@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <title>빨간불인데 뛰고싶어 | Mirinaeman</title>
+  <meta name="description" content="빨간불 앞에서 멈춘 아침, 놓친 버스보다 나를 놓치지 않기로 한 노래." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="빨간불인데 뛰고싶어" />
+  <meta property="og:description" content="멈춰야 하는 순간에도 마음은 먼저 뛰는 아침의 이야기." />
+  <meta property="og:image" content="https://i.imghippo.com/files/swWv5653nk.png" />
+  <meta property="og:image:alt" content="빨간불인데 뛰고싶어 썸네일 이미지" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="빨간불인데 뛰고싶어" />
+  <meta name="twitter:description" content="놓친 버스보다 나를 놓치지 않기로 한 노래." />
+  <meta name="twitter:image" content="https://i.imghippo.com/files/swWv5653nk.png" />
+
+  <style>
+    :root {
+      --bg: #100b0b;
+      --bg-soft: #1b1212;
+      --card: rgba(255, 247, 235, 0.08);
+      --card-strong: rgba(255, 247, 235, 0.14);
+      --text: #fff6e8;
+      --muted: rgba(255, 246, 232, 0.72);
+      --soft: rgba(255, 246, 232, 0.52);
+      --red: #ff4a3d;
+      --amber: #ffd36a;
+      --green: #93e381;
+      --line: rgba(255, 246, 232, 0.16);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+      --radius-lg: 30px;
+      --radius-md: 22px;
+      --radius-sm: 16px;
+      --max: 1120px;
+      --hero-image: url("https://i.imghippo.com/files/gKqZ6395Yyg.png");
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255, 74, 61, 0.24), transparent 32rem),
+        radial-gradient(circle at 88% 24%, rgba(255, 211, 106, 0.12), transparent 28rem),
+        linear-gradient(180deg, #120b0b 0%, #0f0b0b 48%, #17100f 100%);
+      color: var(--text);
+      line-height: 1.65;
+      letter-spacing: -0.01em;
+      overflow-x: hidden;
+      word-break: keep-all;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    :focus-visible {
+      outline: 3px solid rgba(255, 211, 106, 0.9);
+      outline-offset: 4px;
+      border-radius: 12px;
+    }
+
+    .page { min-height: 100vh; }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      transform: translateY(-140%);
+      background: var(--amber);
+      color: #20110d;
+      padding: 10px 14px;
+      border-radius: 999px;
+      z-index: 1000;
+      font-weight: 800;
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      padding: 16px 18px;
+      pointer-events: none;
+    }
+
+    .topbar-inner {
+      width: min(var(--max), 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(16, 11, 11, 0.72);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+      pointer-events: auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-dot {
+      width: 14px;
+      height: 14px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 6px rgba(255, 74, 61, 0.16);
+    }
+
+    .brand span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav a,
+    .lang-toggle,
+    .control-btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font: inherit;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: rgba(255, 246, 232, 0.82);
+      background: transparent;
+      cursor: pointer;
+      padding: 0 14px;
+      white-space: nowrap;
+    }
+
+    .nav a:hover,
+    .lang-toggle:hover,
+    .control-btn:hover {
+      background: rgba(255, 246, 232, 0.09);
+      color: var(--text);
+    }
+
+    .lang-toggle { border-color: var(--line); }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      padding: 108px 18px 48px;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(16, 11, 11, 0.92) 0%, rgba(16, 11, 11, 0.66) 46%, rgba(16, 11, 11, 0.28) 100%),
+        linear-gradient(180deg, rgba(16, 11, 11, 0.12) 0%, rgba(16, 11, 11, 0.62) 72%, #100b0b 100%),
+        var(--hero-image) center / cover no-repeat;
+      z-index: -2;
+      transform: scale(1.02);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 34%;
+      background: linear-gradient(180deg, transparent, var(--bg));
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.72fr);
+      gap: clamp(24px, 5vw, 64px);
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      width: fit-content;
+      min-height: 36px;
+      padding: 6px 12px;
+      border: 1px solid rgba(255, 211, 106, 0.28);
+      border-radius: 999px;
+      background: rgba(255, 211, 106, 0.1);
+      color: #ffe3a1;
+      font-size: 0.86rem;
+      font-weight: 900;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 5px rgba(255, 74, 61, 0.16);
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      max-width: 760px;
+      margin-top: 20px;
+      font-size: clamp(3rem, 9vw, 7.4rem);
+      line-height: 1.04;
+      letter-spacing: -0.075em;
+      text-wrap: balance;
+    }
+
+    .hero-copy {
+      max-width: 670px;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2.4vw, 1.34rem);
+      line-height: 1.72;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      font-weight: 900;
+      line-height: 1.2;
+      border: 1px solid transparent;
+      cursor: pointer;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: white;
+      box-shadow: 0 14px 34px rgba(255, 74, 61, 0.26);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 246, 232, 0.1);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .audio-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(16, 11, 11, 0.56);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .cover-button {
+      width: 100%;
+      display: block;
+      padding: 0;
+      border: 1px solid rgba(255, 246, 232, 0.13);
+      border-radius: 24px;
+      background: rgba(255, 246, 232, 0.05);
+      cursor: zoom-in;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+    }
+
+    .cover-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .track-meta {
+      display: grid;
+      gap: 5px;
+      margin-top: 16px;
+    }
+
+    .track-meta strong {
+      font-size: 1.12rem;
+      line-height: 1.35;
+    }
+
+    .track-meta span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 16px;
+      accent-color: var(--red);
+    }
+
+    section { padding: clamp(54px, 8vw, 96px) 0; }
+
+    .section-head {
+      display: grid;
+      gap: 12px;
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    .section-kicker {
+      color: var(--amber);
+      font-weight: 900;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.12;
+      letter-spacing: -0.055em;
+      text-wrap: balance;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.75;
+      max-width: 680px;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .story-card,
+    .quote-card,
+    .image-tile,
+    .lyric-card,
+    .producer-card {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      overflow-wrap: anywhere;
+      overflow: hidden;
+      box-shadow: 0 14px 46px rgba(0, 0, 0, 0.16);
+    }
+
+    .story-card {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .story-card b {
+      display: inline-flex;
+      width: fit-content;
+      min-height: 34px;
+      align-items: center;
+      padding: 5px 11px;
+      border-radius: 999px;
+      color: #271410;
+      background: var(--amber);
+      font-size: 0.86rem;
+      font-weight: 950;
+    }
+
+    .story-card h3 {
+      font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+      line-height: 1.22;
+      letter-spacing: -0.035em;
+    }
+
+    .story-card p {
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .story-card:nth-child(2) b {
+      background: var(--red);
+      color: white;
+    }
+
+    .story-card:nth-child(3) b {
+      background: var(--green);
+      color: #12200f;
+    }
+
+    .wide-band {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(255, 74, 61, 0.22), rgba(255, 211, 106, 0.08)),
+        rgba(255, 246, 232, 0.06);
+      padding: clamp(24px, 5vw, 44px);
+      overflow: hidden;
+    }
+
+    .wide-band::after {
+      content: "STOP / BREATHE / WALK";
+      position: absolute;
+      right: -18px;
+      bottom: -22px;
+      color: rgba(255, 246, 232, 0.055);
+      font-size: clamp(2.4rem, 8vw, 6.8rem);
+      font-weight: 950;
+      letter-spacing: -0.06em;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .quote-card {
+      position: relative;
+      padding: clamp(24px, 5vw, 42px);
+      background: rgba(255, 246, 232, 0.1);
+    }
+
+    .quote-card p {
+      max-width: 820px;
+      font-size: clamp(1.35rem, 3.6vw, 2.6rem);
+      line-height: 1.34;
+      letter-spacing: -0.05em;
+      font-weight: 900;
+      text-wrap: balance;
+    }
+
+    .quote-card small {
+      display: block;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.7fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .image-tile {
+      padding: 12px;
+      background: rgba(255, 246, 232, 0.07);
+    }
+
+    .image-button {
+      width: 100%;
+      padding: 0;
+      border: 0;
+      border-radius: 18px;
+      overflow: hidden;
+      background: transparent;
+      cursor: zoom-in;
+      display: block;
+    }
+
+    .image-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .image-button:hover img,
+    .cover-button:hover img {
+      transform: scale(1.025);
+    }
+
+    .ratio-916 { aspect-ratio: 9 / 16; }
+    .ratio-43 { aspect-ratio: 4 / 3; }
+    .ratio-11 { aspect-ratio: 1 / 1; }
+
+    .tile-caption {
+      display: grid;
+      gap: 4px;
+      padding: 14px 6px 4px;
+    }
+
+    .tile-caption strong { line-height: 1.35; }
+
+    .tile-caption span {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .gallery-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .lyrics-wrap {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .lyric-nav {
+      position: sticky;
+      top: 98px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .lyric-chip {
+      border: 1px solid var(--line);
+      background: rgba(255, 246, 232, 0.07);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 12px 14px;
+      font: inherit;
+      font-weight: 850;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .lyric-chip[aria-current="true"] {
+      background: var(--red);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .lyric-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .lyric-card {
+      display: grid;
+      gap: 14px;
+      padding: clamp(22px, 4vw, 34px);
+    }
+
+    .lyric-card h3 {
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      line-height: 1.2;
+      letter-spacing: -0.045em;
+    }
+
+    .lyric-card p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.82;
+      white-space: pre-line;
+    }
+
+    .producer-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+      padding: clamp(24px, 5vw, 42px);
+      background:
+        linear-gradient(135deg, rgba(147, 227, 129, 0.13), rgba(255, 74, 61, 0.14)),
+        rgba(255, 246, 232, 0.07);
+    }
+
+    .producer-card h2 { margin-top: 8px; }
+
+    .producer-mark {
+      width: clamp(92px, 18vw, 152px);
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 246, 232, 0.1);
+      border: 1px solid var(--line);
+      font-weight: 950;
+      color: var(--amber);
+      text-align: center;
+      line-height: 1.15;
+      padding: 14px;
+    }
+
+    .footer {
+      padding: 36px 18px 108px;
+      color: var(--soft);
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.94rem;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      z-index: 60;
+      width: min(440px, calc(100% - 24px));
+      display: none;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: rgba(16, 11, 11, 0.82);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 18px 54px rgba(0, 0, 0, 0.38);
+    }
+
+    .bottom-nav a,
+    .bottom-nav button {
+      min-height: 48px;
+      border: 0;
+      border-radius: 20px;
+      background: transparent;
+      color: rgba(255, 246, 232, 0.76);
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .bottom-nav a:hover,
+    .bottom-nav button:hover {
+      background: rgba(255, 246, 232, 0.1);
+      color: var(--text);
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(12px);
+    }
+
+    .lightbox.is-open { display: flex; }
+
+    .lightbox-panel {
+      width: min(980px, 100%);
+      max-height: 88vh;
+      display: grid;
+      gap: 12px;
+    }
+
+    .lightbox-image-wrap {
+      max-height: 78vh;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid rgba(255, 246, 232, 0.18);
+      display: grid;
+      place-items: center;
+    }
+
+    .lightbox img {
+      width: auto;
+      max-width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+    }
+
+    .lightbox-info {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      color: var(--text);
+    }
+
+    .lightbox-info p {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .lightbox-close {
+      min-width: 48px;
+      min-height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 246, 232, 0.1);
+      color: var(--text);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    [data-lang="en"] .ko,
+    [data-lang="ko"] .en { display: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 860px) {
+      .topbar { display: none; }
+      .bottom-nav { display: grid; }
+      .hero { min-height: auto; padding: 64px 0 44px; }
+      .container { width: min(100% - 28px, var(--max)); }
+      .hero-grid, .story-grid, .gallery-grid, .lyrics-wrap, .producer-card { grid-template-columns: 1fr; }
+
+      .hero::before {
+        background:
+          linear-gradient(180deg, rgba(16, 11, 11, 0.42) 0%, rgba(16, 11, 11, 0.84) 52%, #100b0b 100%),
+          var(--hero-image) center top / cover no-repeat;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 15vw, 5rem);
+        margin-top: 18px;
+      }
+
+      .hero-copy { font-size: 1.04rem; }
+      .audio-card { margin-top: 18px; }
+      .story-card { min-height: auto; }
+
+      .lyric-nav {
+        position: relative;
+        top: auto;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .lyric-chip { text-align: center; }
+      .producer-mark { justify-self: start; }
+    }
+
+    @media (max-width: 520px) {
+      body { line-height: 1.68; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; }
+
+      .story-card,
+      .quote-card,
+      .image-tile,
+      .lyric-card,
+      .producer-card {
+        border-radius: 20px;
+      }
+
+      .wide-band { border-radius: 24px; }
+      .lyric-nav { grid-template-columns: 1fr; }
+      .footer-inner { display: grid; }
+    }
+  </style>
+</head>
+
+<body data-lang="ko">
+  <a class="skip-link" href="#main">본문으로 이동</a>
+
+  <div class="page">
+    <header class="topbar" aria-label="상단 메뉴">
+      <div class="topbar-inner">
+        <a class="brand" href="#home" aria-label="빨간불인데 뛰고싶어 홈">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span>빨간불인데 뛰고싶어</span>
+        </a>
+
+        <nav class="nav" aria-label="페이지 이동">
+          <a href="#story"><span class="ko">이야기</span><span class="en">Story</span></a>
+          <a href="#gallery"><span class="ko">이미지</span><span class="en">Images</span></a>
+          <a href="#lyrics"><span class="ko">가사</span><span class="en">Lyrics</span></a>
+          <a href="#producer"><span class="ko">크레딧</span><span class="en">Credit</span></a>
+          <button class="lang-toggle" type="button" data-toggle-lang aria-label="Switch language">EN</button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="home" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div class="hero-text reveal">
+            <span class="eyebrow">
+              <span class="ko">Suno Original Song</span>
+              <span class="en">Suno Original Song</span>
+            </span>
+
+            <h1 id="hero-title">
+              <span class="ko">빨간불인데<br />뛰고싶어</span>
+              <span class="en">Red Light,<br />Still I Want to Run</span>
+            </h1>
+
+            <p class="hero-copy">
+              <span class="ko">
+                버스는 오고, 신호는 빨갛고, 마음은 이미 건너편에 있다.
+                이 노래는 늦을까 봐 뛰고 싶은 아침이 결국 나를 지키는 쪽으로 방향을 바꾸는 이야기다.
+              </span>
+              <span class="en">
+                The bus is coming, the light is red, and the heart has already crossed.
+                This song follows a rushed morning that chooses not to lose itself.
+              </span>
+            </p>
+
+            <div class="hero-actions" aria-label="주요 행동">
+              <a class="btn btn-primary" href="#listen">
+                <span class="ko">노래 듣기</span>
+                <span class="en">Listen Now</span>
+              </a>
+              <a class="btn btn-secondary" href="#story">
+                <span class="ko">이야기 따라가기</span>
+                <span class="en">Follow the Story</span>
+              </a>
+            </div>
+          </div>
+
+          <aside class="audio-card reveal" id="listen" aria-label="음원 플레이어">
+            <button
+              class="cover-button"
+              type="button"
+              data-lightbox-src="https://i.imghippo.com/files/cpT7257ipE.png"
+              data-lightbox-title="빨간불인데 뛰고싶어"
+              data-lightbox-desc="정사각형 커버 이미지"
+              aria-label="커버 이미지 크게 보기">
+              <img
+                src="https://i.imghippo.com/files/cpT7257ipE.png"
+                alt="빨간불인데 뛰고싶어 커버 이미지"
+                width="1200"
+                height="1200"
+                loading="eager"
+                decoding="async" />
+            </button>
+
+            <div class="track-meta">
+              <strong>
+                <span class="ko">빨간불인데 뛰고싶어</span>
+                <span class="en">Red Light, Still I Want to Run</span>
+              </strong>
+              <span>
+                <span class="ko">멈춘 발과 먼저 뛰는 심장의 ska-pop rock</span>
+                <span class="en">A ska-pop rock rush between stopped feet and a racing heart</span>
+              </span>
+            </div>
+
+            <audio controls preload="metadata">
+              <source src="https://cdn1.suno.ai/38257531-b445-4cce-b27c-100843e250a8.mp3" type="audio/mpeg" />
+              브라우저가 오디오 재생을 지원하지 않습니다.
+            </audio>
+          </aside>
+        </div>
+      </section>
+
+      <section id="story" aria-labelledby="story-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="section-kicker">
+              <span class="ko">STORY ARC</span>
+              <span class="en">STORY ARC</span>
+            </span>
+            <h2 id="story-title">
+              <span class="ko">뛰고 싶은 마음은 멈춘 자리에서 더 크게 들린다.</span>
+              <span class="en">The urge to run sounds louder when you stay still.</span>
+            </h2>
+            <p>
+              <span class="ko">
+                빨간불은 단순한 신호가 아니다. 하루를 놓칠 것 같은 압박,
+                건너가면 안 된다는 판단, 그리고 나를 잃지 않으려는 작은 선택이 한 장면 안에서 부딪힌다.
+              </span>
+              <span class="en">
+                The red light is more than a signal. It holds pressure, restraint,
+                and the small decision to keep yourself intact.
+              </span>
+            </p>
+          </div>
+
+          <div class="story-grid">
+            <article class="story-card reveal">
+              <b><span class="ko">01 빨간불</span><span class="en">01 Red</span></b>
+              <div>
+                <h3><span class="ko">버스가 보이는 순간</span><span class="en">The bus comes into view</span></h3>
+                <p><span class="ko">시간은 등을 밀고, 한 발만 가면 닿을 것 같다. 하지만 모두가 멈춰 있고 신호는 분명히 빨갛다.</span><span class="en">Time pushes from behind. One step feels enough, but everyone is still, and the light is red.</span></p>
+              </div>
+            </article>
+
+            <article class="story-card reveal">
+              <b><span class="ko">02 심장</span><span class="en">02 Heart</span></b>
+              <div>
+                <h3><span class="ko">발보다 먼저 뛰는 마음</span><span class="en">The heart runs first</span></h3>
+                <p><span class="ko">초록불보다 먼저 도착한 건 심장이다. 건너고 싶은 건 길인지, 오늘의 나인지 묻게 된다.</span><span class="en">The heart arrives before the green light. The question becomes whether the road is what needs crossing.</span></p>
+              </div>
+            </article>
+
+            <article class="story-card reveal">
+              <b><span class="ko">03 초록불</span><span class="en">03 Green</span></b>
+              <div>
+                <h3><span class="ko">놓친 버스보다 놓치면 안 되는 것</span><span class="en">What must not be missed</span></h3>
+                <p><span class="ko">저 버스는 떠났을지 몰라도, 나는 나를 놓치지 않았다. 초록불이면 뛰지 않고 걸어간다.</span><span class="en">The bus may be gone, but the self remains. When the light turns green, walking is enough.</span></p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="turn-title">
+        <div class="container">
+          <div class="wide-band reveal">
+            <div class="section-head" style="margin-bottom:0;">
+              <span class="section-kicker"><span class="ko">THE TURN</span><span class="en">THE TURN</span></span>
+              <h2 id="turn-title"><span class="ko">버스 문이 닫히는 순간, 하루가 닫히는 건 아니었다.</span><span class="en">When the bus door closes, the day does not have to close with it.</span></h2>
+              <p><span class="ko">처음의 조급함은 마지막에 다르게 해석된다. 노래는 ‘빨리 가야 한다’가 아니라 ‘나를 두고 가지 않는다’는 쪽으로 밝게 열린다.</span><span class="en">The rush is reframed at the end. The song opens toward a brighter promise: do not leave yourself behind.</span></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery" aria-labelledby="gallery-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="section-kicker"><span class="ko">VISUAL MOMENTS</span><span class="en">VISUAL MOMENTS</span></span>
+            <h2 id="gallery-title"><span class="ko">멈춤, 조급함, 그리고 다시 걷는 아침.</span><span class="en">Stillness, urgency, and the morning that walks again.</span></h2>
+            <p><span class="ko">이미지를 누르면 노래의 장면을 더 크게 볼 수 있다.</span><span class="en">Tap an image to open the scene larger.</span></p>
+          </div>
+
+          <div class="gallery-grid">
+            <article class="image-tile reveal">
+              <button class="image-button ratio-916" type="button" data-lightbox-src="https://i.imghippo.com/files/JYpb1216XC.png" data-lightbox-title="Story Image" data-lightbox-desc="세로형 스토리 이미지" aria-label="스토리 이미지 크게 보기">
+                <img src="https://i.imghippo.com/files/JYpb1216XC.png" alt="빨간불 앞의 긴장감을 담은 세로형 스토리 이미지" loading="lazy" />
+              </button>
+              <div class="tile-caption">
+                <strong><span class="ko">숨이 먼저 차오르는 장면</span><span class="en">The breath arrives first</span></strong>
+                <span><span class="ko">9:16 비율의 스토리 이미지</span><span class="en">9:16 story image</span></span>
+              </div>
+            </article>
+
+            <div class="gallery-side">
+              <article class="image-tile reveal">
+                <button class="image-button ratio-43" type="button" data-lightbox-src="https://i.imghippo.com/files/swWv5653nk.png" data-lightbox-title="Thumbnail Image" data-lightbox-desc="공유 썸네일 이미지" aria-label="썸네일 이미지 크게 보기">
+                  <img src="https://i.imghippo.com/files/swWv5653nk.png" alt="빨간불인데 뛰고싶어 썸네일 이미지" loading="lazy" />
+                </button>
+                <div class="tile-caption">
+                  <strong><span class="ko">공유되는 첫인상</span><span class="en">The first shared impression</span></strong>
+                  <span><span class="ko">4:3 비율의 썸네일 이미지</span><span class="en">4:3 thumbnail image</span></span>
+                </div>
+              </article>
+
+              <article class="image-tile reveal">
+                <button class="image-button ratio-11" type="button" data-lightbox-src="https://i.imghippo.com/files/cpT7257ipE.png" data-lightbox-title="Cover Image" data-lightbox-desc="정사각형 커버 이미지" aria-label="커버 이미지 크게 보기">
+                  <img src="https://i.imghippo.com/files/cpT7257ipE.png" alt="빨간불인데 뛰고싶어 커버 이미지" loading="lazy" />
+                </button>
+                <div class="tile-caption">
+                  <strong><span class="ko">멈춘 자리의 리듬</span><span class="en">Rhythm at the stop line</span></strong>
+                  <span><span class="ko">1:1 비율의 커버 이미지</span><span class="en">1:1 cover image</span></span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="line-title">
+        <div class="container">
+          <article class="quote-card reveal">
+            <p id="line-title"><span class="ko">“저 버스는 놓쳤을지 몰라도<br />나를 놓치진 않았어.”</span><span class="en">“I may have missed that bus,<br />but I did not miss myself.”</span></p>
+            <small><span class="ko">노래가 가장 밝게 바뀌는 지점. 조급함은 사라지지 않지만, 방향은 달라진다.</span><span class="en">The brightest turn of the song. The urgency remains, but its direction changes.</span></small>
+          </article>
+        </div>
+      </section>
+
+      <section id="lyrics" aria-labelledby="lyrics-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="section-kicker"><span class="ko">LYRIC FLOW</span><span class="en">LYRIC FLOW</span></span>
+            <h2 id="lyrics-title"><span class="ko">가사는 조급함에서 회복으로 걸어간다.</span><span class="en">The lyrics walk from rush to recovery.</span></h2>
+          </div>
+
+          <div class="lyrics-wrap">
+            <nav class="lyric-nav reveal" aria-label="가사 장면 이동">
+              <button class="lyric-chip" type="button" data-jump="#lyric-1" aria-current="true"><span class="ko">버스가 보인다</span><span class="en">The bus appears</span></button>
+              <button class="lyric-chip" type="button" data-jump="#lyric-2"><span class="ko">심장이 먼저 온다</span><span class="en">The heart arrives</span></button>
+              <button class="lyric-chip" type="button" data-jump="#lyric-3"><span class="ko">십오 분이 흔든다</span><span class="en">Fifteen minutes shake</span></button>
+              <button class="lyric-chip" type="button" data-jump="#lyric-4"><span class="ko">초록불이면 걸어간다</span><span class="en">Green means walking</span></button>
+            </nav>
+
+            <div class="lyric-list">
+              <article class="lyric-card reveal" id="lyric-1">
+                <h3><span class="ko">시작: 눈앞에 온 버스</span><span class="en">Opening: the bus in sight</span></h3>
+                <p><span class="ko">버스가 보여
+시간이 밀어
+한 발만 가면
+탈 것 같아</span><span class="en">The bus comes into view.
+Time pushes forward.
+One more step,
+and it feels within reach.</span></p>
+              </article>
+
+              <article class="lyric-card reveal" id="lyric-2">
+                <h3><span class="ko">후렴: 발은 멈추고 숨은 찬다</span><span class="en">Chorus: feet stop, breath runs</span></h3>
+                <p><span class="ko">빨간불인데 뛰고 싶어
+발은 멈췄는데 숨이 차
+건너가고 싶은 건 길일까
+아니면 오늘의 나일까</span><span class="en">It is red, but I want to run.
+My feet have stopped, but I am out of breath.
+Is it the street I want to cross,
+or the version of me called today?</span></p>
+              </article>
+
+              <article class="lyric-card reveal" id="lyric-3">
+                <h3><span class="ko">가운데: 기다림도 마음을 흔든다</span><span class="en">Middle: waiting still shakes</span></h3>
+                <p><span class="ko">십오 분 뒤에
+또 온다는데
+왜 그 십오 분이
+나를 흔들어</span><span class="en">They say another one comes
+in fifteen minutes.
+Then why do those fifteen minutes
+shake me this much?</span></p>
+              </article>
+
+              <article class="lyric-card reveal" id="lyric-4">
+                <h3><span class="ko">끝: 나는 나를 놓치지 않는다</span><span class="en">Ending: I do not lose myself</span></h3>
+                <p><span class="ko">저 버스는 놓쳤을지 몰라도
+나를 놓치진 않았어
+
+초록불이면
+걸어갈게</span><span class="en">I may have missed that bus,
+but I did not miss myself.
+
+When the light turns green,
+I will walk.</span></p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="producer" aria-labelledby="producer-title">
+        <div class="container">
+          <article class="producer-card reveal">
+            <div>
+              <span class="section-kicker"><span class="ko">PRODUCED BY</span><span class="en">PRODUCED BY</span></span>
+              <h2 id="producer-title">Mirinaeman</h2>
+              <p>
+                <span class="ko">
+                  총괄 프로듀서 Mirinaeman. 이 페이지는 빨간불 앞의 조급함을
+                  리듬, 이미지, 문장으로 따라가며 마지막에는 다시 걷는 마음으로 닫힌다.
+                </span>
+                <span class="en">
+                  Executive Producer Mirinaeman. This page follows the rush at a red light
+                  through rhythm, image, and words, then closes with the choice to walk again.
+                </span>
+              </p>
+            </div>
+            <div class="producer-mark" aria-hidden="true">MIRI<br />NAE<br />MAN</div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <span>© Mirinaeman</span>
+        <span><span class="ko">빨간불인데 뛰고싶어 · Suno</span><span class="en">Red Light, Still I Want to Run · Suno</span></span>
+      </div>
+    </footer>
+  </div>
+
+  <nav class="bottom-nav" aria-label="하단 빠른 메뉴">
+    <a href="#listen"><span class="ko">듣기</span><span class="en">Listen</span></a>
+    <a href="#story"><span class="ko">이야기</span><span class="en">Story</span></a>
+    <a href="#gallery"><span class="ko">이미지</span><span class="en">Images</span></a>
+    <button type="button" data-toggle-lang aria-label="Switch language">EN</button>
+  </nav>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="이미지 크게 보기">
+    <div class="lightbox-panel">
+      <div class="lightbox-image-wrap">
+        <img id="lightboxImage" src="" alt="" />
+      </div>
+      <div class="lightbox-info">
+        <p id="lightboxText"></p>
+        <button class="lightbox-close" type="button" aria-label="닫기">×</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const body = document.body;
+    const langButtons = document.querySelectorAll("[data-toggle-lang]");
+
+    function setLanguage(nextLang) {
+      body.dataset.lang = nextLang;
+      document.documentElement.lang = nextLang;
+      langButtons.forEach((button) => {
+        button.textContent = nextLang === "ko" ? "EN" : "KR";
+        button.setAttribute("aria-label", nextLang === "ko" ? "Switch to English" : "한국어로 전환");
+      });
+    }
+
+    langButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setLanguage(body.dataset.lang === "ko" ? "en" : "ko");
+      });
+    });
+
+    setLanguage("ko");
+
+    const revealItems = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+
+    const chips = document.querySelectorAll(".lyric-chip");
+    chips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const target = document.querySelector(chip.dataset.jump);
+        if (!target) return;
+
+        chips.forEach((item) => item.setAttribute("aria-current", "false"));
+        chip.setAttribute("aria-current", "true");
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxText = document.getElementById("lightboxText");
+    const closeLightbox = document.querySelector(".lightbox-close");
+
+    function openLightbox(button) {
+      const src = button.dataset.lightboxSrc;
+      const title = button.dataset.lightboxTitle || "";
+      const desc = button.dataset.lightboxDesc || "";
+
+      lightboxImage.src = src;
+      lightboxImage.alt = title + " " + desc;
+      lightboxText.textContent = title + (desc ? " · " + desc : "");
+      lightbox.classList.add("is-open");
+      closeLightbox.focus();
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightboxPanel() {
+      lightbox.classList.remove("is-open");
+      lightboxImage.src = "";
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll("[data-lightbox-src]").forEach((button) => {
+      button.addEventListener("click", () => openLightbox(button));
+    });
+
+    closeLightbox.addEventListener("click", closeLightboxPanel);
+
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightboxPanel();
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+        closeLightboxPanel();
+      }
+    });
+  </script>
+</body>
+</html>

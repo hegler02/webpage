@@ -873,6 +873,60 @@
       line-height: 1.58;
     }
 
+    .listen-section {
+      scroll-margin-top: 110px;
+    }
+
+    .listen-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 560px);
+      gap: clamp(22px, 4vw, 44px);
+      align-items: center;
+      padding: clamp(26px, 5vw, 56px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 82% 18%, rgba(247, 215, 125, 0.18), transparent 22vw),
+        linear-gradient(135deg, rgba(212, 90, 55, 0.18), rgba(45, 25, 19, 0.86));
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+    }
+
+    .listen-card h2 {
+      margin: 0;
+      max-width: 14ch;
+      font-size: clamp(2rem, 4.6vw, 4.2rem);
+      line-height: 1.12;
+      letter-spacing: -0.045em;
+      word-break: keep-all;
+      text-wrap: balance;
+    }
+
+    .listen-card p {
+      margin: 14px 0 0;
+      max-width: 42rem;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.25vw, 1.14rem);
+      line-height: 1.72;
+    }
+
+    .listen-player {
+      display: grid;
+      gap: 14px;
+      padding: clamp(18px, 3vw, 28px);
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .listen-player audio {
+      width: 100%;
+      min-height: 48px;
+    }
+
+    .listen-player .btn {
+      width: fit-content;
+    }
+
     .cta-panel {
       position: relative;
       overflow: hidden;
@@ -1035,7 +1089,8 @@
       .album-grid,
       .story-layout,
       .video-grid,
-      .cta-panel {
+      .cta-panel,
+      .listen-card {
         grid-template-columns: 1fr;
       }
 
@@ -1071,6 +1126,10 @@
       .beat-road::before {
         left: 10px;
       }
+
+      .listen-player .btn {
+        width: 100%;
+      }
     }
 
     @media (max-width: 760px) {
@@ -1096,6 +1155,10 @@
         scroll-margin-top: 18px;
       }
 
+      .listen-section {
+        scroll-margin-top: 18px;
+      }
+
       .hero {
         min-height: auto;
         padding-top: 28px;
@@ -1108,7 +1171,8 @@
       }
 
       .section-head h2,
-      .cta-panel h2 {
+      .cta-panel h2,
+      .listen-card h2 {
         max-width: 12ch;
         font-size: clamp(1.8rem, 9vw, 3rem);
         line-height: 1.16;
@@ -1148,6 +1212,7 @@
       .lyric-card,
       .panel-card,
       .cta-panel,
+      .listen-card,
       .media-card,
       .cover-card,
       .video-panel {
@@ -1255,8 +1320,8 @@
               <span></span><span></span><span></span><span></span>
             </div>
 
-            <div class="audio-strip" id="listen">
-              <audio controls preload="metadata" aria-label="한 명만 더 부를께 audio player">
+            <div class="audio-strip">
+              <audio controls preload="metadata" aria-label="한 명만 더 부를께 audio player preview">
                 <source src="https://cdn1.suno.ai/44724ea1-0ee7-424c-a17e-d56b33023bac.mp3" type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
@@ -1680,6 +1745,51 @@
         </div>
       </section>
 
+      <section class="section listen-section" id="listen" aria-labelledby="listen-title">
+        <div class="shell">
+          <article class="listen-card" data-reveal>
+            <div>
+              <span class="eyebrow">
+                <span data-ko>Listen Now</span>
+                <span data-en>Listen Now</span>
+              </span>
+
+              <h2 id="listen-title">
+                <span data-ko>지금 바로 싱글을 들어보세요.</span>
+                <span data-en>Listen to the single now.</span>
+              </h2>
+
+              <p>
+                <span data-ko>
+                  따뜻한 어쿠스틱 기타와 웃픈 계산서 공포가 만나는 싱글,
+                  ‘한 명만 더 부를께’를 여기서 바로 재생할 수 있습니다.
+                </span>
+                <span data-en>
+                  Play the single here and follow the warm acoustic groove as the birthday dinner turns into bill anxiety.
+                </span>
+              </p>
+            </div>
+
+            <div class="listen-player" aria-label="Music listening container">
+              <audio controls preload="metadata" aria-label="한 명만 더 부를께 full audio player">
+                <source src="https://cdn1.suno.ai/44724ea1-0ee7-424c-a17e-d56b33023bac.mp3" type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
+
+              <a
+                class="btn btn-primary"
+                href="https://cdn1.suno.ai/44724ea1-0ee7-424c-a17e-d56b33023bac.mp3"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span data-ko>새 창에서 열기</span>
+                <span data-en>Open Audio</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section class="section" aria-labelledby="cta-title">
         <div class="shell">
           <article class="cta-panel" data-reveal>
@@ -1714,7 +1824,7 @@
       <a href="#story"><span aria-hidden="true">〽</span><span data-ko>스토리</span><span data-en>Story</span></a>
       <a href="#gallery"><span aria-hidden="true">▣</span><span data-ko>이미지</span><span data-en>Visuals</span></a>
       <a href="#video"><span aria-hidden="true">▶</span><span data-ko>영상</span><span data-en>Video</span></a>
-      <button type="button" data-lang-toggle-mobile aria-label="Switch language"><span aria-hidden="true">文</span>KO/EN</button>
+      <a href="#listen"><span aria-hidden="true">♪</span><span data-ko>듣기</span><span data-en>Listen</span></a>
     </nav>
   </div>
 
@@ -1729,7 +1839,7 @@
   <script>
     (function () {
       const root = document.documentElement;
-      const langButtons = document.querySelectorAll("[data-lang-toggle], [data-lang-toggle-mobile]");
+      const langButtons = document.querySelectorAll("[data-lang-toggle]");
       const revealItems = document.querySelectorAll("[data-reveal]");
       const lightbox = document.querySelector("[data-lightbox-modal]");
       const lightboxImage = document.querySelector("[data-lightbox-image]");
@@ -1760,8 +1870,28 @@
           const id = this.getAttribute("href");
           const target = document.querySelector(id);
           if (!target) return;
+
           event.preventDefault();
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+          const header = document.querySelector(".site-header");
+          const headerOffset = header && window.getComputedStyle(header).position === "sticky"
+            ? header.offsetHeight
+            : 0;
+          const extraGap = 18;
+          const targetTop =
+            target.getBoundingClientRect().top +
+            window.pageYOffset -
+            headerOffset -
+            extraGap;
+
+          const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+          window.scrollTo({
+            top: Math.max(0, targetTop),
+            behavior: prefersReducedMotion ? "auto" : "smooth"
+          });
+
+          history.replaceState(null, "", id);
         });
       });
 

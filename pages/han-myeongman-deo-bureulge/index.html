@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="싱글앨범 한 명만 더 부를게 - 생일 한턱이 계산서 재난으로 바뀌는 코믹 힙합 스토리." />
+  <title>한 명만 더 부를게 | 싱글앨범 랜딩페이지</title>
+  <style>
+    :root {
+      --bg: #120d0b;
+      --bg-soft: #1d1511;
+      --panel: #261b15;
+      --panel-2: #fff4df;
+      --text: #fff8ed;
+      --muted: #d8bfa5;
+      --dark-text: #24170f;
+      --accent: #ff7a2f;
+      --accent-2: #ffd36a;
+      --danger: #ff4f3f;
+      --line: rgba(255, 244, 223, 0.16);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 122, 47, 0.2), transparent 34rem),
+        radial-gradient(circle at 90% 20%, rgba(255, 211, 106, 0.12), transparent 28rem),
+        linear-gradient(180deg, #120d0b 0%, #1b100c 48%, #0f0b09 100%);
+      line-height: 1.6;
+      word-break: keep-all;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -60px;
+      background: var(--accent-2);
+      color: #1b100c;
+      padding: 10px 14px;
+      border-radius: 999px;
+      z-index: 20;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+      outline: 3px solid #fff;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: rgba(18, 13, 11, 0.76);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #1c1008;
+      box-shadow: 0 10px 30px rgba(255, 122, 47, 0.28);
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .nav-links a {
+      padding: 10px 0;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #1b100c;
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(255, 122, 47, 0.22);
+    }
+
+    main {
+      isolation: isolate;
+    }
+
+    .section {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+      padding: 64px 0;
+    }
+
+    .hero {
+      position: relative;
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+      padding: 48px 0 72px;
+      display: grid;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 24px -24px auto auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(255, 122, 47, 0.28), transparent 66%);
+      filter: blur(12px);
+      z-index: -1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 211, 106, 0.32);
+      border-radius: 999px;
+      color: var(--accent-2);
+      background: rgba(255, 211, 106, 0.08);
+      font-weight: 800;
+      font-size: 0.86rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 18px;
+      font-size: clamp(3rem, 12vw, 7.8rem);
+      line-height: 0.94;
+      letter-spacing: -0.08em;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2.2vw, 1.24rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 24px;
+    }
+
+    .btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font-weight: 900;
+      border: 1px solid transparent;
+      transition: transform 180ms ease, background 180ms ease, border 180ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn:focus-visible,
+    audio:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid var(--accent-2);
+      outline-offset: 4px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #1b100c;
+      box-shadow: 0 14px 34px rgba(255, 122, 47, 0.3);
+    }
+
+    .btn-secondary {
+      border-color: rgba(255, 244, 223, 0.24);
+      color: var(--text);
+      background: rgba(255, 244, 223, 0.08);
+    }
+
+    .hero-media {
+      border: 1px solid rgba(255, 244, 223, 0.16);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+        var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .cover-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      background: #2a1a12;
+      aspect-ratio: 1 / 1;
+    }
+
+    .cover-frame::after {
+      content: "BIRTHDAY BILL SHOCK";
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.58);
+      color: #fff4df;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .cover-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .player-card {
+      margin-top: 14px;
+      padding: 18px;
+      border-radius: 22px;
+      background: #fff4df;
+      color: var(--dark-text);
+    }
+
+    .player-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+      letter-spacing: -0.03em;
+    }
+
+    .player-card span {
+      display: block;
+      margin-bottom: 14px;
+      color: #71513b;
+      font-size: 0.92rem;
+    }
+
+    audio {
+      width: 100%;
+      min-height: 44px;
+    }
+
+    .ticker {
+      border-block: 1px solid rgba(255, 244, 223, 0.14);
+      background: rgba(255, 244, 223, 0.05);
+      overflow: hidden;
+    }
+
+    .ticker-track {
+      width: max-content;
+      display: flex;
+      gap: 20px;
+      padding: 13px 0;
+      animation: slide 28s linear infinite;
+      color: var(--accent-2);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .ticker-track span {
+      padding-left: 20px;
+    }
+
+    @keyframes slide {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    .section-kicker {
+      margin-bottom: 10px;
+      color: var(--accent-2);
+      font-size: 0.86rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: clamp(2rem, 7vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.06em;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .story-card {
+      display: grid;
+      gap: 22px;
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      background:
+        linear-gradient(135deg, rgba(255, 122, 47, 0.15), rgba(255, 211, 106, 0.06)),
+        var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .quote {
+      margin: 0;
+      color: #fff4df;
+      font-size: clamp(1.5rem, 5vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -0.055em;
+      font-weight: 900;
+    }
+
+    .story-note {
+      color: var(--muted);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+      counter-reset: scene;
+    }
+
+    .scene {
+      position: relative;
+      display: grid;
+      gap: 8px;
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 244, 223, 0.07);
+      border: 1px solid var(--line);
+      counter-increment: scene;
+    }
+
+    .scene::before {
+      content: "0" counter(scene);
+      width: fit-content;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(255, 122, 47, 0.16);
+      color: var(--accent-2);
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .scene h3 {
+      margin-bottom: 0;
+      font-size: 1.3rem;
+      letter-spacing: -0.035em;
+    }
+
+    .scene p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .hook-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .hook-card {
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: var(--panel-2);
+      color: var(--dark-text);
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.22);
+    }
+
+    .hook-card:nth-child(even) {
+      background: #ffdc90;
+    }
+
+    .hook-card small {
+      color: #875236;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+
+    .hook-card strong {
+      margin-top: 18px;
+      display: block;
+      font-size: clamp(1.4rem, 6vw, 2.4rem);
+      line-height: 1.08;
+      letter-spacing: -0.06em;
+    }
+
+    .listen-points {
+      display: grid;
+      gap: 14px;
+    }
+
+    .point {
+      display: flex;
+      gap: 14px;
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 244, 223, 0.07);
+      border: 1px solid var(--line);
+    }
+
+    .point-icon {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(255, 122, 47, 0.18);
+    }
+
+    .point strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .point p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .receipt {
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(255, 244, 223, 0.96)),
+        #fff4df;
+      color: var(--dark-text);
+      box-shadow: var(--shadow);
+    }
+
+    .receipt-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 18px;
+      border-bottom: 2px dashed rgba(36, 23, 15, 0.28);
+    }
+
+    .receipt h2 {
+      margin-bottom: 8px;
+      color: var(--dark-text);
+    }
+
+    .receipt .lead {
+      color: #71513b;
+    }
+
+    .bill {
+      min-width: 118px;
+      text-align: right;
+      color: var(--danger);
+      font-weight: 1000;
+      font-size: 1.4rem;
+      line-height: 1.1;
+    }
+
+    .receipt-lines {
+      display: grid;
+      gap: 12px;
+      padding: 22px 0;
+    }
+
+    .receipt-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      color: #5d4030;
+      border-bottom: 1px dotted rgba(36, 23, 15, 0.18);
+      padding-bottom: 10px;
+    }
+
+    .receipt-line strong {
+      color: var(--dark-text);
+    }
+
+    .receipt-total {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 14px;
+      padding-top: 18px;
+      border-top: 2px dashed rgba(36, 23, 15, 0.28);
+      font-weight: 1000;
+      font-size: 1.2rem;
+    }
+
+    .cta-band {
+      text-align: center;
+      border-radius: var(--radius-lg);
+      padding: 42px 24px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 211, 106, 0.2), transparent 24rem),
+        linear-gradient(135deg, #ff7a2f, #ff4f3f);
+      color: #1b100c;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-band h2 {
+      max-width: 760px;
+      margin-inline: auto;
+      color: #1b100c;
+    }
+
+    .cta-band p {
+      max-width: 620px;
+      margin: 0 auto 24px;
+      color: rgba(27, 16, 12, 0.78);
+      font-weight: 700;
+    }
+
+    .cta-band .btn-primary {
+      background: #1b100c;
+      color: #fff4df;
+      box-shadow: none;
+    }
+
+    .share-text {
+      margin-top: 18px;
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 244, 223, 0.26);
+      color: #1b100c;
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    .footer {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    .footer small {
+      display: block;
+      line-height: 1.6;
+    }
+
+    @media (min-width: 760px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
+        padding-top: 76px;
+      }
+
+      .hero-media {
+        transform: rotate(1.5deg);
+      }
+
+      .story-card {
+        grid-template-columns: 1fr 0.72fr;
+        align-items: center;
+        padding: 34px;
+      }
+
+      .timeline {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      .scene {
+        min-height: 260px;
+      }
+
+      .hook-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .listen-points {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .receipt {
+        padding: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav {
+        width: min(100% - 24px, var(--max));
+      }
+
+      .brand span:last-child {
+        max-width: 130px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .section,
+      .hero,
+      .footer {
+        width: min(100% - 24px, var(--max));
+      }
+
+      .section {
+        padding: 48px 0;
+      }
+
+      .hero {
+        padding-top: 36px;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .story-card,
+      .receipt,
+      .cta-band {
+        padding: 22px;
+      }
+
+      .receipt-top {
+        display: grid;
+      }
+
+      .bill {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .ticker-track {
+        animation: none;
+      }
+
+      .btn {
+        transition: none;
+      }
+
+      .btn:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="주요 메뉴">
+      <a class="brand" href="#top" aria-label="한 명만 더 부를게 홈">
+        <span class="brand-mark" aria-hidden="true">肉</span>
+        <span>한 명만 더 부를게</span>
+      </a>
+
+      <div class="nav-links" aria-label="페이지 섹션">
+        <a href="#story">스토리</a>
+        <a href="#hook">후렴</a>
+        <a href="#listen">감상 포인트</a>
+      </div>
+
+      <a class="nav-cta" href="#player">노래 듣기</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div>
+        <span class="eyebrow">Single Album · Comedy Hip-Hop</span>
+        <h1 id="hero-title">한 명만<br />더 부를게</h1>
+        <p class="hero-copy">
+          생일 파티인 줄 알았는데, 계산서가 주인공이었다.
+          고깃집 불판 위에서 시작된 한턱 선언이 체면, 전화, 소고기,
+          그리고 여섯 달 할부로 번지는 코믹 싱글앨범.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#player">▶ 지금 노래 듣기</a>
+          <a class="btn btn-secondary" href="#story">가사 스토리 보기</a>
+        </div>
+      </div>
+
+      <aside class="hero-media" aria-label="앨범 커버와 오디오 플레이어">
+        <figure class="cover-frame">
+          <img
+            src="https://i.imghippo.com/files/DOgu8253w.png"
+            alt="싱글앨범 한 명만 더 부를게 앨범 커버"
+            width="900"
+            height="900"
+          />
+        </figure>
+
+        <div class="player-card" id="player">
+          <strong>한 명만 더 부를게</strong>
+          <span>생일은 하루, 할부는 여섯 달. 이어폰을 끼고 계산서를 마주하세요.</span>
+          <audio controls preload="metadata">
+            <source src="https://cdn1.suno.ai/af74fdf5-98e4-4fce-b37f-a5ff8cb00234.mp3" type="audio/mpeg" />
+            사용 중인 브라우저가 오디오 재생을 지원하지 않습니다.
+          </audio>
+        </div>
+      </aside>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>한 명만 더 부를게</span>
+        <span>계산서는 왜 자꾸 다섯 자리로 가는데</span>
+        <span>생일은 하루인데 할부는 왜 여섯 달인데</span>
+        <span>오라고 해, 괜찮아 오라고 해</span>
+        <span>한 명만 더 부를게</span>
+        <span>계산서는 왜 자꾸 다섯 자리로 가는데</span>
+        <span>생일은 하루인데 할부는 왜 여섯 달인데</span>
+        <span>오라고 해, 괜찮아 오라고 해</span>
+      </div>
+    </div>
+
+    <section class="section" id="story" aria-labelledby="story-title">
+      <div class="section-head">
+        <p class="section-kicker">Story</p>
+        <h2 id="story-title">생일 한턱이 재난이 되는 순간</h2>
+        <p class="lead">
+          이 노래는 거창한 사건을 말하지 않습니다.
+          단지 “오늘은 내가 쏜다”라고 말한 사람의 지갑이 어떻게 천천히 무너지는지 보여줍니다.
+        </p>
+      </div>
+
+      <article class="story-card">
+        <blockquote class="quote">
+          “소고기로 시킴.”<br />
+          그 한마디가 모든 비극의 시작이었다.
+        </blockquote>
+        <p class="story-note">
+          셋이 앉은 고깃집, 아직은 평화로운 불판.
+          하지만 전화 한 통이 울리고, 체면이 입을 열게 만듭니다.
+          “한 명만 더 부를게.” 그 순간부터 생일 파티는 계산서 스릴러가 됩니다.
+        </p>
+      </article>
+    </section>
+
+    <section class="section" aria-labelledby="timeline-title">
+      <div class="section-head">
+        <p class="section-kicker">Lyrics Timeline</p>
+        <h2 id="timeline-title">가사는 한 편의 고깃집 시트콤처럼 흐른다</h2>
+      </div>
+
+      <div class="timeline">
+        <article class="scene">
+          <h3>오늘은 내 생일</h3>
+          <p>주인공은 멋있게 한턱을 선언합니다. 아직 지갑은 살아 있습니다.</p>
+        </article>
+
+        <article class="scene">
+          <h3>돼지갈비에서 소고기로</h3>
+          <p>입이 먼저 움직이고, 직원은 펜을 듭니다. 심장은 이미 계산서를 읽습니다.</p>
+        </article>
+
+        <article class="scene">
+          <h3>전화가 울린다</h3>
+          <p>“근처라고?” 체면이 멱살을 잡고 결국 말합니다. 한 명만 더 부를게.</p>
+        </article>
+
+        <article class="scene">
+          <h3>불판은 늘어난다</h3>
+          <p>한 명이 두 명이 되고, 사이드와 술이 줄을 섭니다. 축하는 커지고 결제자는 혼자입니다.</p>
+        </article>
+
+        <article class="scene">
+          <h3>계산서가 왔다</h3>
+          <p>케이크보다 큰 숫자들. 생일은 하루지만 할부는 여섯 달입니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="hook" aria-labelledby="hook-title">
+      <div class="section-head">
+        <p class="section-kicker">Hook Point</p>
+        <h2 id="hook-title">웃긴데, 너무 현실적이라 따라 부르게 된다</h2>
+        <p class="lead">
+          반복되는 후렴은 단순한 농담이 아니라,
+          모임에서 한 번쯤 겪어본 체면과 속마음의 충돌을 정확히 찌릅니다.
+        </p>
+      </div>
+
+      <div class="hook-grid">
+        <article class="hook-card">
+          <small>체면</small>
+          <strong>오라고 해<br />괜찮아</strong>
+        </article>
+
+        <article class="hook-card">
+          <small>속마음</small>
+          <strong>제발 오지 마</strong>
+        </article>
+
+        <article class="hook-card">
+          <small>계산서</small>
+          <strong>네 자리에서<br />다섯 자리로</strong>
+        </article>
+
+        <article class="hook-card">
+          <small>엔딩</small>
+          <strong>내 통장은<br />기일</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="listen" aria-labelledby="listen-title">
+      <div class="section-head">
+        <p class="section-kicker">Listening Points</p>
+        <h2 id="listen-title">듣는 재미가 쌓이는 네 가지 포인트</h2>
+      </div>
+
+      <div class="listen-points">
+        <article class="point">
+          <span class="point-icon" aria-hidden="true">📞</span>
+          <div>
+            <strong>전화벨이 만드는 긴장감</strong>
+            <p>가벼운 식사 자리였던 장면이 전화 한 통으로 바로 코미디 스릴러가 됩니다.</p>
+          </div>
+        </article>
+
+        <article class="point">
+          <span class="point-icon" aria-hidden="true">🔥</span>
+          <div>
+            <strong>불판처럼 달아오르는 전개</strong>
+            <p>사람은 늘고, 메뉴는 늘고, 불판은 늘어납니다. 주인공의 멘탈만 줄어듭니다.</p>
+          </div>
+        </article>
+
+        <article class="point">
+          <span class="point-icon" aria-hidden="true">🎤</span>
+          <div>
+            <strong>랩과 단체 후렴의 대비</strong>
+            <p>빠르게 쏟아지는 상황 설명 뒤에 모두가 외치는 후렴이 강한 중독성을 만듭니다.</p>
+          </div>
+        </article>
+
+        <article class="point">
+          <span class="point-icon" aria-hidden="true">🧾</span>
+          <div>
+            <strong>웃긴데 아픈 계산서 엔딩</strong>
+            <p>“생일은 하루, 할부는 여섯 달”이라는 한 줄이 곡의 코미디를 완성합니다.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="receipt-title">
+      <article class="receipt">
+        <div class="receipt-top">
+          <div>
+            <p class="section-kicker">Bill Shock</p>
+            <h2 id="receipt-title">오늘의 영수증</h2>
+            <p class="lead">노래 속 주인공이 마주한 감정의 계산서입니다.</p>
+          </div>
+          <div class="bill" aria-label="계산서 충격">
+            ₩???,???<br />
+            <span>할부 6개월</span>
+          </div>
+        </div>
+
+        <div class="receipt-lines">
+          <div class="receipt-line">
+            <span>생일 한턱 선언</span>
+            <strong>멋있음 +1</strong>
+          </div>
+          <div class="receipt-line">
+            <span>소고기 주문</span>
+            <strong>잔고 -1</strong>
+          </div>
+          <div class="receipt-line">
+            <span>한 명만 더</span>
+            <strong>불판 +3</strong>
+          </div>
+          <div class="receipt-line">
+            <span>괜찮은 척</span>
+            <strong>체면 +99</strong>
+          </div>
+        </div>
+
+        <div class="receipt-total">
+          <span>최종 감정</span>
+          <span>다 같이 생일 축하, 나 혼자 장례식</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" aria-labelledby="cta-title">
+      <div class="cta-band">
+        <h2 id="cta-title">생일 전에 들어두세요. 당신의 카드가 위험할 수 있습니다.</h2>
+        <p>
+          친구 생일, 회식, 고깃집 약속 전에 공유하기 좋은 코믹 싱글.
+          지금 듣고 “한 명만 더”의 위험성을 미리 학습하세요.
+        </p>
+        <a class="btn btn-primary" href="#player">다시 노래 듣기</a>
+        <div class="share-text">공유 문구: 생일에 한턱냈다가 계산서에게 장례식 당한 노래</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>
+      © Single Album Landing Page · 〈한 명만 더 부를게〉<br />
+      앨범 커버와 음원 링크는 제공된 직접 자산 URL을 사용했습니다.
+    </small>
+  </footer>
+</body>
+</html>

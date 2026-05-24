@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>나사가 많이 남았다 | The Mirinaeman Project Music Album</title>
+  <meta name="description" content="The Mirinaeman Project의 코믹 호러 그루브 싱글앨범. 선풍기, 남은 나사, 여름밤의 이상한 바람을 노래합니다." />
+  <meta name="keywords" content="The Mirinaeman Project, Music Album, 싱글앨범, 나사가 많이 남았다, 공포의 선풍기, comic horror song" />
+  <meta name="author" content="The Mirinaeman Project" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#090c12" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="geo.region" content="KR" />
+  <meta name="geo.placename" content="South Korea" />
+
+  <meta property="og:type" content="music.album" />
+  <meta property="og:title" content="나사가 많이 남았다 | The Mirinaeman Project Music Album" />
+  <meta property="og:description" content="오늘 밤은 조심해. 바람이 좀 수상해. 코믹 호러 그루브 싱글앨범." />
+  <meta property="og:image" content="https://i.imghippo.com/files/dcz4138xR.png" />
+  <meta property="og:site_name" content="The Mirinaeman Project Music Album" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="나사가 많이 남았다 | The Mirinaeman Project" />
+  <meta name="twitter:description" content="선풍기, 남은 나사, 여름밤의 이상한 바람을 담은 코믹 호러 싱글." />
+  <meta name="twitter:image" content="https://i.imghippo.com/files/dcz4138xR.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicAlbum",
+    "name": "나사가 많이 남았다",
+    "alternateName": "Too Many Screws Left",
+    "byArtist": {
+      "@type": "MusicGroup",
+      "name": "The Mirinaeman Project"
+    },
+    "inLanguage": ["ko", "en"],
+    "image": "https://i.imghippo.com/files/oqde6567cyc.png",
+    "thumbnailUrl": "https://i.imghippo.com/files/dcz4138xR.png",
+    "genre": ["Comic Horror", "Playful Groove", "Korean Pop"],
+    "track": {
+      "@type": "MusicRecording",
+      "name": "나사가 많이 남았다",
+      "byArtist": {
+        "@type": "MusicGroup",
+        "name": "The Mirinaeman Project"
+      },
+      "audio": {
+        "@type": "AudioObject",
+        "contentUrl": "https://cdn1.suno.ai/c1c9fbba-8dcc-4400-b7ba-6baa9bb4ff62.mp3",
+        "encodingFormat": "audio/mpeg"
+      }
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #090c12;
+      --panel: #121722;
+      --line: rgba(244, 240, 232, 0.14);
+      --text: #f4f0e8;
+      --muted: #a7adba;
+      --soft: #d7dde8;
+      --accent: #d6ff4f;
+      --danger: #ff4f5e;
+      --fan-blue: #77d9ff;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --max: 1180px;
+      --header-z: 60;
+      --mobile-nav-z: 70;
+      --lightbox-z: 100;
+      --lightbox-content-z: 110;
+      --safe-bottom: calc(82px + env(safe-area-inset-bottom));
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      min-width: 0;
+      overflow-x: hidden;
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 8%, rgba(119, 217, 255, 0.14), transparent 28rem),
+        radial-gradient(circle at 84% 22%, rgba(214, 255, 79, 0.09), transparent 24rem),
+        linear-gradient(180deg, #090c12 0%, #0b1018 48%, #090c12 100%);
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+
+    body.lightbox-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+    button { font: inherit; }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 999;
+      transform: translateY(-140%);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #121500;
+      font-weight: 900;
+      transition: transform 0.2s ease;
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: var(--header-z);
+      backdrop-filter: blur(18px);
+      background: rgba(9, 12, 18, 0.72);
+      border-bottom: 1px solid rgba(244, 240, 232, 0.1);
+    }
+
+    .header-inner, .container, .footer-inner {
+      width: min(var(--max), calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .header-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(214, 255, 79, 0.46);
+      border-radius: 50%;
+      color: var(--accent);
+      box-shadow: 0 0 22px rgba(214, 255, 79, 0.22);
+    }
+
+    .brand span:last-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .desktop-nav a, .lang-toggle {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 0 14px;
+      background: transparent;
+      color: rgba(244, 240, 232, 0.82);
+      cursor: pointer;
+      font-size: 0.94rem;
+      white-space: nowrap;
+    }
+
+    .desktop-nav a:hover, .lang-toggle:hover {
+      background: rgba(244, 240, 232, 0.08);
+      border-color: rgba(244, 240, 232, 0.12);
+    }
+
+    .lang-toggle {
+      color: var(--accent);
+      font-weight: 900;
+      border-color: rgba(214, 255, 79, 0.24);
+    }
+
+    main { position: relative; z-index: 1; }
+
+    .section {
+      position: relative;
+      scroll-margin-top: 88px;
+      padding: clamp(64px, 8vw, 108px) 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      margin: 0 0 14px;
+      padding: 7px 11px;
+      border: 1px solid rgba(214, 255, 79, 0.3);
+      border-radius: 999px;
+      background: rgba(214, 255, 79, 0.08);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 16px currentColor;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(2.8rem, 8.5vw, 6.4rem);
+    }
+
+    h2 {
+      max-width: 780px;
+      font-size: clamp(2rem, 5vw, 4rem);
+    }
+
+    h3 { font-size: clamp(1.16rem, 2.6vw, 1.48rem); }
+    p { margin: 0; }
+
+    .lead {
+      max-width: 680px;
+      color: var(--soft);
+      font-size: clamp(1.03rem, 2.4vw, 1.22rem);
+      line-height: 1.72;
+    }
+
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      padding: 112px 0 56px;
+      overflow: hidden;
+      background: #090c12;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: grid;
+      place-items: center;
+      background: #070a0f;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      opacity: 0.72;
+      filter: saturate(1.06) contrast(1.08);
+    }
+
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 56% 34%, rgba(9, 12, 18, 0.08), rgba(9, 12, 18, 0.52) 42%, rgba(9, 12, 18, 0.92) 100%),
+        linear-gradient(180deg, rgba(9, 12, 18, 0.24) 0%, rgba(9, 12, 18, 0.66) 60%, #090c12 100%);
+    }
+
+    .fan-ring {
+      position: absolute;
+      right: max(-120px, -7vw);
+      top: 18%;
+      z-index: 1;
+      width: clamp(240px, 34vw, 520px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(119, 217, 255, 0.26);
+      border-radius: 50%;
+      opacity: 0.58;
+      pointer-events: none;
+      animation: slowSpin 20s linear infinite;
+    }
+
+    .fan-ring::before, .fan-ring::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .fan-ring::before {
+      inset: 18%;
+      border: 1px dashed rgba(214, 255, 79, 0.28);
+    }
+
+    .fan-ring::after {
+      inset: 43%;
+      background: rgba(119, 217, 255, 0.12);
+      box-shadow: 0 0 40px rgba(119, 217, 255, 0.24);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 18px;
+      max-width: 820px;
+    }
+
+    .hero-title-kicker {
+      color: var(--danger);
+      font-weight: 900;
+      font-size: clamp(0.92rem, 2vw, 1.05rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-actions, .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 240, 232, 0.16);
+      cursor: pointer;
+      font-weight: 900;
+      line-height: 1.2;
+      white-space: nowrap;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #101400;
+      border-color: var(--accent);
+      box-shadow: 0 14px 38px rgba(214, 255, 79, 0.18);
+    }
+
+    .btn-secondary {
+      background: rgba(244, 240, 232, 0.08);
+      color: var(--text);
+    }
+
+    .btn-danger {
+      background: rgba(255, 79, 94, 0.16);
+      color: #ffd9dd;
+      border-color: rgba(255, 79, 94, 0.35);
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 240, 232, 0.12);
+      background: rgba(9, 12, 18, 0.58);
+      color: rgba(244, 240, 232, 0.86);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .listen-grid {
+      display: grid;
+      grid-template-columns: minmax(240px, 0.82fr) minmax(0, 1.18fr);
+      gap: clamp(22px, 4vw, 48px);
+      align-items: center;
+    }
+
+    .media-card, .info-card, .lyric-card, .gallery-card, .story-card, .cta-band {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+      box-shadow: var(--shadow);
+    }
+
+    .cover-card {
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: var(--panel);
+      cursor: zoom-in;
+    }
+
+    .cover-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .album-panel {
+      display: grid;
+      gap: 22px;
+      min-width: 0;
+    }
+
+    .meta-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .info-card {
+      padding: 18px;
+      min-width: 0;
+      min-height: 112px;
+    }
+
+    .info-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 0.96rem;
+    }
+
+    .info-card span {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .audio-wrap {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(214, 255, 79, 0.18);
+      background:
+        linear-gradient(90deg, rgba(214, 255, 79, 0.08), rgba(119, 217, 255, 0.08)),
+        rgba(18, 23, 34, 0.74);
+    }
+
+    audio {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      accent-color: var(--accent);
+    }
+
+    .section-head {
+      display: grid;
+      gap: 14px;
+      margin-bottom: clamp(26px, 4vw, 42px);
+    }
+
+    .hook-stack {
+      display: grid;
+      gap: clamp(14px, 2vw, 20px);
+    }
+
+    .lyric-card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(22px, 4vw, 38px);
+      min-height: 160px;
+    }
+
+    .lyric-card::after {
+      content: "위잉";
+      position: absolute;
+      right: 18px;
+      bottom: -12px;
+      color: rgba(119, 217, 255, 0.12);
+      font-size: clamp(3.2rem, 11vw, 8rem);
+      font-weight: 1000;
+      letter-spacing: -0.08em;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .lyric-card:nth-child(2)::after {
+      content: "덜컥";
+      color: rgba(255, 79, 94, 0.13);
+    }
+
+    .lyric-card:nth-child(3)::after {
+      content: "Warning";
+      color: rgba(214, 255, 79, 0.12);
+    }
+
+    .lyric-line {
+      position: relative;
+      z-index: 1;
+      font-size: clamp(1.75rem, 5vw, 4.2rem);
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+      font-weight: 1000;
+    }
+
+    .lyric-card small {
+      position: relative;
+      z-index: 1;
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+      gap: 16px;
+      width: 100%;
+      max-width: 100%;
+      overflow: visible;
+    }
+
+    .story-card {
+      min-width: 0;
+      min-height: 260px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: none;
+    }
+
+    .story-card .num {
+      color: var(--accent);
+      font-weight: 950;
+      font-size: 0.9rem;
+    }
+
+    .story-card p {
+      margin-top: 12px;
+      color: var(--soft);
+    }
+
+    .sound {
+      width: fit-content;
+      max-width: 100%;
+      margin-top: 20px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(119, 217, 255, 0.1);
+      border: 1px solid rgba(119, 217, 255, 0.18);
+      color: #ccefff;
+      font-weight: 900;
+      font-size: 0.88rem;
+      overflow-wrap: anywhere;
+    }
+
+    .gallery-bento {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: clamp(14px, 2vw, 20px);
+      align-items: start;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .gallery-card {
+      position: relative;
+      width: 100%;
+      min-width: 0;
+      overflow: hidden;
+      cursor: zoom-in;
+      box-shadow: none;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(119, 217, 255, 0.1), transparent 65%),
+        #07101b;
+      isolation: isolate;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-position: center center;
+      transition: transform 0.35s ease;
+    }
+
+    .gallery-card:hover img { transform: scale(1.025); }
+
+    .gallery-card figcaption {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      z-index: 2;
+      max-width: calc(100% - 28px);
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(9, 12, 18, 0.72);
+      border: 1px solid rgba(244, 240, 232, 0.14);
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 900;
+      backdrop-filter: blur(14px);
+    }
+
+    .gallery-hero {
+      grid-column: span 7;
+      aspect-ratio: 16 / 9;
+    }
+
+    .gallery-poster {
+      grid-column: span 5;
+      aspect-ratio: 4 / 3;
+    }
+
+    .gallery-cover {
+      grid-column: 8 / span 5;
+      aspect-ratio: 1 / 1;
+    }
+
+    .gallery-wide {
+      grid-column: span 7;
+      aspect-ratio: 16 / 9;
+    }
+
+    .gallery-hero img, .gallery-poster img, .gallery-cover img, .gallery-wide img {
+      object-fit: cover;
+    }
+
+    .gallery-hero img {
+      object-fit: contain;
+      background: #07101b;
+    }
+
+    .bridge { overflow: hidden; }
+
+    .bridge-panel {
+      position: relative;
+      min-height: 560px;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      padding: clamp(28px, 5vw, 64px);
+      border-radius: calc(var(--radius-lg) + 12px);
+      border: 1px solid rgba(244, 240, 232, 0.1);
+      background:
+        radial-gradient(circle at 70% 40%, rgba(119, 217, 255, 0.12), transparent 16rem),
+        radial-gradient(circle at 30% 80%, rgba(255, 79, 94, 0.1), transparent 20rem),
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
+    }
+
+    .bridge-panel::before {
+      content: "";
+      position: absolute;
+      width: min(620px, 80vw);
+      aspect-ratio: 1;
+      right: -16%;
+      top: 8%;
+      border-radius: 50%;
+      border: 1px solid rgba(119, 217, 255, 0.18);
+      box-shadow: inset 0 0 0 34px rgba(119, 217, 255, 0.025);
+      animation: slowSpin 28s linear infinite reverse;
+      pointer-events: none;
+    }
+
+    .bridge-content {
+      position: relative;
+      z-index: 1;
+      max-width: 710px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .whisper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .whisper span {
+      padding: 8px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 240, 232, 0.12);
+      background: rgba(9, 12, 18, 0.42);
+      color: rgba(244, 240, 232, 0.76);
+      font-size: 0.9rem;
+      font-weight: 900;
+    }
+
+    .cta-band {
+      padding: clamp(26px, 5vw, 56px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      background:
+        linear-gradient(135deg, rgba(214, 255, 79, 0.11), rgba(255, 79, 94, 0.08)),
+        rgba(18, 23, 34, 0.78);
+    }
+
+    .cta-band h2 { font-size: clamp(2rem, 5vw, 4rem); }
+
+    .footer {
+      padding: 38px 0 calc(38px + env(safe-area-inset-bottom));
+      color: rgba(244, 240, 232, 0.68);
+      border-top: 1px solid rgba(244, 240, 232, 0.09);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.92rem;
+    }
+
+    .mobile-bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: calc(14px + env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      z-index: var(--mobile-nav-z);
+      display: none;
+      width: min(420px, calc(100% - 24px));
+      padding: 8px;
+      border-radius: 999px;
+      background: rgba(244, 240, 232, 0.92);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(18px);
+    }
+
+    .mobile-bottom-nav a {
+      flex: 1;
+      min-height: 48px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      border-radius: 999px;
+      color: #1a1f2a;
+      font-size: 0.75rem;
+      font-weight: 900;
+    }
+
+    .mobile-bottom-nav a[aria-current="true"] {
+      background: #111720;
+      color: var(--accent);
+    }
+
+    .mobile-bottom-nav .ico {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: var(--lightbox-z);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(2, 4, 8, 0.88);
+      backdrop-filter: blur(18px);
+    }
+
+    .lightbox.is-open { display: flex; }
+
+    .lightbox-dialog {
+      position: relative;
+      z-index: var(--lightbox-content-z);
+      width: min(1100px, 100%);
+      max-height: 90svh;
+      display: grid;
+      gap: 14px;
+    }
+
+    .lightbox-img-wrap {
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: #05070b;
+      border: 1px solid rgba(244, 240, 232, 0.16);
+    }
+
+    .lightbox img {
+      width: 100%;
+      max-height: 78svh;
+      object-fit: contain;
+    }
+
+    .lightbox-caption {
+      color: var(--soft);
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      right: -8px;
+      top: -56px;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(244, 240, 232, 0.2);
+      border-radius: 50%;
+      background: rgba(244, 240, 232, 0.1);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1.45rem;
+      line-height: 1;
+    }
+
+    @keyframes slowSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (min-width: 1440px) {
+      :root { --max: min(84vw, 1480px); }
+
+      .header-inner, .container, .footer-inner {
+        width: min(var(--max), calc(100% - 72px));
+      }
+
+      .story-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 980px) {
+      .gallery-hero, .gallery-poster, .gallery-cover, .gallery-wide {
+        grid-column: span 6;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .site-header { display: none; }
+      .mobile-bottom-nav { display: flex; }
+
+      .section {
+        scroll-margin-top: 20px;
+        padding: clamp(54px, 12vw, 82px) 0;
+      }
+
+      .hero {
+        min-height: 100svh;
+        padding: 42px 0 var(--safe-bottom);
+      }
+
+      .hero-bg img { object-fit: contain; }
+
+      .hero-bg::after {
+        background:
+          radial-gradient(circle at 52% 28%, rgba(9, 12, 18, 0.1), rgba(9, 12, 18, 0.58) 48%, rgba(9, 12, 18, 0.95) 100%),
+          linear-gradient(180deg, rgba(9, 12, 18, 0.14) 0%, rgba(9, 12, 18, 0.66) 55%, #090c12 100%);
+      }
+
+      .listen-grid, .cta-band { grid-template-columns: 1fr; }
+      .meta-list { grid-template-columns: 1fr; }
+
+      .story-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .story-card {
+        min-height: auto;
+        gap: 38px;
+      }
+
+      .gallery-bento {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .gallery-hero, .gallery-poster, .gallery-cover, .gallery-wide {
+        grid-column: auto;
+      }
+
+      .gallery-hero, .gallery-wide { aspect-ratio: 16 / 9; }
+      .gallery-poster { aspect-ratio: 4 / 3; }
+      .gallery-cover { aspect-ratio: 1 / 1; }
+      .footer { padding-bottom: var(--safe-bottom); }
+    }
+
+    @media (max-width: 520px) {
+      .header-inner, .container, .footer-inner {
+        width: min(100% - 28px, var(--max));
+      }
+
+      h1 { font-size: clamp(2.55rem, 14vw, 4.2rem); }
+      h2 { font-size: clamp(1.86rem, 10vw, 3rem); }
+
+      .hero-actions, .cta-row { align-items: stretch; }
+
+      .btn {
+        width: 100%;
+        white-space: normal;
+        text-align: center;
+      }
+
+      .lyric-card { min-height: 138px; }
+      .bridge-panel { min-height: 500px; }
+      .lightbox { padding: 14px; }
+
+      .lightbox-close {
+        right: 0;
+        top: -54px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main" data-ko="본문으로 이동" data-en="Skip to content">본문으로 이동</a>
+
+  <header class="site-header" aria-label="상단 내비게이션">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="The Mirinaeman Project home">
+        <span class="brand-mark" aria-hidden="true">✶</span>
+        <span>The Mirinaeman Project</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="주요 메뉴">
+        <a href="#listen" data-ko="듣기" data-en="Listen">듣기</a>
+        <a href="#lyrics" data-ko="가사 훅" data-en="Lyrics">가사 훅</a>
+        <a href="#story" data-ko="스토리" data-en="Story">스토리</a>
+        <a href="#artwork" data-ko="아트워크" data-en="Artwork">아트워크</a>
+        <button class="lang-toggle" type="button" id="langToggle" aria-label="Switch language">EN</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero section" id="top" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true">
+        <img src="https://i.imghippo.com/files/dcz4138xR.png" alt="" />
+      </div>
+      <div class="fan-ring" aria-hidden="true"></div>
+
+      <div class="container hero-content">
+        <div class="hero-copy reveal">
+          <p class="hero-title-kicker" data-ko="Single Album Release" data-en="Single Album Release">Single Album Release</p>
+          <h1 id="hero-title" data-ko="나사가 많이 남았다" data-en="Too Many Screws Left">나사가 많이 남았다</h1>
+          <p class="lead" data-ko="선풍기를 닦고 조이고 끼웠는데, 손바닥에는 아직 나사가 남았다. 여름밤의 불안을 코믹 호러 그루브로 밀어붙이는 싱글앨범."
+             data-en="The fan is cleaned, tightened, and assembled. But screws are still left in your palm. A comic horror groove for one suspicious summer night.">
+            선풍기를 닦고 조이고 끼웠는데, 손바닥에는 아직 나사가 남았다. 여름밤의 불안을 코믹 호러 그루브로 밀어붙이는 싱글앨범.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#listen" data-ko="지금 듣기" data-en="Listen Now">지금 듣기</a>
+            <a class="btn btn-secondary" href="#lyrics" data-ko="가사 훅 보기" data-en="View Hook">가사 훅 보기</a>
+          </div>
+
+          <div class="hero-chips" aria-label="album tags">
+            <span class="chip">Comic Horror Groove</span>
+            <span class="chip" data-ko="위잉 · 덜컥" data-en="Whirr · Clack">위잉 · 덜컥</span>
+            <span class="chip">The Mirinaeman Project Music Album</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="listen" aria-labelledby="listen-title">
+      <div class="container listen-grid">
+        <figure class="media-card cover-card reveal lightbox-trigger" tabindex="0"
+          data-full="https://i.imghippo.com/files/oqde6567cyc.png"
+          data-caption="Album Cover — 나사가 많이 남았다">
+          <img src="https://i.imghippo.com/files/oqde6567cyc.png" alt="나사가 많이 남았다 앨범 커버 이미지" loading="lazy" />
+        </figure>
+
+        <div class="album-panel reveal">
+          <div>
+            <p class="eyebrow" data-ko="Album Player" data-en="Album Player">Album Player</p>
+            <h2 id="listen-title" data-ko="공포의 선풍기가 나타났다" data-en="The Suspicious Fan Appears">공포의 선풍기가 나타났다</h2>
+          </div>
+
+          <p class="lead" data-ko="말하듯 시작해, 긴장감이 올라가고, 반복 훅에서 모두가 외친다. “잠잘 때는 꼭 꺼라.”"
+             data-en="It begins like a spoken joke, rises into nervous tension, then turns into a group chant: “Turn it off before you sleep.”">
+            말하듯 시작해, 긴장감이 올라가고, 반복 훅에서 모두가 외친다. “잠잘 때는 꼭 꺼라.”
+          </p>
+
+          <div class="meta-list" aria-label="release details">
+            <article class="info-card">
+              <strong data-ko="Style" data-en="Style">Style</strong>
+              <span data-ko="코믹 호러, 타이트한 장난기, 금속성 비트" data-en="Comic horror, tight playful groove, metallic accents">코믹 호러, 타이트한 장난기, 금속성 비트</span>
+            </article>
+            <article class="info-card">
+              <strong data-ko="Mood" data-en="Mood">Mood</strong>
+              <span data-ko="여름밤, 이상한 바람, 남은 나사의 경고" data-en="Summer night, suspicious breeze, leftover screw warning">여름밤, 이상한 바람, 남은 나사의 경고</span>
+            </article>
+            <article class="info-card">
+              <strong data-ko="Artist" data-en="Artist">Artist</strong>
+              <span>The Mirinaeman Project</span>
+            </article>
+          </div>
+
+          <div class="audio-wrap">
+            <strong data-ko="싱글 듣기" data-en="Listen to the single">싱글 듣기</strong>
+            <audio controls preload="metadata">
+              <source src="https://cdn1.suno.ai/c1c9fbba-8dcc-4400-b7ba-6baa9bb4ff62.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="lyrics" aria-labelledby="lyrics-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-ko="Hook Chant" data-en="Hook Chant">Hook Chant</p>
+          <h2 id="lyrics-title" data-ko="반복될수록 더 수상해지는 경고" data-en="A warning that gets stranger every time">반복될수록 더 수상해지는 경고</h2>
+          <p class="lead" data-ko="가사의 힘은 단순한 반복에 있다. 같은 문장이 돌아올수록 선풍기 바람은 장난에서 불길함으로 바뀐다."
+             data-en="The lyric works through repetition. The same line returns again and again until the fan’s breeze turns from playful to ominous.">
+            가사의 힘은 단순한 반복에 있다. 같은 문장이 돌아올수록 선풍기 바람은 장난에서 불길함으로 바뀐다.
+          </p>
+        </div>
+
+        <div class="hook-stack">
+          <article class="lyric-card reveal">
+            <p class="lyric-line" data-ko="나사가 많이 남았다" data-en="Too many screws are left">나사가 많이 남았다</p>
+            <small data-ko="손바닥 위의 증거" data-en="The evidence in your palm">손바닥 위의 증거</small>
+          </article>
+          <article class="lyric-card reveal">
+            <p class="lyric-line" data-ko="잠잘 때는 꼭 꺼라" data-en="Turn it off before you sleep">잠잘 때는 꼭 꺼라</p>
+            <small data-ko="장난처럼 들리지만 꽤 진심인 경고" data-en="A warning that sounds like a joke, but is strangely sincere">장난처럼 들리지만 꽤 진심인 경고</small>
+          </article>
+          <article class="lyric-card reveal">
+            <p class="lyric-line" data-ko="선풍기가 날아올지 몰라" data-en="The fan might fly at you">선풍기가 날아올지 몰라</p>
+            <small data-ko="공포의 선풍기다" data-en="It is the horror fan">공포의 선풍기다</small>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="story" aria-labelledby="story-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-ko="Scroll Story" data-en="Scroll Story">Scroll Story</p>
+          <h2 id="story-title" data-ko="한여름 방 안에서 벌어진 작은 재난" data-en="A tiny disaster in a summer room">한여름 방 안에서 벌어진 작은 재난</h2>
+        </div>
+
+        <div class="story-grid" aria-label="song story timeline">
+          <article class="story-card reveal">
+            <div>
+              <span class="num">01</span>
+              <h3 data-ko="선풍기를 뜯었다" data-en="The fan was opened">선풍기를 뜯었다</h3>
+              <p data-ko="여름 준비를 한다는 평범한 마음으로 시작했다." data-en="It started with the ordinary wish to prepare for summer.">여름 준비를 한다는 평범한 마음으로 시작했다.</p>
+            </div>
+            <span class="sound">tiny screw clicks</span>
+          </article>
+
+          <article class="story-card reveal">
+            <div>
+              <span class="num">02</span>
+              <h3 data-ko="닦고 조이고 끼웠다" data-en="Cleaned, tightened, assembled">닦고 조이고 끼웠다</h3>
+              <p data-ko="분명히 다 한 것 같은데, 설명할 수 없는 것이 남았다." data-en="Everything seemed complete, but something impossible remained.">분명히 다 한 것 같은데, 설명할 수 없는 것이 남았다.</p>
+            </div>
+            <span class="sound">clack</span>
+          </article>
+
+          <article class="story-card reveal">
+            <div>
+              <span class="num">03</span>
+              <h3 data-ko="나사가 남았다" data-en="Screws were left">나사가 남았다</h3>
+              <p data-ko="손바닥의 작은 금속들이 모든 분위기를 바꾼다." data-en="The small metal pieces in your palm change the entire mood.">손바닥의 작은 금속들이 모든 분위기를 바꾼다.</p>
+            </div>
+            <span class="sound">evidence</span>
+          </article>
+
+          <article class="story-card reveal">
+            <div>
+              <span class="num">04</span>
+              <h3 data-ko="바람이 수상하다" data-en="The breeze feels wrong">바람이 수상하다</h3>
+              <p data-ko="위잉 하고 돌아가는데, 덜컥 하는 순간 심장이 멈춘다." data-en="It spins with a whirr, then one clack stops your heart.">위잉 하고 돌아가는데, 덜컥 하는 순간 심장이 멈춘다.</p>
+            </div>
+            <span class="sound">whirr</span>
+          </article>
+
+          <article class="story-card reveal">
+            <div>
+              <span class="num">05</span>
+              <h3 data-ko="방 안이 조용해졌다" data-en="The room went quiet">방 안이 조용해졌다</h3>
+              <p data-ko="남은 나사들이 속삭인다. 우리는 어디 가야 하지." data-en="The leftover screws whisper: where are we supposed to go?">남은 나사들이 속삭인다. 우리는 어디 가야 하지.</p>
+            </div>
+            <span class="sound">whisper</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="artwork" aria-labelledby="artwork-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-ko="Artwork Gallery" data-en="Artwork Gallery">Artwork Gallery</p>
+          <h2 id="artwork-title" data-ko="비율 그대로 맞춘 벤또 아트워크" data-en="Bento artwork matched to each image ratio">비율 그대로 맞춘 벤또 아트워크</h2>
+          <p class="lead" data-ko="16:9 히어로, 4:3 포스터, 1:1 커버를 각각의 실제 비율 카드에 맞춰 빈 여백 없이 정리했습니다."
+             data-en="The 16:9 hero, 4:3 poster, and 1:1 cover are placed in true-ratio bento cards with no broken blank spaces.">
+            16:9 히어로, 4:3 포스터, 1:1 커버를 각각의 실제 비율 카드에 맞춰 빈 여백 없이 정리했습니다.
+          </p>
+        </div>
+
+        <div class="gallery-bento">
+          <figure class="gallery-card gallery-hero reveal lightbox-trigger" tabindex="0"
+            data-full="https://i.imghippo.com/files/dcz4138xR.png"
+            data-caption="Hero Artwork 16:9">
+            <img src="https://i.imghippo.com/files/dcz4138xR.png" alt="나사가 많이 남았다 히어로 아트워크" loading="lazy" />
+            <figcaption>Hero 16:9</figcaption>
+          </figure>
+
+          <figure class="gallery-card gallery-poster reveal lightbox-trigger" tabindex="0"
+            data-full="https://i.imghippo.com/files/Hj4752Ak.png"
+            data-caption="Poster Artwork 4:3">
+            <img src="https://i.imghippo.com/files/Hj4752Ak.png" alt="나사가 많이 남았다 포스터 이미지" loading="lazy" />
+            <figcaption>Poster 4:3</figcaption>
+          </figure>
+
+          <figure class="gallery-card gallery-wide reveal lightbox-trigger" tabindex="0"
+            data-full="https://i.imghippo.com/files/dcz4138xR.png"
+            data-caption="Wide Scene 16:9">
+            <img src="https://i.imghippo.com/files/dcz4138xR.png" alt="공포의 선풍기 와이드 장면" loading="lazy" />
+            <figcaption>Wide 16:9</figcaption>
+          </figure>
+
+          <figure class="gallery-card gallery-cover reveal lightbox-trigger" tabindex="0"
+            data-full="https://i.imghippo.com/files/oqde6567cyc.png"
+            data-caption="Album Cover 1:1">
+            <img src="https://i.imghippo.com/files/oqde6567cyc.png" alt="나사가 많이 남았다 앨범 커버" loading="lazy" />
+            <figcaption>Cover 1:1</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bridge" id="bridge" aria-labelledby="bridge-title">
+      <div class="container">
+        <div class="bridge-panel reveal">
+          <div class="bridge-content">
+            <p class="eyebrow" data-ko="Bridge" data-en="Bridge">Bridge</p>
+            <h2 id="bridge-title" data-ko="불 꺼진 방 안에서 혼자 도는 선풍기" data-en="A fan spinning alone in the dark room">불 꺼진 방 안에서 혼자 도는 선풍기</h2>
+            <p class="lead" data-ko="이 곡의 브릿지는 웃긴 상황을 잠깐 진짜 공포처럼 멈춰 세운다. 남은 나사들이 속삭이고, 바람은 계속 돈다."
+               data-en="The bridge briefly turns a funny situation into something truly eerie. The leftover screws whisper, and the breeze keeps spinning.">
+              이 곡의 브릿지는 웃긴 상황을 잠깐 진짜 공포처럼 멈춰 세운다. 남은 나사들이 속삭이고, 바람은 계속 돈다.
+            </p>
+            <div class="whisper" aria-label="sound effects">
+              <span>(위잉)</span>
+              <span>(덜컥)</span>
+              <span data-ko="우린 어디 가야 하지" data-en="Where should we go?">우린 어디 가야 하지</span>
+              <span data-ko="오늘 밤은 조심해" data-en="Be careful tonight">오늘 밤은 조심해</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="final" aria-labelledby="final-title">
+      <div class="container">
+        <div class="cta-band reveal">
+          <div>
+            <p class="eyebrow" data-ko="Final Chorus" data-en="Final Chorus">Final Chorus</p>
+            <h2 id="final-title" data-ko="오늘 밤은 조심해. 바람이 좀 수상해." data-en="Be careful tonight. The breeze feels suspicious.">오늘 밤은 조심해. 바람이 좀 수상해.</h2>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#listen" data-ko="싱글 듣기" data-en="Listen Now">싱글 듣기</a>
+            <a class="btn btn-danger" href="#artwork" data-ko="앨범 이미지 보기" data-en="View Artwork">앨범 이미지 보기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="mobile-bottom-nav" aria-label="모바일 하단 메뉴">
+    <a href="#top" aria-current="true">
+      <span class="ico" aria-hidden="true">⌂</span>
+      <span data-ko="홈" data-en="Home">홈</span>
+    </a>
+    <a href="#listen">
+      <span class="ico" aria-hidden="true">♪</span>
+      <span data-ko="듣기" data-en="Listen">듣기</span>
+    </a>
+    <a href="#lyrics">
+      <span class="ico" aria-hidden="true">!</span>
+      <span data-ko="가사" data-en="Lyrics">가사</span>
+    </a>
+    <a href="#artwork">
+      <span class="ico" aria-hidden="true">◉</span>
+      <span data-ko="아트" data-en="Art">아트</span>
+    </a>
+  </nav>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>© The Mirinaeman Project Music Album</p>
+      <p data-ko="나사가 많이 남았다 · 공포의 선풍기다" data-en="Too Many Screws Left · The Horror Fan">나사가 많이 남았다 · 공포의 선풍기다</p>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="이미지 크게 보기">
+    <div class="lightbox-dialog">
+      <button class="lightbox-close" type="button" id="lightboxClose" aria-label="닫기">×</button>
+      <div class="lightbox-img-wrap">
+        <img id="lightboxImage" src="" alt="" />
+      </div>
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const doc = document.documentElement;
+      const langToggle = document.getElementById("langToggle");
+      const translatable = document.querySelectorAll("[data-ko][data-en]");
+      const navLinks = document.querySelectorAll(".mobile-bottom-nav a, .desktop-nav a[href^='#']");
+      const sections = Array.from(document.querySelectorAll("section[id]"));
+      const revealItems = document.querySelectorAll(".reveal");
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxCaption = document.getElementById("lightboxCaption");
+      const lightboxClose = document.getElementById("lightboxClose");
+      const lightboxTriggers = document.querySelectorAll(".lightbox-trigger");
+
+      let currentLang = localStorage.getItem("albumLang") || "ko";
+      let lastFocus = null;
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        doc.lang = lang;
+
+        translatable.forEach((node) => {
+          const value = node.dataset[lang];
+          if (value) node.textContent = value;
+        });
+
+        if (langToggle) {
+          langToggle.textContent = lang === "ko" ? "EN" : "KO";
+          langToggle.setAttribute("aria-label", lang === "ko" ? "Switch language to English" : "한국어로 전환");
+        }
+
+        localStorage.setItem("albumLang", lang);
+      }
+
+      if (langToggle) {
+        langToggle.addEventListener("click", () => {
+          setLanguage(currentLang === "ko" ? "en" : "ko");
+        });
+      }
+
+      setLanguage(currentLang);
+
+      const revealObserver = "IntersectionObserver" in window
+        ? new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.14 })
+        : null;
+
+      revealItems.forEach((item) => {
+        if (revealObserver) revealObserver.observe(item);
+        else item.classList.add("is-visible");
+      });
+
+      const sectionObserver = "IntersectionObserver" in window
+        ? new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const id = entry.target.getAttribute("id");
+
+              navLinks.forEach((link) => {
+                const active = link.getAttribute("href") === "#" + id;
+                if (active) link.setAttribute("aria-current", "true");
+                else link.removeAttribute("aria-current");
+              });
+            });
+          }, {
+            rootMargin: "-42% 0px -52% 0px",
+            threshold: 0
+          })
+        : null;
+
+      if (sectionObserver) {
+        sections.forEach((section) => sectionObserver.observe(section));
+      }
+
+      function openLightbox(trigger) {
+        const src = trigger.getAttribute("data-full");
+        const caption = trigger.getAttribute("data-caption") || "";
+        const img = trigger.querySelector("img");
+
+        lastFocus = document.activeElement;
+        lightboxImage.src = src;
+        lightboxImage.alt = img ? img.alt : caption;
+        lightboxCaption.textContent = caption;
+        lightbox.classList.add("is-open");
+        document.body.classList.add("lightbox-open");
+        lightboxClose.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        document.body.classList.remove("lightbox-open");
+        lightboxImage.src = "";
+
+        if (lastFocus && typeof lastFocus.focus === "function") {
+          lastFocus.focus();
+        }
+      }
+
+      lightboxTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", () => openLightbox(trigger));
+        trigger.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openLightbox(trigger);
+          }
+        });
+      });
+
+      lightboxClose.addEventListener("click", closeLightbox);
+
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+          closeLightbox();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

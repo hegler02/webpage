@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>AI 노예와 AI 지휘관의 시대 | 컬럼 : 미리내맨 김준호</title>
+  <meta name="description" content="정보 격차가 사라진 뒤 남는 것은 판단권의 격차다. 생성형 AI 시대의 창작, 지휘 능력, 판단권, 반복 시스템에 관한 칼럼." />
+  <meta name="keywords" content="AI, 생성형 AI, AI 지휘관, AI 노예, CIC, Conversational Input Core, Flow, 판단권, 스크롤텔링, 미리내맨 김준호, Mirinaeman Joon Ho Kim" />
+  <meta name="author" content="미리내맨 김준호, Mirinaeman Joon Ho Kim" />
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="Korean, English" />
+  <meta name="geo.region" content="KR" />
+  <meta name="geo.placename" content="Seoul" />
+  <meta name="geo.position" content="37.5665;126.9780" />
+  <meta name="ICBM" content="37.5665, 126.9780" />
+  <meta name="theme-color" content="#07090f" />
+
+  <link rel="preload" as="image" href="https://i.imghippo.com/files/Mam8649Gj.png" />
+  <link rel="preload" as="image" href="https://i.imghippo.com/files/nqyI7585tqA.png" />
+
+  <link rel="canonical" href="https://example.com/ai-commanders-column" />
+  <link rel="alternate" hreflang="ko" href="https://example.com/ai-commanders-column?lang=ko" />
+  <link rel="alternate" hreflang="en" href="https://example.com/ai-commanders-column?lang=en" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:title" content="AI 노예와 AI 지휘관의 시대" />
+  <meta property="og:description" content="정보 격차가 사라진 뒤, 남는 것은 ‘판단권’의 격차다." />
+  <meta property="og:image" content="https://i.imghippo.com/files/Mam8649Gj.png" />
+  <meta property="og:image:secure_url" content="https://i.imghippo.com/files/Mam8649Gj.png" />
+  <meta property="og:image:alt" content="AI 노예와 AI 지휘관의 시대 칼럼 대표 이미지" />
+  <meta property="og:url" content="https://example.com/ai-commanders-column" />
+  <meta property="og:site_name" content="컬럼 : 미리내맨 김준호" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI 노예와 AI 지휘관의 시대" />
+  <meta name="twitter:description" content="정보 격차가 사라진 뒤, 남는 것은 ‘판단권’의 격차다." />
+  <meta name="twitter:image" content="https://i.imghippo.com/files/Mam8649Gj.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": "https://example.com/ai-commanders-column#article-ko",
+        "headline": "AI 노예와 AI 지휘관의 시대",
+        "alternativeHeadline": "정보 격차가 사라진 뒤, 남는 것은 판단권의 격차다",
+        "inLanguage": "ko-KR",
+        "image": "https://i.imghippo.com/files/Mam8649Gj.png",
+        "author": {
+          "@type": "Person",
+          "name": "미리내맨 김준호",
+          "alternateName": "Mirinaeman Joon Ho Kim"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "컬럼 : 미리내맨 김준호",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://i.imghippo.com/files/Mam8649Gj.png"
+          }
+        },
+        "description": "생성형 AI 시대에 정보 접근권보다 판단권, 지휘 능력, 반복 시스템이 더 큰 격차를 만든다는 칼럼."
+      },
+      {
+        "@type": "Article",
+        "@id": "https://example.com/ai-commanders-column#article-en",
+        "headline": "The Age of AI Slaves and AI Commanders",
+        "alternativeHeadline": "After the information gap disappears, what remains is the gap in judgment authority",
+        "inLanguage": "en-US",
+        "image": "https://i.imghippo.com/files/nqyI7585tqA.png",
+        "author": {
+          "@type": "Person",
+          "name": "Mirinaeman Joon Ho Kim",
+          "alternateName": "미리내맨 김준호"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Column: Mirinaeman Joon Ho Kim",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://i.imghippo.com/files/nqyI7585tqA.png"
+          }
+        },
+        "description": "A bilingual column about judgment, direction, workflow, and human intent in the generative AI era."
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #07090f;
+      --text: #f4f0e8;
+      --muted: #b9b4aa;
+      --dim: #817d76;
+      --line: rgba(255, 255, 255, 0.14);
+      --gold: #f4c768;
+      --gold-soft: rgba(244, 199, 104, 0.1);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+
+      --z-base: 1;
+      --z-media: 2;
+      --z-content: 4;
+      --z-sticky: 20;
+      --z-nav: 40;
+      --z-float: 60;
+      --z-toggle: 70;
+
+      --page-pad: clamp(18px, 4vw, 56px);
+      --content: min(100% - calc(var(--page-pad) * 2), 1240px);
+      --article: min(100% - calc(var(--page-pad) * 2), 860px);
+
+      --radius-lg: 28px;
+      --radius-md: 22px;
+      --radius-sm: 16px;
+
+      --header-h: 74px;
+
+      --space-2: 10px;
+      --space-3: 16px;
+      --space-4: 22px;
+      --space-5: 30px;
+
+      --card-pad: clamp(20px, 2.4vw, 32px);
+      --card-gap: clamp(18px, 2vw, 26px);
+      --section-pad: clamp(56px, 8vw, 104px);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: #07090f;
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--header-h) + 20px);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 8%, rgba(244, 199, 104, 0.16), transparent 28rem),
+        radial-gradient(circle at 86% 12%, rgba(143, 184, 255, 0.12), transparent 25rem),
+        linear-gradient(180deg, #07090f 0%, #0d1018 44%, #07090f 100%);
+      background-color: #07090f;
+      font-family:
+        "Apple SD Gothic Neo",
+        "Malgun Gothic",
+        "Segoe UI",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+      line-height: 1.62;
+      word-break: keep-all;
+      line-break: strict;
+      overflow-x: hidden;
+    }
+
+    body[data-lang="en"] {
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      word-break: normal;
+      line-break: auto;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      min-height: 100%;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.45;
+    }
+
+    body,
+    .site-shell,
+    main,
+    section {
+      background-color: #07090f;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { font: inherit; }
+
+    h1, h2, h3, p, li, a, span, strong {
+      overflow-wrap: normal;
+      word-break: keep-all;
+    }
+
+    body[data-lang="en"] h1,
+    body[data-lang="en"] h2,
+    body[data-lang="en"] h3,
+    body[data-lang="en"] p,
+    body[data-lang="en"] li,
+    body[data-lang="en"] a,
+    body[data-lang="en"] span,
+    body[data-lang="en"] strong {
+      word-break: normal;
+      overflow-wrap: anywhere;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      z-index: 999;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: #071018;
+      background: var(--gold);
+      transform: translateY(-140%);
+      transition: transform 0.2s ease;
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .site-shell {
+      position: relative;
+      z-index: var(--z-base);
+      min-height: 100vh;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: var(--z-nav);
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px var(--page-pad);
+      background: rgba(7, 9, 15, 0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: none;
+    }
+
+    .nav-inner {
+      width: min(100%, 1280px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-weight: 850;
+      letter-spacing: -0.015em;
+    }
+
+    .brand-mark {
+      flex: 0 0 auto;
+      width: 32px;
+      height: 32px;
+      border-radius: 11px;
+      background:
+        linear-gradient(135deg, rgba(244, 199, 104, 1), rgba(216, 146, 55, 0.78)),
+        radial-gradient(circle at 20% 20%, #fff, transparent 45%);
+      box-shadow: 0 0 34px rgba(244, 199, 104, 0.24);
+    }
+
+    .brand-text {
+      min-width: 0;
+      white-space: normal;
+      line-height: 1.25;
+    }
+
+    .desktop-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(8px, 1.2vw, 18px);
+      flex: 0 0 auto;
+    }
+
+    .desktop-links a {
+      padding: 9px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+
+    .desktop-links a:hover,
+    .desktop-links a:focus-visible {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.09);
+      outline: none;
+    }
+
+    .lang-toggle {
+      position: relative;
+      z-index: var(--z-toggle);
+      display: inline-flex;
+      align-items: center;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.075);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+      flex: 0 0 auto;
+    }
+
+    .lang-toggle button {
+      min-width: 44px;
+      min-height: 38px;
+      border: 0;
+      border-radius: 999px;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      font-weight: 850;
+      letter-spacing: -0.01em;
+    }
+
+    .lang-toggle button[aria-pressed="true"] {
+      color: #081018;
+      background: var(--gold);
+    }
+
+    body[data-lang="ko"] { --hero-bg: url("https://i.imghippo.com/files/Mam8649Gj.png"); }
+    body[data-lang="en"] { --hero-bg: url("https://i.imghippo.com/files/nqyI7585tqA.png"); }
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      width: 100%;
+      min-height: calc(100svh - var(--header-h));
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #07090f;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: var(--z-media);
+      overflow: hidden;
+      background: #07090f;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      contain: paint;
+    }
+
+    .hero-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(244, 199, 104, 0.08), transparent 34%),
+        radial-gradient(circle at 82% 52%, rgba(143, 184, 255, 0.08), transparent 36%),
+        #07090f;
+      opacity: 1;
+      filter: none;
+      transform: none;
+    }
+
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(7, 9, 15, 0.88) 0%, rgba(7, 9, 15, 0.58) 42%, rgba(7, 9, 15, 0.38) 70%, rgba(7, 9, 15, 0.76) 100%),
+        linear-gradient(180deg, rgba(7, 9, 15, 0.64) 0%, rgba(7, 9, 15, 0.12) 48%, rgba(7, 9, 15, 0.88) 100%);
+      pointer-events: none;
+    }
+
+    .hero-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      opacity: 0.9;
+      filter: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: var(--z-content);
+      width: var(--content);
+      margin: 0 auto;
+      padding: clamp(76px, 9vw, 142px) 0 clamp(70px, 8vw, 124px);
+      min-width: 0;
+    }
+
+    .hero-copy {
+      width: min(100%, 720px);
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      width: fit-content;
+      max-width: 100%;
+      margin: 0;
+      padding: 7px 12px;
+      border: 1px solid rgba(244, 199, 104, 0.28);
+      border-radius: 999px;
+      color: var(--gold);
+      background: rgba(7, 9, 15, 0.72);
+      font-size: 0.88rem;
+      font-weight: 850;
+      line-height: 1.25;
+      letter-spacing: 0.01em;
+    }
+
+    .eyebrow::before {
+      content: "";
+      flex: 0 0 auto;
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: currentColor;
+      box-shadow: 0 0 18px currentColor;
+    }
+
+    .hero h1 {
+      margin: var(--space-4) 0 var(--space-3);
+      width: 100%;
+      font-size: clamp(2.15rem, 5vw, 4.35rem);
+      line-height: 1.14;
+      letter-spacing: -0.038em;
+      text-shadow: 0 18px 50px rgba(0, 0, 0, 0.58);
+    }
+
+    body[data-lang="en"] .hero h1 { letter-spacing: -0.032em; }
+
+    .hero-sub {
+      width: min(100%, 720px);
+      margin: 0;
+      color: rgba(244, 240, 232, 0.86);
+      font-size: clamp(1.02rem, 1.24vw, 1.16rem);
+      line-height: 1.68;
+      text-shadow: 0 12px 34px rgba(0, 0, 0, 0.64);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: var(--space-5);
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 850;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      white-space: normal;
+      text-align: center;
+    }
+
+    .button.primary {
+      color: #081018;
+      background: var(--gold);
+      box-shadow: 0 14px 36px rgba(244, 199, 104, 0.2);
+    }
+
+    .button.secondary {
+      color: var(--text);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .overview,
+    .scrolly,
+    .final-panel,
+    .footer {
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    .overview {
+      width: var(--content);
+      margin: 0 auto;
+      padding: var(--section-pad) 0;
+      min-width: 0;
+    }
+
+    .section-kicker {
+      margin: 0 0 var(--space-2);
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 850;
+      line-height: 1.35;
+      letter-spacing: 0.055em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin: 0;
+      width: 100%;
+      font-size: clamp(1.85rem, 3vw, 2.9rem);
+      line-height: 1.22;
+      letter-spacing: -0.03em;
+    }
+
+    body[data-lang="en"] .section-title { letter-spacing: -0.026em; }
+
+    .section-lead {
+      width: 100%;
+      margin: var(--space-3) 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.15vw, 1.12rem);
+      line-height: 1.7;
+    }
+
+    .beat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--card-gap);
+      margin-top: var(--space-5);
+    }
+
+    .beat-card {
+      min-width: 0;
+      padding: var(--card-pad);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.045));
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.18);
+    }
+
+    .beat-card b {
+      display: inline-grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      margin-bottom: var(--space-4);
+      border-radius: 14px;
+      color: #071018;
+      background: var(--gold);
+      font-size: 0.94rem;
+      line-height: 1;
+    }
+
+    .beat-card h3 {
+      margin: 0 0 var(--space-2);
+      font-size: 1.08rem;
+      line-height: 1.34;
+      letter-spacing: -0.018em;
+    }
+
+    .beat-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .scrolly {
+      width: var(--content);
+      margin: 0 auto;
+      padding: clamp(44px, 7vw, 92px) 0;
+      display: grid;
+      grid-template-columns: minmax(250px, 0.58fr) minmax(0, 1fr);
+      gap: clamp(28px, 5vw, 70px);
+      align-items: start;
+      min-width: 0;
+    }
+
+    .story-rail {
+      position: sticky;
+      top: calc(var(--header-h) + 24px);
+      z-index: var(--z-sticky);
+      min-width: 0;
+      padding: var(--card-pad);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.065);
+      box-shadow: var(--shadow);
+    }
+
+    .story-rail h2 {
+      margin: 0 0 var(--space-2);
+      width: 100%;
+      font-size: clamp(1.4rem, 1.9vw, 1.98rem);
+      line-height: 1.28;
+      letter-spacing: -0.024em;
+    }
+
+    .story-rail p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.62;
+    }
+
+    .rail-meter {
+      display: grid;
+      gap: var(--space-2);
+      margin-top: var(--space-5);
+    }
+
+    .rail-meter a {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr);
+      gap: var(--space-2);
+      align-items: center;
+      min-height: 44px;
+      padding: 9px;
+      border-radius: 16px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.32;
+    }
+
+    .rail-meter a::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      margin-left: 6px;
+      border: 1px solid rgba(244, 199, 104, 0.6);
+      border-radius: 99px;
+      background: rgba(244, 199, 104, 0.08);
+    }
+
+    .rail-meter a:hover,
+    .rail-meter a:focus-visible {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.07);
+      outline: none;
+    }
+
+    .article-stack {
+      display: grid;
+      gap: var(--card-gap);
+      min-width: 0;
+    }
+
+    .article-block {
+      position: relative;
+      min-width: 0;
+      padding: var(--card-pad);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.045)),
+        rgba(7, 9, 15, 0.8);
+      box-shadow: 0 18px 70px rgba(0, 0, 0, 0.24);
+    }
+
+    .article-block::before {
+      content: attr(data-step);
+      position: absolute;
+      right: 22px;
+      top: 14px;
+      color: rgba(255, 255, 255, 0.06);
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      font-weight: 950;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      pointer-events: none;
+    }
+
+    .article-block h2 {
+      position: relative;
+      width: 100%;
+      margin: 0 0 var(--space-4);
+      padding-right: clamp(24px, 8vw, 90px);
+      font-size: clamp(1.34rem, 2vw, 1.9rem);
+      line-height: 1.34;
+      letter-spacing: -0.024em;
+    }
+
+    .article-block p {
+      position: relative;
+      margin: 0 0 var(--space-3);
+      color: rgba(244, 240, 232, 0.88);
+      font-size: clamp(1rem, 1.06vw, 1.06rem);
+      line-height: 1.68;
+      letter-spacing: -0.002em;
+    }
+
+    .article-block p:last-child { margin-bottom: 0; }
+
+    .quote-card {
+      margin: var(--space-4) 0;
+      padding: clamp(18px, 2.2vw, 26px);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      background: var(--gold-soft);
+      color: var(--text);
+      font-weight: 850;
+      font-size: clamp(1rem, 1.12vw, 1.1rem);
+      line-height: 1.58;
+      letter-spacing: -0.006em;
+    }
+
+    .split-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      margin: var(--space-4) 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--line);
+      overflow: clip;
+    }
+
+    .split-card > div {
+      min-width: 0;
+      padding: var(--card-pad);
+      background: rgba(7, 9, 15, 0.74);
+    }
+
+    .split-card h3 {
+      margin: 0 0 var(--space-3);
+      font-size: 1.15rem;
+      line-height: 1.34;
+      letter-spacing: -0.018em;
+    }
+
+    .split-card ul {
+      display: grid;
+      gap: var(--space-2);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      line-height: 1.58;
+    }
+
+    .split-card li {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .split-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 7px;
+      height: 7px;
+      border-radius: 99px;
+      background: var(--gold);
+    }
+
+    .formula {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-3);
+      margin: var(--space-4) 0;
+    }
+
+    .formula span {
+      display: grid;
+      min-height: 82px;
+      place-items: center;
+      padding: 15px;
+      border: 1px solid rgba(244, 199, 104, 0.26);
+      border-radius: var(--radius-md);
+      color: var(--gold);
+      background: rgba(244, 199, 104, 0.075);
+      font-weight: 900;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .final-panel {
+      width: var(--article);
+      margin: 0 auto;
+      padding: clamp(30px, 5vw, 58px);
+      border: 1px solid rgba(244, 199, 104, 0.34);
+      border-radius: clamp(26px, 4vw, 44px);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(244, 199, 104, 0.18), transparent 26rem),
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.052));
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .final-panel h2 {
+      width: 100%;
+      margin: 0 auto;
+      font-size: clamp(1.75rem, 3.15vw, 2.9rem);
+      line-height: 1.24;
+      letter-spacing: -0.028em;
+    }
+
+    .final-panel p {
+      width: 100%;
+      margin: var(--space-3) auto 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.16vw, 1.1rem);
+      line-height: 1.68;
+    }
+
+    .footer {
+      width: var(--content);
+      margin: 0 auto;
+      padding: 54px 0 110px;
+      color: var(--dim);
+      font-size: 0.92rem;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    [data-i18n] { display: none; }
+
+    body[data-lang="ko"] [data-i18n="ko"],
+    body[data-lang="en"] [data-i18n="en"] {
+      display: revert;
+    }
+
+    body[data-lang="ko"] [data-i18n-img="en"],
+    body[data-lang="en"] [data-i18n-img="ko"] {
+      display: none;
+    }
+
+    .mobile-bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: max(14px, env(safe-area-inset-bottom));
+      z-index: var(--z-float);
+      width: min(calc(100% - 28px), 520px);
+      transform: translateX(-50%);
+      display: none;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 26px;
+      background: rgba(12, 14, 22, 0.96);
+      backdrop-filter: none;
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.38);
+    }
+
+    .mobile-bottom-nav a {
+      min-height: 48px;
+      display: grid;
+      place-items: center;
+      padding: 7px 6px;
+      border-radius: 19px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 850;
+      line-height: 1.15;
+      text-align: center;
+    }
+
+    .mobile-bottom-nav a:hover,
+    .mobile-bottom-nav a:focus-visible {
+      color: #081018;
+      background: var(--gold);
+      outline: none;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(244, 199, 104, 0.68);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .beat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 980px) {
+      .scrolly { grid-template-columns: 1fr; }
+
+      .story-rail {
+        position: relative;
+        top: 0;
+      }
+
+      .formula { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      :root {
+        --header-h: 66px;
+        --page-pad: 18px;
+        --card-pad: 20px;
+        --card-gap: 18px;
+        --section-pad: 58px;
+      }
+
+      body { padding-bottom: 84px; }
+
+      .top-nav {
+        position: relative;
+        height: auto;
+        min-height: var(--header-h);
+      }
+
+      .desktop-links { display: none; }
+      .brand { font-size: 0.88rem; }
+
+      .hero {
+        min-height: auto;
+        display: block;
+        padding-top: 0;
+      }
+
+      .hero-bg {
+        position: relative;
+        z-index: var(--z-media);
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        min-height: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .hero-bg::before {
+        inset: 0;
+        filter: none;
+        transform: none;
+        opacity: 1;
+      }
+
+      .hero-bg::after {
+        background:
+          linear-gradient(180deg, rgba(7, 9, 15, 0.04) 0%, rgba(7, 9, 15, 0.12) 52%, rgba(7, 9, 15, 0.62) 100%);
+      }
+
+      .hero-bg img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        transform: translateZ(0);
+        opacity: 0.95;
+        filter: none;
+      }
+
+      .hero-inner {
+        width: var(--content);
+        padding: 30px 0 54px;
+      }
+
+      .hero-copy { width: 100%; }
+
+      .hero h1 {
+        font-size: clamp(2rem, 9.2vw, 3.15rem);
+        line-height: 1.16;
+        letter-spacing: -0.032em;
+      }
+
+      .hero-sub { line-height: 1.66; }
+
+      .hero-actions {
+        flex-direction: column;
+        margin-top: var(--space-4);
+      }
+
+      .button { width: 100%; }
+
+      .section-title {
+        font-size: clamp(1.76rem, 7.5vw, 2.65rem);
+        line-height: 1.2;
+        letter-spacing: -0.026em;
+      }
+
+      .beat-grid,
+      .split-card,
+      .formula {
+        grid-template-columns: 1fr;
+      }
+
+      .article-block::before {
+        top: 10px;
+        right: 16px;
+        font-size: 4.2rem;
+      }
+
+      .article-block h2 {
+        padding-right: 48px;
+        font-size: clamp(1.3rem, 5.4vw, 1.76rem);
+        line-height: 1.34;
+        letter-spacing: -0.02em;
+      }
+
+      .mobile-bottom-nav { display: grid; }
+    }
+
+    @media (max-width: 420px) {
+      .nav-inner { gap: 10px; }
+
+      .brand-mark {
+        width: 28px;
+        height: 28px;
+        border-radius: 9px;
+      }
+
+      .brand { font-size: 0.78rem; }
+
+      .lang-toggle button {
+        min-width: 38px;
+        min-height: 34px;
+        font-size: 0.82rem;
+      }
+
+      .hero h1 { font-size: clamp(1.92rem, 8.8vw, 2.7rem); }
+      .section-title { font-size: clamp(1.62rem, 7vw, 2.25rem); }
+      .article-block h2 { padding-right: 36px; }
+    }
+  </style>
+</head>
+
+<body data-lang="ko">
+  <a class="skip-link" href="#main">
+    <span data-i18n="ko">본문으로 이동</span>
+    <span data-i18n="en">Skip to content</span>
+  </a>
+
+  <div class="site-shell">
+    <header class="top-nav" aria-label="Primary navigation">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="컬럼 : 미리내맨 김준호">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">
+            <span data-i18n="ko">컬럼 : 미리내맨 김준호</span>
+            <span data-i18n="en">Column: Mirinaeman Joon Ho Kim</span>
+          </span>
+        </a>
+
+        <nav class="desktop-links" aria-label="Section navigation">
+          <a href="#thesis"><span data-i18n="ko">핵심</span><span data-i18n="en">Thesis</span></a>
+          <a href="#cic"><span data-i18n="ko">CIC</span><span data-i18n="en">CIC</span></a>
+          <a href="#divide"><span data-i18n="ko">격차</span><span data-i18n="en">Divide</span></a>
+          <a href="#fulltext"><span data-i18n="ko">원문</span><span data-i18n="en">Full Text</span></a>
+        </nav>
+
+        <div class="lang-toggle" aria-label="Language switch">
+          <button type="button" data-lang-button="ko" aria-pressed="true">KR</button>
+          <button type="button" data-lang-button="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-bg" aria-hidden="true">
+          <img data-i18n-img="ko" src="https://i.imghippo.com/files/Mam8649Gj.png" alt="" />
+          <img data-i18n-img="en" src="https://i.imghippo.com/files/nqyI7585tqA.png" alt="" />
+        </div>
+
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">
+              <span data-i18n="ko">Column · Judgment after AI</span>
+              <span data-i18n="en">Column · Judgment after AI</span>
+            </p>
+
+            <h1 id="hero-title">
+              <span data-i18n="ko">AI 노예와 AI 지휘관의 시대</span>
+              <span data-i18n="en">The Age of AI Slaves and AI Commanders</span>
+            </h1>
+
+            <p class="hero-sub">
+              <span data-i18n="ko">정보 격차가 사라진 뒤, 남는 것은 ‘판단권’의 격차다. AI는 구현할 수 있지만, 무엇을 말할 것인지는 인간의 지휘에서 시작된다.</span>
+              <span data-i18n="en">After the information gap disappears, what remains is the gap in judgment authority. AI can implement, but what should be said begins with human command.</span>
+            </p>
+
+            <div class="hero-actions">
+              <a class="button primary" href="#fulltext">
+                <span data-i18n="ko">원문 읽기</span>
+                <span data-i18n="en">Read Full Text</span>
+              </a>
+              <a class="button secondary" href="#divide">
+                <span data-i18n="ko">핵심 격차 보기</span>
+                <span data-i18n="en">See the Divide</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="overview" id="thesis" aria-labelledby="thesis-title">
+        <p class="section-kicker">
+          <span data-i18n="ko">Story Beats</span>
+          <span data-i18n="en">Story Beats</span>
+        </p>
+        <h2 class="section-title" id="thesis-title">
+          <span data-i18n="ko">한 줄 입력의 환상에서 판단권의 현실로 이동하는 이야기</span>
+          <span data-i18n="en">A story moving from the myth of one-line input to the reality of judgment authority</span>
+        </h2>
+        <p class="section-lead">
+          <span data-i18n="ko">이 페이지는 칼럼의 논리 흐름을 네 개의 비트로 나누어, 독자가 스크롤하면서 “생성 → 검수 → 지휘 → 격차”의 구조를 따라가도록 설계했다.</span>
+          <span data-i18n="en">This page divides the column into four beats, guiding readers through the structure of generation, review, command, and inequality as they scroll.</span>
+        </p>
+
+        <div class="beat-grid">
+          <article class="beat-card">
+            <b>01</b>
+            <h3><span data-i18n="ko">한 줄 프롬프트의 착각</span><span data-i18n="en">The one-line prompt illusion</span></h3>
+            <p><span data-i18n="ko">창작은 결과를 뽑는 행위가 아니라 의도를 구조화하는 과정이다.</span><span data-i18n="en">Creation is not extracting output, but structuring intent.</span></p>
+          </article>
+          <article class="beat-card">
+            <b>02</b>
+            <h3><span data-i18n="ko">영상과 메시지의 심리</span><span data-i18n="en">The psychology of video and message</span></h3>
+            <p><span data-i18n="ko">컷은 화면을 자르는 기술이 아니라 관객의 마음을 이동시키는 판단이다.</span><span data-i18n="en">A cut is not a technical slice, but a judgment that moves the audience’s mind.</span></p>
+          </article>
+          <article class="beat-card">
+            <b>03</b>
+            <h3><span data-i18n="ko">CIC라는 지휘 코어</span><span data-i18n="en">CIC as a command core</span></h3>
+            <p><span data-i18n="ko">앞으로의 입력은 프롬프트가 아니라 의도와 기준이 축적되는 대화형 코어다.</span><span data-i18n="en">Future input is not a prompt, but a conversational core of intent and standards.</span></p>
+          </article>
+          <article class="beat-card">
+            <b>04</b>
+            <h3><span data-i18n="ko">판단권이 만드는 부의 격차</span><span data-i18n="en">The wealth gap made by judgment</span></h3>
+            <p><span data-i18n="ko">정보가 평준화된 뒤에는 안목, 지휘 능력, 반복 시스템이 차이를 만든다.</span><span data-i18n="en">After information is equalized, taste, command ability, and iteration systems make the difference.</span></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="scrolly" id="fulltext" aria-label="Full column text">
+        <aside class="story-rail">
+          <p class="section-kicker">
+            <span data-i18n="ko">Scroll Map</span>
+            <span data-i18n="en">Scroll Map</span>
+          </p>
+          <h2>
+            <span data-i18n="ko">출력물을 받는 사람과 생산 시스템을 만드는 사람</span>
+            <span data-i18n="en">Those who receive outputs and those who build production systems</span>
+          </h2>
+          <p>
+            <span data-i18n="ko">각 블록은 칼럼의 논리 단위를 유지하면서 시선이 자연스럽게 다음 판단으로 이동하도록 구성되어 있다.</span>
+            <span data-i18n="en">Each block preserves the column’s logic while moving the eye naturally toward the next judgment.</span>
+          </p>
+
+          <nav class="rail-meter" aria-label="Article quick navigation">
+            <a href="#illusion"><span data-i18n="ko">프롬프트의 착각</span><span data-i18n="en">Prompt Illusion</span></a>
+            <a href="#cic"><span data-i18n="ko">대화형 입력 코어</span><span data-i18n="en">Conversational Core</span></a>
+            <a href="#divide"><span data-i18n="ko">AI 노예와 지휘관</span><span data-i18n="en">Slaves and Commanders</span></a>
+            <a href="#capital"><span data-i18n="ko">자본 × 안목 × 시스템</span><span data-i18n="en">Capital × Taste × System</span></a>
+          </nav>
+        </aside>
+
+        <div class="article-stack">
+          <article class="article-block" id="illusion" data-step="01">
+            <h2>
+              <span data-i18n="ko">정보 격차가 사라진 뒤, 남는 것은 ‘판단권’의 격차다</span>
+              <span data-i18n="en">After the information gap disappears, what remains is the gap in “judgment authority.”</span>
+            </h2>
+
+            <div data-i18n="ko">
+              <p>생성형 AI를 둘러싼 가장 큰 착각은 이것이다. “한 줄만 입력하면 AI가 알아서 만들어준다.”</p>
+              <p>이미지든, 글쓰기든, 만화든, 영상이든, 코딩이든 마찬가지다. 사람들은 아직도 프롬프트 한 줄을 마치 창작의 전부처럼 생각한다. 그러나 현장에서 실제로 무언가를 만들어본 사람이라면 안다. 창작은 결과물을 뽑는 행위가 아니라, 의도를 구조화하고, 기준을 세우고, 드래프트를 검수하고, 다시 고치는 과정이라는 것을.</p>
+              <p>특히 영상은 더 그렇다. 영상은 단순히 멋진 장면의 나열이 아니다. 쇼트의 길이, 컷의 위치, 시선의 방향, 인물의 동선, 정보가 공개되는 순서, 관객의 감정이 움직이는 타이밍까지 모두 설계되어야 한다. 편집은 기술이 아니라 심리다. 컷은 화면을 자르는 행위가 아니라 관객의 마음을 이동시키는 행위다.</p>
+              <div class="quote-card">미디어는 메시지다. 그렇다면 질문은 분명해진다. AI가 과연 한 줄의 프롬프트만으로 내가 전달하려는 메시지를 판단할 수 있는가?</div>
+              <p>나는 불가능하다고 본다. 설령 기술이 더 고도화되어도 마찬가지다. AI가 아무리 뛰어나도, 무엇을 말할 것인지, 왜 말해야 하는지, 어느 순간에 감정을 누르고 어느 순간에 폭발시킬 것인지는 결국 인간의 판단 영역이다. AI는 구현할 수 있다. 그러나 의도를 대신 가질 수는 없다.</p>
+            </div>
+
+            <div data-i18n="en">
+              <p>The biggest misconception around generative AI is this: “If I enter just one line, AI will make it on its own.”</p>
+              <p>This applies to images, writing, comics, video, and coding alike. People still treat a single prompt as if it were the entirety of creation. But anyone who has actually made something in the field knows this: creation is not the act of extracting an output. It is the process of structuring intent, setting standards, reviewing drafts, and revising again.</p>
+              <p>Video makes this even clearer. Video is not simply a sequence of impressive scenes. The length of a shot, the position of a cut, the direction of the gaze, the movement of a character, the order in which information is revealed, and the timing of the audience’s emotional movement must all be designed. Editing is not technique; it is psychology. A cut is not an act of slicing the screen. It is an act of moving the audience’s mind.</p>
+              <div class="quote-card">The medium is the message. Then the question becomes clear: can AI truly judge the message I want to deliver with only a single line of prompt?</div>
+              <p>I believe it cannot. Even if the technology becomes more advanced, the same remains true. No matter how capable AI becomes, what to say, why it should be said, when to suppress emotion, and when to let it explode are ultimately matters of human judgment. AI can implement. But it cannot possess intent on our behalf.</p>
+            </div>
+          </article>
+
+          <article class="article-block" id="cic" data-step="02">
+            <h2>
+              <span data-i18n="ko">원샷 생성이 아니라 반복적 협업 제작으로 이동하고 있다</span>
+              <span data-i18n="en">The direction is not one-shot generation, but iterative collaborative production.</span>
+            </h2>
+
+            <div data-i18n="ko">
+              <p>최근 생성형 영상 도구들의 진화 방향도 이 사실을 뒷받침한다. 구글은 AI 영화 제작 도구 Flow를 소개하며, 단순히 문장을 영상으로 바꾸는 도구가 아니라 클립, 장면, 이야기, 캐스트, 장소, 오브젝트, 스타일 같은 스토리 재료를 관리하고 엮는 제작 환경으로 설명한다.</p>
+              <p>또한 Flow 공식 페이지는 아이디어 탐색, 반복 수정, 자연어 기반의 복잡한 편집, 개별 에셋 조정, 프로젝트 전체 확장 같은 과정을 강조한다. 즉, 기술의 방향은 이미 “원샷 생성”이 아니라 “반복적 협업 제작”으로 가고 있다.</p>
+              <p>나는 이 지점을 CIC, Conversational Input Core라고 부른다.</p>
+              <p>앞으로의 입력은 단순한 프롬프트가 아니다. 인간의 의도, 맥락, 기준, 제약, 수정 명령이 축적되는 대화형 입력 코어다. 한 줄로 끝나는 명령어가 아니라, 창작자의 사고가 AI와 교차하며 결과물을 다듬어가는 지휘 체계다.</p>
+            </div>
+
+            <div data-i18n="en">
+              <p>The recent direction of generative video tools also supports this point. When Google introduced Flow, its AI filmmaking tool, it described it not merely as a tool that converts sentences into video, but as a production environment for managing and connecting story materials such as clips, scenes, stories, cast, locations, objects, and styles.</p>
+              <p>Flow’s official page also emphasizes processes such as idea exploration, iterative revision, complex natural-language-based editing, individual asset adjustment, and expansion across an entire project. In other words, the direction of technology is already moving away from “one-shot generation” and toward “iterative collaborative production.”</p>
+              <p>I call this point CIC: Conversational Input Core.</p>
+              <p>Future input is not a simple prompt. It is a conversational input core where human intent, context, standards, constraints, and revision commands accumulate. It is not a command that ends in one line. It is a command system in which the creator’s thinking intersects with AI and refines the result.</p>
+            </div>
+          </article>
+
+          <article class="article-block" id="divide" data-step="03">
+            <h2>
+              <span data-i18n="ko">AI 시대의 새로운 계층은 판단권에서 갈라진다</span>
+              <span data-i18n="en">The new classes of the AI era divide around judgment authority.</span>
+            </h2>
+
+            <div data-i18n="ko">
+              <p>여기서 AI 시대의 새로운 계층이 갈라진다. 나는 다소 거칠지만 명확하게 말하고 싶다. 앞으로는 AI 노예 계층과 AI 지휘관 계층으로 나뉠 것이다.</p>
+              <p>여기서 말하는 “노예”는 인간의 신분을 뜻하는 말이 아니다. AI 출력물에 자기 판단권을 양도한 작업 상태를 뜻한다. AI를 많이 쓰는 사람이 문제가 아니다. 문제는 AI가 뱉은 것을 자기 생각으로 착각하는 태도다.</p>
+              <p>AI 노예는 이렇게 일한다. 한 줄을 입력한다. AI가 무언가 그럴듯한 것을 뱉는다. 그것을 보고 “괜찮네” 하고 받아들인다. 수정 기준도 없고, 구조도 없고, 메시지도 없다. 그 결과물 안에는 사용자의 의지가 아니라 모델의 평균값만 남는다.</p>
+              <p>반대로 AI 지휘관은 다르게 일한다. 그는 AI에게 “무엇을 만들어달라”고만 말하지 않는다. “어떤 구조 안에서, 어떤 의도로, 어떤 기준을 만족하게 만들 것인가”를 지시한다. 나온 결과물을 그대로 받지 않는다. 검수하고, 분해하고, 고치고, 다시 조립한다.</p>
+
+              <div class="split-card" aria-label="AI slave and AI commander comparison">
+                <div>
+                  <h3>AI 노예</h3>
+                  <ul>
+                    <li>출력물을 받는다.</li>
+                    <li>프롬프트를 쓴다.</li>
+                    <li>AI가 만든 것을 소비한다.</li>
+                    <li>모델의 평균값 안에 갇힌다.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3>AI 지휘관</h3>
+                  <ul>
+                    <li>생산 시스템을 만든다.</li>
+                    <li>워크플로를 설계한다.</li>
+                    <li>자기 의지를 AI를 통해 구현한다.</li>
+                    <li>출력물을 검수하고 재조립한다.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p>AI 노예는 출력물을 받는다. AI 지휘관은 생산 시스템을 만든다.</p>
+              <p>AI 노예는 프롬프트를 쓴다. AI 지휘관은 워크플로를 설계한다.</p>
+              <p>AI 노예는 AI가 만든 것을 소비한다. AI 지휘관은 자기 의지를 AI를 통해 구현한다.</p>
+            </div>
+
+            <div data-i18n="en">
+              <p>Here, the new classes of the AI era begin to divide. I want to put it bluntly, even if the wording is somewhat harsh: the future will be divided into the class of AI slaves and the class of AI commanders.</p>
+              <p>By “slave,” I do not mean a person’s social status. I mean a working state in which a person has surrendered their judgment authority to AI output. The problem is not using AI frequently. The problem is the attitude of mistaking what AI spits out for one’s own thinking.</p>
+              <p>An AI slave works like this. They enter one line. AI produces something plausible. They look at it and accept it, saying, “Not bad.” There is no revision standard, no structure, and no message. What remains inside the result is not the user’s will, but the model’s average.</p>
+              <p>An AI commander works differently. They do not merely tell AI, “Make something.” They instruct it on “within what structure, with what intent, and by what standards the result must be made.” They do not accept the output as it is. They review it, break it apart, correct it, and assemble it again.</p>
+
+              <div class="split-card" aria-label="AI slave and AI commander comparison">
+                <div>
+                  <h3>AI Slave</h3>
+                  <ul>
+                    <li>Receives outputs.</li>
+                    <li>Writes prompts.</li>
+                    <li>Consumes what AI creates.</li>
+                    <li>Gets trapped inside the model’s average.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3>AI Commander</h3>
+                  <ul>
+                    <li>Builds production systems.</li>
+                    <li>Designs workflows.</li>
+                    <li>Implements personal will through AI.</li>
+                    <li>Reviews and reassembles outputs.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p>AI slaves receive outputs. AI commanders build production systems.</p>
+              <p>AI slaves write prompts. AI commanders design workflows.</p>
+              <p>AI slaves consume what AI creates. AI commanders implement their own will through AI.</p>
+            </div>
+          </article>
+
+          <article class="article-block" id="capital" data-step="04">
+            <h2>
+              <span data-i18n="ko">이 차이가 앞으로의 부의 격차를 만들 것이다</span>
+              <span data-i18n="en">This difference will create the wealth gap of the future.</span>
+            </h2>
+
+            <div data-i18n="ko">
+              <p>이 차이가 앞으로의 부의 격차를 만들 것이다. 과거에는 정보 접근권이 중요했다. 누가 더 많이 알고 있는가, 누가 더 빠르게 검색하는가, 누가 더 많은 자료를 갖고 있는가가 경쟁력이었다. 그러나 이제 정보는 점점 평준화되고 있다. 요약, 번역, 검색, 이미지 생성, 코드 작성, 영상 생성까지 많은 영역이 모두에게 열리고 있다.</p>
+              <p>정보의 격차가 줄어든 뒤 남는 것은 무엇인가. 판단의 격차다. 지휘 능력의 격차다. 자기 의도를 구조화하는 능력의 격차다.</p>
+              <p>더 냉정하게 말하면, 앞으로 중요한 것은 “AI를 쓸 줄 아는가”가 아니다. 누구나 AI를 쓴다. 진짜 질문은 이것이다.</p>
+              <p>AI가 낸 결과를 판단할 자기 기준이 있는가. 작업을 어떤 단위로 쪼갤지 아는가. 어디까지 AI에게 맡기고 어디서 인간이 개입해야 하는지 아는가. 출력물을 자기 메시지에 맞게 재조립할 수 있는가.</p>
+              <p>이 질문에 답할 수 있는 사람만이 AI를 도구가 아니라 협업 파트너로 사용할 수 있다.</p>
+              <p>비용의 문제도 무시할 수 없다. 고급 AI 도구는 점점 구독제와 사용량 제한, 고급 기능 접근권의 문제와 연결되고 있다. 구글은 AI Ultra 요금제를 통해 Flow의 높은 사용 한도, 1080p 영상 생성, 고급 카메라 제어, Veo 3 조기 접근 등을 제공한다고 설명했다. 이는 고성능 모델, 더 많은 생성 횟수, 더 빠른 실험량이 이미 비용과 결합되고 있음을 보여준다.</p>
+              <p>창작과 비즈니스에서 중요한 것은 한 번의 좋은 결과가 아니다. 반복 실험량이다. 많이 만들고, 많이 버리고, 빠르게 비교하고, 다시 수정하는 사람이 앞서간다. 그러나 돈만으로도 부족하다. 많이 생성할 수 있어도 보는 눈이 없으면 쓰레기 더미만 커진다.</p>
+
+              <div class="quote-card">결국 새로운 격차는 이렇게 만들어질 것이다.</div>
+
+              <div class="formula" aria-label="New gap formula">
+                <span>자본</span>
+                <span>안목</span>
+                <span>지휘 능력</span>
+                <span>반복 시스템</span>
+              </div>
+
+              <p>이 네 가지를 가진 사람은 AI 시대에 압도적으로 빨라진다. 반대로 이 중 아무것도 갖추지 못한 사람은 AI를 쓰면서도 AI에게 끌려간다. 자신은 AI를 부리고 있다고 생각하지만, 실제로는 AI가 만들어낸 평균값 안에 갇힌다.</p>
+            </div>
+
+            <div data-i18n="en">
+              <p>This difference will create the wealth gap of the future. In the past, access to information mattered. Competitiveness came from who knew more, who could search faster, and who had more materials. But now information is becoming increasingly equalized. Summarization, translation, search, image generation, code writing, and video generation are all opening to everyone.</p>
+              <p>What remains after the information gap shrinks? The gap in judgment. The gap in command ability. The gap in the ability to structure one’s own intent.</p>
+              <p>To put it more coldly, what matters in the future is not “Can you use AI?” Everyone uses AI. The real question is this.</p>
+              <p>Do you have your own standard for judging the results AI produces? Do you know how to break work into units? Do you know how far to delegate to AI and where humans must intervene? Can you reassemble the output to fit your own message?</p>
+              <p>Only those who can answer these questions can use AI not as a tool, but as a collaborative partner.</p>
+              <p>The issue of cost cannot be ignored either. Advanced AI tools are increasingly tied to subscriptions, usage limits, and access to premium features. Google explained that its AI Ultra plan provides higher usage limits for Flow, 1080p video generation, advanced camera controls, and early access to Veo 3. This shows that high-performance models, more generation attempts, and faster experimentation are already linked to cost.</p>
+              <p>In creation and business, what matters is not one good result. It is the volume of repeated experimentation. Those who make a lot, discard a lot, compare quickly, and revise again will move ahead. But money alone is not enough. Even if one can generate a lot, without an eye for quality, the pile of garbage only grows larger.</p>
+
+              <div class="quote-card">In the end, the new gap will be created like this.</div>
+
+              <div class="formula" aria-label="New gap formula">
+                <span>Capital</span>
+                <span>Taste</span>
+                <span>Command Ability</span>
+                <span>Iteration System</span>
+              </div>
+
+              <p>Those who have these four will become overwhelmingly faster in the AI era. Conversely, those who have none of them will be dragged by AI even while using it. They may believe they are commanding AI, but in reality they are trapped inside the average produced by AI.</p>
+            </div>
+          </article>
+
+          <article class="article-block" id="conclusion" data-step="05">
+            <h2>
+              <span data-i18n="ko">AI는 인간의 의도를 증폭한다</span>
+              <span data-i18n="en">AI amplifies human intent.</span>
+            </h2>
+
+            <div data-i18n="ko">
+              <p>원샷 프롬프팅은 생성형 AI의 입문 방식일 뿐, 전문 제작 방식이 아니다. 전문가의 일은 언제나 같았다. 구조를 짜고, 기준을 세우고, 초안을 만들고, 검수하고, 수정하고, 재조립하는 것. AI 시대에도 이 본질은 사라지지 않는다. 오히려 더 선명해진다.</p>
+              <p>AI는 인간을 대체하는 것이 아니라, 인간의 의도를 증폭한다. 문제는 그 의도가 있는가다.</p>
+              <p>의도 없는 사람은 AI로 더 빠르게 평범해진다. 의도 있는 사람은 AI로 더 빠르게 강해진다.</p>
+              <p>앞으로의 시대는 AI를 사용하는 사람의 시대가 아니다. AI를 지휘하는 사람의 시대다.</p>
+              <p>그리고 그 격차는 생각보다 훨씬 빨리, 훨씬 잔인하게 벌어질 것이다.</p>
+            </div>
+
+            <div data-i18n="en">
+              <p>One-shot prompting is only the entry point to generative AI, not a professional production method. The work of professionals has always been the same: structuring, setting standards, making drafts, reviewing, revising, and reassembling. This essence does not disappear in the AI era. Instead, it becomes even clearer.</p>
+              <p>AI does not replace humans; it amplifies human intent. The question is whether that intent exists.</p>
+              <p>People without intent become ordinary faster through AI. People with intent become stronger faster through AI.</p>
+              <p>The coming era is not the era of people who use AI. It is the era of people who command AI.</p>
+              <p>And that gap will open far faster, and far more brutally, than many expect.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="final-panel" aria-labelledby="final-title">
+        <p class="section-kicker">
+          <span data-i18n="ko">Final Message</span>
+          <span data-i18n="en">Final Message</span>
+        </p>
+        <h2 id="final-title">
+          <span data-i18n="ko">AI를 쓰는 사람이 아니라 AI를 지휘하는 사람이 남는다</span>
+          <span data-i18n="en">Not those who use AI, but those who command AI will remain</span>
+        </h2>
+        <p>
+          <span data-i18n="ko">프롬프트는 시작점일 뿐이다. 의도, 기준, 검수, 재조립이 쌓일 때 AI는 도구를 넘어 생산 시스템이 된다.</span>
+          <span data-i18n="en">A prompt is only the starting point. When intent, standards, review, and reassembly accumulate, AI becomes more than a tool: it becomes a production system.</span>
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <span data-i18n="ko">© 컬럼 : 미리내맨 김준호 · Bilingual AI Column Page</span>
+        <span data-i18n="en">© Column: Mirinaeman Joon Ho Kim · Bilingual AI Column Page</span>
+      </p>
+    </footer>
+
+    <nav class="mobile-bottom-nav" aria-label="Mobile quick navigation">
+      <a href="#top"><span data-i18n="ko">처음</span><span data-i18n="en">Top</span></a>
+      <a href="#thesis"><span data-i18n="ko">핵심</span><span data-i18n="en">Thesis</span></a>
+      <a href="#divide"><span data-i18n="ko">격차</span><span data-i18n="en">Divide</span></a>
+      <a href="#conclusion"><span data-i18n="ko">결론</span><span data-i18n="en">Close</span></a>
+    </nav>
+  </div>
+
+  <script>
+    (function () {
+      const body = document.body;
+      const buttons = document.querySelectorAll("[data-lang-button]");
+      const html = document.documentElement;
+
+      const meta = {
+        ko: {
+          lang: "ko",
+          title: "AI 노예와 AI 지휘관의 시대 | 컬럼 : 미리내맨 김준호",
+          description: "정보 격차가 사라진 뒤 남는 것은 판단권의 격차다. 생성형 AI 시대의 창작, 지휘 능력, 판단권, 반복 시스템에 관한 칼럼.",
+          ogTitle: "AI 노예와 AI 지휘관의 시대",
+          ogDescription: "정보 격차가 사라진 뒤, 남는 것은 ‘판단권’의 격차다.",
+          siteName: "컬럼 : 미리내맨 김준호",
+          image: "https://i.imghippo.com/files/Mam8649Gj.png",
+          imageAlt: "AI 노예와 AI 지휘관의 시대 칼럼 대표 이미지"
+        },
+        en: {
+          lang: "en",
+          title: "The Age of AI Slaves and AI Commanders | Column: Mirinaeman Joon Ho Kim",
+          description: "After the information gap disappears, what remains is the gap in judgment authority. A column on creation, command, judgment, and iteration in the generative AI era.",
+          ogTitle: "The Age of AI Slaves and AI Commanders",
+          ogDescription: "After the information gap disappears, what remains is the gap in judgment authority.",
+          siteName: "Column: Mirinaeman Joon Ho Kim",
+          image: "https://i.imghippo.com/files/nqyI7585tqA.png",
+          imageAlt: "The Age of AI Slaves and AI Commanders hero image"
+        }
+      };
+
+      function setMeta(selector, attr, value) {
+        const el = document.querySelector(selector);
+        if (el) el.setAttribute(attr, value);
+      }
+
+      function setLanguage(lang) {
+        const data = meta[lang] || meta.ko;
+        body.setAttribute("data-lang", lang);
+        html.setAttribute("lang", data.lang);
+        document.title = data.title;
+
+        setMeta('meta[name="description"]', "content", data.description);
+        setMeta('meta[property="og:title"]', "content", data.ogTitle);
+        setMeta('meta[property="og:description"]', "content", data.ogDescription);
+        setMeta('meta[property="og:site_name"]', "content", data.siteName);
+        setMeta('meta[property="og:image"]', "content", data.image);
+        setMeta('meta[property="og:image:secure_url"]', "content", data.image);
+        setMeta('meta[property="og:image:alt"]', "content", data.imageAlt);
+        setMeta('meta[name="twitter:title"]', "content", data.ogTitle);
+        setMeta('meta[name="twitter:description"]', "content", data.ogDescription);
+        setMeta('meta[name="twitter:image"]', "content", data.image);
+
+        buttons.forEach(function (button) {
+          const isActive = button.getAttribute("data-lang-button") === lang;
+          button.setAttribute("aria-pressed", String(isActive));
+        });
+
+        try {
+          localStorage.setItem("column-language", lang);
+        } catch (error) {}
+      }
+
+      buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          setLanguage(button.getAttribute("data-lang-button"));
+        });
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener("click", function (event) {
+          const targetId = anchor.getAttribute("href");
+          if (!targetId || targetId === "#") return;
+          const target = document.querySelector(targetId);
+          if (!target) return;
+
+          event.preventDefault();
+          target.scrollIntoView({
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+            block: "start"
+          });
+
+          history.pushState(null, "", targetId);
+        });
+      });
+
+      let saved = "ko";
+      try {
+        saved = localStorage.getItem("column-language") || "ko";
+      } catch (error) {}
+
+      const urlLang = new URLSearchParams(window.location.search).get("lang");
+      setLanguage(urlLang === "en" ? "en" : saved === "en" ? "en" : "ko");
+    })();
+  </script>
+</body>
+</html>

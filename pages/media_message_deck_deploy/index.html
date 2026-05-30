@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>미디어는 메시지의 몸이다</title>
+  <meta name="description" content="미디어는 메시지가 입는 몸이고, 게슈탈트는 그 몸이 살아 있는지 검증하는 법이라는 관점의 강의용 HTML 슬라이드 덱입니다." />
+  <meta property="og:title" content="미디어는 메시지의 몸이다" />
+  <meta property="og:description" content="메시지, 구조, 검증의 순서로 미디어 생성 원리를 설명하는 강의용 슬라이드입니다." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+
+  <style>
+    :root {
+      --color-primary: #8fd3ff;
+      --color-accent: #ffcf70;
+      --color-bg: #0b0d12;
+      --color-bg-alt: #151925;
+      --color-surface: #202638;
+      --color-surface-2: #111622;
+      --color-text: #f4f7fb;
+      --color-text-muted: #aeb7c8;
+      --color-line: rgba(255,255,255,.16);
+      --font-primary: -apple-system, BlinkMacSystemFont, system-ui, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      --slide-padding: clamp(2rem, 6vw, 5rem);
+      --gap-md: 1.5rem;
+      --gap-lg: 3rem;
+      --gap-xl: 5rem;
+      --z-controls: 100;
+    }
+
+    * {
+      box-sizing: border-box;
+      word-break: keep-all;
+      line-break: strict;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-primary);
+      overscroll-behavior-y: none;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    .slide-deck {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background: var(--color-bg);
+      overflow: hidden;
+      position: relative;
+      outline: none;
+      cursor: default;
+    }
+
+    .slide-track {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      transform: translate3d(0, 0, 0);
+      transition: transform .38s ease;
+      will-change: transform;
+    }
+
+    .slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      padding: var(--slide-padding);
+      background:
+        radial-gradient(circle at 82% 16%, rgba(143,211,255,.18), transparent 28%),
+        radial-gradient(circle at 12% 88%, rgba(255,207,112,.13), transparent 34%),
+        var(--color-bg);
+    }
+
+    .slide-inner {
+      width: min(100%, 1600px);
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+    }
+
+    .column {
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--gap-lg);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.04fr .96fr;
+      gap: var(--gap-xl);
+      align-items: center;
+    }
+
+    .split-wide {
+      display: grid;
+      grid-template-columns: 1.18fr .82fr;
+      gap: var(--gap-xl);
+      align-items: center;
+    }
+
+    .center {
+      align-items: center;
+      text-align: center;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 6.5vw, 6.7rem);
+      line-height: 1.08;
+      letter-spacing: -.055em;
+    }
+
+    h2 {
+      font-size: clamp(2.35rem, 4.7vw, 5.1rem);
+      line-height: 1.14;
+      letter-spacing: -.05em;
+    }
+
+    h3 {
+      font-size: clamp(1.35rem, 2vw, 2.15rem);
+      line-height: 1.28;
+      letter-spacing: -.025em;
+    }
+
+    p,
+    li {
+      font-size: clamp(1.05rem, 1.55vw, 1.65rem);
+      line-height: 1.6;
+      color: var(--color-text-muted);
+    }
+
+    .eyebrow {
+      color: var(--color-primary);
+      font-size: clamp(.82rem, 1.05vw, 1.08rem);
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .accent {
+      color: var(--color-accent);
+    }
+
+    .primary {
+      color: var(--color-primary);
+    }
+
+    .muted {
+      color: var(--color-text-muted);
+    }
+
+    .big-line {
+      font-size: clamp(2.1rem, 3.8vw, 4.4rem);
+      line-height: 1.18;
+      letter-spacing: -.04em;
+      font-weight: 850;
+    }
+
+    .quote {
+      font-size: clamp(2.45rem, 5vw, 5.6rem);
+      line-height: 1.16;
+      letter-spacing: -.05em;
+      font-weight: 900;
+      max-width: 13ch;
+    }
+
+    .grid-3,
+    .grid-4 {
+      display: grid;
+      gap: var(--gap-md);
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .card {
+      border: 1px solid var(--color-line);
+      background: rgba(255,255,255,.045);
+      border-radius: 1.5rem;
+      padding: clamp(1.1rem, 1.8vw, 1.8rem);
+      min-height: 9.5rem;
+    }
+
+    .card strong {
+      display: block;
+      color: var(--color-text);
+      font-size: clamp(1.15rem, 1.65vw, 1.85rem);
+      line-height: 1.22;
+      margin-bottom: .75rem;
+    }
+
+    .card p {
+      font-size: clamp(1rem, 1.28vw, 1.32rem);
+      line-height: 1.5;
+    }
+
+    .card.highlight {
+      background:
+        linear-gradient(135deg, rgba(143,211,255,.18), rgba(255,207,112,.1)),
+        rgba(255,255,255,.055);
+      border-color: rgba(143,211,255,.42);
+    }
+
+    .diagram {
+      position: relative;
+      min-height: 28rem;
+      border-radius: 2rem;
+      background:
+        linear-gradient(135deg, rgba(143,211,255,.16), rgba(255,207,112,.08)),
+        rgba(255,255,255,.04);
+      border: 1px solid var(--color-line);
+      overflow: hidden;
+    }
+
+    .orbit {
+      position: absolute;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      inset: var(--i);
+    }
+
+    .node {
+      position: absolute;
+      border-radius: 999px;
+      padding: .7rem 1rem;
+      background: var(--color-surface);
+      color: var(--color-text);
+      border: 1px solid var(--color-line);
+      font-weight: 800;
+      font-size: clamp(.88rem, 1.13vw, 1.12rem);
+      white-space: nowrap;
+    }
+
+    .n1 { top: 10%; left: 50%; transform: translateX(-50%); }
+    .n2 { top: 28%; right: 12%; }
+    .n3 { bottom: 22%; right: 16%; }
+    .n4 { bottom: 12%; left: 48%; transform: translateX(-50%); }
+    .n5 { bottom: 24%; left: 13%; }
+    .n6 { top: 28%; left: 12%; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .step {
+      padding: 1.15rem;
+      border-top: .28rem solid var(--color-primary);
+      background: rgba(255,255,255,.045);
+      border-radius: 1rem;
+      min-height: 8.2rem;
+    }
+
+    .step b {
+      display: block;
+      color: var(--color-accent);
+      font-size: .95rem;
+      margin-bottom: .5rem;
+    }
+
+    .step span {
+      display: block;
+      font-size: clamp(1rem, 1.3vw, 1.25rem);
+      line-height: 1.3;
+      font-weight: 800;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: .8rem;
+      align-items: end;
+    }
+
+    .time-item {
+      min-height: calc(7rem + var(--h));
+      display: flex;
+      align-items: end;
+      padding: 1rem;
+      border-radius: 1rem;
+      background: linear-gradient(to top, rgba(143,211,255,.24), rgba(255,255,255,.04));
+      border: 1px solid var(--color-line);
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .formula {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .85rem;
+      flex-wrap: wrap;
+      font-size: clamp(1.5rem, 2.6vw, 2.8rem);
+      line-height: 1.3;
+      font-weight: 900;
+    }
+
+    .pill {
+      border: 1px solid var(--color-line);
+      border-radius: 999px;
+      padding: .55rem 1rem;
+      background: rgba(255,255,255,.05);
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-md);
+    }
+
+    .bad,
+    .good {
+      min-height: 18rem;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      border: 1px solid var(--color-line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bad {
+      background: rgba(255,255,255,.04);
+    }
+
+    .good {
+      background:
+        linear-gradient(135deg, rgba(143,211,255,.18), rgba(255,207,112,.1)),
+        rgba(255,255,255,.05);
+      border-color: rgba(143,211,255,.45);
+    }
+
+    .small-label {
+      font-size: .9rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      font-weight: 800;
+    }
+
+    .sample-slide {
+      border-radius: 1.25rem;
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-line);
+      padding: 1.2rem;
+      min-height: 11rem;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+
+    .fake-title {
+      height: 1.5rem;
+      width: 70%;
+      border-radius: 999px;
+      background: rgba(255,255,255,.24);
+    }
+
+    .fake-line {
+      height: .75rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+    }
+
+    .fake-line:nth-child(2) { width: 95%; }
+    .fake-line:nth-child(3) { width: 82%; }
+    .fake-line:nth-child(4) { width: 88%; }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .9rem;
+    }
+
+    .check {
+      border: 1px solid var(--color-line);
+      border-radius: 1rem;
+      padding: 1rem;
+      background: rgba(255,255,255,.045);
+      font-size: clamp(1rem, 1.3vw, 1.35rem);
+      line-height: 1.45;
+      color: var(--color-text);
+      font-weight: 750;
+    }
+
+    .slide-controls {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 4rem;
+      z-index: var(--z-controls);
+      pointer-events: none;
+      color: var(--color-text-muted);
+      font-size: .9rem;
+    }
+
+    .progress-shell {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: .28rem;
+      background: rgba(255,255,255,.12);
+    }
+
+    .progress-bar {
+      width: 8.333%;
+      height: 100%;
+      background: var(--color-primary);
+      transition: width .25s ease;
+    }
+
+    .page-number {
+      position: absolute;
+      right: 1rem;
+      bottom: .65rem;
+      padding: .35rem .6rem;
+      border-radius: 999px;
+      background: rgba(0,0,0,.34);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-button {
+      pointer-events: auto;
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3.25rem;
+      height: 3.25rem;
+      border-radius: 999px;
+      border: 1px solid var(--color-line);
+      background: rgba(0,0,0,.24);
+      color: var(--color-text);
+      font-size: 1.8rem;
+      cursor: pointer;
+      z-index: var(--z-controls);
+      backdrop-filter: blur(10px);
+      opacity: .22;
+      transition: opacity .2s ease, background .2s ease;
+    }
+
+    .nav-button:hover {
+      opacity: 1;
+      background: rgba(143,211,255,.18);
+    }
+
+    .nav-button:disabled {
+      opacity: .1;
+      cursor: default;
+    }
+
+    .nav-prev {
+      left: 1rem;
+    }
+
+    .nav-next {
+      right: 1rem;
+    }
+
+    .click-zone-hint {
+      position: fixed;
+      left: 50%;
+      bottom: 1.2rem;
+      transform: translateX(-50%);
+      z-index: var(--z-controls);
+      color: rgba(244,247,251,.42);
+      font-size: .82rem;
+      pointer-events: none;
+      opacity: .65;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        overflow: hidden;
+      }
+
+      .slide {
+        padding: 2rem;
+        aspect-ratio: auto;
+      }
+
+      .split,
+      .split-wide,
+      .grid-3,
+      .grid-4,
+      .steps,
+      .timeline,
+      .compare,
+      .checklist {
+        grid-template-columns: 1fr;
+      }
+
+      .slide-inner {
+        overflow-y: auto;
+        padding-bottom: 4rem;
+      }
+
+      .diagram {
+        min-height: 22rem;
+      }
+
+      .nav-button {
+        width: 2.75rem;
+        height: 2.75rem;
+        font-size: 1.4rem;
+      }
+
+      .click-zone-hint {
+        display: none;
+      }
+    }
+
+    @media print {
+      body {
+        overflow: visible;
+      }
+
+      .slide-deck {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+
+      .slide-track {
+        display: block;
+        transform: none !important;
+      }
+
+      .slide {
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        aspect-ratio: 16 / 9;
+        page-break-after: always;
+        overflow: hidden;
+      }
+
+      .slide-controls,
+      .nav-button,
+      .click-zone-hint {
+        display: none;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="slide-deck" id="deck" tabindex="0" aria-label="강의 슬라이드">
+    <div class="slide-track" id="slideTrack">
+      <section class="slide" data-slide="1">
+        <div class="slide-inner column center">
+          <p class="eyebrow">Lecture</p>
+          <h1>미디어는<br><span class="primary">메시지의 몸</span>이다</h1>
+          <p>게슈탈트는 그 몸이 살아 있는지 검증하는 법이다.</p>
+        </div>
+        <!-- NOTES:
+        핵심 메시지를 첫 장에서 고정한다.
+        -->
+      </section>
+
+      <section class="slide" data-slide="2">
+        <div class="slide-inner split">
+          <div>
+            <p class="eyebrow">Learning Goal</p>
+            <h2>오늘 배울 것은<br>디자인 팁이 아니라<br><span class="accent">생성의 판단법</span>이다</h2>
+          </div>
+          <div class="grid-3">
+            <div class="card"><strong>메시지</strong><p>무엇을 남길 것인가?</p></div>
+            <div class="card"><strong>구조</strong><p>어떤 순서로 전달할 것인가?</p></div>
+            <div class="card"><strong>검증</strong><p>그 몸이 살아 있는가?</p></div>
+          </div>
+        </div>
+        <!-- NOTES:
+        강의 목표를 명시한다.
+        -->
+      </section>
+
+      <section class="slide" data-slide="3">
+        <div class="slide-inner column">
+          <p class="eyebrow">Problem</p>
+          <h2>대부분의 생성은<br><span class="accent">너무 늦은 단계</span>에서 시작한다</h2>
+          <div class="compare">
+            <div class="bad">
+              <span class="small-label">Weak Generation</span>
+              <div class="sample-slide">
+                <div class="fake-title"></div>
+                <div class="fake-line"></div>
+                <div class="fake-line"></div>
+                <div class="fake-line"></div>
+              </div>
+              <p>레이아웃, 글자 수, 색상부터 만진다. 결과는 예쁘지만 맥락이 없다.</p>
+            </div>
+            <div class="good">
+              <span class="small-label">Strong Generation</span>
+              <div class="sample-slide">
+                <div class="fake-title" style="width:45%; background:rgba(143,211,255,.5);"></div>
+                <div class="fake-line" style="width:90%;"></div>
+                <div class="fake-line" style="width:58%; background:rgba(255,207,112,.3);"></div>
+              </div>
+              <p>메시지와 인과를 먼저 정한다. 레이아웃은 그 다음에 따라온다.</p>
+            </div>
+          </div>
+        </div>
+        <!-- NOTES:
+        실패 원인을 비교로 보여준다.
+        -->
+      </section>
+
+      <section class="slide" data-slide="4">
+        <div class="slide-inner split">
+          <div>
+            <p class="eyebrow">Core Concept</p>
+            <h2>미디어는<br>메시지가 입는<br><span class="primary">몸</span>이다</h2>
+            <p>몸은 겉모양이 아니다. 메시지가 움직이고, 이어지고, 기억되는 방식이다.</p>
+          </div>
+          <div class="diagram" aria-label="메시지가 순서, 장면, 컷, 리듬, 기억으로 확장되는 구조">
+            <div class="orbit" style="--i: 10%;"></div>
+            <div class="orbit" style="--i: 24%;"></div>
+            <div class="orbit" style="--i: 38%;"></div>
+            <span class="node n1">메시지</span>
+            <span class="node n2">순서</span>
+            <span class="node n3">장면</span>
+            <span class="node n4">컷</span>
+            <span class="node n5">리듬</span>
+            <span class="node n6">기억</span>
+          </div>
+        </div>
+        <!-- NOTES:
+        몸이라는 은유를 설명한다.
+        -->
+      </section>
+
+      <section class="slide" data-slide="5">
+        <div class="slide-inner column">
+          <p class="eyebrow">Anatomy</p>
+          <h2>모든 미디어는<br>같은 해부학을 가진다</h2>
+          <div class="formula">
+            <span class="pill">전체</span><span>→</span>
+            <span class="pill">시퀀스</span><span>→</span>
+            <span class="pill">씬</span><span>→</span>
+            <span class="pill">컷</span><span>→</span>
+            <span class="pill">비트</span>
+          </div>
+          <div class="grid-3">
+            <div class="card"><strong>슬라이드</strong><p>덱 → 섹션 → 장표 → 컴포넌트 → 문장</p></div>
+            <div class="card"><strong>영상</strong><p>작품 → 시퀀스 → 장면 → 쇼트 → 프레임</p></div>
+            <div class="card"><strong>웹</strong><p>서비스 → 플로우 → 섹션 → UI → 클릭</p></div>
+          </div>
+        </div>
+        <!-- NOTES:
+        추상 원리를 구체 예시로 증명한다.
+        -->
+      </section>
+
+      <section class="slide" data-slide="6">
+        <div class="slide-inner column">
+          <p class="eyebrow">Eight-Step Pipeline</p>
+          <h2>생성에는<br><span class="accent">올바른 순서</span>가 있다</h2>
+          <div class="steps">
+            <div class="step"><b>01</b><span>메시지 정의</span></div>
+            <div class="step"><b>02</b><span>전체 서사구조</span></div>
+            <div class="step"><b>03</b><span>시퀀스 역할</span></div>
+            <div class="step"><b>04</b><span>씬의 단일 주장</span></div>
+            <div class="step"><b>05</b><span>컷의 역할</span></div>
+            <div class="step"><b>06</b><span>미디어 문법 번역</span></div>
+            <div class="step"><b>07</b><span>HTML/CSS 구현</span></div>
+            <div class="step"><b>08</b><span>접근성·반응형 검증</span></div>
+          </div>
+        </div>
+        <!-- NOTES:
+        실제 작업 순서를 제시한다.
+        -->
+      </section>
+
+      <section class="slide" data-slide="7">
+        <div class="slide-inner split">
+          <div>
+            <p class="eyebrow">Sequence</p>
+            <h2>서사는<br>나열이 아니라<br><span class="primary">인식의 곡선</span>이다</h2>
+          </div>
+          <div class="timeline">
+            <div class="time-item" style="--h: 1rem;">질문</div>
+            <div class="time-item" style="--h: 2rem;">긴장</div>
+            <div class="time-item" style="--h: 4rem;">전환</div>
+            <div class="time-item" style="--h: 3rem;">증거</div>
+            <div class="time-item" style="--h: 2rem;">적용</div>
+            <div class="time-item" style="--h: 1rem;">통찰</div>
+          </div>
+        </div>
+        <!-- NOTES:
+        순서가 의미를 만든다는 점을 설명한다.
+        -->
+      </section>
+
+      <section class="slide" data-slide="8">
+        <div class="slide-inner column center">
+          <p class="eyebrow">Scene Rule</p>
+          <p class="quote">1슬라이드 = 1씬 = 1주장</p>
+          <p>“그리고”가 필요하면, 이미 두 장이다.</p>
+        </div>
+        <!-- NOTES:
+        한 장에 하나의 주장만 남긴다.
+        -->
+      </section>
+
+      <section class="slide" data-slide="9">
+        <div class="slide-inner split-wide">
+          <div>
+            <p class="eyebrow">Evidence: Before / After</p>
+            <h2>한 장에 두 주장을 넣으면<br><span class="accent">기억은 0개</span>가 된다</h2>
+            <p>나쁜 장표는 정보를 많이 담아서 실패하는 것이 아니라, 무엇을 기억해야 하는지 정하지 못해서 실패한다.</p>
+          </div>
+          <div class="compare">
+            <div class="bad">
+              <span class="small-label">Before</span>
+              <p><strong>“시장 규모와 경쟁사 비교와 가격 정책”</strong></p>
+              <p>한 장에 세 역할이 섞여 청중의 시선이 분산된다.</p>
+            </div>
+            <div class="good">
+              <span class="small-label">After</span>
+              <p><strong>“시장은 충분히 크다”</strong></p>
+              <p>한 장은 시장 규모만 증명하고, 경쟁과 가격은 다음 장으로 분리한다.</p>
+            </div>
+          </div>
+        </div>
+        <!-- NOTES:
+        원칙을 사례로 증명한다.
+        -->
+      </section>
+
+      <section class="slide" data-slide="10">
+        <div class="slide-inner split">
+          <div>
+            <p class="eyebrow">Cut Roles</p>
+            <h2>컷은 장식이 아니라<br><span class="primary">역할</span>이다</h2>
+            <p>제목, 본문, 이미지, 차트, 여백은 모두 메시지 안에서 해야 할 일이 있어야 한다.</p>
+          </div>
+          <div class="checklist">
+            <div class="check">주장 컷<br><span class="muted">이 씬의 핵심을 말한다</span></div>
+            <div class="check">증거 컷<br><span class="muted">믿어야 할 이유를 준다</span></div>
+            <div class="check">연결 컷<br><span class="muted">다음 씬으로 넘어간다</span></div>
+            <div class="check">강조 컷<br><span class="muted">감정적 무게를 더한다</span></div>
+            <div class="check">구조 컷<br><span class="muted">복잡한 정보를 정리한다</span></div>
+            <div class="check">여백 컷<br><span class="muted">집중할 위치를 만든다</span></div>
+          </div>
+        </div>
+        <!-- NOTES:
+        컴포넌트를 의미 단위로 본다.
+        -->
+      </section>
+
+      <section class="slide" data-slide="11">
+        <div class="slide-inner column">
+          <p class="eyebrow">Practice</p>
+          <h2>실습: 지금 만드는 슬라이드 하나를<br><span class="accent">8단계로 해부하라</span></h2>
+          <div class="grid-4">
+            <div class="card highlight"><strong>1. 메시지</strong><p>청중이 딱 하나만 기억할 문장은?</p></div>
+            <div class="card"><strong>2. 씬</strong><p>이 장표의 단일 주장은?</p></div>
+            <div class="card"><strong>3. 컷</strong><p>각 요소의 역할은 주장, 증거, 연결 중 무엇인가?</p></div>
+            <div class="card"><strong>4. 검증</strong><p>이 장표가 없어지면 덱이 무너지는가?</p></div>
+          </div>
+        </div>
+        <!-- NOTES:
+        실제 강의 적용 슬라이드다.
+        -->
+      </section>
+
+      <section class="slide" data-slide="12">
+        <div class="slide-inner column center">
+          <p class="eyebrow">Final Question</p>
+          <h2>메시지는<br>어떤 몸을 입고,<br>어떤 순서로,<br>어떤 흔적을 남기는가?</h2>
+          <p class="big-line accent">이 질문에서 생성이 시작된다.</p>
+        </div>
+        <!-- NOTES:
+        전체 강의를 하나의 질문으로 회수한다.
+        -->
+      </section>
+    </div>
+  </main>
+
+  <button class="nav-button nav-prev" id="prevBtn" type="button" aria-label="이전 슬라이드">‹</button>
+  <button class="nav-button nav-next" id="nextBtn" type="button" aria-label="다음 슬라이드">›</button>
+
+  <div class="slide-controls" aria-hidden="true">
+    <div class="progress-shell">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="page-number" id="pageNumber">01 / 12</div>
+  </div>
+
+  <div class="click-zone-hint">오른쪽 클릭·휠 아래: 다음 / 왼쪽 클릭·휠 위: 이전</div>
+
+  <script>
+    (function () {
+      const deck = document.getElementById('deck');
+      const track = document.getElementById('slideTrack');
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const progressBar = document.getElementById('progressBar');
+      const pageNumber = document.getElementById('pageNumber');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      let current = 0;
+      const total = slides.length;
+
+      let wheelLocked = false;
+      let keyLocked = false;
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      function pad(n) {
+        return String(n).padStart(2, '0');
+      }
+
+      function clamp(n, min, max) {
+        return Math.max(min, Math.min(n, max));
+      }
+
+      function goTo(index) {
+        current = clamp(index, 0, total - 1);
+
+        track.style.transform = 'translate3d(' + (-current * 100) + '%, 0, 0)';
+        progressBar.style.width = ((current + 1) / total * 100) + '%';
+        pageNumber.textContent = pad(current + 1) + ' / ' + pad(total);
+
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === total - 1;
+
+        slides.forEach(function (slide, i) {
+          slide.setAttribute('aria-hidden', i === current ? 'false' : 'true');
+        });
+      }
+
+      function next() {
+        goTo(current + 1);
+      }
+
+      function prev() {
+        goTo(current - 1);
+      }
+
+      prevBtn.addEventListener('click', function (event) {
+        event.stopPropagation();
+        prev();
+        deck.focus();
+      });
+
+      nextBtn.addEventListener('click', function (event) {
+        event.stopPropagation();
+        next();
+        deck.focus();
+      });
+
+      deck.addEventListener('click', function (event) {
+        deck.focus();
+
+        const clickedInteractive =
+          event.target.closest('button') ||
+          event.target.closest('a') ||
+          event.target.closest('input') ||
+          event.target.closest('textarea') ||
+          event.target.closest('select');
+
+        if (clickedInteractive) return;
+
+        const x = event.clientX;
+        const width = window.innerWidth;
+
+        if (x < width * 0.35) {
+          prev();
+        } else {
+          next();
+        }
+      });
+
+      window.addEventListener('wheel', function (event) {
+        event.preventDefault();
+
+        if (wheelLocked) return;
+
+        const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX)
+          ? event.deltaY
+          : event.deltaX;
+
+        if (Math.abs(delta) < 12) return;
+
+        if (delta > 0) {
+          next();
+        } else {
+          prev();
+        }
+
+        wheelLocked = true;
+        setTimeout(function () {
+          wheelLocked = false;
+        }, 520);
+      }, { passive: false });
+
+      function isTypingTarget() {
+        const active = document.activeElement;
+        const tag = active && active.tagName ? active.tagName.toLowerCase() : '';
+
+        return (
+          tag === 'input' ||
+          tag === 'textarea' ||
+          tag === 'select' ||
+          (active && active.isContentEditable)
+        );
+      }
+
+      function handleKey(event) {
+        if (isTypingTarget()) return;
+        if (keyLocked) return;
+
+        const nextKeys = ['ArrowRight', 'PageDown', ' ', 'Spacebar', 'Enter', 'N', 'n'];
+        const prevKeys = ['ArrowLeft', 'PageUp', 'Backspace', 'P', 'p'];
+
+        if (nextKeys.includes(event.key) || event.code === 'ArrowRight' || event.code === 'Space') {
+          event.preventDefault();
+          next();
+          keyLocked = true;
+          setTimeout(function () {
+            keyLocked = false;
+          }, 180);
+          return;
+        }
+
+        if (prevKeys.includes(event.key) || event.code === 'ArrowLeft') {
+          event.preventDefault();
+          prev();
+          keyLocked = true;
+          setTimeout(function () {
+            keyLocked = false;
+          }, 180);
+        }
+      }
+
+      window.addEventListener('keydown', handleKey, true);
+      document.addEventListener('keydown', handleKey, true);
+      deck.addEventListener('keydown', handleKey, true);
+
+      deck.addEventListener('touchstart', function (event) {
+        touchStartX = event.changedTouches[0].clientX;
+        touchStartY = event.changedTouches[0].clientY;
+      }, { passive: true });
+
+      deck.addEventListener('touchend', function (event) {
+        const dx = event.changedTouches[0].clientX - touchStartX;
+        const dy = event.changedTouches[0].clientY - touchStartY;
+
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+          if (dx < 0) next();
+          if (dx > 0) prev();
+        }
+      }, { passive: true });
+
+      deck.setAttribute('tabindex', '0');
+
+      window.addEventListener('load', function () {
+        deck.focus();
+        goTo(0);
+      });
+
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) {
+          deck.focus();
+        }
+      });
+
+      goTo(0);
+    })();
+  </script>
+</body>
+</html>

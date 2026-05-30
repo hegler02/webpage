@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suno로 원하는 노래 만들기</title>
+<style>
+:root{
+  --bg:#10100f;
+  --fg:#f7f1e8;
+  --muted:#b9ac9d;
+  --line:rgba(247,241,232,.16);
+  --accent:#ffb84d;
+  --accent2:#69e0c2;
+  --card:rgba(255,255,255,.075);
+
+  --space-1:.4rem;
+  --space-2:.8rem;
+  --space-3:1.2rem;
+  --space-4:1.8rem;
+  --space-5:2.6rem;
+  --space-6:3.6rem;
+
+  --lh-display:1.06;
+  --lh-title:1.14;
+  --lh-body:1.45;
+  --lh-caption:1.3;
+
+  --slide-padding:clamp(2rem,6vw,5rem);
+  --radius:1.6rem;
+  --z-bg:0;
+  --z-deck:1;
+  --z-ui:20;
+
+  --vertical-card-height:clamp(7.2rem,16vh,10.5rem);
+  --vertical-card-gap:var(--space-2);
+  --vertical-card-padding-block:var(--space-3);
+  --vertical-card-padding-inline:var(--space-4);
+
+  --video-opacity:.15;
+  --video-blur:.08rem;
+  --video-scale:1;
+  --video-motion-scale:1.018;
+  --video-motion-x:.35%;
+  --video-motion-y:-.25%;
+  --video-motion-duration:180s;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  overscroll-behavior-y:none;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  word-break:keep-all;
+  line-break:strict;
+}
+
+.video-bg{
+  position:fixed;
+  inset:0;
+  z-index:var(--z-bg);
+  overflow:hidden;
+  pointer-events:none;
+  background:var(--bg);
+}
+
+.video-bg video{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  opacity:var(--video-opacity);
+  filter:blur(var(--video-blur)) saturate(.85) contrast(.9);
+  transform:scale(var(--video-scale)) translate3d(0,0,0);
+  animation:videoDrift var(--video-motion-duration) ease-in-out infinite alternate;
+  will-change:transform;
+}
+
+.video-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 80% 10%,rgba(255,184,77,.18),transparent 35%),
+    linear-gradient(90deg,rgba(16,16,15,.90),rgba(16,16,15,.64),rgba(16,16,15,.88));
+}
+
+@keyframes videoDrift{
+  0%{
+    transform:scale(var(--video-scale)) translate3d(0,0,0);
+  }
+  50%{
+    transform:scale(var(--video-motion-scale)) translate3d(var(--video-motion-x),var(--video-motion-y),0);
+  }
+  100%{
+    transform:scale(var(--video-scale)) translate3d(calc(var(--video-motion-x) * -1),calc(var(--video-motion-y) * -1),0);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .video-bg video{
+    animation:none;
+    transform:scale(var(--video-scale));
+  }
+}
+
+.slide-deck{
+  position:relative;
+  z-index:var(--z-deck);
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+  background:transparent;
+}
+
+.slide-track{
+  width:100%;
+  height:100%;
+  display:flex;
+  transform:translate3d(0,0,0);
+  transition:transform .38s ease;
+  will-change:transform;
+}
+
+.slide{
+  flex:0 0 100%;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding-inline:var(--slide-padding);
+}
+
+.shell{
+  width:100%;
+  max-width:clamp(900px,75vw,1380px);
+  display:grid;
+  gap:var(--space-5);
+}
+
+.center{
+  text-align:center;
+  justify-items:center;
+}
+
+.split{
+  grid-template-columns:1.05fr .95fr;
+  align-items:center;
+}
+
+.grid3{
+  grid-template-columns:repeat(3,1fr);
+}
+
+.grid4{
+  grid-template-columns:repeat(4,1fr);
+}
+
+.grid3,
+.grid4{
+  display:grid;
+  gap:var(--space-3);
+}
+
+.structure-list{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--vertical-card-gap);
+}
+
+.structure-list .card{
+  min-height:var(--vertical-card-height);
+  padding-block:var(--vertical-card-padding-block);
+  padding-inline:var(--vertical-card-padding-inline);
+  justify-content:center;
+}
+
+.structure-list .card h3{
+  font-size:clamp(1.35rem,2.1vw,2.15rem);
+}
+
+.structure-list .card p{
+  font-size:clamp(1rem,1.3vw,1.25rem);
+  line-height:var(--lh-caption);
+}
+
+.kicker{
+  color:var(--accent);
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  line-height:var(--lh-caption);
+}
+
+h1,
+h2,
+h3,
+p{
+  margin:0;
+}
+
+h1{
+  font-size:clamp(3.4rem,7vw,7.8rem);
+  line-height:var(--lh-display);
+  letter-spacing:-.03em;
+}
+
+h2{
+  font-size:clamp(2.5rem,4.8vw,5.2rem);
+  line-height:var(--lh-title);
+  letter-spacing:-.03em;
+}
+
+h3{
+  font-size:clamp(1.3rem,2vw,2rem);
+  line-height:var(--lh-title);
+}
+
+p,
+li{
+  font-size:clamp(1.05rem,1.45vw,1.45rem);
+  line-height:var(--lh-body);
+  color:var(--muted);
+}
+
+.lead{
+  font-size:clamp(1.35rem,2vw,2rem);
+  line-height:var(--lh-body);
+  color:var(--fg);
+}
+
+.ending-lead{
+  white-space:nowrap;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:var(--space-4);
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-3);
+  min-height:12rem;
+  backdrop-filter:blur(.3rem);
+}
+
+.card > *{
+  margin:0;
+}
+
+.component-body{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-2);
+  flex:1;
+}
+
+.component-footer{
+  display:flex;
+  gap:var(--space-2);
+  flex-wrap:wrap;
+}
+
+.tag{
+  border:1px solid var(--line);
+  border-radius:99rem;
+  padding:var(--space-1) var(--space-2);
+  color:var(--accent2);
+  font-weight:800;
+}
+
+.visual{
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--card);
+  backdrop-filter:blur(.3rem);
+}
+
+.visual img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.shot{
+  aspect-ratio:16/10;
+}
+
+.album{
+  aspect-ratio:4/3;
+}
+
+.big{
+  font-size:clamp(5rem,12vw,12rem);
+  font-weight:900;
+  line-height:.9;
+  color:var(--accent);
+}
+
+.steps{
+  display:grid;
+  gap:var(--space-3);
+}
+
+.step{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:var(--space-3);
+  align-items:start;
+}
+
+.num{
+  color:var(--accent);
+  font-weight:900;
+  font-size:2rem;
+}
+
+a{
+  color:var(--accent2);
+  text-decoration:none;
+}
+
+.small{
+  font-size:.95rem;
+  color:var(--muted);
+  line-height:var(--lh-caption);
+}
+
+.slide-controls{
+  position:fixed;
+  inset:auto var(--space-4) var(--space-4) var(--space-4);
+  z-index:var(--z-ui);
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:var(--space-3);
+  align-items:center;
+  pointer-events:none;
+}
+
+.progress{
+  height:.28rem;
+  background:var(--line);
+  border-radius:99rem;
+  overflow:hidden;
+}
+
+.bar{
+  height:100%;
+  width:0;
+  background:var(--accent);
+  transition:width .25s ease;
+}
+
+.page{
+  font-size:.9rem;
+  color:var(--muted);
+}
+
+.nav{
+  position:fixed;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:var(--z-ui);
+  border:1px solid var(--line);
+  background:rgba(0,0,0,.18);
+  color:var(--fg);
+  border-radius:99rem;
+  width:3rem;
+  height:3rem;
+  font-size:2rem;
+  opacity:.28;
+  cursor:pointer;
+}
+
+.nav:hover{
+  opacity:.9;
+}
+
+.prev{
+  left:var(--space-4);
+}
+
+.next{
+  right:var(--space-4);
+}
+
+@media(max-width:850px){
+  .split,
+  .grid3,
+  .grid4{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:3.2rem;
+  }
+
+  h2{
+    font-size:2.5rem;
+  }
+
+  .card{
+    min-height:auto;
+  }
+
+  .structure-list .card{
+    min-height:auto;
+  }
+
+  .ending-lead{
+    white-space:normal;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="video-bg" aria-hidden="true">
+  <video id="bgVideo" autoplay muted loop playsinline preload="auto">
+    <source src="https://cdn.midjourney.com/video/0c7fdc89-1620-4951-84ee-d8ce4fd01b25/3.mp4" type="video/mp4">
+  </video>
+</div>
+
+<main class="slide-deck" id="deck" tabindex="0">
+<div class="slide-track" id="slideTrack">
+
+<section class="slide">
+  <div class="shell center">
+    <div class="kicker">AI Music Lecture</div>
+    <h1>Suno로<br>원하는 노래 만들기</h1>
+    <p class="lead">Public 음악에서 Private 음악으로</p>
+    <p>동서울대학교 전기공학과 김준호 교수</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell center">
+    <h2>AI 음악의 핵심은<br>“히트곡 제작”이 아니다</h2>
+    <p class="lead">개인이 자신의 이야기와 메시지를 음악이라는 미디어로 소유하게 된 사건이다.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell split">
+    <div>
+      <div class="kicker">전환</div>
+      <h2>대중음악은<br>듣는 음악이었다</h2>
+      <p class="lead">Private 음악은 말하는 음악이다.</p>
+    </div>
+    <div class="card">
+      <div class="big">Public<br>→<br>Private</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell grid3">
+    <div class="card">
+      <h3>Public 음악</h3>
+      <p>시장, 방송, 차트, 유통 중심</p>
+    </div>
+    <div class="card">
+      <h3>Private 음악</h3>
+      <p>개인의 기억, 관계, 메시지 중심</p>
+    </div>
+    <div class="card">
+      <h3>AI 음악</h3>
+      <p>작곡 기술보다 의도 설계가 중요</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell center">
+    <div class="kicker">학습 목표</div>
+    <h2>노래를 만들려면<br>음악을 몰라도 되지만,<br>노래의 구조는 알아야 한다</h2>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell grid4">
+    <div class="card">
+      <h3>가사 구조</h3>
+      <p>Verse, Chorus, Bridge</p>
+    </div>
+    <div class="card">
+      <h3>장르·스타일</h3>
+      <p>소리의 문법과 기대감</p>
+    </div>
+    <div class="card">
+      <h3>보컬</h3>
+      <p>성별, 톤, 감정, 발음</p>
+    </div>
+    <div class="card">
+      <h3>목적</h3>
+      <p>일반곡, 로고송, 캠페인송, CM송</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell split">
+    <div>
+      <div class="kicker">Suno</div>
+      <h2>프롬프트 하나가<br>노래의 제작 지시서가 된다</h2>
+      <p>Suno는 텍스트 프롬프트로 보컬, 가사, 편곡이 포함된 완성형 곡을 생성하는 AI 음악 도구다.</p>
+    </div>
+    <div class="visual shot">
+      <img src="https://i.imghippo.com/files/HtaI4566PKc.png" alt="Suno 화면 예시" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell split">
+    <div class="visual shot">
+      <img src="https://i.imghippo.com/files/zmZd3562.png" alt="Suno 생성 화면 예시" loading="lazy">
+    </div>
+    <div>
+      <h2>좋은 입력은<br>좋은 결과보다<br>좋은 수정 방향을 만든다</h2>
+      <p class="lead">처음부터 정답을 뽑는 것이 아니라, 반복할 수 있는 기준을 만드는 것이 핵심이다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell">
+    <h2>가사의 기본 구조</h2>
+    <div class="structure-list">
+      <div class="card">
+        <h3>Verse</h3>
+        <p>상황과 이야기를 연다</p>
+      </div>
+      <div class="card">
+        <h3>Pre-Chorus</h3>
+        <p>감정을 끌어올린다</p>
+      </div>
+      <div class="card">
+        <h3>Chorus</h3>
+        <p>핵심 메시지를 반복한다</p>
+      </div>
+      <div class="card">
+        <h3>Bridge</h3>
+        <p>전환과 재해석을 만든다</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell">
+    <h2>프롬프트는 5개 층으로 쓴다</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <p>이야기: 누구의 어떤 상황인가</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <p>메시지: 후렴에서 무엇을 남길 것인가</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <p>장르: 어떤 음악 문법을 빌릴 것인가</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <p>보컬: 누가 어떤 감정으로 부르는가</p>
+      </div>
+      <div class="step">
+        <div class="num">5</div>
+        <p>구조: Intro–Verse–Chorus–Bridge–Outro</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell">
+    <h2>노래의 목적이 바뀌면<br>구조도 바뀐다</h2>
+    <div class="grid4">
+      <div class="card">
+        <h3>일반곡</h3>
+        <p>감정과 서사의 완성도</p>
+      </div>
+      <div class="card">
+        <h3>로고송</h3>
+        <p>브랜드명과 짧은 기억</p>
+      </div>
+      <div class="card">
+        <h3>캠페인송</h3>
+        <p>행동을 유도하는 메시지</p>
+      </div>
+      <div class="card">
+        <h3>CM송</h3>
+        <p>짧은 시간 안의 후킹</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell split">
+    <div>
+      <h2>연주곡과 보컬곡은<br>설계 질문이 다르다</h2>
+      <p class="lead">연주곡은 분위기를 운반하고, 보컬곡은 문장을 운반한다.</p>
+    </div>
+    <div class="grid3">
+      <div class="card">
+        <h3>Instrumental</h3>
+        <p>공간, 장면, 리듬</p>
+      </div>
+      <div class="card">
+        <h3>Vocal</h3>
+        <p>가사, 발음, 화자</p>
+      </div>
+      <div class="card">
+        <h3>Hybrid</h3>
+        <p>브랜드 사운드와 훅</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell split">
+    <div>
+      <div class="kicker">Workflow</div>
+      <h2>Suno 제작 흐름</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <p>메시지 한 문장 정의</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <p>가사 구조와 장르 선택</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <p>프롬프트 입력 후 1차 생성</p>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <p>가사·보컬·스타일 수정</p>
+        </div>
+        <div class="step">
+          <div class="num">5</div>
+          <p>앨범/랜딩페이지로 발표</p>
+        </div>
+      </div>
+    </div>
+    <div class="visual shot">
+      <img src="https://i.imghippo.com/files/UQtC9912vms.png" alt="Suno 결과 화면 예시" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell">
+    <h2>결과물은 음원 하나에서 끝나지 않는다</h2>
+    <div class="grid4">
+      <a class="card" href="https://webpage-phi-livid.vercel.app/pages/home-was-inside/" target="_blank">
+        <h3>내가 집으로 가는 줄 알았지</h3>
+        <p>싱글 앨범 랜딩페이지</p>
+      </a>
+      <a class="card" href="https://webpage-phi-livid.vercel.app/pages/jjigeodallan-malboda/" target="_blank">
+        <h3>찍어달란 말보다</h3>
+        <p>메시지형 싱글</p>
+      </a>
+      <a class="card" href="https://webpage-phi-livid.vercel.app/pages/too-many-screws-left/" target="_blank">
+        <h3>공포의 선풍기</h3>
+        <p>이야기형 싱글</p>
+      </a>
+      <a class="card" href="https://webpage-phi-livid.vercel.app/pages/sara-vs-natasha/" target="_blank">
+        <h3>블루스 한미 대결</h3>
+        <p>장르 실험형 싱글</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell split">
+    <div>
+      <div class="kicker">Sound Design Lab V2</div>
+      <h2>음악 생성 에이전트는<br>작곡 버튼이 아니라<br>설계 파트너다</h2>
+      <p>제작자: 동서울대학교 김준호 교수</p>
+      <p>
+        <a href="https://chatgpt.com/g/g-69f690a099f881918507ce23174fc75e-sound-design-lab-v2" target="_blank">
+          Sound Design Lab V2 접속
+        </a>
+      </p>
+    </div>
+    <div class="visual shot">
+      <img src="https://i.imghippo.com/files/wpLB8975ihc.png" alt="Sound Design Lab V2 화면" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell split">
+    <div class="visual shot">
+      <img src="https://i.imghippo.com/files/HGcQ4323WfA.png" alt="Sound Design Lab V2 사용 화면" loading="lazy">
+    </div>
+    <div>
+      <h2>실습 과제</h2>
+      <p class="lead">“내가 지금 누군가에게 꼭 전하고 싶은 말”을 한 문장으로 쓰고, 그것을 후렴으로 바꾼다.</p>
+      <div class="component-footer">
+        <span class="tag">Story</span>
+        <span class="tag">Message</span>
+        <span class="tag">Genre</span>
+        <span class="tag">Vocal</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="shell center">
+    <h2>이제 음악은<br>전문가만의 제작물이 아니라<br>개인의 메시지 미디어다</h2>
+    <p class="lead ending-lead">
+      Suno를 배우는 것은 AI 버튼을 배우는 일이 아니라,<br>
+      나의 이야기를 노래로 번역하는 법을 배우는 일이다.
+    </p>
+    <p>Q&A</p>
+  </div>
+</section>
+
+</div>
+</main>
+
+<button class="nav prev" id="prevBtn" aria-label="이전">‹</button>
+<button class="nav next" id="nextBtn" aria-label="다음">›</button>
+
+<div class="slide-controls">
+  <div></div>
+  <div class="progress">
+    <div class="bar" id="progressBar"></div>
+  </div>
+  <div class="page" id="pageNumber">01 / 17</div>
+</div>
+
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  var track=document.getElementById('slideTrack');
+  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total=slides.length;
+  var current=0;
+  var wheelLocked=false;
+  var touchStartX=0;
+  var touchStartY=0;
+  var progress=document.getElementById('progressBar');
+  var page=document.getElementById('pageNumber');
+  var bgVideo=document.getElementById('bgVideo');
+
+  function pad(n){
+    return String(n).padStart(2,'0');
+  }
+
+  function clamp(n,min,max){
+    return Math.max(min,Math.min(max,n));
+  }
+
+  function update(){
+    track.style.transform='translate3d('+(-current*100)+'%,0,0)';
+    progress.style.width=((current+1)/total*100)+'%';
+    page.textContent=pad(current+1)+' / '+pad(total);
+  }
+
+  function goTo(i){
+    current=clamp(i,0,total-1);
+    update();
+  }
+
+  function next(){
+    goTo(current+1);
+  }
+
+  function prev(){
+    goTo(current-1);
+  }
+
+  if(bgVideo){
+    bgVideo.playbackRate=.45;
+
+    bgVideo.addEventListener('loadedmetadata',function(){
+      bgVideo.playbackRate=.45;
+    });
+  }
+
+  document.getElementById('nextBtn').addEventListener('click',function(e){
+    e.stopPropagation();
+    next();
+  });
+
+  document.getElementById('prevBtn').addEventListener('click',function(e){
+    e.stopPropagation();
+    prev();
+  });
+
+  deck.addEventListener('click',function(e){
+    deck.focus();
+
+    if(
+      e.target.closest('button') ||
+      e.target.closest('a') ||
+      e.target.closest('input') ||
+      e.target.closest('textarea') ||
+      e.target.closest('select')
+    ){
+      return;
+    }
+
+    if(e.clientX < window.innerWidth * .35){
+      prev();
+    }else{
+      next();
+    }
+  });
+
+  window.addEventListener('wheel',function(e){
+    e.preventDefault();
+
+    if(wheelLocked){
+      return;
+    }
+
+    var d=Math.abs(e.deltaY)>=Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+
+    if(Math.abs(d)<12){
+      return;
+    }
+
+    if(d>0){
+      next();
+    }else{
+      prev();
+    }
+
+    wheelLocked=true;
+
+    setTimeout(function(){
+      wheelLocked=false;
+    },520);
+  },{passive:false});
+
+  window.addEventListener('keydown',function(e){
+    if(['ArrowRight','PageDown',' ','Enter'].indexOf(e.key)>-1){
+      e.preventDefault();
+      next();
+    }
+
+    if(['ArrowLeft','PageUp','Backspace'].indexOf(e.key)>-1){
+      e.preventDefault();
+      prev();
+    }
+
+    if(e.key==='Home'){
+      e.preventDefault();
+      goTo(0);
+    }
+
+    if(e.key==='End'){
+      e.preventDefault();
+      goTo(total-1);
+    }
+  });
+
+  deck.addEventListener('touchstart',function(e){
+    touchStartX=e.touches[0].clientX;
+    touchStartY=e.touches[0].clientY;
+  },{passive:true});
+
+  deck.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-touchStartX;
+    var dy=e.changedTouches[0].clientY-touchStartY;
+
+    if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)){
+      if(dx<0){
+        next();
+      }else{
+        prev();
+      }
+    }
+  },{passive:true});
+
+  update();
+  deck.focus();
+})();
+</script>
+</body>
+</html>

@@ -105,9 +105,11 @@ body{
   0%{
     transform:scale(var(--video-scale)) translate3d(0,0,0);
   }
+
   50%{
     transform:scale(var(--video-motion-scale)) translate3d(var(--video-motion-x),var(--video-motion-y),0);
   }
+
   100%{
     transform:scale(var(--video-scale)) translate3d(calc(var(--video-motion-x) * -1),calc(var(--video-motion-y) * -1),0);
   }
@@ -405,10 +407,37 @@ a{
 }
 
 @media(max-width:850px){
+  html,
+  body{
+    overflow:hidden;
+  }
+
+  .slide-deck{
+    height:100vh;
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .slide-track{
+    height:auto;
+    min-height:100vh;
+  }
+
+  .slide{
+    height:auto;
+    min-height:100vh;
+    padding-block:var(--space-6);
+  }
+
   .split,
   .grid3,
   .grid4{
     grid-template-columns:1fr;
+  }
+
+  .shell{
+    gap:var(--space-4);
   }
 
   h1{
@@ -784,6 +813,16 @@ a{
     return Math.max(min,Math.min(max,n));
   }
 
+  function isMobileLayout(){
+    return window.matchMedia('(max-width:850px)').matches;
+  }
+
+  function resetMobileScroll(){
+    if(isMobileLayout()){
+      deck.scrollTop=0;
+    }
+  }
+
   function setBackgroundMood(){
     var isHero=slides[current] && slides[current].getAttribute('data-bg') === 'hero';
 
@@ -805,6 +844,7 @@ a{
     progress.style.width=((current+1)/total*100)+'%';
     page.textContent=pad(current+1)+' / '+pad(total);
     setBackgroundMood();
+    resetMobileScroll();
   }
 
   function goTo(i){
@@ -859,6 +899,10 @@ a{
   });
 
   window.addEventListener('wheel',function(e){
+    if(isMobileLayout()){
+      return;
+    }
+
     e.preventDefault();
 
     if(wheelLocked){

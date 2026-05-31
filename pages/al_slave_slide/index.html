@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta property="og:title" content="AI 노예 vs AI 지휘관: 증강의 경제학과 판단권의 격차">
+  <meta property="og:description" content="생성형 AI 시대, 정보 격차보다 중요한 것은 판단권과 지휘 능력의 격차다.">
+  <meta property="og:image" content="https://i.imghippo.com/files/pYGE6282yJU.png">
+  <title>AI 노예 vs AI 지휘관 · PASS v12</title>
+  <style>
+
+    :root{
+      --bg:#07070a;
+      --fg:#f7f1e8;
+      --muted:#b9b0a6;
+      --line:rgba(247,241,232,.18);
+      --surface:rgba(255,255,255,.065);
+      --surface-strong:rgba(255,255,255,.095);
+      --accent:#ff7a3d;
+      --accent2:#79e0ff;
+      --ok:#a8ff9f;
+
+      --space-1:clamp(0.36rem,0.42vw,0.52rem);
+      --space-2:clamp(0.72rem,0.72vw,0.92rem);
+      --space-3:clamp(1.08rem,1.08vw,1.34rem);
+      --space-4:clamp(1.62rem,1.72vw,2.14rem);
+      --space-5:clamp(2.34rem,2.72vw,3.42rem);
+      --space-6:clamp(3.24rem,4.2vw,5.24rem);
+
+      --lh-display:1.08;
+      --lh-title:1.12;
+      --lh-body:1.42;
+      --lh-caption:1.3;
+
+      --slide-padding:clamp(2rem,5vw,5rem);
+      --shell:clamp(900px,75vw,1380px);
+      --radius:2rem;
+      --z-bg:0;
+      --z-veil:1;
+      --z-slide:2;
+      --z-ui:5;
+      --video-opacity-body:.22;
+      --video-opacity-hero:.32;
+      --video-overlay-start:.91;
+      --video-overlay-mid:.74;
+      --video-overlay-end:.91;
+      --video-blur:0px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      width:100%;
+      height:100%;
+      margin:0;
+      background:var(--bg);
+      color:var(--fg);
+      font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+      word-break:keep-all;
+      line-break:strict;
+      overflow:hidden;
+      overscroll-behavior:none;
+    }
+
+    body{position:relative}
+
+    .video-bg{
+      position:fixed;
+      inset:0;
+      z-index:var(--z-bg);
+      overflow:hidden;
+      pointer-events:none;
+      background:var(--bg);
+    }
+    .video-bg video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:var(--video-opacity-body);
+      filter:blur(var(--video-blur)) saturate(1.08) contrast(1.14);
+      transform:scale(1.02);
+    }
+    .veil{
+      position:fixed;
+      inset:0;
+      z-index:var(--z-veil);
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 18% 22%,rgba(255,122,61,.18),transparent 38%),
+        radial-gradient(circle at 80% 72%,rgba(121,224,255,.14),transparent 42%),
+        linear-gradient(90deg,
+          rgba(7,7,10,var(--video-overlay-start)),
+          rgba(7,7,10,var(--video-overlay-mid)),
+          rgba(7,7,10,var(--video-overlay-end)));
+    }
+
+    .slide-deck{
+      position:relative;
+      z-index:var(--z-slide);
+      width:100vw;
+      height:100vh;
+      overflow:hidden;
+      outline:none;
+      touch-action:pan-y;
+    }
+    .slide-track{
+      width:100%;
+      height:100%;
+      display:flex;
+      transform:translate3d(0,0,0);
+      transition:transform .5s cubic-bezier(.22,.8,.22,1);
+      will-change:transform;
+    }
+    .slide{
+      flex:0 0 100%;
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:var(--slide-padding);
+      position:relative;
+    }
+    .shell{
+      width:100%;
+      max-width:var(--shell);
+      margin-inline:auto;
+      display:grid;
+      gap:var(--space-5);
+      align-items:center;
+    }
+    .split{grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr)}
+    .wide-split{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+    .center{text-align:center;justify-items:center}
+
+    h1,h2,p{margin:0}
+    .eyebrow{
+      font-size:clamp(.8rem,.9vw,1rem);
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--accent2);
+      font-weight:900;
+      line-height:var(--lh-caption);
+      margin-block:0 var(--space-3);
+    }
+    h1{
+      font-size:clamp(3.9rem,7.4vw,8.1rem);
+      line-height:var(--lh-display);
+      letter-spacing:-.028em;
+      font-weight:950;
+      text-wrap:balance;
+      margin-block:0 var(--space-4);
+    }
+    h2{
+      font-size:clamp(2.8rem,5.05vw,5.55rem);
+      line-height:var(--lh-title);
+      letter-spacing:-.026em;
+      font-weight:950;
+      text-wrap:balance;
+      margin-block:0 var(--space-4);
+    }
+    .lead{
+      font-size:clamp(1.18rem,1.55vw,1.85rem);
+      line-height:var(--lh-body);
+      color:var(--muted);
+      max-width:58ch;
+      margin:0;
+    }
+    .small{
+      font-size:clamp(.94rem,1.02vw,1.12rem);
+      line-height:var(--lh-caption);
+      color:var(--muted);
+      margin:0;
+    }
+    .statement{
+      font-size:clamp(3.2rem,6.1vw,6.7rem);
+      line-height:var(--lh-display);
+      letter-spacing:-.026em;
+      font-weight:950;
+      max-width:15ch;
+      margin:0;
+      text-wrap:balance;
+    }
+    .quote{
+      font-size:clamp(2.35rem,4.45vw,5rem);
+      line-height:var(--lh-title);
+      letter-spacing:-.026em;
+      font-weight:950;
+      max-width:18ch;
+      margin:0;
+      text-wrap:balance;
+    }
+    .mark{color:var(--accent)}
+    .cyan{color:var(--accent2)}
+
+    .glass{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,var(--surface-strong),rgba(255,255,255,.04));
+      backdrop-filter:blur(18px);
+      border-radius:var(--radius);
+      padding:var(--space-4);
+      box-shadow:0 var(--space-5) var(--space-6) rgba(0,0,0,.25);
+      display:flex;
+      flex-direction:column;
+      gap:var(--space-4);
+    }
+
+    .cover-img{
+      width:min(42vh,32vw);
+      aspect-ratio:1/1;
+      object-fit:cover;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      box-shadow:0 var(--space-5) var(--space-6) rgba(255,122,61,.22);
+      display:block;
+      margin:0;
+    }
+    .hero-img{
+      width:100%;
+      max-width:min(72vw,1120px);
+      aspect-ratio:16/9;
+      object-fit:cover;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      box-shadow:0 var(--space-5) var(--space-6) rgba(121,224,255,.18);
+      display:block;
+      margin:0;
+    }
+
+    .grid3,.grid2,.flow{
+      display:grid;
+      gap:var(--space-3);
+    }
+    .grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .flow{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,var(--surface-strong),rgba(255,255,255,.035));
+      border-radius:calc(var(--radius) * .8);
+      padding:var(--space-4);
+      display:flex;
+      flex-direction:column;
+      gap:var(--space-3);
+      min-height:13rem;
+    }
+    .card > *{margin:0}
+    .component-body{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:var(--space-2);
+    }
+    .component-footer{
+      display:flex;
+      flex-wrap:wrap;
+      gap:var(--space-2);
+      align-items:center;
+      color:var(--muted);
+      font-size:clamp(.84rem,.94vw,1rem);
+      line-height:var(--lh-caption);
+      margin:0;
+    }
+
+    .num{
+      font-size:clamp(2.5rem,4.2vw,4.9rem);
+      line-height:var(--lh-display);
+      font-weight:950;
+      color:var(--accent);
+      margin:0;
+    }
+    .label{
+      font-size:clamp(1.08rem,1.28vw,1.38rem);
+      line-height:var(--lh-title);
+      font-weight:900;
+      margin:0;
+    }
+
+    .bar-wrap{
+      height:44vh;
+      min-height:20rem;
+      display:flex;
+      align-items:flex-end;
+      gap:var(--space-3);
+      border-left:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      padding:var(--space-4) var(--space-3) var(--space-5);
+    }
+    .bar{
+      flex:1;
+      min-height:8%;
+      position:relative;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:var(--space-2);
+      border-radius:var(--space-2) var(--space-2) 0 0;
+      background:linear-gradient(180deg,var(--accent),rgba(255,122,61,.35));
+    }
+    .bar span{
+      font-weight:950;
+      font-size:clamp(1rem,1.45vw,1.75rem);
+      line-height:var(--lh-caption);
+      color:var(--fg);
+    }
+    .bar em{
+      position:absolute;
+      inset-block-end:calc(-1 * var(--space-5));
+      font-style:normal;
+      color:var(--muted);
+      font-weight:800;
+      text-align:center;
+      font-size:clamp(.78rem,.9vw,1rem);
+      line-height:var(--lh-caption);
+      width:100%;
+    }
+
+    .equation{
+      display:flex;
+      flex-wrap:wrap;
+      gap:var(--space-2);
+      align-items:center;
+      justify-content:center;
+      font-size:clamp(1.45rem,2.3vw,2.65rem);
+      font-weight:950;
+      line-height:var(--lh-title);
+    }
+    .pill{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:var(--space-2) var(--space-3);
+      background:rgba(255,255,255,.07);
+      white-space:nowrap;
+    }
+    .formula-note{
+      text-align:center;
+      margin:0;
+    }
+
+    .step{position:relative}
+    .step::after{
+      content:"→";
+      position:absolute;
+      inset-inline-end:calc(-1 * var(--space-3));
+      inset-block-start:45%;
+      color:var(--accent2);
+      font-size:clamp(1.3rem,1.8vw,2rem);
+      line-height:1;
+    }
+    .step:last-child::after{content:""}
+
+    .table{
+      display:grid;
+      gap:var(--space-2);
+    }
+    .row{
+      display:grid;
+      grid-template-columns:minmax(0,.7fr) minmax(3rem,.3fr) minmax(0,1.4fr);
+      gap:var(--space-3);
+      align-items:center;
+      border-bottom:1px solid var(--line);
+      padding:var(--space-2);
+    }
+    .row strong{
+      color:var(--fg);
+      line-height:var(--lh-caption);
+    }
+    .percent{
+      font-weight:950;
+      color:var(--accent);
+      font-size:clamp(1.25rem,2vw,2.35rem);
+      line-height:var(--lh-title);
+    }
+
+    .linkbar{
+      display:flex;
+      gap:var(--space-3);
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .linkbar a{
+      color:var(--fg);
+      text-decoration:none;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:var(--space-2) var(--space-3);
+      background:rgba(255,255,255,.07);
+      font-weight:900;
+      line-height:var(--lh-caption);
+    }
+
+    .resource-panel{
+      width:min(56rem,100%);
+      padding:var(--space-4);
+      gap:var(--space-3);
+    }
+    .resource-links{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:var(--space-3);
+      width:100%;
+    }
+    .resource-links a{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:4.3rem;
+      border-radius:calc(var(--radius) * .72);
+      padding:var(--space-3) var(--space-4);
+      background:linear-gradient(135deg,rgba(255,122,61,.28),rgba(121,224,255,.10));
+      border:1px solid rgba(255,255,255,.22);
+      box-shadow:0 var(--space-3) var(--space-5) rgba(0,0,0,.20);
+      font-size:clamp(1.05rem,1.25vw,1.45rem);
+      letter-spacing:-.02em;
+      white-space:nowrap;
+    }
+    .resource-links a:hover{
+      background:linear-gradient(135deg,rgba(255,122,61,.42),rgba(121,224,255,.18));
+      transform:translateY(-1px);
+    }
+
+    .slide-controls{
+      position:fixed;
+      inset:auto var(--space-4) var(--space-4) var(--space-4);
+      z-index:var(--z-ui);
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      gap:var(--space-3);
+      align-items:center;
+      pointer-events:none;
+    }
+    .nav-button{
+      pointer-events:auto;
+      position:fixed;
+      inset-block-start:50%;
+      transform:translateY(-50%);
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--fg);
+      width:3.2rem;
+      height:3.2rem;
+      border-radius:999px;
+      font-size:2rem;
+      opacity:.24;
+      cursor:pointer;
+    }
+    .nav-button:hover{opacity:.9}
+    .nav-prev{inset-inline-start:var(--space-4)}
+    .nav-next{inset-inline-end:var(--space-4)}
+    .progress{
+      height:.32rem;
+      background:rgba(255,255,255,.14);
+      border-radius:999px;
+      overflow:hidden;
+    }
+    .progress span{
+      display:block;
+      height:100%;
+      width:0;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      transition:width .35s ease;
+    }
+    .page{
+      font-weight:900;
+      color:var(--muted);
+      font-variant-numeric:tabular-nums;
+      line-height:var(--lh-caption);
+    }
+
+
+    /* v2 targeted fixes: slide 2 overlay + rebuilt evidence charts */
+    .hero-frame{
+      position:relative;
+      width:100%;
+      max-width:min(74vw,1180px);
+      aspect-ratio:16/9;
+      border-radius:var(--radius);
+      overflow:hidden;
+      border:1px solid var(--line);
+      box-shadow:0 var(--space-5) var(--space-6) rgba(121,224,255,.18);
+      display:grid;
+      place-items:center;
+      isolation:isolate;
+    }
+    .hero-frame img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      margin:0;
+      transform:scale(1.01);
+    }
+    .hero-frame::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background:
+        linear-gradient(180deg,rgba(0,0,0,.38),rgba(0,0,0,.08) 36%,rgba(0,0,0,.72)),
+        radial-gradient(circle at 50% 74%,rgba(0,0,0,.64),transparent 50%);
+      pointer-events:none;
+    }
+    .hero-overlay-title{
+      position:absolute;
+      z-index:2;
+      inset-inline:var(--space-5);
+      inset-block-end:var(--space-5);
+      margin:0;
+      text-align:center;
+      font-size:clamp(2.6rem,5.2vw,6.2rem);
+      line-height:var(--lh-display);
+      letter-spacing:-.028em;
+      font-weight:950;
+      color:var(--fg);
+      text-shadow:0 .14em .34em rgba(0,0,0,.72), 0 0 1px rgba(0,0,0,.95);
+    }
+    .hero-overlay-title .mark{
+      color:var(--accent);
+      text-shadow:0 .14em .34em rgba(0,0,0,.8), 0 0 1px rgba(0,0,0,1);
+    }
+
+    .evidence-chart{
+      min-height:0;
+      max-height:calc(100vh - (var(--slide-padding) * 2));
+      justify-content:center;
+      overflow:hidden;
+    }
+    .rank-chart{
+      display:flex;
+      flex-direction:column;
+      gap:var(--space-3);
+      width:100%;
+    }
+    .rank-item{
+      display:grid;
+      grid-template-columns:minmax(9rem,.42fr) minmax(0,1fr) minmax(4rem,.18fr);
+      gap:var(--space-3);
+      align-items:center;
+    }
+    .rank-label{
+      display:flex;
+      flex-direction:column;
+      gap:var(--space-1);
+      min-width:0;
+    }
+    .rank-label strong{
+      margin:0;
+      font-size:clamp(1rem,1.25vw,1.38rem);
+      line-height:var(--lh-title);
+      color:var(--fg);
+      font-weight:950;
+    }
+    .rank-label span{
+      margin:0;
+      font-size:clamp(.78rem,.86vw,.98rem);
+      line-height:var(--lh-caption);
+      color:var(--muted);
+      font-weight:800;
+    }
+    .rank-track{
+      height:clamp(2.8rem,5.2vh,4.8rem);
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,255,255,.045);
+      overflow:hidden;
+      position:relative;
+    }
+    .rank-fill{
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--accent),rgba(255,122,61,.46));
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      padding-inline:var(--space-3);
+      min-width:4.2rem;
+      color:var(--fg);
+      font-weight:950;
+      font-size:clamp(1rem,1.45vw,1.72rem);
+      line-height:var(--lh-caption);
+      text-shadow:0 .08em .18em rgba(0,0,0,.55);
+    }
+    .rank-fill.cyan{
+      background:linear-gradient(90deg,var(--accent2),rgba(121,224,255,.38));
+      color:var(--fg);
+    }
+    .rank-percent{
+      font-size:clamp(1.2rem,1.85vw,2.2rem);
+      line-height:var(--lh-title);
+      font-weight:950;
+      color:var(--fg);
+      text-align:right;
+      font-variant-numeric:tabular-nums;
+    }
+    .chart-footnote{
+      border-top:1px solid var(--line);
+      padding-block-start:var(--space-3);
+      color:var(--muted);
+      line-height:var(--lh-caption);
+      font-size:clamp(.9rem,1vw,1.08rem);
+      margin:0;
+    }
+
+    .rule-chart{
+      display:grid;
+      grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+      grid-template-rows:minmax(0,1fr) minmax(0,.82fr);
+      gap:var(--space-3);
+      height:clamp(22rem,42vh,31rem);
+      min-height:0;
+      width:100%;
+      overflow:hidden;
+    }
+    .rule-cell{
+      position:relative;
+      overflow:hidden;
+      border-radius:calc(var(--radius) * .75);
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:var(--space-2);
+      padding:var(--space-3);
+      min-width:0;
+      min-height:0;
+    }
+    .rule-cell.primary{
+      background:linear-gradient(135deg,rgba(255,122,61,.88),rgba(255,122,61,.22));
+    }
+    .rule-cell.story{
+      background:linear-gradient(135deg,rgba(255,122,61,.52),rgba(255,122,61,.13));
+    }
+    .rule-cell.lower{
+      grid-column:1 / 3;
+      background:linear-gradient(135deg,rgba(121,224,255,.22),rgba(121,224,255,.055));
+      display:grid;
+      grid-template-columns:minmax(0,1.04fr) repeat(3,minmax(0,.56fr));
+      align-items:stretch;
+      gap:var(--space-2);
+      padding:var(--space-3);
+      min-height:0;
+    }
+    .rule-cell::after{
+      content:"";
+      position:absolute;
+      inset:auto -10% -40% auto;
+      width:70%;
+      aspect-ratio:1;
+      border-radius:999px;
+      background:rgba(255,255,255,.11);
+      filter:blur(22px);
+      pointer-events:none;
+    }
+    .rule-num{
+      position:relative;
+      z-index:1;
+      font-size:clamp(2.6rem,4.55vw,5.2rem);
+      line-height:.96;
+      letter-spacing:-.03em;
+      font-weight:950;
+      color:var(--fg);
+      margin:0;
+      font-variant-numeric:tabular-nums;
+      white-space:nowrap;
+    }
+    .rule-name{
+      position:relative;
+      z-index:1;
+      font-size:clamp(1rem,1.25vw,1.42rem);
+      line-height:1.08;
+      font-weight:950;
+      color:var(--fg);
+      margin:0;
+      word-break:keep-all;
+    }
+    .rule-caption{
+      position:relative;
+      z-index:1;
+      color:rgba(247,241,232,.78);
+      font-size:clamp(.78rem,.85vw,.96rem);
+      line-height:var(--lh-caption);
+      margin:0;
+      font-weight:800;
+      word-break:keep-all;
+    }
+    .lower-summary{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:var(--space-1);
+      padding:var(--space-2);
+      border-radius:calc(var(--radius) * .55);
+      background:rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.1);
+      min-width:0;
+      overflow:hidden;
+    }
+    .lower-summary .rule-num{
+      font-size:clamp(2.8rem,4.7vw,5.1rem);
+    }
+    .lower-summary .rule-name{
+      font-size:clamp(1rem,1.2vw,1.35rem);
+      max-width:12ch;
+    }
+    .lower-summary .rule-caption{
+      font-size:clamp(.72rem,.78vw,.9rem);
+      max-width:32ch;
+    }
+    .lower-chip{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:var(--space-1);
+      padding:var(--space-2);
+      border-radius:calc(var(--radius) * .55);
+      background:linear-gradient(180deg,rgba(121,224,255,.44),rgba(121,224,255,.16));
+      border:1px solid rgba(121,224,255,.24);
+      min-width:0;
+      overflow:hidden;
+    }
+    .lower-chip .rule-num{
+      font-size:clamp(1.75rem,2.55vw,3rem);
+      line-height:.98;
+    }
+    .lower-chip .rule-name{
+      font-size:clamp(.76rem,.86vw,1rem);
+      line-height:1.08;
+    }
+    .evidence-chart .chart-footnote{
+      padding-block-start:var(--space-2);
+      font-size:clamp(.78rem,.86vw,.96rem);
+      line-height:var(--lh-caption);
+    }
+    .message-only{
+      gap:var(--space-3);
+    }
+    .thanks-shell{
+      gap:var(--space-4);
+    }
+    .final-links{
+      width:min(74rem,100%);
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:var(--space-3);
+      margin-block-start:var(--space-2);
+    }
+    .modern-link{
+      position:relative;
+      isolation:isolate;
+      min-height:7rem;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:var(--space-2);
+      padding:var(--space-4);
+      border-radius:calc(var(--radius) * .78);
+      text-decoration:none;
+      color:var(--fg);
+      border:1px solid rgba(255,255,255,.20);
+      background:
+        linear-gradient(135deg,rgba(255,122,61,.22),rgba(121,224,255,.08)),
+        rgba(255,255,255,.055);
+      backdrop-filter:blur(18px);
+      box-shadow:0 var(--space-5) var(--space-6) rgba(0,0,0,.24);
+      overflow:hidden;
+      transform:translateZ(0);
+      transition:transform .22s ease,border-color .22s ease,background .22s ease;
+    }
+    .modern-link::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background:radial-gradient(circle at 20% 0%,rgba(255,122,61,.42),transparent 42%),
+                 radial-gradient(circle at 100% 100%,rgba(121,224,255,.26),transparent 42%);
+      opacity:.72;
+    }
+    .modern-link::after{
+      content:"↗";
+      position:absolute;
+      top:var(--space-3);
+      right:var(--space-3);
+      width:2.2rem;
+      height:2.2rem;
+      display:grid;
+      place-items:center;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      color:var(--fg);
+      font-size:1rem;
+      font-weight:900;
+    }
+    .modern-link:hover{
+      transform:translateY(calc(var(--space-1) * -1));
+      border-color:rgba(121,224,255,.42);
+      background:
+        linear-gradient(135deg,rgba(255,122,61,.34),rgba(121,224,255,.14)),
+        rgba(255,255,255,.075);
+    }
+    .modern-link span{
+      font-size:clamp(1.3rem,1.7vw,2rem);
+      font-weight:950;
+      line-height:var(--lh-title);
+      letter-spacing:-.025em;
+    }
+    .modern-link em{
+      font-style:normal;
+      color:var(--accent2);
+      font-size:clamp(.82rem,.9vw,1rem);
+      line-height:var(--lh-caption);
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    @media (max-width:900px){
+      .hero-frame{max-width:100%}
+      .hero-overlay-title{
+        inset-inline:var(--space-4);
+        inset-block-end:var(--space-4);
+        font-size:clamp(2.05rem,7.4vw,4.8rem);
+      }
+      .rank-item{
+        grid-template-columns:1fr;
+        gap:var(--space-2);
+      }
+      .rank-percent{text-align:left}
+      .rule-chart{
+        grid-template-columns:1fr;
+        grid-template-rows:auto;
+      }
+      .rule-cell.lower{
+        grid-column:auto;
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:900px){
+      :root{
+        --shell:min(88vw,720px);
+        --slide-padding:var(--space-4);
+        --lh-display:1.1;
+        --lh-title:1.14;
+      }
+      .split,.wide-split,.grid3,.grid2,.flow{grid-template-columns:1fr}
+      .cover-img{width:min(42vh,70vw)}
+      .bar-wrap{height:34vh}
+      .step::after{content:"";display:none}
+      h1{font-size:clamp(3rem,11vw,5.4rem)}
+      h2{font-size:clamp(2.35rem,9vw,4.4rem)}
+      .statement{font-size:clamp(2.6rem,10vw,4.9rem)}
+      .quote{font-size:clamp(2rem,8.6vw,4.2rem)}
+    }
+
+    @media (max-width:760px){
+      html,body{
+        height:auto;
+        min-height:100%;
+        overflow-x:hidden;
+        overflow-y:auto;
+        overscroll-behavior-y:auto;
+      }
+      .slide-deck{
+        width:100%;
+        height:auto;
+        min-height:100svh;
+        overflow:visible;
+        touch-action:pan-y;
+      }
+      .slide-track{
+        display:block;
+        height:auto;
+        transform:none !important;
+        transition:none;
+        will-change:auto;
+      }
+      .slide{
+        min-height:100svh;
+        height:auto;
+        width:100%;
+        padding-block:var(--space-6);
+      }
+      .shell{
+        max-width:min(90vw,680px);
+        gap:var(--space-4);
+      }
+      .slide-controls{
+        inset:auto var(--space-3) var(--space-3) var(--space-3);
+        grid-template-columns:1fr auto;
+        gap:var(--space-2);
+      }
+      .nav-button{
+        position:fixed;
+        width:2.8rem;
+        height:2.8rem;
+        font-size:1.6rem;
+      }
+      .progress{grid-column:1 / 2}
+      .page{grid-column:2 / 3}
+      .bar-wrap{min-height:18rem}
+      .row{grid-template-columns:1fr;gap:var(--space-2)}
+      .hero-img{max-width:100%}
+      audio{width:100%}
+.final-links{
+        grid-template-columns:1fr;
+      }
+      .modern-link{
+        min-height:5.6rem;
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      .slide-track{transition:none}
+      .video-bg video{display:none}
+    }
+
+  
+    .lower-summary.clean {
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+      overflow: hidden !important;
+    }
+    .lower-summary.clean .rule-num {
+      margin: 0 !important;
+      font-size: clamp(3.2rem, 6.6vw, 6.6rem) !important;
+      line-height: .92 !important;
+    }
+
+  
+    @media (max-width: 760px){
+      .resource-links{
+        grid-template-columns:1fr;
+      }
+      .resource-links a{
+        min-height:3.6rem;
+        white-space:normal;
+      }
+    }
+
+  
+
+    /* Slide 14 hierarchy fix: minor premise small, core claim dominant */
+    .final-shell{
+      gap:var(--space-5);
+    }
+    .final-statement{
+      max-width:18ch;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:var(--space-2);
+      line-height:var(--lh-display);
+    }
+    .final-statement .minor-line{
+      font-size:clamp(2.4rem,4.3vw,4.9rem);
+      line-height:var(--lh-title);
+      letter-spacing:-.024em;
+      font-weight:900;
+      color:rgba(249,244,235,.88);
+    }
+    .final-statement .major-line{
+      font-size:clamp(3.5rem,6.3vw,7rem);
+      line-height:var(--lh-display);
+      letter-spacing:-.028em;
+      font-weight:950;
+      color:var(--text);
+    }
+    .final-lead{
+      max-width:min(76vw,920px);
+      margin:0;
+    }
+
+    /* PASS v10 — global typography and final-page reset */
+    :root{
+      --fs-title-lg:clamp(2.65rem,4.55vw,5.05rem);
+      --fs-title-md:clamp(2.35rem,3.85vw,4.35rem);
+      --fs-statement-lg:clamp(2.75rem,5.1vw,5.75rem);
+      --fs-statement-md:clamp(2.35rem,4.25vw,4.85rem);
+      --fs-quote-md:clamp(2.1rem,3.85vw,4.35rem);
+      --tracking-display:-.021em;
+      --tracking-title:-.018em;
+      --lh-readable-display:1.14;
+      --lh-readable-title:1.18;
+    }
+
+    .slide:not(:first-child) h2{
+      font-size:var(--fs-title-lg);
+      line-height:var(--lh-readable-title);
+      letter-spacing:var(--tracking-title);
+      max-width:16ch;
+    }
+
+    .statement{
+      font-size:var(--fs-statement-lg);
+      line-height:var(--lh-readable-display);
+      letter-spacing:var(--tracking-display);
+      max-width:17ch;
+    }
+
+    .quote{
+      font-size:var(--fs-quote-md);
+      line-height:var(--lh-readable-title);
+      letter-spacing:var(--tracking-title);
+      max-width:22ch;
+    }
+
+    .slide:nth-child(4) .statement{
+      font-size:var(--fs-statement-md);
+      max-width:18ch;
+      line-height:1.15;
+    }
+
+    .slide:nth-child(11) .statement{
+      font-size:var(--fs-statement-md);
+      max-width:19ch;
+      line-height:1.15;
+    }
+
+    .slide:nth-child(11) .lead{
+      max-width:46ch;
+      font-size:clamp(1.08rem,1.35vw,1.55rem);
+    }
+
+    .quote-refined{
+      max-width:21ch;
+      line-height:1.16;
+    }
+
+    .quote-refined .quote-soft{
+      color:rgba(247,241,232,.86);
+    }
+
+    .quote-refined .mark{
+      display:inline-block;
+      color:var(--accent);
+    }
+
+    .final-statement{
+      max-width:18ch;
+      gap:var(--space-2);
+    }
+
+    .final-statement .minor-line{
+      font-size:clamp(1.85rem,3.25vw,3.8rem);
+      line-height:var(--lh-readable-title);
+      letter-spacing:-.018em;
+    }
+
+    .final-statement .major-line{
+      font-size:clamp(2.7rem,5.05vw,5.75rem);
+      line-height:var(--lh-readable-display);
+      letter-spacing:var(--tracking-display);
+    }
+
+    .thanks-shell{
+      gap:var(--space-3);
+    }
+
+    .thanks-shell h2{
+      font-size:var(--fs-title-md);
+      max-width:14ch;
+    }
+
+    .final-links{
+      width:min(52rem,82%);
+      gap:var(--space-2);
+      margin-block-start:var(--space-1);
+    }
+
+    .modern-link{
+      min-height:4.7rem;
+      padding:var(--space-3);
+      border-radius:calc(var(--radius) * .58);
+      box-shadow:0 var(--space-3) var(--space-5) rgba(0,0,0,.20);
+    }
+
+    .modern-link::after{
+      top:var(--space-2);
+      right:var(--space-2);
+      width:1.7rem;
+      height:1.7rem;
+      font-size:.82rem;
+    }
+
+    .modern-link span{
+      font-size:clamp(1.02rem,1.18vw,1.32rem);
+      letter-spacing:-.018em;
+    }
+
+    .modern-link em{
+      font-size:clamp(.68rem,.76vw,.84rem);
+      letter-spacing:.06em;
+    }
+
+    @media (max-width:900px){
+      .slide:not(:first-child) h2{font-size:clamp(2.1rem,7.2vw,3.75rem)}
+      .statement{font-size:clamp(2.15rem,8.2vw,4.2rem)}
+      .quote{font-size:clamp(1.9rem,7.4vw,3.8rem)}
+      .final-statement .minor-line{font-size:clamp(1.7rem,6.2vw,3.2rem)}
+      .final-statement .major-line{font-size:clamp(2.2rem,8.2vw,4.25rem)}
+      .final-links{width:100%}
+      .modern-link{min-height:4.2rem}
+    }
+
+    @media (max-width:760px){
+      .slide:not(:first-child) h2,
+      .statement,
+      .quote,
+      .final-statement .major-line,
+      .final-statement .minor-line{
+        letter-spacing:-.015em;
+      }
+      .final-links{
+        grid-template-columns:1fr;
+        width:100%;
+      }
+      .modern-link{
+        min-height:3.8rem;
+        padding:var(--space-2) var(--space-3);
+      }
+    }
+
+  
+
+    /* v11 typography correction: density, tracking and line-height */
+    .slide:first-child .lead{
+      max-width:42ch;
+      line-height:var(--lh-body);
+    }
+
+    .slide:nth-child(2) .hero-overlay-title{
+      font-size:clamp(2.15rem,4.15vw,5.05rem);
+      line-height:1.12;
+      letter-spacing:-.018em;
+      max-width:15ch;
+      margin-inline:auto;
+    }
+
+    .slide:nth-child(4) .statement{
+      font-size:clamp(3.25rem,6.0vw,6.75rem);
+      line-height:1.18;
+      letter-spacing:-.008em;
+      max-width:18ch;
+    }
+
+    .slide:nth-child(11) .statement.thought-loss{
+      font-size:clamp(2.95rem,5.15vw,5.9rem);
+      line-height:1.18;
+      letter-spacing:-.01em;
+      max-width:20ch;
+    }
+
+    .slide:nth-child(11) .statement.thought-loss .mark{
+      display:inline-block;
+      letter-spacing:-.006em;
+    }
+
+    .slide:nth-child(11) .shell.center{
+      gap:var(--space-5);
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="video-bg" aria-hidden="true">
+    <video id="bgVideo" autoplay muted loop playsinline preload="auto">
+      <source src="https://cdn.midjourney.com/video/8e5158d7-45f9-401d-9aaf-a0dd5e6fbf60/0.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="veil" aria-hidden="true"></div>
+  <main class="slide-deck" id="deck" tabindex="0" aria-label="AI 지휘관 강의 슬라이드">
+    <div class="slide-track" id="slideTrack">
+        <section class="slide"><div class="shell split"><div><div class="eyebrow">Lecture · Human-AI Collaboration</div><h1>AI 노예 vs<br><span class="mark">AI 지휘관</span></h1><p class="lead">정보 격차가 끝난 자리에서,<br>다음 계급은 판단권을 누가 쥐는가로 갈린다.</p></div><img class="cover-img" src="https://i.imghippo.com/files/Qf8169Leo.png" alt="AI Slave 앨범 커버"></div></section>
+        <section class="slide"><div class="shell center"><figure class="hero-frame"><img src="https://i.imghippo.com/files/Mam8649Gj.png" alt="AI 시대의 두 계층을 보여주는 히어로 이미지"><figcaption class="hero-overlay-title">프롬프트 한 줄은<br>창작이 아니라<br><span class="mark">판단권 양도</span>일 수 있다.</figcaption></figure></div></section>
+        <section class="slide"><div class="shell"><div><div class="eyebrow">Core Map</div><h2>오늘의 흐름은<br>하나의 질문으로 간다</h2></div><div class="flow"><div class="card step"><div class="label">문제</div><div class="component-body"><p class="small">정보는 평준화됐지만 판단은 평준화되지 않았다.</p></div></div><div class="card step"><div class="label">전환</div><div class="component-body"><p class="small">AI는 자동화 도구가 아니라 증강 시스템이다.</p></div></div><div class="card step"><div class="label">증거</div><div class="component-body"><p class="small">경제·격차·조직 데이터가 같은 방향을 가리킨다.</p></div></div><div class="card step"><div class="label">결론</div><div class="component-body"><p class="small">미래 역량은 프롬프트가 아니라 지휘 능력이다.</p></div></div></div></div></section>
+        <section class="slide"><div class="shell center"><p class="statement">AI 시대의 격차는<br><span class="mark">접속권</span>이 아니라<br><span class="cyan">판단권</span>의 격차다.</p></div></section>
+        <section class="slide"><div class="shell split"><div><div class="eyebrow">Human-in-the-Loop</div><h2>좋은 협업은<br>위임이 아니라<br>루프 설계다</h2><p class="lead">과업, 목표, 상호작용, 과업 할당이 맞물릴 때 AI는 대체자가 아니라 증강 집단 지성의 파트너가 된다.</p></div><div class="grid2"><div class="card"><div class="num">01</div><div class="label">Task</div><p class="small">무엇을 기계가 처리할 것인가</p></div><div class="card"><div class="num">02</div><div class="label">Goal</div><p class="small">어떤 결과를 함께 추구할 것인가</p></div><div class="card"><div class="num">03</div><div class="label">Interaction</div><p class="small">피드백은 어떻게 돌아갈 것인가</p></div><div class="card"><div class="num">04</div><div class="label">Allocation</div><p class="small">인간 판단은 어디에 남길 것인가</p></div></div></div></section>
+        <section class="slide"><div class="shell wide-split"><div><div class="eyebrow">Macro Choice</div><h2>자동화냐,<br>증강이냐</h2><p class="lead">같은 AI라도 경로가 다르면 노동시장의 결말은 정반대로 갈린다.</p></div><div class="grid2"><div class="card"><div class="label">Automation</div><div class="component-body"><p class="small">고임금 업무 대체 → 하위 노동시장 유입 → 임금 하락 연쇄</p></div><div class="component-footer">비용 절감 중심</div></div><div class="card"><div class="label">Augmentation</div><div class="component-body"><p class="small">현장 숙련자 레벨업 → 전문성 확장 → 중산층 재건</p></div><div class="component-footer">역량 증강 중심</div></div></div></div></section>
+        <section class="slide"><div class="shell split"><div><div class="eyebrow">Policy Evidence</div><h2>친노동적 AI는<br>정책 설계가 필요하다</h2><p class="lead">보고서의 5대 개입은 기업의 자동화 유인을 인간 보완 경로로 돌리는 장치다.</p></div><div class="table glass"><div class="row"><strong>조세 형평성</strong><span class="percent">1</span><p class="small">노동과 기계 과세의 왜곡 제거</p></div><div class="row"><strong>산업안전보건 규제 현대화</strong><span class="percent">2</span><p class="small">AI 시대의 노동자 보호 규칙</p></div><div class="row"><strong>공공 연구자금</strong><span class="percent">3</span><p class="small">증강 기술 생태계 육성</p></div><div class="row"><strong>AI 전문센터</strong><span class="percent">4</span><p class="small">규제 지식 통합</p></div><div class="row"><strong>공공도입 자문</strong><span class="percent">5</span><p class="small">교육·의료 현장 보완성 검증</p></div></div></div></section>
+        <section class="slide"><div class="shell"><div><div class="eyebrow">AI Divide</div><h2>AI 격차는<br>문명적 격차로 증폭된다</h2></div><div class="grid3"><div class="card"><div class="num">2.51억</div><div class="component-body"><div class="label">학교 밖 아동</div><p class="small">교육 기반의 결핍 위에 AI 격차가 겹친다.</p></div></div><div class="card"><div class="num">7.5억</div><div class="component-body"><div class="label">전기 접근 부족</div><p class="small">지능 인프라 이전에 물리 인프라가 막힌다.</p></div></div><div class="card"><div class="num">22억</div><div class="component-body"><div class="label">오프라인 인구</div><p class="small">접속하지 못하면 증강의 루프에도 들어오지 못한다.</p></div></div></div></div></section>
+        <section class="slide"><div class="shell split"><div><div class="eyebrow">Wealth Formula</div><h2>새로운 부의 방정식</h2><p class="lead">AI 지휘관은 도구 하나를 잘 쓰는 사람이 아니라,<br>반복 시스템을 설계하는 사람이다.</p></div><div class="glass"><div class="equation"><span class="pill">자본</span><span>×</span><span class="pill">안목</span><span>×</span><span class="pill">지휘 능력</span><span>×</span><span class="pill">반복 시스템</span></div><p class="lead formula-note">이 중 하나라도 빠지면 정보의 바다에서 길을 잃는다.</p></div></div></section>
+        <section class="slide"><div class="shell split"><div><div class="eyebrow">BCG · MIT Sloan Typology</div><h2>조직 안에서도<br>이미 계층이 갈린다</h2><p class="lead">성과 차이는 AI 사용 여부가 아니라,<br>인간이 워크플로를 통제하는 방식에서 발생한다.</p></div><div class="glass evidence-chart"><div class="rank-chart" aria-label="조직 내 AI 협업 유형 비율"><div class="rank-item"><div class="rank-label"><strong>사이보그</strong><span>융합된 공동 창조</span></div><div class="rank-track"><div class="rank-fill" style="width:100%">60%</div></div><div class="rank-percent">60%</div></div><div class="rank-item"><div class="rank-label"><strong>자가 자동화자</strong><span>판단을 AI에 위임</span></div><div class="rank-track"><div class="rank-fill" style="width:45%">27%</div></div><div class="rank-percent">27%</div></div><div class="rank-item"><div class="rank-label"><strong>켄타우로스</strong><span>전략적 분업과 통제</span></div><div class="rank-track"><div class="rank-fill cyan" style="width:24%">14%</div></div><div class="rank-percent cyan">14%</div></div></div><p class="chart-footnote">핵심은 “AI를 얼마나 쓰는가”가 아니라 “어디까지 맡기고 어디서 인간이 판단하는가”다.</p></div></div></section>
+        <section class="slide"><div class="shell center"><p class="statement thought-loss">AI가 대신 생각할수록,<br>인간은 문제를<br><span class="mark">구조화하는 근육</span>을 잃는다.</p></div></section>
+        <section class="slide"><div class="shell wide-split"><div><div class="eyebrow">Walter Murch · Rule of Six</div><h2>기계가 잘하는 것은<br>하위 16%다</h2><p class="lead">공간·축·시선은 계산 가능하지만, 감정과 스토리는 여전히 인간 의도의 영토다.</p></div><div class="glass evidence-chart"><div class="rule-chart" aria-label="월터 머치 편집의 여섯 규칙 비중"><div class="rule-cell primary"><p class="rule-num">51%</p><div><p class="rule-name">감정</p><p class="rule-caption">관객의 정서적 진실</p></div></div><div class="rule-cell story"><p class="rule-num">23%</p><div><p class="rule-name">스토리</p><p class="rule-caption">서사의 진전과 의미</p></div></div><div class="rule-cell lower"><div class="lower-summary clean"><p class="rule-num">16%</p></div><div class="lower-chip"><p class="rule-num">7%</p><p class="rule-name">시선</p></div><div class="lower-chip"><p class="rule-num">5%</p><p class="rule-name">2D 평면</p></div><div class="lower-chip"><p class="rule-num">4%</p><p class="rule-name">3D 공간</p></div></div></div><p class="chart-footnote">나머지 10%의 리듬은 인간과 기계가 함께 조율할 수 있지만, 최상위 판단은 여전히 인간의 몫이다.</p></div></div></section>
+        <section class="slide"><div class="shell center message-only"><div class="eyebrow">Media is the Message</div><p class="quote quote-refined"><span>AI 시대의 핵심은</span><br><span class="quote-soft">더 빨리 만드는 능력이 아니라</span><br><span class="mark">무엇을 남길지</span><br><span>결정하는 능력이다.</span></p></div></section>
+        <section class="slide final-slide"><div class="shell center final-shell"><p class="statement final-statement"><span class="minor-line">AI를 쓰는 사람이 아니라</span><span class="major-line"><span class="mark">AI를 지휘하는 사람</span>이</span><span class="major-line">다음 문명을 설계한다.</span></p><p class="lead final-lead">질문은 “무엇을 만들어줘?”가 아니다.<br>“어떤 구조와 기준으로 함께 만들 것인가?”다.</p></div></section>
+        <section class="slide"><div class="shell center thanks-shell"><div class="eyebrow">Thanks · Q&amp;A</div><h2>질문과 토론</h2><p class="lead">더 깊이 읽고, 듣고, 이어서 생각할 수 있는 자료입니다.</p><div class="final-links" aria-label="참고 자료 링크"><a class="modern-link" href="https://docs.google.com/document/d/1Qk0bfPDhD8IVRZAZbR55_TQmU5KhbrMtlJOG5GaBYqo/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span>보고서</span><em>Read report</em></a><a class="modern-link" href="https://webpage-phi-livid.vercel.app/pages/alslave/" target="_blank" rel="noopener noreferrer"><span>앨범 랜딩페이지</span><em>A.I Slave</em></a><a class="modern-link" href="https://webpage-phi-livid.vercel.app/ai-commanders-column/" target="_blank" rel="noopener noreferrer"><span>컬럼</span><em>AI Commander</em></a></div></div></section>
+    </div>
+  </main>
+  <div class="slide-controls" aria-hidden="false">
+    <button class="nav-button nav-prev" id="prevBtn" aria-label="이전 슬라이드">‹</button>
+    <div class="progress" aria-label="진행률"><span id="progressFill"></span></div>
+    <div class="page" id="pageNum">01 / 14</div>
+    <button class="nav-button nav-next" id="nextBtn" aria-label="다음 슬라이드">›</button>
+  </div>
+  <script>
+
+    (() => {
+      const track = document.getElementById('slideTrack');
+      const deck = document.getElementById('deck');
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const progress = document.getElementById('progressFill');
+      const pageNum = document.getElementById('pageNum');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const mobileQuery = window.matchMedia('(max-width: 760px)');
+      let current = 0;
+      let wheelLocked = false;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchStartTime = 0;
+
+      const clamp = (index) => Math.max(0, Math.min(slides.length - 1, index));
+      const isMobileScroll = () => mobileQuery.matches;
+
+      function updateUi() {
+        progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+        pageNum.textContent = `${String(current + 1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`;
+      }
+
+      function render() {
+        if (!isMobileScroll()) {
+          track.style.transform = `translate3d(${-current * 100}%, 0, 0)`;
+          window.scrollTo(0, 0);
+        } else {
+          track.style.transform = 'none';
+        }
+        updateUi();
+      }
+
+      function goTo(index, opts = {}) {
+        current = clamp(index);
+        render();
+        if (isMobileScroll() && opts.scroll !== false) {
+          slides[current].scrollIntoView({ block: 'start', behavior: opts.instant ? 'auto' : 'smooth' });
+        }
+      }
+
+      function next(opts) { goTo(current + 1, opts); }
+      function prev(opts) { goTo(current - 1, opts); }
+
+      nextBtn.addEventListener('click', (event) => { event.stopPropagation(); next(); });
+      prevBtn.addEventListener('click', (event) => { event.stopPropagation(); prev(); });
+
+      deck.addEventListener('click', (event) => {
+        deck.focus({ preventScroll: true });
+        const interactive = event.target.closest('button,a,input,textarea,select,audio,video');
+        if (interactive || isMobileScroll()) return;
+        if (event.clientX < window.innerWidth * 0.35) prev({ scroll:false });
+        else next({ scroll:false });
+      });
+
+      function handleKey(event) {
+        const nextKeys = ['ArrowRight','ArrowDown','PageDown',' ','Enter','n','N'];
+        const prevKeys = ['ArrowLeft','ArrowUp','PageUp','Backspace','p','P'];
+
+        if (nextKeys.includes(event.key)) {
+          event.preventDefault();
+          next();
+          return;
+        }
+        if (prevKeys.includes(event.key)) {
+          event.preventDefault();
+          prev();
+          return;
+        }
+        if (event.key === 'Home') {
+          event.preventDefault();
+          goTo(0);
+          return;
+        }
+        if (event.key === 'End') {
+          event.preventDefault();
+          goTo(slides.length - 1);
+        }
+      }
+      window.addEventListener('keydown', handleKey, true);
+      document.addEventListener('keydown', handleKey, true);
+      deck.addEventListener('keydown', handleKey, true);
+
+      window.addEventListener('wheel', (event) => {
+        if (isMobileScroll()) return;
+        event.preventDefault();
+        if (wheelLocked) return;
+
+        const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+        if (Math.abs(delta) < 12) return;
+
+        if (delta > 0) next({ scroll:false });
+        else prev({ scroll:false });
+
+        wheelLocked = true;
+        setTimeout(() => { wheelLocked = false; }, 520);
+      }, { passive:false });
+
+      window.addEventListener('touchstart', (event) => {
+        if (!event.changedTouches || event.changedTouches.length === 0) return;
+        touchStartX = event.changedTouches[0].clientX;
+        touchStartY = event.changedTouches[0].clientY;
+        touchStartTime = Date.now();
+      }, { passive:true });
+
+      window.addEventListener('touchend', (event) => {
+        if (!event.changedTouches || event.changedTouches.length === 0) return;
+        const dx = event.changedTouches[0].clientX - touchStartX;
+        const dy = event.changedTouches[0].clientY - touchStartY;
+        const elapsed = Date.now() - touchStartTime;
+        if (isMobileScroll()) return;
+        if (elapsed < 700 && Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+          dx < 0 ? next({ scroll:false }) : prev({ scroll:false });
+        }
+      }, { passive:true });
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          if (!isMobileScroll()) return;
+          const visible = entries
+            .filter(entry => entry.isIntersecting)
+            .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (!visible) return;
+          current = slides.indexOf(visible.target);
+          updateUi();
+        }, { threshold:[0.45,0.6,0.75] });
+        slides.forEach(slide => observer.observe(slide));
+      }
+
+      mobileQuery.addEventListener?.('change', () => {
+        render();
+        if (isMobileScroll()) slides[current].scrollIntoView({ block:'start', behavior:'auto' });
+      });
+      render();
+      deck.focus({ preventScroll:true });
+    })();
+
+  </script>
+</body>
+</html>

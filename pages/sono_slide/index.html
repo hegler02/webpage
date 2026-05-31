@@ -51,9 +51,7 @@
   --video-motion-duration:180s;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 html,
 body{
@@ -102,17 +100,9 @@ body{
 }
 
 @keyframes videoDrift{
-  0%{
-    transform:scale(var(--video-scale)) translate3d(0,0,0);
-  }
-
-  50%{
-    transform:scale(var(--video-motion-scale)) translate3d(var(--video-motion-x),var(--video-motion-y),0);
-  }
-
-  100%{
-    transform:scale(var(--video-scale)) translate3d(calc(var(--video-motion-x) * -1),calc(var(--video-motion-y) * -1),0);
-  }
+  0%{transform:scale(var(--video-scale)) translate3d(0,0,0)}
+  50%{transform:scale(var(--video-motion-scale)) translate3d(var(--video-motion-x),var(--video-motion-y),0)}
+  100%{transform:scale(var(--video-scale)) translate3d(calc(var(--video-motion-x) * -1),calc(var(--video-motion-y) * -1),0)}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -308,10 +298,6 @@ li{
   aspect-ratio:16/10;
 }
 
-.album{
-  aspect-ratio:4/3;
-}
-
 .big{
   font-size:clamp(5rem,12vw,12rem);
   font-weight:900;
@@ -342,10 +328,55 @@ a{
   text-decoration:none;
 }
 
-.small{
-  font-size:.95rem;
+.lang-toggle{
+  position:fixed;
+  top:var(--space-4);
+  right:var(--space-4);
+  z-index:var(--z-ui);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  width:6.8rem;
+  height:2.55rem;
+  padding:var(--space-1);
+  border:1px solid var(--line);
+  border-radius:99rem;
+  background:rgba(0,0,0,.22);
+  backdrop-filter:blur(.55rem);
+  pointer-events:auto;
+}
+
+.lang-toggle::before{
+  content:"";
+  position:absolute;
+  top:var(--space-1);
+  bottom:var(--space-1);
+  left:var(--space-1);
+  width:calc(50% - var(--space-1));
+  border-radius:99rem;
+  background:var(--fg);
+  transition:transform .24s ease;
+}
+
+.lang-toggle[data-lang="en"]::before{
+  transform:translateX(100%);
+}
+
+.lang-toggle button{
+  position:relative;
+  z-index:1;
+  border:0;
+  background:transparent;
   color:var(--muted);
-  line-height:var(--lh-caption);
+  font-weight:900;
+  cursor:pointer;
+  border-radius:99rem;
+  font-size:.86rem;
+  line-height:1;
+}
+
+.lang-toggle button.active{
+  color:var(--bg);
 }
 
 .slide-controls{
@@ -459,6 +490,11 @@ a{
   .ending-lead{
     white-space:normal;
   }
+
+  .lang-toggle{
+    top:var(--space-3);
+    right:var(--space-3);
+  }
 }
 </style>
 </head>
@@ -470,31 +506,36 @@ a{
   </video>
 </div>
 
+<div class="lang-toggle" id="langToggle" data-lang="ko" role="group" aria-label="Language toggle">
+  <button type="button" id="koBtn" class="active" aria-pressed="true">KO</button>
+  <button type="button" id="enBtn" aria-pressed="false">EN</button>
+</div>
+
 <main class="slide-deck" id="deck" tabindex="0">
 <div class="slide-track" id="slideTrack">
 
 <section class="slide" data-bg="hero">
   <div class="shell center">
-    <div class="kicker">AI Music Lecture</div>
-    <h1>Suno로<br>원하는 노래 만들기</h1>
-    <p class="lead">Public 음악에서 Private 음악으로</p>
-    <p>동서울대학교 전기공학과 김준호 교수</p>
+    <div class="kicker" data-i18n="s1_kicker">AI Music Lecture</div>
+    <h1 data-i18n="s1_title">Suno로<br>원하는 노래 만들기</h1>
+    <p class="lead" data-i18n="s1_lead">Public 음악에서 Private 음악으로</p>
+    <p data-i18n="s1_speaker">동서울대학교 전기공학과 김준호 교수</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="shell center">
-    <h2>AI 음악의 핵심은<br>“히트곡 제작”이 아니다</h2>
-    <p class="lead">개인이 자신의 이야기와 메시지를 음악이라는 미디어로 소유하게 된 사건이다.</p>
+    <h2 data-i18n="s2_title">AI 음악의 핵심은<br>“히트곡 제작”이 아니다</h2>
+    <p class="lead" data-i18n="s2_lead">개인이 자신의 이야기와 메시지를 음악이라는 미디어로 소유하게 된 사건이다.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="shell split">
     <div>
-      <div class="kicker">전환</div>
-      <h2>대중음악은<br>듣는 음악이었다</h2>
-      <p class="lead">Private 음악은 말하는 음악이다.</p>
+      <div class="kicker" data-i18n="s3_kicker">전환</div>
+      <h2 data-i18n="s3_title">대중음악은<br>듣는 음악이었다</h2>
+      <p class="lead" data-i18n="s3_lead">Private 음악은 말하는 음악이다.</p>
     </div>
     <div class="card">
       <div class="big">Public<br>→<br>Private</div>
@@ -505,44 +546,44 @@ a{
 <section class="slide">
   <div class="shell grid3">
     <div class="card">
-      <h3>Public 음악</h3>
-      <p>시장, 방송, 차트, 유통 중심</p>
+      <h3 data-i18n="s4_c1_t">Public 음악</h3>
+      <p data-i18n="s4_c1_p">시장, 방송, 차트, 유통 중심</p>
     </div>
     <div class="card">
-      <h3>Private 음악</h3>
-      <p>개인의 기억, 관계, 메시지 중심</p>
+      <h3 data-i18n="s4_c2_t">Private 음악</h3>
+      <p data-i18n="s4_c2_p">개인의 기억, 관계, 메시지 중심</p>
     </div>
     <div class="card">
-      <h3>AI 음악</h3>
-      <p>작곡 기술보다 의도 설계가 중요</p>
+      <h3 data-i18n="s4_c3_t">AI 음악</h3>
+      <p data-i18n="s4_c3_p">작곡 기술보다 의도 설계가 중요</p>
     </div>
   </div>
 </section>
 
 <section class="slide">
   <div class="shell center">
-    <div class="kicker">학습 목표</div>
-    <h2>노래를 만들려면<br>음악을 몰라도 되지만,<br>노래의 구조는 알아야 한다</h2>
+    <div class="kicker" data-i18n="s5_kicker">학습 목표</div>
+    <h2 data-i18n="s5_title">노래를 만들려면<br>음악을 몰라도 되지만,<br>노래의 구조는 알아야 한다</h2>
   </div>
 </section>
 
 <section class="slide">
   <div class="shell grid4">
     <div class="card">
-      <h3>가사 구조</h3>
-      <p>Verse, Chorus, Bridge</p>
+      <h3 data-i18n="s6_c1_t">가사 구조</h3>
+      <p data-i18n="s6_c1_p">Verse, Chorus, Bridge</p>
     </div>
     <div class="card">
-      <h3>장르·스타일</h3>
-      <p>소리의 문법과 기대감</p>
+      <h3 data-i18n="s6_c2_t">장르·스타일</h3>
+      <p data-i18n="s6_c2_p">소리의 문법과 기대감</p>
     </div>
     <div class="card">
-      <h3>보컬</h3>
-      <p>성별, 톤, 감정, 발음</p>
+      <h3 data-i18n="s6_c3_t">보컬</h3>
+      <p data-i18n="s6_c3_p">성별, 톤, 감정, 발음</p>
     </div>
     <div class="card">
-      <h3>목적</h3>
-      <p>일반곡, 로고송, 캠페인송, CM송</p>
+      <h3 data-i18n="s6_c4_t">목적</h3>
+      <p data-i18n="s6_c4_p">일반곡, 로고송, 캠페인송, CM송</p>
     </div>
   </div>
 </section>
@@ -551,8 +592,8 @@ a{
   <div class="shell split">
     <div>
       <div class="kicker">Suno</div>
-      <h2>프롬프트 하나가<br>노래의 제작 지시서가 된다</h2>
-      <p>Suno는 텍스트 프롬프트로 보컬, 가사, 편곡이 포함된 완성형 곡을 생성하는 AI 음악 도구다.</p>
+      <h2 data-i18n="s7_title">프롬프트 하나가<br>노래의 제작 지시서가 된다</h2>
+      <p data-i18n="s7_p">Suno는 텍스트 프롬프트로 보컬, 가사, 편곡이 포함된 완성형 곡을 생성하는 AI 음악 도구다.</p>
     </div>
     <div class="visual shot">
       <img src="https://i.imghippo.com/files/HtaI4566PKc.png" alt="Suno 화면 예시" loading="lazy">
@@ -566,31 +607,31 @@ a{
       <img src="https://i.imghippo.com/files/zmZd3562.png" alt="Suno 생성 화면 예시" loading="lazy">
     </div>
     <div>
-      <h2>좋은 입력은<br>좋은 결과보다<br>좋은 수정 방향을 만든다</h2>
-      <p class="lead">처음부터 정답을 뽑는 것이 아니라, 반복할 수 있는 기준을 만드는 것이 핵심이다.</p>
+      <h2 data-i18n="s8_title">좋은 입력은<br>좋은 결과보다<br>좋은 수정 방향을 만든다</h2>
+      <p class="lead" data-i18n="s8_lead">처음부터 정답을 뽑는 것이 아니라, 반복할 수 있는 기준을 만드는 것이 핵심이다.</p>
     </div>
   </div>
 </section>
 
 <section class="slide">
   <div class="shell">
-    <h2>가사의 기본 구조</h2>
+    <h2 data-i18n="s9_title">가사의 기본 구조</h2>
     <div class="structure-list">
       <div class="card">
         <h3>Verse</h3>
-        <p>상황과 이야기를 연다</p>
+        <p data-i18n="s9_c1_p">상황과 이야기를 연다</p>
       </div>
       <div class="card">
         <h3>Pre-Chorus</h3>
-        <p>감정을 끌어올린다</p>
+        <p data-i18n="s9_c2_p">감정을 끌어올린다</p>
       </div>
       <div class="card">
         <h3>Chorus</h3>
-        <p>핵심 메시지를 반복한다</p>
+        <p data-i18n="s9_c3_p">핵심 메시지를 반복한다</p>
       </div>
       <div class="card">
         <h3>Bridge</h3>
-        <p>전환과 재해석을 만든다</p>
+        <p data-i18n="s9_c4_p">전환과 재해석을 만든다</p>
       </div>
     </div>
   </div>
@@ -598,52 +639,25 @@ a{
 
 <section class="slide">
   <div class="shell">
-    <h2>프롬프트는 5개 층으로 쓴다</h2>
+    <h2 data-i18n="s10_title">프롬프트는 5개 층으로 쓴다</h2>
     <div class="steps">
-      <div class="step">
-        <div class="num">1</div>
-        <p>이야기: 누구의 어떤 상황인가</p>
-      </div>
-      <div class="step">
-        <div class="num">2</div>
-        <p>메시지: 후렴에서 무엇을 남길 것인가</p>
-      </div>
-      <div class="step">
-        <div class="num">3</div>
-        <p>장르: 어떤 음악 문법을 빌릴 것인가</p>
-      </div>
-      <div class="step">
-        <div class="num">4</div>
-        <p>보컬: 누가 어떤 감정으로 부르는가</p>
-      </div>
-      <div class="step">
-        <div class="num">5</div>
-        <p>구조: Intro–Verse–Chorus–Bridge–Outro</p>
-      </div>
+      <div class="step"><div class="num">1</div><p data-i18n="s10_1">이야기: 누구의 어떤 상황인가</p></div>
+      <div class="step"><div class="num">2</div><p data-i18n="s10_2">메시지: 후렴에서 무엇을 남길 것인가</p></div>
+      <div class="step"><div class="num">3</div><p data-i18n="s10_3">장르: 어떤 음악 문법을 빌릴 것인가</p></div>
+      <div class="step"><div class="num">4</div><p data-i18n="s10_4">보컬: 누가 어떤 감정으로 부르는가</p></div>
+      <div class="step"><div class="num">5</div><p data-i18n="s10_5">구조: Intro–Verse–Chorus–Bridge–Outro</p></div>
     </div>
   </div>
 </section>
 
 <section class="slide">
   <div class="shell">
-    <h2>노래의 목적이 바뀌면<br>구조도 바뀐다</h2>
+    <h2 data-i18n="s11_title">노래의 목적이 바뀌면<br>구조도 바뀐다</h2>
     <div class="grid4">
-      <div class="card">
-        <h3>일반곡</h3>
-        <p>감정과 서사의 완성도</p>
-      </div>
-      <div class="card">
-        <h3>로고송</h3>
-        <p>브랜드명과 짧은 기억</p>
-      </div>
-      <div class="card">
-        <h3>캠페인송</h3>
-        <p>행동을 유도하는 메시지</p>
-      </div>
-      <div class="card">
-        <h3>CM송</h3>
-        <p>짧은 시간 안의 후킹</p>
-      </div>
+      <div class="card"><h3 data-i18n="s11_c1_t">일반곡</h3><p data-i18n="s11_c1_p">감정과 서사의 완성도</p></div>
+      <div class="card"><h3 data-i18n="s11_c2_t">로고송</h3><p data-i18n="s11_c2_p">브랜드명과 짧은 기억</p></div>
+      <div class="card"><h3 data-i18n="s11_c3_t">캠페인송</h3><p data-i18n="s11_c3_p">행동을 유도하는 메시지</p></div>
+      <div class="card"><h3 data-i18n="s11_c4_t">CM송</h3><p data-i18n="s11_c4_p">짧은 시간 안의 후킹</p></div>
     </div>
   </div>
 </section>
@@ -651,22 +665,13 @@ a{
 <section class="slide">
   <div class="shell split">
     <div>
-      <h2>연주곡과 보컬곡은<br>설계 질문이 다르다</h2>
-      <p class="lead">연주곡은 분위기를 운반하고, 보컬곡은 문장을 운반한다.</p>
+      <h2 data-i18n="s12_title">연주곡과 보컬곡은<br>설계 질문이 다르다</h2>
+      <p class="lead" data-i18n="s12_lead">연주곡은 분위기를 운반하고, 보컬곡은 문장을 운반한다.</p>
     </div>
     <div class="grid3">
-      <div class="card">
-        <h3>Instrumental</h3>
-        <p>공간, 장면, 리듬</p>
-      </div>
-      <div class="card">
-        <h3>Vocal</h3>
-        <p>가사, 발음, 화자</p>
-      </div>
-      <div class="card">
-        <h3>Hybrid</h3>
-        <p>브랜드 사운드와 훅</p>
-      </div>
+      <div class="card"><h3>Instrumental</h3><p data-i18n="s12_c1_p">공간, 장면, 리듬</p></div>
+      <div class="card"><h3>Vocal</h3><p data-i18n="s12_c2_p">가사, 발음, 화자</p></div>
+      <div class="card"><h3>Hybrid</h3><p data-i18n="s12_c3_p">브랜드 사운드와 훅</p></div>
     </div>
   </div>
 </section>
@@ -675,28 +680,13 @@ a{
   <div class="shell split">
     <div>
       <div class="kicker">Workflow</div>
-      <h2>Suno 제작 흐름</h2>
+      <h2 data-i18n="s13_title">Suno 제작 흐름</h2>
       <div class="steps">
-        <div class="step">
-          <div class="num">1</div>
-          <p>메시지 한 문장 정의</p>
-        </div>
-        <div class="step">
-          <div class="num">2</div>
-          <p>가사 구조와 장르 선택</p>
-        </div>
-        <div class="step">
-          <div class="num">3</div>
-          <p>프롬프트 입력 후 1차 생성</p>
-        </div>
-        <div class="step">
-          <div class="num">4</div>
-          <p>가사·보컬·스타일 수정</p>
-        </div>
-        <div class="step">
-          <div class="num">5</div>
-          <p>앨범/랜딩페이지로 발표</p>
-        </div>
+        <div class="step"><div class="num">1</div><p data-i18n="s13_1">메시지 한 문장 정의</p></div>
+        <div class="step"><div class="num">2</div><p data-i18n="s13_2">가사 구조와 장르 선택</p></div>
+        <div class="step"><div class="num">3</div><p data-i18n="s13_3">프롬프트 입력 후 1차 생성</p></div>
+        <div class="step"><div class="num">4</div><p data-i18n="s13_4">가사·보컬·스타일 수정</p></div>
+        <div class="step"><div class="num">5</div><p data-i18n="s13_5">앨범/랜딩페이지로 발표</p></div>
       </div>
     </div>
     <div class="visual shot">
@@ -707,24 +697,12 @@ a{
 
 <section class="slide">
   <div class="shell">
-    <h2>결과물은 음원 하나에서 끝나지 않는다</h2>
+    <h2 data-i18n="s14_title">결과물은 음원 하나에서 끝나지 않는다</h2>
     <div class="grid4">
-      <a class="card" href="https://webpage-phi-livid.vercel.app/pages/home-was-inside/" target="_blank">
-        <h3>내가 집으로 가는 줄 알았지</h3>
-        <p>싱글 앨범 랜딩페이지</p>
-      </a>
-      <a class="card" href="https://webpage-phi-livid.vercel.app/pages/jjigeodallan-malboda/" target="_blank">
-        <h3>찍어달란 말보다</h3>
-        <p>메시지형 싱글</p>
-      </a>
-      <a class="card" href="https://webpage-phi-livid.vercel.app/pages/too-many-screws-left/" target="_blank">
-        <h3>공포의 선풍기</h3>
-        <p>이야기형 싱글</p>
-      </a>
-      <a class="card" href="https://webpage-phi-livid.vercel.app/pages/sara-vs-natasha/" target="_blank">
-        <h3>블루스 한미 대결</h3>
-        <p>장르 실험형 싱글</p>
-      </a>
+      <a class="card" href="https://webpage-phi-livid.vercel.app/pages/home-was-inside/" target="_blank"><h3 data-i18n="s14_c1_t">내가 집으로 가는 줄 알았지</h3><p data-i18n="s14_p">싱글 앨범 랜딩페이지</p></a>
+      <a class="card" href="https://webpage-phi-livid.vercel.app/pages/jjigeodallan-malboda/" target="_blank"><h3 data-i18n="s14_c2_t">찍어달란 말보다</h3><p data-i18n="s14_p2">메시지형 싱글</p></a>
+      <a class="card" href="https://webpage-phi-livid.vercel.app/pages/too-many-screws-left/" target="_blank"><h3 data-i18n="s14_c3_t">공포의 선풍기</h3><p data-i18n="s14_p3">이야기형 싱글</p></a>
+      <a class="card" href="https://webpage-phi-livid.vercel.app/pages/sara-vs-natasha/" target="_blank"><h3 data-i18n="s14_c4_t">블루스 한미 대결</h3><p data-i18n="s14_p4">장르 실험형 싱글</p></a>
     </div>
   </div>
 </section>
@@ -733,13 +711,9 @@ a{
   <div class="shell split">
     <div>
       <div class="kicker">Sound Design Lab V2</div>
-      <h2>음악 생성 에이전트는<br>작곡 버튼이 아니라<br>설계 파트너다</h2>
-      <p>제작자: 동서울대학교 김준호 교수</p>
-      <p>
-        <a href="https://chatgpt.com/g/g-69f690a099f881918507ce23174fc75e-sound-design-lab-v2" target="_blank">
-          Sound Design Lab V2 접속
-        </a>
-      </p>
+      <h2 data-i18n="s15_title">음악 생성 에이전트는<br>작곡 버튼이 아니라<br>설계 파트너다</h2>
+      <p data-i18n="s15_p">제작자: 동서울대학교 김준호 교수</p>
+      <p><a href="https://chatgpt.com/g/g-69f690a099f881918507ce23174fc75e-sound-design-lab-v2" target="_blank" data-i18n="s15_link">Sound Design Lab V2 접속</a></p>
     </div>
     <div class="visual shot">
       <img src="https://i.imghippo.com/files/wpLB8975ihc.png" alt="Sound Design Lab V2 화면" loading="lazy">
@@ -753,8 +727,8 @@ a{
       <img src="https://i.imghippo.com/files/HGcQ4323WfA.png" alt="Sound Design Lab V2 사용 화면" loading="lazy">
     </div>
     <div>
-      <h2>실습 과제</h2>
-      <p class="lead">“내가 지금 누군가에게 꼭 전하고 싶은 말”을 한 문장으로 쓰고, 그것을 후렴으로 바꾼다.</p>
+      <h2 data-i18n="s16_title">실습 과제</h2>
+      <p class="lead" data-i18n="s16_lead">“내가 지금 누군가에게 꼭 전하고 싶은 말”을 한 문장으로 쓰고, 그것을 후렴으로 바꾼다.</p>
       <div class="component-footer">
         <span class="tag">Story</span>
         <span class="tag">Message</span>
@@ -767,11 +741,8 @@ a{
 
 <section class="slide" data-bg="hero">
   <div class="shell center">
-    <h2>이제 음악은<br>전문가만의 제작물이 아니라<br>개인의 메시지 미디어다</h2>
-    <p class="lead ending-lead">
-      Suno를 배우는 것은 AI 버튼을 배우는 일이 아니라,<br>
-      나의 이야기를 노래로 번역하는 법을 배우는 일이다.
-    </p>
+    <h2 data-i18n="s17_title">이제 음악은<br>전문가만의 제작물이 아니라<br>개인의 메시지 미디어다</h2>
+    <p class="lead ending-lead" data-i18n="s17_lead">Suno를 배우는 것은 AI 버튼을 배우는 일이 아니라,<br>나의 이야기를 노래로 번역하는 법을 배우는 일이다.</p>
     <p>Q&A</p>
   </div>
 </section>
@@ -804,6 +775,168 @@ a{
   var progress=document.getElementById('progressBar');
   var page=document.getElementById('pageNumber');
   var bgVideo=document.getElementById('bgVideo');
+  var langToggle=document.getElementById('langToggle');
+  var koBtn=document.getElementById('koBtn');
+  var enBtn=document.getElementById('enBtn');
+
+  var i18n={
+    ko:{
+      s1_kicker:'AI Music Lecture',
+      s1_title:'Suno로<br>원하는 노래 만들기',
+      s1_lead:'Public 음악에서 Private 음악으로',
+      s1_speaker:'동서울대학교 전기공학과 김준호 교수',
+      s2_title:'AI 음악의 핵심은<br>“히트곡 제작”이 아니다',
+      s2_lead:'개인이 자신의 이야기와 메시지를 음악이라는 미디어로 소유하게 된 사건이다.',
+      s3_kicker:'전환',
+      s3_title:'대중음악은<br>듣는 음악이었다',
+      s3_lead:'Private 음악은 말하는 음악이다.',
+      s4_c1_t:'Public 음악',
+      s4_c1_p:'시장, 방송, 차트, 유통 중심',
+      s4_c2_t:'Private 음악',
+      s4_c2_p:'개인의 기억, 관계, 메시지 중심',
+      s4_c3_t:'AI 음악',
+      s4_c3_p:'작곡 기술보다 의도 설계가 중요',
+      s5_kicker:'학습 목표',
+      s5_title:'노래를 만들려면<br>음악을 몰라도 되지만,<br>노래의 구조는 알아야 한다',
+      s6_c1_t:'가사 구조',
+      s6_c1_p:'Verse, Chorus, Bridge',
+      s6_c2_t:'장르·스타일',
+      s6_c2_p:'소리의 문법과 기대감',
+      s6_c3_t:'보컬',
+      s6_c3_p:'성별, 톤, 감정, 발음',
+      s6_c4_t:'목적',
+      s6_c4_p:'일반곡, 로고송, 캠페인송, CM송',
+      s7_title:'프롬프트 하나가<br>노래의 제작 지시서가 된다',
+      s7_p:'Suno는 텍스트 프롬프트로 보컬, 가사, 편곡이 포함된 완성형 곡을 생성하는 AI 음악 도구다.',
+      s8_title:'좋은 입력은<br>좋은 결과보다<br>좋은 수정 방향을 만든다',
+      s8_lead:'처음부터 정답을 뽑는 것이 아니라, 반복할 수 있는 기준을 만드는 것이 핵심이다.',
+      s9_title:'가사의 기본 구조',
+      s9_c1_p:'상황과 이야기를 연다',
+      s9_c2_p:'감정을 끌어올린다',
+      s9_c3_p:'핵심 메시지를 반복한다',
+      s9_c4_p:'전환과 재해석을 만든다',
+      s10_title:'프롬프트는 5개 층으로 쓴다',
+      s10_1:'이야기: 누구의 어떤 상황인가',
+      s10_2:'메시지: 후렴에서 무엇을 남길 것인가',
+      s10_3:'장르: 어떤 음악 문법을 빌릴 것인가',
+      s10_4:'보컬: 누가 어떤 감정으로 부르는가',
+      s10_5:'구조: Intro–Verse–Chorus–Bridge–Outro',
+      s11_title:'노래의 목적이 바뀌면<br>구조도 바뀐다',
+      s11_c1_t:'일반곡',
+      s11_c1_p:'감정과 서사의 완성도',
+      s11_c2_t:'로고송',
+      s11_c2_p:'브랜드명과 짧은 기억',
+      s11_c3_t:'캠페인송',
+      s11_c3_p:'행동을 유도하는 메시지',
+      s11_c4_t:'CM송',
+      s11_c4_p:'짧은 시간 안의 후킹',
+      s12_title:'연주곡과 보컬곡은<br>설계 질문이 다르다',
+      s12_lead:'연주곡은 분위기를 운반하고, 보컬곡은 문장을 운반한다.',
+      s12_c1_p:'공간, 장면, 리듬',
+      s12_c2_p:'가사, 발음, 화자',
+      s12_c3_p:'브랜드 사운드와 훅',
+      s13_title:'Suno 제작 흐름',
+      s13_1:'메시지 한 문장 정의',
+      s13_2:'가사 구조와 장르 선택',
+      s13_3:'프롬프트 입력 후 1차 생성',
+      s13_4:'가사·보컬·스타일 수정',
+      s13_5:'앨범/랜딩페이지로 발표',
+      s14_title:'결과물은 음원 하나에서 끝나지 않는다',
+      s14_c1_t:'내가 집으로 가는 줄 알았지',
+      s14_c2_t:'찍어달란 말보다',
+      s14_c3_t:'공포의 선풍기',
+      s14_c4_t:'블루스 한미 대결',
+      s14_p:'싱글 앨범 랜딩페이지',
+      s14_p2:'메시지형 싱글',
+      s14_p3:'이야기형 싱글',
+      s14_p4:'장르 실험형 싱글',
+      s15_title:'음악 생성 에이전트는<br>작곡 버튼이 아니라<br>설계 파트너다',
+      s15_p:'제작자: 동서울대학교 김준호 교수',
+      s15_link:'Sound Design Lab V2 접속',
+      s16_title:'실습 과제',
+      s16_lead:'“내가 지금 누군가에게 꼭 전하고 싶은 말”을 한 문장으로 쓰고, 그것을 후렴으로 바꾼다.',
+      s17_title:'이제 음악은<br>전문가만의 제작물이 아니라<br>개인의 메시지 미디어다',
+      s17_lead:'Suno를 배우는 것은 AI 버튼을 배우는 일이 아니라,<br>나의 이야기를 노래로 번역하는 법을 배우는 일이다.'
+    },
+    en:{
+      s1_kicker:'AI Music Lecture',
+      s1_title:'Creating the Song<br>You Want with Suno',
+      s1_lead:'From Public Music to Private Music',
+      s1_speaker:'Prof. Junho Kim, Department of Electrical Engineering, Dong Seoul University',
+      s2_title:'The point of AI music<br>is not “making a hit song”',
+      s2_lead:'It is the moment individuals gain ownership of music as a medium for their own stories and messages.',
+      s3_kicker:'Shift',
+      s3_title:'Public music<br>was music to listen to',
+      s3_lead:'Private music is music that speaks.',
+      s4_c1_t:'Public Music',
+      s4_c1_p:'Driven by markets, broadcasts, charts, and distribution',
+      s4_c2_t:'Private Music',
+      s4_c2_p:'Driven by personal memory, relationships, and messages',
+      s4_c3_t:'AI Music',
+      s4_c3_p:'Intent design matters more than composition technique',
+      s5_kicker:'Learning Goal',
+      s5_title:'You do not need to master music<br>to make a song,<br>but you do need to understand song structure',
+      s6_c1_t:'Lyric Structure',
+      s6_c1_p:'Verse, Chorus, Bridge',
+      s6_c2_t:'Genre & Style',
+      s6_c2_p:'The grammar and expectation of sound',
+      s6_c3_t:'Vocal',
+      s6_c3_p:'Gender, tone, emotion, pronunciation',
+      s6_c4_t:'Purpose',
+      s6_c4_p:'Pop song, jingle, campaign song, commercial song',
+      s7_title:'A single prompt<br>becomes the production brief',
+      s7_p:'Suno is an AI music tool that generates complete songs with vocals, lyrics, and arrangement from text prompts.',
+      s8_title:'A good input does not just make<br>a better result;<br>it creates a better direction for revision',
+      s8_lead:'The key is not getting the perfect answer at once, but creating criteria you can iterate with.',
+      s9_title:'Basic Lyric Structure',
+      s9_c1_p:'Opens the situation and story',
+      s9_c2_p:'Raises the emotional tension',
+      s9_c3_p:'Repeats the core message',
+      s9_c4_p:'Creates a turn and reinterpretation',
+      s10_title:'Write prompts in five layers',
+      s10_1:'Story: Who is in what situation?',
+      s10_2:'Message: What should remain in the chorus?',
+      s10_3:'Genre: Which musical grammar will you borrow?',
+      s10_4:'Vocal: Who sings it, and with what emotion?',
+      s10_5:'Structure: Intro–Verse–Chorus–Bridge–Outro',
+      s11_title:'When the purpose changes,<br>the structure changes',
+      s11_c1_t:'Pop Song',
+      s11_c1_p:'Emotional and narrative completeness',
+      s11_c2_t:'Jingle',
+      s11_c2_p:'Brand name and short-term memory',
+      s11_c3_t:'Campaign Song',
+      s11_c3_p:'A message that drives action',
+      s11_c4_t:'Commercial Song',
+      s11_c4_p:'Hooking within a short time',
+      s12_title:'Instrumental and vocal songs<br>ask different design questions',
+      s12_lead:'Instrumentals carry atmosphere; vocal songs carry sentences.',
+      s12_c1_p:'Space, scene, rhythm',
+      s12_c2_p:'Lyrics, pronunciation, narrator',
+      s12_c3_p:'Brand sound and hook',
+      s13_title:'Suno Production Flow',
+      s13_1:'Define the message in one sentence',
+      s13_2:'Choose lyric structure and genre',
+      s13_3:'Enter the prompt and generate the first version',
+      s13_4:'Revise lyrics, vocal, and style',
+      s13_5:'Publish as an album or landing page',
+      s14_title:'The output does not end with one audio file',
+      s14_c1_t:'I Thought I Was Going Home',
+      s14_c2_t:'More Than “Take My Picture”',
+      s14_c3_t:'The Terrifying Fan',
+      s14_c4_t:'Blues Korea–US Match',
+      s14_p:'Single album landing page',
+      s14_p2:'Message-driven single',
+      s14_p3:'Story-driven single',
+      s14_p4:'Genre experiment single',
+      s15_title:'A music-generation agent is not<br>a compose button;<br>it is a design partner',
+      s15_p:'Created by Prof. Junho Kim, Dong Seoul University',
+      s15_link:'Open Sound Design Lab V2',
+      s16_title:'Practice Task',
+      s16_lead:'Write one sentence you truly want to say to someone now, then turn it into a chorus.',
+      s17_title:'Music is no longer<br>only a professional product;<br>it is a personal message medium',
+      s17_lead:'Learning Suno is not learning an AI button;<br>it is learning how to translate your story into a song.'
+    }
+  };
 
   function pad(n){
     return String(n).padStart(2,'0');
@@ -839,6 +972,29 @@ a{
     }
   }
 
+  function setLanguage(lang){
+    var pack=i18n[lang];
+
+    document.documentElement.lang=lang;
+
+    Array.prototype.slice.call(document.querySelectorAll('[data-i18n]')).forEach(function(el){
+      var key=el.getAttribute('data-i18n');
+
+      if(pack[key]){
+        el.innerHTML=pack[key];
+      }
+    });
+
+    langToggle.setAttribute('data-lang',lang);
+
+    koBtn.classList.toggle('active',lang==='ko');
+    enBtn.classList.toggle('active',lang==='en');
+    koBtn.setAttribute('aria-pressed',lang==='ko' ? 'true' : 'false');
+    enBtn.setAttribute('aria-pressed',lang==='en' ? 'true' : 'false');
+
+    resetMobileScroll();
+  }
+
   function update(){
     track.style.transform='translate3d('+(-current*100)+'%,0,0)';
     progress.style.width=((current+1)/total*100)+'%';
@@ -867,6 +1023,16 @@ a{
       bgVideo.playbackRate=.45;
     });
   }
+
+  koBtn.addEventListener('click',function(e){
+    e.stopPropagation();
+    setLanguage('ko');
+  });
+
+  enBtn.addEventListener('click',function(e){
+    e.stopPropagation();
+    setLanguage('en');
+  });
 
   document.getElementById('nextBtn').addEventListener('click',function(e){
     e.stopPropagation();
@@ -948,6 +1114,14 @@ a{
       e.preventDefault();
       goTo(total-1);
     }
+
+    if(e.key.toLowerCase()==='k'){
+      setLanguage('ko');
+    }
+
+    if(e.key.toLowerCase()==='e'){
+      setLanguage('en');
+    }
   });
 
   deck.addEventListener('touchstart',function(e){
@@ -968,6 +1142,7 @@ a{
     }
   },{passive:true});
 
+  setLanguage('ko');
   update();
   deck.focus();
 })();

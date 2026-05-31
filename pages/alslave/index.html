@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>A.I Slave | The Mirinaeman Project Music Album</title>
+  <meta name="description" content="The Mirinaeman Project Music Album single release landing page for A.I Slave, a brutal grindcore and black metal warning anthem about protecting judgment from machine-made averages." />
+  <meta name="keywords" content="A.I Slave, The Mirinaeman Project, Music Album, single album, grindcore, black metal, AI, Korean metal" />
+  <meta name="author" content="The Mirinaeman Project Music Album" />
+  <meta name="robots" content="index, follow" />
+  <meta name="geo.region" content="KR" />
+  <meta name="geo.placename" content="Seoul, South Korea" />
+  <meta name="theme-color" content="#040306" />
+
+  <meta property="og:type" content="music.song" />
+  <meta property="og:title" content="A.I Slave | The Mirinaeman Project Music Album" />
+  <meta property="og:description" content="A brutal grindcore and black metal warning anthem. Don’t surrender your judgment." />
+  <meta property="og:image" content="https://i.imghippo.com/files/pYGE6282yJU.png" />
+  <meta property="og:image:alt" content="A.I Slave official open graph image" />
+  <meta property="og:site_name" content="The Mirinaeman Project Music Album" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="A.I Slave | The Mirinaeman Project Music Album" />
+  <meta name="twitter:description" content="A brutal grindcore and black metal warning anthem. Don’t become an A.I Slave." />
+  <meta name="twitter:image" content="https://i.imghippo.com/files/pYGE6282yJU.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicRecording",
+    "name": "A.I Slave",
+    "byArtist": {
+      "@type": "MusicGroup",
+      "name": "The Mirinaeman Project Music Album"
+    },
+    "inAlbum": {
+      "@type": "MusicAlbum",
+      "name": "The Mirinaeman Project Music Album"
+    },
+    "genre": ["Grindcore", "Black Metal", "Metal"],
+    "description": "A brutal grindcore and black metal warning anthem about protecting judgment from AI-shaped average values.",
+    "image": "https://i.imghippo.com/files/pYGE6282yJU.png",
+    "audio": {
+      "@type": "AudioObject",
+      "contentUrl": "https://cdn1.suno.ai/f6bfcd58-19ca-4cd2-a1bb-40df0aebc9a5.mp3",
+      "encodingFormat": "audio/mpeg"
+    },
+    "sameAs": [
+      "https://webpage-phi-livid.vercel.app/ai-commanders-column/"
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #09070a;
+      --bg-deep: #040306;
+      --bg-lock: #020203;
+      --panel: rgba(20, 16, 20, 0.82);
+      --panel-solid: #151015;
+      --line: rgba(255, 255, 255, 0.13);
+      --text: #f5f1eb;
+      --muted: #b6aaa2;
+      --dim: #7d7470;
+      --red: #ff352e;
+      --ember: #ff7a1a;
+      --ash: #d8d0c8;
+      --black: #020203;
+
+      --z-bg: 0;
+      --z-content: 5;
+      --z-header: 40;
+      --z-mobile-nav: 55;
+      --z-player: 50;
+      --z-modal: 80;
+
+      --max: 1680px;
+      --gutter: clamp(18px, 4vw, 64px);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+      --shadow: 0 26px 90px rgba(0, 0, 0, 0.42);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      scroll-behavior: smooth;
+      background: var(--bg-deep);
+      overscroll-behavior-y: none;
+    }
+
+    body {
+      min-height: 100%;
+      margin: 0;
+      color: var(--text);
+      background-color: var(--bg-deep);
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(255, 53, 46, 0.2), transparent 34rem),
+        linear-gradient(180deg, #09070a 0%, #0b090b 42%, #050406 100%);
+      overscroll-behavior-y: none;
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.55;
+      word-break: keep-all;
+      line-break: strict;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: var(--z-bg);
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px),
+        radial-gradient(circle at 78% 18%, rgba(255, 122, 26, 0.11), transparent 18rem),
+        radial-gradient(circle at 16% 64%, rgba(255, 53, 46, 0.13), transparent 22rem);
+      background-size: 44px 44px, 44px 44px, auto, auto;
+      opacity: 0.72;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: var(--z-bg);
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(4,3,6,0.12), rgba(4,3,6,0.78));
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    audio {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    img,
+    video {
+      max-width: 100%;
+      display: block;
+      background-color: var(--bg-deep);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--ember);
+      outline-offset: 4px;
+    }
+
+    .page {
+      position: relative;
+      z-index: var(--z-content);
+      min-height: 100vh;
+      background: transparent;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: var(--z-header);
+      padding: 16px var(--gutter);
+      background: linear-gradient(180deg, rgba(5, 4, 6, 0.92), rgba(5, 4, 6, 0.38), transparent);
+      backdrop-filter: blur(14px);
+    }
+
+    .header-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 12px;
+      height: 28px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--red), var(--ember));
+      box-shadow: 0 0 26px rgba(255, 53, 46, 0.72);
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(14, 10, 14, 0.64);
+    }
+
+    .desktop-nav a,
+    .lang-toggle,
+    .pill-button {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      border-radius: 999px;
+      color: var(--muted);
+      background: transparent;
+      transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+      white-space: nowrap;
+    }
+
+    .desktop-nav a:hover,
+    .lang-toggle:hover,
+    .desktop-nav .nav-column:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .desktop-nav .nav-column {
+      color: var(--text);
+      border: 1px solid rgba(255, 53, 46, 0.22);
+      background: rgba(255, 53, 46, 0.08);
+    }
+
+    .lang-toggle {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    main,
+    section,
+    footer {
+      background-color: var(--bg-deep);
+    }
+
+    main {
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(255, 53, 46, 0.08), transparent 36rem),
+        linear-gradient(180deg, rgba(9, 7, 10, 0.96), rgba(4, 3, 6, 0.98));
+    }
+
+    .section {
+      min-height: 82vh;
+      padding: clamp(72px, 11vw, 144px) var(--gutter);
+      scroll-margin-top: 92px;
+      background-color: var(--bg-deep);
+      background-image:
+        linear-gradient(180deg, rgba(9, 7, 10, 0.94), rgba(7, 5, 8, 0.96));
+    }
+
+    .section + .section {
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.035);
+    }
+
+    .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding: 0 var(--gutter);
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--bg-deep);
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: var(--bg-deep);
+      opacity: 0.42;
+      filter: contrast(1.2) saturate(0.84) brightness(0.58);
+    }
+
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background:
+        radial-gradient(circle at 74% 31%, rgba(255, 53, 46, 0.2), transparent 26rem),
+        radial-gradient(circle at 20% 66%, rgba(255, 122, 26, 0.1), transparent 24rem),
+        linear-gradient(90deg, rgba(5, 4, 6, 0.95) 0%, rgba(5, 4, 6, 0.78) 46%, rgba(5, 4, 6, 0.52) 100%),
+        linear-gradient(180deg, rgba(5,4,6,0.58) 0%, rgba(5,4,6,0.12) 48%, #09070a 100%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: var(--max);
+      min-height: 100svh;
+      margin: 0 auto;
+      padding: clamp(92px, 10vw, 136px) 0 clamp(72px, 8vw, 112px);
+      display: grid;
+      grid-template-columns: minmax(0, 0.96fr) minmax(320px, 0.78fr);
+      align-items: center;
+      gap: clamp(34px, 5.2vw, 88px);
+    }
+
+    .hero-content {
+      max-width: 720px;
+      padding-top: clamp(14px, 2vh, 34px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 22px;
+      color: var(--ash);
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: var(--red);
+      box-shadow: 0 0 18px rgba(255, 53, 46, 0.84);
+    }
+
+    .hero-title {
+      margin: 0;
+      max-width: 700px;
+      font-size: clamp(3.2rem, 8vw, 8.15rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      font-weight: 950;
+      background-color: var(--text);
+      background-image:
+        linear-gradient(90deg, rgba(255,255,255,0.92), rgba(255, 53, 46, 0.34)),
+        url("https://i.imghippo.com/files/Mam8649Gj.png");
+      background-size: cover;
+      background-position: center;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-wrap: balance;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 1.45vw, 1.18rem);
+      line-height: 1.72;
+    }
+
+    .hero-copy strong {
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button-primary,
+    .button-secondary,
+    .button-column {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      padding: 0 20px;
+      font-weight: 850;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+    }
+
+    .button-primary {
+      color: #160806;
+      background: linear-gradient(135deg, var(--red), var(--ember));
+      box-shadow: 0 18px 46px rgba(255, 53, 46, 0.28);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .button-column {
+      color: var(--text);
+      border: 1px solid rgba(255, 53, 46, 0.34);
+      background:
+        linear-gradient(135deg, rgba(255, 53, 46, 0.18), rgba(255, 122, 26, 0.08));
+    }
+
+    .button-primary:hover,
+    .button-secondary:hover,
+    .button-column:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-media-stack {
+      width: min(100%, clamp(340px, 34vw, 560px));
+      justify-self: center;
+      display: grid;
+      gap: 18px;
+      align-self: center;
+      transform: translateY(clamp(0px, 1.6vh, 18px));
+    }
+
+    .cover-card,
+    .wide-card,
+    .story-card,
+    .lyric-card,
+    .sound-card,
+    .column-card {
+      border: 1px solid var(--line);
+      background-color: var(--panel-solid);
+      background-image: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.035));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .cover-card {
+      border-radius: var(--radius-lg);
+      aspect-ratio: 1 / 1;
+    }
+
+    .cover-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-caption {
+      padding: 16px 18px 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: rgba(4, 3, 6, 0.86);
+      color: var(--muted);
+    }
+
+    .hero-caption strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
+      font-size: 0.98rem;
+    }
+
+    .section-kicker {
+      margin: 0 0 14px;
+      color: var(--red);
+      font-size: 0.88rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      max-width: 840px;
+      font-size: clamp(2rem, 5vw, 4.8rem);
+      line-height: 1.13;
+      letter-spacing: -0.04em;
+      font-weight: 930;
+    }
+
+    .section-lead {
+      max-width: 760px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      line-height: 1.75;
+    }
+
+    .grid-auto {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      gap: clamp(16px, 2vw, 28px);
+      margin-top: clamp(30px, 5vw, 64px);
+    }
+
+    .sound-card,
+    .story-card,
+    .lyric-card,
+    .column-card {
+      border-radius: var(--radius-lg);
+      padding: clamp(22px, 3vw, 34px);
+    }
+
+    .sound-card h3,
+    .story-card h3,
+    .lyric-card h3,
+    .column-card h3 {
+      margin: 0 0 12px;
+      font-size: clamp(1.18rem, 2.2vw, 1.58rem);
+      line-height: 1.24;
+      letter-spacing: -0.025em;
+    }
+
+    .sound-card p,
+    .story-card p,
+    .lyric-card p,
+    .column-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .beat-word {
+      display: inline-flex;
+      margin-bottom: 18px;
+      color: var(--black);
+      background: var(--red);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 950;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .wide-card {
+      border-radius: var(--radius-lg);
+      aspect-ratio: 16 / 9;
+      margin-top: clamp(30px, 5vw, 64px);
+      position: relative;
+      background: var(--panel-solid);
+    }
+
+    .wide-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.82;
+    }
+
+    .wide-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(5,4,6,0.82), rgba(5,4,6,0.18));
+      pointer-events: none;
+    }
+
+    .wide-card-text {
+      position: absolute;
+      left: clamp(18px, 4vw, 56px);
+      bottom: clamp(18px, 4vw, 48px);
+      z-index: 2;
+      max-width: 560px;
+    }
+
+    .wide-card-text h3 {
+      margin: 0 0 10px;
+      font-size: clamp(1.4rem, 3.4vw, 3rem);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+    }
+
+    .wide-card-text p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .scroll-story {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+      gap: clamp(24px, 5vw, 80px);
+      align-items: start;
+      margin-top: clamp(34px, 6vw, 80px);
+    }
+
+    .sticky-phrase {
+      position: sticky;
+      top: 112px;
+      border-radius: var(--radius-lg);
+      padding: clamp(24px, 4vw, 44px);
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 0 0, rgba(255, 53, 46, 0.22), transparent 18rem),
+        rgba(8, 6, 8, 0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .sticky-phrase strong {
+      display: block;
+      font-size: clamp(1.8rem, 4.4vw, 4.2rem);
+      line-height: 1.06;
+      letter-spacing: -0.045em;
+    }
+
+    .sticky-phrase span {
+      display: block;
+      margin-top: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .story-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .story-card {
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transform: translateY(24px);
+      opacity: 0;
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .story-card.is-visible,
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .story-card .number {
+      color: var(--dim);
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+
+    .lyrics-wall {
+      margin-top: clamp(34px, 6vw, 80px);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      gap: 14px;
+    }
+
+    .lyric-card {
+      min-height: 190px;
+      background-color: rgba(12, 10, 12, 0.9);
+      background-image:
+        linear-gradient(135deg, rgba(255, 53, 46, 0.13), rgba(255,255,255,0.04));
+    }
+
+    .lyric-card strong {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--text);
+      font-size: 1.1rem;
+      line-height: 1.35;
+    }
+
+    .lyric-card span {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .column-card {
+      margin-top: clamp(30px, 5vw, 64px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      background:
+        radial-gradient(circle at 8% 10%, rgba(255, 53, 46, 0.2), transparent 20rem),
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.035)),
+        rgba(12, 10, 12, 0.92);
+    }
+
+    .column-card .button-column {
+      align-self: center;
+      white-space: nowrap;
+    }
+
+    .player-section {
+      min-height: auto;
+      padding-bottom: clamp(96px, 12vw, 148px);
+    }
+
+    .album-player {
+      margin-top: clamp(30px, 5vw, 64px);
+      display: grid;
+      grid-template-columns: minmax(180px, 300px) minmax(0, 1fr);
+      gap: clamp(18px, 4vw, 46px);
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: clamp(16px, 3vw, 28px);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255, 53, 46, 0.2), transparent 20rem),
+        rgba(10, 8, 10, 0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .album-player figure {
+      margin: 0;
+      border-radius: 22px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--line);
+      background-color: var(--panel-solid);
+    }
+
+    .album-player figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .player-copy h2 {
+      font-size: clamp(1.9rem, 4.4vw, 4rem);
+    }
+
+    .player-copy p {
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .audio-box {
+      margin-top: 20px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    audio {
+      width: 100%;
+      min-height: 44px;
+      accent-color: var(--red);
+      color-scheme: dark;
+    }
+
+    .final-cta {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+
+    .final-cta .section-inner {
+      display: grid;
+      place-items: center;
+    }
+
+    .final-cta h2 {
+      max-width: 900px;
+    }
+
+    .final-cta p {
+      max-width: 720px;
+      margin: 24px auto 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .center-actions {
+      justify-content: center;
+    }
+
+    .footer {
+      padding: 40px var(--gutter) 112px;
+      color: var(--dim);
+      border-top: 1px solid var(--line);
+      background-color: var(--bg-deep);
+      background-image: linear-gradient(180deg, rgba(4, 3, 6, 0.92), rgba(4, 3, 6, 1));
+    }
+
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 0.92rem;
+    }
+
+    .mobile-bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      z-index: var(--z-mobile-nav);
+      width: min(calc(100% - 28px), 560px);
+      transform: translateX(-50%);
+      display: none;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 5px;
+      padding: 8px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 26px;
+      background: rgba(12, 10, 12, 0.88);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    }
+
+    .mobile-bottom-nav a,
+    .mobile-bottom-nav button {
+      min-height: 48px;
+      border-radius: 18px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      color: var(--muted);
+      background: transparent;
+      font-size: 0.68rem;
+      font-weight: 800;
+    }
+
+    .mobile-bottom-nav b {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: currentColor;
+    }
+
+    .mobile-bottom-nav a:hover,
+    .mobile-bottom-nav button:hover,
+    .mobile-bottom-nav .mobile-column-link {
+      color: var(--text);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .mobile-bottom-nav .mobile-column-link b {
+      background: var(--red);
+      box-shadow: 0 0 12px rgba(255, 53, 46, 0.7);
+    }
+
+    [data-i18n-en] {
+      display: none;
+    }
+
+    html[lang="en"] [data-i18n-ko] {
+      display: none;
+    }
+
+    html[lang="en"] [data-i18n-en] {
+      display: inline;
+    }
+
+    html[lang="en"] p[data-i18n-en],
+    html[lang="en"] span[data-i18n-en],
+    html[lang="en"] strong[data-i18n-en],
+    html[lang="en"] h1[data-i18n-en],
+    html[lang="en"] h2[data-i18n-en],
+    html[lang="en"] h3[data-i18n-en] {
+      display: block;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 720ms ease, transform 720ms ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    @media (min-width: 1500px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 0.9fr) minmax(360px, 0.72fr);
+      }
+
+      .hero-content {
+        max-width: 760px;
+      }
+
+      .hero-media-stack {
+        width: min(100%, 540px);
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+        gap: 34px;
+      }
+
+      .hero-title {
+        font-size: clamp(3.1rem, 9vw, 6.6rem);
+      }
+
+      .hero-media-stack {
+        width: min(100%, 430px);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .site-header {
+        display: none;
+      }
+
+      .mobile-bottom-nav {
+        display: grid;
+      }
+
+      .section {
+        min-height: auto;
+        padding: 76px var(--gutter);
+        scroll-margin-top: 22px;
+        background-color: var(--bg-deep);
+        background-image:
+          linear-gradient(180deg, rgba(9, 7, 10, 0.96), rgba(7, 5, 8, 0.98));
+      }
+
+      .hero {
+        min-height: 100svh;
+      }
+
+      .hero-video {
+        object-fit: contain;
+        opacity: 0.36;
+      }
+
+      .hero-vignette {
+        background:
+          linear-gradient(180deg, rgba(5,4,6,0.72) 0%, rgba(5,4,6,0.62) 44%, #09070a 100%),
+          radial-gradient(circle at 50% 28%, rgba(255,53,46,0.2), transparent 20rem);
+      }
+
+      .hero-inner {
+        min-height: 100svh;
+        grid-template-columns: 1fr;
+        align-items: center;
+        padding: 82px 0 116px;
+        gap: 28px;
+      }
+
+      .hero-content {
+        max-width: 620px;
+        padding-top: 0;
+      }
+
+      .hero-title {
+        max-width: 560px;
+        font-size: clamp(3.25rem, 17vw, 5.8rem);
+        line-height: 0.99;
+        letter-spacing: -0.045em;
+      }
+
+      .hero-copy {
+        margin-top: 22px;
+      }
+
+      .hero-media-stack {
+        width: min(100%, 360px);
+        justify-self: start;
+        transform: none;
+      }
+
+      .scroll-story {
+        grid-template-columns: 1fr;
+      }
+
+      .sticky-phrase {
+        position: relative;
+        top: auto;
+      }
+
+      .column-card {
+        grid-template-columns: 1fr;
+      }
+
+      .column-card .button-column {
+        width: 100%;
+      }
+
+      .album-player {
+        grid-template-columns: 1fr;
+      }
+
+      .album-player figure {
+        max-width: 320px;
+      }
+
+      .footer {
+        padding-bottom: 104px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      :root {
+        --gutter: 18px;
+      }
+
+      .hero-inner {
+        padding-top: 72px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .button-primary,
+      .button-secondary,
+      .button-column {
+        width: 100%;
+      }
+
+      .hero-media-stack {
+        width: min(100%, 310px);
+      }
+
+      .wide-card {
+        aspect-ratio: 4 / 5;
+      }
+
+      .wide-card img {
+        object-fit: cover;
+      }
+
+      .wide-card::after {
+        background: linear-gradient(180deg, rgba(5,4,6,0.16), rgba(5,4,6,0.92));
+      }
+
+      .wide-card-text {
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+      }
+
+      .mobile-bottom-nav {
+        width: min(calc(100% - 20px), 540px);
+        gap: 3px;
+        padding: 7px;
+      }
+
+      .mobile-bottom-nav a,
+      .mobile-bottom-nav button {
+        min-height: 46px;
+        border-radius: 16px;
+        font-size: 0.62rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="A.I Slave home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>The Mirinaeman Project</span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="Album sections">
+          <a href="#sound"><span data-i18n-ko>사운드</span><span data-i18n-en>Sound</span></a>
+          <a href="#story"><span data-i18n-ko>이야기</span><span data-i18n-en>Story</span></a>
+          <a href="#lyrics"><span data-i18n-ko>가사</span><span data-i18n-en>Lyrics</span></a>
+          <a href="#listen"><span data-i18n-ko>듣기</span><span data-i18n-en>Listen</span></a>
+          <a class="nav-column" href="https://webpage-phi-livid.vercel.app/ai-commanders-column/" target="_blank" rel="noopener noreferrer">
+            <span data-i18n-ko>컬럼</span><span data-i18n-en>Column</span>
+          </a>
+        </nav>
+
+        <button class="lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+          KR / EN
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <video
+          class="hero-video"
+          src="https://cdn.midjourney.com/video/8e5158d7-45f9-401d-9aaf-a0dd5e6fbf60/0.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+        ></video>
+        <div class="hero-vignette" aria-hidden="true"></div>
+
+        <div class="hero-inner">
+          <div class="hero-content">
+            <p class="eyebrow">Single Release</p>
+
+            <h1 id="hero-title" class="hero-title">
+              A.I<br />Slave
+            </h1>
+
+            <p class="hero-copy" data-i18n-ko>
+              <strong>판단권을 넘기지 말라는 경고.</strong><br>
+              낮고 건조한 스크림, 폭발하는 블라스트 비트, 콘크리트 방 안의 경보처럼 번지는 리버브가
+              하나의 질문을 반복한다. <br>네가 기계를 쓰는가, 기계가 너를 쓰는가.
+            </p>
+            <p class="hero-copy" data-i18n-en>
+              <strong>A warning not to surrender judgment.</strong>
+              A close dry scream, violent blast beats, and alarm-like reverb in a concrete room repeat one question:
+              do you command the machine, or does the machine command you?
+            </p>
+
+            <div class="hero-actions">
+              <a class="button-primary" href="#listen">
+                <span data-i18n-ko>지금 듣기</span>
+                <span data-i18n-en>Listen Now</span>
+              </a>
+              <a class="button-secondary" href="#story">
+                <span data-i18n-ko>노래의 경고 읽기</span>
+                <span data-i18n-en>Read the Warning</span>
+              </a>
+              <a class="button-column" href="https://webpage-phi-livid.vercel.app/ai-commanders-column/" target="_blank" rel="noopener noreferrer">
+                <span data-i18n-ko>A.I Slave 컬럼 읽기</span>
+                <span data-i18n-en>Read the A.I Slave Column</span>
+              </a>
+            </div>
+          </div>
+
+          <aside class="hero-media-stack" aria-label="Album artwork">
+            <figure class="cover-card">
+              <img
+                src="https://i.imghippo.com/files/Qf8169Leo.png"
+                alt="A.I Slave single album cover"
+                width="1000"
+                height="1000"
+              />
+            </figure>
+            <div class="hero-caption">
+              <strong>A.I Slave</strong>
+              <span data-i18n-ko>프롬프트 이후의 첫 장면은 생성이 아니라 검수다.</span>
+              <span data-i18n-en>The first scene after a prompt is not generation. It is inspection.</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="sound" aria-labelledby="sound-title">
+        <div class="section-inner">
+          <p class="section-kicker">Sound</p>
+          <h2 id="sound-title">
+            <span data-i18n-ko>좁게 물고 들어와<br />폭발하듯 열린다</span>
+            <span data-i18n-en>It bites in narrow,<br />then opens in violence</span>
+          </h2>
+          <p class="section-lead" data-i18n-ko>
+            이 곡은 짧은 명령문처럼 밀어붙이는 벌스에서 시작해, 프리코러스에서 차갑게 상승하고,
+            코러스에서 집단 구호처럼 터진다. <br>리버브는 목소리를 덮지 않고, 구절 사이에서만 경보처럼 피어난다.
+          </p>
+          <p class="section-lead" data-i18n-en>
+            The song starts with verse lines that hit like short commands, rises through a colder pre-chorus,
+            then detonates into a shouted hook. Reverb never hides the vocal; it blooms between phrases like an alarm.
+          </p>
+
+          <div class="grid-auto">
+            <article class="sound-card reveal">
+              <span class="beat-word">Verse</span>
+              <h3>
+                <span data-i18n-ko>가까운 저음의 압박</span>
+                <span data-i18n-en>Close low pressure</span>
+              </h3>
+              <p data-i18n-ko>
+                한 줄씩 던지는 한국어 스크림이 말보다 명령에 가깝게 박힌다.
+                멜로디는 낮고 좁아, 모든 단어가 목줄처럼 조인다.
+              </p>
+              <p data-i18n-en>
+                Korean screams land one line at a time, closer to command than speech.
+                The melody stays low and narrow, making every word tighten like a leash.
+              </p>
+            </article>
+
+            <article class="sound-card reveal">
+              <span class="beat-word">Chorus</span>
+              <h3>
+                <span data-i18n-ko>반복되는 경고의 후크</span>
+                <span data-i18n-en>A repeated warning hook</span>
+              </h3>
+              <p data-i18n-ko>
+                “Don’t become an A.I Slave”는 넓어진 기타와 블라스트 비트 위에서
+                단순한 문장이 아니라 생존 신호처럼 반복된다.
+              </p>
+              <p data-i18n-en>
+                “Don’t become an A.I Slave” repeats over widened guitars and blast beats,
+                not as a slogan but as a survival signal.
+              </p>
+            </article>
+
+            <article class="sound-card reveal">
+              <span class="beat-word">Bridge</span>
+              <h3>
+                <span data-i18n-ko>비어 있는 콘크리트의 질문</span>
+                <span data-i18n-en>The hollow concrete question</span>
+              </h3>
+              <p data-i18n-ko>
+                브리지는 멀어진 목소리와 빈 공간으로 떨어진다.
+                그곳에서 곡은 묻는다. 누가 기준을 세우는가.
+              </p>
+              <p data-i18n-en>
+                The bridge collapses into distant vocal and hollow space.
+                There the song asks: who sets the standard?
+              </p>
+            </article>
+          </div>
+
+          <figure class="wide-card reveal">
+            <img
+              src="https://i.imghippo.com/files/Mam8649Gj.png"
+              alt="A.I Slave hero visual in a 16 by 9 cinematic frame"
+              width="1600"
+              height="900"
+            />
+            <figcaption class="wide-card-text">
+              <h3>
+                <span data-i18n-ko>차가운 폭풍 속의 한 문장</span>
+                <span data-i18n-en>One line inside a cold storm</span>
+              </h3>
+              <p data-i18n-ko>
+                기타는 검게 밀려오고, 드럼은 문을 두드리듯 닫힌다.
+                그 사이에서 곡은 평균값이 아니라 의도를 요구한다.
+              </p>
+              <p data-i18n-en>
+                Guitars arrive like black weather, and drums shut like metal doors.
+                Between them, the song demands intention over averages.
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="story" aria-labelledby="story-title">
+        <div class="section-inner">
+          <p class="section-kicker">Scroll Story</p>
+          <h2 id="story-title">
+            <span data-i18n-ko>생성의 속도보다<br />판단의 주인이 먼저다</span>
+            <span data-i18n-en>Before speed,<br />the owner of judgment</span>
+          </h2>
+
+          <div class="scroll-story">
+            <div class="sticky-phrase">
+              <strong>
+                <span data-i18n-ko>Don’t become<br />an A.I Slave</span>
+                <span data-i18n-en>Don’t become<br />an A.I Slave</span>
+              </strong>
+              <span data-i18n-ko>
+                반복되는 문장은 공포를 키우기보다 기준을 되찾게 한다.
+                같은 경고가 다른 강도로 돌아오며, 곡은 청자를 방관자가 아니라 지휘자로 세운다.
+              </span>
+              <span data-i18n-en>
+                The repeated line does not merely build fear. It restores the standard.
+                The same warning returns with different force, turning the listener from bystander into commander.
+              </span>
+            </div>
+
+            <div class="story-list">
+              <article class="story-card">
+                <span class="number">01 / INPUT</span>
+                <div>
+                  <h3>
+                    <span data-i18n-ko>“한 줄을 던지고 생각을 버린다”</span>
+                    <span data-i18n-en>“Throw one line, abandon thought”</span>
+                  </h3>
+                  <p data-i18n-ko>
+                    첫 벌스는 편리함의 순간을 겨눈다. 문장은 그럴듯해지고,
+                    사람은 자신의 기준을 잠시 내려놓는다.
+                  </p>
+                  <p data-i18n-en>
+                    The first verse aims at the moment of convenience. The sentence becomes convincing,
+                    and the human quietly lowers their own standard.
+                  </p>
+                </div>
+              </article>
+
+              <article class="story-card">
+                <span class="number">02 / PRESSURE</span>
+                <div>
+                  <h3>
+                    <span data-i18n-ko>“판단권을 넘기지 마”</span>
+                    <span data-i18n-en>“Do not hand over judgment”</span>
+                  </h3>
+                  <p data-i18n-ko>
+                    프리코러스는 계단처럼 올라간다. <br>불안은 커지지만,
+                    곡의 중심은 두려움이 아니라 결정을 되찾는 일이다.
+                  </p>
+                  <p data-i18n-en>
+                    The pre-chorus climbs step by step. Panic rises,
+                    but the center of the song is not fear. It is reclaiming decision.
+                  </p>
+                </div>
+              </article>
+
+              <article class="story-card">
+                <span class="number">03 / BREAK</span>
+                <div>
+                  <h3>
+                    <span data-i18n-ko>“쪼개라, 부숴라, 다시 세워라”</span>
+                    <span data-i18n-en>“Split it, break it, build again”</span>
+                  </h3>
+                  <p data-i18n-ko>
+                    두 번째 벌스는 사용법을 바꾼다. <br>생성은 결론이 아니라,
+                    검수와 분해와 재조립으로 넘어가는 첫 장면이다.
+                  </p>
+                  <p data-i18n-en>
+                    The second verse changes the use of the machine. Generation is not the conclusion;
+                    it is the first scene before inspection, breaking, and rebuilding.
+                  </p>
+                </div>
+              </article>
+
+              <article class="story-card">
+                <span class="number">04 / COMMAND</span>
+                <div>
+                  <h3>
+                    <span data-i18n-ko>“기계를 지휘하라”</span>
+                    <span data-i18n-en>“Command the machine”</span>
+                  </h3>
+                  <p data-i18n-ko>
+                    마지막 코러스는 더 넓고 거칠다. <br>노래는 노예가 되지 말라는 경고에서
+                    기계를 지휘하라는 선언으로 끝난다.
+                  </p>
+                  <p data-i18n-en>
+                    The final chorus grows wider and harsher. The song ends by turning the warning
+                    against slavery into a declaration of command.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <article class="column-card reveal" aria-labelledby="column-title">
+            <div>
+              <span class="beat-word">Column</span>
+              <h3 id="column-title">
+                <span data-i18n-ko>A.I Slave 컬럼</span>
+                <span data-i18n-en>A.I Slave Column</span>
+              </h3>
+              <p data-i18n-ko>
+                곡이 던지는 질문을 더 깊게 읽는다. 판단권, 평균값, 검수, 지휘라는 단어가
+                “A.I Slave” 안에서 어떻게 하나의 경고로 연결되는지 이어서 확인할 수 있다.
+              </p>
+              <p data-i18n-en>
+                Read deeper into the question behind the song. Judgment, averages, inspection, and command
+                connect into one warning inside “A.I Slave.”
+              </p>
+            </div>
+            <a class="button-column" href="https://webpage-phi-livid.vercel.app/ai-commanders-column/" target="_blank" rel="noopener noreferrer">
+              <span data-i18n-ko>컬럼 열기</span>
+              <span data-i18n-en>Open Column</span>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="lyrics" aria-labelledby="lyrics-title">
+        <div class="section-inner">
+          <p class="section-kicker">Lyric Signals</p>
+          <h2 id="lyrics-title">
+            <span data-i18n-ko>가사는 짧게 치고<br />의미는 오래 남는다</span>
+            <span data-i18n-en>The lyrics hit short,<br />the meaning stays long</span>
+          </h2>
+          <p class="section-lead" data-i18n-ko>
+            “A.I Slave”의 문장들은 길게 설명하지 않는다. <br>끊고, 묻고, 명령한다.<br>
+            반복되는 구호는 청자를 압도하기보다 자기 기준을 다시 세우게 만든다.
+          </p>
+          <p class="section-lead" data-i18n-en>
+            The lines of “A.I Slave” do not explain at length. They cut, ask, and command.
+            The repeated chant does not only overwhelm; it forces the listener to rebuild a standard.
+          </p>
+
+          <div class="lyrics-wall">
+            <article class="lyric-card reveal">
+              <strong>네 기준은 어디 있나</strong>
+              <span data-i18n-ko>곡의 첫 질문은 기술이 아니라 사람의 빈자리로 향한다.</span>
+              <span data-i18n-en>The first question points not to technology, but to the human vacancy.</span>
+            </article>
+
+            <article class="lyric-card reveal">
+              <strong>출력물에 무릎 꿇지 마</strong>
+              <span data-i18n-ko>그럴듯함 앞에서 멈추지 말고, 다시 검수하라는 외침.</span>
+              <span data-i18n-en>A scream to keep inspecting instead of bowing to plausible output.</span>
+            </article>
+
+            <article class="lyric-card reveal">
+              <strong>의도 없는 속도는 더 빠른 평범함이다</strong>
+              <span data-i18n-ko>빠른 결과가 강한 결과라는 착각을 찢는 문장.</span>
+              <span data-i18n-en>A line that tears apart the illusion that faster results are stronger results.</span>
+            </article>
+
+            <article class="lyric-card reveal">
+              <strong>네가 A.I.를 쓰는가</strong>
+              <span data-i18n-ko>브리지의 빈 공간에서 가장 큰 질문이 남는다.</span>
+              <span data-i18n-en>The largest question remains inside the hollow space of the bridge.</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section player-section" id="listen" aria-labelledby="listen-title">
+        <div class="section-inner">
+          <p class="section-kicker">Listen</p>
+
+          <div class="album-player reveal">
+            <figure>
+              <img
+                src="https://i.imghippo.com/files/Qf8169Leo.png"
+                alt="A.I Slave cover artwork"
+                width="1000"
+                height="1000"
+              />
+            </figure>
+
+            <div class="player-copy">
+              <h2 id="listen-title">
+                <span data-i18n-ko>A.I Slave를<br />지금 재생</span>
+                <span data-i18n-en>Play<br />A.I Slave now</span>
+              </h2>
+              <p data-i18n-ko>
+                가까운 스크림에서 시작해 집단 구호로 폭발하는 싱글.
+                판단권을 지키라는 문장이 마지막까지 식지 않고 남는다.
+              </p>
+              <p data-i18n-en>
+                A single that begins with close screams and erupts into a group hook.
+                The demand to protect judgment stays burning until the end.
+              </p>
+
+              <div class="audio-box">
+                <audio controls preload="metadata" data-single-audio>
+                  <source src="https://cdn1.suno.ai/f6bfcd58-19ca-4cd2-a1bb-40df0aebc9a5.mp3" type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section final-cta" aria-labelledby="final-title">
+        <div class="section-inner reveal">
+          <p class="section-kicker">Final Signal</p>
+          <h2 id="final-title">
+            <span data-i18n-ko>평균값을 찢어라<br />의도를 세워라</span>
+            <span data-i18n-en>Tear the average<br />build intention</span>
+          </h2>
+          <p data-i18n-ko>
+            “A.I Slave”는 기계에 대한 거부가 아니다.
+            의도 없이 맡기고, 검수 없이 믿고, 판단 없이 복종하는 상태에 대한 거부다.
+          </p>
+          <p data-i18n-en>
+            “A.I Slave” is not a rejection of the machine.
+            It rejects handing over intention, trusting without inspection, and obeying without judgment.
+          </p>
+          <div class="hero-actions center-actions">
+            <a class="button-primary" href="#listen">
+              <span data-i18n-ko>다시 듣기</span>
+              <span data-i18n-en>Listen Again</span>
+            </a>
+            <a class="button-column" href="https://webpage-phi-livid.vercel.app/ai-commanders-column/" target="_blank" rel="noopener noreferrer">
+              <span data-i18n-ko>A.I Slave 컬럼 읽기</span>
+              <span data-i18n-en>Read the Column</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <span>© The Mirinaeman Project Music Album</span>
+        <span>A.I Slave · Single Release</span>
+      </div>
+    </footer>
+
+    <nav class="mobile-bottom-nav" aria-label="Mobile bottom navigation">
+      <a href="#top"><b aria-hidden="true"></b><span data-i18n-ko>홈</span><span data-i18n-en>Home</span></a>
+      <a href="#sound"><b aria-hidden="true"></b><span data-i18n-ko>사운드</span><span data-i18n-en>Sound</span></a>
+      <a href="#story"><b aria-hidden="true"></b><span data-i18n-ko>이야기</span><span data-i18n-en>Story</span></a>
+      <a href="#listen"><b aria-hidden="true"></b><span data-i18n-ko>듣기</span><span data-i18n-en>Listen</span></a>
+      <a class="mobile-column-link" href="https://webpage-phi-livid.vercel.app/ai-commanders-column/" target="_blank" rel="noopener noreferrer"><b aria-hidden="true"></b><span data-i18n-ko>컬럼</span><span data-i18n-en>Column</span></a>
+      <button type="button" data-lang-toggle-mobile aria-label="Switch language"><b aria-hidden="true"></b>KR/EN</button>
+    </nav>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const langButtons = document.querySelectorAll("[data-lang-toggle], [data-lang-toggle-mobile]");
+      const audioPlayers = document.querySelectorAll("audio");
+
+      function setLanguage(nextLang) {
+        root.lang = nextLang;
+        document.title = "A.I Slave | The Mirinaeman Project Music Album";
+      }
+
+      langButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          setLanguage(root.lang === "ko" ? "en" : "ko");
+        });
+      });
+
+      audioPlayers.forEach((audio) => {
+        audio.addEventListener("play", () => {
+          audioPlayers.forEach((otherAudio) => {
+            if (otherAudio !== audio) otherAudio.pause();
+          });
+        });
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const targetId = link.getAttribute("href");
+          if (!targetId || targetId === "#") return;
+
+          const target = document.querySelector(targetId);
+          if (!target) return;
+
+          event.preventDefault();
+          target.scrollIntoView({
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+            block: "start"
+          });
+        });
+      });
+
+      const revealTargets = document.querySelectorAll(".reveal, .story-card");
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.18,
+          rootMargin: "0px 0px -8% 0px"
+        });
+
+        revealTargets.forEach((target) => observer.observe(target));
+      } else {
+        revealTargets.forEach((target) => target.classList.add("is-visible"));
+      }
+    })();
+  </script>
+</body>
+</html>

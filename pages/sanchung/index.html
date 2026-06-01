@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>오늘은 내가 믿어요 | Single Album</title>
+  <meta name="description" content="오늘은 내가 믿어요 — 처음 믿어준 사람에게 보내는 조용한 믿음의 노래." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="오늘은 내가 믿어요 | Single Album" />
+  <meta property="og:description" content="처음 믿어준 사람에게, 이제 내가 보내는 조용한 믿음." />
+  <meta property="og:image" content="https://i.imghippo.com/files/qoKU9120mA.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="오늘은 내가 믿어요 | Single Album" />
+  <meta name="twitter:description" content="처음 믿어준 사람에게, 이제 내가 보내는 조용한 믿음." />
+  <meta name="twitter:image" content="https://i.imghippo.com/files/qoKU9120mA.png" />
+
+  <style>
+    :root {
+      --bg: #15100c;
+      --bg-2: #1d1611;
+      --card: #2d231b;
+      --card-2: #382a20;
+
+      --paper: #f4ead8;
+      --paper-card: #fff9ed;
+      --paper-card-strong: #fff3db;
+
+      --text: #fff6e8;
+      --muted: #d4c2a8;
+      --soft: #a8957b;
+
+      --ink: #25180f;
+      --ink-soft: #57381d;
+      --ink-muted: #75532c;
+
+      --line: rgba(244, 234, 216, 0.18);
+      --line-dark: rgba(36, 23, 14, 0.16);
+
+      --accent: #d8a95c;
+      --accent-strong: #f0c471;
+      --accent-dark: #6f4b20;
+
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
+
+      --radius-lg: 30px;
+      --radius-md: 22px;
+
+      --container: 1180px;
+      --section-pad: clamp(56px, 8vw, 96px);
+      --card-pad: clamp(18px, 2.4vw, 24px);
+      --card-gap: clamp(24px, 3vw, 32px);
+
+      --header-offset: 104px;
+
+      --font: "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      --serif: Georgia, "Times New Roman", serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background-color: var(--bg);
+      scroll-behavior: smooth;
+      overscroll-behavior-y: none;
+    }
+
+    body {
+      min-height: 100%;
+      margin: 0;
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      overscroll-behavior-y: none;
+      word-break: keep-all;
+      line-break: strict;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(216, 169, 92, 0.22), transparent 34rem),
+        radial-gradient(circle at 96% 12%, rgba(111, 75, 32, 0.38), transparent 34rem),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 14px),
+        var(--bg);
+      background-color: var(--bg);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    button,
+    a,
+    audio {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent-strong);
+      outline-offset: 4px;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      background-color: var(--bg);
+    }
+
+    .container {
+      width: min(100% - 32px, var(--container));
+      margin-inline: auto;
+    }
+
+    header,
+    main,
+    section,
+    footer {
+      background-color: var(--bg);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--line);
+      background-color: rgba(21, 16, 12, 0.94);
+      backdrop-filter: blur(14px);
+    }
+
+    .header-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      aspect-ratio: 1;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 35% 30%, var(--accent-strong), var(--accent) 45%, var(--accent-dark));
+      box-shadow: 0 0 34px rgba(216, 169, 92, 0.32);
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav a {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.2;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+      background-color: rgba(244, 234, 216, 0.08);
+    }
+
+    main {
+      position: relative;
+      min-height: 100vh;
+      background-color: var(--bg);
+    }
+
+    section {
+      scroll-margin-top: 92px;
+      padding: var(--section-pad) 0;
+      background-color: var(--bg);
+    }
+
+    #album,
+    #listen,
+    #lyrics {
+      scroll-margin-top: var(--header-offset);
+    }
+
+    #story {
+      scroll-margin-top: var(--header-offset);
+    }
+
+    .hero {
+      min-height: calc(100svh - 72px);
+      display: grid;
+      align-items: center;
+      padding: clamp(36px, 7vw, 80px) 0 var(--section-pad);
+      background:
+        radial-gradient(circle at 12% 6%, rgba(216, 169, 92, 0.18), transparent 32rem),
+        var(--bg);
+    }
+
+    .alt {
+      background:
+        linear-gradient(180deg, rgba(29, 22, 17, 1), rgba(21, 16, 12, 1)),
+        var(--bg-2);
+    }
+
+    .paper {
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(216, 169, 92, 0.2), transparent 24rem),
+        linear-gradient(180deg, var(--paper), #efe1c8);
+      background-color: var(--paper);
+    }
+
+    .final {
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(216, 169, 92, 0.28), transparent 32rem),
+        var(--bg-2);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent-strong);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.14;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      max-width: 900px;
+      font-size: clamp(3rem, 9vw, 7.4rem);
+    }
+
+    h2 {
+      max-width: 840px;
+      font-size: clamp(2rem, 5vw, 4.5rem);
+    }
+
+    h3 {
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .lead {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 2vw, 1.28rem);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+      align-items: center;
+      gap: clamp(32px, 5vw, 72px);
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero-title span {
+      display: block;
+    }
+
+    .hero-title .accent {
+      color: var(--accent-strong);
+      font-family: var(--serif);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 13px 20px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 900;
+      line-height: 1.2;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .primary {
+      color: #20150d;
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      box-shadow: 0 14px 38px rgba(216, 169, 92, 0.24);
+    }
+
+    .secondary {
+      color: var(--text);
+      background-color: rgba(244, 234, 216, 0.08);
+      border-color: var(--line);
+    }
+
+    .ghost {
+      color: var(--muted);
+      background-color: transparent;
+      border-color: var(--line);
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background-color: rgba(244, 234, 216, 0.06);
+      font-size: 0.9rem;
+      line-height: 1.2;
+    }
+
+    .hero-visual {
+      position: relative;
+      margin: 0;
+      padding: clamp(10px, 1.8vw, 18px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(244, 234, 216, 0.16), rgba(244, 234, 216, 0.04)),
+        var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-visual img {
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: calc(var(--radius-lg) - 12px);
+      background-color: var(--bg-2);
+    }
+
+    .note {
+      position: absolute;
+      right: clamp(18px, 3vw, 34px);
+      bottom: -24px;
+      max-width: 270px;
+      padding: 18px;
+      border-radius: 20px;
+      color: var(--ink);
+      background-color: var(--paper-card);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+    }
+
+    .note strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+      line-height: 1.35;
+      color: var(--ink);
+    }
+
+    .note span {
+      color: var(--ink-muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 16px;
+      margin-bottom: clamp(32px, 5vw, 56px);
+    }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.78fr) minmax(0, 1.22fr);
+      align-items: center;
+      gap: var(--card-gap);
+    }
+
+    .cover-card,
+    .text-card,
+    .player-card,
+    .message-card,
+    .story-card,
+    .poster-card,
+    .final-box {
+      border: 1px solid var(--line);
+      background-color: var(--card);
+    }
+
+    .cover-card,
+    .poster-card {
+      margin: 0;
+      padding: var(--card-pad);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .cover-card img {
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: calc(var(--radius-lg) - 12px);
+      background-color: var(--bg-2);
+    }
+
+    .text-card {
+      display: grid;
+      gap: 24px;
+      padding: clamp(22px, 3vw, 32px);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(216, 169, 92, 0.12), rgba(244, 234, 216, 0.04)),
+        var(--card);
+    }
+
+    .big-quote {
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 4vw, 3.5rem);
+      line-height: 1.22;
+      letter-spacing: -0.03em;
+    }
+
+    .info {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      color: var(--muted);
+      list-style: none;
+    }
+
+    .info li {
+      display: flex;
+      gap: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .info b {
+      min-width: 92px;
+      color: var(--text);
+    }
+
+    .player-card {
+      display: grid;
+      gap: 24px;
+      padding: clamp(24px, 4vw, 42px);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(244, 234, 216, 0.12), rgba(216, 169, 92, 0.08)),
+        var(--card-2);
+      box-shadow: var(--shadow);
+    }
+
+    .player-top {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .mini-cover {
+      width: clamp(78px, 12vw, 118px);
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 18px;
+      background-color: var(--bg-2);
+    }
+
+    audio {
+      width: 100%;
+      min-height: 48px;
+      color-scheme: dark;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--card-gap);
+    }
+
+    .message-card {
+      display: grid;
+      gap: 14px;
+      padding: var(--card-pad);
+      border-radius: var(--radius-md);
+      background:
+        linear-gradient(180deg, rgba(244, 234, 216, 0.08), rgba(244, 234, 216, 0.03)),
+        var(--card);
+    }
+
+    .message-card p {
+      color: var(--muted);
+    }
+
+    .num {
+      width: 42px;
+      aspect-ratio: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: var(--ink);
+      background-color: var(--accent);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .paper,
+    .paper .container,
+    .paper .lyrics-layout {
+      color: var(--ink);
+    }
+
+    .paper h2,
+    .paper h3,
+    .paper p,
+    .paper span,
+    .paper div {
+      color: var(--ink);
+    }
+
+    .lyrics-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+      gap: var(--card-gap);
+      align-items: start;
+    }
+
+    .lyrics-side {
+      position: sticky;
+      top: 104px;
+      display: grid;
+      gap: 24px;
+      padding: clamp(22px, 3vw, 30px);
+      border: 1px solid var(--line-dark);
+      border-radius: var(--radius-lg);
+      background-color: var(--paper-card-strong);
+      box-shadow: 0 16px 48px rgba(80, 48, 15, 0.12);
+    }
+
+    .lyrics-side .eyebrow {
+      color: var(--ink-muted);
+    }
+
+    .lyrics-side .big-quote {
+      color: var(--ink);
+      font-family: var(--serif);
+    }
+
+    .lyrics-side p {
+      color: var(--ink-soft);
+    }
+
+    .lyrics-box {
+      display: grid;
+      gap: 28px;
+      padding: clamp(22px, 3vw, 34px);
+      border: 1px solid var(--line-dark);
+      border-radius: var(--radius-lg);
+      background-color: var(--paper-card);
+      box-shadow: 0 16px 48px rgba(80, 48, 15, 0.12);
+    }
+
+    .lyrics-box header {
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .lyrics-box .eyebrow {
+      color: var(--ink-muted);
+    }
+
+    .lyrics-box h2 {
+      color: var(--ink);
+    }
+
+    .lyric-part {
+      display: grid;
+      gap: 12px;
+      padding: 0 0 28px;
+      border: 0;
+      border-bottom: 1px solid rgba(36, 23, 14, 0.14);
+      background: transparent;
+    }
+
+    .lyric-part:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .label {
+      color: #8a5d2c !important;
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .lyric {
+      white-space: pre-line;
+      color: var(--ink) !important;
+      font-size: clamp(1.02rem, 1.8vw, 1.16rem);
+      line-height: 1.8;
+    }
+
+    .chorus {
+      padding: 20px;
+      border: 1px solid rgba(180, 123, 50, 0.3);
+      border-left: 4px solid #b47b32;
+      border-radius: 18px;
+      background-color: #f5dfb8;
+    }
+
+    .chorus .lyric {
+      color: #1f130b !important;
+      font-weight: 700;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+      gap: var(--card-gap);
+      align-items: stretch;
+    }
+
+    .story-card {
+      display: grid;
+      gap: 18px;
+      padding: clamp(24px, 4vw, 42px);
+      border-radius: var(--radius-lg);
+    }
+
+    .story-card p {
+      color: var(--muted);
+      font-size: clamp(1.02rem, 1.7vw, 1.16rem);
+    }
+
+    .poster-card img {
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: calc(var(--radius-lg) - 12px);
+      background-color: var(--bg-2);
+    }
+
+    .final-box {
+      display: grid;
+      justify-items: center;
+      gap: 24px;
+      padding: clamp(34px, 7vw, 76px);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(244, 234, 216, 0.1), rgba(244, 234, 216, 0.03)),
+        var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .final-box p {
+      max-width: 660px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    footer {
+      padding: 34px 0 110px;
+      color: var(--soft);
+      border-top: 1px solid var(--line);
+      background-color: var(--bg);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .dock {
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      z-index: 300;
+      transform: translateX(-50%);
+      display: none;
+      width: min(calc(100% - 28px), 460px);
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background-color: rgba(29, 22, 17, 0.96);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 54px rgba(0, 0, 0, 0.34);
+    }
+
+    .dock a,
+    .dock button {
+      flex: 1 1 0;
+      min-width: 0;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 12px;
+      border: 0;
+      border-radius: 999px;
+      color: var(--text);
+      background-color: transparent;
+      font: inherit;
+      font-size: 0.94rem;
+      font-weight: 900;
+      line-height: 1;
+      white-space: nowrap;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .dock .dock-primary {
+      color: #20150d;
+      background-color: var(--accent-strong);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .button,
+      .reveal {
+        transition: none;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --header-offset: 92px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-grid,
+      .album-grid,
+      .lyrics-layout,
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .note {
+        position: static;
+        max-width: none;
+        margin: 14px 4px 0;
+      }
+
+      .lyrics-side {
+        position: static;
+      }
+
+      .dock {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 560px) {
+      :root {
+        --section-pad: 48px;
+        --card-pad: 18px;
+        --card-gap: 22px;
+        --header-offset: 88px;
+      }
+
+      .container {
+        width: min(100% - 24px, var(--container));
+      }
+
+      .actions {
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .player-top {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-cover {
+        width: 112px;
+      }
+
+      .info li {
+        display: grid;
+        gap: 4px;
+      }
+
+      footer {
+        padding-bottom: 112px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="처음으로 이동">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>오늘은 내가 믿어요</span>
+        </a>
+
+        <nav class="nav" aria-label="페이지 이동">
+          <a href="#album">앨범 소개</a>
+          <a href="#listen">듣기</a>
+          <a href="#lyrics">가사</a>
+          <a href="#story">이야기</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Single Album · Korean Letter Song</p>
+            <h1 id="hero-title" class="hero-title">
+              <span>오늘은</span>
+              <span class="accent">내가 믿어요</span>
+            </h1>
+            <p class="lead">
+              처음 믿어준 사람에게, 이제 내가 보내는 조용한 믿음.
+              낮은 목소리와 따뜻한 기타 위에 오래 품어온 고마움을 담았습니다.
+            </p>
+
+            <div class="actions">
+              <a class="button primary" href="#listen">지금 듣기</a>
+              <a class="button secondary" href="#lyrics">가사 읽기</a>
+            </div>
+
+            <div class="pills">
+              <span class="pill">Roots Rock</span>
+              <span class="pill">Letter Song</span>
+              <span class="pill">Warm Room Tone</span>
+            </div>
+          </div>
+
+          <figure class="hero-visual reveal">
+            <img
+              src="https://i.imghippo.com/files/qoKU9120mA.png"
+              alt="싱글앨범 오늘은 내가 믿어요 대표 이미지"
+              width="1600"
+              height="900"
+            />
+            <figcaption class="note">
+              <strong>처음 믿어준 사람에게</strong>
+              <span>이 마음을 조용히, 간절히 보냅니다.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="album" class="alt" aria-labelledby="album-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">Album Intro</p>
+            <h2 id="album-title">받은 믿음을 다시 건네는 노래</h2>
+            <p class="lead">
+              낯선 이야기를 들어주던 한 사람의 마음이 오래 남아,
+              오늘의 응원과 감사가 되었습니다.
+            </p>
+          </div>
+
+          <div class="album-grid">
+            <figure class="cover-card reveal">
+              <img
+                src="https://i.imghippo.com/files/eAxd4562myc.png"
+                alt="오늘은 내가 믿어요 앨범 커버"
+                width="1200"
+                height="1200"
+              />
+            </figure>
+
+            <article class="text-card reveal">
+              <p class="big-quote">
+                “그날 당신이 믿어준 나,<br />
+                오늘은 내가 믿어요.”
+              </p>
+
+              <ul class="info">
+                <li><b>Title</b><span>오늘은 내가 믿어요</span></li>
+                <li><b>Mood</b><span>가까운 목소리, 편지 같은 고마움, 절제된 응원</span></li>
+                <li><b>Sound</b><span>부드러운 기타와 따뜻한 공간감이 중심이 되는 담백한 밴드 사운드</span></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="listen" aria-labelledby="listen-title">
+        <div class="container">
+          <article class="player-card reveal">
+            <div class="player-top">
+              <img
+                class="mini-cover"
+                src="https://i.imghippo.com/files/eAxd4562myc.png"
+                alt="오늘은 내가 믿어요 작은 앨범 커버"
+                width="240"
+                height="240"
+              />
+              <div>
+                <p class="eyebrow">Now Playing</p>
+                <h2 id="listen-title">오늘은 내가 믿어요</h2>
+                <p class="lead">재생 버튼을 눌러, 편지처럼 시작되는 첫 문장을 들어보세요.</p>
+              </div>
+            </div>
+
+            <audio controls preload="metadata" aria-label="오늘은 내가 믿어요 음원 플레이어">
+              <source src="https://cdn1.suno.ai/9362ebb0-0028-46f8-9473-9a8c4caf5879.mp3" type="audio/mpeg" />
+              사용 중인 브라우저에서 오디오 재생을 지원하지 않습니다.
+            </audio>
+
+            <div class="actions">
+              <a class="button primary" href="#lyrics">가사와 함께 듣기</a>
+              <button class="button ghost" type="button" data-share>페이지 공유하기</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="alt" aria-labelledby="message-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">Message</p>
+            <h2 id="message-title">이 노래가 품은 세 가지 마음</h2>
+            <p class="lead">
+              큰 말보다 조용한 확신에 가까운 노래입니다.
+              고마움, 용기, 바람이 한 사람에게 닿기를 바라며 흘러갑니다.
+            </p>
+          </div>
+
+          <div class="cards">
+            <article class="message-card reveal">
+              <span class="num">1</span>
+              <h3>첫 번째 믿음</h3>
+              <p>낯선 이야기를 가만히 들어주던 한 사람. 그 믿음이 긴 시간의 출발점이 되었습니다.</p>
+            </article>
+
+            <article class="message-card reveal">
+              <span class="num">2</span>
+              <h3>돌려주는 용기</h3>
+              <p>받은 용기를 그대로 간직하는 데서 멈추지 않고, 오늘은 다시 그 사람에게 건넵니다.</p>
+            </article>
+
+            <article class="message-card reveal">
+              <span class="num">3</span>
+              <h3>조용한 바람</h3>
+              <p>꼭 닿기를, 꼭 이루어지기를. 말보다 진심에 가까운 응원을 담았습니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="lyrics" class="paper" aria-labelledby="lyrics-title">
+        <div class="container lyrics-layout">
+          <aside class="lyrics-side reveal">
+            <p class="eyebrow">Lyrics Highlight</p>
+            <p class="big-quote">
+              꼭 닿기를,<br />
+              꼭 이루어지기를
+            </p>
+            <p>
+              반복되는 후렴은 노래의 중심입니다.
+              그날 받은 믿음을 오늘의 믿음으로 되돌려 보내는 마음을 담았습니다.
+            </p>
+          </aside>
+
+          <article class="lyrics-box reveal">
+            <header>
+              <p class="eyebrow">Full Lyrics</p>
+              <h2 id="lyrics-title">가사</h2>
+            </header>
+
+            <section class="lyric-part">
+              <div class="label">Intro</div>
+              <p class="lyric">처음 믿어준 사람에게
+이 마음을 보냅니다</p>
+            </section>
+
+            <section class="lyric-part">
+              <div class="label">Verse</div>
+              <p class="lyric">그날 기억하시죠
+산청의 작은 커피숍에서
+낯선 말을 꺼내던 나를
+가만히 들어주셨죠
+
+누군가를 위해 미리 낸다는 말
+아무도 잘 모르던 그때
+당신은 웃으며 말했죠
+한번 같이 해봅시다</p>
+            </section>
+
+            <section class="lyric-part">
+              <div class="label">Pre-Chorus</div>
+              <p class="lyric">그 한마디가
+내 마음에 불이 됐고
+컨테이너 작은 카페가
+오백 개의 길이 됐죠</p>
+            </section>
+
+            <section class="lyric-part chorus">
+              <div class="label">Chorus</div>
+              <p class="lyric">그날 당신이 믿어준 나
+오늘은 내가 믿어요
+내게 준 첫 번째 용기
+이제 당신께 돌려줘요
+
+그날 당신이 믿어준 나
+오늘은 내가 믿어요
+꼭 닿기를, 꼭 이루어지기를
+처음 믿어준 사람에게</p>
+            </section>
+
+            <section class="lyric-part">
+              <div class="label">Verse 2</div>
+              <p class="lyric">힘든 날이면 돌아갑니다
+그 카페 문 앞의 나에게
+누군가 진심으로 믿어준 일
+그게 나를 살게 했죠</p>
+            </section>
+
+            <section class="lyric-part">
+              <div class="label">Pre-Chorus 2</div>
+              <p class="lyric">이번 길 위에
+외롭지 않길 바라요
+그때 받은 용기를
+오늘 내가 보냅니다</p>
+            </section>
+
+            <section class="lyric-part chorus">
+              <div class="label">Chorus</div>
+              <p class="lyric">그날 당신이 믿어준 나
+오늘은 내가 믿어요
+내게 준 첫 번째 용기
+이제 당신께 돌려줘요
+
+그날 당신이 믿어준 나
+오늘은 내가 믿어요
+꼭 닿기를, 
+꼭 이루어지기를
+처음 믿어준 사람에게</p>
+            </section>
+
+            <section class="lyric-part">
+              <div class="label">Bridge</div>
+              <p class="lyric">묵묵히 걸어온 길
+이제 더 큰 길 앞에 서 있네요
+말로는 다 못 하지만
+진심으로 바랍니다
+
+흔들리지 마세요
+당신을 믿는 내가 있습니다</p>
+            </section>
+
+            <section class="lyric-part chorus">
+              <div class="label">Final Chorus</div>
+              <p class="lyric">그날 당신이 믿어준 나
+오늘은 내가 믿어요
+내게 준 첫 번째 용기
+이제 당신께 돌려줘요
+
+꼭 당선되기를 바랍니다
+조용히, 간절히 믿어요
+산청의 더 큰 길 위에
+당신의 마음이 닿기를</p>
+            </section>
+
+            <section class="lyric-part">
+              <div class="label">Outro</div>
+              <p class="lyric">처음 믿어준 사람에게
+이 마음을 미리 냅니다</p>
+            </section>
+          </article>
+        </div>
+      </section>
+
+      <section class="alt" aria-labelledby="story-title">
+        <div id="story" class="container story-grid">
+          <article class="story-card reveal">
+            <p class="eyebrow">Story Behind</p>
+            <h2 id="story-title">산청의 작은 커피숍에서 시작된 마음</h2>
+            <p>
+              누군가의 이야기를 처음으로 믿어준다는 것은 생각보다 오래 남는 일입니다.
+              이 노래는 그 한마디가 어떻게 마음의 불이 되고,
+              다시 누군가를 응원하는 마음으로 돌아오는지를 담았습니다.
+            </p>
+            <p>
+              그래서 이 곡은 거창한 선언보다 편지에 가깝습니다.
+              가까이 앉아 조용히 건네는 고마움,
+              그리고 흔들리지 말라는 믿음의 말입니다.
+            </p>
+            <div class="actions">
+              <a class="button primary" href="#listen">다시 듣기</a>
+              <a class="button secondary" href="#top">처음으로</a>
+            </div>
+          </article>
+
+          <figure class="poster-card reveal">
+            <img
+              src="https://i.imghippo.com/files/qoKU9120mA.png"
+              alt="오늘은 내가 믿어요의 따뜻한 분위기를 담은 대표 장면"
+              width="1600"
+              height="900"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section class="final" aria-labelledby="final-title">
+        <div class="container">
+          <div class="final-box reveal">
+            <p class="eyebrow">For The First Believer</p>
+            <h2 id="final-title">처음 믿어준 사람에게,<br />이 마음을 미리 냅니다.</h2>
+            <p>
+              오늘의 노래가 고마움으로 닿고,
+              조용한 믿음으로 오래 남기를 바랍니다.
+            </p>
+            <div class="actions">
+              <a class="button primary" href="#listen">음원 듣기</a>
+              <button class="button secondary" type="button" data-share>공유하기</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <p>© Single Album · 오늘은 내가 믿어요</p>
+        <p>처음 믿어준 사람에게</p>
+      </div>
+    </footer>
+
+    <nav class="dock" aria-label="모바일 빠른 이동">
+      <a href="#lyrics">가사</a>
+      <a class="dock-primary" href="#listen">듣기</a>
+      <button type="button" data-share>공유</button>
+    </nav>
+  </div>
+
+  <script>
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach((item) => observer.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add("show"));
+    }
+
+    async function sharePage() {
+      const shareData = {
+        title: "오늘은 내가 믿어요 | Single Album",
+        text: "처음 믿어준 사람에게 보내는 조용한 믿음의 노래.",
+        url: window.location.href
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+          return;
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(window.location.href);
+          alert("페이지 주소를 복사했습니다.");
+          return;
+        }
+
+        prompt("페이지 주소를 복사하세요.", window.location.href);
+      } catch (error) {
+        console.warn("Share canceled or failed:", error);
+      }
+    }
+
+    document.querySelectorAll("[data-share]").forEach((button) => {
+      button.addEventListener("click", sharePage);
+    });
+  </script>
+</body>
+</html>

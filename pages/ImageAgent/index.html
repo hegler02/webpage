@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>내 생각을 이미지로 옮기는 법</title>
+<style>
+
+:root {
+  --space-1: 0.48rem;
+  --space-2: 1rem;
+  --space-3: 1.55rem;
+  --space-4: 2.35rem;
+  --space-5: 3.35rem;
+  --space-6: 4.6rem;
+  --lh-display: 1.17;
+  --lh-title: 1.22;
+  --lh-body: 1.42;
+  --lh-caption: 1.28;
+  --slide-padding: clamp(2rem, 6vw, 5rem);
+  --font-primary: -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  --color-bg: #10100f;
+  --color-bg-alt: #151512;
+  --color-surface: #1d1d19;
+  --color-surface-2: #26251f;
+  --color-text: #f5f0e8;
+  --color-text-muted: #b8afa2;
+  --color-primary: #ffb84d;
+  --color-accent: #74d4ff;
+  --color-danger: #ff5c5c;
+  --color-line: rgba(245, 240, 232, .18);
+  --color-soft: rgba(255, 184, 77, .16);
+  --color-accent-soft: rgba(116, 212, 255, .14);
+  --radius-1: .6rem;
+  --radius-2: 1.2rem;
+  --radius-3: 2rem;
+  --z-slide: 1;
+  --z-controls: 100;
+  --z-progress: 200;
+}
+* { box-sizing: border-box; word-break: keep-all; line-break: strict; font-stretch: normal; }
+html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; overscroll-behavior-y: none; background-color: var(--color-bg); color: var(--color-text); font-family: var(--font-primary); line-height: var(--lh-body); }
+body::before { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(circle at 10% 20%, var(--color-soft), transparent 34%), radial-gradient(circle at 80% 70%, var(--color-accent-soft), transparent 38%), linear-gradient(135deg, var(--color-bg), #171614 54%, var(--color-bg)); }
+p { margin: 0 0 2em; }
+.slide-deck { position: relative; z-index: var(--z-slide); width: 100vw; height: 100vh; overflow: hidden; background-color: var(--color-bg); }
+.slide-track { width: 100%; height: 100%; display: flex; transform: translate3d(0, 0, 0); transition: transform .38s ease; will-change: transform; background-color: var(--color-bg); }
+.slide { flex: 0 0 100%; width: 100%; height: 100%; aspect-ratio: 16 / 9; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: var(--color-bg); }
+.slide:nth-child(even) { background-color: var(--color-bg-alt); }
+.slide-inner { width: 100%; max-width: clamp(900px, 75vw, 1380px); padding-inline: var(--slide-padding); margin-inline: auto; }
+.shell { display: grid; gap: var(--space-5); align-items: center; }
+.split-shell, .hero-shell, .scene-shell, .album-shell, .intervention-shell, .router-shell, .contract-shell, .knowledge-shell, .stop-shell, .worksheet-shell, .identity-shell, .lockblank-shell, .tree-shell, .compare-shell, .style-shell, .dsl-shell, .negative-shell, .patch-shell, .info-shell, .twocol-shell, .editor-shell, .reverse-shell, .pipeline-shell { grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr); }
+.kicker { margin: 0; padding-block: var(--space-1); color: var(--color-primary); letter-spacing: .16em; text-transform: uppercase; font-size: clamp(.7rem, .92vw, 1rem); line-height: var(--lh-caption); font-weight: 800; }
+.display-title { margin: 0; font-size: clamp(2.6rem, 5vw, 5.8rem); line-height: var(--lh-display); letter-spacing: -0.025em; font-weight: 850; text-wrap: balance; }
+.lead { max-width: 66ch; margin: 0; padding-block: var(--space-1); color: var(--color-text-muted); font-size: clamp(1.05rem, 1.45vw, 1.55rem); line-height: var(--lh-body); }
+.big-line { font-size: clamp(1.2rem, 2vw, 2rem); color: var(--color-text); line-height: var(--lh-title); }
+.statement-list { margin: 0; padding-left: var(--space-4); display: grid; gap: var(--space-2); color: var(--color-text); font-size: clamp(1rem, 1.35vw, 1.45rem); line-height: var(--lh-body); }
+.statement-list li + li { margin-top: var(--space-1); }
+.visual, .fog-visual, .flow-visual, .scene-frame, .album-art, .intervention-board, .router-visual, .contract-ui, .editor-panel, .dsl-visual, .guardrail, .patch-grid, .id-grid, .lock-board, .compare-board, .style-grid, .tree-visual, .info-strip, .reverse-flow, .pipeline-visual, .worksheet-grid, .worksheet-steps, .patchwork-grid, .os-grid, .stop-visual { min-height: min(52vh, 36rem); border: 1px solid var(--color-line); border-radius: var(--radius-3); background: linear-gradient(145deg, rgba(255,255,255,.05), rgba(255,255,255,.015)); box-shadow: 0 2rem 5rem rgba(0,0,0,.28); }
+.flow-visual { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-3); align-items: center; padding: var(--space-4); }
+.flow-visual span { display: flex; align-items: center; justify-content: center; min-height: 6rem; border-radius: var(--radius-2); background: var(--color-surface); color: var(--color-text); font-weight: 800; }
+.flow-line { position: absolute; left: var(--space-5); right: var(--space-5); top: 50%; border-top: 1px dashed var(--color-primary); opacity: .48; }
+.fog-visual { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-4); align-items: center; }
+.cloud { padding: var(--space-4); border-radius: var(--radius-3); background: radial-gradient(circle, rgba(255,255,255,.12), rgba(255,255,255,.03)); color: rgba(245,240,232,.56); filter: blur(.03rem); line-height: var(--lh-body); }
+.block-stack, .sentence-stack, .lyric-stack, .callouts, .stop-list { display: grid; gap: var(--space-3); }
+.block-stack span, .sentence-card, .good-line, .edit-line, .guard-item, .contract-line, .route, .worksheet-cell, .worksheet-step, .reverse-step, .pipe-step, .closing-step, .stop-item, .callout, .lyric-line, .info-step, .tree-node { padding: var(--space-4); border-radius: var(--radius-2); background: var(--color-surface); border: 1px solid var(--color-line); line-height: var(--lh-body); }
+.quote-inline { white-space: nowrap; color: var(--color-text-muted); font-size: clamp(1rem, 1.3vw, 1.35rem); padding: var(--space-4); border-radius: var(--radius-2); border: 1px solid var(--color-line); background: var(--color-surface); }
+.tangle-visual { min-height: 12rem; position: relative; box-shadow: none; }
+.tangle-visual span { position: absolute; inset: var(--space-4); border: .18rem solid var(--color-primary); border-radius: 45% 55% 60% 40%; opacity: .62; transform: rotate(18deg); }
+.tangle-visual span:nth-child(2) { border-color: var(--color-accent); transform: rotate(-24deg) scale(.82); }
+.tangle-visual span:nth-child(3) { border-color: var(--color-text-muted); transform: rotate(58deg) scale(.66); }
+.chip-row { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+.chip { padding: var(--space-2) var(--space-3); border-radius: 999rem; background: var(--color-soft); color: var(--color-primary); border: 1px solid rgba(255,184,77,.28); font-weight: 800; line-height: 1; }
+.transform-map { display: grid; grid-template-columns: 1fr auto 1fr; gap: var(--space-4); align-items: center; }
+.comma-card { padding: var(--space-4); border-radius: var(--radius-3); background: var(--color-surface); color: var(--color-text-muted); border: 1px solid var(--color-line); line-height: var(--lh-body); }
+.arrow { color: var(--color-primary); font-size: clamp(2rem, 4vw, 5rem); line-height: 1; }
+.chain-flow, .closing-flow, .timeline-visual { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-3); }
+.step-dot { min-height: 10rem; display: flex; align-items: center; justify-content: center; border: 1px solid var(--color-line); border-radius: 999rem; background: radial-gradient(circle, var(--color-soft), rgba(255,255,255,.02)); font-weight: 850; }
+.compare-board, .two-panel { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); padding: var(--space-4); }
+.bad-box, .good-box, .two-panel > div, .id-card, .lock-col, .patch-cell, .os-card, .style-col { padding: var(--space-4); border-radius: var(--radius-2); border: 1px solid var(--color-line); background: var(--color-surface); display: flex; flex-direction: column; gap: var(--space-3); }
+.bad-box span { color: var(--color-danger); font-size: clamp(1.3rem, 2vw, 2.2rem); line-height: var(--lh-title); }
+.good-box strong, .bad-box strong, .two-panel strong, .id-card strong, .lock-col strong, .patch-cell strong, .os-card strong, .style-col strong { font-size: clamp(1.1rem, 1.6vw, 1.75rem); line-height: var(--lh-title); color: var(--color-primary); }
+.tree-visual { display: grid; gap: var(--space-3); padding: var(--space-4); }
+.tree-node { position: relative; }
+.tree-node + .tree-node { margin-left: var(--space-5); }
+.tree-node::before { content: ""; position: absolute; left: calc(var(--space-5) * -1); top: 50%; width: var(--space-5); border-top: 1px dashed var(--color-primary); }
+.id-grid, .lock-board, .style-grid, .os-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); padding: var(--space-4); }
+.lock-board { grid-template-columns: repeat(3, 1fr); }
+.component-footer { display: flex; gap: var(--space-2); flex-wrap: wrap; align-items: center; }
+.component-footer em { padding: var(--space-2) var(--space-3); border-radius: 999rem; background: rgba(255,255,255,.06); color: var(--color-text-muted); font-style: normal; line-height: 1; }
+.scene-frame { position: relative; padding: var(--space-4); }
+.anchor { position: absolute; left: 18%; top: 34%; width: 19%; aspect-ratio: 1; border-radius: 50%; background: var(--color-primary); box-shadow: 0 0 0 var(--space-3) var(--color-soft); }
+.eye-path { position: absolute; left: 30%; right: 14%; top: 45%; border-top: .2rem dashed var(--color-accent); transform: rotate(-8deg); }
+.hierarchy { position: absolute; border: 1px solid var(--color-line); border-radius: var(--radius-2); }
+.hierarchy.h1 { right: 18%; top: 22%; width: 25%; aspect-ratio: 4 / 3; }
+.hierarchy.h2 { right: 28%; bottom: 18%; width: 30%; aspect-ratio: 16 / 5; }
+.negative-space { position: absolute; left: 8%; right: 8%; bottom: 8%; height: 18%; border-radius: var(--radius-3); background: rgba(255,255,255,.035); }
+.time-step { padding: var(--space-3); min-height: 9rem; border-radius: var(--radius-2); background: var(--color-surface); border: 1px solid var(--color-line); display: flex; flex-direction: column; gap: var(--space-2); }
+.time-step b, .info-step b, .worksheet-step b { color: var(--color-primary); }
+.editor-panel, .contract-ui, .dsl-visual, .guardrail, .patch-grid, .info-strip, .pipeline-visual, .worksheet-grid, .worksheet-steps, .patchwork-grid { padding: var(--space-4); display: grid; gap: var(--space-3); }
+.editor-top { color: var(--color-primary); letter-spacing: .16em; font-weight: 850; }
+.two-panel ul { margin: 0; padding-left: var(--space-4); display: grid; gap: var(--space-2); }
+.dsl-flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+.dsl-flow span, .dsl-row { padding: var(--space-3); border-radius: var(--radius-2); background: var(--color-surface); border: 1px solid var(--color-line); }
+.dsl-row { display: grid; grid-template-columns: .8fr 1.2fr; gap: var(--space-3); }
+.guardrail { border-color: rgba(255,184,77,.32); }
+.patch-grid, .patchwork-grid { grid-template-columns: repeat(2, 1fr); }
+.album-art { position: relative; overflow: visible; background: linear-gradient(145deg, #22221d, #11110f); }
+.window { position: absolute; inset: var(--space-5); border: 1px solid var(--color-line); border-radius: var(--radius-2); background: linear-gradient(125deg, rgba(116,212,255,.1), rgba(255,184,77,.08)); }
+.window span { position: absolute; inset: var(--space-4); border-top: 1px solid var(--color-line); transform: rotate(-14deg); }
+.window span:nth-child(2) { transform: rotate(14deg); }
+.face { position: absolute; width: 22%; aspect-ratio: 1; border-radius: 50%; background: var(--color-primary); bottom: 18%; left: 24%; opacity: .9; }
+.reflection { left: 54%; opacity: .34; transform: scaleX(-1); background: var(--color-accent); }
+.info-strip { grid-template-columns: repeat(5, 1fr); }
+.info-step { display: flex; flex-direction: column; gap: var(--space-2); min-height: 12rem; }
+.intervention-board { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-4); align-items: center; }
+.mini-info { display: grid; gap: var(--space-3); }
+.mini-info span { min-height: 7rem; border-radius: var(--radius-2); background: var(--color-surface); border: 1px solid var(--color-line); }
+.callout { position: relative; }
+.reverse-flow { grid-template-columns: repeat(3, 1fr); }
+.style-grid { grid-template-columns: repeat(3, 1fr); }
+.style-col span { min-height: var(--space-6); border-radius: var(--radius-1); background: rgba(255,255,255,.06); border: 1px solid var(--color-line); }
+.pipeline-visual { grid-template-columns: repeat(7, 1fr); }
+.pipe-step { min-height: 8rem; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 850; }
+.router-visual { padding: var(--space-4); display: grid; grid-template-columns: .7fr 1.3fr; gap: var(--space-4); align-items: center; }
+.input-node { min-height: 14rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--color-soft); color: var(--color-primary); font-weight: 850; }
+.route-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+.stop-visual { padding: var(--space-4); display: grid; grid-template-columns: .8fr 1.2fr; gap: var(--space-4); align-items: center; border-color: rgba(255,92,92,.38); }
+.stop-badge { aspect-ratio: 1; border-radius: 50%; background: var(--color-danger); display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: clamp(2rem, 4vw, 4.4rem); line-height: 1; }
+.prompt-line { margin-top: var(--space-5); padding: var(--space-4); border-radius: var(--radius-2); background: var(--color-soft); color: var(--color-primary); white-space: nowrap; font-weight: 850; }
+.worksheet-grid { grid-template-columns: repeat(2, 1fr); }
+.worksheet-cell { min-height: 10rem; background: rgba(255,255,255,.03); }
+.worksheet-steps { grid-template-columns: repeat(5, 1fr); }
+.worksheet-step { min-height: 13rem; display: flex; flex-direction: column; }
+.patchwork-cell { min-height: 12rem; display: flex; flex-direction: column; gap: var(--space-3); }
+.closing-shell { text-align: center; max-width: clamp(900px, 70vw, 1280px); margin-inline: auto; }
+.closing-flow { grid-template-columns: repeat(5, 1fr); text-align: left; }
+.slide-controls { position: fixed; inset: 0; z-index: var(--z-controls); pointer-events: none; }
+.nav-button { pointer-events: auto; position: fixed; top: 50%; transform: translateY(-50%); border: 1px solid var(--color-line); border-radius: 999rem; background: rgba(16,16,15,.35); color: var(--color-text); width: var(--space-6); height: var(--space-6); font-size: clamp(2rem, 3vw, 3rem); line-height: 1; opacity: .22; transition: opacity .22s ease, background .22s ease; }
+.nav-button:hover { opacity: 1; background: rgba(255,255,255,.08); }
+.nav-prev { left: var(--space-3); }
+.nav-next { right: var(--space-3); }
+.progress-wrap { position: fixed; left: var(--space-4); right: var(--space-4); bottom: var(--space-3); height: var(--space-1); background: rgba(255,255,255,.08); border-radius: 999rem; overflow: visible; pointer-events: none; }
+.progress-bar { width: 5.26%; height: 100%; background: var(--color-primary); border-radius: 999rem; transition: width .38s ease; }
+.page-number { position: fixed; right: var(--space-4); bottom: var(--space-4); color: var(--color-text-muted); font-size: clamp(.8rem, 1vw, 1rem); line-height: var(--lh-caption); letter-spacing: .08em; pointer-events: none; }
+@media (max-width: 850px) {
+  html, body { overflow: hidden; }
+  .slide-deck { height: 100vh; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
+  .slide-track { height: auto; min-height: 100vh; flex-direction: column; transform: none !important; transition: none; }
+  .slide { height: auto; min-height: 100vh; min-height: 100dvh; aspect-ratio: auto; padding-block: var(--space-6); overflow: visible; }
+  .slide-inner { max-width: 100%; }
+  .split-shell, .hero-shell, .scene-shell, .album-shell, .intervention-shell, .router-shell, .contract-shell, .knowledge-shell, .stop-shell, .worksheet-shell, .identity-shell, .lockblank-shell, .tree-shell, .compare-shell, .style-shell, .dsl-shell, .negative-shell, .patch-shell, .info-shell, .twocol-shell, .editor-shell, .reverse-shell, .pipeline-shell { grid-template-columns: 1fr; }
+  .chain-flow, .closing-flow, .timeline-visual, .info-strip, .pipeline-visual, .worksheet-steps { grid-template-columns: 1fr; }
+  .id-grid, .lock-board, .style-grid, .os-grid, .patch-grid, .patchwork-grid, .worksheet-grid, .compare-board, .two-panel, .intervention-board, .router-visual, .stop-visual, .reverse-flow { grid-template-columns: 1fr; }
+  .quote-inline, .prompt-line { white-space: normal; }
+  .nav-button { display: none; }
+}
+@media print {
+  html, body { overflow: visible; }
+  .slide-deck { height: auto; overflow: visible; }
+  .slide-track { flex-direction: column; transform: none !important; transition: none; }
+  .slide { page-break-after: always; aspect-ratio: 16 / 9; overflow: hidden; }
+  .slide-controls, .nav-button { display: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide-track, .progress-bar, .nav-button { transition: none; }
+}
+
+  
+/* REVISION: expanded global vertical rhythm, large-title line-height, component padding, and badge padding. */
+
+
+/* BULK REVISION: page deletion and layout adjustments. */
+.professor-credit {
+  position: absolute;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  border-radius: 999rem;
+  background: rgba(16, 16, 15, .72);
+  border: 1px solid var(--color-line);
+  color: var(--color-text);
+  font-weight: 850;
+  line-height: var(--lh-caption);
+  letter-spacing: -0.02em;
+}
+
+.prompt-sample-inline {
+  display: block;
+  max-width: min(70ch, 100%);
+  white-space: normal;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: var(--color-text);
+  background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+}
+
+.chip-panel,
+.lyric-panel {
+  min-height: min(42vh, 30rem);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-3);
+  background: linear-gradient(145deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+  box-shadow: 0 2rem 5rem rgba(0,0,0,.22);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chip-panel .chip-row {
+  justify-content: center;
+}
+
+.lyric-panel .lyric-stack {
+  width: 100%;
+}
+
+.closing-message {
+  max-width: none;
+  margin-inline: auto;
+  text-align: center;
+  color: var(--color-text);
+  font-size: clamp(1.35rem, 2.2vw, 2.35rem);
+  line-height: var(--lh-title);
+}
+
+.gpts-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline: auto;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 999rem;
+  border: 1px solid rgba(255,184,77,.42);
+  background: var(--color-soft);
+  color: var(--color-primary);
+  font-weight: 900;
+  line-height: var(--lh-caption);
+  text-decoration: none;
+}
+
+.gpts-link:hover {
+  background: rgba(255,184,77,.24);
+}
+
+@media (max-width: 850px) {
+  .professor-credit {
+    position: static;
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+}
+
+
+/* VIDEO BACKGROUND + REQUESTED LAYOUT REVISIONS */
+:root {
+  --z-bg: 0;
+  --video-opacity-body: .18;
+  --video-opacity-hero: .24;
+  --video-opacity-current: var(--video-opacity-body);
+  --video-overlay-start: .82;
+  --video-overlay-mid: .62;
+  --video-overlay-end: .84;
+  --video-blur: .03rem;
+  --video-scale: 1.02;
+  --video-motion-scale: 1.06;
+  --video-motion-x: 1.2%;
+  --video-motion-y: -.8%;
+  --video-motion-duration: 42s;
+}
+
+.video-bg {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  overflow: hidden;
+  pointer-events: none;
+  background-color: var(--color-bg);
+}
+
+.video-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: var(--video-opacity-current);
+  filter: blur(var(--video-blur)) saturate(1.12) contrast(1.05);
+  transform: scale(var(--video-scale)) translate3d(0, 0, 0);
+  animation: videoDrift var(--video-motion-duration) ease-in-out infinite alternate;
+  transition: opacity .8s ease;
+  will-change: transform, opacity;
+}
+
+.video-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 78% 12%, rgba(255,184,77,.16), transparent 36%),
+    radial-gradient(circle at 18% 82%, rgba(116,212,255,.12), transparent 40%),
+    linear-gradient(90deg,
+      rgba(16,16,15,var(--video-overlay-start)),
+      rgba(16,16,15,var(--video-overlay-mid)),
+      rgba(16,16,15,var(--video-overlay-end)));
+}
+
+@keyframes videoDrift {
+  0% { transform: scale(var(--video-scale)) translate3d(0, 0, 0); }
+  50% { transform: scale(var(--video-motion-scale)) translate3d(var(--video-motion-x), var(--video-motion-y), 0); }
+  100% { transform: scale(var(--video-scale)) translate3d(calc(var(--video-motion-x) * -1), calc(var(--video-motion-y) * -1), 0); }
+}
+
+.slide-deck,
+.slide-track {
+  background-color: rgba(16,16,15,.36);
+}
+
+.slide {
+  background-color: rgba(16,16,15,.70);
+}
+
+.slide:nth-child(even) {
+  background-color: rgba(21,21,18,.68);
+}
+
+.visual, .fog-visual, .flow-visual, .scene-frame, .album-art, .intervention-board, .router-visual, .contract-ui, .editor-panel, .dsl-visual, .guardrail, .patch-grid, .id-grid, .lock-board, .compare-board, .style-grid, .tree-visual, .info-strip, .reverse-flow, .pipeline-visual, .worksheet-grid, .worksheet-steps, .patchwork-grid, .os-grid, .stop-visual, .chip-panel, .lyric-panel {
+  background: linear-gradient(145deg, rgba(29,29,25,.78), rgba(29,29,25,.34));
+  backdrop-filter: blur(.16rem);
+}
+
+.comma-shell {
+  grid-template-columns: minmax(0, 1.18fr) minmax(18rem, .82fr);
+  align-items: start;
+}
+
+.comma-copy {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.comma-copy .lead,
+.comma-copy .prompt-sample-inline {
+  margin: 0;
+}
+
+.comma-chip-panel {
+  align-self: start;
+  justify-self: stretch;
+  min-height: min(28vh, 18rem);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-3);
+  background: linear-gradient(145deg, rgba(29,29,25,.72), rgba(29,29,25,.32));
+  box-shadow: 0 2rem 5rem rgba(0,0,0,.2);
+  padding: var(--space-4);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  backdrop-filter: blur(.16rem);
+}
+
+.comma-chip-panel .chip-row {
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.slide-11 .timeline-visual .time-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.slide-11 .timeline-visual .time-step b,
+.slide-11 .timeline-visual .time-step span {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-bg video {
+    animation: none;
+  }
+}
+
+@media (max-width: 850px) {
+  .comma-shell {
+    grid-template-columns: 1fr;
+  }
+  .comma-chip-panel {
+    justify-content: center;
+  }
+  .comma-chip-panel .chip-row {
+    justify-content: center;
+  }
+}
+
+/* FIX: make background video visible under slides + center page 18 worksheet text */
+:root {
+  --video-opacity-body: .42;
+  --video-opacity-hero: .50;
+  --video-opacity-current: var(--video-opacity-body);
+  --video-overlay-start: .46;
+  --video-overlay-mid: .34;
+  --video-overlay-end: .50;
+  --video-blur: 0rem;
+  --video-scale: 1.04;
+}
+
+body::before {
+  z-index: 1;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255,184,77,.14), transparent 34%),
+    radial-gradient(circle at 80% 70%, rgba(116,212,255,.12), transparent 38%),
+    linear-gradient(135deg, rgba(16,16,15,.38), rgba(23,22,20,.14) 54%, rgba(16,16,15,.42));
+}
+
+.video-bg {
+  z-index: 0;
+}
+
+.video-bg video {
+  opacity: var(--video-opacity-current);
+  filter: blur(var(--video-blur)) saturate(1.28) contrast(1.12) brightness(1.08);
+}
+
+.video-bg::after {
+  background:
+    radial-gradient(circle at 78% 12%, rgba(255,184,77,.14), transparent 36%),
+    radial-gradient(circle at 18% 82%, rgba(116,212,255,.12), transparent 40%),
+    linear-gradient(90deg,
+      rgba(16,16,15,var(--video-overlay-start)),
+      rgba(16,16,15,var(--video-overlay-mid)),
+      rgba(16,16,15,var(--video-overlay-end)));
+}
+
+.slide-deck {
+  z-index: 2;
+  background-color: transparent !important;
+}
+
+.slide-track {
+  background-color: transparent !important;
+}
+
+.slide {
+  background-color: rgba(16,16,15,.44) !important;
+}
+
+.slide:nth-child(even) {
+  background-color: rgba(21,21,18,.42) !important;
+}
+
+.slide-inner {
+  position: relative;
+  z-index: 3;
+}
+
+.visual, .fog-visual, .flow-visual, .scene-frame, .album-art, .intervention-board, .router-visual, .contract-ui, .editor-panel, .dsl-visual, .guardrail, .patch-grid, .id-grid, .lock-board, .compare-board, .style-grid, .tree-visual, .info-strip, .reverse-flow, .pipeline-visual, .worksheet-grid, .worksheet-steps, .patchwork-grid, .os-grid, .stop-visual, .chip-panel, .lyric-panel {
+  background: linear-gradient(145deg, rgba(29,29,25,.62), rgba(29,29,25,.22));
+  backdrop-filter: blur(.08rem);
+}
+
+section[data-slide="18"] .worksheet-grid .worksheet-cell,
+.slide-27 .worksheet-grid .worksheet-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+section[data-slide="18"] .worksheet-grid .worksheet-cell span,
+.slide-27 .worksheet-grid .worksheet-cell span {
+  display: block;
+  margin: 0;
+  width: 100%;
+}
+
+</style>
+</head>
+<body><div aria-hidden="true" class="video-bg"><video autoplay="" id="bgVideo" loop="" muted="" playsinline="" preload="auto"><source src="https://cdn.midjourney.com/video/321b0e5c-7259-42e7-90e3-87fd193ee232/0.mp4" type="video/mp4"/></video></div>
+<main aria-label="내 생각을 이미지로 옮기는 법 슬라이드 덱" class="slide-deck" id="deck" tabindex="0">
+<div class="slide-track" id="slideTrack">
+<section aria-label="1 / 19" class="slide slide-01 hero" data-slide="1">
+<div class="slide-inner">
+<div class="shell hero-shell">
+<div class="hero-copy"><div class="kicker">IMAGE MAKING LECTURE</div><h1 class="display-title">내 생각을<br/>이미지로 옮기는 법</h1><p class="lead">단문 연결형 프롬프팅과 이미지 하네스</p><div class="big-line">AI가 그리지만, 방향은 사용자가 잡는다.</div></div>
+<div aria-hidden="true" class="visual flow-visual"><div class="flow-line"></div><span>생각</span><span>단문</span><span>연결</span><span>장면</span><span>수정</span><div class="professor-credit">동서울대학교 김준호 교수</div></div>
+</div>
+</div>
+<!-- NOTES:
+        이 강의는 이미지 생성기 사용법이 아니다. 사용자가 원하는 장면을 설명하고, 수정하고, 다시 통제하는 방법을 다룬다. 핵심은 단어가 아니라 구조다.
+        -->
+</section><section aria-label="2 / 19" class="slide slide-02 split" data-slide="2">
+<div class="slide-inner">
+<div class="shell split-shell"><div><div class="kicker">PART A · PROBLEM</div><h1 class="display-title">왜 결과가<br/>내 생각과 달라질까</h1><p class="lead">AI가 못 그리는 것이 아니라, 생각이 수정 가능한 구조로 전달되지 않는 경우가 많다.</p></div>
+<div aria-hidden="true" class="visual fog-visual"><div class="cloud">cinematic<br/>beautiful<br/>emotional</div><div class="block-stack"><span>대상</span><span>조건</span><span>수정 지점</span></div></div></div>
+</div>
+<!-- NOTES:
+        많은 사용자는 결과가 마음에 안 들면 프롬프트를 더 길게 만든다. 하지만 길어지는 것과 통제되는 것은 다르다. 통제하려면 수정 가능한 단위가 필요하다.
+        -->
+</section><section aria-label="3 / 19" class="slide slide-03 statement" data-slide="3">
+<div class="slide-inner"><div class="shell comma-shell"><div class="comma-copy"><div class="kicker">COMMA PROMPT</div><h1 class="display-title">많은 단어,<br/>약한 구조</h1><p class="lead">콤마 키워드는 빠르지만 어느 부분을 고쳐야 하는지 보기 어렵다.</p><div class="prompt-sample-inline quote-inline">cinematic, emotional, beautiful, dramatic lighting, ultra detailed, moody, aesthetic, high contrast, atmospheric, soft glow</div></div><div class="comma-chip-panel"><div class="chip-row"><span class="chip">많은 단어</span><span class="chip">약한 구조</span><span class="chip">어려운 수정</span></div></div></div></div>
+<!-- NOTES:
+        콤마 키워드는 모델에게 힌트를 던지는 방식이다. 사용자는 어떤 단어가 어떤 결과를 만들었는지 알기 어렵다. 그래서 결과 수정이 감으로 변한다.
+        -->
+</section><section aria-label="4 / 19" class="slide slide-05 chain" data-slide="4">
+<div class="slide-inner">
+<div class="shell chain-shell"><div class="kicker">CORE IDEA</div><h1 class="display-title">단문 연결은<br/>생각의 구조다</h1><p class="lead">AI를 위한 꼼수가 아니라 사람이 자기 생각을 정리하는 방식이다.</p><div class="chain-flow"><div class="step-dot"><span>대상</span></div><div class="step-dot"><span>속성</span></div><div class="step-dot"><span>조건</span></div><div class="step-dot"><span>결과</span></div><div class="step-dot"><span>제약</span></div></div></div>
+</div>
+<!-- NOTES:
+        좋은 디자이너도 이런 단문 판단을 머릿속에서 빠르게 한다. 차이는 그 판단이 말로 드러나느냐 숨겨져 있느냐다. 단문 연결형은 그 과정을 사용자와 AI가 공유하게 만든다.
+        -->
+</section><section aria-label="5 / 19" class="slide slide-06 comparison" data-slide="5">
+<div class="slide-inner">
+<div class="shell compare-shell"><div><div class="kicker">PART B · BASIC GRAMMAR</div><h1 class="display-title">한 문장은<br/>하나만 말한다</h1><p class="lead">한 문장에 여러 판단을 넣으면 수정 지점이 다시 흐려진다.</p></div><div class="compare-board"><div class="bad-box"><strong>나쁜 문장</strong><span>예쁘고 쓸쓸한 밤거리</span></div><div class="good-box"><strong>좋은 문장</strong><div class="good-line">거리는 밤이다</div><div class="good-line">거리는 비어 있다</div><div class="good-line">조명은 차갑다</div></div></div></div>
+</div>
+<!-- NOTES:
+        문장을 짧게 만드는 이유는 AI 때문만이 아니다. 사용자가 나중에 직접 바꿀 수 있게 하기 위해서다. 쓸쓸한보다 비어 있다, 차갑다, 작은 빛만 남아 있다가 더 고치기 쉽다.
+        -->
+</section><section aria-label="6 / 19" class="slide slide-07 tree" data-slide="6">
+<div class="slide-inner">
+<div class="shell tree-shell"><div><div class="kicker">DEPTH</div><h1 class="display-title">깊은 묘사는<br/>연결로 파고든다</h1><p class="lead">디테일은 긴 형용사보다 하위 문장 연결로 깊어진다.</p></div><div class="tree-visual"><div class="tree-node">주인공은 안경을 쓴다</div><div class="tree-node">안경은 사각형이다</div><div class="tree-node">안경테는 금테다</div><div class="tree-node">왼쪽 렌즈에는 작은 하트가 있다</div><div class="tree-node">햇빛을 받으면 렌즈가 어두워진다</div></div></div>
+</div>
+<!-- NOTES:
+        안경이라는 하위 대상 안에 모양, 재질, 위치, 조건부 변화가 귀속된다. 사용자는 나중에 하트만 별도로 바꿀 수 있다.
+        -->
+</section><section aria-label="7 / 19" class="slide slide-08 identity" data-slide="7">
+<div class="slide-inner">
+<div class="shell identity-shell"><div><div class="kicker">IDENTITY FIRST</div><h1 class="display-title">대상과 배경을<br/>먼저 고정한다</h1><p class="lead">일관성은 스타일이 아니라 대상과 배경의 정체성에서 나온다.</p></div><div class="id-grid"><div class="id-card"><span>대상 정체성</span><strong>Entity IP</strong><small>인물, 의자, 안경, 자동차</small><div class="component-footer"><em>fixed</em><em>variable</em></div></div><div class="id-card"><span>배경 정체성</span><strong>World IP</strong><small>건물, 거리, 방, 세계관</small><div class="component-footer"><em>fixed</em><em>variable</em></div></div></div></div>
+</div>
+<!-- NOTES:
+        인물만 캐릭터가 아니다. 장면 안의 의자, 안경, 자동차, 건물, 배경도 주인공이 될 수 있다. 같은 존재처럼 보이게 하려면 고정값과 변화값을 나눠야 한다.
+        -->
+</section><section aria-label="8 / 19" class="slide slide-09 lockblank" data-slide="8">
+<div class="slide-inner">
+<div class="shell lockblank-shell"><div><div class="kicker">CREATIVE BLANK</div><h1 class="display-title">AI가 채울 여백을<br/>따로 둔다</h1><p class="lead">AI 창의성은 모든 것을 맡기는 것이 아니라, 열어둔 영역만 채우게 하는 것이다.</p></div><div class="lock-board"><div class="lock-col"><strong>고정할 것</strong><span>핵심 대상, 배경, 시선 흐름</span></div><div class="lock-col"><strong>열어둘 것</strong><span>소품, 미세한 질감, 분위기 보강</span></div><div class="lock-col"><strong>확인할 것</strong><span>의도와 다른 추가 해석</span></div></div></div>
+</div>
+<!-- NOTES:
+        사용자가 중요한 것을 닫아야 한다. 동시에 모든 것을 닫으면 AI가 창의적으로 보강할 공간이 사라진다. 좋은 프롬프트는 고정과 여백의 균형이다.
+        -->
+</section><section aria-label="9 / 19" class="slide slide-10 scene" data-slide="9">
+<div class="slide-inner">
+<div class="shell scene-shell"><div><div class="kicker">SCENE STRUCTURE</div><h1 class="display-title">장면 구조는<br/>스타일보다 먼저다</h1><p class="lead">이미지가 읽히는 방식은 anchor, flow, hierarchy가 먼저 결정한다.</p></div><div class="chip-panel"><div class="chip-row"><span class="chip">primary anchor</span><span class="chip">flow path</span><span class="chip">hierarchy</span><span class="chip">density</span><span class="chip">negative space</span></div></div></div>
+</div>
+<!-- NOTES:
+        스타일은 겉면이다. 장면 구조는 시선이 어디서 시작하고 어디서 끝나는지를 정한다. 구조가 약하면 어떤 스타일을 붙여도 결과가 흐려진다.
+        -->
+</section><section aria-label="10 / 19" class="slide slide-11 timeline" data-slide="10">
+<div class="slide-inner">
+<div class="shell timeline-shell"><div class="kicker">PART C · PROMPT PACKAGE</div><h1 class="display-title">좋은 GPT는<br/>바로 그리지 않는다</h1><p class="lead">이미지 생성은 마지막 단계이고, 먼저 수정 가능한 프롬프트 패키지가 나와야 한다.</p><div class="timeline-visual"><div class="time-step"><b>1</b><span>요청</span></div><div class="time-step"><b>2</b><span>해석</span></div><div class="time-step"><b>3</b><span>구조</span></div><div class="time-step"><b>4</b><span>프롬프트</span></div><div class="time-step"><b>5</b><span>생성</span></div></div></div>
+</div>
+<!-- NOTES:
+        바로 생성하면 사용자는 결과만 받는다. 프롬프트 패키지가 있으면 사용자는 개입할 수 있다. 이 차이가 단순 이미지 생성기와 하네스의 차이다.
+        -->
+</section><section aria-label="11 / 19" class="slide slide-12 editor" data-slide="11">
+<div class="slide-inner">
+<div class="shell editor-shell"><div><div class="kicker">KR SOURCE</div><h1 class="display-title">한국어는<br/>수정 원본이다</h1><p class="lead">한국어 프롬프트는 사용자가 읽고 고치기 위한 원본이다.</p></div><div class="editor-panel"><div class="editor-top">KR SOURCE</div><div class="edit-line">한국어 프롬프트</div><div class="edit-line">한국어 네거티브</div><div class="edit-line">자연어 수정 포인트</div></div></div>
+</div>
+<!-- NOTES:
+        사용자가 영어 프롬프트만 받으면 수정이 어렵다. 한국어 단문 연결은 사용자가 직접 개입하는 편집 화면이다. 영어는 그 한국어 원본을 실행하기 위한 번역본이다.
+        -->
+</section><section aria-label="12 / 19" class="slide slide-13 twocol" data-slide="12">
+<div class="slide-inner">
+<div class="shell twocol-shell"><div><div class="kicker">EN EXECUTION</div><h1 class="display-title">영어는<br/>실행 번역본이다</h1><p class="lead">영어 프롬프트는 새 판단을 추가하는 곳이 아니라 한국어 원본을 실행형으로 옮기는 곳이다.</p></div><div class="two-panel"><div><strong>KR</strong><ul><li>understand</li><li>revise</li><li>source of truth</li></ul></div><div><strong>EN</strong><ul><li>execute</li><li>compile</li><li>no new judgment</li></ul></div></div></div>
+</div>
+<!-- NOTES:
+        영어가 더 멋져 보인다고 새로운 내용을 넣으면 구조가 깨진다. 영어는 모델이 실행하기 쉬운 형태로 옮기는 역할이다.
+        -->
+</section><section aria-label="13 / 19" class="slide slide-14 dsl" data-slide="13">
+<div class="slide-inner">
+<div class="shell dsl-shell"><div><div class="kicker">DSL LAYER</div><h1 class="display-title">실행값 변환표는<br/>왜 필요한가</h1><p class="lead">사람의 말을 모델이 실행하기 쉬운 장면 값으로 바꾸는 중간층이다.</p></div><div class="dsl-visual"><div class="dsl-flow"><span>사람 말</span><span>실행값 변환표</span><span>실행 프롬프트</span></div><div class="dsl-row"><strong>원문 근거</strong><span>사용자가 한 말</span></div><div class="dsl-row"><strong>사용자용 의미</strong><span>왜 이 값이 필요한지</span></div><div class="dsl-row"><strong>실행값</strong><span>모델이 읽을 장면 값</span></div></div></div>
+</div>
+<!-- NOTES:
+        내부 용어만 던지면 사용자는 이해하기 어렵다. 각 실행값에는 원문 근거와 사용자용 의미가 붙어야 한다. 이 중간층 덕분에 스타일 전환과 세부 수정이 쉬워진다.
+        -->
+</section><section aria-label="14 / 19" class="slide slide-15 negative" data-slide="14">
+<div class="slide-inner">
+<div class="shell negative-shell"><div><div class="kicker">NEGATIVE PROMPT</div><h1 class="display-title">네거티브도<br/>단문으로 쓴다</h1><p class="lead">네거티브 프롬프트는 금지어 목록이 아니라 지켜야 할 제약의 단문 연결이다.</p></div><div class="guardrail"><div class="guard-item">바꾸지 않는다</div><div class="guard-item">추가하지 않는다</div><div class="guard-item">흐트러뜨리지 않는다</div><div class="guard-item">과장하지 않는다</div></div></div>
+</div>
+<!-- NOTES:
+        네거티브는 결과를 망치지 않기 위한 보호 장치다. 한국어 네거티브가 먼저 있어야 사용자가 제약을 이해하고 수정할 수 있다. 영어 네거티브는 그 실행 번역본이다.
+        -->
+</section><section aria-label="15 / 19" class="slide slide-16 patch" data-slide="15">
+<div class="slide-inner">
+<div class="shell patch-shell"><div><div class="kicker">PATCH GRAMMAR</div><h1 class="display-title">수정은<br/>패치처럼 한다</h1><p class="lead">수정 요청은 Preserve, Remove, Replace, Add로 나누면 안정된다.</p></div><div class="patch-grid"><div class="patch-cell"><strong>Preserve</strong><span>유지할 것</span></div><div class="patch-cell"><strong>Remove</strong><span>뺄 것</span></div><div class="patch-cell"><strong>Replace</strong><span>바꿀 것</span></div><div class="patch-cell"><strong>Add</strong><span>추가할 것</span></div></div></div>
+</div>
+<!-- NOTES:
+        유지할 것을 먼저 선언하지 않으면 원래 장점이 사라진다. 제거할 것, 바꿀 것, 추가할 것을 나누면 수정이 명확해진다.
+        -->
+</section><section aria-label="16 / 19" class="slide slide-17 album" data-slide="16">
+<div class="slide-inner">
+<div class="shell album-shell"><div><div class="kicker">PART D · CASE STUDY</div><h1 class="display-title">앨범커버<br/>만들기 사례</h1><p class="lead">가사나 감정도 단문 연결로 장면 구조가 될 수 있다.</p></div><div class="lyric-panel"><div class="lyric-stack"><div class="lyric-line">괜찮은 척한다</div><div class="lyric-line">혼자 집으로 간다</div><div class="lyric-line">창문에 얼굴이 비친다</div><div class="lyric-line">실제 표정과 반사가 다르다</div></div></div></div>
+</div>
+<!-- NOTES:
+        노래 가사는 그대로 그림이 되지 않는다. 정서, 상황, 시선, 배경을 분리해야 한다. 단문 연결은 감정을 장면으로 번역하는 다리다.
+        -->
+</section><section aria-label="17 / 19" class="slide slide-26 lock" data-slide="17">
+<div class="slide-inner">
+<div class="shell stop-shell"><div><div class="kicker">GENERATION LOCK</div><h1 class="display-title">짧은 아이디어는<br/>생성 명령이 아니다</h1><p class="lead">먼저 프롬프트 패키지 요청으로 처리해야 한다.</p></div><div class="stop-visual"><div class="stop-badge">STOP</div><div class="stop-list"><div class="stop-item">바로 생성 금지</div><div class="stop-item">설명 먼저</div><div class="stop-item">프롬프트 먼저</div><div class="stop-item">명시적 생성만 실행</div></div></div></div>
+</div>
+<!-- NOTES:
+        모나리자를 감상하는 남자 같은 입력은 아이디어다. 하네스는 바로 이미지를 만들지 않고 먼저 구조를 세워야 한다. 생성은 사용자가 명확히 요청했을 때만 한다.
+        -->
+</section><section aria-label="18 / 19" class="slide slide-27 worksheet" data-slide="18">
+<div class="slide-inner">
+<div class="shell worksheet-shell"><div><div class="kicker">PART F · WORKSHOP 1</div><h1 class="display-title">한 문장 이미지를<br/>구조화하기</h1><p class="lead">짧은 입력도 대상, 배경, 구조, 여백으로 나눌 수 있다.</p><div class="prompt-line">입력: 비 오는 밤의 작은 편의점</div></div><div class="worksheet-grid"><div class="worksheet-cell"><span>대상</span></div><div class="worksheet-cell"><span>배경</span></div><div class="worksheet-cell"><span>시선 흐름</span></div><div class="worksheet-cell"><span>열어둘 디테일</span></div></div></div>
+</div>
+<!-- NOTES:
+        학생에게 짧은 입력 하나를 준다. 먼저 단문 인과 체인으로 나누게 한다. 이후 AI가 채워도 되는 여백을 따로 적게 한다.
+        -->
+</section><section aria-label="19 / 19" class="slide slide-30 closing" data-slide="19">
+<div class="slide-inner">
+<div class="shell closing-shell"><div class="kicker">TAKEAWAY</div><h1 class="display-title">내가 고칠 수 있는<br/>구조를 만든다</h1><p class="closing-message lead">이미지 만들기의 핵심은 AI가 알아서 그리게 하는 것이 아니라<br/>사람이 수정 가능한 구조를 만드는 것이다.</p><a class="gpts-link" href="https://chatgpt.com/g/g-69f085b428c88191960302b3654a8549-mirinaeman-image-harness" rel="noopener noreferrer" target="_blank">이미지 하네스 에이전트 열기</a></div>
+</div>
+<!-- NOTES:
+        강의의 결론은 단순하다. 사용자는 디자이너처럼 도구를 다루지 않아도 된다. 대신 자기 생각을 수정 가능한 문장 구조로 만들면 된다.
+        -->
+</section>
+</div>
+</main>
+<div aria-hidden="false" class="slide-controls">
+<button aria-label="이전 슬라이드" class="nav-button nav-prev">‹</button>
+<button aria-label="다음 슬라이드" class="nav-button nav-next">›</button>
+<div aria-hidden="true" class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+<div class="page-number" id="pageNumber">01 / 19</div>
+</div>
+<script>
+
+(function () {
+  var deck = document.getElementById('deck');
+  var track = document.getElementById('slideTrack');
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var progress = document.getElementById('progressBar');
+  var pageNumber = document.getElementById('pageNumber');
+  var prevButton = document.querySelector('.nav-prev');
+  var nextButton = document.querySelector('.nav-next');
+  var current = 0;
+  var total = slides.length;
+  var wheelLocked = false;
+  var touchStartX = 0;
+  var touchStartY = 0;
+
+  function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
+  function pad(num) {
+    return String(num).padStart(2, '0');
+  }
+
+  function updateControls() {
+    var progressValue = ((current + 1) / total) * 100;
+    progress.style.width = progressValue + '%';
+    pageNumber.textContent = pad(current + 1) + ' / ' + pad(total);
+    prevButton.setAttribute('aria-disabled', current === 0 ? 'true' : 'false');
+    nextButton.setAttribute('aria-disabled', current === total - 1 ? 'true' : 'false');
+  }
+
+  function goTo(index) {
+    current = clamp(index, 0, total - 1);
+    if (!window.matchMedia('(max-width: 850px)').matches) {
+      track.style.transform = 'translate3d(' + (-current * 100) + '%, 0, 0)';
+    }
+    updateControls();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  deck.addEventListener('click', function (event) {
+    deck.focus();
+    var clickedInteractive = event.target.closest('button') || event.target.closest('a') || event.target.closest('input') || event.target.closest('textarea') || event.target.closest('select');
+    if (clickedInteractive) return;
+    var x = event.clientX;
+    var width = window.innerWidth;
+    if (x < width * 0.35) {
+      prev();
+    } else {
+      next();
+    }
+  });
+
+  window.addEventListener('wheel', function (event) {
+    if (window.matchMedia('(max-width: 850px)').matches) {
+      return;
+    }
+    event.preventDefault();
+    if (wheelLocked) return;
+    var delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+    if (Math.abs(delta) < 12) return;
+    if (delta > 0) {
+      next();
+    } else {
+      prev();
+    }
+    wheelLocked = true;
+    setTimeout(function () {
+      wheelLocked = false;
+    }, 520);
+  }, { passive: false });
+
+  deck.addEventListener('touchstart', function (event) {
+    if (!event.touches || !event.touches.length) return;
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+  }, { passive: true });
+
+  deck.addEventListener('touchend', function (event) {
+    if (!event.changedTouches || !event.changedTouches.length) return;
+    var dx = event.changedTouches[0].clientX - touchStartX;
+    var dy = event.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx < 0) {
+      next();
+    } else {
+      prev();
+    }
+  }, { passive: true });
+
+  function handleKey(event) {
+    var nextKeys = ['ArrowRight', 'PageDown', ' ', 'Enter', 'n', 'N'];
+    var prevKeys = ['ArrowLeft', 'PageUp', 'Backspace', 'p', 'P'];
+    if (nextKeys.indexOf(event.key) !== -1) {
+      event.preventDefault();
+      next();
+      return;
+    }
+    if (prevKeys.indexOf(event.key) !== -1) {
+      event.preventDefault();
+      prev();
+    }
+  }
+
+  prevButton.addEventListener('click', function (event) {
+    event.stopPropagation();
+    prev();
+  });
+  nextButton.addEventListener('click', function (event) {
+    event.stopPropagation();
+    next();
+  });
+
+  window.addEventListener('keydown', handleKey, true);
+  document.addEventListener('keydown', handleKey, true);
+  deck.addEventListener('keydown', handleKey, true);
+
+  window.addEventListener('resize', function () {
+    if (window.matchMedia('(max-width: 850px)').matches) {
+      track.style.transform = 'none';
+    } else {
+      goTo(current);
+    }
+  });
+
+  goTo(0);
+  deck.focus();
+})();
+
+  </script>
+</body>
+</html>

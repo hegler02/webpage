@@ -5,21 +5,6 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>내 생각을 이미지로 옮기는 법</title>
-<meta name="description" content="단문 연결형 프롬프팅과 이미지 하네스로 AI 이미지 작업을 수정 가능한 구조로 배우는 강의 슬라이드입니다."/>
-<meta name="robots" content="index, follow"/>
-<link rel="canonical" href="https://mirinaeman.com/pages/ImageAgent/index.html"/>
-<meta property="og:locale" content="ko_KR"/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://mirinaeman.com/pages/ImageAgent/index.html"/>
-<meta property="og:title" content="내 생각을 이미지로 옮기는 법"/>
-<meta property="og:description" content="단문 연결형 프롬프팅과 이미지 하네스로 AI 이미지 작업을 수정 가능한 구조로 배우는 강의 슬라이드입니다."/>
-<meta property="og:image" content="https://i.imghippo.com/files/rjln1643G.png"/>
-<meta property="og:image:secure_url" content="https://i.imghippo.com/files/rjln1643G.png"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:url" content="https://mirinaeman.com/pages/ImageAgent/index.html"/>
-<meta name="twitter:title" content="내 생각을 이미지로 옮기는 법"/>
-<meta name="twitter:description" content="단문 연결형 프롬프팅과 이미지 하네스로 AI 이미지 작업을 수정 가능한 구조로 배우는 강의 슬라이드입니다."/>
-<meta name="twitter:image" content="https://i.imghippo.com/files/rjln1643G.png"/>
 <style>
 
 :root {
@@ -490,19 +475,30 @@ section[data-slide="18"] .worksheet-grid .worksheet-cell span,
 }
 
 
-/* SEO UPDATE SUPPORT + PAGE 10 LEAD WIDTH FIX */
-.slide-11.timeline .lead,
-section[data-slide="10"] .lead {
-  max-width: none;
-  width: 100%;
-  white-space: nowrap;
+/* PAGE 16 ALBUM COVER LINK */
+.album-cta {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (max-width: 850px) {
-  .slide-11.timeline .lead,
-  section[data-slide="10"] .lead {
-    white-space: normal;
-  }
+.album-cover-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 999rem;
+  border: 1px solid rgba(255,184,77,.42);
+  background: var(--color-soft);
+  color: var(--color-primary);
+  font-weight: 900;
+  line-height: var(--lh-caption);
+  text-decoration: none;
+}
+
+.album-cover-link:hover {
+  background: rgba(255,184,77,.24);
 }
 
 </style>
@@ -619,7 +615,7 @@ section[data-slide="10"] .lead {
         -->
 </section><section aria-label="16 / 19" class="slide slide-17 album" data-slide="16">
 <div class="slide-inner">
-<div class="shell album-shell"><div><div class="kicker">PART D · CASE STUDY</div><h1 class="display-title">앨범커버<br/>만들기 사례</h1><p class="lead">가사나 감정도 단문 연결로 장면 구조가 될 수 있다.</p></div><div class="lyric-panel"><div class="lyric-stack"><div class="lyric-line">괜찮은 척한다</div><div class="lyric-line">혼자 집으로 간다</div><div class="lyric-line">창문에 얼굴이 비친다</div><div class="lyric-line">실제 표정과 반사가 다르다</div></div></div></div>
+<div class="shell album-shell"><div><div class="kicker">PART D · CASE STUDY</div><h1 class="display-title">앨범커버<br/>만들기 사례</h1><p class="lead">가사나 감정도 단문 연결로 장면 구조가 될 수 있다.</p></div><div class="lyric-panel"><div class="lyric-stack"><div class="lyric-line">괜찮은 척한다</div><div class="lyric-line">혼자 집으로 간다</div><div class="lyric-line">창문에 얼굴이 비친다</div><div class="lyric-line">실제 표정과 반사가 다르다</div></div></div><div class="album-cta"><a class="album-cover-link" href="https://mirinaeverse.com/album/fine/pretend.html" rel="noopener noreferrer" target="_blank">앨범 커버 보기</a></div></div>
 </div>
 <!-- NOTES:
         노래 가사는 그대로 그림이 되지 않는다. 정서, 상황, 시선, 배경을 분리해야 한다. 단문 연결은 감정을 장면으로 번역하는 다리다.

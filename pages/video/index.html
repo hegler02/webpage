@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>매체는 메시지의 몸</title>
+<style>
+:root{
+  --space-1:.45rem;--space-2:.85rem;--space-3:1.25rem;--space-4:1.9rem;--space-5:2.8rem;--space-6:4rem;
+  --lh-display:1.08;--lh-title:1.12;--lh-body:1.42;--lh-caption:1.3;
+  --slide-padding:clamp(2rem,6vw,5rem);
+  --color-bg:#0b0d10;--color-bg-alt:#121720;--color-surface:#181f2b;--color-surface-2:#202938;
+  --color-text:#f4efe7;--color-muted:#b8b2a8;--color-primary:#ffb85c;--color-accent:#66e0d2;--color-danger:#ff6b6b;
+  --font-primary:-apple-system,BlinkMacSystemFont,system-ui,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+  --video-opacity-body:.40;--video-opacity-hero:.44;--video-opacity-current:var(--video-opacity-body);--video-overlay-start:.62;--video-overlay-mid:.46;--video-overlay-end:.66;--video-blur:.08rem;--video-scale:1.02;--video-motion-scale:1.06;--video-motion-x:.35%;--video-motion-y:-.25%;--video-motion-duration:180s;
+  --z-bg:0;--z-slide:1;--z-controls:100;--z-progress:200;
+}
+*{box-sizing:border-box;word-break:keep-all;line-break:strict}
+html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;overscroll-behavior-y:none;background:var(--color-bg);color:var(--color-text);font-family:var(--font-primary);font-stretch:normal}
+.video-bg{position:fixed;inset:0;z-index:var(--z-bg);overflow:hidden;pointer-events:none;background:var(--color-bg)}
+.video-bg video{width:100%;height:100%;object-fit:cover;opacity:var(--video-opacity-current);filter:blur(var(--video-blur)) saturate(.82) contrast(.9);transform:scale(var(--video-scale)) translate3d(0,0,0);animation:videoDrift var(--video-motion-duration) ease-in-out infinite alternate;will-change:transform,opacity}
+.video-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 12%,rgba(255,184,92,.18),transparent 34%),linear-gradient(90deg,rgba(11,13,16,var(--video-overlay-start)),rgba(11,13,16,var(--video-overlay-mid)),rgba(11,13,16,var(--video-overlay-end)))}
+@keyframes videoDrift{0%{transform:scale(var(--video-scale)) translate3d(0,0,0)}50%{transform:scale(var(--video-motion-scale)) translate3d(var(--video-motion-x),var(--video-motion-y),0)}100%{transform:scale(var(--video-scale)) translate3d(calc(var(--video-motion-x)*-1),calc(var(--video-motion-y)*-1),0)}}
+@media(prefers-reduced-motion:reduce){.video-bg video{animation:none}}
+.slide-deck{width:100vw;height:100vh;overflow:hidden;background:rgba(11,13,16,.01);position:relative;z-index:var(--z-slide)}
+.slide-track{width:100%;height:100%;display:flex;transform:translate3d(0,0,0);transition:transform .42s cubic-bezier(.2,.8,.2,1);will-change:transform;background:rgba(11,13,16,.01)}
+.slide{flex:0 0 100%;width:100%;height:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:var(--slide-padding);background:radial-gradient(circle at 75% 15%,rgba(255,184,92,.13),transparent 28%),linear-gradient(180deg,rgba(11,13,16,.86),rgba(11,13,16,.78));position:relative}
+.shell{width:100%;max-width:clamp(900px,75vw,1380px);display:grid;gap:var(--space-5);align-items:center;margin-inline:auto}
+.center{text-align:center;justify-items:center}.split{grid-template-columns:1.08fr .92fr}.split.reverse{grid-template-columns:.92fr 1.08fr}
+.stack{display:grid;gap:var(--space-3)}.stack-lg{display:grid;gap:var(--space-5)}.tight{display:grid;gap:var(--space-2)}
+.kicker{color:var(--color-primary);font-size:clamp(.85rem,1vw,1.05rem);font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:var(--lh-caption)}
+h1,h2,h3,p{margin:0}h1,h2,h3{letter-spacing:-.02em}
+h1{font-size:clamp(3.2rem,7.8vw,7.8rem);line-height:var(--lh-display);font-weight:900}
+h2{font-size:clamp(2.35rem,5.1vw,5rem);line-height:var(--lh-title);font-weight:900}
+h3{font-size:clamp(1.35rem,2.2vw,2.2rem);line-height:var(--lh-title);font-weight:850}
+.lead{font-size:clamp(1.1rem,1.75vw,1.7rem);line-height:var(--lh-body);color:var(--color-muted)}
+.big{font-size:clamp(2.2rem,4.5vw,4.5rem);line-height:var(--lh-title);font-weight:900}.accent{color:var(--color-primary)}.cyan{color:var(--color-accent)}.danger{color:var(--color-danger)}
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3)}
+.card{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-4);border:1px solid rgba(255,255,255,.12);border-radius:1.6rem;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025))}
+.component-body{flex:1;display:flex;flex-direction:column;gap:var(--space-2)}.component-footer{display:flex;gap:var(--space-2);flex-wrap:wrap;align-items:center}
+.chip{display:inline-flex;align-items:center;padding:var(--space-1) var(--space-2);border-radius:999rem;background:rgba(255,184,92,.14);color:var(--color-primary);font-size:clamp(.82rem,.9vw,.95rem);line-height:1;font-weight:750}
+.visual{min-height:45vh;border-radius:2rem;background:linear-gradient(135deg,rgba(255,184,92,.18),rgba(102,224,210,.14));border:1px solid rgba(255,255,255,.12);display:grid;place-items:center;padding:var(--space-4)}
+.chain{display:flex;align-items:center;justify-content:center;gap:var(--space-3);flex-wrap:wrap}.bit{padding:var(--space-3) var(--space-4);border-radius:999rem;background:var(--color-surface);font-size:clamp(1rem,1.5vw,1.45rem);font-weight:800}.arrow{color:var(--color-primary);font-size:clamp(1.5rem,2.5vw,2.4rem);font-weight:900}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}.quote{font-size:clamp(1.7rem,3vw,3rem);line-height:var(--lh-title);font-weight:900}
+.table-wrap{overflow-x:auto}.matrix{width:100%;border-collapse:collapse;font-size:clamp(1rem,1.5vw,1.4rem);line-height:var(--lh-body)}
+.matrix th,.matrix td{padding:var(--space-3);border-bottom:1px solid rgba(255,255,255,.14);text-align:left}.matrix th{color:var(--color-primary)}
+.diagram{display:grid;gap:var(--space-3);width:100%;justify-items:stretch}.diagram>.arrow{text-align:center;justify-self:center}.row{display:grid;grid-template-columns:1fr auto 1fr;gap:var(--space-3);align-items:center}.node{padding:var(--space-3);border-radius:1.2rem;background:var(--color-surface);font-weight:800;text-align:center}
+.full-row{grid-column:1/-1}
+.link-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3);width:100%}
+.agent-link{display:flex;flex-direction:column;gap:var(--space-2);padding:var(--space-3);border:1px solid rgba(255,255,255,.14);border-radius:1.25rem;background:rgba(255,255,255,.06);color:var(--color-text);text-decoration:none;line-height:var(--lh-caption);font-weight:850}
+.agent-link span{color:var(--color-muted);font-size:clamp(.78rem,.9vw,.92rem);font-weight:700;white-space:nowrap}
+.appendix-map{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-3)}
+.appendix-image-slide{padding:var(--space-4);background:linear-gradient(180deg,rgba(11,13,16,.76),rgba(11,13,16,.84))}
+.appendix-frame{width:100%;height:calc(100vh - var(--space-6));display:grid;place-items:center}
+.appendix-frame img{width:100%;height:100%;object-fit:contain;border-radius:1.2rem;border:1px solid rgba(255,255,255,.16);box-shadow:0 0 0 var(--space-1) rgba(255,255,255,.04);background:rgba(0,0,0,.28)}
+.slide-controls{position:fixed;inset:0;pointer-events:none;z-index:var(--z-controls)}.nav-button{position:absolute;top:50%;transform:translateY(-50%);pointer-events:auto;border:0;background:rgba(255,255,255,.08);color:var(--color-text);width:3rem;height:4rem;border-radius:999rem;font-size:2rem;opacity:.22;cursor:pointer}.nav-button:hover{opacity:1}.nav-prev{left:var(--space-3)}.nav-next{right:var(--space-3)}
+.progress-shell{position:absolute;left:var(--space-4);right:var(--space-4);bottom:var(--space-3);height:.28rem;background:rgba(255,255,255,.14);border-radius:999rem;z-index:var(--z-progress)}.progress-bar{height:100%;width:4%;background:linear-gradient(90deg,var(--color-primary),var(--color-accent));border-radius:999rem;transition:width .3s ease}.page-number{position:absolute;right:var(--space-4);bottom:var(--space-4);font-size:.9rem;color:var(--color-muted);font-weight:800}
+@media(max-width:850px){.slide-deck{height:100vh;overflow-y:auto;overflow-x:hidden}.slide-track{height:auto;min-height:100vh}.slide{height:auto;min-height:100vh;padding-block:var(--space-6)}.split,.split.reverse,.card-grid,.compare,.row,.link-grid,.appendix-map{grid-template-columns:1fr}.visual{min-height:auto}.quote{white-space:normal}.appendix-image-slide{padding:var(--space-3)}.appendix-frame{height:auto;min-height:70vh}.appendix-frame img{height:auto}}
+@media print{html,body{overflow:visible}.slide-deck{height:auto;overflow:visible}.slide-track{flex-direction:column;transform:none!important}.slide{page-break-after:always;height:100vh}.slide-controls{display:none}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+
+/* Appendix image card refinement */
+.appendix-image-slide{
+  padding:var(--space-5);
+  background:
+    radial-gradient(circle at 50% 18%, rgba(102,224,210,.10), transparent 28%),
+    radial-gradient(circle at 82% 22%, rgba(255,184,92,.14), transparent 24%),
+    linear-gradient(180deg, rgba(11,13,16,.88), rgba(11,13,16,.96));
+}
+.appendix-frame{
+  width:100%;
+  max-width:clamp(980px,86vw,1600px);
+  height:calc(100vh - var(--space-6));
+  padding:var(--space-4);
+  display:grid;
+  place-items:center;
+  border-radius:2rem;
+  border:1px solid rgba(255,255,255,.14);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  box-shadow:
+    0 1.6rem 3.2rem rgba(0,0,0,.34),
+    inset 0 0 0 1px rgba(255,255,255,.04);
+}
+.appendix-frame img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:1.3rem;
+  background:
+    linear-gradient(180deg, rgba(18,23,32,.92), rgba(11,13,16,.92));
+  box-shadow:
+    0 .9rem 2.2rem rgba(0,0,0,.28),
+    inset 0 0 0 1px rgba(255,255,255,.05);
+}
+@media(max-width:850px){
+  .appendix-image-slide{
+    padding:var(--space-4);
+  }
+  .appendix-frame{
+    height:auto;
+    min-height:70vh;
+    padding:var(--space-3);
+  }
+  .appendix-frame img{
+    height:auto;
+    max-height:78vh;
+  }
+}
+
+
+
+/* Video background visibility hard-fix */
+:root{
+  --video-opacity-body:.40;
+  --video-opacity-hero:.44;
+  --video-opacity-current:var(--video-opacity-body);
+  --video-overlay-start:.62;
+  --video-overlay-mid:.46;
+  --video-overlay-end:.66;
+  --video-blur:0rem;
+  --video-scale:1.01;
+  --video-motion-scale:1.08;
+  --video-motion-x:.9%;
+  --video-motion-y:-.65%;
+  --video-motion-duration:95s;
+}
+.video-bg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+  background:var(--color-bg);
+}
+.video-bg video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:var(--video-opacity-current);
+  filter:saturate(1.08) contrast(1.08) brightness(.92);
+  transform:scale(var(--video-scale)) translate3d(0,0,0);
+  animation:videoDrift var(--video-motion-duration) ease-in-out infinite alternate;
+  transition:opacity .6s ease, filter .6s ease;
+  will-change:transform,opacity;
+}
+.video-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 78% 16%, rgba(255,184,92,.18), transparent 30%),
+    radial-gradient(circle at 22% 82%, rgba(102,224,210,.12), transparent 32%),
+    linear-gradient(90deg,
+      rgba(11,13,16,var(--video-overlay-start)),
+      rgba(11,13,16,var(--video-overlay-mid)),
+      rgba(11,13,16,var(--video-overlay-end)));
+}
+.slide-deck{
+  background:transparent;
+  position:relative;
+  z-index:1;
+}
+.slide-track{
+  background:transparent;
+}
+.slide{
+  background:
+    radial-gradient(circle at 76% 16%, rgba(255,184,92,.10), transparent 28%),
+    linear-gradient(180deg, rgba(11,13,16,.72), rgba(11,13,16,.66));
+}
+.slide:first-child,
+.slide:nth-child(24),
+.slide:nth-child(25),
+.slide:nth-child(27){
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255,184,92,.14), transparent 32%),
+    linear-gradient(180deg, rgba(11,13,16,.68), rgba(11,13,16,.62));
+}
+.card,
+.visual,
+.appendix-frame{
+  backdrop-filter:blur(.35rem);
+  -webkit-backdrop-filter:blur(.35rem);
+}
+.speaker-line{
+  margin:0;
+  padding:var(--space-2) var(--space-3);
+  border-radius:999rem;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.15);
+  color:var(--color-text);
+  font-size:clamp(1rem,1.25vw,1.22rem);
+  line-height:var(--lh-caption);
+  font-weight:800;
+}
+@media(prefers-reduced-motion:reduce){
+  .video-bg video{animation:none;}
+}
+
+
+
+/* Dynamic carousel transition layer */
+.slide-deck{
+  perspective:1200px;
+  transform-style:preserve-3d;
+}
+.slide-track{
+  transition:transform .78s cubic-bezier(.16,1,.3,1);
+}
+.slide{
+  transform-style:preserve-3d;
+  transition:filter .78s cubic-bezier(.16,1,.3,1), opacity .78s cubic-bezier(.16,1,.3,1);
+}
+.slide .shell,
+.slide .appendix-frame{
+  will-change:transform, opacity, filter;
+  transition:
+    transform .78s cubic-bezier(.16,1,.3,1),
+    opacity .62s cubic-bezier(.16,1,.3,1),
+    filter .62s cubic-bezier(.16,1,.3,1);
+}
+.slide:not(.is-current) .shell,
+.slide:not(.is-current) .appendix-frame{
+  opacity:.42;
+  transform:translate3d(0,var(--space-2),0) scale(.965);
+  filter:blur(.10rem);
+}
+.slide.is-current .shell,
+.slide.is-current .appendix-frame{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  filter:blur(0);
+}
+.slide-deck.is-transitioning[data-dir="next"] .slide.is-current .shell,
+.slide-deck.is-transitioning[data-dir="next"] .slide.is-current .appendix-frame{
+  animation:contentInNext .78s cubic-bezier(.16,1,.3,1) both;
+}
+.slide-deck.is-transitioning[data-dir="prev"] .slide.is-current .shell,
+.slide-deck.is-transitioning[data-dir="prev"] .slide.is-current .appendix-frame{
+  animation:contentInPrev .78s cubic-bezier(.16,1,.3,1) both;
+}
+.slide-deck::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:8;
+  opacity:0;
+  background:linear-gradient(90deg, transparent, rgba(255,184,92,.14), rgba(102,224,210,.10), transparent);
+  transform:translate3d(-38%,0,0) skewX(-14deg);
+  mix-blend-mode:screen;
+}
+.slide-deck.is-transitioning[data-dir="next"]::after{
+  animation:sweepNext .78s cubic-bezier(.16,1,.3,1) both;
+}
+.slide-deck.is-transitioning[data-dir="prev"]::after{
+  animation:sweepPrev .78s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes contentInNext{
+  0%{opacity:0;transform:translate3d(var(--space-6),var(--space-2),0) scale(.94);filter:blur(.35rem)}
+  58%{opacity:1;filter:blur(0)}
+  100%{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}
+}
+@keyframes contentInPrev{
+  0%{opacity:0;transform:translate3d(calc(var(--space-6)*-1),var(--space-2),0) scale(.94);filter:blur(.35rem)}
+  58%{opacity:1;filter:blur(0)}
+  100%{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}
+}
+@keyframes sweepNext{
+  0%{opacity:0;transform:translate3d(-46%,0,0) skewX(-14deg)}
+  34%{opacity:1}
+  100%{opacity:0;transform:translate3d(46%,0,0) skewX(-14deg)}
+}
+@keyframes sweepPrev{
+  0%{opacity:0;transform:translate3d(46%,0,0) skewX(14deg)}
+  34%{opacity:1}
+  100%{opacity:0;transform:translate3d(-46%,0,0) skewX(14deg)}
+}
+@media(prefers-reduced-motion:reduce){
+  .slide-track,
+  .slide,
+  .slide .shell,
+  .slide .appendix-frame{
+    transition:none;
+  }
+  .slide-deck.is-transitioning[data-dir="next"] .slide.is-current .shell,
+  .slide-deck.is-transitioning[data-dir="next"] .slide.is-current .appendix-frame,
+  .slide-deck.is-transitioning[data-dir="prev"] .slide.is-current .shell,
+  .slide-deck.is-transitioning[data-dir="prev"] .slide.is-current .appendix-frame,
+  .slide-deck.is-transitioning[data-dir="next"]::after,
+  .slide-deck.is-transitioning[data-dir="prev"]::after{
+    animation:none;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="video-bg" aria-hidden="true"><video id="bgVideo" autoplay muted loop playsinline preload="auto"><source src="https://cdn.midjourney.com/video/a02ae05b-cada-4611-9f4b-1e82f3019216/2.mp4" type="video/mp4"></video></div>
+<main class="slide-deck" id="deck" tabindex="0" aria-label="매체는 메시지의 몸 슬라이드 덱">
+<div class="slide-track" id="slideTrack">
+
+<section class="slide"><div class="shell center"><div class="kicker">이미지 · 웹툰 · 영상 · 생성형 AI</div><h1>매체는<br>메시지의 몸</h1><p class="lead">이미지에서 웹툰으로, 웹툰에서 영상으로 — 그리고 생성형 AI</p><p class="speaker-line">동서울대학교 전기공학과 김준호 교수</p></div><!-- NOTES: 오늘 가져갈 문장은 하나입니다. '매체는 메시지의 몸이다.' 이미지, 웹툰, 영상이 어떻게 한 뿌리에서 갈라지는지 봅니다. --></section>
+
+<section class="slide"><div class="shell center"><h2>왜 같은 이야기가<br>이미지에선 살고,<br>영상에선 죽는가?</h2><p class="lead">매체를 바꾸면 메시지의 몸도 바뀐다.</p></div><!-- NOTES: 한 장면은 그림일 때 강렬한데 영상으로 늘리면 늘어집니다. 반대도 있죠. 그 차이가 오늘의 출발점입니다. --></section>
+
+<section class="slide"><div class="shell"><div class="stack"><div class="kicker">오늘의 여정</div><h2>네 정거장으로<br>한 뿌리를 본다</h2></div><div class="card-grid"><div class="card"><div class="component-body"><h3>1. 질문</h3><p class="lead">왜 대부분 실패하는가</p></div></div><div class="card"><div class="component-body"><h3>2. 개념</h3><p class="lead">메시지의 몸이란</p></div></div><div class="card"><div class="component-body"><h3>3. 적용</h3><p class="lead">이미지 · 웹툰 · 영상</p></div></div></div><p class="lead">마지막 정거장: AI 시대에도 변하지 않는 것</p></div><!-- NOTES: 네 정거장입니다. 세 번째에서 세 매체를 차례로 해부하고, 영상은 가장 깊게 들어갑니다. --></section>
+
+<section class="slide"><div class="shell split"><div class="stack"><div class="kicker">문제</div><h2>도구는 폭발했다<br>그런데 기억에 남는 건 줄었다</h2></div><div class="visual"><div class="big">∞ → 0</div></div></div><!-- NOTES: 누구나 이미지와 영상을 뽑아냅니다. 그런데 어제 본 AI 콘텐츠 중 하나라도 기억나십니까? 도구가 늘수록 메시지는 흐려졌습니다. --></section>
+
+<section class="slide"><div class="shell center"><h2>도구를 몰라서<br>실패하지 않는다</h2><p class="big accent">메시지 구조가 없어서 실패한다</p><p class="lead">표면부터 시작하면 예쁘지만 텅 빈 결과가 나온다.</p></div><!-- NOTES: '프롬프트를 더 배워야지' — 틀렸습니다. 예쁜데 텅 빈 결과물은 전부 표면부터 시작했기 때문입니다. 그래서 묻습니다. 매체를 고르기 전에 무엇이 있어야 하는가? 다음 정거장의 답입니다. --></section>
+
+<section class="slide"><div class="shell center"><div class="kicker">핵심 개념</div><h1>메시지의 몸<br>= 단문 인과 체인</h1></div><!-- NOTES: 오늘의 심장입니다. 메시지는 '단문 인과 체인'이라는 몸을 가집니다. 한 줄이 한 판단인 문장들의 사슬입니다. --></section>
+
+<section class="slide"><div class="shell center"><div class="stack"><h2>한 문장 = 한 판단 = 한 비트</h2><p class="lead">한 줄만 바뀌어도 이야기가 바뀐다.</p></div><div class="chain"><span class="bit">문을 연다</span><span class="arrow">→</span><span class="bit">빈 방을 본다</span><span class="arrow">→</span><span class="bit">잘못됐음을 깨닫는다</span></div></div><!-- NOTES: 줄마다 판단 하나입니다. 한 줄만 바꿔도 이야기가 바뀝니다. 초등학생도 고칠 수 있죠. 이게 매체에 독립적인 원본입니다. --></section>
+
+<section class="slide"><div class="shell compare"><div class="card"><div class="component-body"><h3 class="danger">쉼표로 묶인 문장</h3><p class="lead">“문을 열고 방을 보고 놀라 비명을 질렀다”</p></div><div class="component-footer"><span class="chip">실패 신호</span></div></div><div class="card"><div class="component-body"><h3 class="cyan">비트로 쪼갠 체인</h3><p class="lead">문을 연다 → 본다 → 놀란다 → 물러선다 → 비명</p></div><div class="component-footer"><span class="chip">수정 가능</span></div></div></div><!-- NOTES: 한 덩어리로 뭉친 문장은 판단이 뭉개진 겁니다. 어디서 고칠지 모르죠. 쉼표가 많으면 의심하세요. --></section>
+
+<section class="slide"><div class="shell center"><h2>요약은 덜어낸다<br>함축은 한 단위에 살린다</h2><p class="lead">매체는 전부 함축의 기술이다.</p></div><!-- NOTES: 요약은 내용을 줄이는 거고, 함축은 핵심을 한 단위에 압축해 살리는 겁니다. 매체는 전부 이 함축의 기술입니다. --></section>
+
+<section class="slide"><div class="shell"><div class="stack"><div class="kicker">Anchor</div><h2>Keep · Mutate · Avoid</h2><p class="lead">구조보다 먼저 고정한다. 스타일은 앵커를 덮을 수 없다.</p></div><div class="card-grid"><div class="card"><div class="component-body"><h3>Keep</h3><p class="lead">절대 유지할 얼굴 · 톤 · 설정</p></div></div><div class="card"><div class="component-body"><h3>Mutate</h3><p class="lead">변주해도 되는 표면</p></div></div><div class="card"><div class="component-body"><h3>Avoid</h3><p class="lead">무너지면 안 되는 금지선</p></div></div></div></div><!-- NOTES: 주인공의 얼굴, 작품의 톤, 절대 바꾸면 안 되는 것. 먼저 못 박습니다. AI 작업에서 가장 자주 무너지는 지점입니다. --></section>
+
+<section class="slide"><div class="shell center"><div class="stack"><h2>렌더 수는<br>목표가 아니다</h2><p class="lead">그림 수, 컷 수, 쇼트 수는 이해의 결과다.</p></div><div class="chain"><span class="bit">비트</span><span class="arrow">→</span><span class="bit accent">담기면 함축</span><span class="arrow">/</span><span class="bit cyan">안 담기면 분할</span></div></div><!-- NOTES: '컷 10개 만들어줘'가 아닙니다. 판단이 12개니까 12개가 되는 겁니다. 그림 수, 컷 수는 이해의 결과지 시작점이 아닙니다. --></section>
+
+<section class="slide"><div class="shell center"><div class="kicker">적용의 원리</div><h1>같은 체인을<br>매체의 본성으로<br>함축한다</h1><p class="lead">공간 → 공간+여백 → 공간+시간</p></div><!-- NOTES: 그 한 체인이 세 가지 몸으로 변신합니다. 이미지는 공간만, 웹툰은 여백을, 영상은 시간을 더합니다. 압축이 점점 풀리는 순서입니다. --></section>
+
+<section class="slide"><div class="shell split"><div class="stack"><div class="kicker">Image 01</div><h2>이미지 —<br>공간으로 함축한다</h2><p class="lead">시간이 없다. 그래서 체인 전체를 한 프레임에 압축한다.</p></div><div class="visual"><div class="big">1 Frame</div></div></div><!-- NOTES: 이미지는 시간 축이 없습니다. 사슬 전체를 한 장면에 욱여넣어야 하죠. 가장 압축률이 높은 매체입니다. --></section>
+
+<section class="slide"><div class="shell"><div class="stack"><div class="kicker">Image 02</div><h2>한 장면이<br>모든 판단을 품는다</h2></div><div class="card-grid"><div class="card"><div class="component-body"><h3>기울어진 문</h3><p class="lead">긴장</p></div></div><div class="card"><div class="component-body"><h3>흩어진 물건</h3><p class="lead">사건</p></div></div><div class="card"><div class="component-body"><h3>인물의 시선</h3><p class="lead">다음 판단</p></div></div></div></div><!-- NOTES: 잘 만든 한 장은 여러 판단을 동시에 말합니다. 구도, 빛, 시선 하나하나가 체인의 한 줄입니다. 보는 사람이 0.5초에 읽어냅니다. --></section>
+
+<section class="slide"><div class="shell split reverse"><div class="visual"><div class="quote">체인 → 공간 언어</div></div><div class="stack"><div class="kicker">Image 03</div><h2>이미지 × 생성형 AI</h2><p class="lead">프롬프트는 단문 체인을 공간 언어로 번역하는 작업이다.</p><p class="lead accent">앵커 먼저 고정 → 한 장 생성</p></div></div><!-- NOTES: 막연한 형용사 나열 말고, 어떤 판단을 한 프레임에 담을지부터 정하세요. 앵커를 먼저 고정해야 인물이 안 흔들립니다. --></section>
+
+<section class="slide"><div class="shell split"><div class="stack"><div class="kicker">Webtoon 01</div><h2>웹툰 —<br>컷과 여백으로 함축한다</h2><p class="lead">판단을 패널로 자르고, 칸 사이 여백이 시간을 만든다.</p></div><div class="visual"><div class="chain"><span class="bit">컷</span><span class="arrow"> </span><span class="bit">여백</span><span class="arrow"> </span><span class="bit">컷</span></div></div></div><!-- NOTES: 웹툰은 사슬을 칸으로 끊습니다. 칸과 칸 사이 빈 공간에서 독자가 시간을 느낍니다. 이미지에 없던 '사이'가 생긴 겁니다. --></section>
+
+<section class="slide"><div class="shell compare"><div class="card"><div class="component-body"><h3>칸 1</h3><p class="big">칼을 든 손</p></div></div><div class="card"><div class="component-body"><h3>칸 2</h3><p class="big">바닥에 떨어진 칼</p></div></div><p class="lead full-row">그 사이의 시간은 독자가 채운다. 이것이 closure(폐쇄성: 보이지 않는 사이를 독자가 연결해 완성하는 작용)다.</p></div><!-- NOTES: 그 사이에 무슨 일이 있었는지 안 보여줍니다. 독자가 채웁니다. 이걸 closure라고 합니다. 다 보여주면 오히려 약해져요. 여백이 연출입니다. --></section>
+
+<section class="slide"><div class="shell split reverse"><div class="visual"><div class="diagram"><div class="row"><div class="node">체인</div><div class="arrow">→</div><div class="node">컷 분할</div></div><div class="row"><div class="node">앵커</div><div class="arrow">→</div><div class="node">캐릭터 일관성</div></div></div></div><div class="stack"><div class="kicker">Webtoon 03</div><h2>웹툰 × 생성형 AI</h2><p class="lead">어디서 끊고 어디를 여백으로 둘지가 연출의 핵심이다.</p></div></div><!-- NOTES: AI 웹툰의 최대 난제는 캐릭터가 칸마다 달라지는 겁니다. 앵커를 고정하는 이유죠. '어디서 끊고 어디를 여백으로 둘지'가 연출의 핵심입니다. --></section>
+
+<section class="slide"><div class="shell split"><div class="stack"><div class="kicker">Video 01</div><h2>영상 —<br>시간과 움직임으로 함축한다</h2><p class="lead">이미지(공간) ⊗ 소리·시간. 가장 압축이 풀린 매체다.</p></div><div class="visual"><div class="big">Space × Time</div></div></div><!-- NOTES: 영상은 공간에 시간을 곱한 매체입니다. 한 장에 욱여넣을 필요가 없죠. 대신 늘어지면 바로 지루해집니다. 압축이 풀린 만큼 통제가 어렵습니다. --></section>
+
+<section class="slide"><div class="shell compare"><div class="card"><div class="component-body"><h3>쇼트</h3><p class="lead">AI가 만드는 1클립</p></div><div class="component-footer"><span class="chip">생성 단위</span></div></div><div class="card"><div class="component-body"><h3>컷</h3><p class="lead">사람이 잇는 경계</p></div><div class="component-footer"><span class="chip">편집 경계</span></div></div></div><!-- NOTES: 영상의 핵심 구분입니다. 쇼트는 찍기 전 설계 단위, AI가 만드는 한 클립입니다. 컷은 만든 뒤 사람이 잇는 경계죠. 컷은 웹툰의 여백과 같습니다 — 관객의 closure입니다. --></section>
+
+<section class="slide"><div class="shell"><div class="stack"><div class="kicker">Video 03</div><h2>한 비트를<br>어떻게 쇼트로 만드나</h2></div><div class="compare"><div class="card"><div class="component-body"><h3>합성 쇼트</h3><p class="lead">여러 판단을 한 클립에 함축</p></div><div class="component-footer"><span class="chip">synthesis</span></div></div><div class="card"><div class="component-body"><h3>분할 몽타주</h3><p class="lead">한 판단을 여러 쇼트로 펼침</p></div><div class="component-footer"><span class="chip">split</span></div></div></div></div><!-- NOTES: 여기가 영상 연출의 갈림길입니다. 긴장을 한 호흡에 담고 싶으면 합성, 한 판단을 강조하며 쪼개 보여주고 싶으면 몽타주. 쇼트 수는 비트를 얼마나 이해했는지의 결과입니다. 무작정 늘리면 늘어집니다. --></section>
+
+<section class="slide"><div class="shell split reverse"><div class="visual"><div class="diagram"><div class="node">First Frame 승인</div><div class="arrow">↓</div><div class="node">움직임 프롬프트</div><div class="arrow">↓</div><div class="node">편집 · 대위법</div></div></div><div class="stack"><div class="kicker">Video 04</div><h2>영상 × 생성형 AI</h2><p class="lead">정지 이미지를 먼저 승인하고, 그다음 움직임을 입힌다.</p><p class="lead accent">편집과 대위법은 사람의 권한이다.</p></div></div><!-- NOTES: 곧장 영상부터 만들면 통제가 안 됩니다. 먼저 첫 프레임을 정지 이미지로 확정·승인하고, 그 뒤에 움직임을 입힙니다. 이미지 단계가 영상의 앵커가 되는 거죠. 그리고 컷을 잇고 소리를 거스르는 대위법, 그건 사람의 몫입니다. --></section>
+
+<section class="slide"><div class="shell"><div class="stack"><div class="kicker">비교</div><h2>한 체인,<br>세 개의 몸</h2></div><div class="table-wrap"><table class="matrix"><thead><tr><th>매체</th><th>더하는 차원</th><th>AI 생성 단위</th></tr></thead><tbody><tr><td>이미지</td><td>공간</td><td>한 프레임</td></tr><tr><td>웹툰</td><td>공간 + 여백</td><td>패널</td></tr><tr><td>영상</td><td>공간 + 시간</td><td>쇼트</td></tr></tbody></table></div></div><!-- NOTES: 전부 같은 커널입니다. 차이는 매체가 더하는 차원뿐입니다. 단문 체인 → 앵커 → 비트 → 렌더 → 검증, 이 척추는 셋 다 동일합니다. --></section>
+
+<section class="slide"><div class="shell center"><h1>AI는 제안한다<br>인간은 승인한다</h1><p class="lead">무엇을 남기고, 무엇을 못 바꾸게 할지 결정하는 권한.</p></div><!-- NOTES: 도구가 아무리 똑똑해져도 이 줄은 안 바뀝니다. AI는 무한히 변주를 뽑지만, 어떤 판단을 남기고 무엇을 못 바꾸게 할지, 최종 승인은 사람 몫입니다. --></section>
+
+<section class="slide"><div class="shell center"><div class="stack"><div class="kicker">닫는 한 문장</div><h1>매체를 고르기 전에<br>체인을 써라</h1><p class="lead">같은 이야기가 살아나는지 죽는지는 여기서 갈린다.</p></div><div class="link-grid" aria-label="관련 에이전트 링크"><a class="agent-link" href="https://chatgpt.com/g/g-69f085b428c88191960302b3654a8549-mirinaeman-image-harness" target="_blank" rel="noopener noreferrer">이미지 에이전트<span>Image Harness</span></a><a class="agent-link" href="https://chatgpt.com/g/g-69f1a14a8ac0819192833ee6fc24add6-mirinaeman-toon-agent-harness" target="_blank" rel="noopener noreferrer">웹툰 에이전트<span>Toon Agent Harness</span></a><a class="agent-link" href="https://chatgpt.com/g/g-6a1bcbd742f08191924f7aa4eec427d8-mirinaeman-video-agent-harness-v1-0" target="_blank" rel="noopener noreferrer">동영상 에이전트<span>Video Agent Harness</span></a><a class="agent-link" href="https://chatgpt.com/g/g-69e779b09e8881918f566d099cfd58b6-webpage-gpt-builder-1-5" target="_blank" rel="noopener noreferrer">웹페이지 빌더<span>Webpage Builder</span></a></div></div><!-- NOTES: 처음 질문 기억하십니까? 왜 같은 이야기가 이미지에선 살고 영상에선 죽는가. 답입니다. 매체를 고르기 전에 단문 체인을 먼저 썼느냐. 그게 전부입니다. 하단의 에이전트 링크는 실습으로 이어지는 출구입니다. 감사합니다. --></section>
+
+
+<section class="slide"><div class="shell"><div class="stack"><div class="kicker">Appendix Bridge</div><h2>본편은 끝났다<br>이제 참고 장면으로 확인한다</h2><p class="lead">다음 페이지부터 만화·영상·쇼트·컷·심리적 커팅·대위법을 16:9 이미지로 이어서 본다.</p></div><div class="appendix-map"><div class="card"><div class="component-body"><h3>만화</h3><p class="lead">패널과 여백</p></div></div><div class="card"><div class="component-body"><h3>영상</h3><p class="lead">시간과 움직임</p></div></div><div class="card"><div class="component-body"><h3>쇼트</h3><p class="lead">생성 단위</p></div></div><div class="card"><div class="component-body"><h3>컷</h3><p class="lead">편집 경계</p></div></div><div class="card"><div class="component-body"><h3>대위법</h3><p class="lead">소리와 화면의 충돌</p></div></div></div></div><!-- NOTES: 별첨 이미지로 넘어가기 전, 청중에게 지금부터는 본편 개념을 시각 자료로 다시 확인하는 구간임을 알려줍니다. --></section>
+
+<section class="slide"><div class="shell center"><div class="kicker">별첨자료</div><h1>만화 · 영상 · 쇼트 · 컷<br>심리적 커팅과 대위법</h1><p class="lead">이후 이미지는 16:9 비율을 유지한 채 화면에 크게 표시됩니다.</p></div><!-- NOTES: 27페이지 별첨자료 표지입니다. 이후 28~38페이지는 16:9 이미지 자료입니다. --></section>
+
+<section class="slide appendix-image-slide"><div class="appendix-frame"><img src="https://i.imghippo.com/files/zcw4674vQ.webp" alt="별첨자료 28페이지 이미지" loading="lazy"></div><!-- NOTES: 별첨자료 28페이지 이미지입니다. --></section>
+
+<section class="slide appendix-image-slide"><div class="appendix-frame"><img src="https://i.imghippo.com/files/joJi4233BA.webp" alt="별첨자료 29페이지 이미지" loading="lazy"></div><!-- NOTES: 별첨자료 29페이지 이미지입니다. --></section>
+
+<section class="slide appendix-image-slide"><div class="appendix-frame"><img src="https://i.imghippo.com/files/yXp3754yko.webp" alt="별첨자료 30페이지 이미지" loading="lazy"></div><!-- NOTES: 별첨자료 30페이지 이미지입니다. --></section>
+
+<section class="slide appendix-image-slide"><div class="appendix-frame"><img src="https://i.imghippo.com/files/OBN5344NQ.webp" alt="별첨자료 31페이지 이미지" loading="lazy"></div><!-- NOTES: 별첨자료 31페이지 이미지입니다. --></section>
+
+<section class="slide appendix-image-slide"><div class="appendix-frame"><img src="https://i.imghippo.com/files/swF5131hLA.webp" alt="별첨자료 32페이지 이미지" loading="lazy"></div><!-- NOTES: 별첨자료 32페이지 이미지입니다. --></section>
+
+<section class="slide appendix-image-slide"><div class="appendix-frame"><img src="https://i.imghippo.com/files/aON7885bW.webp" alt="별첨자료 33페이지 이미지" loading="lazy"></div><!-- NOTES: 별첨자료 33페이지 이미지입니다. --></section>
+
+<section class="slide appendix-image-slide"><div class="appendix-frame"><img src="https://i.imghippo.com/files/bSp1791osw.webp" alt="별첨자료 34페이지 이미지" loading="lazy"></div><!-- NOTES: 별첨자료 34페이지 이미지입니다. --></section>
+
+<section class="slide appendix-image-slide"><div class="appendix-frame"><img src="https://i.imghippo.com/files/HC7753RRE.webp" alt="별첨자료 35페이지 이미지" loading="lazy"></div><!-- NOTES: 별첨자료 35페이지 이미지입니다. --></section>
+
+<section class="slide appendix-image-slide"><div class="appendix-frame"><img src="https://i.imghippo.com/files/gJSx3962T.webp" alt="별첨자료 36페이지 이미지" loading="lazy"></div><!-- NOTES: 별첨자료 36페이지 이미지입니다. --></section>
+
+<section class="slide appendix-image-slide"><div class="appendix-frame"><img src="https://i.imghippo.com/files/yFuU5326BEc.webp" alt="별첨자료 37페이지 이미지" loading="lazy"></div><!-- NOTES: 별첨자료 37페이지 이미지입니다. --></section>
+
+<section class="slide appendix-image-slide"><div class="appendix-frame"><img src="https://i.imghippo.com/files/Q6014qsk.webp" alt="별첨자료 38페이지 이미지" loading="lazy"></div><!-- NOTES: 별첨자료 38페이지 이미지입니다. --></section>
+
+</div>
+</main>
+
+<div class="slide-controls" aria-hidden="false">
+  <button class="nav-button nav-prev" id="prevBtn" aria-label="이전 슬라이드">‹</button>
+  <button class="nav-button nav-next" id="nextBtn" aria-label="다음 슬라이드">›</button>
+  <div class="progress-shell"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="page-number" id="pageNumber">01 / 38</div>
+</div>
+
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  var track=document.getElementById('slideTrack');
+  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total=slides.length;
+  var current=0;
+  var progress=document.getElementById('progressBar');
+  var page=document.getElementById('pageNumber');
+  var prevBtn=document.getElementById('prevBtn');
+  var nextBtn=document.getElementById('nextBtn');
+
+  var bgVideo=document.getElementById('bgVideo');
+  function ensureVideoPlayback(){
+    if(bgVideo && bgVideo.paused){
+      var attempt=bgVideo.play();
+      if(attempt && typeof attempt.catch==='function'){attempt.catch(function(){});}
+    }
+  }
+  window.addEventListener('load',ensureVideoPlayback);
+  document.addEventListener('click',ensureVideoPlayback,true);
+  document.addEventListener('keydown',ensureVideoPlayback,true);
+  document.addEventListener('touchstart',ensureVideoPlayback,true);
+  function clamp(n,min,max){return Math.max(min,Math.min(max,n));}
+  function pad(n){return String(n).padStart(2,'0');}
+  var transitionTimer=null;
+  function syncSlideClasses(){
+    slides.forEach(function(slide, i){
+      slide.classList.remove('is-current','is-before','is-after');
+      if(i===current){slide.classList.add('is-current');}
+      else if(i<current){slide.classList.add('is-before');}
+      else{slide.classList.add('is-after');}
+    });
+  }
+  function playTransition(direction){
+    deck.setAttribute('data-dir', direction || 'next');
+    deck.classList.remove('is-transitioning');
+    void deck.offsetWidth;
+    deck.classList.add('is-transitioning');
+    clearTimeout(transitionTimer);
+    transitionTimer=setTimeout(function(){
+      deck.classList.remove('is-transitioning');
+    }, 820);
+  }
+  function update(){
+    syncSlideClasses();
+    track.style.transform='translate3d('+(-current*100)+'%,0,0)';
+    progress.style.width=((current+1)/total*100)+'%';
+    page.textContent=pad(current+1)+' / '+pad(total);
+  }
+  function goTo(index){
+    var target=clamp(index,0,total-1);
+    if(target===current){return;}
+    var direction=target>current?'next':'prev';
+    current=target;
+    playTransition(direction);
+    update();
+  }
+  function next(){goTo(current+1);}
+  function prev(){goTo(current-1);}
+  deck.addEventListener('click',function(e){
+    deck.focus();
+    if(e.target.closest('button,a,input,textarea,select')) return;
+    if(e.clientX < window.innerWidth*.35){prev();}else{next();}
+  });
+  prevBtn.addEventListener('click',function(e){e.stopPropagation();prev();});
+  nextBtn.addEventListener('click',function(e){e.stopPropagation();next();});
+  var wheelLocked=false;
+  window.addEventListener('wheel',function(e){
+    if(window.matchMedia('(max-width:850px)').matches){return;}
+    e.preventDefault();
+    if(wheelLocked) return;
+    var d=Math.abs(e.deltaY)>=Math.abs(e.deltaX)?e.deltaY:e.deltaX;
+    if(Math.abs(d)<12) return;
+    if(d>0){next();}else{prev();}
+    wheelLocked=true;
+    setTimeout(function(){wheelLocked=false;},520);
+  },{passive:false});
+  var startX=0,startY=0;
+  deck.addEventListener('touchstart',function(e){
+    if(!e.touches.length) return;
+    startX=e.touches[0].clientX;startY=e.touches[0].clientY;
+  },{passive:true});
+  deck.addEventListener('touchend',function(e){
+    if(!e.changedTouches.length) return;
+    var dx=e.changedTouches[0].clientX-startX;
+    var dy=e.changedTouches[0].clientY-startY;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>45){dx<0?next():prev();}
+  },{passive:true});
+  function handleKey(e){
+    var nextKeys=['ArrowRight','PageDown',' ','Enter','n','N'];
+    var prevKeys=['ArrowLeft','PageUp','Backspace','p','P'];
+    if(nextKeys.indexOf(e.key)!==-1){e.preventDefault();next();return;}
+    if(prevKeys.indexOf(e.key)!==-1){e.preventDefault();prev();}
+  }
+  window.addEventListener('keydown',handleKey,true);
+  document.addEventListener('keydown',handleKey,true);
+  deck.addEventListener('keydown',handleKey,true);
+  window.addEventListener('resize',update);
+  deck.focus();
+  update();
+})();
+</script>
+</body>
+</html>

@@ -86,9 +86,7 @@
       --color-bg-2: #2a1d17;
       --color-bg-3: #34251d;
       --color-surface: #3a281f;
-      --color-surface-2: #463025;
       --color-card: rgba(255, 241, 210, 0.08);
-      --color-card-strong: rgba(255, 241, 210, 0.13);
       --color-line: rgba(255, 241, 210, 0.18);
       --color-line-strong: rgba(255, 241, 210, 0.3);
       --color-text: #fff1d2;
@@ -97,7 +95,6 @@
       --color-heading: #fff7df;
       --color-accent: #d94c32;
       --color-accent-2: #e9a38d;
-      --color-olive: #8c9a64;
       --color-shadow: rgba(0, 0, 0, 0.28);
 
       --header-h: 76px;
@@ -127,22 +124,18 @@
       --ls-body: 0;
       --ls-caption: 0.01em;
 
-      --flow-xxs: 0.35em;
       --flow-xs: 0.55em;
       --flow-sm: 0.8em;
       --flow-md: 1.15em;
       --flow-lg: 1.6em;
       --flow-xl: 2.2em;
 
-      --space-xs: 6px;
-      --space-sm: 10px;
       --space-md: 16px;
       --space-card-pad: clamp(18px, 1.5vw, 24px);
       --space-card-gap: clamp(26px, 2.2vw, 38px);
       --space-section-y: clamp(68px, 7.2vw, 116px);
       --space-hero-y: clamp(86px, 8.8vw, 148px);
 
-      --radius-sm: 14px;
       --radius-md: 22px;
       --radius-lg: 32px;
       --radius-xl: 44px;
@@ -190,7 +183,6 @@
     }
 
     img,
-    picture,
     svg,
     audio {
       max-width: 100%;
@@ -331,10 +323,6 @@
     .wrap {
       width: min(calc(100% - var(--page-pad) * 2), var(--wrap-max));
       margin-inline: auto;
-    }
-
-    .narrow {
-      max-width: var(--content-max);
     }
 
     .site-header {
@@ -992,24 +980,29 @@
       text-align: center;
     }
 
-    .lightbox {
-      width: min(92vw, 820px);
-      max-width: 820px;
+    .lightbox,
+    .lyrics-modal {
       margin: auto;
       padding: 0;
       border: 1px solid rgba(255, 241, 210, 0.26);
-      border-radius: var(--radius-lg);
       background: var(--color-bg);
       color: var(--color-text);
-      box-shadow: 0 34px 90px rgba(0, 0, 0, 0.54);
+      box-shadow: 0 34px 90px rgba(0, 0, 0, 0.56);
     }
 
-    .lightbox::backdrop {
+    .lightbox {
+      width: min(92vw, 820px);
+      max-width: 820px;
+      border-radius: var(--radius-lg);
+    }
+
+    .lightbox::backdrop,
+    .lyrics-modal::backdrop {
       background:
-        radial-gradient(circle at 50% 40%, rgba(217, 76, 50, 0.18), transparent 38%),
-        rgba(12, 8, 6, 0.78);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+        radial-gradient(circle at 50% 36%, rgba(217, 76, 50, 0.2), transparent 38%),
+        rgba(12, 8, 6, 0.8);
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
     }
 
     .lightbox-inner {
@@ -1042,10 +1035,11 @@
       text-align: center;
     }
 
-    .lightbox-close {
+    .lightbox-close,
+    .lyrics-close {
       position: absolute;
-      top: 14px;
-      right: 14px;
+      top: 16px;
+      right: 16px;
       z-index: 1;
       min-width: 44px;
       min-height: 44px;
@@ -1057,6 +1051,70 @@
       background: rgba(33, 24, 20, 0.74);
       border: 1px solid rgba(255, 241, 210, 0.26);
       cursor: pointer;
+    }
+
+    .lyrics-modal {
+      width: min(92vw, 860px);
+      max-height: min(86vh, 920px);
+      border-radius: var(--radius-xl);
+      overflow: visible;
+    }
+
+    .lyrics-modal-inner {
+      position: relative;
+      max-height: min(86vh, 920px);
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 18% 10%, rgba(217, 76, 50, 0.18), transparent 30%),
+        linear-gradient(145deg, rgba(255, 241, 210, 0.12), rgba(255, 241, 210, 0.04)),
+        var(--color-surface);
+      overflow: hidden;
+    }
+
+    .lyrics-head {
+      padding: clamp(24px, 4vw, 46px) clamp(22px, 4vw, 54px) clamp(18px, 2.4vw, 28px);
+      border-bottom: 1px solid rgba(255, 241, 210, 0.16);
+    }
+
+    .lyrics-kicker {
+      margin: 0 0 var(--flow-xs);
+      color: var(--color-accent-2);
+      font-size: var(--text-sm);
+      line-height: var(--lh-caption);
+      font-weight: 800;
+    }
+
+    .lyrics-head h2 {
+      max-width: 12em;
+      margin: 0;
+      font-size: clamp(1.9rem, 1.45rem + 1.8vw, 3.2rem);
+      line-height: 1.18;
+      letter-spacing: var(--ls-title);
+    }
+
+    .lyrics-body {
+      padding: clamp(22px, 3vw, 42px) clamp(22px, 4vw, 54px) clamp(34px, 5vw, 64px);
+      overflow: auto;
+      background:
+        linear-gradient(180deg, rgba(33, 24, 20, 0), rgba(33, 24, 20, 0.34));
+    }
+
+    .lyrics-body p {
+      max-width: 48ch;
+      margin: 0 0 2em;
+      color: var(--color-text);
+      font-size: clamp(1.02rem, 0.98rem + 0.22vw, 1.16rem);
+      line-height: 1.78;
+      letter-spacing: 0;
+    }
+
+    .lyrics-body p:nth-child(5),
+    .lyrics-body p:nth-child(10),
+    .lyrics-body p:nth-child(14) {
+      color: var(--color-soft);
+      font-weight: 800;
     }
 
     .site-footer {
@@ -1192,6 +1250,31 @@
       .listen-cover-card {
         width: 100%;
         justify-self: stretch;
+      }
+
+      .lyrics-modal {
+        width: min(94vw, 860px);
+        max-height: 84vh;
+        border-radius: var(--radius-lg);
+      }
+
+      .lyrics-modal-inner {
+        max-height: 84vh;
+        border-radius: var(--radius-lg);
+      }
+
+      .lyrics-head {
+        padding: 24px 22px 18px;
+      }
+
+      .lyrics-body {
+        padding: 22px 22px 44px;
+      }
+
+      .lyrics-body p {
+        max-width: 100%;
+        font-size: 1rem;
+        line-height: 1.74;
       }
 
       .footer-inner {
@@ -1684,6 +1767,10 @@
                 <span data-lang="ko">곡 재생하기</span>
                 <span data-lang="en">Play the song</span>
               </button>
+              <button class="btn btn-secondary" type="button" data-lyrics-open>
+                <span data-lang="ko">가사 보기</span>
+                <span data-lang="en">View lyrics</span>
+              </button>
               <button class="btn btn-secondary" type="button" data-lightbox-open>
                 <span data-lang="ko">커버 크게 보기</span>
                 <span data-lang="en">View cover</span>
@@ -1776,6 +1863,240 @@
     </div>
   </dialog>
 
+  <dialog class="lyrics-modal" data-lyrics-modal aria-labelledby="lyrics-title">
+    <div class="lyrics-modal-inner">
+      <button class="lyrics-close" type="button" data-lyrics-close aria-label="가사 닫기">×</button>
+
+      <div class="lyrics-head">
+        <p class="lyrics-kicker">Lyrics</p>
+        <h2 id="lyrics-title">
+          <span data-lang="ko">맛의 유통기한</span>
+          <span data-lang="en">The Shelf Life of Taste</span>
+        </h2>
+      </div>
+
+      <article class="lyrics-body">
+        <div data-lang="ko">
+          <p>음<br />라라라</p>
+
+          <p>
+            유통기한을 봤어<br />
+            조금 멀리 지나 있었어<br />
+            여섯 달쯤 지난 숫자가<br />
+            조용히 나를 보고 있었어
+          </p>
+
+          <p>
+            괜찮겠지 생각했어<br />
+            사람은 가끔 용감하니까<br />
+            끓는 물 앞에 서서 나는<br />
+            인생을 조금 믿어봤어
+          </p>
+
+          <p>
+            먹는 데는 아무 문제 없었어<br />
+            나는 멀쩡히 앉아 있었어<br />
+            그런데 이상하게도<br />
+            마음이 먼저 알아챘어
+          </p>
+
+          <p>
+            맛이 달라<br />
+            확실히 달라<br />
+            새콤한 말투가 사라지고<br />
+            달콤한 농담도 줄어들었어
+          </p>
+
+          <p>
+            유통기한은<br />
+            맛의 유통기한<br />
+            괜찮다는 말 뒤에 숨어 있던<br />
+            작은 이별의 날짜였어
+          </p>
+
+          <p>
+            빨간 소스는 그대로<br />
+            면발도 나를 배신하진 않았어<br />
+            그런데 그 감칠맛만<br />
+            어디론가 먼저 떠났어
+          </p>
+
+          <p>
+            나는 그릇을 보다가<br />
+            괜히 철학자가 되었어<br />
+            상한 건 내가 아니라<br />
+            기대였는지도 몰라
+          </p>
+
+          <p>
+            먹는 데는 아무 문제 없었어<br />
+            내일도 아마 살아 있겠지<br />
+            그런데 세상에는 분명히<br />
+            맛으로 끝나는 시간이 있어
+          </p>
+
+          <p>
+            맛이 달라<br />
+            확실히 달라<br />
+            새콤한 반짝임이 사라지고<br />
+            달콤한 믿음도 흐려졌어
+          </p>
+
+          <p>
+            유통기한은<br />
+            맛의 유통기한<br />
+            괜찮다는 말 뒤에 숨어 있던<br />
+            작은 이별의 날짜였어
+          </p>
+
+          <p>
+            사랑도 그런 걸까<br />
+            멀쩡한 얼굴을 하고<br />
+            어느 날 문득 맛만 먼저<br />
+            조용히 사라지는 걸까
+          </p>
+
+          <p>
+            맛이 달라<br />
+            그래서 알았어<br />
+            아무 일 없는 것처럼 보여도<br />
+            사라지는 건 있더라
+          </p>
+
+          <p>
+            유통기한은<br />
+            맛의 유통기한<br />
+            괜찮다는 말로는 못 지키는<br />
+            새콤달콤한 순간이 있어
+          </p>
+
+          <p>
+            유통기한은<br />
+            맛의 유통기한<br />
+            오늘 나는 비빔면 앞에서<br />
+            조금 어른이 되었어
+          </p>
+
+          <p>
+            유통기한은<br />
+            맛의 유통기한<br />
+            라라라<br />
+            음
+          </p>
+        </div>
+
+        <div data-lang="en">
+          <p>Mm<br />La la la</p>
+
+          <p>
+            I checked the expiration date<br />
+            It had passed a little far away<br />
+            A number about six months old<br />
+            Was quietly looking at me
+          </p>
+
+          <p>
+            I thought it would be fine<br />
+            People are brave sometimes<br />
+            Standing before boiling water<br />
+            I trusted life a little
+          </p>
+
+          <p>
+            There was nothing wrong with eating it<br />
+            I was sitting there just fine<br />
+            But strangely somehow<br />
+            My heart noticed first
+          </p>
+
+          <p>
+            The taste is different<br />
+            Definitely different<br />
+            The tangy tone disappeared<br />
+            The sweet jokes grew fewer too
+          </p>
+
+          <p>
+            An expiration date<br />
+            The expiration date of taste<br />
+            Hidden behind the words “it’s fine”<br />
+            Was a small date of farewell
+          </p>
+
+          <p>
+            The red sauce was still the same<br />
+            The noodles did not betray me<br />
+            But that savory taste alone<br />
+            Had already gone somewhere first
+          </p>
+
+          <p>
+            Looking at the bowl<br />
+            I became a philosopher for no reason<br />
+            Maybe what went bad was not me<br />
+            But the expectation
+          </p>
+
+          <p>
+            There was nothing wrong with eating it<br />
+            I’ll probably live tomorrow too<br />
+            But surely in this world<br />
+            Some time ends through taste
+          </p>
+
+          <p>
+            The taste is different<br />
+            Definitely different<br />
+            The tangy sparkle disappeared<br />
+            The sweet trust grew blurry too
+          </p>
+
+          <p>
+            An expiration date<br />
+            The expiration date of taste<br />
+            Hidden behind the words “it’s fine”<br />
+            Was a small date of farewell
+          </p>
+
+          <p>
+            Is love like that too?<br />
+            Wearing a perfectly fine face<br />
+            Then one day, suddenly, only the taste<br />
+            Quietly disappears first
+          </p>
+
+          <p>
+            The taste is different<br />
+            That is how I knew<br />
+            Even when it looks like nothing happened<br />
+            Some things do disappear
+          </p>
+
+          <p>
+            An expiration date<br />
+            The expiration date of taste<br />
+            A sweet-and-tangy moment<br />
+            That “it’s fine” cannot protect
+          </p>
+
+          <p>
+            An expiration date<br />
+            The expiration date of taste<br />
+            Today, before a bowl of bibim noodles<br />
+            I grew up a little
+          </p>
+
+          <p>
+            An expiration date<br />
+            The expiration date of taste<br />
+            La la la<br />
+            Mm
+          </p>
+        </div>
+      </article>
+    </div>
+  </dialog>
+
   <script>
     (() => {
       const root = document.documentElement;
@@ -1783,9 +2104,14 @@
       const audioList = Array.from(document.querySelectorAll("audio"));
       const mainAudio = document.getElementById("mainAudio");
       const playMain = document.querySelector("[data-play-main]");
+
       const lightbox = document.querySelector("[data-lightbox]");
       const lightboxOpen = document.querySelector("[data-lightbox-open]");
       const lightboxClose = document.querySelector("[data-lightbox-close]");
+
+      const lyricsModal = document.querySelector("[data-lyrics-modal]");
+      const lyricsOpen = document.querySelector("[data-lyrics-open]");
+      const lyricsClose = document.querySelector("[data-lyrics-close]");
 
       const setLanguage = (lang) => {
         const nextLang = lang === "en" ? "en" : "ko";
@@ -1848,13 +2174,37 @@
             lightbox.close();
           }
         });
+      }
 
-        window.addEventListener("keydown", (event) => {
-          if (event.key === "Escape" && lightbox.open) {
-            lightbox.close();
+      if (lyricsModal && lyricsOpen && lyricsClose) {
+        lyricsOpen.addEventListener("click", () => {
+          if (typeof lyricsModal.showModal === "function") {
+            lyricsModal.showModal();
+          }
+        });
+
+        lyricsClose.addEventListener("click", () => {
+          lyricsModal.close();
+        });
+
+        lyricsModal.addEventListener("click", (event) => {
+          if (event.target === lyricsModal) {
+            lyricsModal.close();
           }
         });
       }
+
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          if (lightbox && lightbox.open) {
+            lightbox.close();
+          }
+
+          if (lyricsModal && lyricsModal.open) {
+            lyricsModal.close();
+          }
+        }
+      });
 
       const revealItems = Array.from(document.querySelectorAll(".reveal"));
 

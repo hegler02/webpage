@@ -153,12 +153,13 @@
       outline-offset: 4px;
     }
 
-    [hidden] {
-      display: none !important;
+    [data-lang] {
+      display: contents;
     }
 
-    [data-lang] {
-      min-width: 0;
+    html[data-current-lang="ko"] [data-lang="en"],
+    html[data-current-lang="en"] [data-lang="ko"] {
+      display: none !important;
     }
 
     .page,
@@ -166,13 +167,13 @@
       position: relative;
       z-index: 1;
       min-height: 100vh;
-      background: transparent;
+      background: var(--color-bg);
     }
 
     header,
     section,
     footer {
-      background-color: transparent;
+      background-color: var(--color-bg);
     }
 
     section {
@@ -1134,15 +1135,17 @@
             <div class="film-notes reveal">
               <article class="film-statement">
                 <strong>
-                  <span data-lang="ko">미디어아트 쇼츠</span>
-                  <span data-lang="en">Media Art Shorts</span>
+                  <span data-lang="ko">작품명</span>
+                  <span data-lang="en">Title</span>
                 </strong>
                 <p>
                   <span data-lang="ko">
-                    〈검이불루, 화이불치 2026〉는 백제의 미학을 현대 하이엔드 패션 필름의 언어로 재해석한 작품이다.
+                    검이불루, 화이불치 2026<br>
+                    BAEKJE RENAISSANCE 2026
                   </span>
                   <span data-lang="en">
-                    “Baekje Renaissance 2026” reinterprets Baekje’s beauty through the language of a contemporary high-end fashion film.
+                    Geomibullu, Hwaibulchi 2026<br>
+                    BAEKJE RENAISSANCE 2026
                   </span>
                 </p>
               </article>
@@ -1151,48 +1154,48 @@
                 <article class="beat-card">
                   <span class="num">01</span>
                   <h3>
-                    <span data-lang="ko">연꽃 문양과 금빛 투각</span>
-                    <span data-lang="en">Lotus and Golden Openwork</span>
+                    <span data-lang="ko">하이엔드 패션 필름</span>
+                    <span data-lang="en">High-End Fashion Film</span>
                   </h3>
                   <p>
-                    <span data-lang="ko">백제의 섬세한 장식성이 오늘의 의상과 공간 위로 옮겨온다.</span>
-                    <span data-lang="en">Baekje’s delicate ornament moves onto today’s garments and spaces.</span>
+                    <span data-lang="ko">백제의 미학을 현대 하이엔드 패션 필름의 언어로 재해석한 미디어아트 쇼츠이다.</span>
+                    <span data-lang="en">A media art short that reinterprets Baekje’s beauty through the language of a contemporary high-end fashion film.</span>
                   </p>
                 </article>
 
                 <article class="beat-card">
                   <span class="num">02</span>
                   <h3>
-                    <span data-lang="ko">차콜 블랙과 낮은 금빛</span>
-                    <span data-lang="en">Charcoal Black and Low Gold</span>
+                    <span data-lang="ko">런웨이와 브랜드 공간</span>
+                    <span data-lang="en">Runway and Brand Space</span>
                   </h3>
                   <p>
-                    <span data-lang="ko">깊은 어둠 속에서 빛은 과시하지 않고 천천히 번진다.</span>
-                    <span data-lang="en">Inside deep darkness, light spreads slowly without showing off.</span>
+                    <span data-lang="ko">연꽃 문양, 금빛 투각 장식, 비취색 안감, 금동대향로를 닮은 미디어 오브제가 오늘의 공간 안에서 맞물린다.</span>
+                    <span data-lang="en">Lotus patterns, golden openwork, jade lining, and a media object echoing the Baekje incense burner meet inside a contemporary space.</span>
                   </p>
                 </article>
 
                 <article class="beat-card">
                   <span class="num">03</span>
                   <h3>
-                    <span data-lang="ko">블랙과 아이보리</span>
-                    <span data-lang="en">Black and Ivory</span>
+                    <span data-lang="ko">차콜 블랙과 낮은 금빛</span>
+                    <span data-lang="en">Charcoal Black and Low Gold</span>
                   </h3>
                   <p>
-                    <span data-lang="ko">두 인물은 대립하지 않고 절제와 화려함을 나누어 가진다.</span>
-                    <span data-lang="en">The two figures do not oppose each other; they share restraint and splendor.</span>
+                    <span data-lang="ko">깊은 공간, 낮게 번지는 금빛, 과시하지 않는 의상 구조가 중심 문장을 시각적으로 증명한다.</span>
+                    <span data-lang="en">Deep space, low-spreading gold, and unshowy garment structure visually prove the central phrase.</span>
                   </p>
                 </article>
 
                 <article class="beat-card">
                   <span class="num">04</span>
                   <h3>
-                    <span data-lang="ko">사람의 얼굴 위 작은 온기</span>
-                    <span data-lang="en">Small Warmth on a Face</span>
+                    <span data-lang="ko">하나의 미학을 나누는 두 인물</span>
+                    <span data-lang="en">Two Figures, One Aesthetic</span>
                   </h3>
                   <p>
-                    <span data-lang="ko">문양은 원단이 되고, 의상은 공간이 되며, 마지막에는 표정으로 돌아온다.</span>
-                    <span data-lang="en">Pattern becomes fabric, clothing becomes space, and finally returns as expression.</span>
+                    <span data-lang="ko">블랙은 절제와 그림자를, 아이보리는 빛과 화려함을 상징하며 서로 대립하지 않는다.</span>
+                    <span data-lang="en">Black symbolizes restraint and shadow; ivory symbolizes light and splendor. They do not oppose each other.</span>
                   </p>
                 </article>
               </div>
@@ -1243,20 +1246,15 @@
                   “Baekje Renaissance 2026” is a media art short that reinterprets Baekje’s beauty through the language of a contemporary high-end fashion film.
                 </span>
               </p>
+            </article>
+
+            <article class="description-card wide reveal">
               <p>
                 <span data-lang="ko">
-                  작품은 백제를 유적이나 역사 설명의 대상으로 다루지 않는다.
+                  작품은 백제를 유적이나 역사 설명의 대상으로 다루지 않는다. 연꽃 문양, 금빛 투각 장식, 비취색 안감, 금동대향로를 닮은 미디어 오브제, 그리고 두 여성 모델의 절제된 표정을 통해 백제 미학이 오늘의 런웨이와 브랜드 공간 안에서 다시 살아나는 순간을 보여준다.
                 </span>
                 <span data-lang="en">
-                  The work does not treat Baekje as an archaeological site or a subject of historical explanation.
-                </span>
-              </p>
-              <p>
-                <span data-lang="ko">
-                  대신 연꽃 문양, 금빛 투각 장식, 비취색 안감, 금동대향로를 닮은 오브제, 그리고 절제된 인물의 표정을 통해 백제 미학이 오늘의 런웨이와 브랜드 공간 안에서 다시 살아나는 순간을 보여준다.
-                </span>
-                <span data-lang="en">
-                  Instead, through lotus patterns, golden openwork ornaments, jade-colored lining, an object resembling the Baekje gilt-bronze incense burner, and restrained facial expressions, it shows the moment Baekje aesthetics come alive again inside today’s runway and brand space.
+                  The work does not treat Baekje as an archaeological site or a subject of historical explanation. Through lotus patterns, golden openwork ornaments, jade-colored lining, a media object resembling the Baekje gilt-bronze incense burner, and the restrained expressions of two female models, it shows the moment Baekje aesthetics come alive again inside today’s runway and brand space.
                 </span>
               </p>
             </article>
@@ -1264,18 +1262,10 @@
             <article class="description-card reveal">
               <p>
                 <span data-lang="ko">
-                  영상의 중심에는 “검소하되 누추하지 않고, 화려하되 사치스럽지 않다”는 문장이 있다.
+                  영상의 중심에는 “검소하되 누추하지 않고, 화려하되 사치스럽지 않다”는 문장이 있다. 차콜 블랙의 깊은 공간, 낮게 번지는 금빛, 과시하지 않는 의상 구조, 그리고 고요한 시선은 이 문장을 시각적으로 증명한다.
                 </span>
                 <span data-lang="en">
-                  At the center of the film is the phrase, “Simple without becoming shabby, splendid without becoming extravagant.”
-                </span>
-              </p>
-              <p>
-                <span data-lang="ko">
-                  차콜 블랙의 깊은 공간, 낮게 번지는 금빛, 과시하지 않는 의상 구조, 그리고 두 여성 모델의 고요한 시선은 이 문장을 시각적으로 증명한다.
-                </span>
-                <span data-lang="en">
-                  The deep charcoal-black space, low-spreading gold light, unshowy garment structure, and the quiet gazes of two female models visually prove this phrase.
+                  At the center of the film is the phrase, “Simple without becoming shabby, splendid without becoming extravagant.” The deep charcoal-black space, low-spreading gold light, unshowy garment structure, and quiet gazes visually prove this phrase.
                 </span>
               </p>
             </article>
@@ -1283,18 +1273,10 @@
             <article class="description-card reveal">
               <p>
                 <span data-lang="ko">
-                  블랙 의상은 절제와 그림자를 상징하고, 아이보리 의상은 빛과 화려함을 상징한다.
+                  블랙 의상은 절제와 그림자를 상징하고, 아이보리 의상은 빛과 화려함을 상징한다. 두 인물은 대립하지 않고 하나의 미학을 나누어 가진다. 문양은 원단이 되고, 원단은 의상이 되며, 의상은 공간 오브제로 확장되고, 마지막에는 사람의 얼굴 위에 아주 작은 온기로 돌아온다.
                 </span>
                 <span data-lang="en">
-                  The black garment symbolizes restraint and shadow, while the ivory garment symbolizes light and splendor.
-                </span>
-              </p>
-              <p>
-                <span data-lang="ko">
-                  두 인물은 대립하지 않고 하나의 미학을 나누어 가진다.
-                </span>
-                <span data-lang="en">
-                  The two figures do not oppose each other; they share one aesthetic.
+                  The black garment symbolizes restraint and shadow, while the ivory garment symbolizes light and splendor. The two figures do not oppose each other; they share one aesthetic. Pattern becomes fabric, fabric becomes clothing, clothing expands into spatial objects, and in the end returns as a very small warmth on a human face.
                 </span>
               </p>
             </article>
@@ -1302,26 +1284,10 @@
             <article class="description-card wide reveal">
               <p>
                 <span data-lang="ko">
-                  문양은 원단이 되고, 원단은 의상이 되며, 의상은 공간 오브제로 확장되고, 마지막에는 사람의 얼굴 위에 아주 작은 온기로 돌아온다.
+                  이 작품은 백제가 과거에 머문 문화가 아니라, 지금 다시 런칭해도 통할 만큼 세련된 미학임을 선언한다. 백제는 설명되는 유산이 아니라, 감각으로 다시 입혀지는 현재형의 아름다움이다.
                 </span>
                 <span data-lang="en">
-                  Pattern becomes fabric, fabric becomes clothing, clothing expands into spatial objects, and in the end returns as a very small warmth on a human face.
-                </span>
-              </p>
-              <p>
-                <span data-lang="ko">
-                  이 작품은 백제가 과거에 머문 문화가 아니라, 지금 다시 런칭해도 통할 만큼 세련된 미학임을 선언한다.
-                </span>
-                <span data-lang="en">
-                  This work declares that Baekje is not a culture trapped in the past, but an aesthetic refined enough to launch again today.
-                </span>
-              </p>
-              <p>
-                <span data-lang="ko">
-                  백제는 설명되는 유산이 아니라, 감각으로 다시 입혀지는 현재형의 아름다움이다.
-                </span>
-                <span data-lang="en">
-                  Baekje is not heritage to be explained; it is present-tense beauty dressed again through sensation.
+                  This work declares that Baekje is not a culture trapped in the past, but an aesthetic refined enough to launch again today. Baekje is not heritage to be explained; it is present-tense beauty dressed again through sensation.
                 </span>
               </p>
             </article>
@@ -1382,8 +1348,8 @@
                 <span data-lang="en">Quiet Gaze</span>
               </h3>
               <p>
-                <span data-lang="ko">두 여성 모델의 고요한 시선은 하나의 미학을 나누어 가진다.</span>
-                <span data-lang="en">The quiet gazes of two female models share one aesthetic.</span>
+                <span data-lang="ko">두 여성 모델의 절제된 표정과 고요한 시선은 하나의 미학을 나누어 가진다.</span>
+                <span data-lang="en">The restrained expressions and quiet gazes of the two female models share one aesthetic.</span>
               </p>
             </article>
           </div>
@@ -1515,25 +1481,20 @@
       const videoTriggers = document.querySelectorAll("[data-load-video], [data-video-thumb]");
       const videoSlot = document.querySelector("[data-video-slot]");
 
-      const applyLanguage = (lang) => {
+      const setLanguage = (lang) => {
         root.setAttribute("data-current-lang", lang);
         root.setAttribute("lang", lang);
-
-        document.querySelectorAll("[data-lang='ko'], [data-lang='en']").forEach((node) => {
-          node.hidden = node.getAttribute("data-lang") !== lang;
-        });
-
         document.querySelectorAll("[data-lang-toggle]").forEach((button) => {
           button.setAttribute("aria-label", lang === "ko" ? "Switch to English" : "한국어로 전환");
         });
       };
 
-      applyLanguage("ko");
+      setLanguage("ko");
 
       langButtons.forEach((button) => {
         button.addEventListener("click", () => {
           const next = root.getAttribute("data-current-lang") === "ko" ? "en" : "ko";
-          applyLanguage(next);
+          setLanguage(next);
         });
       });
 

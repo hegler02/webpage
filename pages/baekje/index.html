@@ -7,7 +7,7 @@
 
   <title>검이불루, 화이불치 2026 | BAEKJE RENAISSANCE 2026</title>
   <meta name="description" content="PLAY백제 AI영상 공모전 출품작. 백제의 미학을 현대 하이엔드 패션 필름의 언어로 재해석한 미디어아트 쇼츠, 검이불루 화이불치 2026 소개 페이지." />
-  <meta name="keywords" content="PLAY백제, AI영상 공모전, 검이불루 화이불치 2026, BAEKJE RENAISSANCE 2026, 백제, 미디어아트 쇼츠, 하이엔드 패션 필름" />
+  <meta name="keywords" content="PLAY백제, AI영상 공모전, 검이불루 화이불치 2026, BAEKJE RENAISSANCE 2026, 백제, 미디어아트 쇼츠, 하이엔드 패션 필름, 배경음악, 연주곡" />
   <meta name="geo.region" content="KR-44" />
   <meta name="geo.placename" content="Baekje Cultural Area" />
   <meta name="geo.position" content="36.2755;126.9091" />
@@ -42,7 +42,14 @@
       "name": "Mirinaeman"
     },
     "genre": "Media Art Shorts",
-    "about": ["Baekje", "High-end Fashion Film", "Media Art"]
+    "about": ["Baekje", "High-end Fashion Film", "Media Art"],
+    "associatedMedia": {
+      "@type": "AudioObject",
+      "name": "검이불루, 화이불치",
+      "encodingFormat": "audio/mpeg",
+      "contentUrl": "https://cdn1.suno.ai/f9cbb4af-631d-4882-bb77-36512f48f7fc.mp3",
+      "description": "백제의 미학이 2026년에 하나의 하이엔드 브랜드처럼 다시 런칭된다면 어떤 소리로 등장할지를 상상한 배경음악."
+    }
   }
   </script>
 
@@ -143,9 +150,19 @@
       height: auto;
     }
 
-    button {
+    button,
+    audio {
       font: inherit;
+    }
+
+    button {
       cursor: pointer;
+    }
+
+    audio {
+      width: 100%;
+      min-height: 44px;
+      color-scheme: dark;
     }
 
     :focus-visible {
@@ -555,7 +572,9 @@
     .shorts-card,
     .description-card,
     .tool-card,
-    .motif-card {
+    .motif-card,
+    .music-card,
+    .sound-card {
       padding: var(--space-lg);
       border: 1px solid rgba(244, 213, 143, 0.18);
       border-radius: var(--radius-lg);
@@ -571,7 +590,8 @@
         var(--color-card);
     }
 
-    .film-statement strong {
+    .film-statement strong,
+    .music-card strong {
       display: block;
       margin-bottom: var(--space-md);
       color: var(--color-heading);
@@ -586,7 +606,9 @@
     .beat-card p,
     .motif-card p,
     .description-card p,
-    .tool-card p {
+    .tool-card p,
+    .music-card p,
+    .sound-card p {
       margin: 0;
       color: var(--color-muted);
       line-height: 1.7;
@@ -605,7 +627,8 @@
     }
 
     .beat-card .num,
-    .motif-card .num {
+    .motif-card .num,
+    .sound-card .num {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -619,7 +642,8 @@
     }
 
     .beat-card h3,
-    .motif-card h3 {
+    .motif-card h3,
+    .sound-card h3 {
       max-width: 14em;
       margin-bottom: var(--space-md);
       color: var(--color-heading);
@@ -691,6 +715,71 @@
 
     .video-button {
       width: 100%;
+    }
+
+    .music {
+      background:
+        radial-gradient(circle at 16% 20%, rgba(217, 169, 74, 0.14), transparent 34%),
+        radial-gradient(circle at 82% 80%, rgba(114, 171, 144, 0.1), transparent 34%),
+        linear-gradient(180deg, rgba(11, 8, 6, 0.98), rgba(13, 10, 7, 0.98)),
+        var(--color-bg-2);
+    }
+
+    .music-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.48fr) minmax(0, 1fr);
+      gap: var(--space-xl);
+      align-items: start;
+      margin-top: var(--space-2xl);
+    }
+
+    .music-card {
+      position: sticky;
+      top: calc(var(--header-h) + var(--space-xl));
+      background:
+        radial-gradient(circle at 16% 0%, rgba(217, 169, 74, 0.18), transparent 42%),
+        var(--color-card);
+    }
+
+    .music-meta {
+      display: grid;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .music-meta span {
+      color: var(--color-muted);
+      line-height: 1.55;
+      word-break: keep-all;
+      line-break: strict;
+    }
+
+    .music-meta b {
+      color: var(--color-heading);
+    }
+
+    .music-player {
+      display: grid;
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+      padding: var(--space-lg);
+      border: 1px solid rgba(244, 213, 143, 0.18);
+      border-radius: calc(var(--radius-lg) - 8px);
+      background: rgba(7, 6, 5, 0.38);
+    }
+
+    .sound-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-xl);
+    }
+
+    .sound-card.wide {
+      grid-column: span 2;
+    }
+
+    .sound-card p + p {
+      margin-top: 2em;
     }
 
     .description {
@@ -898,6 +987,12 @@
       }
     }
 
+    @media (max-width: 1180px) {
+      .desktop-nav a {
+        padding: 0 0.78rem;
+      }
+    }
+
     @media (max-width: 1080px) {
       :root {
         --header-h: 66px;
@@ -908,7 +1003,8 @@
       }
 
       .hero-inner,
-      .film-layout {
+      .film-layout,
+      .music-layout {
         grid-template-columns: 1fr;
       }
 
@@ -921,13 +1017,19 @@
         max-width: 9.5ch;
       }
 
-      .shorts-card {
+      .shorts-card,
+      .music-card {
         position: static;
         max-width: 460px;
         margin: 0 auto;
       }
 
-      .description-card.wide {
+      .music-card {
+        max-width: 100%;
+      }
+
+      .description-card.wide,
+      .sound-card.wide {
         grid-column: auto;
       }
 
@@ -970,7 +1072,8 @@
         width: 100%;
       }
 
-      .beat-cards {
+      .beat-cards,
+      .sound-grid {
         grid-template-columns: 1fr;
       }
 
@@ -987,6 +1090,8 @@
       .description-card,
       .motif-card,
       .tool-card,
+      .music-card,
+      .sound-card,
       .closing-card {
         border-radius: var(--radius-lg);
       }
@@ -1020,6 +1125,10 @@
           <a href="#video">
             <span data-lang="ko">영상</span>
             <span data-lang="en">Video</span>
+          </a>
+          <a href="#music">
+            <span data-lang="ko">배경음악</span>
+            <span data-lang="en">Music</span>
           </a>
           <a href="#description">
             <span data-lang="ko">작품설명</span>
@@ -1071,9 +1180,9 @@
                 <span data-lang="ko">영상 재생하기</span>
                 <span data-lang="en">Play Video</span>
               </a>
-              <a class="soft-button" href="#description">
-                <span data-lang="ko">작품설명 읽기</span>
-                <span data-lang="en">Read Description</span>
+              <a class="soft-button" href="#music">
+                <span data-lang="ko">배경음악 듣기</span>
+                <span data-lang="en">Listen</span>
               </a>
             </div>
           </div>
@@ -1223,6 +1332,184 @@
                 <span data-lang="en">Play This Work</span>
               </button>
             </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="music" id="music" aria-labelledby="music-title">
+        <div class="section-wrap">
+          <p class="section-kicker reveal">BACKGROUND MUSIC</p>
+
+          <h2 class="section-title reveal" id="music-title">
+            <span data-lang="ko">전통의 재현이 아니라,<br>미학의 재런칭을 위한 사운드.</span>
+            <span data-lang="en">Not a reproduction of tradition,<br>but a sound for relaunching an aesthetic.</span>
+          </h2>
+
+          <div class="music-layout">
+            <aside class="music-card reveal" aria-label="배경음악 재생">
+              <strong>
+                <span data-lang="ko">배경음악 · 연주곡</span>
+                <span data-lang="en">Background Music · Instrumental</span>
+              </strong>
+
+              <div class="music-meta">
+                <span>
+                  <b>
+                    <span data-lang="ko">곡제목</span>
+                    <span data-lang="en">Title</span>
+                  </b>
+                  <br>
+                  <span data-lang="ko">검이불루, 화이불치</span>
+                  <span data-lang="en">Geomibullu, Hwaibulchi</span>
+                </span>
+                <span>
+                  <b>
+                    <span data-lang="ko">소리의 기준</span>
+                    <span data-lang="en">Sound Standard</span>
+                  </b>
+                  <br>
+                  <span data-lang="ko">검소하되 누추하지 않고, 화려하되 사치스럽지 않다.</span>
+                  <span data-lang="en">Simple, never shabby. Splendid, never lavish.</span>
+                </span>
+              </div>
+
+              <div class="music-player">
+                <audio controls preload="metadata">
+                  <source src="https://cdn1.suno.ai/f9cbb4af-631d-4882-bb77-36512f48f7fc.mp3" type="audio/mpeg" />
+                  이 브라우저는 오디오 재생을 지원하지 않습니다.
+                </audio>
+              </div>
+            </aside>
+
+            <div class="sound-grid">
+              <article class="sound-card wide reveal">
+                <span class="num">01</span>
+                <h3>
+                  <span data-lang="ko">백제가 2026년에 다시 런칭된다면</span>
+                  <span data-lang="en">If Baekje launched again in 2026</span>
+                </h3>
+                <p>
+                  <span data-lang="ko">
+                    이 음악은 백제를 설명하기 위한 배경음악이 아니다. 백제의 미학이 2026년에 하나의 하이엔드 브랜드처럼 다시 런칭된다면, 어떤 소리로 등장할지를 상상한 사운드다.
+                  </span>
+                  <span data-lang="en">
+                    This music is not background sound for explaining Baekje. It imagines what sound Baekje’s aesthetic would arrive with if it were relaunched in 2026 like a high-end brand.
+                  </span>
+                </p>
+              </article>
+
+              <article class="sound-card wide reveal">
+                <span class="num">02</span>
+                <h3>
+                  <span data-lang="ko">검이불루, 화이불치의 질감</span>
+                  <span data-lang="en">The texture of Geomibullu, Hwaibulchi</span>
+                </h3>
+                <p>
+                  <span data-lang="ko">
+                    핵심 기준은 검이불루, 화이불치다. 검소하지만 누추하지 않고, 화려하지만 사치스럽지 않은 태도를 음악 전체의 질감과 구조에 반영했다. 그래서 음악은 과하게 웅장하거나 전통 악기를 전면에 내세우지 않는다. 대신 절제된 전자음, 깊은 베이스, 얇은 금속성 질감, 희미한 대금의 숨결, 짧게 반짝이는 가야금의 음색을 통해 백제적 감각을 현대적으로 번역한다.
+                  </span>
+                  <span data-lang="en">
+                    The core standard is Geomibullu, Hwaibulchi. The music reflects an attitude that is simple without being shabby and splendid without being extravagant. It does not become overly grand or push traditional instruments to the front. Instead, restrained electronics, deep bass, thin metallic textures, a faint breath of daegeum, and brief flashes of gayageum translate a Baekje-like sensibility into the present.
+                  </span>
+                </p>
+              </article>
+
+              <article class="sound-card reveal">
+                <span class="num">03</span>
+                <h3>
+                  <span data-lang="ko">대금과 가야금</span>
+                  <span data-lang="en">Daegeum and Gayageum</span>
+                </h3>
+                <p>
+                  <span data-lang="ko">
+                    대금은 전통 선율을 연주하는 악기가 아니라, 어둠 속에서 피어나는 숨과 안개의 질감으로 사용된다. 가야금은 국악적 멜로디가 아니라, 실크 위에 박힌 금빛 자수처럼 짧고 섬세하게 등장한다.
+                  </span>
+                  <span data-lang="en">
+                    The daegeum is not used to perform a traditional melody, but as breath and mist blooming in darkness. The gayageum does not appear as a folk melody, but briefly and delicately, like gold embroidery set into silk.
+                  </span>
+                </p>
+              </article>
+
+              <article class="sound-card reveal">
+                <span class="num">04</span>
+                <h3>
+                  <span data-lang="ko">낮은 드론과 서브베이스</span>
+                  <span data-lang="en">Low Drone and Sub Bass</span>
+                </h3>
+                <p>
+                  <span data-lang="ko">
+                    낮은 드론과 서브베이스는 고대적 신비감이 아니라 현대 럭셔리 패션 필름의 무게감을 만든다.
+                  </span>
+                  <span data-lang="en">
+                    The low drone and sub bass do not create ancient mysticism; they create the weight of a modern luxury fashion film.
+                  </span>
+                </p>
+              </article>
+
+              <article class="sound-card wide reveal">
+                <span class="num">05</span>
+                <h3>
+                  <span data-lang="ko">영상의 구조와 함께 움직이는 흐름</span>
+                  <span data-lang="en">A flow that moves with the film</span>
+                </h3>
+                <p>
+                  <span data-lang="ko">
+                    음악의 흐름은 영상의 구조와 함께 움직인다. 처음에는 암전 속에서 얇은 금빛 문양이 깨어나듯 낮고 어둡게 시작한다. 문양이 의상으로 변할 때는 금속성 플럭과 섬세한 리듬이 더해진다. 런웨이 장면에서는 느리고 통제된 다운템포 비트가 모델의 걸음과 맞물린다. 의상 디테일과 오브제 장면에서는 소리가 다시 비워지며 질감과 공간감이 강조된다. 마지막 백제의 미소 장면에서만 음악이 가장 넓게 열리며, 절제된 감정의 피크를 만든다.
+                  </span>
+                  <span data-lang="en">
+                    The music moves with the structure of the film. It begins low and dark, like a thin golden pattern waking inside a blackout. When pattern becomes clothing, metallic plucks and delicate rhythm are added. In the runway scene, a slow and controlled downtempo beat meets the models’ steps. In garment details and object scenes, the sound empties again to emphasize texture and space. Only in the final smile of Baekje does the music open the widest, creating a restrained emotional peak.
+                  </span>
+                </p>
+              </article>
+
+              <article class="sound-card wide reveal">
+                <span class="num">06</span>
+                <h3>
+                  <span data-lang="ko">적게 말하고 오래 남기는 방식</span>
+                  <span data-lang="en">Saying less, remaining longer</span>
+                </h3>
+                <p>
+                  <span data-lang="ko">
+                    이 음악은 크게 터뜨려 감동을 강요하지 않는다. 오히려 적게 말하고 오래 남기는 방식으로 백제의 품격을 드러낸다. 화려함은 금빛 잔향으로, 절제는 여백과 낮은 호흡으로, 현대성은 깊은 베이스와 정제된 전자음으로 표현된다.
+                  </span>
+                  <span data-lang="en">
+                    This music does not force emotion by erupting loudly. It reveals Baekje’s dignity by saying less and remaining longer. Splendor appears as golden afterglow, restraint as silence and low breath, and modernity as deep bass and refined electronics.
+                  </span>
+                </p>
+              </article>
+
+              <article class="sound-card wide reveal">
+                <span class="num">07</span>
+                <h3>
+                  <span data-lang="ko">미학의 재런칭</span>
+                  <span data-lang="en">Relaunching an aesthetic</span>
+                </h3>
+                <p>
+                  <span data-lang="ko">
+                    결국 이 사운드는 전통의 재현이 아니라 미학의 재런칭이다. 관객이 “옛날 음악 같다”고 느끼는 것이 아니라, “지금 등장해도 완전히 세련된 브랜드 같다”고 느끼게 만드는 것이 목표다. 마지막에는 소리가 사라지는 방식까지도 메시지가 된다.
+                  </span>
+                  <span data-lang="en">
+                    Ultimately, this sound is not a reproduction of tradition but the relaunch of an aesthetic. The goal is not for the audience to feel that it sounds old, but to feel that it could appear now as a fully refined brand. Even the way the sound disappears at the end becomes part of the message.
+                  </span>
+                </p>
+              </article>
+
+              <article class="sound-card wide reveal">
+                <span class="num">08</span>
+                <h3>
+                  <span data-lang="ko">백제는 과거가 아니다.</span>
+                  <span data-lang="en">Baekje is not the past.</span>
+                </h3>
+                <p>
+                  <span data-lang="ko">
+                    백제는 과거가 아니다. 백제는 지금도 통하는 미학이다.
+                  </span>
+                  <span data-lang="en">
+                    Baekje is not the past. Baekje is an aesthetic that still works today.
+                  </span>
+                </p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -1424,9 +1711,9 @@
               <span data-lang="ko">영상 다시 보기</span>
               <span data-lang="en">Watch Again</span>
             </a>
-            <a class="soft-button" href="https://youtube.com/shorts/WWZW0Vo0jS4?si=839e1clRY3rx30Iy" target="_blank" rel="noopener noreferrer">
-              <span data-lang="ko">유튜브에서 열기</span>
-              <span data-lang="en">Open on YouTube</span>
+            <a class="soft-button" href="#music">
+              <span data-lang="ko">배경음악 다시 듣기</span>
+              <span data-lang="en">Listen Again</span>
             </a>
           </div>
         </div>
@@ -1458,15 +1745,15 @@
       <span data-lang="ko">영상</span>
       <span data-lang="en">Video</span>
     </a>
+    <a href="#music" aria-label="배경음악으로 이동">
+      <span aria-hidden="true">♪</span>
+      <span data-lang="ko">음악</span>
+      <span data-lang="en">Music</span>
+    </a>
     <a href="#description" aria-label="작품설명으로 이동">
       <span aria-hidden="true">文</span>
       <span data-lang="ko">설명</span>
       <span data-lang="en">Text</span>
-    </a>
-    <a href="#tools" aria-label="저작도구로 이동">
-      <span aria-hidden="true">✦</span>
-      <span data-lang="ko">도구</span>
-      <span data-lang="en">Tools</span>
     </a>
     <button type="button" aria-label="언어 전환" data-lang-toggle>
       <span aria-hidden="true">🌐</span>
@@ -1516,6 +1803,14 @@
 
       videoTriggers.forEach((trigger) => {
         trigger.addEventListener("click", loadVideo);
+      });
+
+      document.querySelectorAll("audio").forEach((audio) => {
+        audio.addEventListener("play", () => {
+          document.querySelectorAll("audio").forEach((other) => {
+            if (other !== audio) other.pause();
+          });
+        });
       });
 
       const reveals = document.querySelectorAll(".reveal");

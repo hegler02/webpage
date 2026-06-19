@@ -43,6 +43,11 @@
     },
     "genre": "Media Art Shorts",
     "about": ["Baekje", "High-end Fashion Film", "Media Art"],
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://i.imghippo.com/files/L3839Vg.png",
+      "caption": "백제의 미학이 현대 하이엔드 패션 브랜드로 다시 런칭되는 순간을 상상한 이미지"
+    },
     "associatedMedia": {
       "@type": "AudioObject",
       "name": "검이불루, 화이불치",
@@ -265,7 +270,7 @@
     }
 
     .desktop-nav a {
-      padding: 0 1rem;
+      padding: 0 0.88rem;
       color: var(--color-muted);
       font-size: var(--font-sm);
     }
@@ -547,6 +552,82 @@
       letter-spacing: 0.06em;
     }
 
+    .image-section {
+      background:
+        radial-gradient(circle at 22% 16%, rgba(217, 169, 74, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(9, 7, 6, 0.98), rgba(13, 10, 7, 0.98)),
+        var(--color-bg);
+    }
+
+    .image-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+      gap: var(--space-xl);
+      align-items: start;
+      margin-top: var(--space-2xl);
+    }
+
+    .image-frame-card,
+    .image-copy-card,
+    .film-statement,
+    .beat-card,
+    .shorts-card,
+    .description-card,
+    .tool-card,
+    .motif-card,
+    .music-card,
+    .sound-card {
+      padding: var(--space-lg);
+      border: 1px solid rgba(244, 213, 143, 0.18);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(180deg, rgba(255, 244, 220, 0.08), rgba(255, 244, 220, 0.035)),
+        var(--color-card);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .image-frame {
+      aspect-ratio: 16 / 9;
+      overflow: clip;
+      border-radius: calc(var(--radius-lg) - 8px);
+      background: var(--color-black);
+    }
+
+    .image-frame img {
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .image-caption {
+      margin: var(--space-lg) 0 0;
+      color: var(--color-muted);
+      line-height: 1.7;
+      word-break: keep-all;
+      line-break: strict;
+    }
+
+    .image-copy-grid {
+      display: grid;
+      gap: var(--space-xl);
+    }
+
+    .image-copy-card h3 {
+      margin-bottom: var(--space-md);
+    }
+
+    .image-copy-card p {
+      margin: 0;
+      color: var(--color-muted);
+      line-height: 1.7;
+      word-break: keep-all;
+      line-break: strict;
+    }
+
+    .image-copy-card p + p {
+      margin-top: 2em;
+    }
+
     .video-section {
       background:
         radial-gradient(circle at 86% 12%, rgba(114, 171, 144, 0.13), transparent 34%),
@@ -565,23 +646,6 @@
     .film-notes {
       display: grid;
       gap: var(--space-xl);
-    }
-
-    .film-statement,
-    .beat-card,
-    .shorts-card,
-    .description-card,
-    .tool-card,
-    .motif-card,
-    .music-card,
-    .sound-card {
-      padding: var(--space-lg);
-      border: 1px solid rgba(244, 213, 143, 0.18);
-      border-radius: var(--radius-lg);
-      background:
-        linear-gradient(180deg, rgba(255, 244, 220, 0.08), rgba(255, 244, 220, 0.035)),
-        var(--color-card);
-      box-shadow: var(--shadow-soft);
     }
 
     .film-statement {
@@ -987,9 +1051,9 @@
       }
     }
 
-    @media (max-width: 1180px) {
+    @media (max-width: 1240px) {
       .desktop-nav a {
-        padding: 0 0.78rem;
+        padding: 0 0.68rem;
       }
     }
 
@@ -1003,6 +1067,7 @@
       }
 
       .hero-inner,
+      .image-layout,
       .film-layout,
       .music-layout {
         grid-template-columns: 1fr;
@@ -1084,6 +1149,8 @@
 
       .hero-visual,
       .quote-panel,
+      .image-frame-card,
+      .image-copy-card,
       .film-statement,
       .beat-card,
       .shorts-card,
@@ -1104,6 +1171,11 @@
       .closing-card {
         padding: var(--space-xl);
       }
+
+      .bottom-nav a,
+      .bottom-nav button {
+        font-size: 0.66rem;
+      }
     }
   </style>
 </head>
@@ -1122,12 +1194,16 @@
             <span data-lang="ko">문장</span>
             <span data-lang="en">Phrase</span>
           </a>
+          <a href="#image">
+            <span data-lang="ko">이미지</span>
+            <span data-lang="en">Image</span>
+          </a>
           <a href="#video">
             <span data-lang="ko">영상</span>
             <span data-lang="en">Video</span>
           </a>
           <a href="#music">
-            <span data-lang="ko">배경음악</span>
+            <span data-lang="ko">음악</span>
             <span data-lang="en">Music</span>
           </a>
           <a href="#description">
@@ -1180,9 +1256,9 @@
                 <span data-lang="ko">영상 재생하기</span>
                 <span data-lang="en">Play Video</span>
               </a>
-              <a class="soft-button" href="#music">
-                <span data-lang="ko">배경음악 듣기</span>
-                <span data-lang="en">Listen</span>
+              <a class="soft-button" href="#image">
+                <span data-lang="ko">이미지 보기</span>
+                <span data-lang="en">View Image</span>
               </a>
             </div>
           </div>
@@ -1227,6 +1303,109 @@
               <span data-lang="ko">검소하되 누추하지 않고,<br>화려하되 사치스럽지 않다.</span>
               <span data-lang="en">Simple, never shabby.<br>Splendid, never lavish.</span>
             </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section class="image-section" id="image" aria-labelledby="image-title">
+        <div class="section-wrap">
+          <p class="section-kicker reveal">IMAGE DESCRIPTION</p>
+
+          <h2 class="section-title reveal" id="image-title">
+            <span data-lang="ko">백제의 미학이<br>하이엔드 브랜드로 다시 런칭되는 순간.</span>
+            <span data-lang="en">The moment Baekje’s beauty<br>relaunches as a high-end brand.</span>
+          </h2>
+
+          <div class="image-layout">
+            <figure class="image-frame-card reveal">
+              <div class="image-frame">
+                <img
+                  src="https://i.imghippo.com/files/L3839Vg.png"
+                  alt="백제의 미학이 현대 하이엔드 패션 브랜드로 다시 런칭되는 순간을 상상한 이미지"
+                  width="1600"
+                  height="900"
+                  loading="lazy"
+                />
+              </div>
+              <figcaption class="image-caption">
+                <span data-lang="ko">
+                  깊은 차콜 블랙 공간, 낮게 번지는 금빛, 두 인물의 절제된 표정이 하나의 브랜드 장면처럼 만난다.
+                </span>
+                <span data-lang="en">
+                  A deep charcoal-black space, low-spreading gold, and restrained expressions meet like a single brand scene.
+                </span>
+              </figcaption>
+            </figure>
+
+            <div class="image-copy-grid">
+              <article class="image-copy-card reveal">
+                <h3>
+                  <span data-lang="ko">유적이 아니라 오늘의 브랜드 공간</span>
+                  <span data-lang="en">Not a relic, but today’s brand space</span>
+                </h3>
+                <p>
+                  <span data-lang="ko">
+                    이 이미지는 백제를 유적이나 박물관의 대상으로 설명하지 않고, 백제의 미학이 현대 하이엔드 패션 브랜드로 다시 런칭되는 순간을 상상한 작품이다.
+                  </span>
+                  <span data-lang="en">
+                    This image does not explain Baekje as a relic or museum object. It imagines the moment Baekje’s aesthetic relaunches as a contemporary high-end fashion brand.
+                  </span>
+                </p>
+              </article>
+
+              <article class="image-copy-card reveal">
+                <h3>
+                  <span data-lang="ko">차콜 블랙, 금빛, 두 인물</span>
+                  <span data-lang="en">Charcoal black, gold, and two figures</span>
+                </h3>
+                <p>
+                  <span data-lang="ko">
+                    깊은 차콜 블랙 공간은 절제와 고요함을, 낮게 번지는 금빛 조명은 사치스럽지 않은 화려함을 상징한다. 검은 의상의 모델은 그림자와 절제를, 아이보리 의상의 모델은 빛과 세련된 품격을 맡고 있다. 두 인물은 대립하지 않고 하나의 미학을 나누어 가진다.
+                  </span>
+                  <span data-lang="en">
+                    The deep charcoal-black space symbolizes restraint and quietness, while the low-spreading gold light symbolizes splendor without extravagance. The model in black carries shadow and restraint, and the model in ivory carries light and refined dignity. The two figures do not oppose each other; they share one aesthetic.
+                  </span>
+                </p>
+              </article>
+
+              <article class="image-copy-card reveal">
+                <h3>
+                  <span data-lang="ko">금사, 직조 문양, 상징적 오브제</span>
+                  <span data-lang="en">Gold thread, woven patterns, symbolic object</span>
+                </h3>
+                <p>
+                  <span data-lang="ko">
+                    의상 속 금사와 직조 문양은 백제의 연꽃, 투각 장식, 금동 공예의 감각을 현대 패션 언어로 번역한다. 중앙의 오브제는 백제 금동대향로의 기억을 품고 있지만, 유물의 복제가 아니라 오늘의 브랜드 공간을 완성하는 상징적 조형물로 존재한다.
+                  </span>
+                  <span data-lang="en">
+                    The gold thread and woven patterns translate the sensibility of Baekje lotus motifs, openwork decoration, and gilt-bronze craft into contemporary fashion language. The central object carries the memory of the Baekje gilt-bronze incense burner, but exists not as a replica of an artifact, but as a symbolic form completing today’s brand space.
+                  </span>
+                </p>
+              </article>
+
+              <article class="image-copy-card reveal">
+                <h3>
+                  <span data-lang="ko">지금도 사람의 얼굴 위에 되살아나는 아름다움</span>
+                  <span data-lang="en">Beauty returning to a human face today</span>
+                </h3>
+                <p>
+                  <span data-lang="ko">
+                    이 작품은 “검소하되 누추하지 않고, 화려하되 사치스럽지 않다”는 백제 미학을 공간, 의상, 빛, 표정으로 표현한다. 은은한 미소는 이 아름다움이 과거에 머무르지 않고 지금도 사람의 얼굴 위에 따뜻하게 되살아날 수 있음을 보여준다.
+                  </span>
+                  <span data-lang="en">
+                    This work expresses Baekje’s aesthetic of being simple without becoming shabby and splendid without becoming extravagant through space, clothing, light, and expression. The subtle smile shows that this beauty does not remain in the past, but can return warmly to a human face today.
+                  </span>
+                </p>
+                <p>
+                  <span data-lang="ko">
+                    백제는 과거가 아니라, 지금도 통하는 미학이다.
+                  </span>
+                  <span data-lang="en">
+                    Baekje is not the past. It is an aesthetic that still works today.
+                  </span>
+                </p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -1711,9 +1890,9 @@
               <span data-lang="ko">영상 다시 보기</span>
               <span data-lang="en">Watch Again</span>
             </a>
-            <a class="soft-button" href="#music">
-              <span data-lang="ko">배경음악 다시 듣기</span>
-              <span data-lang="en">Listen Again</span>
+            <a class="soft-button" href="#image">
+              <span data-lang="ko">이미지 다시 보기</span>
+              <span data-lang="en">View Image Again</span>
             </a>
           </div>
         </div>
@@ -1735,15 +1914,15 @@
   </div>
 
   <nav class="bottom-nav" aria-label="하단 바로가기">
-    <a href="#top" aria-label="처음으로">
-      <span aria-hidden="true">◐</span>
-      <span data-lang="ko">처음</span>
-      <span data-lang="en">Top</span>
-    </a>
     <a href="#video" aria-label="영상으로 이동">
       <span aria-hidden="true">▶</span>
       <span data-lang="ko">영상</span>
       <span data-lang="en">Video</span>
+    </a>
+    <a href="#image" aria-label="이미지로 이동">
+      <span aria-hidden="true">◆</span>
+      <span data-lang="ko">이미지</span>
+      <span data-lang="en">Image</span>
     </a>
     <a href="#music" aria-label="배경음악으로 이동">
       <span aria-hidden="true">♪</span>

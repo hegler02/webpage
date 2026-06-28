@@ -54,6 +54,7 @@
       --img-video-agent: url("https://i.imghippo.com/files/yQGH3045fE.webp");
       --img-video-hellgate: url("https://i.imghippo.com/files/Sn3734AE.webp");
       --img-social-gangneung: url("https://cdnimg.melon.co.kr/cm2/album/images/115/80/409/11580409_20240830154202_500.jpg");
+      --img-theme-song: url("https://i.imghippo.com/files/uyXF3975yHs.jpeg");
 
       --img-product-ssulwha: url("https://i.imghippo.com/files/PcW2955pM.png");
       --img-product-magicsrt: url("https://i.imghippo.com/files/DyIh8640pKE.png");
@@ -65,6 +66,7 @@
       --img-book-contents: url("https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791166755903.jpg");
       --img-book-video: url("https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791166756306.jpg");
       --img-book-agent: url("https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791166756788.jpg");
+      --img-book-judgment: url("https://i.imghippo.com/files/FRK6662tM.jpg");
 
       --img-mirinae-logo: url("https://mirinaeverse.com/alflso/wp-content/uploads/2021/06/KakaoTalk_20210604_103745975.png");
 
@@ -701,8 +703,11 @@
     .media-agent { background-image: var(--img-video-agent), var(--mesh-cyan); }
     .media-hellgate { background-image: var(--img-video-hellgate), var(--mesh-red); }
     .media-social { background-image: var(--img-social-gangneung), var(--mesh-cyan); }
+    .media-theme-song { background-image: var(--img-theme-song), var(--mesh-purple); }
+
     .media-product-ssulwha { background-image: var(--img-product-ssulwha), var(--mesh-purple); }
     .media-product-magicsrt { background-image: var(--img-product-magicsrt), var(--mesh-cyan); }
+
     .media-book-media { background-image: var(--img-book-media), var(--mesh-cyan); }
     .media-book-sharon { background-image: var(--img-book-sharon), var(--mesh-red); }
     .media-book-pinky { background-image: var(--img-book-pinky), var(--mesh-purple); }
@@ -710,7 +715,31 @@
     .media-book-contents { background-image: var(--img-book-contents), var(--mesh-cyan); }
     .media-book-video { background-image: var(--img-book-video), var(--mesh-gold); }
     .media-book-agent { background-image: var(--img-book-agent), var(--mesh-purple); }
+    .media-book-judgment { background-image: var(--img-book-judgment), var(--mesh-cyan); }
+
     .media-mirinae { background-image: var(--img-mirinae-logo), var(--mesh-gold); }
+
+    .music-feature-card {
+      margin-top: var(--space-xl);
+      display: grid;
+      grid-template-columns: minmax(220px, 360px) minmax(0, 1fr);
+      gap: var(--space-xl);
+      align-items: center;
+    }
+
+    .poster-slot {
+      aspect-ratio: 9 / 16;
+      min-height: 420px;
+      margin-bottom: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .audio-player {
+      width: 100%;
+      margin-top: var(--space-lg);
+      accent-color: var(--color-accent);
+    }
 
     .video-card {
       min-height: 100%;
@@ -1058,6 +1087,16 @@
         min-height: 240px;
       }
 
+      .poster-slot {
+        min-height: 360px;
+        max-width: 320px;
+        margin-inline: auto;
+      }
+
+      .music-feature-card {
+        grid-template-columns: 1fr;
+      }
+
       .book-card .media-slot {
         min-height: 280px;
       }
@@ -1179,7 +1218,7 @@
                 <span class="stat-label" data-en>AI compositions</span>
               </div>
               <div class="stat">
-                <span class="stat-number slot-number" data-count="7">7</span>
+                <span class="stat-number slot-number" data-count="8">8</span>
                 <span class="stat-label" data-ko>주요 저서</span>
                 <span class="stat-label" data-en>Major books</span>
               </div>
@@ -1324,6 +1363,24 @@
             </article>
           </div>
         </div>
+
+        <article class="work-card music-feature-card reveal">
+          <div class="media-slot poster-slot media-theme-song" data-slot-label="Theme song cover"></div>
+          <div class="card-content">
+            <span class="tag">Theme Song</span>
+            <h3>
+              <span data-ko>주제곡</span>
+              <span data-en>Theme Song</span>
+            </h3>
+            <p data-ko>AI 창작 세계관을 음악으로 압축한 주제곡입니다. 세로형 썸네일과 함께 곡의 분위기를 바로 들을 수 있게 구성했습니다.</p>
+            <p data-en>A theme song that captures the creative universe in music, paired with a vertical cover image and direct audio playback.</p>
+
+            <audio class="audio-player" controls preload="metadata">
+              <source src="https://cdn1.suno.ai/5784802a-c660-4084-a3e9-036fe575595d.mp3" type="audio/mpeg" />
+              브라우저가 오디오 재생을 지원하지 않습니다.
+            </audio>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -1380,14 +1437,29 @@
             <span data-en>Major Books</span>
           </h2>
           <p>
-            <span data-ko>미디어융합, 생성형 AI, AI Agent, AI 동화까지 창작과 교육의 흐름을 책으로 확장했습니다.</span>
-            <span data-en>From media convergence and generative AI to AI Agent creation and AI fairy tales, the work expands into books.</span>
+            <span data-ko>미디어융합, 생성형 AI, AI Agent, AI 동화, AI 판단과 미디어 리터러시까지 창작과 교육의 흐름을 책으로 확장했습니다.</span>
+            <span data-en>From media convergence and generative AI to AI agents, AI fairy tales, judgment, and media literacy, the work expands into books.</span>
           </p>
         </div>
 
         <div class="book-wall">
           <article class="book-card reveal">
-            <div class="media-slot media-book-media" data-slot-label="Book cover slot"></div>
+            <div class="media-slot media-book-judgment" data-slot-label="북커버"></div>
+            <div class="card-content">
+              <span class="tag">New Book</span>
+              <h3>How AI Borrows Your Judgment: Judgment and Media Literacy in the Age of Generative AI</h3>
+              <span class="book-meta">Generative AI · Media Literacy · Kindle</span>
+              <div class="actions">
+                <a class="btn secondary" href="https://a.co/d/02NZNM7h" target="_blank" rel="noopener noreferrer">
+                  <span data-ko>아마존 킨들에서 보기</span>
+                  <span data-en>View on Amazon Kindle</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="book-card reveal">
+            <div class="media-slot media-book-media" data-slot-label="북커버"></div>
             <div class="card-content">
               <span class="tag">Media</span>
               <h3>미디어융합과 방송의 미래</h3>
@@ -1396,7 +1468,7 @@
           </article>
 
           <article class="book-card reveal">
-            <div class="media-slot media-book-sharon" data-slot-label="Book cover slot"></div>
+            <div class="media-slot media-book-sharon" data-slot-label="북커버"></div>
             <div class="card-content">
               <span class="tag">AI Fairy Tale</span>
               <h3>빨간 고양이 샤론</h3>
@@ -1405,7 +1477,7 @@
           </article>
 
           <article class="book-card reveal">
-            <div class="media-slot media-book-pinky" data-slot-label="Book cover slot"></div>
+            <div class="media-slot media-book-pinky" data-slot-label="북커버"></div>
             <div class="card-content">
               <span class="tag">AI Fairy Tale</span>
               <h3>핑키의 무지개 마음</h3>
@@ -1414,7 +1486,7 @@
           </article>
 
           <article class="book-card reveal">
-            <div class="media-slot media-book-coco" data-slot-label="Book cover slot"></div>
+            <div class="media-slot media-book-coco" data-slot-label="북커버"></div>
             <div class="card-content">
               <span class="tag">AI Fairy Tale</span>
               <h3>코코의 그린어드벤처</h3>
@@ -1423,7 +1495,7 @@
           </article>
 
           <article class="book-card reveal">
-            <div class="media-slot media-book-contents" data-slot-label="Book cover slot"></div>
+            <div class="media-slot media-book-contents" data-slot-label="북커버"></div>
             <div class="card-content">
               <span class="tag">Generative AI</span>
               <h3>AID 역량 강화를 위한 생성형 AI 활용 콘텐츠 제작 가이드</h3>
@@ -1432,7 +1504,7 @@
           </article>
 
           <article class="book-card reveal">
-            <div class="media-slot media-book-video" data-slot-label="Book cover slot"></div>
+            <div class="media-slot media-book-video" data-slot-label="북커버"></div>
             <div class="card-content">
               <span class="tag">AI Music Video</span>
               <h3>생성형 AI를 활용한 뮤직비디오 제작 가이드</h3>
@@ -1441,7 +1513,7 @@
           </article>
 
           <article class="book-card reveal">
-            <div class="media-slot media-book-agent" data-slot-label="Book cover slot"></div>
+            <div class="media-slot media-book-agent" data-slot-label="북커버"></div>
             <div class="card-content">
               <span class="tag">AI Agent</span>
               <h3>나만의 AI Agent 만들기</h3>
@@ -1699,6 +1771,16 @@
         frame.appendChild(iframe);
         card.classList.add("is-loaded");
         button.remove();
+      });
+    });
+
+    document.querySelectorAll("audio").forEach((audio) => {
+      audio.addEventListener("play", () => {
+        document.querySelectorAll("audio").forEach((otherAudio) => {
+          if (otherAudio !== audio) {
+            otherAudio.pause();
+          }
+        });
       });
     });
 

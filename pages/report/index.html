@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 시대의 과제 지도와 평가</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:#1a1a1a;display:flex;align-items:flex-start;justify-content:center;padding:24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo',sans-serif}
+#ac{width:960px;max-width:100%}
+/* progress */
+#prog-track{height:3px;background:rgba(255,255,255,.12);border-radius:2px;margin-bottom:9px}
+#prog-bar{height:3px;background:#B23A26;border-radius:2px;transition:width 280ms ease;width:3.33%}
+/* part tabs */
+.parts{display:flex;gap:6px;justify-content:center;margin-bottom:10px}
+.pt{padding:4px 16px;border-radius:9999px;font-size:11px;font-weight:600;letter-spacing:.07em;cursor:pointer;border:1.5px solid rgba(255,255,255,.18);color:rgba(255,255,255,.4);background:transparent;transition:all 150ms;font-family:inherit}
+.pt.on{background:#B23A26;color:#fff;border-color:transparent}
+/* carousel */
+.sw{overflow:hidden;border-radius:20px;border:.5px solid #E6E1DC}
+.st{display:flex;transition:transform 300ms cubic-bezier(.22,1,.36,1);will-change:transform}
+.sl{min-width:100%;width:100%;aspect-ratio:16/9;display:flex;flex-direction:column;justify-content:center;padding:2.75rem 4rem;position:relative;overflow:hidden}
+.dk{background:#1E1914;color:#FBF8F5}
+.pr{background:#B23A26;color:#fff}
+.lt{background:#FBF8F5;color:#1E1914}
+/* nav */
+.sn{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.25rem;background:#fff;border:.5px solid #E6E1DC;border-top:none;border-radius:0 0 20px 20px}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border:1.5px solid #B0A89E;border-radius:9999px;background:#fff;color:#4A4035;font-size:13px;cursor:pointer;font-family:inherit;user-select:none;transition:background 120ms}
+.nav-btn:hover{background:#F0EDE9}
+.nav-btn.off{opacity:.3;pointer-events:none}
+.cnt{font-size:12px;color:#9C9488;min-width:50px;text-align:center}
+/* type */
+.lbl{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;opacity:.4;margin-bottom:1.125rem}
+.hero{font-size:2.25rem;font-weight:800;line-height:1.2;margin-bottom:.75rem}
+.ttl{font-size:1.625rem;font-weight:700;line-height:1.25;margin-bottom:.625rem}
+.lt .ttl{color:#1E1914}
+.sub{font-size:.9rem;line-height:1.65}
+.lt .sub{color:#706757}
+.dk .sub{color:rgba(251,248,245,.5)}
+.pr .sub{color:rgba(255,255,255,.65)}
+.em{color:#B23A26;font-weight:600}
+/* layout */
+.col2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.col3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.875rem;margin-top:1rem}
+/* cards */
+.crd{background:#fff;border-radius:14px;padding:1rem;border:.5px solid #E6E1DC}
+.ct{font-size:.75rem;font-weight:600;color:#B23A26;margin-bottom:.375rem}
+.ct.g{color:#2A7A40}
+.cv{font-size:.875rem;color:#1E1914;line-height:1.5}
+/* chain */
+.chain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:1rem}
+.ci{padding:5px 12px;border-radius:9999px;font-size:.8125rem;font-weight:500;background:#fff;border:.5px solid #E6E1DC;color:#1E1914}
+.ci.p{background:#B23A26;color:#fff;border-color:transparent}
+.ci.g{background:#EDF7EE;color:#1A5C2A;border-color:transparent}
+.arr{color:#B0A89E;font-size:.875rem}
+/* badge */
+.bdg{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:9999px;font-size:11px;font-weight:500;margin-bottom:.875rem}
+/* status chips */
+.good{background:#EDF7EE;color:#1A5C2A}
+.bad{background:#FEF0ED;color:#7A2018}
+.p2{padding:4px 10px;border-radius:8px;font-size:.8125rem}
+/* big bg number */
+.bignum{font-size:6rem;font-weight:800;line-height:1;opacity:.08;position:absolute;right:3rem;bottom:1.5rem;pointer-events:none}
+/* axis table */
+.ax{width:100%;border-collapse:collapse;font-size:.875rem;margin-top:.75rem}
+.ax th{text-align:left;padding:5px 10px;font-size:.7rem;font-weight:600;color:#706757;border-bottom:.5px solid #E6E1DC;letter-spacing:.04em}
+.ax td{padding:7px 10px;border-bottom:.5px solid #E6E1DC;color:#1E1914;line-height:1.4;vertical-align:middle}
+.ax tr.hi>td{background:#FEF0ED;font-weight:600}
+.ax tr.hi .ax-k{color:#B23A26}
+.ax .ax-k{font-weight:700;min-width:70px;display:inline-block}
+.ax .sc{text-align:right;font-weight:700;color:#B23A26;white-space:nowrap}
+/* step list */
+.slist{margin-top:.875rem;display:flex;flex-direction:column;gap:.4rem}
+.si{display:flex;align-items:center;gap:.625rem;padding:.5rem .875rem;border-radius:10px;opacity:0;transform:translateX(-8px);transition:opacity 260ms,transform 260ms;font-size:.875rem}
+.dk .si{background:rgba(251,248,245,.07);color:#FBF8F5}
+.lt .si{background:#F0EDE9;color:#1E1914}
+.si.show{opacity:1;transform:none}
+.sn2{min-width:20px;height:20px;border-radius:50%;background:#B23A26;color:#fff;font-size:.625rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hint{font-size:.75rem;color:#B23A26;margin-top:.75rem;display:none;align-items:center;gap:4px;opacity:.8}
+.hint.vis{display:flex}
+/* gate flow */
+.gflow{display:flex;align-items:center;gap:.375rem;margin-top:1.125rem}
+.gbox{flex:1;padding:.875rem .75rem;text-align:center;border-radius:14px;background:#fff;border:.5px solid #E6E1DC;opacity:0;transform:translateY(8px);transition:all 320ms}
+.gbox.show{opacity:1;transform:none}
+.gbox-n{font-size:.7rem;font-weight:700;color:#B23A26;margin-bottom:.375rem;letter-spacing:.05em}
+.gbox-t{font-size:.875rem;font-weight:600;color:#1E1914;margin-bottom:.25rem}
+.gbox-s{font-size:.75rem;color:#706757;line-height:1.4}
+.garr{color:#B0A89E;flex-shrink:0;font-size:1rem}
+/* compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.cbox{border-radius:14px;padding:1rem;border:.5px solid #E6E1DC;background:#fff;transition:all 180ms;cursor:pointer}
+.cbox.dim{opacity:.18}
+.cbox.hl{border-color:#B23A26;box-shadow:0 0 0 2px #B23A26}
+.cbox.hlg{border-color:#2A7A40;box-shadow:0 0 0 2px #2A7A40}
+/* links */
+a.lnk{display:inline-flex;align-items:center;gap:6px;padding:9px 22px;background:#fff;border-radius:9999px;text-decoration:none;font-size:.875rem;font-weight:600;color:#B23A26;margin-right:8px}
+a.lnk:hover{opacity:.85}
+a.lnk2{color:rgba(255,255,255,.6);font-size:.8125rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);line-height:1.8;display:inline-block;margin-top:.25rem}
+/* gate badge */
+.gbdg{display:inline-block;padding:3px 8px;border-radius:6px;font-size:.7rem;font-weight:700;background:#B23A26;color:#fff;margin-right:6px;letter-spacing:.03em}
+/* check list */
+.ck{display:flex;flex-direction:column;gap:.4rem;margin-top:.875rem}
+.ck-r{display:flex;align-items:flex-start;gap:.5rem;font-size:.875rem;color:#1E1914;line-height:1.4}
+.ck-dot{width:6px;height:6px;border-radius:50%;background:#B23A26;flex-shrink:0;margin-top:.45rem}
+.ck-dot.g{background:#2A7A40}
+</style>
+</head>
+<body>
+<div id="ac">
+<div id="prog-track"><div id="prog-bar"></div></div>
+<div class="parts">
+  <button class="pt on" data-part="0">PART 1 — 왜 구조가 필요한가</button>
+  <button class="pt" data-part="1">PART 2 — 게슈탈트 6축</button>
+  <button class="pt" data-part="2">PART 3 — 검증과 평가 하네스</button>
+</div>
+<div class="sw"><div class="st" id="track">
+
+<!-- 01 dk 타이틀 -->
+<div class="sl dk">
+  <div class="lbl">AI 시대의 과제 지도·평가 특강</div>
+  <h1 class="hero">AI가 쓴 글을,<br>어떻게 평가할 것인가</h1>
+  <p class="sub">답은 AI 금지가 아니라<br>구조화된 출제 · 지도 · 검증 · 평가다</p>
+  <div class="bignum">1</div>
+</div>
+
+<!-- 02 lt 교수자 새로운 질문 -->
+<div class="sl lt">
+  <div class="bdg" style="background:#FEF0ED;color:#B23A26">교수자가 마주한 새로운 질문</div>
+  <h2 class="ttl">학생 글을 읽을 때 이제 세 가지를 동시에 확인해야 한다</h2>
+  <div class="col3">
+    <div class="crd"><div class="ct">① 진짜 쓴 것인가</div><div class="cv">학생이 직접 작성했는가, AI가 생성한 것인가</div></div>
+    <div class="crd"><div class="ct">② 이해하고 있는가</div><div class="cv">내용을 실제로 알고 있는가, 아니면 글만 있는가</div></div>
+    <div class="crd"><div class="ct">③ 근거가 실제인가</div><div class="cv">출처와 통계가 존재하는 것인가, 만들어진 것인가</div></div>
+  </div>
+  <p class="sub" style="margin-top:1rem">잘 쓴 글일수록 더 정교한 확인이 필요하다</p>
+</div>
+
+<!-- 03 lt 기존 대응 한계 -->
+<div class="sl lt">
+  <div class="bdg" style="background:#FEF0ED;color:#B23A26">기존 대응의 한계</div>
+  <h2 class="ttl">AI 금지 · 표절 검사 · 문체 판단만으로는 부족하다</h2>
+  <div class="col3" style="margin-top:1rem">
+    <div class="crd" style="border-top:3px solid #E8634A"><div class="ct">AI 글 ≠ 표절</div><div class="cv" style="font-size:.825rem">기존 문서와 겹치지 않아도 AI가 쓴 글일 수 있다</div></div>
+    <div class="crd" style="border-top:3px solid #E8634A"><div class="ct">문체 ≠ 이해도</div><div class="cv" style="font-size:.825rem">완성도 높은 문체가 이해를 보장하지 않는다</div></div>
+    <div class="crd" style="border-top:3px solid #E8634A"><div class="ct">사후 감점 ≠ 개선</div><div class="cv" style="font-size:.825rem">처벌은 다음 과제를 개선시키지 않는다</div></div>
+  </div>
+  <p class="sub" style="margin-top:1rem">필요한 것은 단속이 아니라 <span class="em">구조화된 지도와 검증</span>이다</p>
+</div>
+
+<!-- 04 lt 관점 전환 -->
+<div class="sl lt">
+  <div class="bdg" style="background:#EDF7EE;color:#2A7A40">관점 전환</div>
+  <h2 class="ttl">글이 아니라 <span style="color:#B23A26">사고 과정</span>을 본다</h2>
+  <p class="sub">과제는 완성된 글 한 편이 아니라 학생의 사고 구조물이다. 확인해야 할 것:</p>
+  <div class="chain">
+    <div class="ci p">무엇을 주장하는가</div>
+    <div class="ci">어떻게 분석했는가</div>
+    <div class="ci">어디까지 다루는가</div>
+    <div class="ci">얼마나 깊이 들어갔는가</div>
+    <div class="ci">어떤 순서로 전개했는가</div>
+    <div class="ci">무엇을 근거로 삼았는가</div>
+  </div>
+  <p class="sub" style="margin-top:1rem">이 여섯 질문이 이 강의의 <span class="em">6가지 평가 기준 — Gestalt 6축</span>의 뼈대다</p>
+</div>
+
+<!-- 05 dk 교수자 실제 프로세스 step-reveal -->
+<div class="sl dk" data-steps="7">
+  <div class="lbl">교수자가 실제로 하는 일</div>
+  <h2 class="hero" style="font-size:1.875rem;margin-bottom:.5rem">논문 지도와 과제 평가는<br>하나의 반복 사이클이다</h2>
+  <div class="slist">
+    <div class="si"><div class="sn2">1</div><span>교수 — 과제 출제 및 기준 공개</span></div>
+    <div class="si"><div class="sn2">2</div><span>학생 — 초안 작성 및 제출</span></div>
+    <div class="si"><div class="sn2">3</div><span>교수 — 초안 기준 분석 및 개선 방향 피드백</span></div>
+    <div class="si"><div class="sn2">4</div><span>학생 — 피드백 반영 후 최종본 제출</span></div>
+    <div class="si"><div class="sn2">5</div><span>교수 — AI 탐지 · 출처 검증 · 필요 시 구술 검증</span></div>
+    <div class="si"><div class="sn2">6</div><span>교수 — 5인 AI 저지 채점 + 집계</span></div>
+    <div class="si"><div class="sn2">7</div><span>교수 — 피드백 보고서 전달 → 다음 과제로</span></div>
+  </div>
+  <div class="hint"><i class="ti ti-arrow-right" style="font-size:.875rem"></i>스페이스바로 단계 공개</div>
+</div>
+
+<!-- 06 pr 제안하는 구조 (Part 2 오프너) -->
+<div class="sl pr">
+  <div class="lbl">PART 2 — 6가지 평가 기준 (Gestalt 6축)</div>
+  <h2 class="hero">세 가지 도구로<br>교수자의 판단을 구조화한다</h2>
+  <div class="col3" style="margin-top:1.25rem">
+    <div style="background:rgba(255,255,255,.15);border-radius:14px;padding:1rem">
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.6);margin-bottom:.375rem">도구 1</div>
+      <div style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.25rem">6가지 평가 기준</div>
+      <div style="font-size:.8125rem;color:rgba(255,255,255,.65)">출제·지도·평가 기준 (Gestalt 6축)</div>
+    </div>
+    <div style="background:rgba(255,255,255,.15);border-radius:14px;padding:1rem">
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.6);margin-bottom:.375rem">도구 2</div>
+      <div style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.25rem">3개 검증 게이트</div>
+      <div style="font-size:.8125rem;color:rgba(255,255,255,.65)">AI탐지 · 구술 · 출처</div>
+    </div>
+    <div style="background:rgba(255,255,255,.15);border-radius:14px;padding:1rem">
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.6);margin-bottom:.375rem">도구 3</div>
+      <div style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.25rem">5인 AI 저지</div>
+      <div style="font-size:.8125rem;color:rgba(255,255,255,.65)">다관점 올림픽 채점</div>
+    </div>
+  </div>
+  <p class="sub" style="margin-top:1.25rem">AI가 교수자를 대체하는 것이 아니라 — <strong style="color:#fff">판단의 구조를 지원</strong>한다</p>
+</div>
+
+<!-- 07 lt 6축 소개 -->
+<div class="sl lt">
+  <div class="bdg" style="background:#FEF0ED;color:#B23A26">6가지 평가 기준 — Gestalt 6축</div>
+  <h2 class="ttl">새로운 이론이 아니다<br>교수들이 이미 하던 피드백을 여섯 기준으로 명문화했다</h2>
+  <div class="chain">
+    <div class="ci p">WHAT</div><span class="arr">·</span>
+    <div class="ci p">HOW</div><span class="arr">·</span>
+    <div class="ci p">WHERE</div><span class="arr">·</span>
+    <div class="ci p">DEPTH</div><span class="arr">·</span>
+    <div class="ci p">TIME</div><span class="arr">·</span>
+    <div class="ci p">EVIDENCE</div>
+  </div>
+  <div style="margin-top:.875rem;padding:.5rem .875rem;background:#F0EDE9;border-radius:8px;font-size:.8rem;color:#706757">
+    ※ 이 강의를 위해 직접 설계한 분석 프레임워크 — 일반에 공개된 이론이 아닙니다
+  </div>
+  <p class="sub" style="margin-top:.75rem">"글이 약하다" 대신 — <span class="em">어느 기준이 약한지 정확히 말할 수 있게 해준다</span></p>
+</div>
+
+<!-- 08 lt 6축 = 교수자 언어 (auto-highlight) -->
+<div class="sl lt" data-axhl="true">
+  <h2 class="ttl">6가지 평가 기준을 교수자의 언어로</h2>
+  <table class="ax">
+    <thead><tr><th>축</th><th>교수자의 실제 피드백</th><th style="text-align:right">배점</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ax-k">WHAT</span>그래서 네가 하려는 말이 뭐냐?</td><td class="sc">20</td></tr>
+      <tr><td><span class="ax-k">HOW</span>그걸 어떤 방식으로 보겠다는 거냐?</td><td class="sc">20</td></tr>
+      <tr><td><span class="ax-k">WHERE</span>범위가 어디까지냐? 뭘 안 할 거냐?</td><td class="sc">10</td></tr>
+      <tr><td><span class="ax-k">DEPTH</span>말만 하지 말고 끝까지 들어가라</td><td class="sc">20</td></tr>
+      <tr><td><span class="ax-k">TIME</span>글의 순서가 왜 이렇게 가야 하냐?</td><td class="sc">15</td></tr>
+      <tr><td><span class="ax-k">EVIDENCE</span>근거가 어디 있냐?</td><td class="sc">15</td></tr>
+    </tbody>
+  </table>
+  <p class="sub" style="margin-top:.875rem">이 표가 출제 · 지도 · 채점의 공통 언어다</p>
+</div>
+
+<!-- 09 lt WHAT -->
+<div class="sl lt">
+  <div class="bdg" style="background:#FEF0ED;color:#B23A26">WHAT — 20점</div>
+  <h2 class="ttl">그래서 네 말이 뭐냐</h2>
+  <div class="cmp">
+    <div class="cbox" id="w-bad">
+      <div class="ct">약한 WHAT</div>
+      <div class="cv" style="font-size:.875rem">"SNS는 청소년에게 영향을 준다"<br><span style="color:#9C9488;font-size:.8rem">→ 주장이 없다. 모두가 아는 사실이다.</span></div>
+    </div>
+    <div class="cbox" id="w-good">
+      <div class="ct g">강한 WHAT</div>
+      <div class="cv" style="font-size:.875rem">"SNS 사용 시간이 청소년 자존감에 미치는 영향을 분석하고, 비교 심리 노출을 원인으로 사용 기준 필요성을 검토한다"<br><span style="color:#2A7A40;font-size:.8rem">→ 무엇을, 어떻게, 왜</span></div>
+    </div>
+  </div>
+  <p class="sub" style="margin-top:.875rem">확인: 이 글은 무엇에 답하는가 — 첫 문단에서 알 수 있는가</p>
+</div>
+
+<!-- 10 lt HOW -->
+<div class="sl lt">
+  <div class="bdg" style="background:#FEF0ED;color:#B23A26">HOW — 20점</div>
+  <h2 class="ttl">어떤 방식으로 볼 것인가</h2>
+  <div class="col2">
+    <div>
+      <p class="sub" style="margin-bottom:.875rem">HOW = 주장을 다루는 방법론</p>
+      <div class="ck">
+        <div class="ck-r"><div class="ck-dot"></div>비교할 것인가</div>
+        <div class="ck-r"><div class="ck-dot"></div>사례를 분석할 것인가</div>
+        <div class="ck-r"><div class="ck-dot"></div>통계를 볼 것인가</div>
+        <div class="ck-r"><div class="ck-dot"></div>문헌을 검토할 것인가</div>
+        <div class="ck-r"><div class="ck-dot"></div>인터뷰·관찰을 활용할 것인가</div>
+      </div>
+    </div>
+    <div class="crd" style="border-top:3px solid #E8634A;display:flex;flex-direction:column;justify-content:center">
+      <div class="ct">HOW 없는 글</div>
+      <div class="cv">WHAT이 있어도 방법론이 없으면 글은 선언으로 끝난다</div>
+    </div>
+  </div>
+</div>
+
+<!-- 11 lt WHERE -->
+<div class="sl lt">
+  <div class="bdg" style="background:#FEF0ED;color:#B23A26">WHERE — 10점</div>
+  <h2 class="ttl">어디까지 다룰 것인가</h2>
+  <div class="col2">
+    <div>
+      <p class="sub" style="margin-bottom:.875rem">WHERE = 과제의 경계. 범위를 모르면 아이디어는 늘어나기만 한다.</p>
+      <div class="ck">
+        <div class="ck-r"><div class="ck-dot"></div>분석 대상은 누구인가</div>
+        <div class="ck-r"><div class="ck-dot"></div>기간은 어디까지인가</div>
+        <div class="ck-r"><div class="ck-dot"></div>어떤 사례를 포함하는가</div>
+        <div class="ck-r"><div class="ck-dot"></div><strong>무엇은 이번 과제에서 제외하는가</strong></div>
+      </div>
+    </div>
+    <div class="crd" style="background:#EDF7EE;border:.5px solid #A8D5B5;display:flex;flex-direction:column;justify-content:center">
+      <div class="ct g">좋은 WHERE</div>
+      <div class="cv">무엇을 다루는지 <strong>뿐만 아니라</strong><br>무엇을 다루지 않는지도 안다</div>
+    </div>
+  </div>
+</div>
+
+<!-- 12 lt DEPTH -->
+<div class="sl lt">
+  <div class="bdg" style="background:#FEF0ED;color:#B23A26">DEPTH — 20점</div>
+  <h2 class="ttl">얼마나 깊이 들어갔는가</h2>
+  <p class="sub" style="margin-bottom:1rem">선언 → 원인 → 메커니즘 → 반론 → 실행수준. 어디까지 내려갔는가.</p>
+  <div style="display:flex;flex-direction:column;gap:.375rem">
+    <div style="padding:.5rem 1rem;border-radius:8px;background:#FEF0ED;font-size:.875rem;color:#9C9488;text-decoration:line-through">"좋다 / 나쁘다" → 깊이 0</div>
+    <div style="padding:.5rem 1rem;border-radius:8px;background:#F0EDE9;font-size:.875rem;color:#706757">"왜 나쁜가" → 원인 제시</div>
+    <div style="padding:.5rem 1rem;border-radius:8px;background:#E8E3DD;font-size:.875rem;color:#4A4035">"어떤 구조로 작동하는가" → 메커니즘</div>
+    <div style="padding:.5rem 1rem;border-radius:8px;background:#EDF7EE;font-size:.875rem;color:#1A5C2A;font-weight:500">"반론과 한계를 다루고 실행 수준까지" → 완전한 DEPTH</div>
+  </div>
+</div>
+
+<!-- 13 lt TIME -->
+<div class="sl lt">
+  <div class="bdg" style="background:#FEF0ED;color:#B23A26">TIME — 15점</div>
+  <h2 class="ttl">순서가 논리를 만드는가</h2>
+  <div class="col2">
+    <div>
+      <p class="sub" style="margin-bottom:.875rem">TIME = 글의 진행 순서와 인과 흐름</p>
+      <div class="ck">
+        <div class="ck-r"><div class="ck-dot"></div>앞 문단이 뒤 문단을 낳는가</div>
+        <div class="ck-r"><div class="ck-dot"></div>서론의 질문이 결론에서 답을 얻는가</div>
+        <div class="ck-r"><div class="ck-dot"></div>분석 순서가 자연스러운가</div>
+        <div class="ck-r"><div class="ck-dot"></div>중간에 논리적 점프가 없는가</div>
+      </div>
+    </div>
+    <div class="crd" style="display:flex;flex-direction:column;justify-content:center;gap:.5rem">
+      <div class="cv" style="font-size:.825rem;color:#9C9488;text-decoration:line-through">목차가 있는 글</div>
+      <div class="cv" style="font-size:.825rem;color:#B23A26;font-weight:600">→ 흐름이 있는 글</div>
+      <div class="cv" style="font-size:.8rem;color:#706757">목차는 형식, 흐름은 논리다</div>
+    </div>
+  </div>
+</div>
+
+<!-- 14 lt EVIDENCE -->
+<div class="sl lt">
+  <div class="bdg" style="background:#FEF0ED;color:#B23A26">EVIDENCE — 15점</div>
+  <h2 class="ttl">근거가 어디 있는가</h2>
+  <div class="col2">
+    <div>
+      <p class="sub" style="margin-bottom:.875rem">주장은 증거 위에 서야 한다</p>
+      <div class="ck">
+        <div class="ck-r"><div class="ck-dot g"></div>데이터 · 통계</div>
+        <div class="ck-r"><div class="ck-dot g"></div>문헌 · 논문</div>
+        <div class="ck-r"><div class="ck-dot g"></div>사례 · 인터뷰 · 관찰</div>
+        <div class="ck-r"><div class="ck-dot g"></div>출처 링크 (실제 접근 가능)</div>
+      </div>
+    </div>
+    <div class="crd" style="border-top:3px solid #E8634A;display:flex;flex-direction:column;justify-content:center;gap:.5rem">
+      <div style="font-size:.825rem;color:#9C9488;text-decoration:line-through">"그럴 것 같다"</div>
+      <div style="font-size:.825rem;color:#9C9488;text-decoration:line-through">"일반적으로 알려져 있다"</div>
+      <div style="font-size:.825rem;font-weight:600;color:#B23A26;margin-top:.25rem">→ 근거가 아니다</div>
+    </div>
+  </div>
+</div>
+
+<!-- 15 lt 피드백 비교 compare -->
+<div class="sl lt">
+  <h2 class="ttl">나쁜 피드백 vs 구조화된 피드백</h2>
+  <p class="sub" style="margin-bottom:.25rem">학생은 "글이 약하다"는 말로는 고칠 수 없다. 축을 지정하면 고친다.</p>
+  <div class="cmp">
+    <div class="cbox" id="fb-bad">
+      <div class="ct">나쁜 피드백</div>
+      <div style="display:flex;flex-direction:column;gap:.375rem;margin-top:.5rem;font-size:.875rem;color:#706757">
+        <div>"글이 산만하다"</div>
+        <div>"더 깊이 써라"</div>
+        <div>"근거가 부족하다"</div>
+      </div>
+    </div>
+    <div class="cbox" id="fb-good">
+      <div class="ct g">구조화된 피드백</div>
+      <div style="display:flex;flex-direction:column;gap:.375rem;margin-top:.5rem;font-size:.875rem;color:#1E1914">
+        <div><span class="em">WHERE</span>가 없다 — 분석 대상을 좁혀라</div>
+        <div><span class="em">DEPTH</span>가 약하다 — 반론과 한계를 포함하라</div>
+        <div><span class="em">EVIDENCE</span>가 약하다 — 3문단 주장에 문헌을 붙여라</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 16 lt 6축 출제 -->
+<div class="sl lt">
+  <div class="bdg" style="background:#EDF7EE;color:#2A7A40">출제 단계에서 6축 활용</div>
+  <h2 class="ttl">채점 기준을 나중에 붙이지 않는다<br>출제 단계에서 내장한다</h2>
+  <div class="col2" style="margin-top:.75rem">
+    <div style="background:#F0EDE9;border-radius:12px;padding:.875rem;font-size:.8125rem;color:#1E1914;line-height:1.7">
+      <strong>과제 요구사항 예시</strong><br>
+      WHAT: 핵심 주장을 한 문장으로<br>
+      HOW: 분석 기준 2개 이상<br>
+      WHERE: 대상·제외 항목 명시<br>
+      DEPTH: 반론과 한계 포함<br>
+      TIME: 문제제기→분석→결론 흐름<br>
+      EVIDENCE: 신뢰 근거 3개 이상
+    </div>
+    <div class="crd" style="display:flex;flex-direction:column;justify-content:center;gap:.5rem">
+      <div class="ct g">결과</div>
+      <div class="cv">학생은 출제 시점부터 무엇이 평가되는지 안다</div>
+      <div class="cv" style="margin-top:.5rem">교수자는 이 기준 그대로 채점한다</div>
+    </div>
+  </div>
+</div>
+
+<!-- 17 lt 6축 지도 -->
+<div class="sl lt">
+  <div class="bdg" style="background:#EDF7EE;color:#2A7A40">지도 단계에서 6가지 기준 활용</div>
+  <h2 class="ttl">초안 피드백 = 다시 써주는 것이 아니라<br>어디를 고칠지 알려주는 것이다</h2>
+  <div class="chain" style="margin-top:.875rem">
+    <div class="ci p">학생 초안 입력</div><span class="arr">→</span>
+    <div class="ci">기준 분석</div><span class="arr">→</span>
+    <div class="ci">약점 기준 확인</div><span class="arr">→</span>
+    <div class="ci">개선 우선순위 제시</div><span class="arr">→</span>
+    <div class="ci g">학생이 직접 수정</div>
+  </div>
+  <div class="crd" style="margin-top:1rem;border-left:3px solid #B23A26">
+    <div class="cv" style="font-size:.875rem">AI가 학생 글을 대신 쓰면 안 된다<br>교수자는 AI 분석을 참고해 <strong>지도 방향</strong>을 결정한다</div>
+  </div>
+</div>
+
+<!-- 18 lt 6축 평가 -->
+<div class="sl lt">
+  <div class="bdg" style="background:#EDF7EE;color:#2A7A40">평가 단계에서 6축 활용</div>
+  <h2 class="ttl">요구한 것을 평가하고<br>평가할 것을 미리 요구한다</h2>
+  <table class="ax" style="margin-top:.75rem">
+    <thead><tr><th>축</th><th>핵심 질문</th><th style="text-align:right">배점</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ax-k">WHAT</span></td><td>핵심 주장이 한 문장으로 명확한가</td><td class="sc">20</td></tr>
+      <tr><td><span class="ax-k">HOW</span></td><td>방법론이 WHAT을 실현하는가</td><td class="sc">20</td></tr>
+      <tr><td><span class="ax-k">WHERE</span></td><td>범위와 경계가 명확한가</td><td class="sc">10</td></tr>
+      <tr><td><span class="ax-k">DEPTH</span></td><td>아이디어가 실행 수준까지 내려갔는가</td><td class="sc">20</td></tr>
+      <tr><td><span class="ax-k">TIME</span></td><td>논리적 흐름과 순서가 있는가</td><td class="sc">15</td></tr>
+      <tr><td><span class="ax-k">EVIDENCE</span></td><td>주장에 측정 가능한 근거가 있는가</td><td class="sc">15</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 19 dk Part 3 오프너 -->
+<div class="sl dk">
+  <div class="lbl">PART 3 — 검증과 평가 하네스</div>
+  <h2 class="hero">왜 AI 평가만으로는<br>부족한가</h2>
+  <p class="sub">AI가 쓴 글을 AI가 평가할 때 생기는 구조적 문제</p>
+  <div class="bignum">3</div>
+</div>
+
+<!-- 20 lt AI 평가 문제 -->
+<div class="sl lt">
+  <h2 class="ttl">AI가 평가할 때 생기는 위험</h2>
+  <div class="col2">
+    <div class="crd" style="border-top:3px solid #E8634A"><div class="ct">완성도 ≠ 이해도</div><div class="cv" style="font-size:.85rem">그럴듯한 글을 사고 깊이로 착각할 수 있다</div></div>
+    <div class="crd" style="border-top:3px solid #E8634A"><div class="ct">출처 실존 미확인</div><div class="cv" style="font-size:.85rem">논문·통계가 실제로 존재하는지 확인하지 못할 수 있다</div></div>
+    <div class="crd" style="border-top:3px solid #E8634A"><div class="ct">이해 여부 불명</div><div class="cv" style="font-size:.85rem">학생이 내용을 실제로 알고 있는지 알 수 없다</div></div>
+    <div class="crd" style="border-top:3px solid #E8634A"><div class="ct">단일 관점 편향</div><div class="cv" style="font-size:.85rem">하나의 AI 판단은 하나의 관점에 갇힌다</div></div>
+  </div>
+  <p class="sub" style="margin-top:1rem">그래서 채점 전에 <span class="em">검증 게이트</span>가 필요하고, 평가는 <span class="em">5명의 다관점</span>이 필요하다</p>
+</div>
+
+<!-- 21 dk 3개 게이트 gflow -->
+<div class="sl dk" data-gflow="true">
+  <div class="lbl">검증 게이트 시스템</div>
+  <h2 class="hero" style="font-size:2rem;margin-bottom:.5rem">3개의 게이트가<br>AI 판정을 교수자 판단으로 연결한다</h2>
+  <div class="gflow">
+    <div class="gbox">
+      <div class="gbox-n">GATE 1</div>
+      <div class="gbox-t">AI 작성 가능성 탐지</div>
+      <div class="gbox-s">구조·문체 분석<br>→ 의심 높음 시 Gate 2</div>
+    </div>
+    <div class="garr"><i class="ti ti-arrow-right"></i></div>
+    <div class="gbox">
+      <div class="gbox-n">GATE 2</div>
+      <div class="gbox-t">구술 검증</div>
+      <div class="gbox-s">5개 질문 직접 확인<br>→ 3/5 이상 통과</div>
+    </div>
+    <div class="garr"><i class="ti ti-arrow-right"></i></div>
+    <div class="gbox">
+      <div class="gbox-n">GATE 3</div>
+      <div class="gbox-t">출처·링크 검증</div>
+      <div class="gbox-s">URL·논문·통계 실존 확인<br>→ 브라우징 ON 필수</div>
+    </div>
+  </div>
+  <p class="sub" style="margin-top:1rem">게이트는 처벌 장치가 아니다 — 교수자가 확인해야 할 지점을 표시하는 장치다</p>
+</div>
+
+<!-- 22 lt Gate 1 -->
+<div class="sl lt">
+  <div class="bdg" style="background:#FEF0ED;color:#B23A26"><span class="gbdg">GATE 1</span>AI 작성 가능성 탐지</div>
+  <h2 class="ttl">확정 판정이 아니라 구술 검증 트리거다</h2>
+  <div class="col2">
+    <div>
+      <p style="font-size:.8125rem;font-weight:600;color:#706757;margin-bottom:.5rem">탐지 신호 예시</p>
+      <div class="ck">
+        <div class="ck-r"><div class="ck-dot"></div>개인 경험 부재</div>
+        <div class="ck-r"><div class="ck-dot"></div>문체 균일성</div>
+        <div class="ck-r"><div class="ck-dot"></div>구조 과잉 완성도</div>
+        <div class="ck-r"><div class="ck-dot"></div>수업 맥락 부재</div>
+        <div class="ck-r"><div class="ck-dot"></div>근거의 일반성</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.625rem">
+      <div class="crd" style="background:#EDF7EE;border:.5px solid #A8D5B5">
+        <div class="ct g">낮음 / 보통</div>
+        <div class="cv" style="font-size:.85rem">→ 채점 진행</div>
+      </div>
+      <div class="crd" style="background:#FEF0ED;border:.5px solid #F2B5AC">
+        <div class="ct">높음 / 매우 높음</div>
+        <div class="cv" style="font-size:.85rem">→ Gate 2 구술 검증</div>
+      </div>
+    </div>
+  </div>
+  <p class="sub" style="margin-top:.875rem">핵심: "AI가 썼다"가 아니라 <span class="em">"확인이 필요하다"</span>이다. 최종 판단은 교수자가 한다.</p>
+</div>
+
+<!-- 23 lt Gate 2 -->
+<div class="sl lt">
+  <div class="bdg" style="background:#FEF0ED;color:#B23A26"><span class="gbdg">GATE 2</span>구술 검증</div>
+  <h2 class="ttl">학생이 실제로 이해했는지는 말로 확인한다</h2>
+  <div class="col2">
+    <div>
+      <p style="font-size:.8125rem;font-weight:600;color:#706757;margin-bottom:.5rem">질문 5가지 유형</p>
+      <div class="ck">
+        <div class="ck-r"><div class="ck-dot"></div>Q1 출처 확인 — 어디서 찾았는가</div>
+        <div class="ck-r"><div class="ck-dot"></div>Q2 과정 확인 — 어떻게 작성했는가</div>
+        <div class="ck-r"><div class="ck-dot"></div>Q3 확장 — 한 발 더 나아가면?</div>
+        <div class="ck-r"><div class="ck-dot"></div>Q4 반론 — 이 주장에 반대하면?</div>
+        <div class="ck-r"><div class="ck-dot"></div>Q5 개인화 — 본인 경험과 연결은?</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.625rem">
+      <div class="crd" style="background:#EDF7EE;border:.5px solid #A8D5B5">
+        <div class="ct g">3/5 이상 충분</div>
+        <div class="cv" style="font-size:.85rem">→ 본인 작성 인정, 채점 진행</div>
+      </div>
+      <div class="crd" style="background:#FEF0ED;border:.5px solid #F2B5AC">
+        <div class="ct">2/5 이하 충분</div>
+        <div class="cv" style="font-size:.85rem">→ 재제출 또는 추가 지도</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 24 lt Gate 3 -->
+<div class="sl lt">
+  <div class="bdg" style="background:#FEF0ED;color:#B23A26"><span class="gbdg">GATE 3</span>출처·링크 검증</div>
+  <h2 class="ttl">AI 시대의 핵심은 글의 유창함이 아니라<br>근거의 실존성이다</h2>
+  <div class="col2">
+    <div>
+      <p style="font-size:.8125rem;font-weight:600;color:#706757;margin-bottom:.5rem">확인할 것</p>
+      <div class="ck">
+        <div class="ck-r"><div class="ck-dot"></div>URL이 실제로 열리는가</div>
+        <div class="ck-r"><div class="ck-dot"></div>논문이 실제로 존재하는가</div>
+        <div class="ck-r"><div class="ck-dot"></div>통계 수치가 원 출처에 있는가</div>
+        <div class="ck-r"><div class="ck-dot"></div>인용 방향이 주장과 같은가</div>
+        <div class="ck-r"><div class="ck-dot"></div>허위 기관·미래 날짜는 없는가</div>
+      </div>
+    </div>
+    <div class="crd" style="border-left:3px solid #B23A26;display:flex;flex-direction:column;justify-content:center">
+      <div class="ct">논문 지도 원칙</div>
+      <div class="cv" style="font-size:.85rem">출처 검증은 선택이 아니라 필수다<br>브라우징 ON 상태에서만 "검증 완료"다</div>
+    </div>
+  </div>
+</div>
+
+<!-- 25 lt 브라우징 ON/OFF -->
+<div class="sl lt">
+  <h2 class="ttl">브라우징 OFF 상태에서는<br>"출처 검증 완료"라고 말하면 안 된다</h2>
+  <table class="ax" style="margin-top:1rem">
+    <thead><tr><th>상태</th><th>가능한 것</th><th>불가능한 것</th></tr></thead>
+    <tbody>
+      <tr class="hi">
+        <td><span class="ax-k">브라우징 OFF</span></td>
+        <td>구조 패턴 분석, 내부 논리 검토</td>
+        <td>URL·논문·통계 실제 확인</td>
+      </tr>
+      <tr>
+        <td><span class="ax-k">브라우징 ON</span></td>
+        <td>URL 접속, 논문 검색, 통계 대조</td>
+        <td>API 기반 완전 자동화</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="chain" style="margin-top:1rem">
+    <div class="ci" style="background:#FEF0ED;border-color:transparent;color:#B23A26">OFF = "구조 분석 완료 (미검증)"</div>
+    <span class="arr">vs</span>
+    <div class="ci g">ON = "출처 검증 완료"</div>
+  </div>
+</div>
+
+<!-- 26 lt 왜 5명인가 -->
+<div class="sl lt">
+  <div class="bdg" style="background:#FEF0ED;color:#B23A26">5명의 평가관 페르소나</div>
+  <h2 class="ttl">단일 AI 판단은 하나의 관점에 갇힌다<br>5명의 평가관 페르소나가 평가 관점을 분산한다</h2>
+  <table class="ax" style="margin-top:.75rem">
+    <thead><tr><th>페르소나</th><th>관점</th><th>중점 기준</th></tr></thead>
+    <tbody>
+      <tr><td><strong>김현우</strong></td><td>전략 기획</td><td>WHAT · WHERE</td></tr>
+      <tr><td><strong>이수진</strong></td><td>현장 실무</td><td>HOW · DEPTH</td></tr>
+      <tr><td><strong>박민준</strong></td><td>데이터 연구</td><td>EVIDENCE · TIME</td></tr>
+      <tr><td><strong>최지영</strong></td><td>UX / 정보 설계</td><td>TIME · WHAT</td></tr>
+      <tr><td><strong>정도현</strong></td><td>창의 교육</td><td>DEPTH · EVIDENCE</td></tr>
+    </tbody>
+  </table>
+  <div class="chain" style="margin-top:.875rem">
+    <div class="ci">5명 점수</div><span class="arr">→</span>
+    <div class="ci p">최고점 1명 제외</div><span class="arr">→</span>
+    <div class="ci p">최저점 1명 제외</div><span class="arr">→</span>
+    <div class="ci g">나머지 3명 평균 = 최종</div>
+  </div>
+</div>
+
+<!-- 27 lt 하네스 구조 -->
+<div class="sl lt" style="flex-direction:row;gap:3rem;align-items:center">
+  <div style="flex:1;min-width:0">
+    <div class="bdg" style="background:#EDF7EE;color:#2A7A40">전체 하네스 구조</div>
+    <h2 class="ttl">오케스트레이터 1개<br>서브 에이전트 15개 파일</h2>
+    <p class="sub">교수자는 GPTs 하나에 트리거 6개로 전체 시스템을 운영한다</p>
+    <div class="chain" style="margin-top:.875rem">
+      <div class="ci p">00_master</div><span class="arr">↓</span>
+      <div class="ci">01 루브릭</div>
+      <div class="ci">03 초안피드백</div>
+      <div class="ci">04 AI탐지</div>
+      <div class="ci">05 구술</div>
+      <div class="ci">06~10 저지</div>
+      <div class="ci">11 집계</div>
+      <div class="ci">15 출처</div>
+    </div>
+  </div>
+  <div style="flex:0 0 220px">
+    <div style="background:#1E1914;border-radius:14px;padding:1rem;font-size:.75rem;color:rgba(251,248,245,.6);line-height:1.8;font-family:monospace">
+      <div style="color:#B23A26;font-weight:700;margin-bottom:.5rem">Instructions</div>
+      <div>00_master.md</div>
+      <div style="color:#B23A26;font-weight:700;margin:.75rem 0 .5rem">서브 에이전트 (Knowledge)</div>
+      <div>01_rubric.md</div>
+      <div>02_judge_profiles.md</div>
+      <div>03_feedback.md</div>
+      <div>04_ai_gate.md</div>
+      <div>05_oral.md</div>
+      <div>06~10_judge1~5.md</div>
+      <div>11_scoring.md</div>
+      <div>12_report.md</div>
+      <div>13_design.md</div>
+      <div>14_student.md</div>
+      <div>15_citation.md</div>
+    </div>
+  </div>
+</div>
+
+<!-- 28 dk 운영 흐름 step-reveal -->
+<div class="sl dk" data-steps="11">
+  <div class="lbl">실제 운영 흐름</div>
+  <h2 class="hero" style="font-size:1.625rem;margin-bottom:.5rem">AI 평가도 기록이 있어야 신뢰할 수 있다</h2>
+  <div style="display:flex;gap:.875rem;margin-top:.625rem">
+    <div class="slist" style="flex:1;margin-top:0">
+      <div class="si"><div class="sn2">1</div><span>교수 — 과제 출제 및 기준 공개</span></div>
+      <div class="si"><div class="sn2">2</div><span>교수 — 학생 초안 입력 → AI 피드백 수령</span></div>
+      <div class="si"><div class="sn2">3</div><span>학생 — 최종본 직접 수정·제출</span></div>
+      <div class="si"><div class="sn2">4</div><span>교수 — Gate 1: AI 탐지</span></div>
+      <div class="si"><div class="sn2">5</div><span>교수 — Gate 3: 출처·링크 검증</span></div>
+      <div class="si"><div class="sn2">6</div><span>교수 — Gate 2: 구술 검증</span></div>
+    </div>
+    <div class="slist" style="flex:1;margin-top:0">
+      <div class="si"><div class="sn2">7</div><span>교수 — 5인 채점 시작 (트리거 E)</span></div>
+      <div class="si"><div class="sn2">8</div><span>AI — 올림픽 집계 (3명 평균)</span></div>
+      <div class="si"><div class="sn2">9</div><span>AI — 채점 검증 로그 출력</span></div>
+      <div class="si"><div class="sn2">10</div><span>교수 — 피드백 보고서 전달 (트리거 F)</span></div>
+      <div class="si"><div class="sn2">11</div><span>기록 보존 → 다음 사이클</span></div>
+    </div>
+  </div>
+  <div class="hint"><i class="ti ti-arrow-right" style="font-size:.875rem"></i>스페이스바로 단계 공개</div>
+</div>
+
+<!-- 29 lt 직접 설계하기 -->
+<div class="sl lt">
+  <div class="bdg" style="background:#EDF7EE;color:#2A7A40">직접 설계하기</div>
+  <h2 class="ttl">하네스 파일은 공개하지 않는다<br>구조를 보고 직접 만드는 것이 목표다</h2>
+  <div class="col2" style="margin-top:.875rem;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:.75rem">
+      <div class="crd" style="border-left:3px solid #2A7A40">
+        <div class="ct g">파일 구조 공개</div>
+        <div class="cv" style="font-size:.85rem;margin-bottom:.625rem">오케스트레이터 + 서브 에이전트 15개의 역할·구조를 공개합니다<br><span style="color:#9C9488">내용(Instructions)은 공개하지 않습니다</span></div>
+        <a class="lnk" style="padding:6px 14px;font-size:.8rem;display:inline-flex" href="./file_structure.html" target="_blank" rel="noopener">
+          <i class="ti ti-external-link"></i>&nbsp;파일 구조 보기
+        </a>
+      </div>
+      <div class="crd" style="border-left:3px solid #706757">
+        <div class="ct" style="color:#706757">참고 데모 (구조 확인용)</div>
+        <div style="display:flex;gap:.5rem;margin-top:.5rem">
+          <a class="lnk" style="padding:5px 12px;font-size:.775rem" href="https://gemini.google.com/gem/5f49d09ac39e" target="_blank" rel="noopener">
+            <i class="ti ti-external-link"></i> Gems
+          </a>
+          <a class="lnk" style="padding:5px 12px;font-size:.775rem" href="https://chatgpt.com/g/g-6a4bd7c53e60819195886995136c1c60-ai-judge-system-v1-0" target="_blank" rel="noopener">
+            <i class="ti ti-external-link"></i> GPTs
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="crd" style="background:#FEF0ED;border:none;display:flex;flex-direction:column;justify-content:center;gap:.375rem">
+      <div style="font-size:.75rem;font-weight:700;color:#B23A26;letter-spacing:.04em">AI 활용 레벨 기준 (10단계)</div>
+      <div style="font-size:1.5rem;font-weight:800;color:#B23A26;line-height:1">레벨 5~6</div>
+      <div style="font-size:.875rem;color:#1E1914;line-height:1.65;margin-top:.125rem">이 구조를 파악하고<br>직접 설계·구현할 수 있는 수준</div>
+      <div style="margin-top:.625rem;padding:.5rem .75rem;background:rgba(178,58,38,.08);border-radius:8px;font-size:.8rem;color:#706757;line-height:1.6">파일 구조 파악 → 역할 이해 →<br>GPTs / Gems / Claude에 직접 구현</div>
+    </div>
+  </div>
+</div>
+
+<!-- 30 pr 마무리 -->
+<div class="sl pr" style="align-items:center;text-align:center">
+  <div style="font-size:.8125rem;color:rgba(255,255,255,.5);margin-bottom:1rem;font-weight:500;letter-spacing:.06em">CLOSING</div>
+  <h2 style="font-size:2rem;font-weight:800;line-height:1.25;color:#fff;margin-bottom:1rem">AI 시대의 과제 평가는<br>구조 설계다</h2>
+  <div style="width:40px;height:2px;background:rgba(255,255,255,.4);margin:0 auto 1rem"></div>
+  <p style="color:rgba(255,255,255,.75);font-size:.9375rem;line-height:1.8;max-width:560px">과제는 더 이상 글 한 편을 받는 일이 아니다<br>학생의 사고를 구조화하고, 근거를 확인하고<br>이해를 검증하고, 다시 피드백으로 돌려주는 과정이다</p>
+  <div style="margin-top:1.5rem;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap">
+    <div style="padding:6px 14px;background:rgba(255,255,255,.15);border-radius:9999px;font-size:.8125rem;color:#fff">출제 — 6축 내장</div>
+    <div style="padding:6px 14px;background:rgba(255,255,255,.15);border-radius:9999px;font-size:.8125rem;color:#fff">지도 — 축별 피드백</div>
+    <div style="padding:6px 14px;background:rgba(255,255,255,.15);border-radius:9999px;font-size:.8125rem;color:#fff">검증 — 3개 게이트</div>
+    <div style="padding:6px 14px;background:rgba(255,255,255,.15);border-radius:9999px;font-size:.8125rem;color:#fff">평가 — 5인 다관점</div>
+  </div>
+</div>
+
+</div></div>
+
+<div class="sn">
+  <div id="pb" class="nav-btn off">← 이전</div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <span class="cnt" id="cnt">1 / 30</span>
+  </div>
+  <div id="nb" class="nav-btn">다음 →</div>
+</div>
+</div>
+
+<script>
+(function(){
+const PART_STARTS=[0,5,18];
+const track=document.getElementById('track');
+const slides=[...track.querySelectorAll('.sl')];
+const total=slides.length;
+const pb=document.getElementById('pb');
+const nb=document.getElementById('nb');
+const cnt=document.getElementById('cnt');
+const progBar=document.getElementById('prog-bar');
+const partBtns=[...document.querySelectorAll('.pt')];
+let cur=0, axTimer=null, stepTimers=[];
+
+slides.forEach(s=>{s.style.minWidth='100%';s.style.width='100%'});
+
+// step state
+const stepState={};
+slides.forEach((sl,i)=>{
+  const items=[...sl.querySelectorAll('.si')];
+  if(items.length) stepState[i]={items,idx:0};
+});
+
+function clearTimers(){
+  clearInterval(axTimer); axTimer=null;
+  stepTimers.forEach(clearTimeout); stepTimers=[];
+}
+
+function enterSlide(n){
+  clearTimers();
+  const sl=slides[n];
+  // step-reveal: show only first item
+  if(stepState[n]){
+    const {items}=stepState[n];
+    items.forEach(it=>it.classList.remove('show'));
+    stepState[n].idx=0;
+    items[0].classList.add('show');
+    stepState[n].idx=1;
+    const hint=sl.querySelector('.hint');
+    if(hint) hint.classList.toggle('vis',items.length>1);
+  }
+  // axis highlight
+  if(sl.dataset.axhl){
+    const rows=[...sl.querySelectorAll('.ax tbody tr')];
+    let ai=0;
+    rows.forEach(r=>r.classList.remove('hi'));
+    rows[ai].classList.add('hi');
+    axTimer=setInterval(()=>{
+      rows[ai].classList.remove('hi');
+      ai=(ai+1)%rows.length;
+      rows[ai].classList.add('hi');
+    },1800);
+  }
+  // gate flow reveal
+  if(sl.dataset.gflow){
+    const boxes=[...sl.querySelectorAll('.gbox')];
+    boxes.forEach(b=>b.classList.remove('show'));
+    boxes.forEach((b,i)=>{
+      stepTimers.push(setTimeout(()=>b.classList.add('show'),(i*2)*180));
+    });
+  }
+}
+
+function advanceStep(n){
+  if(!stepState[n]) return false;
+  const {items,idx}=stepState[n];
+  if(idx>=items.length) return false;
+  items[idx].classList.add('show');
+  stepState[n].idx=idx+1;
+  const hint=slides[n].querySelector('.hint');
+  if(hint) hint.classList.toggle('vis',stepState[n].idx<items.length);
+  return true;
+}
+
+function updatePartTabs(){
+  const pi=PART_STARTS.filter(p=>p<=cur).length-1;
+  partBtns.forEach((b,i)=>b.classList.toggle('on',i===pi));
+}
+
+function go(n){
+  cur=Math.max(0,Math.min(total-1,n));
+  track.style.transform=`translateX(-${cur*100}%)`;
+  cnt.textContent=`${cur+1} / ${total}`;
+  pb.className='nav-btn'+(cur===0?' off':'');
+  nb.className='nav-btn'+(cur===total-1?' off':'');
+  progBar.style.width=`${((cur+1)/total)*100}%`;
+  updatePartTabs();
+  enterSlide(cur);
+}
+
+pb.onclick=()=>go(cur-1);
+nb.onclick=()=>go(cur+1);
+partBtns.forEach((b,i)=>b.onclick=()=>go(PART_STARTS[i]));
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){
+    e.preventDefault();
+    if(!advanceStep(cur)) go(cur+1);
+  }
+  if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1)}
+});
+
+// compare click
+document.querySelectorAll('.cmp').forEach(cmp=>{
+  const boxes=[...cmp.querySelectorAll('.cbox')];
+  boxes.forEach((box,idx)=>{
+    box.onclick=()=>{
+      boxes.forEach((b,i)=>{
+        b.classList.remove('hl','hlg','dim');
+        if(i!==idx) b.classList.add('dim');
+      });
+      box.classList.add(idx===0?'hl':'hlg');
+    };
+  });
+});
+
+go(0);
+})();
+</script>
+</body>
+</html>

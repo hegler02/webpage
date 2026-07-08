@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>매체는 메시지의 몸</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="slides.js" defer></script>
+  <script src="deck.js" defer></script>
+</head>
+<body>
+  <main class="deck" id="deck" aria-label="매체는 메시지의 몸 강의 슬라이드">
+    <div class="grain" aria-hidden="true"></div>
+    <header class="topbar" aria-hidden="true">
+      <div class="brand">MEDIA BODY</div>
+      <div class="lecture">IMAGE · WEBTOON · VIDEO</div>
+      <div class="counter" id="counter">01 / 36</div>
+    </header>
+
+    <section class="stage">
+      <aside class="hierarchy" aria-label="메시지 제작 하이어라키">
+        <div class="rail-title">Hierarchy</div>
+        <ol id="hierarchyRail"></ol>
+      </aside>
+
+      <section class="copy-pane" id="copyPane" aria-live="polite"></section>
+
+      <section class="media-pane" aria-label="현재 매체 시각화">
+        <div class="media-frame" id="mediaFrame"></div>
+      </section>
+    </section>
+
+    <footer class="timeline" aria-label="강의 진행 타임라인">
+      <div class="timeline-track" id="timelineTrack"></div>
+      <nav class="controls" aria-label="슬라이드 이동">
+        <button id="prevBtn" type="button" aria-label="이전 슬라이드">‹</button>
+        <button id="nextBtn" type="button" aria-label="다음 슬라이드">›</button>
+      </nav>
+    </footer>
+    <div class="credit">김준호 동서울대학교 교수</div>
+  </main>
+</body>
+</html>

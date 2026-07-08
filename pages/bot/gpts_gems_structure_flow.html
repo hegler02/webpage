@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Bot GPTs/Gems 구조 + 플로우</title>
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #fbf7f0;
+    --ink: #1d232b;
+    --muted: #68707a;
+    --line: #d6cbc0;
+    --civil: #1f7a8c;
+    --staff: #7057b8;
+    --rule: #c05a35;
+    --source: #3c7d4f;
+    --gate: #d8a21f;
+    --stop: #b23a30;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 12% 10%, rgba(31, 122, 140, 0.12), transparent 28%),
+      radial-gradient(circle at 88% 4%, rgba(112, 87, 184, 0.12), transparent 30%),
+      var(--paper);
+    display: flex;
+    justify-content: center;
+    padding: 32px 16px;
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  }
+
+  .sheet {
+    width: min(960px, 100%);
+    background: rgba(255, 252, 247, 0.88);
+    border: 1px solid rgba(29, 35, 43, 0.12);
+    border-radius: 20px;
+    box-shadow: 0 24px 80px rgba(29, 35, 43, 0.14);
+    overflow: hidden;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+<main class="sheet" aria-label="GPTs/Gems 구조와 운영 플로우">
+<svg viewBox="0 0 960 1520" xmlns="http://www.w3.org/2000/svg" font-family="'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif">
+  <defs>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#1d232b" flood-opacity="0.13"/>
+    </filter>
+    <marker id="arrowInk" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1d232b"/>
+    </marker>
+    <marker id="arrowCivil" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1f7a8c"/>
+    </marker>
+    <marker id="arrowStaff" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#7057b8"/>
+    </marker>
+    <marker id="arrowStop" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#b23a30"/>
+    </marker>
+
+    <style>
+      .title { font-size: 24px; font-weight: 800; fill: #1d232b; letter-spacing: 0; }
+      .subtitle { font-size: 12px; font-weight: 600; fill: #68707a; }
+      .section { font-size: 15px; font-weight: 800; fill: #1d232b; }
+      .small { font-size: 10px; fill: #68707a; }
+      .tiny { font-size: 9px; fill: #68707a; }
+      .label { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+      .box-title { font-size: 13px; font-weight: 800; fill: #1d232b; }
+      .box-copy { font-size: 10px; fill: #4f5863; }
+      .white-title { font-size: 13px; font-weight: 800; fill: #fff; }
+      .white-copy { font-size: 10px; fill: rgba(255,255,255,0.86); }
+      .caption { font-size: 11px; font-weight: 700; fill: #1d232b; }
+      .pill { font-size: 10px; font-weight: 800; fill: #fff; }
+      .line { stroke: #1d232b; stroke-width: 1.8; fill: none; marker-end: url(#arrowInk); }
+      .civil-line { stroke: #1f7a8c; stroke-width: 2; fill: none; marker-end: url(#arrowCivil); }
+      .staff-line { stroke: #7057b8; stroke-width: 2; fill: none; marker-end: url(#arrowStaff); }
+      .stop-line { stroke: #b23a30; stroke-width: 2; fill: none; marker-end: url(#arrowStop); }
+      .dash { stroke-dasharray: 6 5; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="1520" fill="#fbf7f0"/>
+
+  <text x="480" y="46" text-anchor="middle" class="title">009_Knowlege_Bot_SYSTEM_v1_0</text>
+  <text x="480" y="68" text-anchor="middle" class="subtitle">GPTs/Gems 구조 + 운영 플로우 - 민원봇과 직원봇 2개 패키지</text>
+
+  <rect x="76" y="92" width="12" height="12" rx="3" fill="#1f7a8c"/><text x="96" y="103" class="small">민원봇</text>
+  <rect x="170" y="92" width="12" height="12" rx="3" fill="#7057b8"/><text x="190" y="103" class="small">직원봇</text>
+  <rect x="264" y="92" width="12" height="12" rx="3" fill="#c05a35"/><text x="284" y="103" class="small">시스템프롬프트</text>
+  <rect x="406" y="92" width="12" height="12" rx="3" fill="#3c7d4f"/><text x="426" y="103" class="small">원문발췌</text>
+  <rect x="518" y="92" width="12" height="12" rx="3" fill="#d8a21f"/><text x="538" y="103" class="small">검증게이트</text>
+  <rect x="626" y="92" width="12" height="12" rx="3" fill="#b23a30"/><text x="646" y="103" class="small">중단/확인</text>
+
+  <line x1="60" y1="126" x2="900" y2="126" stroke="#d6cbc0" stroke-width="1.5"/>
+  <text x="60" y="154" class="section">1. 실제 업로드 구조</text>
+  <text x="900" y="154" text-anchor="end" class="small">각 봇 = Instructions 1개 + Knowledge 11개</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="60" y="178" width="395" height="272" rx="16" fill="#ffffff" stroke="#b9d6dc"/>
+    <rect x="60" y="178" width="395" height="50" rx="16" fill="#1f7a8c"/>
+    <text x="82" y="200" class="white-title">민원봇</text>
+    <text x="82" y="218" class="white-copy">학생·학부모·수험생용 쉬운 안내</text>
+
+    <rect x="82" y="246" width="351" height="42" rx="9" fill="#f8e9e2" stroke="#c05a35"/>
+    <text x="100" y="264" class="box-title">시스템프롬프트_민원봇.md</text>
+    <text x="100" y="280" class="box-copy">권한 제한: 안내만 가능, 개별 승인·예외 판단 금지</text>
+
+    <rect x="82" y="304" width="351" height="50" rx="9" fill="#fff5d7" stroke="#d8a21f"/>
+    <text x="100" y="323" class="box-title">공통 Knowledge 3개</text>
+    <text x="100" y="340" class="box-copy">05 금지규칙 / 07 상위법 매핑 / 08 검증게이트</text>
+
+    <rect x="82" y="370" width="351" height="56" rx="9" fill="#e9f3eb" stroke="#3c7d4f"/>
+    <text x="100" y="389" class="box-title">원문발췌 Knowledge 8개</text>
+    <text x="100" y="406" class="box-copy">휴복학 · 수강신청 · 졸업 · 성적 · 장학 · 등록금 · 현장실습 · 공통</text>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <rect x="505" y="178" width="395" height="272" rx="16" fill="#ffffff" stroke="#d5caef"/>
+    <rect x="505" y="178" width="395" height="50" rx="16" fill="#7057b8"/>
+    <text x="527" y="200" class="white-title">직원봇</text>
+    <text x="527" y="218" class="white-copy">교직원용 근거 정리·초안 작성·법적 정합성 경고</text>
+
+    <rect x="527" y="246" width="351" height="42" rx="9" fill="#f8e9e2" stroke="#c05a35"/>
+    <text x="545" y="264" class="box-title">시스템프롬프트_직원봇.md</text>
+    <text x="545" y="280" class="box-copy">상위법 필수 인용, 초안 생성 후 직원 검토 전 발송 금지</text>
+
+    <rect x="527" y="304" width="351" height="50" rx="9" fill="#fff5d7" stroke="#d8a21f"/>
+    <text x="545" y="323" class="box-title">공통 Knowledge 3개</text>
+    <text x="545" y="340" class="box-copy">05 금지규칙 / 07 상위법 매핑 / 08 검증게이트</text>
+
+    <rect x="527" y="370" width="351" height="56" rx="9" fill="#e9f3eb" stroke="#3c7d4f"/>
+    <text x="545" y="389" class="box-title">원문발췌 Knowledge 8개</text>
+    <text x="545" y="406" class="box-copy">휴복학 · 수강신청 · 졸업 · 성적 · 장학 · 등록금 · 현장실습 · 공통</text>
+  </g>
+
+  <rect x="60" y="480" width="840" height="116" rx="16" fill="#ffffff" stroke="#d6cbc0" filter="url(#softShadow)"/>
+  <text x="82" y="508" class="section">2. 왜 두 개로 나누는가</text>
+  <g>
+    <rect x="82" y="526" width="184" height="40" rx="10" fill="#eaf5f7" stroke="#1f7a8c"/>
+    <text x="174" y="542" text-anchor="middle" class="caption">민원봇</text>
+    <text x="174" y="558" text-anchor="middle" class="tiny">쉬운 안내 + 담당부서 연결</text>
+    <rect x="288" y="526" width="184" height="40" rx="10" fill="#f0edf8" stroke="#7057b8"/>
+    <text x="380" y="542" text-anchor="middle" class="caption">직원봇</text>
+    <text x="380" y="558" text-anchor="middle" class="tiny">근거·체크리스트·초안</text>
+    <rect x="494" y="526" width="184" height="40" rx="10" fill="#fff5d7" stroke="#d8a21f"/>
+    <text x="586" y="542" text-anchor="middle" class="caption">공통 게이트</text>
+    <text x="586" y="558" text-anchor="middle" class="tiny">원문·상위법·확인 필요</text>
+    <rect x="700" y="526" width="178" height="40" rx="10" fill="#fae8e6" stroke="#b23a30"/>
+    <text x="789" y="542" text-anchor="middle" class="caption">권한 차단</text>
+    <text x="789" y="558" text-anchor="middle" class="tiny">승인·예외·발송 단정 금지</text>
+  </g>
+
+  <line x1="60" y1="626" x2="900" y2="626" stroke="#d6cbc0" stroke-width="1.5"/>
+  <text x="60" y="654" class="section">3. GPTs/Gems 선택 실행 플로우</text>
+
+  <rect x="350" y="678" width="260" height="42" rx="21" fill="#1d232b"/>
+  <text x="480" y="696" text-anchor="middle" class="pill">사용자 질문 입력</text>
+  <text x="480" y="711" text-anchor="middle" class="white-copy">휴학, 등록금, 졸업, 성적, 장학 등</text>
+
+  <path d="M480 720 L480 754" class="line"/>
+  <rect x="326" y="758" width="308" height="54" rx="12" fill="#ffffff" stroke="#1d232b" filter="url(#softShadow)"/>
+  <text x="480" y="780" text-anchor="middle" class="box-title">봇 선택</text>
+  <text x="480" y="798" text-anchor="middle" class="box-copy">민원인용이면 민원봇, 직원용이면 직원봇을 따로 연다</text>
+
+  <path d="M326 784 C250 784 230 838 198 874" class="civil-line"/>
+  <path d="M634 784 C710 784 730 838 762 874" class="staff-line"/>
+
+  <rect x="70" y="874" width="255" height="62" rx="14" fill="#eaf5f7" stroke="#1f7a8c" stroke-width="2"/>
+  <text x="198" y="899" text-anchor="middle" class="box-title">민원봇 실행</text>
+  <text x="198" y="916" text-anchor="middle" class="box-copy">쉬운 설명, 근거 조항, 담당부서 확인</text>
+
+  <rect x="635" y="874" width="255" height="62" rx="14" fill="#f0edf8" stroke="#7057b8" stroke-width="2"/>
+  <text x="763" y="899" text-anchor="middle" class="box-title">직원봇 실행</text>
+  <text x="763" y="916" text-anchor="middle" class="box-copy">상위법 매핑, 체크리스트, 회신 초안</text>
+
+  <path d="M198 936 L198 980 L350 980" class="civil-line"/>
+  <path d="M762 936 L762 980 L610 980" class="staff-line"/>
+
+  <rect x="350" y="950" width="260" height="78" rx="14" fill="#fff" stroke="#d6cbc0" filter="url(#softShadow)"/>
+  <text x="480" y="974" text-anchor="middle" class="box-title">Knowledge 검색</text>
+  <text x="480" y="993" text-anchor="middle" class="box-copy">원문발췌 8개 + 공통 규칙 3개</text>
+  <text x="480" y="1012" text-anchor="middle" class="box-copy">필요 조항과 법령 매핑 후보 찾기</text>
+
+  <path d="M480 1028 L480 1068" class="line"/>
+
+  <rect x="170" y="1072" width="620" height="138" rx="18" fill="#fff5d7" stroke="#d8a21f" stroke-width="2" filter="url(#softShadow)"/>
+  <text x="480" y="1098" text-anchor="middle" class="section">검증게이트</text>
+  <g>
+    <rect x="196" y="1116" width="160" height="36" rx="9" fill="#ffffff" stroke="#d8a21f"/>
+    <text x="276" y="1131" text-anchor="middle" class="caption">원문 근거</text>
+    <text x="276" y="1145" text-anchor="middle" class="tiny">조항·문구 확인</text>
+    <rect x="400" y="1116" width="160" height="36" rx="9" fill="#ffffff" stroke="#d8a21f"/>
+    <text x="480" y="1131" text-anchor="middle" class="caption">상위법 연결</text>
+    <text x="480" y="1145" text-anchor="middle" class="tiny">22건 매핑 참조</text>
+    <rect x="604" y="1116" width="160" height="36" rx="9" fill="#ffffff" stroke="#d8a21f"/>
+    <text x="684" y="1131" text-anchor="middle" class="caption">최신 확인</text>
+    <text x="684" y="1145" text-anchor="middle" class="tiny">공지·부서 확인</text>
+  </g>
+  <text x="480" y="1184" text-anchor="middle" class="box-copy">근거가 부족하거나 개별 판단이 필요한 사안은 답변을 멈추고 확인 요청으로 전환한다.</text>
+
+  <path d="M330 1210 L198 1250" class="civil-line"/>
+  <path d="M630 1210 L762 1250" class="staff-line"/>
+  <path d="M480 1210 L480 1250" class="stop-line dash"/>
+
+  <rect x="70" y="1250" width="255" height="88" rx="16" fill="#1f7a8c" filter="url(#softShadow)"/>
+  <text x="198" y="1276" text-anchor="middle" class="white-title">민원봇 출력</text>
+  <text x="198" y="1296" text-anchor="middle" class="white-copy">쉬운 안내문</text>
+  <text x="198" y="1312" text-anchor="middle" class="white-copy">근거 조항 표시</text>
+  <text x="198" y="1328" text-anchor="middle" class="white-copy">담당 부서 확인 안내</text>
+
+  <rect x="352" y="1250" width="256" height="88" rx="16" fill="#b23a30" filter="url(#softShadow)"/>
+  <text x="480" y="1276" text-anchor="middle" class="white-title">중단/확인 출력</text>
+  <text x="480" y="1296" text-anchor="middle" class="white-copy">제공 자료로 판단 불가</text>
+  <text x="480" y="1312" text-anchor="middle" class="white-copy">최신 공지·담당 부서 확인</text>
+  <text x="480" y="1328" text-anchor="middle" class="white-copy">근거 없는 답변 생성 금지</text>
+
+  <rect x="635" y="1250" width="255" height="88" rx="16" fill="#7057b8" filter="url(#softShadow)"/>
+  <text x="763" y="1276" text-anchor="middle" class="white-title">직원봇 출력</text>
+  <text x="763" y="1296" text-anchor="middle" class="white-copy">근거 정리·확인 항목</text>
+  <text x="763" y="1312" text-anchor="middle" class="white-copy">이메일·문자·공지 초안</text>
+  <text x="763" y="1328" text-anchor="middle" class="white-copy">직원 검토 후 발송</text>
+
+  <rect x="60" y="1380" width="840" height="92" rx="16" fill="#1d232b" filter="url(#softShadow)"/>
+  <text x="480" y="1428" text-anchor="middle" class="white-title">김준호 동서울대학교 교수 / 사)한국고등직업교육학회 부회장</text>
+</svg>
+</main>
+</body>
+</html>

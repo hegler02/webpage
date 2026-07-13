@@ -4,6 +4,7 @@ const data = window.EDITORIAL_RUBRIC || { slides: [] };
 const presentation = data.presentation || {};
 const slides = data.slides || [];
 const deck = document.getElementById("deck");
+const deckViewport = document.getElementById("deckViewport");
 const spread = document.getElementById("spread");
 const folio = document.getElementById("folio");
 const toc = document.getElementById("toc");
@@ -17,6 +18,39 @@ let locked = false;
 let stepRows = [];
 let stepCursor = 0;
 
+const transitionItemSelector = [
+  ".cover-map-core",
+  ".cover-map-stage",
+  ".cover-map-owner",
+  ".question-card",
+  ".editorial-card",
+  ".chain-chip",
+  ".framework-node",
+  ".step-row.is-visible",
+  ".toolkit-card",
+  ".contrast-grid section",
+  ".axis-table tr",
+  ".checklist-items > div",
+  ".depth-level",
+  ".assignment-row",
+  ".flow-node",
+  ".gate-card",
+  ".gate-signals > div",
+  ".gate-outcomes article",
+  ".status-table article",
+  ".judge-card",
+  ".aggregation-line span",
+  ".blueprint-figure",
+  ".resource-link",
+  ".level-card",
+  ".resource-steps span",
+  ".manual-list div",
+  ".cycle-node",
+  ".closing-stage",
+  ".closing-owner",
+  ".closing-manifesto"
+].join(",");
+
 function applyPresentation() {
   document.title = presentation.documentTitle || "Editorial Magazine Deck";
   deck.setAttribute("aria-label", presentation.deckLabel || presentation.documentTitle || document.title);
@@ -28,17 +62,49 @@ function applyPresentation() {
   nextBtn.setAttribute("aria-label", presentation.nextLabel || "Next slide");
 }
 
-function readCssTime(token) {
+function readCssValue(token) {
   const raw = getComputedStyle(document.documentElement).getPropertyValue(token).trim();
+  if (!raw) throw new Error("Required motion token is missing: " + token);
+  return raw;
+}
+
+function readCssTime(token) {
+  const raw = readCssValue(token);
   const value = Number.parseFloat(raw);
-  if (!raw || !Number.isFinite(value)) {
-    throw new Error('Required motion token is missing: ' + token);
-  }
+  if (!Number.isFinite(value)) throw new Error("Invalid motion time token: " + token);
   return raw.endsWith("s") && !raw.endsWith("ms") ? value * 1000 : value;
+}
+
+function readCssNumber(token) {
+  const value = Number.parseFloat(readCssValue(token));
+  if (!Number.isFinite(value)) throw new Error("Invalid motion number token: " + token);
+  return value;
+}
+
+function clamp(value, minimum, maximum) {
+  return Math.min(maximum, Math.max(minimum, value));
 }
 
 function removeTurnLayer() {
   deck.querySelectorAll(".page-turn-layer").forEach(layer => layer.remove());
+}
+
+function markRevealTargets(incoming) {
+  const firstStep = incoming.querySelector(".step-row");
+  if (firstStep) firstStep.classList.add("is-visible");
+
+  const mark = (elements, kind) => {
+    Array.from(elements).forEach((element, order) => {
+      if (element.hasAttribute("data-reveal-target")) return;
+      element.dataset.revealTarget = "";
+      element.dataset.revealKind = kind;
+      element.dataset.revealOrder = String(order);
+    });
+  };
+
+  mark(incoming.querySelectorAll(".page-copy > *"), "copy");
+  mark(incoming.querySelectorAll(".page-visual > *"), "visual");
+  mark(incoming.querySelectorAll(transitionItemSelector), "item");
 }
 
 function createTurnLayer(direction, targetIndex) {
@@ -51,7 +117,7 @@ function createTurnLayer(direction, targetIndex) {
   const ghost = document.createElement("div");
   layer.className = `page-turn-layer film-wipe ${direction === "next" ? "film-next" : "film-prev"}`;
   layer.setAttribute("aria-hidden", "true");
-  incoming.className = "film-incoming";
+  incoming.className = "film-incoming is-transition-preview";
   outgoing.className = "film-outgoing";
   veil.className = "film-veil";
   sweep.className = "film-sweep";
@@ -59,10 +125,72 @@ function createTurnLayer(direction, targetIndex) {
   incoming.innerHTML = buildSlideMarkup(targetIndex);
   outgoing.innerHTML = spread.innerHTML;
   ghost.innerHTML = "<span></span><span></span><span></span>";
+  markRevealTargets(incoming);
   layer.append(incoming, outgoing, veil, sweep, ghost);
   deck.append(layer);
-  window.requestAnimationFrame(() => layer.classList.add("turn-active"));
   return layer;
+}
+
+function runRevealTimeline(incoming, direction, turnDuration) {
+  const copyStart = readCssTime("--motion-reveal-copy-start");
+  const visualStart = readCssTime("--motion-reveal-visual-start");
+  const itemStart = readCssTime("--motion-reveal-item-start");
+  const revealDuration = readCssTime("--motion-reveal-duration");
+  const travel = readCssTime("--motion-reveal-travel");
+  const stagger = readCssTime("--motion-reveal-item-stagger");
+  const settleGuard = readCssTime("--motion-reveal-settle-guard");
+  const offset = readCssNumber("--motion-reveal-offset");
+  const easing = readCssValue("--motion-reveal-ease");
+  const hostRect = incoming.getBoundingClientRect();
+  const maximumDelay = Math.max(0, turnDuration - revealDuration - settleGuard);
+  const starts = { copy: copyStart, visual: visualStart, item: itemStart };
+  const xOffset = direction === "next" ? offset : offset * -1;
+
+  return Array.from(incoming.querySelectorAll("[data-reveal-target]")).map(element => {
+    const rect = element.getBoundingClientRect();
+    const center = rect.left + rect.width / 2;
+    const progress = hostRect.width ? clamp((center - hostRect.left) / hostRect.width, 0, 1) : 0.5;
+    const directionalProgress = direction === "next" ? progress : 1 - progress;
+    const kind = element.dataset.revealKind || "item";
+    const order = Number.parseInt(element.dataset.revealOrder || "0", 10);
+    const delay = Math.min((starts[kind] ?? itemStart) + travel * directionalProgress + stagger * order, maximumDelay);
+
+    return element.animate([
+      { opacity: 0, transform: `translate3d(${xOffset}px, var(--motion-reveal-offset-y), 0) scale(var(--motion-reveal-scale-start))` },
+      { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" }
+    ], {
+      duration: revealDuration,
+      delay,
+      easing,
+      fill: "both"
+    });
+  });
+}
+
+function finishRevealTimeline(animations) {
+  animations.forEach(animation => {
+    try { animation.finish(); } catch (error) { /* Animation may already be finished. */ }
+    animation.cancel();
+  });
+}
+
+function commitIncomingSlide(target, incoming, animations) {
+  spread.classList.add("transition-committed");
+  finishRevealTimeline(animations);
+  const pages = Array.from(incoming.children);
+  spread.replaceChildren(...pages);
+  spread.querySelectorAll("[data-reveal-target]").forEach(element => {
+    delete element.dataset.revealTarget;
+    delete element.dataset.revealKind;
+    delete element.dataset.revealOrder;
+  });
+
+  current = Math.max(0, Math.min(slides.length - 1, target));
+  const slide = slides[current];
+  deck.dataset.layout = slide.layout;
+  folio.textContent = `${String(current + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+  renderToc();
+  initializeStepReveal();
 }
 
 function escapeHtml(value) {
@@ -75,6 +203,10 @@ function escapeHtml(value) {
 
 function multiline(value) {
   return escapeHtml(value).split("\n").join("<br>");
+}
+
+function sentenceLines(value) {
+  return escapeHtml(value).replace(/([.!?][’'”"]?)\s+(?=\S)/g, "$1<br>");
 }
 
 function renderAnchor(href, label, index = 0) {
@@ -124,6 +256,38 @@ function readCssNumber(token) {
   return value;
 }
 
+let deckFitFrame = 0;
+
+function fitDeckToViewport() {
+  const canvasWidth = readCssNumber("--deck-canvas-width");
+  const canvasHeight = readCssNumber("--deck-canvas-height");
+  const mobileBreakpoint = readCssNumber("--mobile-breakpoint");
+  const isMobile = window.innerWidth <= mobileBreakpoint;
+
+  if (isMobile) {
+    deckViewport.style.width = "";
+    deckViewport.style.height = "";
+    deck.style.removeProperty("--deck-scale");
+    deckViewport.dataset.fit = "mobile";
+    return;
+  }
+
+  const root = document.documentElement;
+  const availableWidth = root.clientWidth || window.innerWidth;
+  const availableHeight = root.clientHeight || window.innerHeight;
+  const scale = Math.min(availableWidth / canvasWidth, availableHeight / canvasHeight);
+
+  deck.style.setProperty("--deck-scale", String(scale));
+  deckViewport.style.width = (canvasWidth * scale) + "px";
+  deckViewport.style.height = (canvasHeight * scale) + "px";
+  deckViewport.dataset.fit = "desktop";
+}
+
+function scheduleDeckFit() {
+  window.cancelAnimationFrame(deckFitFrame);
+  deckFitFrame = window.requestAnimationFrame(fitDeckToViewport);
+}
+
 function renderToc() {
   const windowSize = Math.min(slides.length, Math.max(1, Math.round(readCssNumber("--toc-window-size"))));
   const start = Math.max(0, Math.min(current - Math.floor(windowSize / 2), slides.length - windowSize));
@@ -150,6 +314,17 @@ chain(slide) {
     return `<div class="chain-layout"><div class="chain-items">${(slide.items || []).map((item, index) => `
       <span class="chain-chip" style="--i:${index}">${escapeHtml(item)}</span>
     `).join("")}</div>${slide.note ? `<p class="visual-note">${escapeHtml(slide.note)}</p>` : ""}</div>`;
+  },
+framework(slide) {
+    return `<div class="framework-layout">
+      <div class="framework-map">
+        <div class="framework-core"><small>${escapeHtml(slide.frameCaption || "6 AXES")}</small><strong>${escapeHtml(slide.frameLabel || "GESTALT")}</strong><span>WHAT · HOW · WHERE<br>DEPTH · TIME · EVIDENCE</span></div>
+        <div class="framework-nodes">${(slide.items || []).map((item, index) => `
+          <article class="framework-node" data-axis="${escapeHtml(String(item[0]).toLowerCase())}" style="--i:${index}"><span>${escapeHtml(item[0])}</span><div><b>${escapeHtml(item[1])}</b><p>${escapeHtml(item[2])}</p></div></article>
+        `).join("")}</div>
+      </div>
+      ${slide.note ? `<p class="framework-note">${escapeHtml(slide.note)}</p>` : ""}
+    </div>`;
   },
 steps(slide) {
     const columns = slide.columns === 2 ? " two-columns" : "";
@@ -273,7 +448,7 @@ function buildSlideMarkup(index) {
       <div class="section-label">${escapeHtml(slide.section)}</div>
       <div class="kicker">${escapeHtml(slide.kicker)}</div>
       <h1>${multiline(slide.title)}</h1>
-      <p class="deckline">${escapeHtml(slide.deck)}</p>
+      <p class="deckline">${sentenceLines(slide.deck)}</p>
       ${slide.quote ? `<blockquote>${escapeHtml(slide.quote)}</blockquote>` : ""}
       ${slide.meta ? `<div class="meta-line">${slide.meta.map(escapeHtml).join(" · ")}</div>` : ""}
     </article>
@@ -302,6 +477,7 @@ function renderSlide(index) {
   const slide = slides[current];
   deck.dataset.layout = slide.layout;
   folio.textContent = `${String(current + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+  spread.classList.remove("transition-committed");
   spread.innerHTML = buildSlideMarkup(current);
   renderToc();
   initializeStepReveal();
@@ -314,9 +490,11 @@ function goTo(index) {
   locked = true;
   const direction = target > current ? "next" : "prev";
   const layer = createTurnLayer(direction, target);
+  const incoming = layer.querySelector(".film-incoming");
   const outgoing = layer.querySelector(".film-outgoing");
   const duration = readCssTime("--motion-turn-duration");
   const fallbackBuffer = readCssTime("--motion-turn-fallback-buffer");
+  const revealAnimations = [];
   let settled = false;
   let fallbackId;
 
@@ -325,7 +503,7 @@ function goTo(index) {
     settled = true;
     window.clearTimeout(fallbackId);
     outgoing.removeEventListener("animationend", handleAnimationEnd);
-    renderSlide(target);
+    commitIncomingSlide(target, incoming, revealAnimations);
     window.requestAnimationFrame(() => {
       removeTurnLayer();
       locked = false;
@@ -338,6 +516,10 @@ function goTo(index) {
 
   outgoing.addEventListener("animationend", handleAnimationEnd);
   fallbackId = window.setTimeout(settle, duration + fallbackBuffer);
+  window.requestAnimationFrame(() => {
+    layer.classList.add("turn-active");
+    revealAnimations.push(...runRevealTimeline(incoming, direction, duration));
+  });
 }
 function next() { goTo(current + 1); }
 function prev() { goTo(current - 1); }
@@ -355,6 +537,9 @@ deck.addEventListener("click", (event) => {
 imageLightbox.addEventListener("click", (event) => {
   if (event.target === imageLightbox || event.target.closest(".lightbox-close")) closeImageLightbox();
 });
+window.addEventListener("resize", scheduleDeckFit);
+if (window.visualViewport) window.visualViewport.addEventListener("resize", scheduleDeckFit);
+
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !imageLightbox.hidden) { event.preventDefault(); closeImageLightbox(); return; }
   if (!imageLightbox.hidden) return;
@@ -363,5 +548,6 @@ window.addEventListener("keydown", (event) => {
   if (["ArrowLeft", "PageUp", "Backspace"].includes(event.key)) { event.preventDefault(); prev(); }
 });
 
+fitDeckToViewport();
 applyPresentation();
 renderSlide(0);

@@ -83,17 +83,19 @@ window.EDITORIAL_RUBRIC = {
     {
       "section": "Perspective",
       "marker": "04",
-      "layout": "chain",
+      "layout": "framework",
       "kicker": "관점 전환",
       "title": "글이 아니라\n사고 과정을 본다",
       "deck": "과제는 완성된 글 한 편이 아니라 학생의 사고 구조물이다.",
+      "frameLabel": "사고 과정",
+      "frameCaption": "6개의 질문",
       "items": [
-        "무엇을 주장하는가",
-        "어떻게 분석했는가",
-        "어디까지 다루는가",
-        "얼마나 깊이 들어갔는가",
-        "어떤 순서로 전개했는가",
-        "무엇을 근거로 삼았는가"
+        ["WHAT", "주장", "무엇을 주장하는가"],
+        ["HOW", "방법", "어떻게 분석했는가"],
+        ["WHERE", "범위", "어디까지 다루는가"],
+        ["DEPTH", "깊이", "얼마나 깊이 들어갔는가"],
+        ["TIME", "흐름", "어떤 순서로 전개했는가"],
+        ["EVIDENCE", "근거", "무엇을 근거로 삼았는가"]
       ],
       "note": "이 여섯 질문이 Gestalt 6축의 뼈대다."
     },
@@ -142,17 +144,19 @@ window.EDITORIAL_RUBRIC = {
     {
       "section": "Six Axes",
       "marker": "07",
-      "layout": "chain",
+      "layout": "framework",
       "kicker": "6가지 평가 기준 — Gestalt 6축",
       "title": "교수들이 이미 하던 피드백을\n여섯 기준으로 명문화한다",
       "deck": "새로운 공개 이론이 아니라 이 강의를 위해 직접 설계한 분석 프레임워크다.",
+      "frameLabel": "GESTALT",
+      "frameCaption": "6 AXES",
       "items": [
-        "WHAT",
-        "HOW",
-        "WHERE",
-        "DEPTH",
-        "TIME",
-        "EVIDENCE"
+        ["WHAT", "주장", "무엇을 말하는가"],
+        ["HOW", "방법", "어떻게 분석하는가"],
+        ["WHERE", "범위", "어디까지 다루는가"],
+        ["DEPTH", "깊이", "얼마나 파고드는가"],
+        ["TIME", "흐름", "어떤 순서로 가는가"],
+        ["EVIDENCE", "근거", "무엇으로 증명하는가"]
       ],
       "note": "'글이 약하다' 대신 어느 기준이 약한지 정확히 말한다."
     },

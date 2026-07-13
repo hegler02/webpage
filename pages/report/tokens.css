@@ -1,0 +1,402 @@
+:root {
+  color-scheme: light;
+
+  /* Primitive palette */
+  --color-paper-100: #fffaf3;
+  --color-paper-200: #f7f1e8;
+  --color-paper-300: #e7ded2;
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --color-ink-900: #1f211f;
+  --color-ink-800: #342d26;
+  --color-ink-700: #514940;
+  --color-ink-600: #5c554d;
+  --color-ink-500: #777067;
+  --color-line: #d8cfc2;
+  --color-accent-700: #73291f;
+  --color-accent-500: #b43d2a;
+  --color-info-600: #1f4d73;
+  --color-success-600: #356c52;
+  --color-stage: #171615;
+
+  /* Alpha palette */
+  --alpha-white-04: rgba(255, 255, 255, .04);
+  --alpha-white-14: rgba(255, 255, 255, .14);
+  --alpha-white-18: rgba(255, 255, 255, .18);
+  --alpha-white-22: rgba(255, 255, 255, .22);
+  --alpha-white-35: rgba(255, 255, 255, .35);
+  --alpha-white-36: rgba(255, 255, 255, .36);
+  --alpha-white-45: rgba(255, 255, 255, .45);
+  --alpha-white-50: rgba(255, 255, 255, .50);
+  --alpha-white-52: rgba(255, 255, 255, .52);
+  --alpha-white-58: rgba(255, 255, 255, .58);
+  --alpha-white-70: rgba(255, 255, 255, .70);
+  --alpha-white-78: rgba(255, 255, 255, .78);
+  --alpha-ink-035: rgba(46, 38, 31, .035);
+  --alpha-ink-08: rgba(54, 42, 31, .08);
+  --alpha-ink-09: rgba(54, 42, 31, .09);
+  --alpha-ink-10: rgba(50, 42, 34, .10);
+  --alpha-ink-13: rgba(54, 42, 31, .13);
+  --alpha-ink-14: rgba(31, 33, 31, .14);
+  --alpha-ink-18: rgba(31, 33, 31, .18);
+  --alpha-ink-20: rgba(0, 0, 0, .20);
+  --alpha-ink-42: rgba(0, 0, 0, .42);
+  --alpha-ink-86: rgba(18, 16, 14, .86);
+  --alpha-fold-10: rgba(55, 45, 38, .10);
+  --alpha-accent-10: rgba(180, 61, 42, .10);
+  --alpha-accent-18: rgba(180, 61, 42, .18);
+  --alpha-accent-22: rgba(180, 61, 42, .22);
+  --alpha-info-20: rgba(31, 77, 115, .20);
+
+  /* Semantic color roles */
+  --surface-stage: var(--color-stage);
+  --surface-page: var(--color-paper-200);
+  --surface-page-raised: var(--color-paper-100);
+  --surface-page-fold: var(--color-paper-300);
+  --surface-card: var(--alpha-white-45);
+  --surface-control: var(--alpha-white-35);
+  --surface-image: var(--color-white);
+  --text-primary: var(--color-ink-900);
+  --text-secondary: var(--color-ink-700);
+  --text-muted: var(--color-ink-500);
+  --text-control: var(--color-ink-600);
+  --text-on-accent: var(--color-white);
+  --border-subtle: var(--color-line);
+  --border-control: var(--alpha-ink-14);
+  --border-control-strong: var(--alpha-ink-18);
+  --accent-primary: var(--color-accent-500);
+  --accent-strong: var(--color-accent-700);
+  --accent-info: var(--color-info-600);
+  --accent-success: var(--color-success-600);
+
+  /* Semantic aliases */
+  --paper: var(--surface-page);
+  --paper-2: var(--surface-page-raised);
+  --ink: var(--text-primary);
+  --muted: var(--text-muted);
+  --rust: var(--accent-primary);
+  --rust-dark: var(--accent-strong);
+  --blue: var(--accent-info);
+  --green: var(--accent-success);
+
+  /* Typography */
+  --font-family-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-family-display: Georgia, "Times New Roman", "Noto Serif KR", serif;
+  --font-size-toc: 10px;
+  --font-size-caption: 11px;
+  --font-size-micro: 12px;
+  --font-size-figure-caption: 13px;
+  --font-size-label: 14px;
+  --font-size-small: 15px;
+  --font-size-support: 16px;
+  --font-size-body: 18px;
+  --font-size-card-label: 20px;
+  --font-size-card-title: 22px;
+  --font-size-section-title: 24px;
+  --font-size-deckline: clamp(18px, 1.55vw, 25px);
+  --font-size-manual-index: 34px;
+  --font-size-title-mobile: 38px;
+  --font-size-question-index: 46px;
+  --font-size-title: clamp(36px, 4.2vw, 60px);
+  --font-weight-body-strong: 720;
+  --font-weight-contrast: 760;
+  --font-weight-judge-copy: 780;
+  --font-weight-label: 800;
+  --font-weight-node: 820;
+  --font-weight-manual: 830;
+  --font-weight-kicker: 850;
+  --font-weight-strong: 900;
+  --letter-spacing-title: -.01em;
+  --letter-spacing-toc: .04em;
+  --letter-spacing-chip: .10em;
+  --letter-spacing-meta: .12em;
+  --letter-spacing-section: .14em;
+  --line-height-solid: 1;
+  --headline-line-height: 1.13;
+  --line-height-heading: 1.2;
+  --line-height-table: 1.35;
+  --line-height-caption: 1.4;
+  --line-height-card: 1.45;
+  --line-height-body: 1.55;
+
+  /* Spacing scale */
+  --space-2: 5px;
+  --space-3: 6px;
+  --space-4: 8px;
+  --space-5: 10px;
+  --space-6: 12px;
+  --space-7: 14px;
+  --space-8: 15px;
+  --space-9: 16px;
+  --space-10: 18px;
+  --space-11: 20px;
+  --space-12: 22px;
+  --space-13: 24px;
+  --space-14: 28px;
+  --space-15: 34px;
+  --space-16: 36px;
+  --space-17: 44px;
+  --space-18: 46px;
+
+  /* Frame and page geometry */
+  --deck-aspect-ratio: 16 / 9;
+  --deck-landscape-ratio: 1.7777778;
+  --deck-min-width: 320px;
+  --deck-gutter-inline: var(--space-17);
+  --deck-content-top: 76px;
+  --deck-content-bottom: 108px;
+  --deck-page-gap: var(--space-18);
+  --deck-perspective: 2200px;
+  --page-padding-block: var(--space-15);
+  --page-padding-inline: var(--space-16);
+  --page-visual-padding-start: var(--space-14);
+  --masthead-top: var(--space-14);
+  --masthead-padding-bottom: var(--space-6);
+  --section-label-top: var(--space-10);
+  --meta-bottom: var(--space-13);
+  --bottom-bar-bottom: var(--space-13);
+  --bottom-bar-gap: var(--space-10);
+  --deckline-margin-top: var(--space-14);
+  --deckline-max-width: 640px;
+  --quote-margin-top: var(--space-15);
+  --quote-padding-top: var(--space-10);
+
+  /* Borders, surfaces, shadows, and backgrounds */
+  --border-width-thin: 1px;
+  --border-width-strong: 2px;
+  --border-radius-round: 50%;
+  --border-subtle-line: var(--border-width-thin) solid var(--border-subtle);
+  --component-card-border: var(--border-subtle-line);
+  --component-card-surface: var(--surface-card);
+  --component-card-shadow: 0 16px 34px var(--alpha-ink-08);
+  --component-page-divider: var(--border-width-thin) solid var(--alpha-ink-10);
+  --component-control-border: var(--border-width-thin) solid var(--border-control);
+  --component-control-border-strong: var(--border-width-thin) solid var(--border-control-strong);
+  --component-image-shadow: 0 20px 44px var(--alpha-ink-13);
+  --component-node-shadow: 0 14px 30px var(--alpha-ink-09);
+  --shadow-deck: 0 36px 130px var(--alpha-ink-42);
+  --shadow-deck-inset: inset 0 0 0 var(--border-width-thin) var(--alpha-white-50);
+  --shadow-transition-inset: inset 0 0 0 var(--border-width-thin) var(--alpha-white-52);
+  --background-stage-grid-size: 68px 68px;
+  --background-stage:
+    linear-gradient(90deg, var(--alpha-white-04) var(--border-width-thin), var(--color-transparent) var(--border-width-thin)),
+    radial-gradient(circle at 20% 18%, var(--alpha-accent-22), var(--color-transparent) 30%),
+    radial-gradient(circle at 78% 78%, var(--alpha-info-20), var(--color-transparent) 36%),
+    var(--surface-stage);
+  --background-page-spread: linear-gradient(90deg, var(--paper) 0 49.8%, var(--surface-page-fold) 50%, var(--paper-2) 50.2% 100%);
+  --background-paper-shadow:
+    linear-gradient(90deg, var(--color-transparent) 0 47.8%, var(--alpha-ink-20) 49.5%, var(--alpha-white-36) 50.2%, var(--color-transparent) 53%),
+    repeating-linear-gradient(0deg, var(--alpha-ink-035) 0 var(--border-width-thin), var(--color-transparent) var(--border-width-thin) var(--space-2));
+  --background-cover-line: linear-gradient(90deg, var(--alpha-accent-18), var(--color-transparent) 72%);
+  --background-cycle: radial-gradient(circle, var(--alpha-accent-10), var(--color-transparent) 64%);
+  --background-ghost-line: linear-gradient(90deg, var(--color-transparent), var(--alpha-white-70), var(--color-transparent));
+  --background-veil: linear-gradient(100deg,
+    var(--color-transparent) 0 8%,
+    var(--alpha-white-14) 22%,
+    var(--alpha-white-58) 48%,
+    var(--alpha-white-22) 68%,
+    var(--alpha-fold-10) 82%,
+    var(--color-transparent) 100%);
+  --background-sweep: linear-gradient(100deg,
+    var(--color-transparent) 0 18%,
+    var(--alpha-white-18) 30%,
+    var(--alpha-white-78) 48%,
+    var(--alpha-white-18) 64%,
+    var(--color-transparent) 82%);
+
+  /* Layout component tokens */
+  --cover-line-height: 78px;
+  --cover-line-skew: -4deg;
+  --cover-map-gap: var(--space-11);
+  --cover-map-label-gap: var(--space-4);
+  --cover-map-core-padding: var(--space-13);
+  --cover-map-stage-columns: repeat(4, minmax(0, 1fr));
+  --cover-map-stage-gap: var(--space-5);
+  --cover-map-stage-min-height: 96px;
+  --cover-map-stage-padding: var(--space-8) var(--space-5);
+  --cover-map-owner-padding: var(--space-11);
+  --cover-map-number-size: 26px;
+  --question-stack-gap: var(--space-10);
+  --question-card-min-height: 128px;
+  --question-card-padding: var(--space-12) var(--space-13);
+  --question-card-columns: 58px 1fr;
+  --question-card-gap: var(--space-6) var(--space-11);
+  --contrast-columns: 1fr 1fr;
+  --contrast-gap: var(--space-11);
+  --contrast-padding: var(--space-13);
+  --contrast-min-height: 390px;
+  --contrast-heading-margin-bottom: var(--space-11);
+  --contrast-row-padding: var(--space-7) 0;
+  --axis-label-width: 120px;
+  --axis-score-width: 60px;
+  --axis-cell-padding: var(--space-8) var(--space-5);
+  --cycle-min-height: 520px;
+  --cycle-ring-size: 390px;
+  --cycle-node-width: 160px;
+  --cycle-node-padding: var(--space-7) var(--space-9);
+  --cycle-node-angle: 51.4deg;
+  --cycle-node-radius: -205px;
+  --gate-spread-gap: var(--space-10);
+  --gate-card-padding: var(--space-13);
+  --gate-chip-padding: var(--space-2) var(--space-5);
+  --judge-count: 5;
+  --judge-grid-gap: var(--space-6);
+  --judge-card-min-height: 330px;
+  --judge-card-padding: var(--space-10) var(--space-7);
+  --blueprint-gap: var(--space-5);
+  --blueprint-hint-inset: var(--space-5);
+  --blueprint-hint-padding: var(--space-4) var(--space-7);
+  --lightbox-backdrop: var(--alpha-ink-86);
+  --lightbox-padding: var(--space-13);
+  --lightbox-panel-max-width: 96vw;
+  --lightbox-panel-max-height: 92vh;
+  --lightbox-image-max-height: calc(var(--lightbox-panel-max-height) - var(--space-15));
+  --lightbox-control-size: var(--space-18);
+  --lightbox-control-inset: var(--space-13);
+  --manual-list-gap: var(--space-7);
+  --manual-list-columns: 54px 1fr;
+  --manual-item-min-height: 72px;
+  --manual-item-padding: var(--space-6) var(--space-10);
+  --closing-system-gap: var(--space-8);
+  --closing-cycle-width: min(100%, 760px);
+  --closing-cycle-aspect-ratio: 1.42;
+  --closing-cycle-padding: var(--space-8);
+  --closing-cycle-columns: 1fr 0.72fr 1fr;
+  --closing-cycle-rows: 1fr 0.72fr 1fr;
+  --closing-stage-min-height: 116px;
+  --closing-stage-padding: var(--space-6);
+  --closing-stage-number-size: var(--font-size-label);
+  --closing-stage-title-size: var(--font-size-card-title);
+  --closing-stage-body-size: var(--font-size-support);
+  --closing-owner-size: 184px;
+  --closing-owner-border-width: 5px;
+  --closing-owner-label-size: var(--font-size-small);
+  --closing-owner-title-size: var(--font-size-card-title);
+  --closing-return-left: 4%;
+  --closing-return-gap: var(--space-3);
+  --closing-return-size: var(--font-size-small);
+  --closing-path-width: 2.2;
+  --closing-manifesto-padding: var(--space-6) var(--space-9);
+  --closing-manifesto-size: var(--font-size-card-label);
+  --toc-count: 10;
+  --toc-gap: var(--space-3);
+  --toc-control-min-height: var(--space-18);
+  --nav-gap: var(--space-5);
+  --nav-control-size: var(--space-18);
+  --nav-icon-size: var(--space-13);
+  --nav-icon-stroke-width: 2.2;
+
+  /* Responsive component tokens */
+  --mobile-deck-aspect-ratio: auto;
+  --mobile-deck-min-height: 0;
+  --mobile-shell-margin: var(--space-11);
+  --mobile-spread-margin: var(--space-13) var(--space-11);
+  --mobile-spread-gap: var(--space-6);
+  --mobile-page-padding: var(--space-14) 0;
+  --mobile-cycle-gap: var(--space-5);
+  --mobile-toc-count: 2;
+
+  /* Layers */
+  --layer-paper: 1;
+  --layer-content: 10;
+  --layer-header: 20;
+  --layer-navigation: 30;
+  --layer-transition: 44;
+  --layer-lightbox: 80;
+
+  /* Motion system */
+  --motion-ease-enter: cubic-bezier(.18, .78, .18, 1);
+  --motion-ease-turn: cubic-bezier(.18, .76, .14, 1);
+  --motion-turn-duration: 900ms;
+  --motion-turn-fallback-buffer: 160ms;
+  --motion-item-duration: 560ms;
+  --motion-item-stagger: 70ms;
+  --motion-item-offset: var(--space-9);
+  --motion-turn-skew: 9deg;
+  --motion-transition-overscan-block: -12%;
+  --motion-transition-overscan-inline: -18%;
+  --motion-veil-width: 24%;
+  --motion-sweep-width: 11%;
+  --motion-veil-start: -120%;
+  --motion-veil-middle: 215%;
+  --motion-veil-end: 520%;
+  --motion-sweep-middle: 510%;
+  --motion-sweep-end: 1040%;
+  --motion-veil-prev-edge: -18%;
+  --motion-sweep-edge: -20%;
+  --motion-ghost-padding-inline: 8%;
+  --motion-ghost-gap: var(--space-12);
+  --motion-ghost-start-inline: -18%;
+  --motion-outgoing-shift-1: 6px;
+  --motion-outgoing-shift-2: 14px;
+  --motion-outgoing-shift-3: 20px;
+  --motion-outgoing-shift-4: 24px;
+  --motion-veil-blur: 2px;
+  --motion-sweep-blur: 4px;
+  --motion-veil-opacity-low: .34;
+  --motion-veil-opacity-mid: .42;
+  --motion-veil-opacity: .52;
+  --motion-sweep-opacity-low: .72;
+  --motion-sweep-opacity: .80;
+  --motion-ghost-opacity: .48;
+  --motion-ghost-offset: var(--space-5);
+  /* Rubric Judge 30-slide extensions */
+  --toc-window-size: 8;
+  --font-size-visual-title: 18px;
+  --font-size-visual-body: 14px;
+  --font-size-visual-small: 12px;
+  --surface-neutral-soft: #f0ede9;
+  --surface-warning-soft: #fef0ed;
+  --surface-success-soft: #edf7ee;
+  --border-warning-soft: #f2b5ac;
+  --border-success-soft: #a8d5b5;
+  --text-success: #1a5c2a;
+  --card-grid-gap: var(--space-10);
+  --card-grid-columns: 2;
+  --editorial-card-min-height: 150px;
+  --editorial-card-padding: var(--space-10);
+  --editorial-card-index-size: 28px;
+  --chain-gap: var(--space-8);
+  --chain-chip-padding: var(--space-7) var(--space-10);
+  --chain-note-padding: var(--space-9);
+  --steps-gap: var(--space-3);
+  --step-row-min-height: 48px;
+  --step-row-padding: var(--space-7) var(--space-9);
+  --step-index-size: 28px;
+  --step-reveal-offset: 10px;
+  --step-hint-margin-top: var(--space-6);
+  --toolkit-gap: var(--space-10);
+  --toolkit-card-min-height: 120px;
+  --toolkit-card-padding: var(--space-10);
+  --checklist-gap: var(--space-5);
+  --checklist-item-padding: var(--space-7) var(--space-9);
+  --checklist-mark-size: 26px;
+  --callout-padding: var(--space-9);
+  --depth-gap: var(--space-5);
+  --depth-level-padding: var(--space-9) var(--space-11);
+  --depth-label-width: 112px;
+  --assignment-gap: var(--space-5);
+  --assignment-row-padding: var(--space-7) var(--space-9);
+  --assignment-label-width: 138px;
+  --flow-gap: var(--space-4);
+  --flow-node-min-height: 62px;
+  --flow-node-padding: var(--space-7);
+  --gate-detail-columns: minmax(0, 1.25fr) minmax(0, .75fr);
+  --gate-detail-gap: var(--space-10);
+  --gate-signal-gap: var(--space-4);
+  --gate-signal-padding: var(--space-6) var(--space-8);
+  --gate-outcome-gap: var(--space-7);
+  --gate-outcome-padding: var(--space-10);
+  --status-gap: var(--space-10);
+  --status-card-padding: var(--space-10);
+  --aggregation-gap: var(--space-4);
+  --aggregation-padding: var(--space-6) var(--space-8);
+  --resource-gap: var(--space-10);
+  --resource-link-padding: var(--space-8) var(--space-11);
+  --resource-level-padding: var(--space-11);
+  --resource-step-gap: var(--space-4);
+  --resource-step-padding: var(--space-6) var(--space-8);
+  --blueprint-link-margin-top: var(--space-3);
+  --blueprint-link-justify: start;
+
+}

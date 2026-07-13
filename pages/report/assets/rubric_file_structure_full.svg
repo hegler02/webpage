@@ -1,0 +1,230 @@
+<svg viewBox="0 0 900 1440" xmlns="http://www.w3.org/2000/svg" font-family="'Apple SD Gothic Neo','Pretendard',sans-serif">
+
+  <!-- ══════ 제목 + 범례 ══════ -->
+  <text x="450" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1E1914">008_RUBRIC_JUDGE_SYSTEM_v1_0 — 파일 구조 + 플로우</text>
+
+  <rect x="40"  y="44" width="10" height="10" rx="2" fill="#B23A26"/><text x="56"  y="54" font-size="10" fill="#1E1914">오케스트레이터</text>
+  <rect x="168" y="44" width="10" height="10" rx="2" fill="#4A7C59"/><text x="184" y="54" font-size="10" fill="#1E1914">참조 데이터</text>
+  <rect x="276" y="44" width="10" height="10" rx="2" fill="#3A6EA5"/><text x="292" y="54" font-size="10" fill="#1E1914">실행 기능</text>
+  <rect x="374" y="44" width="10" height="10" rx="2" fill="#8B5E3C"/><text x="390" y="54" font-size="10" fill="#1E1914">심사위원</text>
+  <rect x="468" y="44" width="10" height="10" rx="2" fill="#706757"/><text x="484" y="54" font-size="10" fill="#1E1914">결과 처리</text>
+  <rect x="560" y="44" width="10" height="10" rx="2" fill="#999"   /><text x="576" y="54" font-size="10" fill="#1E1914">요청 시</text>
+
+  <!-- ══════ 파일 구조 트리 ══════ -->
+
+  <!-- 00_master.md -->
+  <rect x="40" y="66" width="820" height="40" rx="6" fill="#B23A26"/>
+  <text x="60" y="83" font-size="12" font-weight="700" fill="#fff">00_master.md</text>
+  <text x="60" y="98" font-size="10" fill="#fdd">Instructions — 오케스트레이터 / 교수·학생 입력 자동 판단 → Knowledge 15개 파일 순서대로 호출</text>
+
+  <!-- 참조 데이터 -->
+  <text x="40" y="124" font-size="10" font-weight="700" fill="#4A7C59">▸ 참조 데이터 (Knowledge — 채점 시 상시 참조)</text>
+  <rect x="40"  y="130" width="400" height="40" rx="5" fill="#E8F0EC" stroke="#4A7C59" stroke-width="1"/>
+  <text x="56"  y="148" font-size="11" font-weight="600" fill="#1E1914">01_rubric.md</text>
+  <text x="56"  y="162" font-size="9"  fill="#706757">Gestalt V3.4.1 6축 기준표 + 배점 근거</text>
+  <rect x="456" y="130" width="404" height="40" rx="5" fill="#E8F0EC" stroke="#4A7C59" stroke-width="1"/>
+  <text x="472" y="148" font-size="11" font-weight="600" fill="#1E1914">02_judges.md</text>
+  <text x="472" y="162" font-size="9"  fill="#706757">5인 심사위원 페르소나 + 5명 구성 근거</text>
+
+  <!-- 실행 기능 Row1: 13번(교수 과제출제) + 03번(학생 초안) -->
+  <text x="40" y="188" font-size="10" font-weight="700" fill="#3A6EA5">▸ 실행 기능 (Knowledge — 오케스트레이터 단계별 호출)</text>
+  <rect x="40"  y="194" width="400" height="52" rx="5" fill="#E6EEF7" stroke="#3A6EA5" stroke-width="1.5"/>
+  <text x="56"  y="212" font-size="9"  font-weight="700" fill="#3A6EA5">트리거 A — 교수</text>
+  <text x="56"  y="226" font-size="11" font-weight="600" fill="#1E1914">13_assignment_design_guide.md</text>
+  <text x="56"  y="239" font-size="9"  fill="#706757">과제 출제 요청 → 6축 기반 완성 과제문제지 생성</text>
+
+  <rect x="456" y="194" width="404" height="52" rx="5" fill="#E6EEF7" stroke="#3A6EA5" stroke-width="1.5"/>
+  <text x="472" y="212" font-size="9"  font-weight="700" fill="#3A6EA5">트리거 B — 교수 (학생 초안)</text>
+  <text x="472" y="226" font-size="11" font-weight="600" fill="#1E1914">03_assignment_writer.md</text>
+  <text x="472" y="239" font-size="9"  fill="#706757">학생 과제물 입력 → 6축별 개선방향 제시 (대필 X)</text>
+
+  <!-- 실행 기능 Row2: 04번(AI탐지) + 05번(구술) -->
+  <rect x="40"  y="260" width="400" height="52" rx="5" fill="#E6EEF7" stroke="#3A6EA5" stroke-width="1.5"/>
+  <text x="56"  y="278" font-size="9"  font-weight="700" fill="#3A6EA5">트리거 C — 교수: 최종본 입력</text>
+  <text x="56"  y="292" font-size="11" font-weight="600" fill="#1E1914">04_ai_detection_gate.md</text>
+  <text x="56"  y="305" font-size="9"  fill="#706757">AI 작성 여부 판별 (7가지 기준) + 의심도 판정 + 근거</text>
+
+  <rect x="456" y="260" width="404" height="52" rx="5" fill="#E6EEF7" stroke="#3A6EA5" stroke-width="1.5"/>
+  <text x="472" y="278" font-size="9"  font-weight="700" fill="#3A6EA5">트리거 D — 조건부</text>
+  <text x="472" y="292" font-size="11" font-weight="600" fill="#1E1914">05_oral_verification.md</text>
+  <text x="472" y="305" font-size="9"  fill="#706757">AI 의심 높음 시 → 구술 질문 5개 자동 생성 + 3/5 기준 근거</text>
+
+  <!-- 심사위원 -->
+  <text x="40" y="330" font-size="10" font-weight="700" fill="#8B5E3C">▸ 심사위원 (Knowledge — 채점 시 06→07→08→09→10번 순차 독립 호출)</text>
+  <rect x="40"  y="336" width="152" height="52" rx="5" fill="#F5EDE6" stroke="#8B5E3C" stroke-width="1"/>
+  <text x="56"  y="354" font-size="10" font-weight="600" fill="#1E1914">06_judge1</text>
+  <text x="56"  y="368" font-size="10" fill="#8B5E3C">김현우</text>
+  <text x="56"  y="381" font-size="9"  fill="#706757">전략기획 WHAT·WHERE</text>
+
+  <rect x="204" y="336" width="152" height="52" rx="5" fill="#F5EDE6" stroke="#8B5E3C" stroke-width="1"/>
+  <text x="220" y="354" font-size="10" font-weight="600" fill="#1E1914">07_judge2</text>
+  <text x="220" y="368" font-size="10" fill="#8B5E3C">이수진</text>
+  <text x="220" y="381" font-size="9"  fill="#706757">현장실무 HOW·DEPTH</text>
+
+  <rect x="368" y="336" width="152" height="52" rx="5" fill="#F5EDE6" stroke="#8B5E3C" stroke-width="1"/>
+  <text x="384" y="354" font-size="10" font-weight="600" fill="#1E1914">08_judge3</text>
+  <text x="384" y="368" font-size="10" fill="#8B5E3C">박민준</text>
+  <text x="384" y="381" font-size="9"  fill="#706757">데이터연구 EVIDENCE·TIME</text>
+
+  <rect x="532" y="336" width="152" height="52" rx="5" fill="#F5EDE6" stroke="#8B5E3C" stroke-width="1"/>
+  <text x="548" y="354" font-size="10" font-weight="600" fill="#1E1914">09_judge4</text>
+  <text x="548" y="368" font-size="10" fill="#8B5E3C">최지영</text>
+  <text x="548" y="381" font-size="9"  fill="#706757">UX디자인 TIME·WHAT</text>
+
+  <rect x="696" y="336" width="164" height="52" rx="5" fill="#F5EDE6" stroke="#8B5E3C" stroke-width="1"/>
+  <text x="712" y="354" font-size="10" font-weight="600" fill="#1E1914">10_judge5</text>
+  <text x="712" y="368" font-size="10" fill="#8B5E3C">정도현</text>
+  <text x="712" y="381" font-size="9"  fill="#706757">창의교육 DEPTH·EVIDENCE</text>
+
+  <!-- 결과 처리 -->
+  <text x="40" y="406" font-size="10" font-weight="700" fill="#706757">▸ 결과 처리 (Knowledge — 채점 완료 후 순차 자동 호출)</text>
+  <rect x="40"  y="412" width="400" height="40" rx="5" fill="#EEEAE6" stroke="#706757" stroke-width="1"/>
+  <text x="56"  y="430" font-size="11" font-weight="600" fill="#1E1914">11_scoring_sheet.md</text>
+  <text x="56"  y="444" font-size="9"  fill="#706757">5명 점수 → 올림픽 방식 최종 점수 산출 + 근거</text>
+
+  <rect x="456" y="412" width="404" height="40" rx="5" fill="#EEEAE6" stroke="#706757" stroke-width="1"/>
+  <text x="472" y="430" font-size="11" font-weight="600" fill="#1E1914">12_feedback_report_template.md</text>
+  <text x="472" y="444" font-size="9"  fill="#706757">집계 결과 → 학생 개인 피드백 보고서</text>
+
+  <!-- 요청 시 + 게이트 3 -->
+  <text x="40" y="470" font-size="10" font-weight="700" fill="#999">▸ 요청 시 / 게이트 3 (Knowledge — 학생 가이드 + 출처 검증)</text>
+  <rect x="40" y="476" width="400" height="36" rx="5" fill="#F0EEEC" stroke="#bbb" stroke-width="1"/>
+  <text x="56" y="493" font-size="11" font-weight="600" fill="#555">14_student_guide.md</text>
+  <text x="56" y="507" font-size="9"  fill="#999">과제 주제 맞춤 학생용 평가 기준 가이드 생성</text>
+  <rect x="456" y="476" width="404" height="36" rx="5" fill="#E6EEF7" stroke="#3A6EA5" stroke-width="1.5"/>
+  <text x="472" y="493" font-size="9"  font-weight="700" fill="#3A6EA5">게이트 3 — 트리거 C 순차 실행</text>
+  <text x="472" y="507" font-size="10" font-weight="600" fill="#1E1914">15_citation_verification_gate.md — 출처·링크 검증 / 할루시네이션 탐지</text>
+
+  <!-- ══════ 구분선 ══════ -->
+  <line x1="40" y1="532" x2="860" y2="532" stroke="#D5CFC9" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="450" y="554" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1914">실행 플로우차트</text>
+
+  <!-- ══════ 플로우차트 ══════ -->
+
+  <!-- 교수 경로 (좌) -->
+  <rect x="60" y="568" width="340" height="34" rx="17" fill="#F0EEEC" stroke="#999" stroke-width="1.5"/>
+  <text x="230" y="582" text-anchor="middle" font-size="9"  fill="#999" font-weight="700">교수</text>
+  <text x="230" y="596" text-anchor="middle" font-size="10" fill="#555">과제 출제 요청 → 13번 호출</text>
+
+  <line x1="230" y1="602" x2="230" y2="622" stroke="#3A6EA5" stroke-width="1.5"/>
+  <polygon points="230,626 224,616 236,616" fill="#3A6EA5"/>
+
+  <rect x="60" y="628" width="340" height="44" rx="6" fill="#E6EEF7" stroke="#3A6EA5" stroke-width="2"/>
+  <text x="230" y="646" text-anchor="middle" font-size="9"  fill="#3A6EA5" font-weight="700">트리거 A — 13번</text>
+  <text x="230" y="662" text-anchor="middle" font-size="11" fill="#1E1914">과제 출제 생성기</text>
+
+  <line x1="230" y1="672" x2="230" y2="694" stroke="#999" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="234" y="689" font-size="9" fill="#999">↓ 완성 과제문제지 → 학생 배포</text>
+
+  <!-- 교수: 학생 초안 입력 경로 (우) -->
+  <rect x="500" y="568" width="340" height="34" rx="17" fill="#E6EEF7" stroke="#3A6EA5" stroke-width="1.5"/>
+  <text x="670" y="582" text-anchor="middle" font-size="9"  fill="#3A6EA5" font-weight="700">교수 — 학생 초안 입력</text>
+  <text x="670" y="596" text-anchor="middle" font-size="10" fill="#1E1914">"초안이야" / "개선방향 알려줘" → 03번 호출</text>
+
+  <line x1="670" y1="602" x2="670" y2="622" stroke="#3A6EA5" stroke-width="1.5"/>
+  <polygon points="670,626 664,616 676,616" fill="#3A6EA5"/>
+
+  <rect x="500" y="628" width="340" height="44" rx="6" fill="#E6EEF7" stroke="#3A6EA5" stroke-width="2"/>
+  <text x="670" y="646" text-anchor="middle" font-size="9"  fill="#3A6EA5" font-weight="700">트리거 B — 03번</text>
+  <text x="670" y="662" text-anchor="middle" font-size="11" fill="#1E1914">초안 피드백 + 6축 개선방향 제시</text>
+
+  <!-- 03번 → 학생 수정 → 최종본 제출 합류 -->
+  <line x1="670" y1="672" x2="670" y2="706" stroke="#3A6EA5" stroke-width="1.5"/>
+  <line x1="670" y1="706" x2="510" y2="706" stroke="#3A6EA5" stroke-width="1.5"/>
+  <line x1="510" y1="706" x2="510" y2="720" stroke="#3A6EA5" stroke-width="1.5"/>
+  <polygon points="510,724 504,714 516,714" fill="#3A6EA5"/>
+  <text x="672" y="692" font-size="9" fill="#706757">↓ 학생이 직접 수정 후</text>
+  <text x="672" y="704" font-size="9" fill="#706757">'제출: [최종본]' 입력</text>
+
+  <!-- 과제물 제출 (최종본 = 트리거 C) -->
+  <rect x="290" y="726" width="340" height="32" rx="16" fill="#1E1914"/>
+  <text x="460" y="740" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">최종본 제출 (트리거 C: "제출: ...")</text>
+  <text x="460" y="752" text-anchor="middle" font-size="9" fill="#ccc">게이트 자동 실행 시작</text>
+
+  <line x1="460" y1="758" x2="460" y2="780" stroke="#1E1914" stroke-width="1.5"/>
+  <polygon points="460,784 454,774 466,774" fill="#1E1914"/>
+
+  <!-- 04번 AI 탐지 + 15번 출처 검증 순차 -->
+  <rect x="280" y="786" width="360" height="44" rx="6" fill="#E6EEF7" stroke="#3A6EA5" stroke-width="2"/>
+  <text x="460" y="804" text-anchor="middle" font-size="9"  fill="#3A6EA5" font-weight="700">게이트 1+3 — 04번 → 15번 순차</text>
+  <text x="460" y="820" text-anchor="middle" font-size="11" fill="#1E1914">AI 탐지 (7가지) + 출처·링크 검증</text>
+
+  <!-- 통과 분기 (좌 우회 → 채점 좌측 입력) -->
+  <line x1="280" y1="808" x2="190" y2="808" stroke="#4A7C59" stroke-width="1.5"/>
+  <line x1="190" y1="808" x2="190" y2="972" stroke="#4A7C59" stroke-width="1.5"/>
+  <line x1="190" y1="972" x2="290" y2="972" stroke="#4A7C59" stroke-width="1.5"/>
+  <polygon points="290,972 280,966 280,978" fill="#4A7C59"/>
+  <text x="138" y="802" text-anchor="middle" font-size="10" fill="#4A7C59" font-weight="700">통과</text>
+  <text x="138" y="816" text-anchor="middle" font-size="9"  fill="#4A7C59">낮음/보통</text>
+
+  <!-- 의심 분기 (우 → 05번) -->
+  <line x1="640" y1="808" x2="720" y2="808" stroke="#B23A26" stroke-width="1.5"/>
+  <line x1="720" y1="808" x2="720" y2="858" stroke="#B23A26" stroke-width="1.5"/>
+  <polygon points="720,862 714,852 726,852" fill="#B23A26"/>
+  <text x="684" y="802" text-anchor="middle" font-size="10" fill="#B23A26" font-weight="700">의심 높음</text>
+
+  <!-- 05번 구술 검증 (우측) -->
+  <rect x="590" y="864" width="260" height="44" rx="6" fill="#E6EEF7" stroke="#3A6EA5" stroke-width="2"/>
+  <text x="720" y="882" text-anchor="middle" font-size="9"  fill="#3A6EA5" font-weight="700">게이트 2 — 05번</text>
+  <text x="720" y="898" text-anchor="middle" font-size="11" fill="#1E1914">구술 검증 질문 5개 생성</text>
+
+  <!-- 구술 통과 → 채점 우측 입력 -->
+  <line x1="720" y1="908" x2="720" y2="952" stroke="#4A7C59" stroke-width="1.5"/>
+  <line x1="720" y1="952" x2="632" y2="952" stroke="#4A7C59" stroke-width="1.5"/>
+  <polygon points="632,952 642,946 642,958" fill="#4A7C59"/>
+  <text x="762" y="928" text-anchor="middle" font-size="10" fill="#4A7C59" font-weight="700">통과</text>
+  <text x="762" y="942" text-anchor="middle" font-size="9"  fill="#4A7C59">3/5 이상</text>
+
+  <!-- 구술 리젝 루프 → 재제출 → AI 탐지 재시작 -->
+  <line x1="850" y1="886" x2="866" y2="886" stroke="#B23A26" stroke-width="1.5"/>
+  <line x1="866" y1="886" x2="866" y2="750" stroke="#B23A26" stroke-width="1.5"/>
+  <line x1="866" y1="750" x2="592" y2="750" stroke="#B23A26" stroke-width="1.5"/>
+  <line x1="592" y1="750" x2="592" y2="784" stroke="#B23A26" stroke-width="1.5"/>
+  <polygon points="592,784 586,774 598,774" fill="#B23A26"/>
+  <text x="868" y="822" font-size="10" fill="#B23A26" font-weight="700">리젝</text>
+  <text x="868" y="836" font-size="9"  fill="#B23A26">2/5 이하</text>
+  <text x="868" y="850" font-size="9"  fill="#B23A26">재제출</text>
+  <text x="726" y="744" text-anchor="middle" font-size="9" fill="#B23A26">↑ 재제출 → AI 탐지 재시작</text>
+
+  <!-- 채점 (5명 순차) -->
+  <rect x="290" y="956" width="340" height="44" rx="6" fill="#F5EDE6" stroke="#8B5E3C" stroke-width="2"/>
+  <text x="460" y="974" text-anchor="middle" font-size="9"  fill="#8B5E3C" font-weight="700">채점 단계 — 06→07→08→09→10번</text>
+  <text x="460" y="990" text-anchor="middle" font-size="11" fill="#1E1914">심사위원 5명 순차 독립 채점</text>
+
+  <line x1="460" y1="1000" x2="460" y2="1022" stroke="#8B5E3C" stroke-width="1.5"/>
+  <polygon points="460,1026 454,1016 466,1016" fill="#8B5E3C"/>
+
+  <!-- 집계 (11번) -->
+  <rect x="280" y="1028" width="360" height="44" rx="6" fill="#EEEAE6" stroke="#706757" stroke-width="2"/>
+  <text x="460" y="1046" text-anchor="middle" font-size="9"  fill="#706757" font-weight="700">집계 — 11번</text>
+  <text x="460" y="1062" text-anchor="middle" font-size="11" fill="#1E1914">5명 점수 → 올림픽 방식 최종 점수</text>
+
+  <line x1="460" y1="1072" x2="460" y2="1094" stroke="#706757" stroke-width="1.5"/>
+  <polygon points="460,1098 454,1088 466,1088" fill="#706757"/>
+
+  <!-- 피드백 (12번) -->
+  <rect x="280" y="1100" width="360" height="44" rx="6" fill="#EEEAE6" stroke="#706757" stroke-width="2"/>
+  <text x="460" y="1118" text-anchor="middle" font-size="9"  fill="#706757" font-weight="700">피드백 — 12번</text>
+  <text x="460" y="1134" text-anchor="middle" font-size="11" fill="#1E1914">학생 개인 피드백 보고서 생성</text>
+
+  <line x1="460" y1="1144" x2="460" y2="1166" stroke="#706757" stroke-width="1.5"/>
+  <polygon points="460,1170 454,1160 466,1160" fill="#706757"/>
+
+  <!-- 완료 -->
+  <rect x="330" y="1172" width="260" height="32" rx="16" fill="#4A7C59"/>
+  <text x="460" y="1193" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">학생에게 전달 완료</text>
+
+  <!-- ══════ Knowledge 요약 ══════ -->
+  <rect x="40" y="1224" width="820" height="96" rx="6" fill="#F5F0EB" stroke="#D5CFC9" stroke-width="1"/>
+  <text x="60" y="1246" font-size="11" font-weight="700" fill="#1E1914">Knowledge 구성 (총 15개 파일)</text>
+  <text x="60" y="1264" font-size="10" fill="#706757">상시 참조: 01_rubric.md / 02_judges.md</text>
+  <text x="60" y="1280" font-size="10" fill="#706757">실행 기능: 13번(교수 과제출제) / 03번(학생 초안) / 04번(AI탐지) / 05번(구술) / 15번(출처 검증)</text>
+  <text x="60" y="1296" font-size="10" fill="#706757">심사위원: 06번(김현우) / 07번(이수진) / 08번(박민준) / 09번(최지영) / 10번(정도현)</text>
+  <text x="60" y="1312" font-size="10" fill="#706757">결과 처리: 11번(집계) / 12번(피드백) — 요청 시: 14번(학생 가이드)</text>
+
+  <!-- Instructions 강조 -->
+  <rect x="40" y="1330" width="820" height="40" rx="6" fill="#B23A26"/>
+  <text x="460" y="1348" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">Instructions (1개) = 00_master.md</text>
+  <text x="460" y="1364" text-anchor="middle" font-size="10" fill="#fdd">GPTs / Gems / Claude Projects — 어디서든 동일하게 작동</text>
+
+</svg>

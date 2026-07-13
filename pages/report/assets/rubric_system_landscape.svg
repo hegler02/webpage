@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">AI 과제 평가 하네스 구조</title>
+  <desc id="desc">교수자 입력이 00_master 오케스트레이터를 거쳐 출제, 피드백, 검증 게이트, 5인 심사, 집계, 보고서, 교수 최종 판단으로 이어지는 구조도</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#342d26" flood-opacity=".12"/>
+    </filter>
+    <marker id="arrow-rust" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0L12 6L0 12Z" fill="#b43d2a"/>
+    </marker>
+    <marker id="arrow-ink" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0L12 6L0 12Z" fill="#514940"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0L12 6L0 12Z" fill="#1a5c2a"/>
+    </marker>
+    <style>
+      text{font-family:Inter,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
+      .eyebrow{font-size:18px;font-weight:800;letter-spacing:2px;fill:#b43d2a}
+      .title{font-family:Georgia,"Noto Serif KR",serif;font-size:42px;font-weight:800;fill:#1f211f}
+      .subtitle{font-size:18px;fill:#777067}
+      .section{font-size:16px;font-weight:900;letter-spacing:1.4px;fill:#73291f}
+      .boxTitle{font-size:21px;font-weight:900;fill:#1f211f}
+      .boxCode{font-size:14px;font-weight:900;letter-spacing:1px;fill:#b43d2a}
+      .boxBody{font-size:15px;fill:#514940}
+      .small{font-size:13px;fill:#777067}
+      .inverseTitle{font-size:23px;font-weight:900;fill:#fffaf3}
+      .inverseBody{font-size:14px;fill:#e7ded2}
+      .chip{font-size:13px;font-weight:800;fill:#1f211f}
+      .human{font-size:18px;font-weight:900;fill:#1a5c2a}
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="#f7f1e8"/>
+  <path d="M0 0H1600V900H0Z" fill="none" stroke="#d8cfc2" stroke-width="2"/>
+  <g opacity=".22">
+    <path d="M0 110H1600M0 220H1600M0 330H1600M0 440H1600M0 550H1600M0 660H1600M0 770H1600" stroke="#d8cfc2"/>
+    <path d="M160 0V900M320 0V900M480 0V900M640 0V900M800 0V900M960 0V900M1120 0V900M1280 0V900M1440 0V900" stroke="#d8cfc2"/>
+  </g>
+
+  <text x="70" y="62" class="eyebrow">RUBRIC JUDGE SYSTEM · PROFESSOR WORKFLOW</text>
+  <text x="70" y="112" class="title">AI 시대 과제 지도·검증·평가 하네스</text>
+  <text x="70" y="146" class="subtitle">Instructions 1개가 Knowledge 15개를 호출하고, 최종 판단은 교수자가 수행한다.</text>
+  <text x="1530" y="62" text-anchor="end" class="small">16:9 LECTURE MAP</text>
+
+  <!-- Professor inputs -->
+  <g transform="translate(70 210)">
+    <text x="0" y="-22" class="section">01 · 교수자 입력</text>
+    <rect width="240" height="92" rx="10" fill="#fffaf3" stroke="#d8cfc2" filter="url(#shadow)"/>
+    <text x="22" y="31" class="boxCode">TRIGGER A</text>
+    <text x="22" y="60" class="boxTitle">과제 출제</text>
+    <text x="22" y="80" class="small">13_assignment_design</text>
+
+    <rect y="116" width="240" height="92" rx="10" fill="#fffaf3" stroke="#d8cfc2" filter="url(#shadow)"/>
+    <text x="22" y="147" class="boxCode">TRIGGER B</text>
+    <text x="22" y="176" class="boxTitle">학생 초안 입력</text>
+    <text x="22" y="196" class="small">03_assignment_writer</text>
+
+    <rect y="232" width="240" height="92" rx="10" fill="#fffaf3" stroke="#d8cfc2" filter="url(#shadow)"/>
+    <text x="22" y="263" class="boxCode">TRIGGER C</text>
+    <text x="22" y="292" class="boxTitle">최종본 제출</text>
+    <text x="22" y="312" class="small">게이트 자동 실행</text>
+  </g>
+
+  <!-- Arrows to orchestrator -->
+  <path d="M310 256H390M310 372H390M310 488H390" fill="none" stroke="#b43d2a" stroke-width="3" marker-end="url(#arrow-rust)"/>
+
+  <!-- Orchestrator -->
+  <g transform="translate(400 220)" filter="url(#shadow)">
+    <rect width="340" height="280" rx="14" fill="#1f211f"/>
+    <rect x="20" y="20" width="300" height="38" rx="19" fill="#b43d2a"/>
+    <text x="170" y="46" text-anchor="middle" class="inverseTitle">00_master.md</text>
+    <text x="170" y="94" text-anchor="middle" class="inverseTitle">오케스트레이터</text>
+    <text x="170" y="127" text-anchor="middle" class="inverseBody">질문 분류 · 파일 호출 · 순서 강제</text>
+
+    <rect x="24" y="158" width="140" height="92" rx="9" fill="#342d26" stroke="#777067"/>
+    <text x="94" y="184" text-anchor="middle" class="boxCode">STATE CARD</text>
+    <text x="94" y="208" text-anchor="middle" class="inverseBody">현재 단계</text>
+    <text x="94" y="230" text-anchor="middle" class="inverseBody">다음 허용 행동</text>
+
+    <rect x="176" y="158" width="140" height="92" rx="9" fill="#342d26" stroke="#777067"/>
+    <text x="246" y="184" text-anchor="middle" class="boxCode">VERIFY LOG</text>
+    <text x="246" y="208" text-anchor="middle" class="inverseBody">게이트 결과</text>
+    <text x="246" y="230" text-anchor="middle" class="inverseBody">채점 증적</text>
+  </g>
+
+  <!-- Pipeline: one-way pass path and explicit correction loop -->
+  <text x="770" y="198" class="section">02 · KNOWLEDGE 실행 파이프라인</text>
+  <path d="M740 360H760" stroke="#b43d2a" stroke-width="3" marker-end="url(#arrow-rust)"/>
+
+  <g transform="translate(770 220)">
+    <circle cx="20" cy="-16" r="15" fill="#b43d2a"/><text x="20" y="-11" text-anchor="middle" class="inverseBody">1</text>
+    <rect width="190" height="120" rx="12" fill="#fffaf3" stroke="#d8cfc2" filter="url(#shadow)"/>
+    <text x="20" y="30" class="boxCode">DESIGN · FEEDBACK</text>
+    <text x="20" y="61" class="boxTitle">출제와 지도</text>
+    <text x="20" y="88" class="boxBody">13 과제 출제</text>
+    <text x="20" y="108" class="boxBody">03 초안 피드백</text>
+
+    <path d="M190 60H225" stroke="#514940" stroke-width="3" marker-end="url(#arrow-ink)"/>
+
+    <circle cx="250" cy="-16" r="15" fill="#b43d2a"/><text x="250" y="-11" text-anchor="middle" class="inverseBody">2</text>
+    <rect x="230" width="230" height="120" rx="12" fill="#fef0ed" stroke="#f2b5ac" filter="url(#shadow)"/>
+    <text x="250" y="30" class="boxCode">3 VALIDATION GATES</text>
+    <text x="250" y="61" class="boxTitle">검증 게이트</text>
+    <text x="250" y="88" class="boxBody">04 AI 탐지 · 15 출처 검증</text>
+    <text x="250" y="108" class="boxBody">05 필요 시 구술 검증</text>
+
+    <text x="475" y="44" class="boxCode">통과</text>
+    <path d="M460 60H495" stroke="#1a5c2a" stroke-width="4" marker-end="url(#arrow-green)"/>
+
+    <circle cx="520" cy="-16" r="15" fill="#1a5c2a"/><text x="520" y="-11" text-anchor="middle" class="inverseBody">3</text>
+    <rect x="500" width="250" height="120" rx="12" fill="#edf7ee" stroke="#a8d5b5" filter="url(#shadow)"/>
+    <text x="520" y="30" class="boxCode">5 INDEPENDENT JUDGES</text>
+    <text x="520" y="61" class="boxTitle">다관점 심사</text>
+    <text x="520" y="88" class="boxBody">06 · 07 · 08 · 09 · 10</text>
+    <text x="520" y="108" class="boxBody">각자 독립 채점</text>
+
+    <path d="M345 120V182H95V132" fill="none" stroke="#b43d2a" stroke-width="3" stroke-dasharray="10 7" marker-end="url(#arrow-rust)"/>
+    <rect x="120" y="145" width="215" height="28" rx="14" fill="#fef0ed" stroke="#f2b5ac"/>
+    <text x="228" y="164" text-anchor="middle" class="boxCode">미통과 · 보완 후 재검증</text>
+  </g>
+
+  <!-- Judge perspectives -->
+  <g transform="translate(770 420)">
+    <rect width="138" height="42" rx="8" fill="#e7ded2"/><text x="69" y="27" text-anchor="middle" class="chip">WHAT · WHERE</text>
+    <rect x="148" width="138" height="42" rx="8" fill="#e7ded2"/><text x="217" y="27" text-anchor="middle" class="chip">HOW · DEPTH</text>
+    <rect x="296" width="148" height="42" rx="8" fill="#e7ded2"/><text x="370" y="27" text-anchor="middle" class="chip">EVIDENCE · TIME</text>
+    <rect x="454" width="138" height="42" rx="8" fill="#e7ded2"/><text x="523" y="27" text-anchor="middle" class="chip">TIME · WHAT</text>
+    <rect x="602" width="148" height="42" rx="8" fill="#e7ded2"/><text x="676" y="27" text-anchor="middle" class="chip">DEPTH · EVIDENCE</text>
+  </g>
+
+  <!-- Pass path: judges to aggregation, report, and professor -->
+  <path d="M1395 340V476H910V492" fill="none" stroke="#1a5c2a" stroke-width="4" marker-end="url(#arrow-green)"/>
+  <text x="1115" y="468" text-anchor="middle" class="boxCode">게이트 통과 결과만 집계</text>
+
+  <g transform="translate(770 500)">
+    <circle cx="20" cy="-16" r="15" fill="#1a5c2a"/><text x="20" y="-11" text-anchor="middle" class="inverseBody">4</text>
+    <rect width="270" height="112" rx="12" fill="#fffaf3" stroke="#d8cfc2" filter="url(#shadow)"/>
+    <text x="22" y="30" class="boxCode">11_SCORING_SHEET</text>
+    <text x="22" y="61" class="boxTitle">올림픽 방식 집계</text>
+    <text x="22" y="88" class="boxBody">최고점·최저점 제외 → 3명 평균</text>
+
+    <path d="M270 56H310" stroke="#514940" stroke-width="3" marker-end="url(#arrow-ink)"/>
+
+    <circle cx="335" cy="-16" r="15" fill="#1a5c2a"/><text x="335" y="-11" text-anchor="middle" class="inverseBody">5</text>
+    <rect x="315" width="250" height="112" rx="12" fill="#fffaf3" stroke="#d8cfc2" filter="url(#shadow)"/>
+    <text x="337" y="30" class="boxCode">12_FEEDBACK_REPORT</text>
+    <text x="337" y="61" class="boxTitle">피드백 보고서</text>
+    <text x="337" y="88" class="boxBody">6축 점수 · 근거 · 개선 우선순위</text>
+
+    <path d="M565 56H605" stroke="#b43d2a" stroke-width="4" marker-end="url(#arrow-rust)"/>
+  </g>
+
+  <g transform="translate(1385 486)" filter="url(#shadow)">
+    <circle cx="20" cy="-2" r="15" fill="#1a5c2a"/><text x="20" y="3" text-anchor="middle" class="inverseBody">6</text>
+    <rect width="145" height="140" rx="66" fill="#edf7ee" stroke="#a8d5b5" stroke-width="3"/>
+    <text x="72" y="52" text-anchor="middle" class="human">교수 최종 판단</text>
+    <text x="72" y="82" text-anchor="middle" class="boxBody">승인 · 재지도</text>
+    <text x="72" y="106" text-anchor="middle" class="boxBody">피드백 전달</text>
+  </g>
+
+  <!-- Foundation layer -->
+  <g transform="translate(70 684)">
+    <text x="0" y="-22" class="section">03 · 상시 참조 기반층</text>
+    <rect width="1460" height="136" rx="14" fill="#fffaf3" stroke="#d8cfc2" filter="url(#shadow)"/>
+    <rect x="28" y="28" width="320" height="80" rx="9" fill="#f7f1e8" stroke="#d8cfc2"/>
+    <text x="50" y="55" class="boxCode">01_RUBRIC.MD</text>
+    <text x="50" y="83" class="boxTitle">Gestalt 6축 · 100점</text>
+
+    <rect x="370" y="28" width="320" height="80" rx="9" fill="#f7f1e8" stroke="#d8cfc2"/>
+    <text x="392" y="55" class="boxCode">02_JUDGES.MD</text>
+    <text x="392" y="83" class="boxTitle">5인 심사 관점 계약</text>
+
+    <rect x="712" y="28" width="320" height="80" rx="9" fill="#f7f1e8" stroke="#d8cfc2"/>
+    <text x="734" y="55" class="boxCode">14_STUDENT_GUIDE.MD</text>
+    <text x="734" y="83" class="boxTitle">학생 안내 · 요청 시</text>
+
+    <rect x="1054" y="28" width="378" height="80" rx="9" fill="#1f211f"/>
+    <text x="1243" y="55" text-anchor="middle" class="inverseBody">Instructions 1개 + Knowledge 15개</text>
+    <text x="1243" y="83" text-anchor="middle" class="inverseTitle">사람이 최종 결정한다</text>
+  </g>
+
+  <text x="1530" y="868" text-anchor="end" class="small">상세 파일 구조: file_structure.html</text>
+</svg>

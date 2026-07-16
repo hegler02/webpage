@@ -1,10 +1,10 @@
 "use strict";
 
-// Full 30-slide lecture data. Edit this file to change content and brick positions.
+// Full 31-slide lecture data. Edit content and scene positions here; visual decisions live in tokens.css.
 window.KNOWLEDGE_BLOCK_SLIDES = [
   {
     "chapter": "01 — Opening",
-    "accent": "#2f6dff",
+    "accent": "blue",
     "label": "Opening",
     "title": "학교 규정집을\n지식봇으로",
     "lead": "좋은 지식봇은 거대한 AI 하나가 아니라 작은 업무봇들의 질서 있는 조합이다.",
@@ -90,7 +90,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "02 — Problem",
-    "accent": "#f4bf3a",
+    "accent": "yellow",
     "label": "Problem",
     "title": "규정집은\n너무 크다",
     "lead": "학칙, 등록금, 수강신청, 졸업, 장학, 부칙과 별표가 한 파일에 섞여 있다.",
@@ -176,7 +176,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "03 — Bad Approach",
-    "accent": "#2bc06f",
+    "accent": "green",
     "label": "Bad Approach",
     "title": "몽창 업로드는\n위험하다",
     "lead": "민원인용 안내와 직원용 판단이 섞이면 답변 책임과 근거 체계가 무너진다.",
@@ -262,7 +262,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "04 — Principle",
-    "accent": "#ef5a4f",
+    "accent": "red",
     "label": "Principle",
     "title": "유닉스처럼\n작게 만든다",
     "lead": "하나의 봇이 모든 일을 하지 않는다. 각 봇은 하나의 목적을 정확히 맡는다.",
@@ -348,7 +348,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "05 — Scope",
-    "accent": "#8c6dff",
+    "accent": "purple",
     "label": "Scope",
     "title": "이번 목표는\n지식파일이다",
     "lead": "민원봇과 직원봇은 최종 목적이 아니라 업무별 지식파일을 보여주는 샘플 결과물이다.",
@@ -434,7 +434,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "06 — Architecture",
-    "accent": "#45d4ff",
+    "accent": "cyan",
     "label": "Architecture",
     "title": "원본에서\n봇까지",
     "lead": "마스터 원본을 보존하고 원문발췌, 공통 규칙, 법령 매핑, 검증게이트를 조립한다.",
@@ -520,7 +520,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "07 — Master Source",
-    "accent": "#2f6dff",
+    "accent": "blue",
     "label": "Master Source",
     "title": "원본은\n건드리지 않는다",
     "lead": "공식 원본은 재료다. 수정하지 않고, 모든 발췌와 해설은 별도 파일에서 관리한다.",
@@ -606,7 +606,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "08 — Excerpt",
-    "accent": "#f4bf3a",
+    "accent": "yellow",
     "label": "Excerpt",
     "title": "원문발췌는\n증거 보관함",
     "lead": "원문발췌 파일은 설명서가 아니다. 관련 조항을 그대로 복사해 보존하는 증거 보관함이다.",
@@ -692,7 +692,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "09 — Eight Files",
-    "accent": "#2bc06f",
+    "accent": "green",
     "label": "Eight Files",
     "title": "8개 업무로\n먼저 나눈다",
     "lead": "휴복학, 수강신청, 졸업요건, 성적이의, 장학, 등록금환불, 현장실습, 기타공통으로 시작한다.",
@@ -778,7 +778,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "10 — Three Layers",
-    "accent": "#ef5a4f",
+    "accent": "red",
     "label": "Three Layers",
     "title": "원문과 해설을\n분리한다",
     "lead": "마스터 원본, 원문발췌, 지식파일은 서로 다른 역할을 가진다.",
@@ -864,7 +864,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "11 — AI Role",
-    "accent": "#8c6dff",
+    "accent": "purple",
     "label": "AI Role",
     "title": "AI는 원문\n보관자가 아니다",
     "lead": "AI는 찾고 분류하고 설명할 수 있지만, 원문을 임의로 다시 쓰게 하면 안 된다.",
@@ -950,7 +950,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "12 — Extraction",
-    "accent": "#45d4ff",
+    "accent": "cyan",
     "label": "Extraction",
     "title": "발췌는 창작이\n아니라 복사다",
     "lead": "조항 후보는 도구가 찾을 수 있지만 최종 원문은 원본에서 직접 대조해 가져온다.",
@@ -1036,7 +1036,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "13 — Knowledge File",
-    "accent": "#2f6dff",
+    "accent": "blue",
     "label": "Knowledge File",
     "title": "지식파일은\n업무 설명서다",
     "lead": "지식파일에는 적용 범위, 학교 규정 근거, 상위 법령 매핑, 안내 원칙, 확인 항목을 둔다.",
@@ -1122,7 +1122,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "14 — Upload Shape",
-    "accent": "#f4bf3a",
+    "accent": "yellow",
     "label": "Upload Shape",
     "title": "업로드는\n11개 Knowledge",
     "lead": "실제 봇 패키지는 시스템프롬프트와 11개 Knowledge 파일로 구성한다.",
@@ -1208,7 +1208,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "15 — Common Rules",
-    "accent": "#2bc06f",
+    "accent": "green",
     "label": "Common Rules",
     "title": "공통 규칙이\n연결 브릭이다",
     "lead": "민원봇과 직원봇은 같은 원문발췌와 공통 규칙을 공유하되 출력 권한만 다르게 가진다.",
@@ -1294,7 +1294,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "16 — Law Chain",
-    "accent": "#ef5a4f",
+    "accent": "red",
     "label": "Law Chain",
     "title": "학교 규정은\n법령과 연결된다",
     "lead": "학교 학칙만으로 끝내지 않고 상위 법령, 시행령, 시행세칙, 최신 공지까지 사슬을 만든다.",
@@ -1380,7 +1380,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "17 — Mapping",
-    "accent": "#8c6dff",
+    "accent": "purple",
     "label": "Mapping",
     "title": "법령 매핑표가\n필요하다",
     "lead": "업무 주제마다 학교 규정, 상위 법령, 답변 등급을 연결해 답변의 한계를 드러낸다.",
@@ -1466,7 +1466,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "18 — Gate",
-    "accent": "#45d4ff",
+    "accent": "cyan",
     "label": "Gate",
     "title": "검증게이트가\n답변을 막는다",
     "lead": "근거 조항, 법령 연결, 최신 공지, 개별 판단, 개인정보 포함 여부를 답변 전에 확인한다.",
@@ -1552,7 +1552,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "19 — Prompt Limit",
-    "accent": "#2f6dff",
+    "accent": "blue",
     "label": "Prompt Limit",
     "title": "프롬프트만으로는\n부족하다",
     "lead": "말로 정한 규칙은 모델이 놓칠 수 있다. 원문 대조가 확실하지 않으면 인용하지 않게 해야 한다.",
@@ -1638,7 +1638,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "20 — Auto Check",
-    "accent": "#f4bf3a",
+    "accent": "yellow",
     "label": "Auto Check",
     "title": "자동 확인으로\n실수를 줄인다",
     "lead": "사람이 놓치기 쉬운 원문 인용, 개인정보, 긴 안내문, 바뀐 파일을 자동 점검으로 한 번 더 확인한다.",
@@ -1724,7 +1724,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "21 — Citizen Bot",
-    "accent": "#2bc06f",
+    "accent": "green",
     "label": "Citizen Bot",
     "title": "민원봇은\n안내만 한다",
     "lead": "학생, 학부모, 외부 민원인에게 쉬운 말로 안내하되 승인과 예외를 판단하지 않는다.",
@@ -1810,7 +1810,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "22 — Citizen Output",
-    "accent": "#ef5a4f",
+    "accent": "red",
     "label": "Citizen Output",
     "title": "민원 답변은\n작게 말한다",
     "lead": "근거 범위 안에서만 답하고, 자료에 없거나 개별 판단이 필요하면 담당 부서 확인으로 넘긴다.",
@@ -1896,7 +1896,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "23 — Staff Bot",
-    "accent": "#8c6dff",
+    "accent": "purple",
     "label": "Staff Bot",
     "title": "직원봇은\n초안을 돕는다",
     "lead": "직원봇은 근거 정리, 확인 항목, 이메일·문자·공지 초안을 만들 수 있다.",
@@ -1982,7 +1982,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "24 — Staff Risk",
-    "accent": "#45d4ff",
+    "accent": "cyan",
     "label": "Staff Risk",
     "title": "직원봇은\n더 위험하다",
     "lead": "직원봇은 법령 정합성과 발송 초안을 다루므로 최신 공지와 사람 검토가 더 강해야 한다.",
@@ -2068,7 +2068,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "25 — Same Question",
-    "accent": "#2f6dff",
+    "accent": "blue",
     "label": "Same Question",
     "title": "같은 질문도\n출력이 다르다",
     "lead": "휴학하려면 어떻게 하나요라는 질문도 민원봇은 안내, 직원봇은 확인 체크리스트를 낸다.",
@@ -2154,7 +2154,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "26 — No Evidence",
-    "accent": "#f4bf3a",
+    "accent": "yellow",
     "label": "No Evidence",
     "title": "근거가 없으면\n멈춘다",
     "lead": "없는 내용을 채우는 친절보다, 제공된 자료만으로 판단할 수 없다고 멈추는 것이 안전하다.",
@@ -2240,7 +2240,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "27 — Test Questions",
-    "accent": "#2bc06f",
+    "accent": "green",
     "label": "Test Questions",
     "title": "검증 질문으로\n흔들어 본다",
     "lead": "휴학, 군휴학, 복학 기간, 등록금 환불, 전화 신청 같은 질문으로 경계를 확인한다.",
@@ -2326,7 +2326,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "28 — Pass Criteria",
-    "accent": "#ef5a4f",
+    "accent": "red",
     "label": "Pass Criteria",
     "title": "통과 기준은\n답변이 아니다",
     "lead": "원문을 요약하지 않는가, 없는 내용을 지어내지 않는가, 두 봇 출력이 구분되는가를 본다.",
@@ -2412,7 +2412,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "29 — Seven Rules",
-    "accent": "#8c6dff",
+    "accent": "purple",
     "label": "Seven Rules",
     "title": "최종 7원칙으로\n닫는다",
     "lead": "몽창 넣지 않고, 업무 단위로 자르고, 원문과 해설을 분리하고, 근거 없으면 멈춘다.",
@@ -2498,7 +2498,7 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
   },
   {
     "chapter": "30 — Closing",
-    "accent": "#45d4ff",
+    "accent": "cyan",
     "label": "Closing",
     "title": "AI가 행정을\n대신하지 않는다",
     "lead": "목표는 AI가 판단하는 것이 아니라 직원이 더 빠르고 정확하게 근거 있는 답변을 준비하도록 돕는 것이다.",
@@ -2588,38 +2588,50 @@ window.KNOWLEDGE_BLOCK_SLIDES = [
         0
       ]
     }
+  },
+  {
+    "chapter": "31 — Live Bots",
+    "accent": "green",
+    "label": "Live Bots",
+    "title": "이제 직접\n실행해본다",
+    "lead": "같은 질문을 민원봇과 직원봇에 각각 입력하고 답변 범위와 근거 제시 방식의 차이를 확인한다.",
+    "rows": [
+      ["ChatGPT", "민원봇 · 직원봇"],
+      ["Gems", "민원봇 · 직원봇"],
+      ["Test", "같은 질문으로 비교"]
+    ],
+    "hideBricks": true,
+    "linkLayout": "grid",
+    "links": [
+      {
+        "label": "ChatGPT 민원봇",
+        "href": "https://chatgpt.com/g/g-6a56f6c28d9c819189fb93bd13793171-minweonbos-mandeulgi-teseuteu-v1-0",
+        "note": "학생·학부모·외부 민원 안내"
+      },
+      {
+        "label": "ChatGPT 직원봇",
+        "href": "https://chatgpt.com/g/g-6a56f7f140e881918635fe2fd5baa667-jigweonbos-mandeulgi-teseuteu-v1-0",
+        "note": "교직원용 근거 확인과 초안 작성"
+      },
+      {
+        "label": "Gems 민원봇",
+        "href": "https://gemini.google.com/gem/1dUhXxnm6tQOBCnxcqJkgpMYCvhGr9lUy?usp=sharing",
+        "note": "학생·학부모·외부 민원 안내"
+      },
+      {
+        "label": "Gems 직원봇",
+        "href": "https://gemini.google.com/gem/1lK8GJv1MMn6fhdZ-EMISl8Q2GkApdS06?usp=sharing",
+        "note": "교직원용 근거 확인과 초안 작성"
+      }
+    ],
+    "layout": {
+      "source": [-176, 72, 0, 160, "민원", "cyan", 0],
+      "excerpt": [-14, 72, 0, 160, "직원", "green", 0],
+      "rule": [148, 72, 0, 160, "비교", "yellow", 0],
+      "law": [-176, -18, 34, 160, "ChatGPT", "blue", 0],
+      "gate": [-14, -18, 34, 160, "Gems", "purple", 0],
+      "citizen": [148, -18, 34, 160, "질문", "red", 0],
+      "staff": [-14, -108, 68, 190, "실행", "green", 0]
+    }
   }
 ];
-
-window.KNOWLEDGE_BLOCK_PALETTE = {
-  "blue": [
-    "#2f6dff",
-    "#1740b8",
-    "#102b80"
-  ],
-  "green": [
-    "#2bc06f",
-    "#148348",
-    "#0d5e34"
-  ],
-  "yellow": [
-    "#f4bf3a",
-    "#c98512",
-    "#8e5c0c"
-  ],
-  "red": [
-    "#ef5a4f",
-    "#b72d28",
-    "#7c1f1c"
-  ],
-  "purple": [
-    "#8c6dff",
-    "#5941c9",
-    "#37298a"
-  ],
-  "cyan": [
-    "#45d4ff",
-    "#168cb7",
-    "#0e607f"
-  ]
-};

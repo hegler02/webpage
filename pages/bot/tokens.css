@@ -1,0 +1,265 @@
+:root {
+  color-scheme: dark;
+
+  /* Primitive colors */
+  --kb-color-stage-900: #080a0f;
+  --kb-color-stage-800: #0d1016;
+  --kb-color-stage-700: #111723;
+  --kb-color-text-100: #f4f7fb;
+  --kb-color-text-400: #aeb8c8;
+  --kb-color-paper: rgba(248, 250, 252, .92);
+  --kb-color-paper-ink: #121722;
+  --kb-color-line: rgba(255, 255, 255, .16);
+
+  /* Brick palette */
+  --kb-brick-blue-top: #2f6dff;
+  --kb-brick-blue-mid: #1740b8;
+  --kb-brick-blue-side: #102b80;
+  --kb-brick-green-top: #2bc06f;
+  --kb-brick-green-mid: #148348;
+  --kb-brick-green-side: #0d5e34;
+  --kb-brick-yellow-top: #f4bf3a;
+  --kb-brick-yellow-mid: #c98512;
+  --kb-brick-yellow-side: #8e5c0c;
+  --kb-brick-red-top: #ef5a4f;
+  --kb-brick-red-mid: #b72d28;
+  --kb-brick-red-side: #7c1f1c;
+  --kb-brick-purple-top: #8c6dff;
+  --kb-brick-purple-mid: #5941c9;
+  --kb-brick-purple-side: #37298a;
+  --kb-brick-cyan-top: #45d4ff;
+  --kb-brick-cyan-mid: #168cb7;
+  --kb-brick-cyan-side: #0e607f;
+
+  /* Semantic surfaces */
+  --kb-text-high: rgba(244, 247, 251, .98);
+  --kb-text-body: rgba(244, 247, 251, .78);
+  --kb-text-meta: rgba(244, 247, 251, .72);
+  --kb-text-footer: rgba(244, 247, 251, .54);
+  --kb-surface-deck: rgba(9, 12, 18, .78);
+  --kb-surface-control: rgba(7, 10, 15, .62);
+  --kb-surface-control-button: rgba(255, 255, 255, .12);
+  --kb-surface-control-hover: rgba(255, 255, 255, .22);
+  --kb-surface-brick-label: rgba(7, 10, 15, .22);
+
+  --kb-stage-background: radial-gradient(circle at 20% 14%, rgba(47, 109, 255, .24), transparent 28%), radial-gradient(circle at 82% 78%, rgba(244, 191, 58, .16), transparent 30%), linear-gradient(135deg, var(--kb-color-stage-900), var(--kb-color-stage-800) 54%, var(--kb-color-stage-700));
+  --kb-deck-background: linear-gradient(135deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02)), var(--kb-surface-deck);
+  --kb-deck-overlay: linear-gradient(90deg, rgba(255, 255, 255, .08), transparent 18%, transparent 78%, rgba(255, 255, 255, .06));
+  --kb-accent-glow: 0 0 22px var(--accent, var(--blue));
+  --kb-baseplate-background: linear-gradient(135deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, .015)), repeating-linear-gradient(90deg, rgba(255, 255, 255, .045) 0 1px, transparent 1px 48px), repeating-linear-gradient(0deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 48px), rgba(22, 29, 41, .70);
+  --kb-baseplate-shadow: 0 34px 80px rgba(0, 0, 0, .30), inset 0 0 0 1px rgba(255, 255, 255, .10);
+  --kb-brick-highlight: linear-gradient(180deg, rgba(255, 255, 255, .30), rgba(255, 255, 255, 0) 38%);
+  --kb-brick-shadow-drop: 0 28px 36px rgba(0, 0, 0, .30);
+  --kb-brick-shadow-outline: inset 0 0 0 1px rgba(255, 255, 255, .24);
+  --kb-brick-shadow-depth: inset 0 -16px 22px rgba(0, 0, 0, .12);
+  --kb-brick-label-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12), 0 4px 12px rgba(0, 0, 0, .18);
+  --kb-flash-background: radial-gradient(circle, rgba(255, 255, 255, .72), rgba(255, 255, 255, .18) 32%, rgba(255, 255, 255, 0) 72%), radial-gradient(circle at 32% 44%, var(--accent, var(--blue)), transparent 60%);
+
+  /* Typography */
+  --kb-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+  --kb-font-size-hud: 11px;
+  --kb-hud-gap: 18px;
+  --kb-font-size-label: 12px;
+  --kb-font-size-title: clamp(44px, 5.2vw, 76px);
+  --kb-font-size-title-secondary: clamp(40px, 4.8vw, 68px);
+  --kb-font-size-body: clamp(18px, 1.7vw, 24px);
+  --kb-font-size-row: 14px;
+  --kb-font-size-link: 15px;
+  --kb-font-size-link-note: 12px;
+  --kb-font-size-brick-label: 12px;
+  --kb-font-size-footer: 12px;
+  --kb-title-line-height: 1.02;
+  --kb-title-letter-spacing: -.045em;
+  --kb-body-line-height: 1.58;
+
+  /* Deck frame */
+  --kb-deck-width: min(92vw, calc(84vh * 1.7777778), 1180px);
+  --kb-deck-height: auto;
+  --kb-deck-aspect-ratio: 16 / 9;
+  --kb-deck-radius: 24px;
+  --kb-deck-border: 1px solid rgba(255, 255, 255, .15);
+  --kb-deck-shadow: 0 44px 120px rgba(0, 0, 0, .58);
+  --kb-deck-gutter: 28px;
+  --kb-deck-header-y: 22px;
+  --kb-deck-rule-y: 52px;
+  --kb-viewport-inset: 74px 46px 56px;
+  --kb-viewport-columns: minmax(0, .9fr) minmax(420px, 1.1fr);
+  --kb-viewport-gap: 32px;
+
+  /* Copy and links */
+  --kb-copy-max-width: 520px;
+  --kb-copy-title-max-width: 560px;
+  --kb-copy-body-max-width: 480px;
+  --kb-label-gap: 9px;
+  --kb-label-dot-size: 9px;
+  --kb-label-margin-bottom: 22px;
+  --kb-body-margin-top: 24px;
+  --kb-link-left-offset: 42px;
+  --kb-link-top: 58px;
+  --kb-link-width: min(320px, 30vw);
+  --kb-link-grid-width: min(600px, 40vw);
+  --kb-link-grid-columns: repeat(2, minmax(0, 1fr));
+  --kb-link-grid-top: 58px;
+  --kb-link-grid-card-min-height: 82px;
+  --kb-link-radius: 14px;
+  --kb-link-gap: 10px;
+  --kb-link-padding: 12px 15px;
+  --kb-link-content-gap: 4px;
+  --kb-link-border: 1px solid color-mix(in srgb, var(--accent, var(--blue)) 72%, white 18%);
+  --kb-link-background: linear-gradient(135deg, color-mix(in srgb, var(--accent, var(--blue)) 42%, transparent), rgba(255, 255, 255, .10));
+  --kb-link-shadow: 0 14px 36px color-mix(in srgb, var(--accent, var(--blue)) 28%, transparent);
+  --kb-link-hover-border: rgba(255, 255, 255, .72);
+  --kb-link-hover-background: linear-gradient(135deg, color-mix(in srgb, var(--accent, var(--blue)) 60%, transparent), rgba(255, 255, 255, .16));
+  --kb-row-key-width: 92px;
+  --kb-row-gap: 14px;
+  --kb-row-padding: 11px 0;
+  --kb-row-line-height: 1.45;
+  --kb-mini-gap: 10px;
+  --kb-mini-margin-top: 32px;
+
+  /* Brick scene */
+  --kb-brick-zone-width: min(100%, 680px);
+  --kb-brick-zone-height: min(52vw, 520px);
+  --kb-brick-zone-min-height: 420px;
+  --kb-brick-zone-perspective: 1200px;
+  --kb-brick-zone-shift-x: -58px;
+  --kb-brick-zone-scale: .88;
+  --kb-scene-coordinate-scale: 1;
+  --kb-scene-width-scale: 1;
+  --kb-baseplate-width: 620px;
+  --kb-baseplate-height: 360px;
+  --kb-baseplate-top: 56%;
+  --kb-baseplate-radius: 28px;
+  --kb-baseplate-opacity: .58;
+  --kb-baseplate-inner-inset: 22px;
+  --kb-baseplate-inner-radius: 18px;
+  --kb-brick-width-default: 120px;
+  --kb-brick-height: 58px;
+  --kb-brick-radius: 10px 10px 7px 7px;
+  --kb-brick-side-depth: 18px;
+  --kb-brick-stud-inset: 16px;
+  --kb-brick-stud-offset: -12px;
+  --kb-brick-stud-height: 24px;
+  --kb-brick-stud-pitch: 62px;
+  --kb-brick-label-max-inset: 28px;
+  --kb-brick-label-min-width: 56px;
+  --kb-brick-label-padding: 5px 10px 6px;
+  --kb-brick-label-radius: 999px;
+
+  /* Flash */
+  --kb-flash-width: 520px;
+  --kb-flash-height: 320px;
+  --kb-flash-scale: .58;
+
+  /* Controls and footer */
+  --kb-side-title-top: 92px;
+  --kb-control-bottom: 18px;
+  --kb-control-gap: 10px;
+  --kb-control-padding: 9px 12px;
+  --kb-control-radius: 999px;
+  --kb-control-border: 1px solid rgba(255, 255, 255, .16);
+  --kb-control-shadow: 0 16px 40px rgba(0, 0, 0, .32);
+  --kb-control-glow: 0 0 0 1px rgba(255, 255, 255, .18), 0 0 28px var(--accent, var(--blue));
+  --kb-page-number-min-width: 64px;
+  --kb-control-button-size: 38px;
+  --kb-footer-right: 28px;
+  --kb-footer-bottom: 24px;
+  --kb-footer-max-width: min(520px, calc(100% - 360px));
+
+  /* Layers */
+  --kb-layer-baseplate: 1;
+  --kb-layer-bricks: 3;
+  --kb-layer-viewport: 5;
+  --kb-layer-brick-zone: 6;
+  --kb-layer-copy: 7;
+  --kb-layer-overlay: 8;
+  --kb-layer-side-title: 9;
+  --kb-layer-flash: 12;
+  --kb-layer-links: 18;
+  --kb-layer-rule: 19;
+  --kb-layer-hud: 20;
+  --kb-layer-progress: 21;
+  --kb-layer-footer: 24;
+  --kb-layer-controls: 30;
+
+  /* Motion and interaction */
+  --kb-motion-ease: cubic-bezier(.17, .84, .24, 1);
+  --kb-motion-snap: cubic-bezier(.2, 1.3, .24, 1);
+  --kb-motion-ui: 180ms;
+  --kb-motion-progress: 760ms;
+  --kb-motion-color: 420ms;
+  --kb-motion-copy-fade: 520ms;
+  --kb-motion-copy-move: 720ms;
+  --kb-motion-brick-move: 860ms;
+  --kb-motion-brick-opacity: 360ms;
+  --kb-motion-brick-filter: 640ms;
+  --kb-motion-brick-stagger: 42ms;
+  --kb-motion-flash: 560ms;
+  --kb-motion-flash-class: 520ms;
+  --kb-motion-scene-lock: 880ms;
+  --kb-interaction-swipe-threshold: 52;
+
+  /* Compatibility aliases */
+  --bg: var(--kb-color-stage-800);
+  --ink: var(--kb-color-text-100);
+  --muted: var(--kb-color-text-400);
+  --line: var(--kb-color-line);
+  --paper: var(--kb-color-paper);
+  --paper-ink: var(--kb-color-paper-ink);
+  --blue: var(--kb-brick-blue-top);
+  --green: var(--kb-brick-green-top);
+  --yellow: var(--kb-brick-yellow-top);
+  --red: var(--kb-brick-red-top);
+  --purple: var(--kb-brick-purple-top);
+  --cyan: var(--kb-brick-cyan-top);
+  --ease: var(--kb-motion-ease);
+  --snap: var(--kb-motion-snap);
+  --deck-w: var(--kb-deck-width);
+  --deck-h: var(--kb-deck-height);
+}
+
+@media (max-width: 900px) {
+  :root {
+    --kb-deck-width: 94vw;
+    --kb-deck-height: 88vh;
+    --kb-deck-aspect-ratio: auto;
+    --kb-deck-gutter: 18px;
+    --kb-deck-header-y: 16px;
+    --kb-deck-rule-y: 46px;
+    --kb-viewport-inset: 60px 20px 66px;
+    --kb-viewport-columns: minmax(0, 1fr);
+    --kb-viewport-gap: 8px;
+    --kb-brick-zone-width: 100%;
+    --kb-brick-zone-height: 250px;
+    --kb-brick-zone-min-height: 250px;
+    --kb-brick-zone-shift-x: 0px;
+    --kb-brick-zone-scale: 1;
+    --kb-scene-coordinate-scale: .32;
+    --kb-scene-width-scale: .52;
+    --kb-baseplate-width: 260px;
+    --kb-baseplate-height: 190px;
+    --kb-brick-height: 48px;
+    --kb-brick-stud-inset: 12px;
+    --kb-brick-stud-offset: -10px;
+    --kb-brick-stud-height: 20px;
+    --kb-brick-stud-pitch: 50px;
+    --kb-font-size-hud: 9px;
+    --kb-hud-gap: 10px;
+    --kb-label-margin-bottom: 14px;
+    --kb-body-margin-top: 14px;
+    --kb-font-size-title: 36px;
+    --kb-font-size-title-secondary: 34px;
+    --kb-font-size-body: 14px;
+    --kb-font-size-brick-label: 10px;
+    --kb-link-left-offset: 0px;
+    --kb-link-top: 0px;
+    --kb-link-width: 100%;
+    --kb-link-grid-width: 100%;
+    --kb-link-grid-columns: 1fr;
+    --kb-link-grid-top: 0px;
+    --kb-link-grid-card-min-height: 0px;
+    --kb-control-bottom: 14px;
+    --kb-link-padding: 11px 13px;
+    --kb-mobile-link-margin-top: 20px;
+  }
+}

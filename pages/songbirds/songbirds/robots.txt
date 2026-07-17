@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mirinaeman.com/sitemap-songbirds.xml

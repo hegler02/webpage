@@ -1,0 +1,15 @@
+오랜만이야 · SONGBIRDS 정적 배포판
+
+1. 이 폴더의 모든 파일을 웹서버의 /pages/songbirds/ 경로에 업로드합니다.
+2. 접속 주소는 https://mirinaeman.com/pages/songbirds 입니다.
+3. 별도의 npm install, 빌드, Node.js, 환경변수가 필요하지 않습니다.
+
+중요: 검색엔진용 파일 두 개는 도메인 루트에 배치해야 합니다.
+
+- robots.txt → https://mirinaeman.com/robots.txt
+  기존 robots.txt가 있다면 아래 한 줄만 병합합니다.
+  Sitemap: https://mirinaeman.com/sitemap-songbirds.xml
+
+- sitemap-songbirds.xml → https://mirinaeman.com/sitemap-songbirds.xml
+
+페이지 폴더에 포함된 robots.txt는 배포 참고본입니다. 검색엔진은 일반적으로 도메인 루트의 robots.txt만 읽습니다.

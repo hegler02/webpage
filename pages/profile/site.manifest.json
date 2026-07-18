@@ -1,0 +1,12 @@
+{
+  "canonical": "https://mirinaeman.com/",
+  "architecture": "modular-authoring/static-mpa",
+  "pages": [
+    "index.html",
+    "work/index.html",
+    "books/index.html",
+    "mirinae/index.html",
+    "profile/index.html"
+  ],
+  "external_images": 0
+}

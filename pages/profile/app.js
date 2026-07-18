@@ -83,6 +83,8 @@ window.ProfileBus = (() => {
     }
     const audioButton = event.target.closest('[data-audio-src]');
     if (!audioButton || !audio || !player) return;
+    const avatar = player.querySelector('.player-avatar img[data-src]');
+    if (avatar && !avatar.src) avatar.src = avatar.dataset.src;
     if (audio.dataset.current !== audioButton.dataset.audioSrc) {
       audio.pause(); audio.removeAttribute('src');
       audio.src = audioButton.dataset.audioSrc;

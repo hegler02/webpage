@@ -24,7 +24,6 @@
 }
 
 *{box-sizing:border-box} html{background:var(--paper);color:var(--ink)}
-@view-transition{navigation:auto}::view-transition-old(root){animation:page-out 180ms ease both}::view-transition-new(root){animation:page-in 360ms cubic-bezier(.22,1,.36,1) both}@keyframes page-out{to{opacity:.92}}@keyframes page-in{from{opacity:.82}to{opacity:1}}
 body{margin:0;min-width:20rem;background:var(--paper);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;font-size:1rem;line-height:var(--leading-body);text-rendering:optimizeLegibility}
 body.drawer-open{overflow:hidden}body::before{content:"";position:fixed;z-index:80;inset:0;background:rgba(8,10,13,.34);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .5s ease,visibility 0s linear .5s}body.drawer-open::before{opacity:1;visibility:visible;pointer-events:auto;transition-delay:0s} img{display:block;max-width:100%} a{color:inherit} button,a{-webkit-tap-highlight-color:transparent}
 h1,h2,h3{margin:0;line-height:var(--leading-heading);text-wrap:balance;word-break:keep-all} p{margin:0;text-wrap:pretty;word-break:keep-all}

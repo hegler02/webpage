@@ -1,1 +1,1 @@
-Upload every item in this folder to https://mirinaeman.com/. Static MPA; no framework, server, build, or environment variable is required.
+Upload every item in this folder into the existing pages/profile web root without changing Vercel settings. index.html must remain at the top of that folder. Static MPA; no framework, server, build, or environment variable is required.

@@ -69,6 +69,23 @@ window.ProfileBus = (() => {
   const close = player?.querySelector('[data-player-close]');
 
   document.addEventListener('click', async (event) => {
+    const soundcloudButton = event.target.closest('[data-soundcloud-url]');
+    if (soundcloudButton) {
+      const shell = document.querySelector('[data-soundcloud-shell]');
+      if (!shell) return;
+      if (!shell.querySelector('iframe')) {
+        const iframe = document.createElement('iframe');
+        iframe.title = soundcloudButton.dataset.title;
+        iframe.allow = 'autoplay';
+        iframe.loading = 'eager';
+        iframe.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(soundcloudButton.dataset.soundcloudUrl)}&color=%23254f43&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`;
+        shell.replaceChildren(iframe);
+      }
+      shell.hidden = false;
+      soundcloudButton.setAttribute('aria-expanded', 'true');
+      ProfileBus.emit('media:loaded', { provider: 'soundcloud', url: soundcloudButton.dataset.soundcloudUrl });
+      return;
+    }
     const videoButton = event.target.closest('[data-video-id]');
     if (videoButton) {
       const shell = videoButton.closest('.video-shell');

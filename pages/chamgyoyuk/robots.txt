@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mirinaeman.com/pages/chamgyoyuk/sitemap.xml

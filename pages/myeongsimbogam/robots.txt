@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://attitude-news-15.mirinaeman.chatgpt.site/sitemap.xml

@@ -97,7 +97,7 @@ def main() -> int:
     route_sources = {item.get("source") for item in vercel.get("rewrites", [])}
     for route in routes:
         public_path = route["public_path"]
-        required_sources = [public_path] if public_path == "/" else [public_path.rstrip("/"), public_path + ":path*"]
+        required_sources = [public_path] if public_path == "/" else [public_path, public_path + ":path*"]
         for source in required_sources:
             if source not in route_sources:
                 errors.append(f"missing route rewrite: {source}")

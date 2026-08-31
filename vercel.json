@@ -9,7 +9,7 @@
       "destination": "/pages/profile/"
     },
     {
-      "source": "/work",
+      "source": "/work/",
       "destination": "/pages/profile/work/"
     },
     {
@@ -17,7 +17,7 @@
       "destination": "/pages/profile/work/:path*"
     },
     {
-      "source": "/archive",
+      "source": "/archive/",
       "destination": "/pages/profile/archive/"
     },
     {
@@ -25,7 +25,7 @@
       "destination": "/pages/profile/archive/:path*"
     },
     {
-      "source": "/books",
+      "source": "/books/",
       "destination": "/pages/profile/books/"
     },
     {
@@ -33,7 +33,7 @@
       "destination": "/pages/profile/books/:path*"
     },
     {
-      "source": "/mirinae",
+      "source": "/mirinae/",
       "destination": "/pages/profile/mirinae/"
     },
     {
@@ -41,7 +41,7 @@
       "destination": "/pages/profile/mirinae/:path*"
     },
     {
-      "source": "/profile",
+      "source": "/profile/",
       "destination": "/pages/profile/profile/"
     },
     {

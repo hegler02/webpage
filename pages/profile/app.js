@@ -11,17 +11,18 @@ window.ProfileBus = (() => {
   const button = document.querySelector('[data-theme-toggle]');
   let saved = null;
   try { saved = localStorage.getItem('profile-theme'); } catch (_) {}
-  const initial = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'morning');
+  const normalizeTheme = (theme) => theme === 'night' ? 'dark' : theme === 'morning' ? 'light' : theme;
+  const initial = normalizeTheme(saved) || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   const apply = (theme) => {
     root.dataset.theme = theme;
-    button?.setAttribute('aria-pressed', String(theme === 'night'));
-    button?.setAttribute('aria-label', theme === 'night' ? '라이트 모드로 전환' : '다크 모드로 전환');
-    button?.querySelector('[data-sun]')?.toggleAttribute('hidden', theme === 'night');
-    button?.querySelector('[data-moon]')?.toggleAttribute('hidden', theme !== 'night');
+    button?.setAttribute('aria-pressed', String(theme === 'dark'));
+    button?.setAttribute('aria-label', theme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환');
+    button?.querySelector('[data-sun]')?.toggleAttribute('hidden', theme === 'dark');
+    button?.querySelector('[data-moon]')?.toggleAttribute('hidden', theme !== 'dark');
   };
   apply(initial);
   button?.addEventListener('click', () => {
-    const next = root.dataset.theme === 'night' ? 'morning' : 'night';
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     apply(next); try { localStorage.setItem('profile-theme', next); } catch (_) {}
     ProfileBus.emit('theme:changed', { theme: next });
   });

@@ -1,0 +1,719 @@
+{
+  "schema_version": 1,
+  "generated_from": "MESSAGE BODIES CQI archive",
+  "bodies": [
+    {
+      "body_id": "ai-slave",
+      "title": "A.I Slave | The Mirinaeman Project Music Album",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "ai-literacy",
+        "warning"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "metal"
+      ],
+      "message_sentence": "기계가 만든 평균에 판단을 넘기지 말라는 경고가 거친 음악의 몸을 얻는다.",
+      "canonical_url": "https://mirinaeman.com/pages/alslave/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "ai-slave-slide",
+      "title": "AI 노예 vs AI 지휘관 · PASS v13",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "ai-literacy"
+      ],
+      "tags": [
+        "ai",
+        "judgment",
+        "lecture"
+      ],
+      "message_sentence": "생성형 AI 시대의 격차를 정보가 아니라 판단권과 지휘 능력의 문제로 보여준다.",
+      "canonical_url": "https://mirinaeman.com/pages/al_slave_slide/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "baekje-renaissance",
+      "title": "검이불루, 화이불치 2026 | BAEKJE RENAISSANCE 2026",
+      "body_type": "SCREENBODY",
+      "source_kinds": [
+        "history",
+        "media-art"
+      ],
+      "tags": [
+        "baekje",
+        "film",
+        "fashion"
+      ],
+      "message_sentence": "백제의 미학이 현대 하이엔드 패션 필름과 웹의 몸으로 다시 살아난다.",
+      "canonical_url": "https://mirinaeman.com/pages/baekje/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "chamgyoyuk",
+      "title": "참교육 — CHAMGYOYUK",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "social-critique",
+        "education"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "death-metal"
+      ],
+      "message_sentence": "지워진 이름을 증언으로 되돌리고 숨은 권력을 판결대에 세우는 음악의 몸이다.",
+      "canonical_url": "https://mirinaeman.com/pages/chamgyoyuk/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "coding-body-message",
+      "title": "Coding is the Body of the Message",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "media-philosophy"
+      ],
+      "tags": [
+        "coding",
+        "mcluhan",
+        "lecture"
+      ],
+      "message_sentence": "코딩을 메시지가 작동하는 몸으로 바라보는 미디어 철학을 강의 화면으로 설명한다.",
+      "canonical_url": "https://mirinaeman.com/pages/jeju_hak/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "editorial-magazine-deck",
+      "title": "Editorial Magazine Deck",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "editorial-design"
+      ],
+      "tags": [
+        "design",
+        "magazine",
+        "lecture"
+      ],
+      "message_sentence": "편집 디자인과 웹 슬라이드의 관계를 매거진형 강의 덱으로 탐색한다.",
+      "canonical_url": "https://mirinaeman.com/pages/report/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "farewell-sarang",
+      "title": "사랑아 잘 가 | The Mirinaeman Project Music Album",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "memory",
+        "farewell"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "folk"
+      ],
+      "message_sentence": "먼저 떠난 우리 집 복덩이를 향한 담백한 작별이 따뜻한 포크 송별가로 남는다.",
+      "canonical_url": "https://mirinaeverse.com/album/49/49.html",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "git-github-deployment-guide",
+      "title": "Git · GitHub · 배포 완전 가이드",
+      "body_type": "KNOWLEDGEBODY",
+      "source_kinds": [
+        "education",
+        "deployment"
+      ],
+      "tags": [
+        "git",
+        "github",
+        "guide"
+      ],
+      "message_sentence": "Git과 GitHub, 정적 웹 배포의 전체 흐름을 단계별 지식의 몸으로 정리한다.",
+      "canonical_url": "https://mirinaeman.com/pages/github/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "github-vercel-guide",
+      "title": "GitHub + Vercel 배포 안내",
+      "body_type": "KNOWLEDGEBODY",
+      "source_kinds": [
+        "education",
+        "deployment"
+      ],
+      "tags": [
+        "github",
+        "vercel",
+        "guide"
+      ],
+      "message_sentence": "GitHub 업로드와 Vercel 자동 배포를 한글과 영어로 안내하는 실전 지식의 몸이다.",
+      "canonical_url": "https://mirinaeman.com/pages/github-vercel-guide/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "gongnyangi-era",
+      "title": "공냥이, 시대를 쓰다",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "person",
+        "teaching",
+        "ai-era"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "theme-song",
+        "writer"
+      ],
+      "message_sentence": "AI 시대의 작가이자 명강사 공냥이의 이야기가 주제곡과 앨범 페이지의 몸을 얻는다.",
+      "canonical_url": "https://gongnyangi-era.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-08-28T14:02:11Z",
+      "latest_deployed_at": "2026-08-29T02:23:22Z"
+    },
+    {
+      "body_id": "home-was-inside",
+      "title": "내가 집으로 가는 줄 알았지 | The Mirinaeman Project Music Album",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "memory",
+        "home"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "bossa-nova"
+      ],
+      "message_sentence": "집이 장소가 아니라 마음 안의 온기였음을 깨닫는 순간이 부드러운 노래의 몸을 얻는다.",
+      "canonical_url": "https://mirinaeman.com/pages/home-was-inside/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "hwasan-insu",
+      "title": "화산인수 — 같은 원작, 두 개의 몸",
+      "body_type": "STORYBODY",
+      "source_kinds": [
+        "fiction",
+        "world-building"
+      ],
+      "tags": [
+        "martial-arts",
+        "webtoon",
+        "archive"
+      ],
+      "message_sentence": "망해가는 화산파를 인수한 전문가의 산업 무협 세계가 실사와 웹툰 두 개의 몸으로 펼쳐진다.",
+      "canonical_url": "https://mirinaeman.com/pages/hwasan/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "image-agent",
+      "title": "내 생각을 이미지로 옮기는 법",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "visual-thinking"
+      ],
+      "tags": [
+        "ai",
+        "image",
+        "lecture"
+      ],
+      "message_sentence": "생각을 이미지 언어로 번역하는 생성형 AI 워크플로를 강의의 몸으로 펼친다.",
+      "canonical_url": "https://mirinaeman.com/pages/ImageAgent/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "jeju-we",
+      "title": "제주 WE",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "travel",
+        "healing",
+        "personal-record"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "jeju",
+        "healing"
+      ],
+      "message_sentence": "직접 촬영한 제주 WE 호텔의 숲과 바다, 공간과 자작곡이 개인 치유의 몸으로 만난다.",
+      "canonical_url": "https://jeju-we.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-08-30T07:46:49Z",
+      "latest_deployed_at": "2026-08-30T09:36:52Z"
+    },
+    {
+      "body_id": "kimbujang-unsealed",
+      "title": "김부장 - 봉인해제 | 66호 테마곡",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "drama",
+        "fatherhood"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "heavy-metal"
+      ],
+      "message_sentence": "평범한 아버지의 절규가 냉혹한 전진으로 바뀌는 순간을 헤비메탈의 몸으로 만든다.",
+      "canonical_url": "https://mirinaeman.com/pages/kimbujang/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "listen-before-photo",
+      "title": "찍어달란 말보다 | The Mirinaeman Project Music Album",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "social-critique",
+        "politics"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "rock"
+      ],
+      "message_sentence": "스팸 같은 홍보보다 먼저 삶을 들어달라는 요구가 록과 붐뱁의 몸을 얻는다.",
+      "canonical_url": "https://mirinaeman.com/pages/jjigeodallan-malboda/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "lotus-of-steel",
+      "title": "Lotus of Steel — The Mirinaeman Project Music Album",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "ritual",
+        "awakening"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "indian-metal"
+      ],
+      "message_sentence": "사원의 드론과 종소리, 인도 퍼커션과 기타가 어둠에서 각성으로 향하는 의식을 만든다.",
+      "canonical_url": "https://mirinaeman.com/pages/lotus-of-steel/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "media-body-video",
+      "title": "매체는 메시지의 몸",
+      "body_type": "SCREENBODY",
+      "source_kinds": [
+        "education",
+        "media-philosophy"
+      ],
+      "tags": [
+        "media",
+        "screen",
+        "video"
+      ],
+      "message_sentence": "영상 매체가 메시지의 몸이 되는 과정을 화면의 리듬과 장면으로 설명한다.",
+      "canonical_url": "https://mirinaeman.com/pages/video/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "media-message-body-deck",
+      "title": "미디어는 메시지의 몸이다",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "media-philosophy"
+      ],
+      "tags": [
+        "gestalt",
+        "mcluhan",
+        "lecture"
+      ],
+      "message_sentence": "미디어는 메시지가 입는 몸이고 게슈탈트는 그 몸의 생명성을 검증하는 법임을 강의한다.",
+      "canonical_url": "https://mirinaeman.com/pages/media_message_deck_deploy/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "medium-body-lecture",
+      "title": "매체는 메시지의 몸",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "media-philosophy"
+      ],
+      "tags": [
+        "mcluhan",
+        "media",
+        "lecture"
+      ],
+      "message_sentence": "매체가 메시지의 몸이라는 관점을 화면의 순서와 상호작용으로 설명한다.",
+      "canonical_url": "https://mirinaeman.com/pages/media/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "modern-myeongsimbogam",
+      "title": "시간이 흘러도 변하지 않는 현대판 명심보감 15가지",
+      "body_type": "KNOWLEDGEBODY",
+      "source_kinds": [
+        "relationship",
+        "wisdom"
+      ],
+      "tags": [
+        "attitude",
+        "essay",
+        "scroll-story"
+      ],
+      "message_sentence": "관계를 오래 지키는 작고 단단한 태도 열다섯 가지를 이미지와 짧은 해설로 읽게 한다.",
+      "canonical_url": "https://attitude-news-15.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "my-son",
+      "title": "가끔은 내 말도 들어줘 — The Mirinaeman Project Music Album",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "memory",
+        "family"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "family"
+      ],
+      "message_sentence": "밥상 앞에서 건네던 말과 조용히 남은 마음이 따뜻한 노래의 몸을 얻는다.",
+      "canonical_url": "https://mirinaeman.com/pages/MySon/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "noreut-galchi-album",
+      "title": "노릇노릇 갈치통구이",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "experience",
+        "food",
+        "travel"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "interactive-web",
+        "jeju"
+      ],
+      "message_sentence": "제주에서 맛본 한 끼의 놀라움이 노래와 미디어의 몸으로 다시 살아난다.",
+      "canonical_url": "https://noreut-galchi-album.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-08-30T12:16:04Z",
+      "latest_deployed_at": "2026-08-30T21:45:34Z"
+    },
+    {
+      "body_id": "one-more-guest-album",
+      "title": "한 명만 더 부를께 | The Mirinaeman Project Music Album",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "comedy",
+        "daily-life"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "folk"
+      ],
+      "message_sentence": "따뜻한 생일 식사가 계산서 공포로 뒤집히는 이야기가 어쿠스틱 포크의 몸을 얻는다.",
+      "canonical_url": "https://mirinaeman.com/pages/one-more-guest/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "one-more-guest-single",
+      "title": "한 명만 더 부를게 | 싱글앨범 랜딩페이지",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "comedy",
+        "daily-life"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "hip-hop"
+      ],
+      "message_sentence": "생일 한턱이 계산서 재난으로 바뀌는 순간을 코믹 힙합의 몸으로 만든다.",
+      "canonical_url": "https://mirinaeman.com/pages/han-myeongman-deo-bureulge/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "physical-ai-field-lab-ulsan-jeju",
+      "title": "Physical AI Field Lab: Ulsan x Jeju",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "lecture",
+        "education",
+        "physical-ai"
+      ],
+      "tags": [
+        "physical-ai",
+        "hackathon",
+        "ulsan",
+        "jeju"
+      ],
+      "message_sentence": "울산과 제주 학생이 피지컬 AI 앱을 직접 만드는 해커톤 특강이 슬라이드의 몸을 얻는다.",
+      "canonical_url": "https://physical-ai-field-lab-ulsan-jeju.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-08-19T13:55:22Z",
+      "latest_deployed_at": "2026-08-19T14:03:07Z"
+    },
+    {
+      "body_id": "red-light-run",
+      "title": "빨간불인데 뛰고싶어 | Mirinaeman",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "daily-life",
+        "self-belief"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "pop"
+      ],
+      "message_sentence": "빨간불 앞에서 놓친 버스보다 나를 놓치지 않기로 한 아침이 노래가 된다.",
+      "canonical_url": "https://mirinaeman.com/pages/red-light-run/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "sara-vs-natasha",
+      "title": "SARA vs NATASHA — 난 살아 / Still Alive | The Mirinaeman Project Music Album",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "survival",
+        "identity"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "blues-rock"
+      ],
+      "message_sentence": "두 여성 블루스 록커의 서로 다른 목소리가 살아남겠다는 선언으로 맞붙는다.",
+      "canonical_url": "https://mirinaeman.com/pages/sara-vs-natasha/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "school-rule-knowledge-bot",
+      "title": "학교 규정집 지식봇 강의 31장",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "knowledge-system"
+      ],
+      "tags": [
+        "ai",
+        "knowledge-bot",
+        "lecture"
+      ],
+      "message_sentence": "학교 규정집을 목적별 지식으로 재구성해 지식봇으로 만드는 과정을 31장의 강의로 설명한다.",
+      "canonical_url": "https://mirinaeman.com/pages/bot/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "snail-time-jeju",
+      "title": "달팽이의 시간",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "travel",
+        "observation",
+        "time"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "jeju",
+        "snail"
+      ],
+      "message_sentence": "제주 아침 산책길에서 만난 달팽이가 서로 다른 시간의 속도를 노래의 몸으로 보여준다.",
+      "canonical_url": "https://snail-time-jeju.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-08-30T00:41:43Z",
+      "latest_deployed_at": "2026-08-30T05:13:23Z"
+    },
+    {
+      "body_id": "songbirds",
+      "title": "오랜만이야 · IT’S BEEN A WHILE · SONGBIRDS",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "memory",
+        "nature"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "jeju"
+      ],
+      "message_sentence": "제주 정원의 실제 새소리에서 시작된 안부가 네 가지 목소리의 포크팝으로 돌아온다.",
+      "canonical_url": "https://mirinaeman.com/pages/songbirds/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "sound-design-lab",
+      "title": "Sound Design Lab V2 — Agent Harness Lecture",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "music-production"
+      ],
+      "tags": [
+        "agent",
+        "ai",
+        "sound-design"
+      ],
+      "message_sentence": "AI 음악 제작을 에이전트 하네스로 구조화하는 Sound Design Lab 강의다.",
+      "canonical_url": "https://mirinaeman.com/pages/sound_design_lab/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "suno-song-guide",
+      "title": "Suno로 원하는 노래 만들기",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "music-production"
+      ],
+      "tags": [
+        "ai",
+        "music",
+        "suno"
+      ],
+      "message_sentence": "원하는 노래를 만들기 위한 프롬프트와 제작 흐름을 슬라이드의 몸으로 설명한다.",
+      "canonical_url": "https://mirinaeman.com/pages/sono_slide/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "taste-expiration",
+      "title": "맛의 유통기한 | The Mirinaeman Project Music Album",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "relationship",
+        "farewell"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "bossa-nova"
+      ],
+      "message_sentence": "괜찮다는 말 뒤에 숨어 있던 작은 이별의 날짜가 따뜻한 보사노바의 몸을 얻는다.",
+      "canonical_url": "https://mirinaeman.com/pages/duedate/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "today-i-believe",
+      "title": "오늘은 내가 믿어요 | Single Album",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "gratitude",
+        "trust"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "ballad"
+      ],
+      "message_sentence": "처음 믿어준 사람에게 보내는 조용한 믿음이 노래의 몸을 얻는다.",
+      "canonical_url": "https://mirinaeman.com/pages/sanchung/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "too-many-screws-left",
+      "title": "나사가 많이 남았다 | The Mirinaeman Project Music Album",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "comedy",
+        "daily-life"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "horror-groove"
+      ],
+      "message_sentence": "선풍기를 조립하고 남은 나사가 여름밤의 불안을 코믹 호러 그루브로 바꾼다.",
+      "canonical_url": "https://mirinaeman.com/pages/too-many-screws-left/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-07-30T10:30:22Z",
+      "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "ttaro-coffee",
+      "title": "따로 커피",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "coffee",
+        "everyday-life"
+      ],
+      "tags": [
+        "album",
+        "audio",
+        "coffee"
+      ],
+      "message_sentence": "따로 커피라는 제목의 이야기가 노래와 웹페이지의 몸으로 기록된다.",
+      "canonical_url": "https://ttaro-coffee.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-08-12T08:28:37Z",
+      "latest_deployed_at": "2026-08-12T09:26:05Z"
+    }
+  ]
+}

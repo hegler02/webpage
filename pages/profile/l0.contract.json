@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "route-contract",
+      "kind": "file",
+      "relation": {"statement": "한 논리 주소를 프로필 문서와 물리 자산 루트에 연결한다.", "enforcement": ["gate:route-rewrite-equality"]},
+      "attitude": {"statement": "방문자는 메뉴와 공유 주소 어디에서 들어와도 막힌 경로를 만나지 않는다.", "enforcement": ["gate:all-public-routes-present"]},
+      "memory": {"statement": "경로 불일치는 공개 경로와 물리 출력의 쌍으로 기록된다.", "enforcement": ["report:release-gate-route-error"]},
+      "transformation": {"statement": "불일치는 Vercel 배포를 중단하고 라우트 권위 수정을 요구한다.", "enforcement": ["gate:release-block"]},
+      "human_judgment": {"affected_human": "site visitor", "accountable_human": "김준호", "authority_scope": "accept, reject, or hold public navigation", "decision_path": ["approve", "reject", "hold"], "reason_evidence": "release gate and public route review", "override_effect": "rejection blocks publication", "appeal_path": "same-route review with the release owner", "rejection_memory": "MESSAGE BODIES CQI archive", "transformation_feedback": "rejection changes routes, tests, or release state", "revalidation_owner": "김준호", "revalidation_evidence": "same public-route matrix", "enforcement": ["gate:human-acceptance", "gate:release-block"]}
+    },
+    {
+      "id": "public-catalog",
+      "kind": "file",
+      "relation": {"statement": "비공개 CQI 원장과 공개 작품 카드를 하나의 위생 처리된 데이터 흐름으로 연결한다.", "enforcement": ["gate:catalog-card-equality"]},
+      "attitude": {"statement": "방문자는 내부 사고 기록에 노출되지 않고 공개 작품 사실만 읽는다.", "enforcement": ["gate:no-private-public-fields"]},
+      "memory": {"statement": "중복 ID와 URL, 생성물 드리프트를 정확한 항목으로 남긴다.", "enforcement": ["report:release-gate-catalog-error"]},
+      "transformation": {"statement": "데이터 불일치는 공개 HTML을 수동 패치하지 않고 원장 또는 렌더러를 바꾸게 한다.", "enforcement": ["gate:generated-output-drift"]},
+      "human_judgment": {"affected_human": "archive visitor", "accountable_human": "김준호", "authority_scope": "accept, reject, or hold catalog inclusion", "decision_path": ["approve", "reject", "hold"], "reason_evidence": "public catalog review", "override_effect": "rejection removes the record from the next public export", "appeal_path": "record-level review with the release owner", "rejection_memory": "project evidence ledger", "transformation_feedback": "judgment changes catalog state and regenerated outputs", "revalidation_owner": "김준호", "revalidation_evidence": "same catalog and archive comparison", "enforcement": ["gate:human-acceptance", "gate:catalog-card-equality"]}
+    },
+    {
+      "id": "archive-interface",
+      "kind": "ui",
+      "relation": {"statement": "서로 다른 몸 유형을 한 화면에서 비교하고 원래 작품으로 이동하게 한다.", "enforcement": ["test:filter-preserves-body-links"]},
+      "attitude": {"statement": "필터가 실패해도 모든 작품은 읽을 수 있고 미디어는 자동으로 재생되지 않는다.", "enforcement": ["gate:no-archive-audio", "gate:progressive-filter"]},
+      "memory": {"statement": "누락 카드와 잘못된 유형은 body_id로 추적된다.", "enforcement": ["report:release-gate-body-id"]},
+      "transformation": {"statement": "누락 또는 중복은 렌더링을 실패시키고 공개 상태를 바꾼다.", "enforcement": ["gate:archive-render-block"]},
+      "human_judgment": {"affected_human": "archive visitor", "accountable_human": "김준호", "authority_scope": "accept, reject, or hold archive experience", "decision_path": ["approve", "reject", "hold"], "reason_evidence": "responsive archive review", "override_effect": "rejection blocks publication and opens a body revision", "appeal_path": "same-viewport review with the release owner", "rejection_memory": "MESSAGE BODIES CQI archive", "transformation_feedback": "rejection changes interface tokens, copy, or gates", "revalidation_owner": "김준호", "revalidation_evidence": "same viewport, language, and theme matrix", "enforcement": ["gate:human-acceptance", "gate:release-block"]}
+    },
+    {
+      "id": "release-gate",
+      "kind": "gate",
+      "relation": {"statement": "소스 변경과 Vercel 공개 배포 사이에 검증 가능한 판정을 둔다.", "enforcement": ["command:python3-tools-release-gate"]},
+      "attitude": {"statement": "오류를 숨기지 않고 배포 전에 구체적인 BLOCK 이유를 보여준다.", "enforcement": ["gate:nonzero-on-error"]},
+      "memory": {"statement": "실패 항목은 파일과 계약 이름으로 출력되어 다음 수정의 입력이 된다.", "enforcement": ["report:block-lines"]},
+      "transformation": {"statement": "실패는 배포 상태를 중단하고 성공만 공개 출력으로 승격한다.", "enforcement": ["vercel:build-command"]},
+      "human_judgment": {"affected_human": "site visitor", "accountable_human": "김준호", "authority_scope": "final acceptance of the public body", "decision_path": ["approve", "reject", "hold"], "reason_evidence": "release gate output and public review", "override_effect": "rejection blocks main deployment", "appeal_path": "review after a corrected successor build", "rejection_memory": "CQI incident record", "transformation_feedback": "rejection changes source, rule, test, or release state", "revalidation_owner": "김준호", "revalidation_evidence": "same gate and public experience", "enforcement": ["gate:human-acceptance", "gate:release-block"]}
+    }
+  ]
+}

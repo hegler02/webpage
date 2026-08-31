@@ -1,10 +1,64 @@
 {
+  "buildCommand": "python3 tools/release_gate.py",
+  "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": true,
   "rewrites": [
     {
       "source": "/",
       "destination": "/pages/profile/"
+    },
+    {
+      "source": "/work/:path*",
+      "destination": "/pages/profile/work/:path*"
+    },
+    {
+      "source": "/archive/:path*",
+      "destination": "/pages/profile/archive/:path*"
+    },
+    {
+      "source": "/books/:path*",
+      "destination": "/pages/profile/books/:path*"
+    },
+    {
+      "source": "/mirinae/:path*",
+      "destination": "/pages/profile/mirinae/:path*"
+    },
+    {
+      "source": "/profile/:path*",
+      "destination": "/pages/profile/profile/:path*"
+    },
+    {
+      "source": "/assets/:path*",
+      "destination": "/pages/profile/assets/:path*"
+    },
+    {
+      "source": "/styles.css",
+      "destination": "/pages/profile/styles.css"
+    },
+    {
+      "source": "/navigation.js",
+      "destination": "/pages/profile/navigation.js"
+    },
+    {
+      "source": "/app.js",
+      "destination": "/pages/profile/app.js"
+    },
+    {
+      "source": "/archive.js",
+      "destination": "/pages/profile/archive.js"
+    },
+    {
+      "source": "/favicon.svg",
+      "destination": "/pages/profile/favicon.svg"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/pages/profile/robots.txt"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/pages/profile/sitemap.xml"
     }
   ]
 }

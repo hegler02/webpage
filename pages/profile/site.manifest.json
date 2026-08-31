@@ -1,12 +1,18 @@
 {
+  "schema_version": 2,
   "canonical": "https://mirinaeman.com/",
+  "public_home": "https://mirinaeman.com/",
+  "physical_root": "/pages/profile/",
   "architecture": "modular-authoring/static-mpa/shared-navigation-router",
-  "pages": [
-    "index.html",
-    "work/index.html",
-    "books/index.html",
-    "mirinae/index.html",
-    "profile/index.html"
+  "routes": [
+    {"key": "home", "public_path": "/", "physical_path": "index.html", "ko": "홈", "en": "Home"},
+    {"key": "work", "public_path": "/work/", "physical_path": "work/index.html", "ko": "작업", "en": "Work"},
+    {"key": "archive", "public_path": "/archive/", "physical_path": "archive/index.html", "ko": "아카이브", "en": "Archive"},
+    {"key": "books", "public_path": "/books/", "physical_path": "books/index.html", "ko": "저서·연구", "en": "Books & research"},
+    {"key": "mirinae", "public_path": "/mirinae/", "physical_path": "mirinae/index.html", "ko": "미리내", "en": "Mirinae"},
+    {"key": "profile", "public_path": "/profile/", "physical_path": "profile/index.html", "ko": "프로필", "en": "Profile"}
   ],
+  "catalog": "data/message-bodies.json",
+  "generated_outputs": ["archive/index.html", "sitemap.xml"],
   "external_images": 0
 }

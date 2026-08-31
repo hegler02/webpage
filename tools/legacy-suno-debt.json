@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "policy": "Exact inventory. New references, count growth, and unregistered removals block release. Remove a record only in the same change that migrates its page to first-party media.",
+  "files": {
+    "pages/MySon/index.html": {
+      "reference_count": 3,
+      "urls": ["https://cdn1.suno.ai/1c2e489d-6e74-468f-8660-1b94f395cf4d.mp3"]
+    },
+    "pages/alslave/index.html": {
+      "reference_count": 2,
+      "urls": ["https://cdn1.suno.ai/f6bfcd58-19ca-4cd2-a1bb-40df0aebc9a5.mp3"]
+    },
+    "pages/baekje/index.html": {
+      "reference_count": 2,
+      "urls": ["https://cdn1.suno.ai/f9cbb4af-631d-4882-bb77-36512f48f7fc.mp3"]
+    },
+    "pages/duedate/index.html": {
+      "reference_count": 2,
+      "urls": ["https://cdn1.suno.ai/dfd0b786-8a85-4eff-beb6-461c64eb854a.mp3"]
+    },
+    "pages/han-myeongman-deo-bureulge/index.html": {
+      "reference_count": 1,
+      "urls": ["https://cdn1.suno.ai/af74fdf5-98e4-4fce-b37f-a5ff8cb00234.mp3"]
+    },
+    "pages/home-was-inside/index.html": {
+      "reference_count": 3,
+      "urls": ["https://cdn1.suno.ai/fd00bf20-4b6d-473d-8ea7-f331a35bec89.mp3"]
+    },
+    "pages/jjigeodallan-malboda/index.html": {
+      "reference_count": 4,
+      "urls": ["https://cdn1.suno.ai/ea78b11d-4bcb-46d1-b194-028a7b441f84.mp3"]
+    },
+    "pages/lotus-of-steel/index.html": {
+      "reference_count": 2,
+      "urls": ["https://cdn1.suno.ai/ec5547e9-6ef9-4374-88e6-8e66c0c96f92.mp3"]
+    },
+    "pages/one-more-guest/index.html": {
+      "reference_count": 5,
+      "urls": ["https://cdn1.suno.ai/44724ea1-0ee7-424c-a17e-d56b33023bac.mp3"]
+    },
+    "pages/red-light-run/index.html": {
+      "reference_count": 1,
+      "urls": ["https://cdn1.suno.ai/38257531-b445-4cce-b27c-100843e250a8.mp3"]
+    },
+    "pages/sanchung/index.html": {
+      "reference_count": 1,
+      "urls": ["https://cdn1.suno.ai/9362ebb0-0028-46f8-9473-9a8c4caf5879.mp3"]
+    },
+    "pages/sara-vs-natasha/index.html": {
+      "reference_count": 6,
+      "urls": [
+        "https://cdn1.suno.ai/ab5643fc-c271-4344-a913-07b8e4e27e8f.mp3",
+        "https://cdn1.suno.ai/c0233b02-82a0-401f-816a-0af0ca508117.mp3"
+      ]
+    },
+    "pages/sarang-49/index.html": {
+      "reference_count": 2,
+      "urls": ["https://cdn1.suno.ai/123f91ae-9d6e-41dd-b2d5-846a711c16e6.mp3"]
+    },
+    "pages/too-many-screws-left/index.html": {
+      "reference_count": 2,
+      "urls": ["https://cdn1.suno.ai/c1c9fbba-8dcc-4400-b7ba-6baa9bb4ff62.mp3"]
+    }
+  }
+}

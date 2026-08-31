@@ -140,7 +140,7 @@ footer button { border: 0; background: none; cursor: pointer; color: var(--ink-s
 .dock-progress span { min-width: 74px; font: 9px/1 system-ui; opacity: .65; }
 .sound-wave { height: 26px; display: flex; align-items: center; gap: 2px; }
 .sound-wave i { width: 2px; height: var(--bar); min-height: 3px; background: currentColor; opacity: .42; animation: pulse-wave .8s ease-in-out infinite alternate; animation-delay: calc(var(--bar) * -0.01); }
-.source-link { justify-self: end; font: 650 10px/1 system-ui; letter-spacing: .06em; padding: 10px 12px; border: 1px solid color-mix(in srgb, currentColor 28%, transparent); border-radius: 999px; }
+.source-link { justify-self: end; font: 650 10px/1 system-ui; letter-spacing: .06em; padding: 10px 12px; color: inherit; background: transparent; border: 1px solid color-mix(in srgb, currentColor 28%, transparent); border-radius: 999px; cursor: pointer; }
 @keyframes pulse-wave { to { height: calc(var(--bar) * .42); opacity: .72; } }
 
 @media (max-width: 820px) {

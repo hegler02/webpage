@@ -108,6 +108,16 @@ def webp_dimensions(path: Path) -> tuple[int, int] | None:
 
 def main() -> int:
     errors: list[str] = []
+    project_checks = (
+        ([sys.executable, str(ROOT / "tools" / "render_songbirds.py"), "--check"], "Songbirds manifest gate"),
+        (["node", str(ROOT / "tools" / "test_songbirds_player.mjs")], "Songbirds player gate"),
+        ([sys.executable, str(ROOT / "tools" / "audit_suno_transport.py")], "Suno transport debt gate"),
+    )
+    for command, label in project_checks:
+        check = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
+        if check.returncode:
+            errors.append(f"{label}: " + (check.stdout.strip() or check.stderr.strip()))
+
     render = subprocess.run(
         [sys.executable, str(ROOT / "tools" / "render_archive.py"), "--check"],
         cwd=ROOT,

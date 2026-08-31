@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "songbirds-female",
+      "kind": "audio",
+      "source": {
+        "kind": "user-provided",
+        "filename": "오랫만이야(female).mp3",
+        "sha256": "c12c7994fea9225c2a6b6a48998b2fcb0cf8c68029a4467fcf90a0e7dde315d4"
+      },
+      "delivery": {
+        "path": "assets/audio/songbirds-female.mp3",
+        "mime": "audio/mpeg",
+        "sha256": "f47e0b34023e72076aca8c02240460fd60d5e42ac0e61d4e71e85fd7d756e924"
+      }
+    },
+    {
+      "id": "songbirds-en",
+      "kind": "audio",
+      "source": {
+        "kind": "user-provided",
+        "filename": "오랫만이야 (EN).mp3",
+        "sha256": "8439baed825d5f051ad1729e7aaa9d95868769efe31ee0962f21b2fd5f414aa7"
+      },
+      "delivery": {
+        "path": "assets/audio/songbirds-en.mp3",
+        "mime": "audio/mpeg",
+        "sha256": "30b5ed7f88b6282f5ae7650d31690344033bd727f8928d2ac8fb340cc627c9c7"
+      }
+    },
+    {
+      "id": "songbirds-male",
+      "kind": "audio",
+      "source": {
+        "kind": "user-provided",
+        "filename": "오랫만이야 (Male).mp3",
+        "sha256": "41d7b95e2e611d05102c8fc37663dc41b5ccddfcc9277ea50399a007d63f2625"
+      },
+      "delivery": {
+        "path": "assets/audio/songbirds-male.mp3",
+        "mime": "audio/mpeg",
+        "sha256": "233e9f89d6105e98e86d8ef4bc544de130c47b1172da91f83f69edd1a06a8d6b"
+      }
+    },
+    {
+      "id": "songbirds-duet",
+      "kind": "audio",
+      "source": {
+        "kind": "user-provided",
+        "filename": "오랫만이야 (Duet).mp3",
+        "sha256": "3c17dce0febbe5622b24364d852b506251f3cf38e97af5e0cce7fe8366414f71"
+      },
+      "delivery": {
+        "path": "assets/audio/songbirds-duet.mp3",
+        "mime": "audio/mpeg",
+        "sha256": "484090de063114781febe543a573bc59e3be11840d9cc96bdb6303c7115f509e"
+      }
+    }
+  ]
+}

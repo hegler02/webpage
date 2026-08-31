@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "canonical_url": "https://mirinaeman.com/pages/songbirds/",
+  "album": {
+    "name": "오랜만이야",
+    "alternate_names": [
+      "IT’S BEEN A WHILE",
+      "SONGBIRDS"
+    ]
+  },
+  "tracks": [
+    {
+      "id": "ko",
+      "eyebrow": "Korean",
+      "title": "오랜만이야",
+      "note": "가장 먼저 돌아온 목소리",
+      "alternate_name": "Korean / Female Version",
+      "language": "ko-KR",
+      "src": "./assets/audio/songbirds-female.mp3",
+      "mime": "audio/mpeg",
+      "duration_seconds": 146.784
+    },
+    {
+      "id": "en",
+      "eyebrow": "English",
+      "title": "It’s Been a While",
+      "note": "같은 아침, 다른 언어의 온기",
+      "alternate_name": "English Version",
+      "language": "en",
+      "src": "./assets/audio/songbirds-en.mp3",
+      "mime": "audio/mpeg",
+      "duration_seconds": 148.752
+    },
+    {
+      "id": "male",
+      "eyebrow": "Male",
+      "title": "오랜만이야",
+      "note": "낮고 담담하게 건네는 안부",
+      "alternate_name": "Male Version",
+      "language": "ko-KR",
+      "src": "./assets/audio/songbirds-male.mp3",
+      "mime": "audio/mpeg",
+      "duration_seconds": 147.504
+    },
+    {
+      "id": "duet",
+      "eyebrow": "Duet",
+      "title": "오랜만이야",
+      "note": "두 목소리가 함께 알아보는 마음",
+      "alternate_name": "Duet Version",
+      "language": "ko-KR",
+      "src": "./assets/audio/songbirds-duet.mp3",
+      "mime": "audio/mpeg",
+      "duration_seconds": 199.224
+    }
+  ]
+}

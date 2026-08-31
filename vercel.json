@@ -9,20 +9,40 @@
       "destination": "/pages/profile/"
     },
     {
+      "source": "/work",
+      "destination": "/pages/profile/work/"
+    },
+    {
       "source": "/work/:path*",
       "destination": "/pages/profile/work/:path*"
+    },
+    {
+      "source": "/archive",
+      "destination": "/pages/profile/archive/"
     },
     {
       "source": "/archive/:path*",
       "destination": "/pages/profile/archive/:path*"
     },
     {
+      "source": "/books",
+      "destination": "/pages/profile/books/"
+    },
+    {
       "source": "/books/:path*",
       "destination": "/pages/profile/books/:path*"
     },
     {
+      "source": "/mirinae",
+      "destination": "/pages/profile/mirinae/"
+    },
+    {
       "source": "/mirinae/:path*",
       "destination": "/pages/profile/mirinae/:path*"
+    },
+    {
+      "source": "/profile",
+      "destination": "/pages/profile/profile/"
     },
     {
       "source": "/profile/:path*",

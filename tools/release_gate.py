@@ -96,9 +96,11 @@ def main() -> int:
     routes = manifest.get("routes", [])
     route_sources = {item.get("source") for item in vercel.get("rewrites", [])}
     for route in routes:
-        source = route["public_path"] if route["public_path"] == "/" else route["public_path"] + ":path*"
-        if source not in route_sources:
-            errors.append(f"missing route rewrite: {source}")
+        public_path = route["public_path"]
+        required_sources = [public_path] if public_path == "/" else [public_path.rstrip("/"), public_path + ":path*"]
+        for source in required_sources:
+            if source not in route_sources:
+                errors.append(f"missing route rewrite: {source}")
         if not (PROFILE / route["physical_path"]).is_file():
             errors.append(f"missing route output: {route['physical_path']}")
 

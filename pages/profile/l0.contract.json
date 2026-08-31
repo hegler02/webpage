@@ -22,10 +22,10 @@
     {
       "id": "archive-interface",
       "kind": "ui",
-      "relation": {"statement": "서로 다른 몸 유형을 한 화면에서 비교하고 원래 작품으로 이동하게 한다.", "enforcement": ["test:filter-preserves-body-links"]},
-      "attitude": {"statement": "필터가 실패해도 모든 작품은 읽을 수 있고 미디어는 자동으로 재생되지 않는다.", "enforcement": ["gate:no-archive-audio", "gate:progressive-filter"]},
-      "memory": {"statement": "누락 카드와 잘못된 유형은 body_id로 추적된다.", "enforcement": ["report:release-gate-body-id"]},
-      "transformation": {"statement": "누락 또는 중복은 렌더링을 실패시키고 공개 상태를 바꾼다.", "enforcement": ["gate:archive-render-block"]},
+      "relation": {"statement": "서로 다른 몸 유형을 대표 썸네일로 식별하고 한 화면에서 비교한 뒤 원래 작품으로 이동하게 한다.", "enforcement": ["test:filter-preserves-body-links", "gate:thumbnail-card-equality"]},
+      "attitude": {"statement": "필터가 실패해도 모든 작품과 대체 텍스트는 읽을 수 있고 미디어는 자동으로 재생되지 않는다.", "enforcement": ["gate:no-archive-audio", "gate:progressive-filter", "gate:thumbnail-alt"]},
+      "memory": {"statement": "누락 카드, 잘못된 유형, 썸네일 자산 불일치는 body_id로 추적된다.", "enforcement": ["report:release-gate-body-id", "report:release-gate-thumbnail"]},
+      "transformation": {"statement": "누락, 중복, 외부 썸네일 또는 규격 위반은 렌더링을 실패시키고 공개 상태를 바꾼다.", "enforcement": ["gate:archive-render-block", "gate:first-party-thumbnail"]},
       "human_judgment": {"affected_human": "archive visitor", "accountable_human": "김준호", "authority_scope": "accept, reject, or hold archive experience", "decision_path": ["approve", "reject", "hold"], "reason_evidence": "responsive archive review", "override_effect": "rejection blocks publication and opens a body revision", "appeal_path": "same-viewport review with the release owner", "rejection_memory": "MESSAGE BODIES CQI archive", "transformation_feedback": "rejection changes interface tokens, copy, or gates", "revalidation_owner": "김준호", "revalidation_evidence": "same viewport, language, and theme matrix", "enforcement": ["gate:human-acceptance", "gate:release-block"]}
     },
     {

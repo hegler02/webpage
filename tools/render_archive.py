@@ -25,6 +25,8 @@ HOME_END = "<!-- MESSAGE_BODIES_LATEST_END -->"
 ROUTES_RE = re.compile(r"/\* GENERATED_ROUTES_START \*/.*?/\* GENERATED_ROUTES_END \*/", re.S)
 BODY_TYPES = ("SONGBODY", "SLIDEBODY", "SCREENBODY", "STORYBODY", "KNOWLEDGEBODY")
 HOME_ARCHIVE_LIMIT = 6
+THUMBNAIL_PATH_RE = re.compile(r"^assets/thumbnails/([a-z0-9-]+)\.webp$")
+FOCAL_POINT_RE = re.compile(r"^(?:100|[0-9]{1,2})% (?:100|[0-9]{1,2})%$")
 
 
 def load_json(path: Path) -> dict:
@@ -40,6 +42,8 @@ def esc(value: object) -> str:
 
 
 def normalized_bodies(catalog: dict) -> list[dict]:
+    if catalog.get("schema_version") != 2:
+        raise ValueError("catalog.schema_version must be 2")
     bodies = catalog.get("bodies")
     if not isinstance(bodies, list):
         raise ValueError("catalog.bodies must be a list")
@@ -49,7 +53,7 @@ def normalized_bodies(catalog: dict) -> list[dict]:
     for index, body in enumerate(bodies):
         if not isinstance(body, dict):
             raise ValueError(f"catalog.bodies[{index}] must be an object")
-        required = ("body_id", "title", "body_type", "message_sentence", "canonical_url", "status", "latest_deployed_at")
+        required = ("body_id", "title", "body_type", "message_sentence", "canonical_url", "status", "latest_deployed_at", "thumbnail")
         missing = [field for field in required if not body.get(field)]
         if missing:
             raise ValueError(f"catalog.bodies[{index}] missing: {', '.join(missing)}")
@@ -66,19 +70,36 @@ def normalized_bodies(catalog: dict) -> list[dict]:
             raise ValueError(f"placeholder canonical_url: {body['canonical_url']}")
         if body["status"] not in {"DEPLOYED", "GOLDEN"}:
             continue
+        thumbnail = body["thumbnail"]
+        if not isinstance(thumbnail, dict):
+            raise ValueError(f"invalid thumbnail object: {body['body_id']}")
+        path_match = THUMBNAIL_PATH_RE.fullmatch(str(thumbnail.get("path", "")))
+        if not path_match or path_match.group(1) != body["body_id"]:
+            raise ValueError(f"thumbnail path must match body_id: {body['body_id']}")
+        if not str(thumbnail.get("alt", "")).strip():
+            raise ValueError(f"thumbnail alt is required: {body['body_id']}")
+        if thumbnail.get("width") != 960 or thumbnail.get("height") != 540:
+            raise ValueError(f"thumbnail dimensions must be 960x540: {body['body_id']}")
+        if not FOCAL_POINT_RE.fullmatch(str(thumbnail.get("focal_point", ""))):
+            raise ValueError(f"invalid thumbnail focal_point: {body['body_id']}")
         seen_ids.add(body["body_id"])
         seen_urls.add(body["canonical_url"])
         normalized.append(body)
     return sorted(normalized, key=lambda item: (item["latest_deployed_at"], item["body_id"]), reverse=True)
 
 
-def body_card(body: dict, compact: bool = False) -> str:
+def body_card(body: dict, compact: bool = False, asset_prefix: str = "./") -> str:
     tags = "".join(f'<span>{esc(tag)}</span>' for tag in body.get("tags", [])[:3])
     date = datetime.fromisoformat(body["latest_deployed_at"].replace("Z", "+00:00")).date().isoformat()
     css_class = "body-card body-card-compact" if compact else "body-card"
+    thumbnail = body["thumbnail"]
+    thumbnail_src = asset_prefix + thumbnail["path"]
+    body_kind = body["body_type"].removesuffix("BODY")
     return (
         f'<article class="{css_class}" data-body-id="{esc(body["body_id"])}" data-body-type="{esc(body["body_type"])}">'
-        f'<div class="body-card-signal" aria-hidden="true"><span>{esc(body["body_type"].removesuffix("BODY"))}</span></div>'
+        f'<figure class="body-card-media" style="--thumbnail-position:{esc(thumbnail["focal_point"])}">'
+        f'<img data-body-thumbnail="{esc(body["body_id"])}" src="{esc(thumbnail_src)}" alt="{esc(thumbnail["alt"])}" width="960" height="540" loading="lazy" decoding="async">'
+        f'<figcaption>{esc(body_kind)}</figcaption></figure>'
         '<div class="body-card-copy">'
         f'<div class="body-card-meta"><span class="tag">{esc(body["body_type"])}</span><time datetime="{date}">{date[:4]}</time></div>'
         f'<h3>{esc(body["title"])}</h3><p>{esc(body["message_sentence"])}</p>'
@@ -110,7 +131,7 @@ def render_archive(bodies: list[dict], manifest: dict) -> str:
         ensure_ascii=False,
         separators=(",", ":"),
     )
-    cards = "".join(body_card(body) for body in bodies)
+    cards = "".join(body_card(body, asset_prefix="../") for body in bodies)
     return f'''<!doctype html>
 <html lang="ko" data-lang="ko" data-theme="light">
 <head>
@@ -160,7 +181,7 @@ def render_archive(bodies: list[dict], manifest: dict) -> str:
 
 
 def render_latest(bodies: list[dict]) -> str:
-    cards = "".join(body_card(body, compact=True) for body in bodies[:HOME_ARCHIVE_LIMIT])
+    cards = "".join(body_card(body, compact=True, asset_prefix="./") for body in bodies[:HOME_ARCHIVE_LIMIT])
     return f'''{HOME_START}<section class="section latest-bodies"><div class="wrap"><div class="section-head"><div><span class="eyebrow">MESSAGE BODIES</span><h2><span data-ko>내 미디어 철학이 몸을 입는 순간</span><span data-en lang="en">The moment my media philosophy takes a body</span></h2></div><p><span data-ko>노래, 슬라이드, 화면과 이야기가 배포로 끝나지 않고 다음 창작을 바꾸는 기억으로 축적됩니다.</span><span data-en lang="en">Songs, slides, screens, and stories accumulate as memory that changes the next creation.</span></p></div><div class="body-grid body-grid-latest">{cards}</div><div class="actions"><a class="button primary" href="./archive/index.html" data-route-key="archive"><span data-ko>전체 아카이브</span><span data-en lang="en">View full archive</span></a></div></div></section>{HOME_END}'''
 
 

@@ -17,6 +17,10 @@ DISPLAY_LEADING_FLOOR = 1.05
 SECTION_LEADING_FLOOR = 1.10
 DISPLAY_TRACKING_FLOOR = -0.05
 SECTION_TRACKING_FLOOR = -0.04
+THUMBNAIL_WIDTH = 960
+THUMBNAIL_HEIGHT = 540
+THUMBNAIL_PATH_RE = re.compile(r"^assets/thumbnails/([a-z0-9-]+)\.webp$")
+FOCAL_POINT_RE = re.compile(r"^(?:100|[0-9]{1,2})% (?:100|[0-9]{1,2})%$")
 FORBIDDEN_PUBLIC_FIELDS = {
     "incidents",
     "deployments",
@@ -26,6 +30,8 @@ FORBIDDEN_PUBLIC_FIELDS = {
     "golden_baseline",
     "project_id",
     "provider",
+    "sha256",
+    "source_kind",
 }
 AXES = ("relation", "attitude", "memory", "transformation")
 JUDGMENT_FIELDS = (
@@ -76,6 +82,30 @@ def nested_keys(value: object) -> set[str]:
     return keys
 
 
+def webp_dimensions(path: Path) -> tuple[int, int] | None:
+    """Read VP8/VP8L/VP8X dimensions without an image-library dependency."""
+    data = path.read_bytes()
+    if len(data) < 30 or data[:4] != b"RIFF" or data[8:12] != b"WEBP":
+        return None
+    offset = 12
+    while offset + 8 <= len(data):
+        kind = data[offset : offset + 4]
+        size = int.from_bytes(data[offset + 4 : offset + 8], "little")
+        payload = data[offset + 8 : offset + 8 + size]
+        if kind == b"VP8X" and len(payload) >= 10:
+            return (1 + int.from_bytes(payload[4:7], "little"), 1 + int.from_bytes(payload[7:10], "little"))
+        if kind == b"VP8 " and len(payload) >= 10 and payload[3:6] == b"\x9d\x01\x2a":
+            return (
+                int.from_bytes(payload[6:8], "little") & 0x3FFF,
+                int.from_bytes(payload[8:10], "little") & 0x3FFF,
+            )
+        if kind == b"VP8L" and len(payload) >= 5 and payload[0] == 0x2F:
+            bits = int.from_bytes(payload[1:5], "little")
+            return ((bits & 0x3FFF) + 1, ((bits >> 14) & 0x3FFF) + 1)
+        offset += 8 + size + (size % 2)
+    return None
+
+
 def main() -> int:
     errors: list[str] = []
     render = subprocess.run(
@@ -113,6 +143,42 @@ def main() -> int:
         errors.append("duplicate body_id in public catalog")
     if len(urls) != len(set(urls)):
         errors.append("duplicate canonical_url in public catalog")
+    if catalog.get("schema_version") != 2:
+        errors.append("public catalog schema_version must be 2")
+
+    thumbnail_paths: list[str] = []
+    for body in catalog.get("bodies", []):
+        if body.get("status") not in {"DEPLOYED", "GOLDEN"}:
+            continue
+        body_id = body.get("body_id", "unknown")
+        thumbnail = body.get("thumbnail")
+        if not isinstance(thumbnail, dict):
+            errors.append(f"thumbnail contract missing: {body_id}")
+            continue
+        thumbnail_path = str(thumbnail.get("path", ""))
+        path_match = THUMBNAIL_PATH_RE.fullmatch(thumbnail_path)
+        if not path_match or path_match.group(1) != body_id:
+            errors.append(f"thumbnail path/body_id mismatch: {body_id}")
+            continue
+        thumbnail_paths.append(thumbnail_path)
+        if not str(thumbnail.get("alt", "")).strip():
+            errors.append(f"thumbnail alt missing: {body_id}")
+        if thumbnail.get("width") != THUMBNAIL_WIDTH or thumbnail.get("height") != THUMBNAIL_HEIGHT:
+            errors.append(f"thumbnail catalog dimensions mismatch: {body_id}")
+        if not FOCAL_POINT_RE.fullmatch(str(thumbnail.get("focal_point", ""))):
+            errors.append(f"thumbnail focal_point invalid: {body_id}")
+        asset = (PROFILE / thumbnail_path).resolve()
+        try:
+            asset.relative_to(PROFILE.resolve())
+        except ValueError:
+            errors.append(f"thumbnail escapes profile root: {body_id}")
+            continue
+        if not asset.is_file() or asset.stat().st_size == 0:
+            errors.append(f"thumbnail asset missing: {body_id}")
+        elif webp_dimensions(asset) != (THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT):
+            errors.append(f"thumbnail asset dimensions mismatch: {body_id}")
+    if len(thumbnail_paths) != len(set(thumbnail_paths)):
+        errors.append("duplicate thumbnail path in public catalog")
 
     for item in l0_contract.get("items", []):
         item_id = item.get("id", "unknown")
@@ -140,14 +206,24 @@ def main() -> int:
     archive_source = (PROFILE / "archive" / "index.html").read_text(encoding="utf-8")
     archive = Document()
     archive.feed(archive_source)
-    expected_ids = [
-        body["body_id"]
-        for body in catalog.get("bodies", [])
-        if body.get("status") in {"DEPLOYED", "GOLDEN"}
-    ]
+    deployable_bodies = sorted(
+        (body for body in catalog.get("bodies", []) if body.get("status") in {"DEPLOYED", "GOLDEN"}),
+        key=lambda body: (body["latest_deployed_at"], body["body_id"]),
+        reverse=True,
+    )
+    expected_ids = [body["body_id"] for body in deployable_bodies]
     rendered_ids = re.findall(r'data-body-id="([a-z0-9-]+)"', archive_source)
     if sorted(rendered_ids) != sorted(expected_ids):
         errors.append("archive cards do not equal deployable public catalog records")
+    archive_thumbnail_ids = re.findall(r'data-body-thumbnail="([a-z0-9-]+)"', archive_source)
+    if sorted(archive_thumbnail_ids) != sorted(expected_ids):
+        errors.append("archive thumbnails do not equal deployable public catalog records")
+    if re.search(r'data-body-thumbnail="[^"]+"[^>]+src="https?://', archive_source):
+        errors.append("archive thumbnails must use project-owned local assets")
+    home_source = (PROFILE / "index.html").read_text(encoding="utf-8")
+    home_thumbnail_ids = re.findall(r'data-body-thumbnail="([a-z0-9-]+)"', home_source)
+    if home_thumbnail_ids != expected_ids[:6]:
+        errors.append("home thumbnails do not equal the six latest public bodies")
     if archive.audio_count:
         errors.append("archive must not render audio controls")
     if "cdn1.suno.ai" in archive_source or "cdn2.suno.ai" in archive_source:

@@ -133,6 +133,34 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "eagle-five-love",
+      "title": "독수리 오형제의 애틋한 사랑",
+      "body_type": "STORYBODY",
+      "source_kinds": [
+        "family-archive",
+        "handwritten-fiction",
+        "oral-history"
+      ],
+      "tags": [
+        "story",
+        "manuscript",
+        "illustration",
+        "song"
+      ],
+      "message_sentence": "홍수경 작가의 손글씨 소설이 원문, 읽기 좋은 활자, 삽화와 노래를 지나 하나의 살아 있는 가족 기억으로 흐른다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/eagle-five-love.webp",
+        "alt": "홍수경 작가의 단편소설 ‘독수리 오형제의 애틋한 사랑’ 아카이브 대표 이미지",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://eagle-five-love.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-01T15:23:32Z",
+      "latest_deployed_at": "2026-09-01T15:35:40Z"
+    },
+    {
       "body_id": "editorial-magazine-deck",
       "title": "Editorial Magazine Deck",
       "body_type": "SLIDEBODY",

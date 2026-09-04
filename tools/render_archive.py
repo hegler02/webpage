@@ -97,6 +97,7 @@ def body_card(body: dict, compact: bool = False, asset_prefix: str = "./") -> st
     body_kind = body["body_type"].removesuffix("BODY")
     return (
         f'<article class="{css_class}" data-body-id="{esc(body["body_id"])}" data-body-type="{esc(body["body_type"])}">'
+        f'<a class="body-card-hit" href="{esc(body["canonical_url"])}" target="_blank" rel="noopener noreferrer">'
         f'<figure class="body-card-media" style="--thumbnail-position:{esc(thumbnail["focal_point"])}">'
         f'<img data-body-thumbnail="{esc(body["body_id"])}" src="{esc(thumbnail_src)}" alt="{esc(thumbnail["alt"])}" width="960" height="540" loading="lazy" decoding="async">'
         f'<figcaption>{esc(body_kind)}</figcaption></figure>'
@@ -104,8 +105,8 @@ def body_card(body: dict, compact: bool = False, asset_prefix: str = "./") -> st
         f'<div class="body-card-meta"><span class="tag">{esc(body["body_type"])}</span><time datetime="{date}">{date[:4]}</time></div>'
         f'<h3>{esc(body["title"])}</h3><p>{esc(body["message_sentence"])}</p>'
         f'<div class="body-tags" aria-label="태그">{tags}</div>'
-        f'<a class="body-card-link" href="{esc(body["canonical_url"])}"><span data-ko>작품 열기</span><span data-en lang="en">Open body</span><span aria-hidden="true">↗</span></a>'
-        '</div></article>'
+        '<span class="body-card-link"><span data-ko>작품 열기</span><span data-en lang="en">Open body</span><span aria-hidden="true">↗</span></span>'
+        '</div></a></article>'
     )
 
 

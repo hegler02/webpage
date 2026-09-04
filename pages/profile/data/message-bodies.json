@@ -685,10 +685,10 @@
         "height": 540,
         "focal_point": "50% 50%"
       },
-      "canonical_url": "https://noreut-galchi-album.mirinaeman.chatgpt.site",
+      "canonical_url": "https://noreut-galchi-album-v2.mirinaeman.chatgpt.site",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-08-30T12:16:04Z",
-      "latest_deployed_at": "2026-08-30T21:45:34Z"
+      "latest_deployed_at": "2026-09-04T07:04:26Z"
     },
     {
       "body_id": "one-more-guest-album",

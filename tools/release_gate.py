@@ -57,9 +57,22 @@ class Document(HTMLParser):
         self.og_urls: list[str] = []
         self.og_images: list[str] = []
         self.audio_count = 0
+        self.current_body_card: str | None = None
+        self.body_card_links: dict[str, list[dict[str, str | None]]] = {}
+        self.body_card_link_open = False
+        self.body_card_unlinked_content: set[str] = set()
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         values = dict(attrs)
+        classes = set((values.get("class") or "").split())
+        if tag == "article" and "body-card" in classes and values.get("data-body-id"):
+            self.current_body_card = values["data-body-id"]
+            self.body_card_links.setdefault(self.current_body_card, [])
+        elif tag == "a" and self.current_body_card:
+            self.body_card_links[self.current_body_card].append(values)
+            self.body_card_link_open = "body-card-hit" in classes
+        elif self.current_body_card and not self.body_card_link_open:
+            self.body_card_unlinked_content.add(self.current_body_card)
         if tag == "link" and values.get("rel") == "canonical" and values.get("href"):
             self.canonicals.append(values["href"])
         if tag == "meta" and values.get("property") == "og:url" and values.get("content"):
@@ -68,6 +81,42 @@ class Document(HTMLParser):
             self.og_images.append(values["content"])
         if tag == "audio":
             self.audio_count += 1
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "a" and self.current_body_card:
+            self.body_card_link_open = False
+        if tag == "article":
+            self.current_body_card = None
+
+    def handle_data(self, data: str) -> None:
+        if self.current_body_card and data.strip() and not self.body_card_link_open:
+            self.body_card_unlinked_content.add(self.current_body_card)
+
+
+def check_body_card_links(document: Document, bodies: list[dict], label: str) -> list[str]:
+    errors: list[str] = []
+    expected = {body["body_id"]: body["canonical_url"] for body in bodies}
+    if set(document.body_card_links) != set(expected):
+        errors.append(f"{label} whole-card link ids do not match expected bodies")
+    for body_id in sorted(document.body_card_unlinked_content):
+        errors.append(f"{label} card has content outside its link: {body_id}")
+    for body_id, canonical_url in expected.items():
+        links = document.body_card_links.get(body_id, [])
+        if len(links) != 1:
+            errors.append(f"{label} card must contain exactly one link: {body_id}")
+            continue
+        link = links[0]
+        classes = set((link.get("class") or "").split())
+        rel = set((link.get("rel") or "").split())
+        if "body-card-hit" not in classes:
+            errors.append(f"{label} card link must cover the whole card: {body_id}")
+        if link.get("href") != canonical_url:
+            errors.append(f"{label} card URL differs from catalog: {body_id}")
+        if link.get("target") != "_blank":
+            errors.append(f"{label} card must open in a new tab: {body_id}")
+        if not {"noopener", "noreferrer"}.issubset(rel):
+            errors.append(f"{label} card new-tab relation is unsafe: {body_id}")
+    return errors
 
 
 def nested_keys(value: object) -> set[str]:
@@ -225,15 +274,19 @@ def main() -> int:
     rendered_ids = re.findall(r'data-body-id="([a-z0-9-]+)"', archive_source)
     if sorted(rendered_ids) != sorted(expected_ids):
         errors.append("archive cards do not equal deployable public catalog records")
+    errors.extend(check_body_card_links(archive, deployable_bodies, "archive"))
     archive_thumbnail_ids = re.findall(r'data-body-thumbnail="([a-z0-9-]+)"', archive_source)
     if sorted(archive_thumbnail_ids) != sorted(expected_ids):
         errors.append("archive thumbnails do not equal deployable public catalog records")
     if re.search(r'data-body-thumbnail="[^"]+"[^>]+src="https?://', archive_source):
         errors.append("archive thumbnails must use project-owned local assets")
     home_source = (PROFILE / "index.html").read_text(encoding="utf-8")
+    home = Document()
+    home.feed(home_source)
     home_thumbnail_ids = re.findall(r'data-body-thumbnail="([a-z0-9-]+)"', home_source)
     if home_thumbnail_ids != expected_ids[:6]:
         errors.append("home thumbnails do not equal the six latest public bodies")
+    errors.extend(check_body_card_links(home, deployable_bodies[:6], "home"))
     if archive.audio_count:
         errors.append("archive must not render audio controls")
     if "cdn1.suno.ai" in archive_source or "cdn2.suno.ai" in archive_source:
@@ -254,6 +307,10 @@ def main() -> int:
         match = re.search(pattern, css)
         if not match or float(match.group(1)) < floor:
             errors.append(f"typography token below floor or missing: {name}")
+    if not re.search(r"\.body-card\{[^}]*display:flex", css):
+        errors.append("body card must stretch its whole-card link")
+    if not re.search(r"\.body-card-hit\{[^}]*display:grid[^}]*flex:1[^}]*text-decoration:none", css):
+        errors.append("whole-card link layout contract missing")
     for html_path in PROFILE.rglob("*.html"):
         source = html_path.read_text(encoding="utf-8")
         document = Document()

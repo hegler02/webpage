@@ -80,7 +80,7 @@
       "canonical_url": "https://ai-ti-judgment.mirinaeman.chatgpt.site",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-09-02T16:04:12Z",
-      "latest_deployed_at": "2026-09-03T00:49:33Z"
+      "latest_deployed_at": "2026-09-02T16:59:12Z"
     },
     {
       "body_id": "baekje-renaissance",
@@ -239,6 +239,34 @@
       "status": "DEPLOYED",
       "first_deployed_at": "2026-07-30T10:30:22Z",
       "latest_deployed_at": "2026-07-30T10:30:22Z"
+    },
+    {
+      "body_id": "gileodo-geudaero-astra",
+      "title": "길어도 그대로 — Astra 105만 토큰",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "ai-literacy",
+        "music",
+        "webtoon"
+      ],
+      "tags": [
+        "audio",
+        "interactive-web",
+        "webtoon",
+        "romantic-comedy"
+      ],
+      "message_sentence": "긴 문맥과 다른 계산법을 노래의 시간과 웹툰의 선택된 시간으로 번역한다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/gileodo-geudaero-astra.webp",
+        "alt": "빛나는 데이터 통로 앞에서 긴 문서와 코드 노트를 들고 손을 맞잡은 두 주인공",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://gileodo-geudaero-astra.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-04T01:06:12Z",
+      "latest_deployed_at": "2026-09-04T01:06:12Z"
     },
     {
       "body_id": "git-github-deployment-guide",

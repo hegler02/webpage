@@ -33,6 +33,13 @@
         { "path": "pages/profile/books/index.html", "count": 1 }
       ]
     },
+    "research-tabs": {
+      "value": "data-research-tabs",
+      "targets": [
+        { "path": "pages/profile/books/index.html", "count": 1 },
+        { "path": "pages/profile/app.js", "count": 1 }
+      ]
+    },
     "research-projects": {
       "value": "class=\"project-list\"",
       "targets": [

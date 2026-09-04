@@ -144,5 +144,40 @@ window.ProfileBus = (() => {
   });
 })();
 
+(() => {
+  const browser = document.querySelector('[data-research-tabs]');
+  if (!browser) return;
+  const tabs = [...browser.querySelectorAll('[data-research-tab]')];
+  const panels = [...browser.querySelectorAll('[data-research-panel]')];
+  const names = new Set(tabs.map((tab) => tab.dataset.researchTab));
+  const activate = (name, { focus = false, updateHash = false } = {}) => {
+    const selected = names.has(name) ? name : 'papers';
+    tabs.forEach((tab) => {
+      const active = tab.dataset.researchTab === selected;
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      if (active && focus) tab.focus();
+    });
+    panels.forEach((panel) => panel.toggleAttribute('hidden', panel.dataset.researchPanel !== selected));
+    if (updateHash) history.replaceState(null, '', `#${selected}`);
+    ProfileBus.emit('research:changed', { panel: selected });
+  };
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => activate(tab.dataset.researchTab, { updateHash: true }));
+    tab.addEventListener('keydown', (event) => {
+      let next = null;
+      if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+      if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = tabs.length - 1;
+      if (next === null) return;
+      event.preventDefault();
+      activate(tabs[next].dataset.researchTab, { focus: true, updateHash: true });
+    });
+  });
+  addEventListener('hashchange', () => activate(location.hash.slice(1)));
+  activate(location.hash.slice(1));
+})();
+
 document.documentElement.classList.add('js');
 window.ProfileBus?.emit('app:ready');

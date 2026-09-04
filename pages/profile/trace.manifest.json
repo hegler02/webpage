@@ -30,6 +30,12 @@
     "research-bibliography": {
       "value": "class=\"research-list\"",
       "targets": [
+        { "path": "pages/profile/books/index.html", "count": 2 }
+      ]
+    },
+    "research-degree-priority": {
+      "value": "data-research-list=\"theses\"",
+      "targets": [
         { "path": "pages/profile/books/index.html", "count": 1 }
       ]
     },

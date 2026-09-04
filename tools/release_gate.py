@@ -322,6 +322,35 @@ def main() -> int:
         if re.search(r"<h[1-3][^>]*>.*?<br\s*/?>", source, re.I | re.S):
             errors.append(f"unapproved heading hard break: {html_path.relative_to(ROOT)}")
 
+    books_source = (PROFILE / "books" / "index.html").read_text(encoding="utf-8")
+    thesis_list = re.search(
+        r'<ol class="research-list" data-research-list="theses">(.*?)</ol>',
+        books_source,
+        re.S,
+    )
+    article_list = re.search(
+        r'<ol class="research-list" data-research-list="articles">(.*?)</ol>',
+        books_source,
+        re.S,
+    )
+    if not thesis_list or not article_list:
+        errors.append("degree thesis and journal article groups must both exist")
+    else:
+        thesis_items = thesis_list.group(1)
+        article_items = article_list.group(1)
+        if books_source.index(thesis_list.group(0)) > books_source.index(article_list.group(0)):
+            errors.append("degree thesis group must precede journal articles")
+        if thesis_items.count('class="research-item"') != 2:
+            errors.append("degree thesis group must contain exactly 2 records")
+        if article_items.count('class="research-item"') != 14:
+            errors.append("journal article group must contain exactly 14 records")
+        if thesis_items.count("박사학위논문") != 2 or thesis_items.count("석사학위논문") != 2:
+            errors.append("doctoral and master's thesis labels must remain explicit")
+        if thesis_items.index("박사학위논문") > thesis_items.index("석사학위논문"):
+            errors.append("doctoral thesis must precede master's thesis")
+    if "<span data-ko>학위논문·학술논문</span>" not in books_source:
+        errors.append("research tab must name degree theses before journal articles")
+
     sitemap = (PROFILE / "sitemap.xml").read_text(encoding="utf-8")
     for route in routes:
         public_url = manifest["public_home"].rstrip("/") + route["public_path"]

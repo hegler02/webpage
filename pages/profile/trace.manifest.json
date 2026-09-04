@@ -26,6 +26,18 @@
         { "path": "tools/render_archive.py", "count": 1 },
         { "path": "tools/release_gate.py", "count": 1 }
       ]
+    },
+    "research-bibliography": {
+      "value": "class=\"research-list\"",
+      "targets": [
+        { "path": "pages/profile/books/index.html", "count": 1 }
+      ]
+    },
+    "research-projects": {
+      "value": "class=\"project-list\"",
+      "targets": [
+        { "path": "pages/profile/books/index.html", "count": 1 }
+      ]
     }
   }
 }

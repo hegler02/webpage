@@ -849,6 +849,35 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "show-me-one-page",
+      "title": "딱 한 장 (SHOW ME)",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "verified-tech-source",
+        "original-song",
+        "romantic-comedy-webtoon"
+      ],
+      "tags": [
+        "audio",
+        "webtoon",
+        "code",
+        "humanlayer",
+        "show-me"
+      ],
+      "message_sentence": "긴 설명 대신 상황에 맞는 가장 작은 그림 하나가 사람과 코드를 다시 통하게 한다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/show-me-one-page.webp",
+        "alt": "노을 진 사무실에서 긴 설명의 벽 대신 세 칸짜리 작은 흐름도를 함께 바라보는 두 사람",
+        "width": 960,
+        "height": 540,
+        "focal_point": "62% 48%"
+      },
+      "canonical_url": "https://show-me-one-page.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-04T11:50:07Z",
+      "latest_deployed_at": "2026-09-04T12:04:19Z"
+    },
+    {
       "body_id": "snail-time-jeju",
       "title": "달팽이의 시간",
       "body_type": "SONGBODY",

@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "last-resonance",
+      "kind": "audio",
+      "source": {
+        "kind": "user-provided",
+        "filename": "last-resonance.mp3",
+        "sha256": "aef433893751cad4fc1c851bb35da93405d2ab29d0e3f4761420c3f6cc58511b"
+      },
+      "delivery": {
+        "path": "assets/audio/last-resonance.mp3",
+        "mime": "audio/mpeg",
+        "sha256": "aef433893751cad4fc1c851bb35da93405d2ab29d0e3f4761420c3f6cc58511b"
+      }
+    },
+    {
+      "id": "og",
+      "kind": "image",
+      "source": {
+        "kind": "project-generated",
+        "filename": "og.png",
+        "sha256": "fbab2af3c2a297530585a16424c4843dcc0dfc770e3d463ca4ddaf19ceb5f7da"
+      },
+      "delivery": {
+        "path": "assets/og.png",
+        "mime": "image/png",
+        "sha256": "fbab2af3c2a297530585a16424c4843dcc0dfc770e3d463ca4ddaf19ceb5f7da",
+        "width": 1200,
+        "height": 630
+      },
+      "role": "open-graph"
+    },
+    {
+      "id": "share-wide",
+      "kind": "image",
+      "source": {
+        "kind": "project-generated",
+        "filename": "share-wide.webp",
+        "sha256": "bfc7133bb8d903e84ece151bb1056dd8b1d82997131da5dff29c80680a530c0c"
+      },
+      "delivery": {
+        "path": "assets/share-wide.webp",
+        "mime": "image/webp",
+        "sha256": "bfc7133bb8d903e84ece151bb1056dd8b1d82997131da5dff29c80680a530c0c"
+      }
+    },
+    {
+      "id": "page-01",
+      "kind": "image",
+      "source": {
+        "kind": "project-generated",
+        "filename": "page-01.png",
+        "sha256": "caea23990522744f7f7d3a263461a50d7802481e3e7b18e7468a1f415d79f1a9"
+      },
+      "delivery": {
+        "path": "assets/webtoon/page-01.webp",
+        "mime": "image/webp",
+        "sha256": "3afb71a549f68d50362dd55a93fd9a34addf848c0de3638998677e85ce60961f"
+      }
+    },
+    {
+      "id": "page-02",
+      "kind": "image",
+      "source": {
+        "kind": "project-generated",
+        "filename": "page-02.png",
+        "sha256": "2859867dd0cd7efda44bd131b781477b7a4e3dcf0536fe88d7a5d4b5c69bf590"
+      },
+      "delivery": {
+        "path": "assets/webtoon/page-02.webp",
+        "mime": "image/webp",
+        "sha256": "a6423297bce38409ae4fb62cc6f43655f0a4fee3a721c051f1fcd82c1e890495"
+      }
+    },
+    {
+      "id": "page-03",
+      "kind": "image",
+      "source": {
+        "kind": "project-generated",
+        "filename": "page-03.png",
+        "sha256": "dbd9feadff4834ecb646d9617b8904c8aa114a000755a07b416f042aa42e17d3"
+      },
+      "delivery": {
+        "path": "assets/webtoon/page-03.webp",
+        "mime": "image/webp",
+        "sha256": "9ce309955f726a956c70939797140fb0675f59d7d37561a644944f9e8cbd49a5"
+      }
+    },
+    {
+      "id": "page-04",
+      "kind": "image",
+      "source": {
+        "kind": "project-generated",
+        "filename": "page-04.png",
+        "sha256": "fa2e1086ffd9437b742f166b3dc3aa42327ed3d16dae2e2d365616b90c2d8010"
+      },
+      "delivery": {
+        "path": "assets/webtoon/page-04.webp",
+        "mime": "image/webp",
+        "sha256": "e72b11aafcfd3126e86c4d543a8271640bd16e792fd02b2845c23bbe29fe13c2"
+      }
+    },
+    {
+      "id": "page-05",
+      "kind": "image",
+      "source": {
+        "kind": "project-generated",
+        "filename": "page-05.png",
+        "sha256": "ec1a66516be3c25a0bf0a091364299c5f830e48096d922879d90dea0b5e75b8c"
+      },
+      "delivery": {
+        "path": "assets/webtoon/page-05.webp",
+        "mime": "image/webp",
+        "sha256": "368aea00b1ef447fdce81e84e4ab03ce5a80386469e329d1c47082051d0234fe"
+      }
+    },
+    {
+      "id": "page-06",
+      "kind": "image",
+      "source": {
+        "kind": "project-generated",
+        "filename": "page-06.png",
+        "sha256": "24b0a325391e42a0e4f57775201db63459e382c389ea9e73568b28014b935692"
+      },
+      "delivery": {
+        "path": "assets/webtoon/page-06.webp",
+        "mime": "image/webp",
+        "sha256": "629e979b88f929969b326d95b848022bba5b5206eeb8f28c9b8d613506c76780"
+      }
+    },
+    {
+      "id": "page-07",
+      "kind": "image",
+      "source": {
+        "kind": "project-generated",
+        "filename": "page-07.png",
+        "sha256": "2bd9c952643df09c84ae54988b00f5940f765803f9718de84a7c2e7ed29380a2"
+      },
+      "delivery": {
+        "path": "assets/webtoon/page-07.webp",
+        "mime": "image/webp",
+        "sha256": "61498a604b7394bc034d2b7c58c60354383ae9bb448d79aef3c0fe8e7d3cc074"
+      }
+    },
+    {
+      "id": "page-08",
+      "kind": "image",
+      "source": {
+        "kind": "project-generated",
+        "filename": "page-08.png",
+        "sha256": "3d017a23a19c6d998d43e0b8070db5ca9e796ce1e56d74ba3484529d23519cdb"
+      },
+      "delivery": {
+        "path": "assets/webtoon/page-08.webp",
+        "mime": "image/webp",
+        "sha256": "e126be318c567d7367e7902f6cc264e8ffd35b4093a2cb7e4ac1eb903fc55588"
+      }
+    },
+    {
+      "id": "page-09",
+      "kind": "image",
+      "source": {
+        "kind": "project-generated",
+        "filename": "page-09.png",
+        "sha256": "7ad9d4f664153820f2c9f4b6905b16f77dfbbb8d546aa9cee440cbaa6cddf8ea"
+      },
+      "delivery": {
+        "path": "assets/webtoon/page-09.webp",
+        "mime": "image/webp",
+        "sha256": "6b4e647f793818913be03bb91ec105841c215dc667ec3f8ebec7468f3e169430"
+      }
+    },
+    {
+      "id": "page-10",
+      "kind": "image",
+      "source": {
+        "kind": "project-generated",
+        "filename": "page-10.png",
+        "sha256": "1b2b7b4f58c114de21844e4c6277e4724f9c3f8aee0dc27b7cbddd2ad9925c77"
+      },
+      "delivery": {
+        "path": "assets/webtoon/page-10.webp",
+        "mime": "image/webp",
+        "sha256": "79106804cd79ef4b25fc11300671ee12a89bbae5d6339a37ad312efc1a6f5cae"
+      }
+    }
+  ]
+}

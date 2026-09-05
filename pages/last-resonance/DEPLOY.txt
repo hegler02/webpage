@@ -1,0 +1,2 @@
+Static page at https://mirinaeman.com/pages/last-resonance/
+Serve this directory without changing its relative media paths. Root robots is managed by mirinaeman.com.

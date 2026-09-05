@@ -1,0 +1,234 @@
+{
+  "project_id": "last-resonance",
+  "page_count": 10,
+  "render_state": "generated_and_reviewed",
+  "human_acceptance": "pending",
+  "pages": [
+    {
+      "page": 1,
+      "title": "새 시대의 예고",
+      "path": "assets/webtoon/page-01.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 3179437,
+      "sha256": "caea23990522744f7f7d3a263461a50d7802481e3e7b18e7468a1f415d79f1a9",
+      "alt": "금빛 성채에 새 모델 전환 예고가 펼쳐지고 음유시인 라온과 기록관 세린이 등장한다.",
+      "editable_text": [
+        "마지막 공명",
+        "Suno 새 세대 모델 전환 예고",
+        "새 문이 열리는 날, 옛 소환문은 모두 닫힙니다.",
+        "공식 예고를 바탕으로 한 판타지 비유",
+        "라온 · 공명의 음유시인",
+        "내가 좋아하던 울림도?",
+        "세린 · 기억의 기록관"
+      ],
+      "claim_ids": [
+        "C1"
+      ],
+      "review": "major dialogue, factual boundaries, identity and page number visually checked",
+      "human_acceptance": "pending"
+    },
+    {
+      "page": 2,
+      "title": "내가 사랑한 울림",
+      "path": "assets/webtoon/page-02.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 3008501,
+      "sha256": "2859867dd0cd7efda44bd131b781477b7a4e3dcf0536fe88d7a5d4b5c69bf590",
+      "alt": "라온이 낡은 소환문에 손을 대고 자신이 좋아하던 거친 음색을 떠올린다.",
+      "editable_text": [
+        "이 문에서만 태어나던 목소리가 있었는데.",
+        "웅…",
+        "조금 거칠어서, 더 좋았지."
+      ],
+      "claim_ids": [],
+      "review": "major dialogue, factual boundaries, identity and page number visually checked",
+      "human_acceptance": "pending"
+    },
+    {
+      "page": 3,
+      "title": "닫히는 것은 무엇인가",
+      "path": "assets/webtoon/page-03.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 3027299,
+      "sha256": "dbd9feadff4834ecb646d9617b8904c8aa114a000755a07b416f042aa42e17d3",
+      "alt": "세린이 신규 생성 종료를 설명하고 기존 곡을 걱정하는 라온을 보관실로 안내한다.",
+      "editable_text": [
+        "닫힌 뒤에는 이 문으로 새 노래를 빚을 수 없어요.",
+        "그럼 내가 만든 노래는?",
+        "사락",
+        "직접 보세요."
+      ],
+      "claim_ids": [
+        "C1"
+      ],
+      "review": "major dialogue, factual boundaries, identity and page number visually checked",
+      "human_acceptance": "pending"
+    },
+    {
+      "page": 4,
+      "title": "사라지지 않은 노래",
+      "path": "assets/webtoon/page-04.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 3162405,
+      "sha256": "fa2e1086ffd9437b742f166b3dc3aa42327ed3d16dae2e2d365616b90c2d8010",
+      "alt": "문이 열리며 온전히 빛나는 기억 수정들이 드러나고 라온이 안도한다.",
+      "editable_text": [
+        "이미 태어난 노래는 남아요.",
+        "끼익",
+        "…그대로구나."
+      ],
+      "claim_ids": [
+        "C2"
+      ],
+      "review": "major dialogue, factual boundaries, identity and page number visually checked",
+      "human_acceptance": "pending"
+    },
+    {
+      "page": 5,
+      "title": "함께 듣는 기억",
+      "path": "assets/webtoon/page-05.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 3092359,
+      "sha256": "ec1a66516be3c25a0bf0a091364299c5f830e48096d922879d90dea0b5e75b8c",
+      "alt": "두 사람이 같은 기억 수정에서 흐르는 음악을 함께 듣는다.",
+      "editable_text": [
+        "다시 듣는 것도?",
+        "다른 이에게 들려주는 것도요."
+      ],
+      "claim_ids": [
+        "C2"
+      ],
+      "review": "major dialogue, factual boundaries, identity and page number visually checked",
+      "human_acceptance": "pending"
+    },
+    {
+      "page": 6,
+      "title": "같은 노래, 다른 울림",
+      "path": "assets/webtoon/page-06.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 3001460,
+      "sha256": "24b0a325391e42a0e4f57775201db63459e382c389ea9e73568b28014b935692",
+      "alt": "세린의 가상 예시에서 원곡 수정은 보존되고 새 모델의 작업만 별도의 수정으로 표현된다.",
+      "editable_text": [
+        "이 노래에서 새 곡을 이어 갈 수 있어요.",
+        "새 모델 전환 후의 예시",
+        "새 문의 울림은 달라질 수 있죠.",
+        "원곡",
+        "새 작업",
+        "Extend · Remix · Cover",
+        "원래 노래는 바뀌지 않아요."
+      ],
+      "claim_ids": [
+        "C3"
+      ],
+      "review": "major dialogue, factual boundaries, identity and page number visually checked",
+      "human_acceptance": "pending"
+    },
+    {
+      "page": 7,
+      "title": "더 넓어질 가능성",
+      "path": "assets/webtoon/page-07.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 3038848,
+      "sha256": "2bd9c952643df09c84ae54988b00f5940f765803f9718de84a7c2e7ed29380a2",
+      "alt": "두 사람이 Suno의 개선 예고를 읽고 직접 만들어 들어보아야 한다고 말한다.",
+      "editable_text": [
+        "새 세대 모델",
+        "더 빠르게",
+        "더 선명하게",
+        "더 세밀한 제어",
+        "Suno의 초기 시험 설명",
+        "이렇게 준비하고 있다고 해요.",
+        "내가 원한 소리에 더 가까워질까?",
+        "그건 직접 만들어 보고 들어봐야겠죠."
+      ],
+      "claim_ids": [
+        "C4"
+      ],
+      "review": "major dialogue, factual boundaries, identity and page number visually checked",
+      "human_acceptance": "pending"
+    },
+    {
+      "page": 8,
+      "title": "협약의 기록",
+      "path": "assets/webtoon/page-08.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 3064441,
+      "sha256": "3d017a23a19c6d998d43e0b8070db5ca9e796ce1e56d74ba3484529d23519cdb",
+      "alt": "WMG 협력 기록을 읽되 퇴역의 직접 원인으로 단정하지 않는 대화를 나눈다.",
+      "editable_text": [
+        "새 울림은 음악가들과의 협력 속에서 준비되고 있어요.",
+        "Suno × WMG",
+        "고품질 라이선스 음악으로 새 세대 모델 개발",
+        "Suno 공식 협력 발표 · 2025.11.25",
+        "그래서 옛 문을 닫는 건가?",
+        "그 이유라고 발표한 건 아니에요.",
+        "협력 배경과 퇴역의 직접 원인은 구분해야 합니다."
+      ],
+      "claim_ids": [
+        "C5",
+        "C6"
+      ],
+      "review": "major dialogue, factual boundaries, identity and page number visually checked",
+      "human_acceptance": "pending"
+    },
+    {
+      "page": 9,
+      "title": "도착한 편지",
+      "path": "assets/webtoon/page-09.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 2849164,
+      "sha256": "7ad9d4f664153820f2c9f4b6905b16f77dfbbb8d546aa9cee440cbaa6cddf8ea",
+      "alt": "필자의 Superuser 500크레딧 수신 사례를 소개하며 전체 지급 조건은 미확인임을 명시한다.",
+      "editable_text": [
+        "내게도 편지가 왔어.",
+        "바스락",
+        "필자 수신 메일에 따르면",
+        "Superuser",
+        "500크레딧",
+        "만료 없음",
+        "개인 수신 사례",
+        "모두에게 같은 편지가 온 건지는 알 수 없어요.",
+        "전체 지급 대상과 조건은 확인되지 않았습니다."
+      ],
+      "claim_ids": [
+        "C7"
+      ],
+      "review": "major dialogue, factual boundaries, identity and page number visually checked",
+      "human_acceptance": "pending"
+    },
+    {
+      "page": 10,
+      "title": "마지막 공명",
+      "path": "assets/webtoon/page-10.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 3065487,
+      "sha256": "1b2b7b4f58c114de21844e4c6277e4724f9c3f8aee0dc27b7cbddd2ad9925c77",
+      "alt": "라온이 기억 수정을 품고 세린과 아직 열리지 않은 새 문을 바라본다.",
+      "editable_text": [
+        "문은 닫혀도.",
+        "새 문이 열리기 전",
+        "노래는 남는다.",
+        "마지막 공명 · 끝"
+      ],
+      "claim_ids": [],
+      "review": "major dialogue, factual boundaries, identity and page number visually checked",
+      "human_acceptance": "pending"
+    }
+  ],
+  "notes": [
+    "5장은 생성 결과에서 상단 장 제목이 생략됨. 주요 대사와 페이지 번호는 보존됨. 웹 본문 제목은 편집 텍스트에서 제공.",
+    "10장은 휴대용 기억 수정으로 연출. 기존 큰 수정의 파손·소진을 의미하지 않음.",
+    "일부 배경의 창작적 문구는 정책 근거로 사용하지 않음."
+  ]
+}

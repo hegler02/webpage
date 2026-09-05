@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0",
+  "packet_id": "news-suno-model-transition-2026-09-05",
+  "title": "Suno 새 세대 모델 전환 예고",
+  "event_date": "unknown",
+  "verified_at": "2026-09-05T00:00:00Z",
+  "editorial_thesis": "기존 곡을 보존하면서 생성 모델 체계를 새 세대로 전환한다는 예고다.",
+  "caution_line": "라이선스 협력을 퇴역의 직접 원인으로 단정하지 않고 500크레딧을 개인 수신 사례로 구분한다.",
+  "sources": [
+    {
+      "source_id": "S1",
+      "publisher": "Suno",
+      "title": "An update to our downloads policy and Terms of Service",
+      "url": "https://suno.com/blog/suno-updates-tos",
+      "source_type": "official",
+      "accessed_at": "2026-09-05",
+      "supports_claim_ids": [
+        "C1",
+        "C4",
+        "C6"
+      ]
+    },
+    {
+      "source_id": "S2",
+      "publisher": "Suno",
+      "title": "Upcoming Changes FAQ",
+      "url": "https://help.suno.com/en/articles/13614785",
+      "source_type": "official",
+      "accessed_at": "2026-09-05",
+      "supports_claim_ids": [
+        "C2",
+        "C3"
+      ]
+    },
+    {
+      "source_id": "S3",
+      "publisher": "Suno",
+      "title": "A new chapter in music creation",
+      "url": "https://suno.com/blog/wmg-partnership",
+      "source_type": "official",
+      "accessed_at": "2026-09-05",
+      "supports_claim_ids": [
+        "C5",
+        "C6"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "statement": "새 모델 출시 시 모든 이전 모델을 퇴역시켜 구형 모델로 신규 생성할 수 없게 된다는 공식 예고.",
+      "status": "confirmed",
+      "source_ids": [
+        "S1"
+      ],
+      "notes": "정확한 출시일 미확인."
+    },
+    {
+      "claim_id": "C2",
+      "statement": "기존 곡은 보존되며 재생·공유할 수 있다.",
+      "status": "confirmed",
+      "source_ids": [
+        "S2"
+      ],
+      "notes": ""
+    },
+    {
+      "claim_id": "C3",
+      "statement": "기존 곡을 Extend·Remix·Cover의 출발점으로 사용할 수 있으며 새 모델로 처리하므로 결과가 달라질 수 있다. 원곡은 변경되지 않는다.",
+      "status": "confirmed",
+      "source_ids": [
+        "S2"
+      ],
+      "notes": ""
+    },
+    {
+      "claim_id": "C4",
+      "statement": "Suno는 초기 시험에서 더 빠른 생성·더 높은 음질·더 많은 제어력을 설명했다.",
+      "status": "confirmed",
+      "source_ids": [
+        "S1"
+      ],
+      "notes": "발표 내용 확인이며 독립 성능 검증이 아님."
+    },
+    {
+      "claim_id": "C5",
+      "statement": "Suno는 WMG와의 협력을 통해 고품질 라이선스 음악으로 새 세대 모델을 개발한다고 발표했다.",
+      "status": "confirmed",
+      "source_ids": [
+        "S3"
+      ],
+      "notes": ""
+    },
+    {
+      "claim_id": "C6",
+      "statement": "확인한 발표들은 라이선스 협력을 구형 모델 퇴역의 직접 원인이라고 밝히지 않았다.",
+      "status": "confirmed",
+      "source_ids": [
+        "S1",
+        "S3"
+      ],
+      "notes": "확인 범위는 제공된 문서. 모든 공식 발언의 부재를 입증한 것은 아님."
+    },
+    {
+      "claim_id": "C7",
+      "statement": "필자가 Superuser라는 호칭과 만료 없는 500크레딧 안내 메일을 수신했다는 사례.",
+      "status": "unknown",
+      "source_ids": [],
+      "notes": "사용자의 직접 진술로 귀속해 사용. 메일 원본 미확인. 전체 지급 조건 미확인."
+    }
+  ],
+  "creative_boundaries": {
+    "must_keep": [
+      "기존 곡 보존",
+      "퇴역은 새 모델 출시 때",
+      "개인 수신 사례 표기"
+    ],
+    "may_transform": [
+      "소환문과 기억 수정의 판타지 비유"
+    ],
+    "must_avoid": [
+      "곡 삭제",
+      "라이선스 직접 원인 단정",
+      "출시일 날조",
+      "크레딧 전원 지급 단정"
+    ]
+  }
+}

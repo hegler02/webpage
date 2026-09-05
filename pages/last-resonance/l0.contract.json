@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "audio-player",
+      "kind": "ui",
+      "human_judgment": {
+        "affected_human": "작품 독자와 청취자",
+        "accountable_human": "미리내맨",
+        "authority_scope": "작품 표현의 수용·반려·보류",
+        "decision_path": [
+          "approve",
+          "reject",
+          "hold"
+        ],
+        "reason_evidence": "이 대화의 사용자 피드백",
+        "override_effect": "반려 시 해당 표현을 수정하고 동일 조건으로 다시 확인",
+        "appeal_path": "미리내맨의 직접 검토",
+        "rejection_memory": "tools/last-resonance/review.json",
+        "transformation_feedback": "피드백을 표현·검사에 반영",
+        "revalidation_owner": "미리내맨",
+        "revalidation_evidence": "후속 사용자 검토",
+        "enforcement": [
+          "gate:human-acceptance",
+          "gate:release-block-on-rejection"
+        ]
+      },
+      "relation": {
+        "statement": "청취자의 의도와 원본 음원을 연결",
+        "enforcement": [
+          "test:playback-order"
+        ]
+      },
+      "attitude": {
+        "statement": "정적 본문을 항상 유지하고 오류를 알림",
+        "enforcement": [
+          "test:playback-order"
+        ]
+      },
+      "memory": {
+        "statement": "검사 결과와 오류 상태를 review.json 및 세션 이벤트에 기록",
+        "enforcement": [
+          "test:playback-order"
+        ]
+      },
+      "transformation": {
+        "statement": "오류 시 지역 대체 화면으로 전환하고 배포 전 원인을 수정",
+        "enforcement": [
+          "test:playback-order"
+        ]
+      }
+    },
+    {
+      "id": "webtoon",
+      "kind": "ui",
+      "human_judgment": {
+        "affected_human": "작품 독자와 청취자",
+        "accountable_human": "미리내맨",
+        "authority_scope": "작품 표현의 수용·반려·보류",
+        "decision_path": [
+          "approve",
+          "reject",
+          "hold"
+        ],
+        "reason_evidence": "이 대화의 사용자 피드백",
+        "override_effect": "반려 시 해당 표현을 수정하고 동일 조건으로 다시 확인",
+        "appeal_path": "미리내맨의 직접 검토",
+        "rejection_memory": "tools/last-resonance/review.json",
+        "transformation_feedback": "피드백을 표현·검사에 반영",
+        "revalidation_owner": "미리내맨",
+        "revalidation_evidence": "후속 사용자 검토",
+        "enforcement": [
+          "gate:human-acceptance",
+          "gate:release-block-on-rejection"
+        ]
+      },
+      "relation": {
+        "statement": "열 장의 연속 이미지와 접근 가능한 대사를 연결",
+        "enforcement": [
+          "gate:ten-pages"
+        ]
+      },
+      "attitude": {
+        "statement": "정적 본문을 항상 유지하고 오류를 알림",
+        "enforcement": [
+          "gate:ten-pages"
+        ]
+      },
+      "memory": {
+        "statement": "검사 결과와 오류 상태를 review.json 및 세션 이벤트에 기록",
+        "enforcement": [
+          "gate:ten-pages"
+        ]
+      },
+      "transformation": {
+        "statement": "오류 시 지역 대체 화면으로 전환하고 배포 전 원인을 수정",
+        "enforcement": [
+          "gate:ten-pages"
+        ]
+      }
+    },
+    {
+      "id": "news",
+      "kind": "ui",
+      "human_judgment": {
+        "affected_human": "작품 독자와 청취자",
+        "accountable_human": "미리내맨",
+        "authority_scope": "작품 표현의 수용·반려·보류",
+        "decision_path": [
+          "approve",
+          "reject",
+          "hold"
+        ],
+        "reason_evidence": "이 대화의 사용자 피드백",
+        "override_effect": "반려 시 해당 표현을 수정하고 동일 조건으로 다시 확인",
+        "appeal_path": "미리내맨의 직접 검토",
+        "rejection_memory": "tools/last-resonance/review.json",
+        "transformation_feedback": "피드백을 표현·검사에 반영",
+        "revalidation_owner": "미리내맨",
+        "revalidation_evidence": "후속 사용자 검토",
+        "enforcement": [
+          "gate:human-acceptance",
+          "gate:release-block-on-rejection"
+        ]
+      },
+      "relation": {
+        "statement": "정책 주장과 공식 출처를 연결",
+        "enforcement": [
+          "gate:source-ids"
+        ]
+      },
+      "attitude": {
+        "statement": "정적 본문을 항상 유지하고 오류를 알림",
+        "enforcement": [
+          "gate:source-ids"
+        ]
+      },
+      "memory": {
+        "statement": "검사 결과와 오류 상태를 review.json 및 세션 이벤트에 기록",
+        "enforcement": [
+          "gate:source-ids"
+        ]
+      },
+      "transformation": {
+        "statement": "오류 시 지역 대체 화면으로 전환하고 배포 전 원인을 수정",
+        "enforcement": [
+          "gate:source-ids"
+        ]
+      }
+    },
+    {
+      "id": "experience",
+      "kind": "ui",
+      "human_judgment": {
+        "affected_human": "작품 독자와 청취자",
+        "accountable_human": "미리내맨",
+        "authority_scope": "작품 표현의 수용·반려·보류",
+        "decision_path": [
+          "approve",
+          "reject",
+          "hold"
+        ],
+        "reason_evidence": "이 대화의 사용자 피드백",
+        "override_effect": "반려 시 해당 표현을 수정하고 동일 조건으로 다시 확인",
+        "appeal_path": "미리내맨의 직접 검토",
+        "rejection_memory": "tools/last-resonance/review.json",
+        "transformation_feedback": "피드백을 표현·검사에 반영",
+        "revalidation_owner": "미리내맨",
+        "revalidation_evidence": "후속 사용자 검토",
+        "enforcement": [
+          "gate:human-acceptance",
+          "gate:release-block-on-rejection"
+        ]
+      },
+      "relation": {
+        "statement": "장 사이 문장과 공명을 서로 다른 표면에서 표현",
+        "enforcement": [
+          "gate:disjoint-owners"
+        ]
+      },
+      "attitude": {
+        "statement": "정적 본문을 항상 유지하고 오류를 알림",
+        "enforcement": [
+          "gate:disjoint-owners"
+        ]
+      },
+      "memory": {
+        "statement": "검사 결과와 오류 상태를 review.json 및 세션 이벤트에 기록",
+        "enforcement": [
+          "gate:disjoint-owners"
+        ]
+      },
+      "transformation": {
+        "statement": "오류 시 지역 대체 화면으로 전환하고 배포 전 원인을 수정",
+        "enforcement": [
+          "gate:disjoint-owners"
+        ]
+      }
+    }
+  ]
+}

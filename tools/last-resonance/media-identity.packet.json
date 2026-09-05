@@ -1,0 +1,45 @@
+{
+  "schema_version": "4.0",
+  "revision": 1,
+  "approval": "confirmed",
+  "source": {
+    "project_id": "last-resonance",
+    "title": "마지막 공명",
+    "anchor": "문은 닫혀도, 노래는 남는다.",
+    "approval_evidence": "사용자가 제안 후 노래 만들었다고 하며 해당 제목 MP3를 제공함. 후속 제작용 선택 음원으로 해석. 음악적 만족도를 추정하지 않음.",
+    "facts": "새 모델 출시 때 구형 모델 퇴역. 기존 곡 보존. 새 작업은 새 모델에서 처리. 라이선스를 직접 퇴역 원인으로 단정 금지. 500크레딧은 사용자 수신 사례."
+  },
+  "music_body": {
+    "pulse": "비대칭 맥박에서 넓은 후렴으로 펼쳐짐",
+    "breath": "짧은 발화 뒤 기악 응답",
+    "weight": "오르간과 베이스에서 전체 밴드로 무게 이동",
+    "tension": "단조와 미해결 화성으로 조임",
+    "release": "긴 모음과 열린 화성으로 해방",
+    "repetition": "문은 닫혀도 / 노래는 남는다 및 첫 동기 회귀",
+    "pause": "마지막 후렴 앞 정적",
+    "direction": "붙잡음에서 품고 나아감으로",
+    "gesture": "악기를 가슴 앞으로 들어 올림",
+    "residue": "첫 기타 동기의 잔향"
+  },
+  "language": {
+    "lyrics_source": "제안 가사; 실제 음원 가사 일치 여부는 청취 검증하지 않음",
+    "lyrics": "[Intro: solitary clean guitar motif; dark organ slowly rises]\n\n[Verse 1: close low male vocal; uneven pulse gathers underneath]\n낡은 문에 귀를 대면\n처음의 내가 들려\n조금 거친 그 숨결에\n이름을 맡겼지\n\n[Pre-Chorus: melody climbs; harmony refuses to settle]\n문틈은 좁아지고\n손끝은 머뭇대네\n\n[Chorus: sweeping 6/8; ringing high vocal opens above the band]\n문은 닫혀도\n노래는 남는다\n나를 깨운 그 떨림\n아직 여기 있다\n\n[Instrumental: guitar and analog synth trade the opening motif over shifting accents]\n\n[Verse 2: melodic bass leads; vocal retains its warm grain]\n더 높이 열린 아침\n낯선 울림 너머\n닳아 버린 한 음이\n발걸음을 잡네\n\n[Bridge: drums fall away; intimate voice over bare organ]\n다시 빚을 수 없는\n그 목소릴 품고\n아직 부르지 않은\n내일 앞에 선다\n\n[Break: brief full-band silence before the final entrance]\n\n[Final Chorus: brighter harmony; soaring lead with wordless choir behind]\n문은 닫혀도\n노래는 남는다\n나를 깨운 그 떨림\n아직 여기 있다\n\n문은 닫혀도\n노래는 남는다\n처음 나를 부른 너\n내 안에서 울려라\n\n[Outro: opening guitar motif returns alone; one quiet final vocal]\n울려라",
+    "hook": "문은 닫혀도 / 노래는 남는다"
+  },
+  "sound": {
+    "style_prompt": "Create a majestic Korean symphonic progressive rock song around four minutes.\nOpen with a fragile guitar motif over dark organ.\nLet verses lean forward in 7/8 as melodic bass and live drums tighten the pulse.\nUse a mature male voice with smoky low chest resonance and crisp Korean consonants.\nOpen the chorus into a clear ringing high mix; delay vibrato until sustained endings.\nKeep verse melody low over unresolved minor harmony.\nLet the chorus broaden into sweeping 6/8 and lift the hook through open vowels.\nTrade the opening motif between singing electric guitar and a bending analog synth lead in the instrumental passage.\nStrip the bridge to voice and organ, then pause before the final ascent.\nReturn the hook with brighter harmony and a wordless choir behind the lead.\nKeep bass and kick distinct; let hall tails bloom between phrases without washing out the lyric.\nPreserve quiet-to-grand contrast and end with the opening guitar motif alone.",
+    "negative_prompt": "No EDM drops. No trap percussion. No harsh growls. No breathy pop delivery. No constant belting. No nonstop shredding. No muddy organ and bass buildup. No buried Korean lyrics. No flattened dynamics. No abrupt cutoff.",
+    "description_status": "제작 의도. 실제 음원에 구현됐다고 검증한 내용은 아님."
+  },
+  "boundaries": {
+    "literal": "확인한 정책 사실과 사용자 제공 음원",
+    "transformable": "판타지 인물·소환문·기억 수정·편집 호흡",
+    "unknown": "v6 공식 명칭·정확한 출시일·500크레딧 전체 대상 및 조건",
+    "avoid": [
+      "기존 곡 삭제",
+      "라이선스 협력을 직접 퇴역 원인으로 확정",
+      "새 모델 출시 완료 묘사",
+      "크레딧 전원 지급·보상 단정"
+    ]
+  }
+}

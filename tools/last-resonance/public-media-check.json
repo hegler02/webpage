@@ -1,0 +1,93 @@
+{
+  "assets": [
+    {
+      "path": "assets/og.png",
+      "status": 200,
+      "mime": "image/png",
+      "bytes": 577998,
+      "matches": true
+    },
+    {
+      "path": "assets/audio/last-resonance.mp3",
+      "status": 200,
+      "mime": "audio/mpeg",
+      "bytes": 5653346,
+      "matches": true
+    },
+    {
+      "path": "assets/webtoon/page-01.webp",
+      "status": 200,
+      "mime": "image/webp",
+      "bytes": 545906,
+      "matches": true
+    },
+    {
+      "path": "assets/webtoon/page-02.webp",
+      "status": 200,
+      "mime": "image/webp",
+      "bytes": 489564,
+      "matches": true
+    },
+    {
+      "path": "assets/webtoon/page-03.webp",
+      "status": 200,
+      "mime": "image/webp",
+      "bytes": 507392,
+      "matches": true
+    },
+    {
+      "path": "assets/webtoon/page-04.webp",
+      "status": 200,
+      "mime": "image/webp",
+      "bytes": 544744,
+      "matches": true
+    },
+    {
+      "path": "assets/webtoon/page-05.webp",
+      "status": 200,
+      "mime": "image/webp",
+      "bytes": 531582,
+      "matches": true
+    },
+    {
+      "path": "assets/webtoon/page-06.webp",
+      "status": 200,
+      "mime": "image/webp",
+      "bytes": 515992,
+      "matches": true
+    },
+    {
+      "path": "assets/webtoon/page-07.webp",
+      "status": 200,
+      "mime": "image/webp",
+      "bytes": 517968,
+      "matches": true
+    },
+    {
+      "path": "assets/webtoon/page-08.webp",
+      "status": 200,
+      "mime": "image/webp",
+      "bytes": 522492,
+      "matches": true
+    },
+    {
+      "path": "assets/webtoon/page-09.webp",
+      "status": 200,
+      "mime": "image/webp",
+      "bytes": 468780,
+      "matches": true
+    },
+    {
+      "path": "assets/webtoon/page-10.webp",
+      "status": 200,
+      "mime": "image/webp",
+      "bytes": 515278,
+      "matches": true
+    }
+  ],
+  "range": {
+    "status": 206,
+    "range": "bytes 0-1023/5653346",
+    "bytes": 1024
+  }
+}

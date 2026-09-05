@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "body_id": "last-resonance",
+  "title": "마지막 공명",
+  "body_type": "SONGBODY",
+  "source_kinds": [
+    "verified-tech-news",
+    "user-provided-song",
+    "fantasy-webtoon"
+  ],
+  "tags": [
+    "audio",
+    "webtoon",
+    "suno",
+    "progressive-rock",
+    "fantasy"
+  ],
+  "message_sentence": "문은 닫혀도, 노래는 남는다.",
+  "thumbnail": {
+    "source_kind": "project-owned",
+    "path": "assets/thumbnails/last-resonance.webp",
+    "alt": "금빛 성채와 닫힐 소환문을 배경으로 한 마지막 공명 제목 이미지",
+    "width": 960,
+    "height": 540,
+    "focal_point": "50% 50%",
+    "sha256": "ac8eafddb82ef7e96a007d8a63b0c04f939ed2cef8f98af5b6ec5de63737dccf"
+  },
+  "canonical_url": "https://mirinaeman.com/pages/last-resonance/",
+  "status": "DEPLOYED",
+  "first_deployed_at": "2026-09-05T04:04:08.957000Z",
+  "latest_deployed_at": "2026-09-05T04:04:08.957000Z",
+  "deployments": [
+    {
+      "deployed_at": "2026-09-05T04:04:08.957000Z",
+      "url": "https://mirinaeman.com/pages/last-resonance/",
+      "release_ref": "dpl_E9QThq1BJaqMR5LJHGa7iiGv6AYS",
+      "source_revision": "0ae857e97a64fdcd2909f20f5c1b01c465b9d9c9",
+      "validation": [
+        "news-fact-lock-pass",
+        "ten-page-webtoon-packet-pass",
+        "first-party-media-pass",
+        "playback-event-order-pass",
+        "design-authority-zero-errors",
+        "static-site-zero-errors",
+        "l0-structure-grade-a",
+        "browser-native-audio-progress-pass",
+        "browser-single-player-close-focus-pass",
+        "browser-chapter-anchor-focus-pass",
+        "browser-gsap-mounted-pass",
+        "browser-webgpu-unavailable-fallback-pass",
+        "production-ready",
+        "public-canonical-browser-pass"
+      ],
+      "status": "succeeded"
+    }
+  ],
+  "incidents": [
+    {
+      "incident_id": "preview-access-recovery",
+      "observation": "내부 미리보기 연결이 실패하고 Vercel 미리보기는 인증 화면으로 이동했다.",
+      "root_cause": "내부 미리보기 연결 제한 및 기존 Vercel 배포 보호 정책.",
+      "correction": "기존 Vercel 연결 도구가 발급한 임시 접근 링크로 미리보기를 검수하고 공개 도메인도 별도로 확인했다.",
+      "gate": "인증 화면을 작품 렌더링으로 간주하지 않고 실제 제목·웹툰·재생 상태를 확인한다.",
+      "scope": "PROJECT",
+      "status": "CORRECTED"
+    }
+  ],
+  "invariants": [],
+  "approvals": [
+    {
+      "scope": "public-deployment-and-message-bodies-catalog",
+      "statement": "V4 스킬을 사용해서 노래와 웹툰과 매클루언 스킬로 배포하고 mirinaeman.com 에 추가한다. 웹툰은 10장.",
+      "recorded_at": "2026-09-05T04:04:08.957000Z"
+    },
+    {
+      "scope": "page-implementation-and-gsap-wgsl-experience",
+      "statement": "승인한다",
+      "recorded_at": "2026-09-05T04:04:08.957000Z"
+    }
+  ],
+  "golden_baseline": null,
+  "verification_limits": [
+    "GPU 미지원 검수 브라우저에서 정지 화면 폴백만 직접 확인했다. GPU 렌더링 성공을 주장하지 않는다.",
+    "직접 브라우저 검수 너비는 1363px이며 모바일 실기기 검수는 수행하지 않았다.",
+    "기술 검수 통과는 배포 결과에 대한 사용자의 미적 수락이 아니다."
+  ]
+}

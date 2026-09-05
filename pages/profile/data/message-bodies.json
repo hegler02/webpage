@@ -481,6 +481,35 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "last-resonance",
+      "title": "마지막 공명",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "verified-tech-news",
+        "user-provided-song",
+        "fantasy-webtoon"
+      ],
+      "tags": [
+        "audio",
+        "webtoon",
+        "suno",
+        "progressive-rock",
+        "fantasy"
+      ],
+      "message_sentence": "문은 닫혀도, 노래는 남는다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/last-resonance.webp",
+        "alt": "금빛 성채와 닫힐 소환문을 배경으로 한 마지막 공명 제목 이미지",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/last-resonance/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-05T04:04:08.957000Z",
+      "latest_deployed_at": "2026-09-05T04:04:08.957000Z"
+    },
+    {
       "body_id": "listen-before-photo",
       "title": "찍어달란 말보다 | The Mirinaeman Project Music Album",
       "body_type": "SONGBODY",

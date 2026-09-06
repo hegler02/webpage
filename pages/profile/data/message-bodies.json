@@ -669,6 +669,35 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "message-body-slide",
+      "title": "말에 몸을 입히다",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "original-slide",
+        "generated-image",
+        "generated-webtoon"
+      ],
+      "tags": [
+        "slide",
+        "webtoon",
+        "transition",
+        "design",
+        "16:9"
+      ],
+      "message_sentence": "미디어는 메시지의 몸이며, 함축·여백·전환은 같은 말에 서로 다른 마음을 드러낸다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/message-body-slide.webp",
+        "alt": "두 사람 사이를 연결하는 빛나는 종이 다리 — 말에 몸을 입히다",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://message-body-slide-v2.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-06T05:53:51.461840+00:00",
+      "latest_deployed_at": "2026-09-06T05:53:51.461840+00:00"
+    },
+    {
       "body_id": "modern-myeongsimbogam",
       "title": "시간이 흘러도 변하지 않는 현대판 명심보감 15가지",
       "body_type": "KNOWLEDGEBODY",

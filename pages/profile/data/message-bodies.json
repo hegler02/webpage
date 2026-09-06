@@ -241,6 +241,35 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "first-fire-hackathon",
+      "title": "처음의 불 — 아홉 팀의 밤, 초지일관",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "mentor-memoir",
+        "original-song",
+        "hero-webtoon"
+      ],
+      "tags": [
+        "audio",
+        "webtoon",
+        "hackathon",
+        "ai",
+        "education"
+      ],
+      "message_sentence": "처음 품은 의도가 게임이라는 미디어의 몸을 얻었다면, 그것 자체가 성공이다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/first-fire-hackathon.webp",
+        "alt": "처음의 불. 게임을 완성한 학생들과 멘토가 아홉 세계의 빛 앞에서 함께 웃는 장면",
+        "width": 960,
+        "height": 540,
+        "focal_point": "62% 55%"
+      },
+      "canonical_url": "https://first-fire-hackathon.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-06T03:20:32.028673+00:00",
+      "latest_deployed_at": "2026-09-06T03:20:32.028673+00:00"
+    },
+    {
       "body_id": "gileodo-geudaero-astra",
       "title": "길어도 그대로 — Astra 105만 토큰",
       "body_type": "SONGBODY",

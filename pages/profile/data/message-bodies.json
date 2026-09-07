@@ -1019,6 +1019,38 @@
       "latest_deployed_at": "2026-08-31T09:02:32Z"
     },
     {
+      "body_id": "songbirds-image-cinema",
+      "title": "오랫만이야 — 숲에 머무는 시간",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "original-song",
+        "field-recording",
+        "independent-webtoon",
+        "image-cinema"
+      ],
+      "tags": [
+        "image-cinema",
+        "audio",
+        "webtoon",
+        "quiet",
+        "jeju",
+        "gaze",
+        "transitions"
+      ],
+      "message_sentence": "제주 숲의 새소리에서 시작한 안부를 소리·독립 웹툰·영화의 서로 다른 시간으로 만나게 한다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/songbirds-image-cinema.webp",
+        "alt": "제주 호텔 곁, 햇살이 들어오는 울창한 숲의 오솔길",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://songbirds-image-cinema.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-07T06:28:46.361539+00:00",
+      "latest_deployed_at": "2026-09-07T06:28:46.361539+00:00"
+    },
+    {
       "body_id": "sound-design-lab",
       "title": "Sound Design Lab V2 — Agent Harness Lecture",
       "body_type": "SLIDEBODY",

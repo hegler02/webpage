@@ -1205,6 +1205,34 @@
       "status": "DEPLOYED",
       "first_deployed_at": "2026-08-12T08:28:37Z",
       "latest_deployed_at": "2026-08-12T09:26:05Z"
+    },
+    {
+      "body_id": "ttaro-coffee-image-cinema",
+      "title": "따로 커피 · 이미지 시네마",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "original-song",
+        "everyday-experience"
+      ],
+      "tags": [
+        "image-cinema",
+        "webtoon",
+        "photoreal",
+        "coffee",
+        "mcluhan"
+      ],
+      "message_sentence": "커피와 얼음을 따로 주문하는 작은 용기를 노래와 웹툰, 두 편의 이미지 시네마로 만난다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/ttaro-coffee-image-cinema.webp",
+        "alt": "햇살이 드는 카페에 들어서는 노란 카디건의 주인공 · 따로 커피 실사 이미지 시네마",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://ttaro-coffee-image-cinema.mirinaeman.chatgpt.site",
+      "status": "GOLDEN",
+      "first_deployed_at": "2026-09-09T04:46:20.037783+00:00",
+      "latest_deployed_at": "2026-09-09T04:46:20.037783+00:00"
     }
   ]
 }

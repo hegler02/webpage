@@ -1232,7 +1232,7 @@
         "focal_point": "65% 50%"
       },
       "canonical_url": "https://ttak-joa.mirinaeman.chatgpt.site",
-      "status": "DEPLOYED",
+      "status": "GOLDEN",
       "first_deployed_at": "2026-09-10T00:11:59.269138+00:00",
       "latest_deployed_at": "2026-09-10T01:05:33.166769+00:00"
     },

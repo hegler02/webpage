@@ -14,5 +14,6 @@
   ],
   "catalog": "data/message-bodies.json",
   "generated_outputs": ["archive/index.html", "sitemap.xml"],
+  "editorial_pages": ["/work/hwasan-pan-v6/"],
   "external_images": 0
 }

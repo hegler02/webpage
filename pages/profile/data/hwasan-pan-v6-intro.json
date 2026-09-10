@@ -1,0 +1,127 @@
+{
+  "body_id": "hwasan-pan-v6",
+  "approved_discovery": {
+    "title": "화산인수 — 판을 바꿔 | 미리내맨의 음악·이미지 시네마·웹툰",
+    "description": "미리내맨의 장편 무협소설 화산인수를 바탕으로 만든 메인 테마곡 판을 바꿔 v6. 이미지 시네마와 독립 웹툰 문 열어라를 감상하고 원작과 캐릭터를 만나보세요.",
+    "canonical": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/",
+    "summary": "미리내맨의 장편 무협소설 화산인수를 바탕으로 만든 메인 테마곡 「판을 바꿔」 v6입니다.",
+    "meaning": "서로 다른 사람들이 각자의 판단과 기술로 함께 문을 여는 이야기를 노래와 이미지로 담았습니다.",
+    "cinema": "이미지 시네마는 결정적 이미지와 음악 사이의 시간에 관객이 자신의 경험과 감정을 더할 여백을 남기는 형식입니다.",
+    "webtoon": "독립 웹툰 「문 열어라」는 10장의 이미지를 세로로 이어 읽는 주제곡의 테마 각색입니다.",
+    "json_ld": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/",
+          "url": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/",
+          "name": "화산인수 — 판을 바꿔 | 미리내맨의 음악·이미지 시네마·웹툰",
+          "description": "미리내맨의 장편 무협소설 화산인수를 바탕으로 만든 메인 테마곡 판을 바꿔 v6. 이미지 시네마와 독립 웹툰 문 열어라를 감상하고 원작과 캐릭터를 만나보세요.",
+          "inLanguage": "ko",
+          "creator": {
+            "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#creator"
+          },
+          "mainEntity": [
+            {
+              "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#song"
+            },
+            {
+              "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#cinema"
+            },
+            {
+              "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#webtoon"
+            }
+          ],
+          "about": {
+            "@id": "https://mirinaeman.com/pages/hwasan/"
+          }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#creator",
+          "name": "미리내맨",
+          "url": "https://mirinaeman.com/"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://mirinaeman.com/pages/hwasan/",
+          "url": "https://mirinaeman.com/pages/hwasan/",
+          "name": "화산인수",
+          "genre": "무협소설",
+          "inLanguage": "ko",
+          "author": {
+            "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#creator"
+          }
+        },
+        {
+          "@type": "MusicRecording",
+          "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#song",
+          "name": "판을 바꿔",
+          "description": "미리내맨의 장편 무협소설 화산인수를 바탕으로 만든 메인 테마곡 「판을 바꿔」 v6입니다.",
+          "url": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#listen",
+          "duration": "PT3M16.8S",
+          "inLanguage": "ko",
+          "byArtist": {
+            "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#creator"
+          },
+          "isBasedOn": {
+            "@id": "https://mirinaeman.com/pages/hwasan/"
+          },
+          "encoding": {
+            "@type": "AudioObject",
+            "contentUrl": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/media/pan-v6.mp3",
+            "encodingFormat": "audio/mpeg"
+          }
+        },
+        {
+          "@type": "VideoObject",
+          "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#cinema",
+          "name": "화산인수 — 판을 바꿔 이미지 시네마",
+          "description": "서로 다른 사람들이 각자의 판단과 기술로 함께 문을 여는 이야기를 노래와 이미지로 담았습니다. 이미지 시네마는 결정적 이미지와 음악 사이의 시간에 관객이 자신의 경험과 감정을 더할 여백을 남기는 형식입니다.",
+          "url": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#listen",
+          "contentUrl": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/media/pan-v6-cinema.mp4",
+          "encodingFormat": "video/mp4",
+          "thumbnailUrl": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/assets/cinema-poster.webp",
+          "duration": "PT3M16.8S",
+          "inLanguage": "ko",
+          "creator": {
+            "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#creator"
+          },
+          "isBasedOn": [
+            {
+              "@id": "https://mirinaeman.com/pages/hwasan/"
+            },
+            {
+              "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#song"
+            }
+          ]
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#webtoon",
+          "url": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#webtoon",
+          "name": "문 열어라",
+          "description": "독립 웹툰 「문 열어라」는 10장의 이미지를 세로로 이어 읽는 주제곡의 테마 각색입니다.",
+          "inLanguage": "ko",
+          "creator": {
+            "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#creator"
+          },
+          "isBasedOn": [
+            {
+              "@id": "https://mirinaeman.com/pages/hwasan/"
+            },
+            {
+              "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/#song"
+            }
+          ],
+          "isPartOf": {
+            "@id": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/"
+          }
+        }
+      ]
+    },
+    "og_image": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/assets/og.jpg"
+  },
+  "source_revision": "0dcb9e7b6b71aac1b1a0f9b9992bb6134c9e4bc8",
+  "purpose": "First-party editorial introduction; linked media remains on the approved Site."
+}

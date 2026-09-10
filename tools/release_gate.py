@@ -158,6 +158,8 @@ def webp_dimensions(path: Path) -> tuple[int, int] | None:
 def main() -> int:
     errors: list[str] = []
     project_checks = (
+        ([sys.executable, str(ROOT / "tools" / "render_hwasan_intro.py"), "--check"], "Hwasan introduction gate"),
+        ([sys.executable, str(ROOT / "tools" / "probe_hwasan_discovery.py"), "--local"], "Hwasan discovery output gate"),
         ([sys.executable, str(ROOT / "tools" / "render_songbirds.py"), "--check"], "Songbirds manifest gate"),
         (["node", str(ROOT / "tools" / "test_songbirds_player.mjs")], "Songbirds player gate"),
         ([sys.executable, str(ROOT / "tools" / "audit_suno_transport.py")], "Suno transport debt gate"),

@@ -208,6 +208,7 @@ def rendered_routes(manifest: dict) -> str:
 
 def render_sitemap(manifest: dict, bodies: list[dict]) -> str:
     urls = [manifest["public_home"].rstrip("/") + route["public_path"] for route in manifest["routes"]]
+    urls.extend(manifest["public_home"].rstrip("/") + path for path in manifest.get("editorial_pages", []))
     urls.extend(body["canonical_url"] for body in bodies if urlparse(body["canonical_url"]).netloc == "mirinaeman.com")
     unique = list(dict.fromkeys(urls))
     body = "".join(f"<url><loc>{esc(url)}</loc></url>" for url in unique)

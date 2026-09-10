@@ -1,5 +1,5 @@
 {
-  "buildCommand": "python3 tools/release_gate.py",
+  "buildCommand": "python3 -m pip install --target /tmp/mirinae-build-deps -r requirements-build.txt && PYTHONPATH=/tmp/mirinae-build-deps python3 tools/release_gate.py",
   "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": true,

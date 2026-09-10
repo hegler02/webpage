@@ -5,6 +5,10 @@
   "trailingSlash": true,
   "rewrites": [
     {
+      "source": "/work/hwasan-pan-v6/",
+      "destination": "/pages/profile/work/hwasan-pan-v6/"
+    },
+    {
       "source": "/",
       "destination": "/pages/profile/"
     },

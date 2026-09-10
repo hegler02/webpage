@@ -1181,6 +1181,33 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "ttak-joa",
+      "title": "딱 좋아 — 지금 그대로가 딱 좋아",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "original-song",
+        "everyday-relationship"
+      ],
+      "tags": [
+        "image-cinema",
+        "webtoon",
+        "middle-age",
+        "reassurance"
+      ],
+      "message_sentence": "열심히 살아온 우리에게 지금 그대로가 딱 좋다고 전하는 노래와 이미지 시네마, 그리고 웹툰.",
+      "thumbnail": {
+        "path": "assets/thumbnails/ttak-joa.webp",
+        "alt": "소파에 나란히 앉아 눈을 맞추는 중년 부부 — 딱 좋아",
+        "width": 960,
+        "height": 540,
+        "focal_point": "65% 50%"
+      },
+      "canonical_url": "https://ttak-joa.mirinaeman.chatgpt.site",
+      "status": "GOLDEN",
+      "first_deployed_at": "2026-09-10T00:11:59.269138+00:00",
+      "latest_deployed_at": "2026-09-10T00:11:59.269138+00:00"
+    },
+    {
       "body_id": "ttaro-coffee",
       "title": "따로 커피",
       "body_type": "SONGBODY",

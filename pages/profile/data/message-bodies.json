@@ -430,6 +430,35 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "hwasan-pan-v6",
+      "title": "화산인수 — 판을 바꿔",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-provided-song",
+        "novel",
+        "webtoon",
+        "image-cinema"
+      ],
+      "tags": [
+        "image-cinema",
+        "webtoon",
+        "wuxia",
+        "audio"
+      ],
+      "message_sentence": "서로 다른 사람들이 각자의 판단과 기술로 함께 문을 여는 화산인수의 이야기를 노래와 이미지 시네마, 웹툰으로 만난다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/hwasan-pan-v6.webp",
+        "alt": "거대한 산문에 쓰인 화산인수 판을 바꿔 오프닝 제목",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-10T22:50:13Z",
+      "latest_deployed_at": "2026-09-10T22:50:13Z"
+    },
+    {
       "body_id": "image-agent",
       "title": "내 생각을 이미지로 옮기는 법",
       "body_type": "SLIDEBODY",

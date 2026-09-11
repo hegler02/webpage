@@ -161,6 +161,7 @@ def main() -> int:
         ([sys.executable, str(ROOT / "tools" / "render_creator_profile.py"), "--check"], "Creator profile identity gate"),
         ([sys.executable, str(ROOT / "tools" / "render_public_routes.py"), "--check"], "Public HTML route gate"),
         ([sys.executable, str(ROOT / "tools" / "render_hwasan_intro.py"), "--check"], "Hwasan introduction gate"),
+        ([sys.executable, str(ROOT / "tools" / "render_birthday_intro.py"), "--check"], "Birthday introduction gate"),
         ([sys.executable, str(ROOT / "tools" / "probe_hwasan_discovery.py"), "--local"], "Hwasan discovery output gate"),
         ([sys.executable, str(ROOT / "tools" / "render_songbirds.py"), "--check"], "Songbirds manifest gate"),
         (["node", str(ROOT / "tools" / "test_songbirds_player.mjs")], "Songbirds player gate"),

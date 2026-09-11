@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "birthday-intro-share",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "kind": "project-owned",
+        "filename": "birthday-og.png",
+        "path": "assets/birthday-og.png",
+        "sha256": "63bfd4930d96a9a91edf5dcaaa250c546e97ba000b355f53e71732a179c4cdab"
+      },
+      "delivery": {
+        "path": "assets/birthday-og.png",
+        "mime": "image/png",
+        "width": 1200,
+        "height": 630,
+        "sha256": "63bfd4930d96a9a91edf5dcaaa250c546e97ba000b355f53e71732a179c4cdab"
+      }
+    }
+  ]
+}

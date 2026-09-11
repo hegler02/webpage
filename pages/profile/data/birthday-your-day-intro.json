@@ -1,0 +1,69 @@
+{
+  "body_id": "birthday-your-day",
+  "description": "아내의 생일에 만들어 선물한 노래에서 시작된 이야기. 미리내맨의 생일노래와 이미지 시네마 그리고 웹툰을 감상하세요.",
+  "song_title": "생일 축하해, Happy birthday",
+  "creator": "미리내맨",
+  "lyrics": [
+    {
+      "id": "verse1",
+      "title": "Verse 1",
+      "lines": [
+        "오늘은 너의 생일, 특별한 날",
+        "생일 축하해, happy birthday",
+        "웃음 가득한 이 순간을 함께해",
+        "행복이 넘치는 축제의 밤"
+      ]
+    },
+    {
+      "id": "chorus1",
+      "title": "Chorus",
+      "lines": [
+        "생일 축하해, happy birthday",
+        "너의 삶의 모든 순간 빛나길 바래",
+        "함께 춤추고 노래하자",
+        "오늘밤은 너가 주인공이야"
+      ]
+    },
+    {
+      "id": "verse2",
+      "title": "Verse 2",
+      "lines": [
+        "또 한 해 지나 더 멋져진 너",
+        "생일 축하해, happy birthday",
+        "소중한 추억 가득 채워가며",
+        "더 밝은 미래로 나아가자"
+      ]
+    },
+    {
+      "id": "chorus2",
+      "title": "Chorus",
+      "lines": [
+        "생일 축하해, happy birthday",
+        "너의 삶의 모든 순간 빛나길 바래",
+        "함께 춤추고 노래하자",
+        "오늘밤은 너가 주인공이야"
+      ]
+    },
+    {
+      "id": "outro",
+      "title": "Outro · whisper",
+      "lines": [
+        "생일 축하해",
+        "Happy birthday",
+        "Happy birthday to you"
+      ]
+    }
+  ],
+  "og": {
+    "src": "assets/birthday-og.png",
+    "mime": "image/png",
+    "width": 1200,
+    "height": 630,
+    "alt": "생일 케이크 앞에서 서로를 보며 웃는 중년 부부"
+  },
+  "story": [
+    "아내의 생일에 만들어 선물한 노래가 다른 사람의 생일에도 기쁨이 되었습니다.",
+    "미리내맨의 생일노래를 2분 12초 이미지 시네마와 8개 블록의 독립 웹툰으로 감상할 수 있습니다.",
+    "그림 속 부부는 이야기를 위한 가상 인물입니다. 소중한 사람에게 이 노래를 건네 보세요."
+  ]
+}

@@ -109,6 +109,36 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "birthday-your-day",
+      "title": "생일 축하해 — 오늘은 너의 자리",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-provided-audio",
+        "lyrics",
+        "generated-image-cinema",
+        "webtoon"
+      ],
+      "tags": [
+        "audio",
+        "birthday",
+        "image-cinema",
+        "webtoon",
+        "gift"
+      ],
+      "message_sentence": "한 사람을 위해 만든 생일노래가 다음 사람에게 건네는 축하가 된다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/birthday-your-day.webp",
+        "alt": "촛불이 켜진 생일 케이크 앞에서 서로를 보며 웃는 부부",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://birthday-your-day.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-11T12:30:33.460414+00:00",
+      "latest_deployed_at": "2026-09-11T12:30:33.460414+00:00"
+    },
+    {
       "body_id": "chamgyoyuk",
       "title": "참교육 — CHAMGYOYUK",
       "body_type": "SONGBODY",

@@ -190,6 +190,21 @@
       "source": "/pages/profile/work/hwasan-pan-v6/",
       "destination": "/work/hwasan-pan-v6/",
       "permanent": true
+    },
+    {
+      "source": "/pages/profile/work/birthday-your-day/index.html",
+      "destination": "/work/birthday-your-day/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/work/birthday-your-day/index",
+      "destination": "/work/birthday-your-day/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/work/birthday-your-day/",
+      "destination": "/work/birthday-your-day/",
+      "permanent": true
     }
   ]
 }

@@ -123,5 +123,17 @@
     "og_image": "https://hwasan-pan-v6.mirinaeman.chatgpt.site/assets/og.jpg"
   },
   "source_revision": "0dcb9e7b6b71aac1b1a0f9b9992bb6134c9e4bc8",
-  "purpose": "First-party editorial introduction; linked media remains on the approved Site."
+  "purpose": "First-party editorial introduction; linked media remains on the approved Site.",
+  "video_publication": {
+    "date": "2026-09-10",
+    "precision": "day",
+    "evidence": {
+      "source": "Sites get_site: project creation and public access policy",
+      "project_id": "appgprj_6aa302244edc819186c565c77daaad1b",
+      "created_at": "2026-09-10T19:16:55.710378+00:00",
+      "public_access_revision": 2,
+      "public_access_updated_at": "2026-09-10T22:49:55.259228+00:00"
+    },
+    "note": "Publication day is bounded by project creation and confirmed public access on the same UTC date. Do not substitute rebuild or filesystem dates."
+  }
 }

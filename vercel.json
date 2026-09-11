@@ -84,5 +84,112 @@
       "source": "/sitemap.xml",
       "destination": "/pages/profile/sitemap.xml"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/pages/profile/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/index",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/work/index.html",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/work/index",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/work/",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/index.html",
+      "destination": "/archive/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/index",
+      "destination": "/archive/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/",
+      "destination": "/archive/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/books/index.html",
+      "destination": "/books/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/books/index",
+      "destination": "/books/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/books/",
+      "destination": "/books/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/mirinae/index.html",
+      "destination": "/mirinae/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/mirinae/index",
+      "destination": "/mirinae/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/mirinae/",
+      "destination": "/mirinae/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/profile/index.html",
+      "destination": "/profile/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/profile/index",
+      "destination": "/profile/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/profile/",
+      "destination": "/profile/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/work/hwasan-pan-v6/index.html",
+      "destination": "/work/hwasan-pan-v6/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/work/hwasan-pan-v6/index",
+      "destination": "/work/hwasan-pan-v6/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/work/hwasan-pan-v6/",
+      "destination": "/work/hwasan-pan-v6/",
+      "permanent": true
+    }
   ]
 }

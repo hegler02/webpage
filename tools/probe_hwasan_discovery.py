@@ -77,13 +77,16 @@ def verify(local=False):
         graph = json.loads(doc.json)['@graph']
         assert graph[0]['@id'] == CANONICAL and graph[0]['@type'] == 'WebPage'
         assert any(n['@type'] == 'MusicRecording' for n in graph)
+        video = next(n for n in graph if n['@type'] == 'VideoObject')
+        assert datetime.fromisoformat(video['uploadDate'])
+        assert all(video.get(key) for key in ['name', 'thumbnailUrl', 'contentUrl'])
         parser = RobotFileParser(); parser.parse(data[1].decode().splitlines())
         for agent in ['Googlebot', 'bingbot', 'OAI-SearchBot']: assert parser.can_fetch(agent, CANONICAL), agent
         sitemap = ElementTree.fromstring(data[2])
         assert CANONICAL in [n.text for n in sitemap.iter() if n.tag.endswith('loc')]
         image = Image.open(io.BytesIO(data[3])); image.load(); assert image.format == 'JPEG' and image.size == (1200, 630)
         assert hashlib.sha256(data[3]).digest() == hashlib.sha256((PROFILE / paths[3]).read_bytes()).digest()
-        work = Document(); work.feed(data[4].decode()); assert './hwasan-pan-v6/' in work.links
+        work = Document(); work.feed(data[4].decode()); assert CANONICAL in work.links
         assert 'https://hwasan-pan-v6.mirinaeman.chatgpt.site/' in doc.links
         report.update({'result': 'PASS', 'seo_title': doc.meta['og:title'], 'seo_description': doc.meta['description'],
                        'json_ld_types': sorted(set(n['@type'] for n in graph)),
@@ -100,3 +103,4 @@ if __name__ == '__main__':
     if args.output: Path(args.output).write_text(result + '\n')
     print(result)
     raise SystemExit(report['result'] != 'PASS')
+

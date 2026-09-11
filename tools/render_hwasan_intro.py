@@ -3,6 +3,7 @@ import argparse
 import html
 import json
 from pathlib import Path
+from public_routes import public_url, editorial_url
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = ROOT / 'pages/profile'
@@ -17,7 +18,7 @@ def render():
     catalog = json.loads((PROFILE / 'data/message-bodies.json').read_text())
     body = next(b for b in catalog['bodies'] if b['body_id'] == d['body_id'])
     source = d['approved_discovery']
-    url = 'https://mirinaeman.com/work/hwasan-pan-v6/'
+    url = editorial_url(d['body_id'])
     title = body['title'] + ' 작품 소개 | 미리내맨'
     desc = '미리내맨의 무협소설 화산인수에서 이어지는 메인 테마곡 판을 바꿔 v6, 이미지 시네마와 독립 웹툰 문 열어라의 공식 작품 소개.'
     og = 'https://mirinaeman.com/assets/images/hwasan-pan-v6-og.jpg'
@@ -29,6 +30,7 @@ def render():
     for node in graph:
         if node.get('@type') == 'VideoObject':
             node['thumbnailUrl'] = og
+            node['uploadDate'] = d['video_publication']['date']
     schema = json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False).replace('<', '\\u003c')
     e = html.escape
     paragraphs = ''.join(f'<p>{e(source[key])}</p>' for key in ['summary', 'meaning'])
@@ -63,10 +65,10 @@ def render():
 <article class="card"><div class="card-body"><h3>독립 웹툰 〈문 열어라〉</h3><p>{e(source['webtoon'])}</p><p>감상 페이지에서 음악과 이미지 시네마를 재생하고, 웹툰은 자신의 속도로 읽을 수 있습니다.</p></div></article></div></div></section>
 <section class="section"><div class="wrap"><div class="section-head"><div><span class="eyebrow">ORIGINAL WORLD</span><h2>화산인수에서 이어지는 이야기</h2></div>
 <p>〈판을 바꿔〉는 미리내맨의 장편 무협소설 〈화산인수〉를 바탕으로 만든 주제곡입니다. 원작과 캐릭터의 이야기는 <a href="https://mirinaeman.com/pages/hwasan/">화산인수 원작 페이지</a>에서 이어집니다.</p></div>
-<p><a href="../../archive/index.html" data-route-key="archive">전체 작품 아카이브</a></p></div></section>
+<p><a href="{public_url('archive')}" data-route-key="archive">전체 작품 아카이브</a></p></div></section>
 </main><footer class="footer"><div class="wrap"><p>© 미리내맨 · mirinaeman.com</p></div></footer></body></html>
 '''
-    card = f'''{START}<article class="card feature"><img class="card-media" src="../{e(body['thumbnail']['path'])}" alt="{e(body['thumbnail']['alt'])}" loading="lazy"><div class="card-body"><span class="tag">MUSIC · IMAGE CINEMA · WEBTOON</span><h2>{e(body['title'])}</h2><p>{e(body['message_sentence'])}</p><div class="actions"><a class="button" href="./hwasan-pan-v6/">작품 소개</a></div></div></article>{END}'''
+    card = f'''{START}<article class="card feature"><img class="card-media" src="../{e(body['thumbnail']['path'])}" alt="{e(body['thumbnail']['alt'])}" loading="lazy"><div class="card-body"><span class="tag">MUSIC · IMAGE CINEMA · WEBTOON</span><h2>{e(body['title'])}</h2><p>{e(body['message_sentence'])}</p><div class="actions"><a class="button" href="{url}">작품 소개</a></div></div></article>{END}'''
     work = PROFILE / 'work/index.html'
     original = work.read_text()
     if START in original:

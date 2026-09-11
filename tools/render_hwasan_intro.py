@@ -2,6 +2,7 @@
 import argparse
 import html
 import json
+import re
 from pathlib import Path
 from public_routes import public_url, editorial_url
 
@@ -11,6 +12,51 @@ DATA = PROFILE / 'data/hwasan-pan-v6-intro.json'
 OUTPUT = PROFILE / 'work/hwasan-pan-v6/index.html'
 START = '<!-- HWASAN_INTRO_START -->'
 END = '<!-- HWASAN_INTRO_END -->'
+READING_STYLE = 'max-width:var(--measure)'
+PARAGRAPH_STYLE = 'margin-block-end:var(--rhythm-heading)'
+LINK_PATTERN = re.compile(r'\[([^\]]+)\]\((https://[^\s)]+)\)')
+
+
+def inline_copy(text):
+    parts = []
+    start = 0
+    for match in LINK_PATTERN.finditer(text):
+        parts.append(html.escape(text[start:match.start()]))
+        parts.append(f'<a href="{html.escape(match[2], quote=True)}">{html.escape(match[1])}</a>')
+        start = match.end()
+    parts.append(html.escape(text[start:]))
+    return ''.join(parts)
+
+
+def reading_copy(text):
+    # Existing statement-line is a block role; preserve punctuation rhythm
+    # without changing typography tokens or splitting URLs and metadata.
+    return ''.join(f'<span class="statement-line">{inline_copy(line)}</span>'
+                   for line in re.split(r'(?<=[,.])\s+', text))
+
+
+def render_block(block):
+    if block['type'] == 'paragraph':
+        return f'<p style="{PARAGRAPH_STYLE}">{reading_copy(block["text"])}</p>'
+    if block['type'] == 'list':
+        return '<ul>' + ''.join(f'<li>{reading_copy(item)}</li>' for item in block['items']) + '</ul>'
+    if block['type'] == 'comparison':
+        cards = []
+        for column, heading in enumerate(block['headings'], start=1):
+            rows = ''.join(f'<dt>{html.escape(row[0])}</dt><dd>{reading_copy(row[column])}</dd>'
+                           for row in block['rows'])
+            cards.append(f'<article class="card"><div class="card-body"><h3>{html.escape(heading)}</h3><dl>{rows}</dl></div></article>')
+        return '<div class="grid two">' + ''.join(cards) + '</div>'
+    raise ValueError(f'Unknown editorial block: {block["type"]}')
+
+
+def render_section(section):
+    section_id = html.escape(section['id'], quote=True)
+    heading = html.escape(section['heading'])
+    blocks = ''.join(render_block(block) for block in section['blocks'])
+    return (f'<section class="section" id="{section_id}" aria-labelledby="{section_id}-title">'
+            f'<div class="wrap"><div style="{READING_STYLE}">'
+            f'<h2 id="{section_id}-title" style="{PARAGRAPH_STYLE}">{heading}</h2>{blocks}</div></div></section>')
 
 
 def render():
@@ -19,8 +65,9 @@ def render():
     body = next(b for b in catalog['bodies'] if b['body_id'] == d['body_id'])
     source = d['approved_discovery']
     url = editorial_url(d['body_id'])
-    title = body['title'] + ' 작품 소개 | 미리내맨'
-    desc = '미리내맨의 무협소설 화산인수에서 이어지는 메인 테마곡 판을 바꿔 v6, 이미지 시네마와 독립 웹툰 문 열어라의 공식 작품 소개.'
+    editorial = d['editorial']
+    title = editorial['title']
+    desc = editorial['description']
     og = 'https://mirinaeman.com/assets/images/hwasan-pan-v6-og.jpg'
     graph = json.loads(json.dumps(source['json_ld']['@graph']))
     # Describe the linked work without presenting this editorial page as a video player.
@@ -33,7 +80,10 @@ def render():
             node['uploadDate'] = d['video_publication']['date']
     schema = json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False).replace('<', '\\u003c')
     e = html.escape
-    paragraphs = ''.join(f'<p>{e(source[key])}</p>' for key in ['summary', 'meaning'])
+    overview, *sections = editorial['sections']
+    paragraphs = ''.join(render_block(block) for block in overview['blocks']
+                         if block['type'] == 'paragraph' and not LINK_PATTERN.fullmatch(block['text']))
+    editorial_html = ''.join(render_section(section) for section in sections)
     text = f'''<!doctype html>
 <html lang="ko" data-lang="ko" data-theme="light">
 <head>
@@ -59,13 +109,7 @@ def render():
 <h1>{e(body['title'])}</h1>{paragraphs}
 <div class="actions"><a class="button primary" href="{e(body['canonical_url'])}">작품 감상하기</a></div></div></section>
 <section class="section"><div class="wrap"><figure><img src="../../assets/images/hwasan-pan-v6-og.jpg" width="1200" height="630" alt="화산인수 판을 바꿔의 산문 오프닝" loading="lazy"></figure></div></section>
-<section class="section"><div class="wrap"><div class="section-head"><div><span class="eyebrow">STORY & MUSIC</span><h2>함께 여는 내일</h2></div>
-<p>창작자 미리내맨 · 메인 테마곡 〈판을 바꿔〉 v6 · 재생 시간 약 3분 17초</p></div>
-<div class="grid two"><article class="card"><div class="card-body"><h3>이미지 시네마</h3><p>{e(source['cinema'])}</p><p>각 인물의 선택과 행동이 다음 장면으로 이어집니다. 문을 여는 이야기는 음악과 이미지 사이에서 함께 여는 내일의 의미를 만듭니다.</p></div></article>
-<article class="card"><div class="card-body"><h3>독립 웹툰 〈문 열어라〉</h3><p>{e(source['webtoon'])}</p><p>감상 페이지에서 음악과 이미지 시네마를 재생하고, 웹툰은 자신의 속도로 읽을 수 있습니다.</p></div></article></div></div></section>
-<section class="section"><div class="wrap"><div class="section-head"><div><span class="eyebrow">ORIGINAL WORLD</span><h2>화산인수에서 이어지는 이야기</h2></div>
-<p>〈판을 바꿔〉는 미리내맨의 장편 무협소설 〈화산인수〉를 바탕으로 만든 주제곡입니다. 원작과 캐릭터의 이야기는 <a href="https://mirinaeman.com/pages/hwasan/">화산인수 원작 페이지</a>에서 이어집니다.</p></div>
-<p><a href="{public_url('archive')}" data-route-key="archive">전체 작품 아카이브</a></p></div></section>
+{editorial_html}
 </main><footer class="footer"><div class="wrap"><p>© 미리내맨 · mirinaeman.com</p></div></footer></body></html>
 '''
     card = f'''{START}<article class="card feature"><img class="card-media" src="../{e(body['thumbnail']['path'])}" alt="{e(body['thumbnail']['alt'])}" loading="lazy"><div class="card-body"><span class="tag">MUSIC · IMAGE CINEMA · WEBTOON</span><h2>{e(body['title'])}</h2><p>{e(body['message_sentence'])}</p><div class="actions"><a class="button" href="{url}">작품 소개</a></div></div></article>{END}'''

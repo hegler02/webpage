@@ -38,7 +38,13 @@ if __name__ == '__main__':
     check = parser.parse_args().check
     for path, content in outputs().items():
         if check:
-            assert path.read_text() == content, f'Public route drift: {path}'
+            actual = path.read_text()
+            # The hosting CLI may reserialize its configuration before building.
+            # Compare JSON values; keep byte-exact checks for generated HTML.
+            if path.suffix == '.json':
+                assert json.loads(actual) == json.loads(content), f'Public route drift: {path}'
+            else:
+                assert actual == content, f'Public route drift: {path}'
         else:
             path.write_text(content)
     print('Public HTML routes: PASS' if check else 'Public HTML routes rendered')

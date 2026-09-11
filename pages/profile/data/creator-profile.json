@@ -1,0 +1,59 @@
+{
+  "name": "김준호",
+  "aliases": [
+    "미리내맨",
+    "Mirinaeman",
+    "JOONHO KIM"
+  ],
+  "url": "https://mirinaeman.com/profile/",
+  "home": "https://mirinaeman.com/",
+  "email": "hegler.kim@gmail.com",
+  "title": "김준호(미리내맨) | 프로필·공식 채널",
+  "description": "동서울대학교 교수이자 저자·크리에이터 김준호(미리내맨)의 프로필. AI 음악·소설·웹툰·이미지 시네마 작품과 공식 채널 및 연락처를 안내합니다.",
+  "jobTitle": "교수 · 저자 · 창작자 · 시스템 설계자",
+  "intro": {
+    "ko": "김준호는 ‘미리내맨’이라는 이름으로 활동하는 동서울대학교 교수이자 저자·크리에이터입니다.",
+    "en": "Joonho Kim is a professor at Dong Seoul University and an author and creator working under the name Mirinaeman."
+  },
+  "practice": {
+    "ko": "AI와 함께 음악·소설·웹툰·이미지 시네마를 만들며 이 사이트에 작품과 제작 과정을 기록합니다.",
+    "en": "He creates music and stories alongside webtoons and image cinema with AI and documents his work and creative process on this site."
+  },
+  "channels": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@mirinaeman"
+    },
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/mirinaeman/"
+    },
+    {
+      "label": "TikTok",
+      "url": "https://www.tiktok.com/@.mirinae.man"
+    },
+    {
+      "label": "네이버 블로그",
+      "url": "https://blog.naver.com/mirinaeverse"
+    }
+  ],
+  "works": [
+    {
+      "label": "화산인수 — 판을 바꿔 · 작품 소개",
+      "url": "https://mirinaeman.com/work/hwasan-pan-v6/"
+    },
+    {
+      "label": "전체 창작 아카이브",
+      "url": "https://mirinaeman.com/archive/"
+    }
+  ],
+  "movement": {
+    "intro_url": "https://mirinaeman.com/mirinae/",
+    "label": "미리내운동 공식 홈페이지",
+    "url": "https://mirinaeverse.com/"
+  },
+  "image": {
+    "url": "https://mirinaeman.com/assets/images/profile-hero.webp",
+    "alt": "종이 기록과 렌즈 및 데이터 빛이 만나는 김준호의 작업 공간"
+  }
+}

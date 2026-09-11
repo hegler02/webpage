@@ -5,6 +5,10 @@
   "trailingSlash": true,
   "rewrites": [
     {
+      "source": "/work/birthday-your-day/",
+      "destination": "/pages/profile/work/birthday-your-day/"
+    },
+    {
       "source": "/work/hwasan-pan-v6/",
       "destination": "/pages/profile/work/hwasan-pan-v6/"
     },

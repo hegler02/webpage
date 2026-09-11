@@ -5,6 +5,7 @@ import html
 import json
 import re
 from pathlib import Path
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = ROOT / 'pages/profile'
@@ -19,10 +20,16 @@ def esc(value):
 def bilingual(value):
     return ''.join(f'<span data-{lang}' + (' lang="en"' if lang == 'en' else '') + f'>{esc(value[lang])}</span>' for lang in ('ko', 'en'))
 
-def links(items):
-    return '<ul>' + ''.join(f'<li><a href="{esc(item["url"])}">{esc(item["label"])}</a></li>' for item in items) + '</ul>'
+def external_attrs(url, site_url):
+    destination = urlsplit(url)
+    if destination.netloc and destination.hostname != urlsplit(site_url).hostname:
+        return ' target="_blank" rel="noopener noreferrer"'
+    return ''
 
-def channel_links(items):
+def links(items, site_url):
+    return '<ul>' + ''.join(f'<li><a href="{esc(item["url"])}"{external_attrs(item["url"], site_url)}>{esc(item["label"])}</a></li>' for item in items) + '</ul>'
+
+def channel_links(items, site_url):
     # Paths from Simple Icons (CC0); recognizable logos, not text glyph substitutes.
     paths = json.loads((PROFILE / 'data/social-icons.json').read_text())
     keys = {'YouTube':'youtube', 'Instagram':'instagram', 'TikTok':'tiktok', '네이버 블로그':'naver'}
@@ -30,7 +37,7 @@ def channel_links(items):
     for item in items:
         key = keys[item['label']]
         svg = f'<svg width="24" height="24" viewBox="0 0 24 24" data-icon="{key}" aria-hidden="true" focusable="false"><path d="{paths[key]}"/></svg>'
-        result.append(f'<li><a class="creator-icon-link" href="{esc(item["url"])}" aria-label="{esc(item["label"])}" title="{esc(item["label"])}">{svg}</a></li>')
+        result.append(f'<li><a class="creator-icon-link" href="{esc(item["url"])}"{external_attrs(item["url"], site_url)} aria-label="{esc(item["label"])}" title="{esc(item["label"])}">{svg}</a></li>')
     return '<ul class="creator-socials">'+''.join(result)+'</ul>'
 
 def render(source, data):
@@ -64,13 +71,13 @@ def render(source, data):
       '<div class="section-head"><div><span class="eyebrow">CREATOR · CONTACT</span>'
       f'<h2 id="creator-contact-title">{esc(data["name"])} · {esc(data["aliases"][0])}</h2></div>'
       '<p>'+bilingual(data['practice'])+'</p></div><div class="grid two">'
-      '<article class="creator-panel"><h3>'+bilingual({'ko':'공식 채널','en':'Official channels'})+'</h3>'+channel_links(data['channels'])+
+      '<article class="creator-panel"><h3>'+bilingual({'ko':'공식 채널','en':'Official channels'})+'</h3>'+channel_links(data['channels'], data['url'])+
       '<div class="creator-email"><span id="creator-email-address">'+esc(data['email'])+'</span>'
       '<button type="button" class="creator-copy" data-copy-email aria-label="이메일 주소 복사" title="이메일 주소 복사" aria-describedby="creator-copy-status">'
       '<svg width="24" height="24" viewBox="0 0 24 24" data-icon="copy" aria-hidden="true" focusable="false"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg></button></div>'
       '<p class="creator-copy-status" id="creator-copy-status" role="status" aria-live="polite"></p></article>'
-      '<div class="creator-activities"><article class="creator-panel"><h3>'+bilingual({'ko':'창작 작품','en':'Creative works'})+'</h3>'+links(data['works'])+'</article>'
-      '<article class="creator-panel"><h3>'+bilingual({'ko':'사회적 활동','en':'Social initiatives'})+'</h3>'+links([{'label':'미리내운동 활동 소개','url':data['movement']['intro_url']},data['movement']])+
+      '<div class="creator-activities"><article class="creator-panel"><h3>'+bilingual({'ko':'창작 작품','en':'Creative works'})+'</h3>'+links(data['works'], data['url'])+'</article>'
+      '<article class="creator-panel"><h3>'+bilingual({'ko':'사회적 활동','en':'Social initiatives'})+'</h3>'+links([{'label':'미리내운동 활동 소개','url':data['movement']['intro_url']},data['movement']], data['url'])+
       '</article></div></div></div></section>'+END)
     if START in source:
         source = re.sub(re.escape(START)+'.*?'+re.escape(END),lambda _:contact,source,flags=re.S)

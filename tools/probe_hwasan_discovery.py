@@ -78,7 +78,7 @@ def verify(local=False):
         assert graph[0]['@id'] == CANONICAL and graph[0]['@type'] == 'WebPage'
         assert any(n['@type'] == 'MusicRecording' for n in graph)
         video = next(n for n in graph if n['@type'] == 'VideoObject')
-        assert datetime.fromisoformat(video['uploadDate'])
+        assert datetime.fromisoformat(video['uploadDate']).tzinfo is not None
         assert all(video.get(key) for key in ['name', 'thumbnailUrl', 'contentUrl'])
         parser = RobotFileParser(); parser.parse(data[1].decode().splitlines())
         for agent in ['Googlebot', 'bingbot', 'OAI-SearchBot']: assert parser.can_fetch(agent, CANONICAL), agent

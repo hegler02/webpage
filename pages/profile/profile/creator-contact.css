@@ -1,0 +1,25 @@
+.creator-contact {
+  --contact-padding: clamp(1.25rem, 3vw, 2rem);
+  --contact-target: 3rem;
+  --contact-icon: 1.5rem;
+  scroll-margin-top: calc(var(--header) + var(--grid-gap));
+}
+.creator-contact .grid.two { align-items: start; gap: var(--rhythm-actions); }
+.creator-panel { min-width: 0; padding: var(--contact-padding); border-top: 2px solid var(--rust); background: var(--paper-2); }
+.creator-panel h3 { font-size: 1.25rem; margin-bottom: var(--rhythm-heading); }
+.creator-activities { display: grid; gap: var(--rhythm-actions); min-width: 0; }
+.creator-panel ul { list-style: none; padding: 0; margin: 0; }
+.creator-panel li + li { margin-top: var(--grid-gap); }
+.creator-panel a { color: var(--ink); text-underline-offset: .25em; text-decoration-color: var(--line); }
+.creator-panel a:hover { color: var(--rust); text-decoration-color: currentColor; }
+.creator-panel .creator-socials { display: flex; flex-wrap: wrap; gap: var(--grid-gap); margin-block: var(--rhythm-heading) var(--rhythm-actions); }
+.creator-socials li + li { margin-top: 0; }
+.creator-icon-link, .creator-copy { display: inline-flex; align-items: center; justify-content: center; width: var(--contact-target); height: var(--contact-target); flex: 0 0 auto; border: 1px solid var(--line); border-radius: var(--r-sm); background: transparent; color: var(--ink); cursor: pointer; }
+.creator-icon-link svg { width: var(--contact-icon); height: var(--contact-icon); fill: currentColor; }
+.creator-icon-link:hover, .creator-copy:hover { color: var(--rust); border-color: currentColor; }
+.creator-email { display: flex; align-items: center; gap: var(--grid-gap); padding-top: var(--rhythm-heading); border-top: 1px solid var(--line); }
+.creator-email > span { min-width: 0; overflow-wrap: anywhere; user-select: all; }
+.creator-copy { margin-left: auto; }
+.creator-copy svg { width: var(--contact-icon); height: var(--contact-icon); fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.creator-copy:disabled { cursor: wait; opacity: .6; }
+.creator-copy-status { min-height: 1.5em; margin-top: var(--grid-gap); color: var(--soft); font-size: .875rem; line-height: var(--leading-ui); }

@@ -5,6 +5,10 @@
   "trailingSlash": true,
   "rewrites": [
     {
+      "source": "/archive/dont-you-want-my-money/",
+      "destination": "/pages/profile/archive/dont-you-want-my-money/"
+    },
+    {
       "source": "/work/birthday-your-day/",
       "destination": "/pages/profile/work/birthday-your-day/"
     },
@@ -208,6 +212,21 @@
     {
       "source": "/pages/profile/work/birthday-your-day/",
       "destination": "/work/birthday-your-day/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/dont-you-want-my-money/index.html",
+      "destination": "/archive/dont-you-want-my-money/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/dont-you-want-my-money/index",
+      "destination": "/archive/dont-you-want-my-money/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/dont-you-want-my-money/",
+      "destination": "/archive/dont-you-want-my-money/",
       "permanent": true
     }
   ]

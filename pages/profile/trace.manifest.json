@@ -4,52 +4,114 @@
     "public-home": {
       "value": "<meta name=\"site-home\" content=\"https://mirinaeman.com/\">",
       "targets": [
-        { "path": "pages/profile/index.html", "count": 1 },
-        { "path": "pages/profile/archive/index.html", "count": 1 },
-        { "path": "pages/profile/work/index.html", "count": 1 },
-        { "path": "pages/profile/books/index.html", "count": 1 },
-        { "path": "pages/profile/mirinae/index.html", "count": 1 },
-        { "path": "pages/profile/profile/index.html", "count": 1 }
+        {
+          "path": "pages/profile/index.html",
+          "count": 1
+        },
+        {
+          "path": "pages/profile/archive/index.html",
+          "count": 1
+        },
+        {
+          "path": "pages/profile/work/index.html",
+          "count": 1
+        },
+        {
+          "path": "pages/profile/books/index.html",
+          "count": 1
+        },
+        {
+          "path": "pages/profile/mirinae/index.html",
+          "count": 1
+        },
+        {
+          "path": "pages/profile/profile/index.html",
+          "count": 1
+        }
       ]
     },
     "archive-route": {
-      "value": "https://mirinaeman.com/archive/",
+      "value": "\"https://mirinaeman.com/archive/\"",
       "targets": [
-        { "path": "pages/profile/archive/index.html", "count": 3 },
-        { "path": "pages/profile/sitemap.xml", "count": 1 }
+        {
+          "path": "pages/profile/archive/index.html",
+          "count": 3
+        }
       ]
     },
     "public-catalog": {
       "value": "message-bodies.json",
       "targets": [
-        { "path": "pages/profile/site.manifest.json", "count": 1 },
-        { "path": "tools/render_archive.py", "count": 1 },
-        { "path": "tools/release_gate.py", "count": 1 }
+        {
+          "path": "pages/profile/site.manifest.json",
+          "count": 1
+        },
+        {
+          "path": "tools/render_archive.py",
+          "count": 1
+        },
+        {
+          "path": "tools/release_gate.py",
+          "count": 1
+        }
       ]
     },
     "research-bibliography": {
       "value": "class=\"research-list\"",
       "targets": [
-        { "path": "pages/profile/books/index.html", "count": 2 }
+        {
+          "path": "pages/profile/books/index.html",
+          "count": 2
+        }
       ]
     },
     "research-degree-priority": {
       "value": "data-research-list=\"theses\"",
       "targets": [
-        { "path": "pages/profile/books/index.html", "count": 1 }
+        {
+          "path": "pages/profile/books/index.html",
+          "count": 1
+        }
       ]
     },
     "research-tabs": {
       "value": "data-research-tabs",
       "targets": [
-        { "path": "pages/profile/books/index.html", "count": 1 },
-        { "path": "pages/profile/app.js", "count": 1 }
+        {
+          "path": "pages/profile/books/index.html",
+          "count": 1
+        },
+        {
+          "path": "pages/profile/app.js",
+          "count": 1
+        }
       ]
     },
     "research-projects": {
       "value": "class=\"project-list\"",
       "targets": [
-        { "path": "pages/profile/books/index.html", "count": 1 }
+        {
+          "path": "pages/profile/books/index.html",
+          "count": 1
+        }
+      ]
+    },
+    "archive-sitemap": {
+      "value": "<loc>https://mirinaeman.com/archive/</loc>",
+      "targets": [
+        {
+          "path": "pages/profile/sitemap.xml",
+          "count": 1
+        }
+      ]
+    },
+    "money-introduction-sitemap": {
+      "value": "<loc>https://mirinaeman.com/archive/dont-you-want-my-money/</loc>",
+      "targets": [
+        {
+          "path": "pages/profile/sitemap.xml",
+          "count": 1
+        }
       ]
     }
   }

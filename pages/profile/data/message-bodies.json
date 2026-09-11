@@ -191,6 +191,33 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "dont-you-want-my-money",
+      "title": "내 돈도 안 받냐",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "song",
+        "image-cinema",
+        "webtoon"
+      ],
+      "tags": [
+        "노래",
+        "이미지 시네마",
+        "웹툰"
+      ],
+      "message_sentence": "돈을 내겠다는 손님이 닫힌 문 앞에서 기다리는 황당함을 노래와 이미지 시네마·웹툰으로 풀어낸 풍자.",
+      "thumbnail": {
+        "path": "assets/thumbnails/dont-you-want-my-money.webp",
+        "alt": "닫힌 OPEN 상점의 유리문을 사이에 둔 손님과 샘 알트만의 풍자 그림",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://dont-you-want-my-money.mirinaeman.chatgpt.site",
+      "status": "GOLDEN",
+      "first_deployed_at": "2026-09-11T15:33:48.752388+00:00",
+      "latest_deployed_at": "2026-09-11T15:33:48.752388+00:00"
+    },
+    {
       "body_id": "eagle-five-love",
       "title": "독수리 오형제의 애틋한 사랑",
       "body_type": "STORYBODY",

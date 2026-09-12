@@ -2,3 +2,7 @@
 .visit-map{display:block;width:100%;height:var(--visit-map-height);border:0;margin-block:var(--grid-gap)}
 
 .section figure > img{height:auto}
+
+.visit-story > h2 + p{margin-block-start:var(--rhythm-heading)}
+.visit-story > p + p,.visit-story > .actions + p{margin-block-start:var(--grid-gap)}
+.visit-story > * + h2{margin-block-start:var(--rhythm-breath)}

@@ -134,7 +134,6 @@ def render_archive(bodies: list[dict], manifest: dict) -> str:
         separators=(",", ":"),
     )
     cards = "".join(body_card(body, asset_prefix="../") for body in bodies)
-    introduction_links = ''.join('<a href="'+manifest['public_home'].rstrip('/')+path+'">'+esc(b['title'])+' · 작품 소개</a>' for path in manifest.get('editorial_pages',[]) if path.startswith('/archive/') for b in bodies if path.rstrip('/').endswith('/'+b['body_id']))
     return f'''<!doctype html>
 <html lang="ko" data-lang="ko" data-theme="light">
 <head>
@@ -172,7 +171,6 @@ def render_archive(bodies: list[dict], manifest: dict) -> str:
     </section>
     <section class="section archive-section">
       <div class="wrap">
-        <div class="actions">{introduction_links}</div>
         <div class="body-filters" aria-label="몸 유형 필터">{''.join(filters)}</div>
         <div class="body-grid">{cards}</div>
       </div>

@@ -1,0 +1,11 @@
+.introduction-copy > h2 + p {
+  margin-block-start: var(--rhythm-heading);
+}
+
+.introduction-copy > p + p {
+  margin-block-start: var(--grid-gap);
+}
+
+.introduction-copy > * + h2 {
+  margin-block-start: var(--rhythm-breath);
+}

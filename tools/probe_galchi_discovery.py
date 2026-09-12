@@ -12,6 +12,8 @@ class Page(HTMLParser):
   a=dict(attrs)
   if tag=='meta':self.meta[a.get('name',a.get('property'))]=a.get('content')
   if tag=='link' and a.get('rel')=='canonical':self.canonical.append(a.get('href'))
+config=json.loads((ROOT.parents[1]/'vercel.json').read_text())
+assert {'source':'/archive/noreut-galchi-album/','destination':'/pages/profile/archive/noreut-galchi-album/'} in config['rewrites']
 p=Page();p.feed((PAGE/'index.html').read_text());assert p.canonical==[URL]
 assert p.meta['og:url']==URL and p.meta['twitter:card']=='summary_large_image'
 assert p.meta['og:image']==p.meta['twitter:image']==URL+'assets/og.png'

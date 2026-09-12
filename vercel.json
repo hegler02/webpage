@@ -5,6 +5,10 @@
   "trailingSlash": true,
   "rewrites": [
     {
+      "source": "/archive/noreut-galchi-album/",
+      "destination": "/pages/profile/archive/noreut-galchi-album/"
+    },
+    {
       "source": "/archive/dont-you-want-my-money/",
       "destination": "/pages/profile/archive/dont-you-want-my-money/"
     },

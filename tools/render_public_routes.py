@@ -28,6 +28,9 @@ def outputs():
     config = json.loads(config_path.read_text())
     existing = [r for r in config.get('redirects', []) if r['source'] not in aliases]
     config['redirects'] = existing + [{'source': source, 'destination': target, 'permanent': True} for source, target in aliases.items()]
+    editorial = [{'source': path, 'destination': data['physical_root'].rstrip('/') + path} for path in data.get('editorial_pages', [])]
+    editorial_sources = {entry['source'] for entry in editorial}
+    config['rewrites'] = editorial + [entry for entry in config.get('rewrites', []) if entry['source'] not in editorial_sources]
     result[config_path] = json.dumps(config, ensure_ascii=False, indent=2) + '\n'
     return result
 

@@ -11,7 +11,7 @@
   "officialUrl": "https://wehotel.co.kr/",
   "locationUrl": "https://wehotel.co.kr/location/",
   "directionsUrl": "https://www.google.com/maps/dir/?api=1&destination=WE+Hotel+Jeju%2C+453-95+1100-ro%2C+Seogwipo",
-  "embedUrl": "https://www.google.com/maps/embed?pb=!1m5!3m3!1m2!1s0x350c50a253c1fb11%3A0xd4ad66deea67b8b3!2zV0XtmLjthZQg7KCc7KO8!5e0!3m2!1sko!2skr!4v1789202530673!5m2!1sko!2skr",
+  "embedUrl": "https://www.google.com/maps?q=WE%ED%98%B8%ED%85%94+%EC%A0%9C%EC%A3%BC&ll=33.38%2C126.55&z=11&hl=ko&output=embed",
   "imageAlt": "제주 WE 호텔의 숲과 먼 바다를 담은 여행 기록",
   "source": "Exported from the authorized jeju-we V2 identity and verified official hotel location on 2026-09-12."
 }

@@ -5,20 +5,24 @@
   "trailingSlash": true,
   "rewrites": [
     {
-      "source": "/archive/noreut-galchi-album/",
-      "destination": "/pages/profile/archive/noreut-galchi-album/"
-    },
-    {
-      "source": "/archive/dont-you-want-my-money/",
-      "destination": "/pages/profile/archive/dont-you-want-my-money/"
+      "source": "/work/hwasan-pan-v6/",
+      "destination": "/pages/profile/work/hwasan-pan-v6/"
     },
     {
       "source": "/work/birthday-your-day/",
       "destination": "/pages/profile/work/birthday-your-day/"
     },
     {
-      "source": "/work/hwasan-pan-v6/",
-      "destination": "/pages/profile/work/hwasan-pan-v6/"
+      "source": "/archive/dont-you-want-my-money/",
+      "destination": "/pages/profile/archive/dont-you-want-my-money/"
+    },
+    {
+      "source": "/archive/noreut-galchi-album/",
+      "destination": "/pages/profile/archive/noreut-galchi-album/"
+    },
+    {
+      "source": "/archive/jeju-we/",
+      "destination": "/pages/profile/archive/jeju-we/"
     },
     {
       "source": "/",

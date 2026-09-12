@@ -109,6 +109,46 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "baekun-five-strike-action-cinema",
+      "title": "화산인수 - 반천운겁(返天雲劫)",
+      "body_type": "STORYBODY",
+      "source_kinds": [
+        "original-fiction",
+        "generated-keyframes",
+        "image-cinema",
+        "user-selected-music",
+        "procedural-foley",
+        "independent-webtoon",
+        "static-viewing-page"
+      ],
+      "tags": [
+        "image-cinema",
+        "wuxia",
+        "action",
+        "baekun",
+        "anatomy",
+        "hit-stop",
+        "ink-comic",
+        "stillness",
+        "native-lettering",
+        "vertical-scroll",
+        "web-viewing",
+        "sequel"
+      ],
+      "message_sentence": "백운의 고요한 시선과 남은 파문 사이에서 관객이 반천운겁의 움직임을 완성한다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/baekun-five-strike-action-cinema.webp",
+        "alt": "흰 도포를 입은 백운과 다섯 검객이 원형 문 앞에서 대치하는 무협 원화",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://hwasan-returning-clouds.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-12T13:00:17.352045+00:00",
+      "latest_deployed_at": "2026-09-12T13:00:17.352045+00:00"
+    },
+    {
       "body_id": "birthday-your-day",
       "title": "생일 축하해 — 오늘은 너의 자리",
       "body_type": "SONGBODY",

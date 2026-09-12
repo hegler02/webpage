@@ -247,6 +247,21 @@
       "source": "/pages/profile/archive/noreut-galchi-album/",
       "destination": "/archive/noreut-galchi-album/",
       "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/jeju-we/index.html",
+      "destination": "/archive/jeju-we/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/jeju-we/index",
+      "destination": "/archive/jeju-we/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/jeju-we/",
+      "destination": "/archive/jeju-we/",
+      "permanent": true
     }
   ]
 }

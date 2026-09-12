@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "we-og",
+      "kind": "image",
+      "role": "open-graph",
+      "delivery": {
+        "path": "assets/og.png",
+        "mime": "image/png",
+        "width": 1200,
+        "height": 630,
+        "sha256": "35a3c4447a4c81d7cf1c2d0c1862f40953b836a36144b9533ec57af11cb32ff0"
+      }
+    }
+  ]
+}

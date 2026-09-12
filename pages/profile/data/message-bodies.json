@@ -543,7 +543,7 @@
     },
     {
       "body_id": "jeju-we",
-      "title": "제주 WE",
+      "title": "제주 WE — 당신과 나, 다시 우리",
       "body_type": "SONGBODY",
       "source_kinds": [
         "travel",
@@ -551,23 +551,26 @@
         "personal-record"
       ],
       "tags": [
-        "album",
+        "travel",
         "audio",
         "jeju",
-        "healing"
+        "webtoon",
+        "image-cinema",
+        "couple",
+        "hotel"
       ],
-      "message_sentence": "직접 촬영한 제주 WE 호텔의 숲과 바다, 공간과 자작곡이 개인 치유의 몸으로 만난다.",
+      "message_sentence": "아내와 단둘이 쉰 제주 WE 호텔의 휴가에서 다시 30대로 돌아간 듯했던 마음을 노래·사진·웹툰·이미지 시네마로 잇고, 실제 장소를 찾아가는 경험으로 연결한다.",
       "thumbnail": {
         "path": "assets/thumbnails/jeju-we.webp",
-        "alt": "“제주 WE” 작품의 대표 이미지",
+        "alt": "제주 WE 호텔의 숲과 먼 바다를 담은 여행 기록",
         "width": 960,
         "height": 540,
         "focal_point": "50% 50%"
       },
-      "canonical_url": "https://jeju-we.mirinaeman.chatgpt.site",
+      "canonical_url": "https://jeju-we-v2.mirinaeman.chatgpt.site",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-08-30T07:46:49Z",
-      "latest_deployed_at": "2026-08-30T09:36:52Z"
+      "latest_deployed_at": "2026-09-12T08:56:18.963106+00:00"
     },
     {
       "body_id": "kimbujang-unsealed",

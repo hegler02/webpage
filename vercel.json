@@ -25,6 +25,10 @@
       "destination": "/pages/profile/archive/jeju-we/"
     },
     {
+      "source": "/archive/baekun-five-strike-action-cinema/",
+      "destination": "/pages/profile/archive/baekun-five-strike-action-cinema/"
+    },
+    {
       "source": "/",
       "destination": "/pages/profile/"
     },
@@ -265,6 +269,21 @@
     {
       "source": "/pages/profile/archive/jeju-we/",
       "destination": "/archive/jeju-we/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/baekun-five-strike-action-cinema/index.html",
+      "destination": "/archive/baekun-five-strike-action-cinema/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/baekun-five-strike-action-cinema/index",
+      "destination": "/archive/baekun-five-strike-action-cinema/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/baekun-five-strike-action-cinema/",
+      "destination": "/archive/baekun-five-strike-action-cinema/",
       "permanent": true
     }
   ]

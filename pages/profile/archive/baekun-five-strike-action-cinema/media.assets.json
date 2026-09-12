@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "returning-clouds-intro-og",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "kind": "project-generated",
+        "filename": "og.jpg",
+        "sha256": "340c244ed582d08d1227e6f56cad34dd75e6c1ab15b3caf7ccab8023ddafe338"
+      },
+      "delivery": {
+        "path": "assets/og.jpg",
+        "sha256": "340c244ed582d08d1227e6f56cad34dd75e6c1ab15b3caf7ccab8023ddafe338",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  ]
+}

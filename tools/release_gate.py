@@ -163,6 +163,8 @@ def main() -> int:
         ([sys.executable, str(ROOT / "tools" / "probe_galchi_discovery.py")], "Galchi discovery gate"),
         ([sys.executable, str(ROOT / "tools" / "render_galchi_intro.py"), "--check"], "Galchi introduction gate"),
         ([sys.executable, str(ROOT / "tools" / "render_money_intro.py"), "--check"], "Money archive introduction gate"),
+        ([sys.executable, str(ROOT / "tools" / "render_returning_clouds_intro.py"), "--check"], "Hwasan Returning Clouds introduction gate"),
+        ([sys.executable, str(ROOT / "tools" / "probe_returning_clouds_discovery.py")], "Hwasan Returning Clouds discovery gate"),
         ([sys.executable, str(ROOT / "tools" / "render_creator_profile.py"), "--check"], "Creator profile identity gate"),
         ([sys.executable, str(ROOT / "tools" / "render_public_routes.py"), "--check"], "Public HTML route gate"),
         ([sys.executable, str(ROOT / "tools" / "render_hwasan_intro.py"), "--check"], "Hwasan introduction gate"),

@@ -849,9 +849,10 @@
         "audio",
         "interactive-web",
         "jeju",
-        "webtoon"
+        "webtoon",
+        "image-cinema"
       ],
-      "message_sentence": "제주에서 맛본 한 끼의 놀라움이 노래와 미디어의 몸으로 다시 살아난다.",
+      "message_sentence": "제주에서 맛본 갈치통구이와 솥밥의 놀라움이 노래와 이미지 시네마, 웹툰으로 다시 살아난다.",
       "thumbnail": {
         "path": "assets/thumbnails/noreut-galchi-album.webp",
         "alt": "“노릇노릇 갈치통구이” 작품의 대표 이미지",
@@ -862,7 +863,7 @@
       "canonical_url": "https://noreut-galchi-album-v2.mirinaeman.chatgpt.site",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-08-30T12:16:04Z",
-      "latest_deployed_at": "2026-09-12T01:45:02.851706+00:00"
+      "latest_deployed_at": "2026-09-12T02:38:18.317149+00:00"
     },
     {
       "body_id": "one-more-guest-album",

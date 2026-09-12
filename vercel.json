@@ -228,6 +228,21 @@
       "source": "/pages/profile/archive/dont-you-want-my-money/",
       "destination": "/archive/dont-you-want-my-money/",
       "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/noreut-galchi-album/index.html",
+      "destination": "/archive/noreut-galchi-album/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/noreut-galchi-album/index",
+      "destination": "/archive/noreut-galchi-album/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/noreut-galchi-album/",
+      "destination": "/archive/noreut-galchi-album/",
+      "permanent": true
     }
   ]
 }

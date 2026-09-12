@@ -158,6 +158,8 @@ def webp_dimensions(path: Path) -> tuple[int, int] | None:
 def main() -> int:
     errors: list[str] = []
     project_checks = (
+        ([sys.executable, str(ROOT / "tools" / "probe_galchi_discovery.py")], "Galchi discovery gate"),
+        ([sys.executable, str(ROOT / "tools" / "render_galchi_intro.py"), "--check"], "Galchi introduction gate"),
         ([sys.executable, str(ROOT / "tools" / "render_money_intro.py"), "--check"], "Money archive introduction gate"),
         ([sys.executable, str(ROOT / "tools" / "render_creator_profile.py"), "--check"], "Creator profile identity gate"),
         ([sys.executable, str(ROOT / "tools" / "render_public_routes.py"), "--check"], "Public HTML route gate"),

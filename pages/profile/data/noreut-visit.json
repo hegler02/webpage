@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "searchTitle": "제주 노릇 갈치통구이·갈치솥밥 방문기 | 노래·웹툰·이미지 시네마",
+  "introductionTitle": "제주 노릇 방문기 — 갈치통구이와 갈치솥밥을 노래로 | 미리내맨",
+  "description": "제주 서귀포 중문 노릇에서 맛본 갈치통구이와 갈치솥밥. 미리내맨의 실제 방문 사진·영상, 노래와 웹툰, 이미지 시네마로 한 끼의 기억을 만나고 지도에서 위치를 확인하세요.",
+  "heading": "제주 노릇에서 시작된 한 끼의 기록",
+  "summary": "제주 서귀포 중문의 노릇에서 긴 갈치통구이를 마주했습니다. 바삭한 껍질과 부드러운 속살, 걱정과 달리 고소했던 갈치솥밥의 기억을 노래와 웹툰, 이미지 시네마로 담았습니다.",
+  "perspective": "미리내맨의 개인 방문 경험에서 출발한 창작물입니다. 사진과 실제 방문 영상은 그날의 식사를 기록하고, 웹툰과 이미지 시네마는 그 기억을 새롭게 표현합니다.",
+  "visitNote": "방문 전 위치와 최신 영업시간·메뉴는 지도에서 확인해 주세요.",
+  "introductionUrl": "https://mirinaeman.com/archive/noreut-galchi-album/",
+  "place": {
+    "id": "https://mirinaeman.com/archive/noreut-galchi-album/#place",
+    "name": "중문갈치노릇 서귀포중문점",
+    "region": "제주 서귀포 중문",
+    "mapUrl": "https://maps.app.goo.gl/1SRAmzw4EuTJWmrB8",
+    "mapLabel": "노릇 위치·영업정보 보기",
+    "embedUrl": "https://www.google.com/maps/embed?pb=!1m5!3m3!1m2!1s0x350c5b5c22a8b405%3A0xf9610b7227acb6e1!2z7KSR66y46rCI7LmY64W466aHIOyEnOq3gO2PrOykkeusuOygkA!5e0!3m2!1sko!2skr!4v1789190094082!5m2!1sko!2skr",
+    "directionsLabel": "노릇 길찾기",
+    "directionsUrl": "https://www.google.com/maps/dir/?api=1&destination=%EC%A4%91%EB%AC%B8%EA%B0%88%EC%B9%98%EB%85%B8%EB%A6%87+%EC%84%9C%EA%B7%80%ED%8F%AC%EC%A4%91%EB%AC%B8%EC%A0%90"
+  }
+}

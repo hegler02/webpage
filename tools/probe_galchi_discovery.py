@@ -21,4 +21,11 @@ with Image.open(PAGE/'assets/og.png') as im:im.load();assert im.size==(1731,909)
 assert (PAGE/'assets/og.png').stat().st_size<5_000_000
 assert URL in [n.text for n in ET.parse(ROOT/'sitemap.xml').getroot().findall('{*}url/{*}loc')]
 assert 'Sitemap: https://mirinaeman.com/sitemap.xml' in (ROOT/'robots.txt').read_text()
+visit=json.loads((ROOT/'data/noreut-visit.json').read_text())
+from html import escape
+page=(PAGE/'index.html').read_text()
+assert '<title>'+escape(visit['introductionTitle'])+'</title>' in page
+assert escape(visit['place']['embedUrl']) in page
+assert escape(visit['place']['directionsUrl']) in page
+assert visit['place']['name'] in page
 print('Galchi introduction discovery and image integrity: PASS')

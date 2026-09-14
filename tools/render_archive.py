@@ -12,7 +12,7 @@ from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 from public_routes import public_url
-from context_graph import load as load_context
+from context_graph import load as load_context, CREATIVE_NOTES_LABEL
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = ROOT / "pages" / "profile"
@@ -172,13 +172,12 @@ def render_archive(bodies: list[dict], manifest: dict) -> str:
     </section>
     <section class="section archive-section">
       <div class="wrap">
-        <p><a href="{load_context()['hub_url']}">이미지 시네마의 감정과 해석 여백 — 작품을 연결해 읽기</a></p>
         <div class="body-filters" aria-label="몸 유형 필터">{''.join(filters)}</div>
         <div class="body-grid">{cards}</div>
       </div>
     </section>
   </main>
-  <footer class="footer"><div class="wrap"><p>© Joonho Kim · mirinaeman.com</p><p><span data-ko>인간의 판단이 최종 수용 권한을 갖습니다.</span><span data-en lang="en">Human judgment retains final authority over acceptance.</span></p></div></footer>
+  <footer class="footer"><div class="wrap"><p>© Joonho Kim · mirinaeman.com</p><p><a href="{load_context()['hub_url']}" data-context-nav><span data-ko>{CREATIVE_NOTES_LABEL}</span><span data-en lang="en">Creative notes</span></a></p><p><span data-ko>인간의 판단이 최종 수용 권한을 갖습니다.</span><span data-en lang="en">Human judgment retains final authority over acceptance.</span></p></div></footer>
 </body>
 </html>
 '''

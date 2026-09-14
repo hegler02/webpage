@@ -2,6 +2,8 @@
 from pathlib import Path
 import json,html,re,hashlib
 ROOT=Path(__file__).resolve().parents[1];PROFILE=ROOT/'pages/profile'
+CREATIVE_NOTES_LABEL='창작노트'
+RELATED_WORKS_LABEL='이어지는 작품'
 def load():
  d=json.loads((PROFILE/'data/context-graph.json').read_text());catalog=json.loads((PROFILE/'data/message-bodies.json').read_text());lookup={b['body_id']:b for b in catalog['bodies']};creator=json.loads((PROFILE/'data/creator-profile.json').read_text())
  d['creator']={'id':creator['url']+'#person','name':creator['name'],'alias':creator['aliases'][0],'url':creator['url']}
@@ -30,4 +32,4 @@ def work_node(d,w):
  return n
 def backlink(body_id):
  d=load();w=next(x for x in d['works'] if x['body_id']==body_id)
- return '<aside class="section"><div class="wrap" style="max-width:var(--measure)"><h2>이어지는 창작 맥락</h2><p>'+prose(w['reason'])+'</p><p><a href="'+d['hub_url']+'">이미지 시네마의 감정과 해석 여백</a> · <a href="'+d['intro_url']+'">벌써, 가을의 창작 기록</a></p></div></aside>'
+ return '<aside class="section"><div class="wrap" style="max-width:var(--measure)"><h2>'+RELATED_WORKS_LABEL+'</h2><p>'+prose(w['reason'])+'</p><p><a href="'+d['intro_url']+'">벌써, 가을 살펴보기</a> · <a href="'+d['hub_url']+'">'+CREATIVE_NOTES_LABEL+'</a></p></div></aside>'

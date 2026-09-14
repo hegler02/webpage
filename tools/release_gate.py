@@ -155,7 +155,12 @@ def webp_dimensions(path: Path) -> tuple[int, int] | None:
     return None
 
 
+def unapproved_heading_breaks(source):
+    return any(re.search(r"<br\s*/?>", content, re.I) and 'data-typography-break="approved"' not in attrs for attrs, content in re.findall(r"<h[1-3]([^>]*)>(.*?)</h[1-3]>", source, re.I | re.S))
+
+
 def main() -> int:
+    subprocess.run([sys.executable, str(ROOT / "tools/check_context_graph.py")], check=True)
     errors: list[str] = []
     project_checks = (
         ([sys.executable, str(ROOT / "tools" / "render_we_intro.py"), "--check"], "WE introduction gate"),
@@ -331,7 +336,7 @@ def main() -> int:
             errors.append(f"forbidden Suno playback transport: {html_path.relative_to(ROOT)}")
         if document.audio_count > 1:
             errors.append(f"multiple audio control surfaces: {html_path.relative_to(ROOT)}")
-        if re.search(r"<h[1-3][^>]*>.*?<br\s*/?>", source, re.I | re.S):
+        if unapproved_heading_breaks(source):
             errors.append(f"unapproved heading hard break: {html_path.relative_to(ROOT)}")
 
     books_source = (PROFILE / "books" / "index.html").read_text(encoding="utf-8")

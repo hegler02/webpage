@@ -1,0 +1,6 @@
+.context-prose{max-width:var(--measure)}
+.context-prose > * + *{margin-block-start:var(--rhythm-heading)}
+.context-prose > * + h2,.context-prose > * + h3{margin-block-start:var(--rhythm-breath)}
+.context-prose img{max-width:100%;height:auto}
+.context-prose a{overflow-wrap:anywhere}
+#share-status input{max-width:100%}

@@ -29,6 +29,14 @@
       "destination": "/pages/profile/archive/baekun-five-strike-action-cinema/"
     },
     {
+      "source": "/archive/already-autumn/",
+      "destination": "/pages/profile/archive/already-autumn/"
+    },
+    {
+      "source": "/archive/image-cinema/",
+      "destination": "/pages/profile/archive/image-cinema/"
+    },
+    {
       "source": "/",
       "destination": "/pages/profile/"
     },
@@ -284,6 +292,36 @@
     {
       "source": "/pages/profile/archive/baekun-five-strike-action-cinema/",
       "destination": "/archive/baekun-five-strike-action-cinema/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/already-autumn/index.html",
+      "destination": "/archive/already-autumn/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/already-autumn/index",
+      "destination": "/archive/already-autumn/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/already-autumn/",
+      "destination": "/archive/already-autumn/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/image-cinema/index.html",
+      "destination": "/archive/image-cinema/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/image-cinema/index",
+      "destination": "/archive/image-cinema/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/image-cinema/",
+      "destination": "/archive/image-cinema/",
       "permanent": true
     }
   ]

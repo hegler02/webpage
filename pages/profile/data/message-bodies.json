@@ -83,6 +83,35 @@
       "latest_deployed_at": "2026-09-02T16:59:12Z"
     },
     {
+      "body_id": "already-autumn",
+      "title": "벌써, 가을",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "original-song",
+        "everyday-experience"
+      ],
+      "tags": [
+        "image-cinema",
+        "webtoon",
+        "watercolor",
+        "autumn",
+        "generations",
+        "mcluhan"
+      ],
+      "message_sentence": "같은 바람이 각자의 삶에 다른 가을로 도착한다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/already-autumn.webp",
+        "alt": "초가을 강변에서 각자의 시간을 보내는 다섯 세대 · 벌써, 가을",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://already-autumn.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-14T10:22:52.614622+00:00",
+      "latest_deployed_at": "2026-09-14T10:22:52.614622+00:00"
+    },
+    {
       "body_id": "baekje-renaissance",
       "title": "검이불루, 화이불치 2026 | BAEKJE RENAISSANCE 2026",
       "body_type": "SCREENBODY",

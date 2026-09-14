@@ -12,6 +12,7 @@ from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 from public_routes import public_url
+from context_graph import load as load_context
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = ROOT / "pages" / "profile"
@@ -171,6 +172,7 @@ def render_archive(bodies: list[dict], manifest: dict) -> str:
     </section>
     <section class="section archive-section">
       <div class="wrap">
+        <p><a href="{load_context()['hub_url']}">이미지 시네마의 감정과 해석 여백 — 작품을 연결해 읽기</a></p>
         <div class="body-filters" aria-label="몸 유형 필터">{''.join(filters)}</div>
         <div class="body-grid">{cards}</div>
       </div>
@@ -184,7 +186,7 @@ def render_archive(bodies: list[dict], manifest: dict) -> str:
 
 def render_latest(bodies: list[dict]) -> str:
     cards = "".join(body_card(body, compact=True, asset_prefix="./") for body in bodies[:HOME_ARCHIVE_LIMIT])
-    return f'''{HOME_START}<section class="section latest-bodies"><div class="wrap"><div class="section-head"><div><span class="eyebrow">MESSAGE BODIES</span><h2><span data-ko>내 미디어 철학이 몸을 입는 순간</span><span data-en lang="en">The moment my media philosophy takes a body</span></h2></div><p><span data-ko>노래, 슬라이드, 화면과 이야기가 배포로 끝나지 않고 다음 창작을 바꾸는 기억으로 축적됩니다.</span><span data-en lang="en">Songs, slides, screens, and stories accumulate as memory that changes the next creation.</span></p></div><div class="body-grid body-grid-latest">{cards}</div><div class="actions"><a class="button primary" href="{public_url('archive')}" data-route-key="archive"><span data-ko>전체 아카이브</span><span data-en lang="en">View full archive</span></a></div></div></section>{HOME_END}'''
+    return f'''{HOME_START}<section class="section latest-bodies"><div class="wrap"><div class="section-head"><div><span class="eyebrow">MESSAGE BODIES</span><h2><span data-ko>내 미디어 철학이 몸을 입는 순간</span><span data-en lang="en">The moment my media philosophy takes a body</span></h2></div><p><span data-ko>노래, 슬라이드, 화면과 이야기가 배포로 끝나지 않고 다음 창작을 바꾸는 기억으로 축적됩니다.</span><span data-en lang="en">Songs, slides, screens, and stories accumulate as memory that changes the next creation.</span></p></div><div class="body-grid body-grid-latest">{cards}</div><div class="actions"><a class="button primary" href="{public_url('archive')}" data-route-key="archive"><span data-ko>전체 아카이브</span><span data-en lang="en">View full archive</span></a><a class="button" href="{load_context()['hub_url']}">이미지 시네마 창작 연구</a></div></div></section>{HOME_END}'''
 
 
 def replace_block(source: str, start: str, end: str, replacement: str) -> str:

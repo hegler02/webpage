@@ -1,0 +1,4 @@
+node_modules/
+__pycache__/
+public/assets/afternoon-shadows.png
+.qa/

@@ -133,3 +133,7 @@ a,code,samp,kbd{overflow-wrap:anywhere} button{font:inherit}:focus-visible{outli
 @media (hover:none),(pointer:coarse){.button,.nav a,.nav button{min-height:2.75rem}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}}
 @media (max-width:56rem){.mirinae-steps,.mirinae-history,.theme-song{grid-template-columns:1fr}}
+
+/* Standard Phosphor icon for the constellation route. */
+.constellation-nav-icon{filter:invert(1);opacity:.7}
+:root[data-theme="light"] .constellation-nav-icon{filter:none}

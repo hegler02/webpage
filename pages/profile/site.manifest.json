@@ -27,6 +27,13 @@
       "en": "Archive"
     },
     {
+      "key": "constellation",
+      "public_path": "/constellation/",
+      "physical_path": "constellation/index.html",
+      "ko": "별자리",
+      "en": "Constellation"
+    },
+    {
       "key": "books",
       "public_path": "/books/",
       "physical_path": "books/index.html",
@@ -51,7 +58,9 @@
   "catalog": "data/message-bodies.json",
   "generated_outputs": [
     "archive/index.html",
-    "sitemap.xml"
+    "sitemap.xml",
+    "constellation/index.html",
+    "constellation/graph.json"
   ],
   "editorial_pages": [
     "/work/hwasan-pan-v6/",

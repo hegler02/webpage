@@ -11,7 +11,7 @@
     : new URL(declaredHome || '/', location.href);
   const routeRoot = location.protocol === 'file:' ? assetRoot : home;
 
-  const routes = /* GENERATED_ROUTES_START */[{"key":"home","path":"","ko":"홈","en":"Home"},{"key":"work","path":"work/","ko":"작업","en":"Work"},{"key":"archive","path":"archive/","ko":"아카이브","en":"Archive"},{"key":"books","path":"books/","ko":"저서·연구","en":"Books & research"},{"key":"mirinae","path":"mirinae/","ko":"미리내","en":"Mirinae"},{"key":"profile","path":"profile/","ko":"프로필","en":"Profile"}]/* GENERATED_ROUTES_END */;
+  const routes = /* GENERATED_ROUTES_START */[{"key":"home","path":"","ko":"홈","en":"Home"},{"key":"work","path":"work/","ko":"작업","en":"Work"},{"key":"archive","path":"archive/","ko":"아카이브","en":"Archive"},{"key":"constellation","path":"constellation/","ko":"별자리","en":"Constellation"},{"key":"books","path":"books/","ko":"저서·연구","en":"Books & research"},{"key":"mirinae","path":"mirinae/","ko":"미리내","en":"Mirinae"},{"key":"profile","path":"profile/","ko":"프로필","en":"Profile"}]/* GENERATED_ROUTES_END */;
   const shapes = {
     home: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5M9 21v-7h6v7"/>',
     work: '<rect x="3" y="6" width="18" height="14" rx="2"/><path d="m3 10 4-4m2 4 4-4m2 4 4-4M7 3h14l-2 3H5z"/>',
@@ -23,7 +23,7 @@
   const icon = (body, attrs = '') => `<svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" focusable="false" ${attrs}>${body}</svg>`;
   const href = (key, path) => key === 'home' ? home.href : new URL(location.protocol === 'file:' ? `${path}index.html` : path, routeRoot).href;
   const links = routes.map(({ key, path, ko, en }) =>
-    `<a href="${href(key, path)}"${key === page ? ' aria-current="page"' : ''}>${icon(shapes[key], `data-icon="${key}"`)}<span data-ko>${ko}</span><span data-en lang="en">${en}</span></a>`
+    `<a href="${href(key, path)}"${key === page ? ' aria-current="page"' : ''}>${key === "constellation" ? `<img class="icon constellation-nav-icon" src="${new URL("constellation/assets/graph.svg", assetRoot)}" alt="" width="24" height="24">` : icon(shapes[key], `data-icon="${key}"`)}<span data-ko>${ko}</span><span data-en lang="en">${en}</span></a>`
   ).join('');
 
   const nameKo = "김준호";

@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "vite --config tools/constellation/vite.config.mjs",
+    "build": "python3 tools/render_archive.py --check && python3 tools/release_gate.py"
+  },
+  "devDependencies": {
+    "vite": "^7.1.5"
+  }
+}

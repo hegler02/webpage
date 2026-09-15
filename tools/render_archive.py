@@ -223,7 +223,9 @@ def outputs() -> dict[Path, str]:
     bodies = normalized_bodies(catalog)
     home = replace_block(HOME.read_text(encoding="utf-8"), HOME_START, HOME_END, render_latest(bodies))
     navigation = ROUTES_RE.sub(rendered_routes(manifest), NAVIGATION.read_text(encoding="utf-8"), count=1)
+    from render_constellation import outputs as constellation_outputs
     return {
+        **constellation_outputs(),
         ARCHIVE: render_archive(bodies, manifest),
         HOME: home,
         NAVIGATION: navigation,

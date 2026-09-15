@@ -37,6 +37,10 @@
       "destination": "/pages/profile/archive/image-cinema/"
     },
     {
+      "source": "/constellation/",
+      "destination": "/pages/profile/constellation/"
+    },
+    {
       "source": "/",
       "destination": "/pages/profile/"
     },
@@ -111,6 +115,10 @@
     {
       "source": "/sitemap.xml",
       "destination": "/pages/profile/sitemap.xml"
+    },
+    {
+      "source": "/constellation/:path*",
+      "destination": "/pages/profile/constellation/:path*"
     }
   ],
   "redirects": [
@@ -157,6 +165,21 @@
     {
       "source": "/pages/profile/archive/",
       "destination": "/archive/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/constellation/index.html",
+      "destination": "/constellation/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/constellation/index",
+      "destination": "/constellation/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/constellation/",
+      "destination": "/constellation/",
       "permanent": true
     },
     {

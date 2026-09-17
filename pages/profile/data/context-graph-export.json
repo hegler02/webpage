@@ -105,6 +105,27 @@
       },
       "intro_url": "https://mirinaeman.com/archive/noreut-galchi-album/",
       "entity_id": "https://noreut-galchi-album-v2.mirinaeman.chatgpt.site/cinema/#work"
+    },
+    {
+      "body_id": "tuna-man",
+      "concepts": [
+        "image-cinema",
+        "interpretive-space"
+      ],
+      "reason": "근엄한 외양과 엉뚱한 호기심 사이의 간극을 슬랩 베이스와 정지 장면으로 표현합니다. 양을 세다가 목장을 구상하는 반전을 관객이 이어 보며 농담을 완성합니다.",
+      "intro_path": "/archive/tuna-man/",
+      "title": "‘튜나’라 불리는 사나이",
+      "url": "https://tuna-man.mirinaeman.chatgpt.site/",
+      "summary": "주식은 장투 성격은 단타 — 튜나의 엉뚱한 자기소개를 신나는 슬랩 베이스 펑크록과 열두 컷 웹툰 그리고 이미지 시네마로 만난다",
+      "thumbnail": {
+        "path": "assets/thumbnails/tuna-man.webp",
+        "alt": "검은 선글라스와 시가를 한 정장 차림의 튜나가 베이스를 연주하는 만화 앨범 아트",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "intro_url": "https://mirinaeman.com/archive/tuna-man/",
+      "entity_id": "https://tuna-man.mirinaeman.chatgpt.site/#song"
     }
   ],
   "autumn": {
@@ -145,5 +166,5 @@
   },
   "hub_url": "https://mirinaeman.com/archive/image-cinema/",
   "intro_url": "https://mirinaeman.com/archive/already-autumn/",
-  "source_sha256": "02c5b0010bf6c613e4647eb791047f27c6f74254c51f291adb44e5eb3e1daed9"
+  "source_sha256": "e35e4c7bc1b29b9d8311ea2c632765b240115626a5ea131ed83eee9d1b692260"
 }

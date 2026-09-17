@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "tuna-share",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "kind": "project-generated",
+        "filename": "og.jpg",
+        "path": "assets/og.jpg",
+        "sha256": "d86d8c8dcdff7a2c0d1217e6e8a638efcf1b73f20efd30e8536d3c088889b2c3"
+      },
+      "delivery": {
+        "path": "assets/og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "d86d8c8dcdff7a2c0d1217e6e8a638efcf1b73f20efd30e8536d3c088889b2c3"
+      }
+    }
+  ]
+}

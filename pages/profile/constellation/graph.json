@@ -9,6 +9,29 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:tuna-man",
+      "kind": "work",
+      "title": "‘튜나’라 불리는 사나이",
+      "summary": "주식은 장투 성격은 단타 — 튜나의 엉뚱한 자기소개를 신나는 슬랩 베이스 펑크록과 열두 컷 웹툰 그리고 이미지 시네마로 만난다",
+      "url": "https://tuna-man.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/tuna-man.webp",
+      "alt": "검은 선글라스와 시가를 한 정장 차림의 튜나가 베이스를 연주하는 만화 앨범 아트",
+      "year": "2026",
+      "tags": [
+        "audio",
+        "webtoon",
+        "image-cinema",
+        "funk-rock"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "주식은 장투 성격은 단타 — 튜나의 엉뚱한 자기소개를 신나는 슬랩 베이스 펑크록과 열두 컷 웹툰 그리고 이미지 시네마로 만난다"
+        }
+      ]
+    },
+    {
       "id": "work:already-autumn",
       "kind": "work",
       "title": "벌써, 가을",
@@ -1631,6 +1654,13 @@
   ],
   "edges": [
     {
+      "source": "work:tuna-man",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:already-autumn",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2048,6 +2078,20 @@
       "target": "concept:interpretive-space",
       "label": "함께 읽는 개념",
       "reason": "한 끼의 놀라움과 즐거움이 노래와 웹툰 및 이미지 시네마로 이어진다. 감정이 서로 다른 미디어로 표현되고 다시 경험의 장소로 연결되는 사례다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:tuna-man",
+      "target": "concept:image-cinema",
+      "label": "함께 읽는 개념",
+      "reason": "근엄한 외양과 엉뚱한 호기심 사이의 간극을 슬랩 베이스와 정지 장면으로 표현합니다. 양을 세다가 목장을 구상하는 반전을 관객이 이어 보며 농담을 완성합니다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:tuna-man",
+      "target": "concept:interpretive-space",
+      "label": "함께 읽는 개념",
+      "reason": "근엄한 외양과 엉뚱한 호기심 사이의 간극을 슬랩 베이스와 정지 장면으로 표현합니다. 양을 세다가 목장을 구상하는 반전을 관객이 이어 보며 농담을 완성합니다.",
       "evidence": "https://mirinaeman.com/archive/image-cinema/"
     },
     {

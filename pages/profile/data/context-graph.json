@@ -59,6 +59,15 @@
       ],
       "reason": "한 끼의 놀라움과 즐거움이 노래와 웹툰 및 이미지 시네마로 이어진다. 감정이 서로 다른 미디어로 표현되고 다시 경험의 장소로 연결되는 사례다.",
       "intro_path": "/archive/noreut-galchi-album/"
+    },
+    {
+      "body_id": "tuna-man",
+      "concepts": [
+        "image-cinema",
+        "interpretive-space"
+      ],
+      "reason": "근엄한 외양과 엉뚱한 호기심 사이의 간극을 슬랩 베이스와 정지 장면으로 표현합니다. 양을 세다가 목장을 구상하는 반전을 관객이 이어 보며 농담을 완성합니다.",
+      "intro_path": "/archive/tuna-man/"
     }
   ],
   "autumn": {

@@ -1420,6 +1420,34 @@
       "status": "DEPLOYED",
       "first_deployed_at": "2026-09-09T04:46:20.037783+00:00",
       "latest_deployed_at": "2026-09-09T06:32:32.020064+00:00"
+    },
+    {
+      "body_id": "tuna-man",
+      "title": "‘튜나’라 불리는 사나이",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-audio",
+        "approved-cover",
+        "character-comedy"
+      ],
+      "tags": [
+        "audio",
+        "webtoon",
+        "image-cinema",
+        "funk-rock"
+      ],
+      "message_sentence": "주식은 장투 성격은 단타 — 튜나의 엉뚱한 자기소개를 신나는 슬랩 베이스 펑크록과 열두 컷 웹툰 그리고 이미지 시네마로 만난다",
+      "thumbnail": {
+        "path": "assets/thumbnails/tuna-man.webp",
+        "alt": "검은 선글라스와 시가를 한 정장 차림의 튜나가 베이스를 연주하는 만화 앨범 아트",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://tuna-man.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-17T16:41:06.254729Z",
+      "latest_deployed_at": "2026-09-17T16:41:06.254729Z"
     }
   ]
 }

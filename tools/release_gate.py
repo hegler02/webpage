@@ -378,6 +378,10 @@ def main() -> int:
     if "Sitemap: https://mirinaeman.com/sitemap.xml" not in robots:
         errors.append("robots sitemap authority mismatch")
 
+    tuna = subprocess.run([sys.executable, str(ROOT / "tools/check_tuna_intro.py")], cwd=ROOT)
+    if tuna.returncode:
+        errors.append("Tuna introduction gate failed")
+
     if errors:
         for error in errors:
             print(f"BLOCK: {error}")

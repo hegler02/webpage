@@ -37,6 +37,10 @@
       "destination": "/pages/profile/archive/image-cinema/"
     },
     {
+      "source": "/archive/tuna-man/",
+      "destination": "/pages/profile/archive/tuna-man/"
+    },
+    {
       "source": "/constellation/",
       "destination": "/pages/profile/constellation/"
     },
@@ -345,6 +349,21 @@
     {
       "source": "/pages/profile/archive/image-cinema/",
       "destination": "/archive/image-cinema/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/tuna-man/index.html",
+      "destination": "/archive/tuna-man/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/tuna-man/index",
+      "destination": "/archive/tuna-man/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/tuna-man/",
+      "destination": "/archive/tuna-man/",
       "permanent": true
     }
   ]

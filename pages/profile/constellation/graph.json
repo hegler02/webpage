@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "nodes": [
     {
       "id": "creator:joonho",
@@ -30,7 +30,8 @@
           "title": "작품의 기록",
           "text": "509만 원 신제품보다 내 꿈을 펼치는 일이 더 설렌다."
         }
-      ]
+      ],
+      "introUrl": "https://mirinaeman.com/archive/unfold-your-turn/"
     },
     {
       "id": "work:tuna-man",
@@ -53,7 +54,8 @@
           "title": "작품의 기록",
           "text": "주식은 장투 성격은 단타 — 튜나의 엉뚱한 자기소개를 신나는 슬랩 베이스 펑크록과 열두 컷 웹툰 그리고 이미지 시네마로 만난다"
         }
-      ]
+      ],
+      "introUrl": "https://mirinaeman.com/archive/tuna-man/"
     },
     {
       "id": "work:already-autumn",
@@ -78,7 +80,8 @@
           "title": "작품의 기록",
           "text": "같은 바람이 각자의 삶에 다른 가을로 도착한다."
         }
-      ]
+      ],
+      "introUrl": "https://mirinaeman.com/archive/already-autumn/"
     },
     {
       "id": "work:baekun-five-strike-action-cinema",
@@ -109,7 +112,8 @@
           "title": "작품의 기록",
           "text": "백운의 고요한 시선과 남은 파문 사이에서 관객이 반천운겁의 움직임을 완성한다."
         }
-      ]
+      ],
+      "introUrl": "https://mirinaeman.com/archive/baekun-five-strike-action-cinema/"
     },
     {
       "id": "work:jeju-we",
@@ -135,7 +139,8 @@
           "title": "작품의 기록",
           "text": "아내와 단둘이 쉰 제주 WE 호텔의 휴가에서 다시 30대로 돌아간 듯했던 마음을 노래·사진·웹툰·이미지 시네마로 잇고, 실제 장소를 찾아가는 경험으로 연결한다."
         }
-      ]
+      ],
+      "introUrl": "https://mirinaeman.com/archive/jeju-we/"
     },
     {
       "id": "work:noreut-galchi-album",
@@ -160,7 +165,8 @@
           "title": "작품의 기록",
           "text": "제주에서 맛본 갈치통구이와 솥밥의 놀라움이 노래와 이미지 시네마, 웹툰으로 다시 살아난다."
         }
-      ]
+      ],
+      "introUrl": "https://mirinaeman.com/archive/noreut-galchi-album/"
     },
     {
       "id": "work:dont-you-want-my-money",
@@ -182,7 +188,8 @@
           "title": "작품의 기록",
           "text": "돈을 내겠다는 손님이 닫힌 문 앞에서 기다리는 황당함을 노래와 이미지 시네마·웹툰으로 풀어낸 풍자."
         }
-      ]
+      ],
+      "introUrl": "https://mirinaeman.com/archive/dont-you-want-my-money/"
     },
     {
       "id": "work:birthday-your-day",
@@ -206,7 +213,8 @@
           "title": "작품의 기록",
           "text": "한 사람을 위해 만든 생일노래가 다음 사람에게 건네는 축하가 된다."
         }
-      ]
+      ],
+      "introUrl": "https://mirinaeman.com/work/birthday-your-day/"
     },
     {
       "id": "work:hwasan-pan-v6",
@@ -229,7 +237,8 @@
           "title": "작품의 기록",
           "text": "서로 다른 사람들이 각자의 판단과 기술로 함께 문을 여는 화산인수의 이야기를 노래와 이미지 시네마, 웹툰으로 만난다."
         }
-      ]
+      ],
+      "introUrl": "https://mirinaeman.com/work/hwasan-pan-v6/"
     },
     {
       "id": "work:ttak-joa",
@@ -1348,6 +1357,38 @@
       ]
     },
     {
+      "id": "essay:unfold-origin",
+      "kind": "essay",
+      "title": "509만 원보다 마음을 움직인 것",
+      "summary": "출발점은 미리내벌스에 쓴 아이폰 신제품에 대한 감상입니다. 509만 원이라는 숫자를 보아도 예전처럼 마음이 움직이지 않는 순간을 노래의 첫 장면으로 옮겼습니다. 이 작품에서 가격은 제품 구매 안내가 아니라 창작자의 감정이 바뀌는 계기입니다.",
+      "url": "https://mirinaeverse.com/아이폰-509만원-ai-시대/",
+      "sourceLabel": "미리내벌스 · 작품의 출발점",
+      "sections": [
+        {
+          "title": "509만 원보다 마음을 움직인 것",
+          "text": "노래 속 화자는 새 기기 소식이 있으면 밤을 새우던 자신을 떠올립니다. 그러나 지금 설레는 것은 자신의 한마디가 멜로디가 되어 돌아오는 경험입니다. 갖고 싶은 것이 없어진 줄 알았지만 만들고 싶은 것이 많아졌다는 발견이 ‘내 꿈을 펼칠 차례’라는 제목으로 이어집니다."
+        }
+      ]
+    },
+    {
+      "id": "judgment:unfold-vocal-texture",
+      "kind": "judgment",
+      "title": "깨끗한 목소리에서 나다운 질감으로",
+      "summary": "창작자는 학생들에게 AI로 만든 노래를 들려준 뒤 노래는 좋지만 보컬이 비슷하게 들린다는 피드백을 받았습니다. 특히 한국어 노래에서 자신도 느꼈던 문제였습니다. 이번에는 잘 부르는 목소리를 고르는 데서 멈추지 않고 곡의 감정에 맞는 질감과 발음·리듬을 찾았습니다.",
+      "url": "https://mirinaeman.com/archive/unfold-your-turn/",
+      "sourceLabel": "제작 판단 · 펼칠 차례",
+      "sections": [
+        {
+          "title": "보컬을 바꾸며 들은 것",
+          "text": "같은 노래를 커버로 바꾸며 저음·허스키·거친 발성·그로울링을 들어봤습니다. 보컬이 조금씩 달라지고 개성이 느껴진다는 청취 판단을 거쳐 두 결과를 남겼습니다. 사람마다 다른 고유한 목소리를 완전히 재현했다는 결론은 내리지 않았습니다."
+        },
+        {
+          "title": "이번 실험에서 확인한 것과 남은 질문",
+          "text": "창작자는 같은 노래의 커버 결과에서 보컬 질감뿐 아니라 연주도 조금씩 달라졌다고 관찰했습니다. 따라서 이번 결과를 보컬 하나만 바꾼 엄밀한 단일 변인 실험으로 설명하지 않습니다. 특정 프롬프트가 언제나 같은 효과를 낸다는 보장도 아닙니다.\n\n남긴 판단은 ‘곡의 감정에 맞는 질감과 발음·리듬’입니다. 어떤 표현을 요청했고 실제로 무엇이 들렸으며 왜 한 결과를 선택했는지를 기록했습니다. 이후 작품에서는 이 선택을 출발점으로 삼되 다른 감정의 노래에서도 그대로 통하는지 다시 듣고 판단합니다."
+        }
+      ]
+    },
+    {
       "id": "topic:metaverse",
       "kind": "topic",
       "title": "메타버스와 교육",
@@ -2168,6 +2209,34 @@
       "evidence": "https://mirinaeverse.com/%EB%B2%8C%EC%8D%A8-%EA%B0%80%EC%9D%84-%EC%95%84%EC%A7%81-%ED%95%A0-%EB%A7%90/"
     },
     {
+      "source": "work:unfold-your-turn",
+      "target": "essay:unfold-origin",
+      "label": "작품이 시작된 글",
+      "reason": "노래 속 화자는 새 기기 소식이 있으면 밤을 새우던 자신을 떠올립니다. 그러나 지금 설레는 것은 자신의 한마디가 멜로디가 되어 돌아오는 경험입니다. 갖고 싶은 것이 없어진 줄 알았지만 만들고 싶은 것이 많아졌다는 발견이 ‘내 꿈을 펼칠 차례’라는 제목으로 이어집니다.",
+      "evidence": "https://mirinaeman.com/archive/unfold-your-turn/"
+    },
+    {
+      "source": "work:unfold-your-turn",
+      "target": "judgment:unfold-vocal-texture",
+      "label": "목소리를 고른 이유",
+      "reason": "남긴 판단은 ‘곡의 감정에 맞는 질감과 발음·리듬’입니다. 어떤 표현을 요청했고 실제로 무엇이 들렸으며 왜 한 결과를 선택했는지를 기록했습니다. 이후 작품에서는 이 선택을 출발점으로 삼되 다른 감정의 노래에서도 그대로 통하는지 다시 듣고 판단합니다.",
+      "evidence": "https://mirinaeman.com/archive/unfold-your-turn/"
+    },
+    {
+      "source": "work:unfold-your-turn",
+      "target": "work:already-autumn",
+      "label": "이어 읽는 작품",
+      "reason": "일상의 작은 감정이 음악과 장면으로 이어진 작품입니다. 가을의 시간과 창작의 설렘을 나란히 보며 이미지 시네마의 해석 여백을 살펴볼 수 있습니다.",
+      "evidence": "https://mirinaeman.com/archive/unfold-your-turn/"
+    },
+    {
+      "source": "work:unfold-your-turn",
+      "target": "work:tuna-man",
+      "label": "이어 읽는 작품",
+      "reason": "펑크록의 리듬과 인물의 말투가 만나는 작품입니다. 튜나의 엉뚱한 자기소개와 펼칠 차례의 능청스러운 허스키가 각각 어떤 성격을 만드는지 이어 들어볼 수 있습니다.",
+      "evidence": "https://mirinaeman.com/archive/unfold-your-turn/"
+    },
+    {
       "source": "paper:d9837dd6c236dbac",
       "target": "creator:joonho",
       "label": "저자",
@@ -2386,12 +2455,13 @@
     }
   ],
   "featured": [
-    "work:already-autumn",
     "work:snail-time-jeju",
-    "essay:autumn-still-stories",
+    "work:already-autumn",
+    "work:jeju-we",
+    "work:unfold-your-turn",
     "concept:felt-time",
-    "judgment:autumn-subtitles",
-    "concept:image-cinema"
+    "concept:image-cinema",
+    "concept:interpretive-space"
   ],
-  "defaultNode": "judgment:autumn-subtitles"
+  "defaultNode": "work:snail-time-jeju"
 }

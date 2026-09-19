@@ -163,6 +163,9 @@ def main() -> int:
     subprocess.run([sys.executable, str(ROOT / "tools/check_context_graph.py")], check=True)
     errors: list[str] = []
     project_checks = (
+        ([sys.executable, str(ROOT / "tools/check_constellation_discovery.py")], "Constellation discovery gate"),
+        (["node", str(ROOT / "tools" / "test_constellation_renderer.mjs")], "Constellation projection lifecycle gate"),
+        (["node", str(ROOT / "tools" / "test_constellation_state.mjs")], "Constellation state gate"),
         ([sys.executable, str(ROOT / "tools" / "check_unfold_intro.py")], "Unfold editorial discovery gate"),
         ([sys.executable, str(ROOT / "tools" / "test_constellation.py")], "Constellation source and registration gate"),
         ([sys.executable, str(ROOT / "tools" / "render_we_intro.py"), "--check"], "WE introduction gate"),

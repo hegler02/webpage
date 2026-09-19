@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "constellation-og",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "description": "Existing approved Already Autumn representative image, reused unchanged; this work is featured in the constellation",
+        "path": "pages/profile/archive/already-autumn/assets/og.jpg"
+      },
+      "delivery": {
+        "path": "assets/og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "db535b7b4f28b094b0ae280e8ac34c560422ab0d5e43a521c7abca0a94379d16"
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "status": "implementation-verified; public deployment pending",
+  "design_authority": "approved-prototype.json",
+  "data": {
+    "nodes": 81,
+    "edges": 105,
+    "works": 54,
+    "papers": 16
+  },
+  "gate_1": {
+    "result": "PASS",
+    "scope": "semantic index, data authority, keyboard control design, source evidence, state and lifecycle contract"
+  },
+  "gate_2": {
+    "desktop": "1363px browser: SVG spatial rendering, records, search 화산인수 -> 3 results, list selection to work:hwasan-pan-v6, URL and reader agreement",
+    "compact": "375px iframe (360px content with scrollbar): no horizontal overflow, four nodes with visible relationship, reading panel below; screenshot inspected",
+    "tablet": "768px iframe: clientWidth == scrollWidth 768",
+    "limits": [
+      "WebGL hardware disabled in verification browser; native SVG backend with the same real Three.js camera was inspected",
+      "Mobile menu interaction could not be reliably verified through iframe browser controls; no touch-device or screen-reader claim",
+      "Later responsive harness action was rejected by browser URL policy; stopped that action, no workaround attempted"
+    ]
+  },
+  "automated": [
+    "tools/test_constellation.py",
+    "tools/test_constellation_state.mjs",
+    "tools/test_constellation_renderer.mjs",
+    "tools/check_constellation_discovery.py",
+    "tools/release_gate.py"
+  ],
+  "performance": {
+    "runtime_bytes": 652433,
+    "drawing": "on-demand; capped DPR 1.5 / 1.2M pixels; offscreen and hidden pause",
+    "lifecycle_test": "real Three.js math with GPU-unavailable DOM fixture: frame loop settles, keyboard rotation, reduced motion single frame, pause/resume/resize/disposal pass",
+    "not_measured": [
+      "hardware GPU frame time",
+      "real-device touch latency",
+      "screen-reader speech"
+    ]
+  },
+  "human_acceptance": {
+    "prototype": "좋다",
+    "production": "pending user feedback"
+  },
+  "search_outcome": "Not measured; publication and schema validation are not indexing or AI citation."
+}

@@ -1,0 +1,14 @@
+{
+  "authority": "user-approved interactive prototype",
+  "source_file": "mirinae-living-constellation.html",
+  "sha256": "b8190ef1fda17d6a92528aac12a8f5c01015899c0eec47fc5e5a82136f01d369",
+  "bytes": 614910,
+  "approval": "좋다",
+  "implementation_authorization": "진행하자",
+  "scope": "Three.js spatial constellation, thumbnails at depth, reading panel, click and drag, path history",
+  "source_preserved": true,
+  "fidelity": "Dark blue palette, image nodes, curved links, thought pills, spatial canvas and reader preserved. Real data replaces mock data. Existing navigation/search/list and source evidence are retained. Responsive page-size avoids overlap; body text and tap targets support legibility.",
+  "not_claimed": "No corpus DESIGN.md approval inferred; no production acceptance or search outcome inferred.",
+  "frozen_source": "tools/constellation/baselines/approved-prototype.html.gz",
+  "source_sha256_after_decompression": "b8190ef1fda17d6a92528aac12a8f5c01015899c0eec47fc5e5a82136f01d369"
+}

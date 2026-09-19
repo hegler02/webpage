@@ -26,10 +26,11 @@ class Papers(HTMLParser):
         if tag=='li' and self.current is not None:
             self.records.append(self.current); self.current=None
 
-def build_graph(catalog=None):
+def build_graph(catalog=None, editorial=None):
     catalog = catalog or json.loads((PROFILE/'data/message-bodies.json').read_text())
     context=json.loads((PROFILE/'data/context-graph.json').read_text())
-    editorial=json.loads((PROFILE/'data/constellation-editorial.json').read_text())
+    editorial=editorial if editorial is not None else json.loads((PROFILE/'data/constellation-editorial.json').read_text())
+    manifest=json.loads((PROFILE/'site.manifest.json').read_text())
     nodes=[]; edges=[]
     def node(id,kind,title,summary,url,**extra):
         n=dict(id=id,kind=kind,title=title,summary=summary,url=url,**extra); nodes.append(n); return n
@@ -39,6 +40,8 @@ def build_graph(catalog=None):
     for b in sorted(catalog['bodies'],key=lambda x:x.get('latest_deployed_at',''),reverse=True):
         if b['status'] not in ('DEPLOYED','GOLDEN'): continue
         n=node('work:'+b['body_id'],'work',b['title'],b['message_sentence'],b['canonical_url'],image=ASSETS+b['thumbnail']['path'],alt=b['thumbnail']['alt'],year=b['first_deployed_at'][:4],tags=b.get('tags',[]),sourceLabel='작품 아카이브',sections=[{'title':'작품의 기록','text':b['message_sentence']}])
+        intro=next((p for p in manifest['editorial_pages'] if p.rstrip('/').split('/')[-1]==b['body_id']),None)
+        if intro:n['introUrl']=ORIGIN+intro
         edge(n['id'],creator['id'],'창작자','김준호의 공개 작품 아카이브에 등록된 기록입니다.',ORIGIN+'/archive/')
     for c in context['concepts']:
         node('concept:'+c['id'],'concept',c['name'],c['text'],ORIGIN+context['hub_path'],image=ASSETS+'constellation/assets/afternoon-shadows.webp',alt='햇빛이 드리운 나뭇가지 그림자 — 개념을 위한 이미지',sourceLabel='창작 노트',sections=[{'title':'창작의 관점','text':c['text']}])
@@ -53,6 +56,23 @@ def build_graph(catalog=None):
     node(essay['id'],'essay',essay['title'],essay['summary'],essay['url'],sourceLabel='미리내벌스 · 개인적인 기록',year='2026',sections=essay['sections'])
     edge('work:already-autumn',essay['id'],'작품을 낳은 마음','작가가 이 노래를 만든 마음과 다섯 세대의 가을을 선택한 이유를 직접 기록했습니다.',essay['url'])
     edge(essay['id'],'concept:felt-time','같은 이야기, 서로 다른 시간','글에서 노래, 웹툰, 이미지 시네마가 시간을 쓰는 방식과 각자의 가을을 설명합니다.',essay['url'])
+    # Approved introduction owns these facts; no second copy of its prose or identity.
+    unfold=json.loads((PROFILE/'data/unfold-context.json').read_text())
+    intro=next(n['introUrl'] for n in nodes if n['id']=='work:'+unfold['body_id'])
+    source_id='essay:unfold-origin';judgment_id='judgment:unfold-vocal-texture'
+    first=unfold['sections'][0];voice=unfold['sections'][1];finding=unfold['sections'][-1]
+    node(source_id,'essay',first['heading'],first['paragraphs'][0],unfold['source']['url'],sourceLabel='미리내벌스 · 작품의 출발점',sections=[{'title':first['heading'],'text':first['paragraphs'][1]}])
+    node(judgment_id,'judgment',voice['heading'],voice['paragraphs'][0],intro,sourceLabel='제작 판단 · 펼칠 차례',sections=[{'title':'보컬을 바꾸며 들은 것','text':voice['paragraphs'][1]},{'title':finding['heading'],'text':'\n\n'.join(finding['paragraphs'])}])
+    edge('work:'+unfold['body_id'],source_id,'작품이 시작된 글',first['paragraphs'][1],intro)
+    edge('work:'+unfold['body_id'],judgment_id,'목소리를 고른 이유',finding['paragraphs'][1],intro)
+    for related in unfold['related']:
+        edge('work:'+unfold['body_id'],'work:'+related['body_id'],'이어 읽는 작품',related['reason'],intro)
+    # Extension seam for future approved editorial records. Required fields are
+    # allowlisted, so internal CQI metadata cannot become public accidentally.
+    for item in editorial.get('nodes',[]):
+        node(item['id'],item['kind'],item['title'],item['summary'],item['url'],**{k:item[k] for k in ('sections','sourceLabel','image','alt','year') if k in item})
+    for item in editorial.get('edges',[]):
+        edge(item['source'],item['target'],item['label'],item['reason'],item['evidence'])
     # A title-based grouping is a browsing aid, never a claim of citation or influence.
     topics=[('metaverse','메타버스와 교육',['메타버스']),('bees','스마트 양봉',['꿀벌','여왕벌','honeybee','beehive','beekeeping']),('moving-image','영상과 창작',['영상','동영상','panorama','디지털 디자인'])]
     papers=Papers(); papers.feed((PROFILE/'books/index.html').read_text())
@@ -67,4 +87,6 @@ def build_graph(catalog=None):
     ids={n['id'] for n in nodes}
     assert len(ids)==len(nodes), 'duplicate node ID'
     assert all(e['source'] in ids and e['target'] in ids for e in edges), 'dangling relationship'
-    return {'schemaVersion':1,'nodes':nodes,'edges':edges,'featured':['work:already-autumn','work:snail-time-jeju',essay['id'],'concept:felt-time','judgment:autumn-subtitles','concept:image-cinema'],'defaultNode':'judgment:autumn-subtitles'}
+    assert all(e['reason'].strip() and e['evidence'].startswith('https://') for e in edges), 'missing relation evidence'
+    assert len({(e['source'],e['target'],e['label']) for e in edges})==len(edges), 'duplicate relationship'
+    return {'schemaVersion':2,'nodes':nodes,'edges':edges,'featured':['work:snail-time-jeju','work:already-autumn','work:jeju-we','work:unfold-your-turn','concept:felt-time','concept:image-cinema','concept:interpretive-space'],'defaultNode':'work:snail-time-jeju'}

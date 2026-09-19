@@ -26,6 +26,24 @@ class ConstellationTests(unittest.TestCase):
             self.assertIn(e['source'],ids);self.assertIn(e['target'],ids)
             self.assertTrue(e['reason']);self.assertEqual(urlparse(e['evidence']).scheme,'https')
         for id in self.g['featured']:self.assertIn(id,ids)
+    def test_editorial_growth_and_rejection(self):
+        editorial=json.loads((PROFILE/'data/constellation-editorial.json').read_text())
+        editorial['nodes']=[dict(id='essay:future',kind='essay',title='미래 기록',summary='검증',url='https://mirinaeman.com/profile/',incidents='SECRET-INTERNAL')]
+        editorial['edges']=[dict(source='work:snail-time-jeju',target='essay:future',label='기록',reason='원문에서 확인한 연결',evidence='https://mirinaeman.com/profile/')]
+        g=build_graph(self.catalog,editorial)
+        self.assertIn('essay:future',{n['id'] for n in g['nodes']})
+        self.assertNotIn('SECRET-INTERNAL',json.dumps(g))
+        editorial['edges'][0]['target']='essay:missing'
+        with self.assertRaises(AssertionError):build_graph(self.catalog,editorial)
+        editorial['edges'][0]['target']='essay:future';editorial['edges'][0]['reason']=''
+        with self.assertRaises(AssertionError):build_graph(self.catalog,editorial)
+    def test_static_reading_survives_without_runtime(self):
+        from render_constellation import outputs
+        source=outputs()[PROFILE/'constellation/index.html']
+        for n in self.g['nodes']:
+            self.assertIn('record-'+n['id'],source)
+        self.assertIn('class="reading-index" open',source)
+        self.assertNotIn('src="https://cdnjs',source)
     def test_internal_catalog_fields_never_escape(self):
         self.catalog['bodies'][0].update(incidents=['SECRET-INTERNAL'],approvals=['SECRET-INTERNAL'],source_revision='SECRET-INTERNAL')
         self.assertNotIn('SECRET-INTERNAL',json.dumps(build_graph(self.catalog)))

@@ -66,5 +66,27 @@
     ],
     "relations": "creator is separate from contextual mentions; complete two-way relation reasons remain in visible HTML",
     "og": "1200x630 JPEG, already approved Autumn image reused unchanged, local+preview validated"
-  }
+  },
+  "feedback_revisions": [
+    {
+      "date": "2026-09-19",
+      "request": "Long titles clipped; drag too slow. Other design approved.",
+      "changes": [
+        "Removed three-line title height cap; full wrapped thought labels 176px / compact 138px; history titles wrap.",
+        "Viewport-relative horizontal rotation without former ±0.35 rad cap; immediate pointer response; damped release inertia; bounded pitch; Home reset."
+      ],
+      "browser_evidence": {
+        "route": "/constellation/?node=topic%3Amoving-image",
+        "width": 1363,
+        "long_titles": "Seven visible titles have scrollHeight == clientHeight, max-height none; screenshot inspected. Longest visible pills 78px content height.",
+        "drag": "240px actual pointer drag visibly changes the projected node positions; Home restores orientation.",
+        "backend": "Native SVG using real Three.js camera; hardware WebGL unmeasured."
+      },
+      "automated": "Release gate PASS; real projection fixture verifies drag beyond old cap, release advance and idle, cancellation, reduced-motion blocks drag, pause/resume, resize and cleanup.",
+      "limits": [
+        "No new physical touch-device or hardware GPU performance measurement."
+      ],
+      "acceptance": "Correction delivered for user review; no new golden declaration."
+    }
+  ]
 }

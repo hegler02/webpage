@@ -41,3 +41,7 @@ Release gate invokes source/registration tests, actual model URL/paging tests, r
 Supported local preview: `npm ci`, then `sites-preview start "$PWD"`, and the managed browser URL `http://terminal.local:4173/constellation/`. Keep temporary responsive QA harnesses out of the committed release. Production retains the existing Vercel static routes and release gate.
 
 Revisions keep the public URL and old node IDs stable. Deployment is not human acceptance, indexing, or AI citation. User feedback on the public result determines the next CQI revision.
+
+## September 19 feedback revision
+
+Titles are readable content: do not cap star or history titles to a fixed number of lines. Check the longest Korean and English paper titles with computed scrollHeight/clientHeight and visual inspection, including compact widths. Thought pill widths are 176px / compact 138px with natural height. Rotation uses a viewport-relative turn without the former yaw wall, bounded pitch, immediate drag and a short damped release. Pointer cancellation, pause, reduced motion and Home clear inertia; idle drawing still stops. The projection fixture covers these transitions. Actual GPU performance is separate from this input/lifecycle evidence.

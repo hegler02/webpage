@@ -13,7 +13,10 @@ export async function mount(host, labels, status, {onFailure}) {
   const scene=new THREE.Scene(),world=new THREE.Group(),camera=new THREE.PerspectiveCamera(43,1,.1,100);
   scene.add(world);
   let nodes=[],links=[],objects=[],width=1,height=1,raf=0,paused=false,dead=false;
-  let angle=0,pitch=0,targetAngle=0,targetPitch=0;
+  let angle=0,pitch=0,targetAngle=0,targetPitch=0,velocityX=0,velocityY=0,lastFrame=0;
+  const pitchLimit=.65,stopSpeed=.008;
+  const clampPitch=value=>Math.max(-pitchLimit,Math.min(pitchLimit,value));
+  const stopInertia=()=>{velocityX=velocityY=0;lastFrame=0;};
   const shift=new THREE.Vector3(),targetShift=new THREE.Vector3();
   const motion=matchMedia('(prefers-reduced-motion: reduce)');
   const ease=Number(token('--space-ease'))||.11;
@@ -49,9 +52,17 @@ export async function mount(host, labels, status, {onFailure}) {
     draw();
   }
   const vector=new THREE.Vector3();
-  function render(){
+  function render(now=performance.now()){
     raf=0;if(paused||dead)return;
-    const speed=motion.matches?1:ease;
+    const dt=lastFrame?Math.min(.04,Math.max(.001,(now-lastFrame)/1000)):1/60;lastFrame=now;
+    if(!drag&&!motion.matches){
+      targetAngle+=velocityX*dt;
+      const nextPitch=targetPitch+velocityY*dt;targetPitch=clampPitch(nextPitch);
+      if(nextPitch!==targetPitch)velocityY=0;
+      const friction=Math.exp(-5.5*dt);velocityX*=friction;velocityY*=friction;
+      if(Math.abs(velocityX)<stopSpeed)velocityX=0;if(Math.abs(velocityY)<stopSpeed)velocityY=0;
+    }
+    const speed=motion.matches||drag?1:1-Math.pow(1-ease,dt*60);
     angle+=(targetAngle-angle)*speed;pitch+=(targetPitch-pitch)*speed;shift.lerp(targetShift,speed);
     world.rotation.set(pitch,angle,0);world.position.copy(shift);world.updateMatrixWorld(true);
     camera.updateMatrixWorld();
@@ -62,7 +73,7 @@ export async function mount(host, labels, status, {onFailure}) {
       n.button.style.zIndex=String(Math.round(10+depth));n.halo.lookAt(camera.position);
     }
     renderer.render(scene,camera);
-    if(Math.abs(targetAngle-angle)+Math.abs(targetPitch-pitch)+shift.distanceTo(targetShift)>.001)draw();
+    if((!drag&&Math.abs(velocityX)+Math.abs(velocityY)>0)||Math.abs(targetAngle-angle)+Math.abs(targetPitch-pitch)+shift.distanceTo(targetShift)>.001)draw();else lastFrame=0;
   }
   function draw(){if(!raf&&!paused&&!dead)raf=requestAnimationFrame(render);}
   function resize(){
@@ -76,22 +87,39 @@ export async function mount(host, labels, status, {onFailure}) {
   }
   const observer=new ResizeObserver(resize);observer.observe(host);
   const events=new AbortController(),opts={signal:events.signal};let drag=null;
-  canvas.addEventListener('pointerdown',e=>{if(motion.matches)return;drag={x:e.clientX,y:e.clientY,a:targetAngle,p:targetPitch};canvas.setPointerCapture(e.pointerId);},opts);
-  canvas.addEventListener('pointermove',e=>{if(!drag)return;targetAngle=Math.max(-.35,Math.min(.35,drag.a+(e.clientX-drag.x)*.002));targetPitch=Math.max(-.18,Math.min(.18,drag.p+(e.clientY-drag.y)*.001));draw();},opts);
-  for(const name of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(name,()=>{drag=null;},opts);
-  function reset(){targetAngle=targetPitch=0;targetShift.set(0,0,0);draw();}
+  canvas.addEventListener('pointerdown',e=>{
+    if(motion.matches||(e.button!==undefined&&e.button!==0))return;
+    stopInertia();drag={id:e.pointerId,x:e.clientX,y:e.clientY,time:e.timeStamp};
+    canvas.setPointerCapture(e.pointerId);
+  },opts);
+  canvas.addEventListener('pointermove',e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    const dx=e.clientX-drag.x,dy=e.clientY-drag.y,dt=Math.max(.008,(e.timeStamp-drag.time)/1000);
+    // A viewport-relative turn: ~4x the old response, without the old 20-degree yaw wall.
+    const gain=2*Math.PI/Math.max(600,width);
+    targetAngle+=dx*gain;targetPitch=clampPitch(targetPitch+dy*gain*.6);
+    velocityX=Math.max(-2.4,Math.min(2.4,dx*gain/dt));
+    velocityY=Math.max(-1.2,Math.min(1.2,dy*gain*.6/dt));
+    drag={id:e.pointerId,x:e.clientX,y:e.clientY,time:e.timeStamp};draw();
+  },opts);
+  canvas.addEventListener('pointerup',e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    if(e.timeStamp-drag.time>100)stopInertia();drag=null;draw();
+  },opts);
+  for(const name of ['pointercancel','lostpointercapture'])canvas.addEventListener(name,()=>{if(drag){drag=null;stopInertia();draw();}},opts);
+  function reset(){drag=null;stopInertia();targetAngle=targetPitch=0;targetShift.set(0,0,0);draw();}
   canvas.addEventListener('keydown',e=>{
     if(e.key==='Home'){e.preventDefault();reset();return;}
     if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;
-    e.preventDefault();if(motion.matches)return;
-    if(e.key==='ArrowLeft')targetAngle-=.08;if(e.key==='ArrowRight')targetAngle+=.08;
-    if(e.key==='ArrowUp')targetPitch-=.05;if(e.key==='ArrowDown')targetPitch+=.05;
-    targetAngle=Math.max(-.35,Math.min(.35,targetAngle));targetPitch=Math.max(-.18,Math.min(.18,targetPitch));draw();
+    e.preventDefault();if(motion.matches)return;stopInertia();
+    if(e.key==='ArrowLeft')targetAngle-=.18;if(e.key==='ArrowRight')targetAngle+=.18;
+    if(e.key==='ArrowUp')targetPitch-=.10;if(e.key==='ArrowDown')targetPitch+=.10;
+    targetPitch=clampPitch(targetPitch);draw();
   },opts);
   canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();onFailure('3D 연결이 끊겨 평면 지도로 전환했습니다.');},opts);
   function modeLabel(){return motion.matches?'정지된 입체 지도':mode==='WebGL'?'3D 탐색':'입체 탐색 · 호환 모드';}
   function motionChange(){reset();status.textContent=modeLabel();}
   motion.addEventListener('change',motionChange,opts);
   status.textContent=modeLabel();resize();
-  return {update,reset,pause(){paused=true;if(raf)cancelAnimationFrame(raf);raf=0;},resume(){paused=false;draw();},destroy(){if(dead)return;dead=true;if(raf)cancelAnimationFrame(raf);observer.disconnect();events.abort();clear();dispose(stars);renderer.dispose();renderer.forceContextLoss();canvas.remove();}};
+  return {update,reset,pause(){paused=true;drag=null;stopInertia();if(raf)cancelAnimationFrame(raf);raf=0;},resume(){paused=false;draw();},destroy(){if(dead)return;dead=true;if(raf)cancelAnimationFrame(raf);observer.disconnect();events.abort();clear();dispose(stars);renderer.dispose();renderer.forceContextLoss();canvas.remove();}};
 }

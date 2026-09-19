@@ -2,7 +2,7 @@ import {model} from './graph-model.mjs';
 import {renderReader,renderLabels,renderList,renderTrail} from './graph-view.mjs';
 const $=id=>document.getElementById(id);
 $('menu').addEventListener('click',()=>{const open=$('menu').getAttribute('aria-expanded')!=='true';$('menu').setAttribute('aria-expanded',String(open));$('main-nav').classList.toggle('open',open);});
-const root=$('interactive'),space=$('map'),labels=$('nodes');
+const root=$('interactive'),space=$('map'),labels=$('nodes'),explorer=root.querySelector('.explorer');
 let graph,db,state,adapter=null,loading=false,failed=false,visible=false,dead=false,trail=[],latest,limit=7;
 function fallback(reason){failed=true;adapter?.destroy();adapter=null;space.classList.add('flat');$('engine-status').textContent=reason||'평면 지도';$('map-help').textContent='작품을 눌러 연결 읽기';}
 async function reconcile(){
@@ -20,7 +20,7 @@ async function reconcile(){
 }
 function setURL(replace=false){const url=db.toURL(state,location.href);history[replace?'replaceState':'pushState'](null,'',url);}
 function render(){
-  limit=$('canvas-host').clientWidth<600?4:7;
+  limit=explorer.clientWidth<600?4:7;
   const w=db.window(state,limit);state.page=w.page;latest={visible:w.visible,edges:graph.edges,selected:state.selected};
   $('scope').value=state.scope;$('search').value=state.query;
   $('map-view').setAttribute('aria-pressed',String(state.view==='map'));
@@ -46,6 +46,16 @@ function choose(id,{fromList=false}={}){
   // Replaced controls must not strand keyboard focus on the document body.
   $('reader-title').focus({preventScroll:true});
 }
+// Reading intent moves both the nested panel and keyboard focus. A bare hash
+// cannot reveal a scrolled panel and would re-enter the popstate renderer.
+$('read-selected').addEventListener('click',e=>{
+  const title=$('reader-title');if(!title)return;
+  e.preventDefault();
+  const reader=$('reader');
+  reader.scrollTo({top:0,behavior:'instant'});
+  title.focus({preventScroll:true});
+  reader.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+});
 root.addEventListener('click',e=>{const button=e.target.closest('[data-node]');if(button)choose(button.dataset.node,{fromList:!!button.closest('#record-list')});});
 for(const view of ['map','list'])$(view+'-view').addEventListener('click',()=>{state.view=view;setURL();render();});
 $('scope').addEventListener('change',()=>{state.scope=$('scope').value;state.page=0;state.overview=true;setURL();render();});
@@ -61,7 +71,7 @@ $('share').addEventListener('click',async()=>{
 });
 window.addEventListener('popstate',()=>{if(!db)return;state=db.fromURL(location.href);render();});
 const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;reconcile();},{threshold:.01});observer.observe(space);
-const resizeObserver=new ResizeObserver(()=>{if(state&&state.view==='map'&&limit!==($('canvas-host').clientWidth<600?4:7)){state.page=0;render();}});resizeObserver.observe($('canvas-host'));
+const resizeObserver=new ResizeObserver(()=>{if(state&&limit!==(explorer.clientWidth<600?4:7)){state.page=0;render();}});resizeObserver.observe(explorer);
 document.addEventListener('visibilitychange',reconcile);
 window.addEventListener('pagehide',()=>{dead=true;adapter?.destroy();adapter=null;});
 window.addEventListener('pageshow',e=>{if(e.persisted){dead=false;reconcile();}});

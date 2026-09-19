@@ -87,6 +87,24 @@
         "No new physical touch-device or hardware GPU performance measurement."
       ],
       "acceptance": "Correction delivered for user review; no new golden declaration."
+    },
+    {
+      "date": "2026-09-19",
+      "request": "Correct home brand and selected-record reading action; inspect adjacent interactions.",
+      "changes": [
+        "Header link now says 미리내맨 홈.",
+        "Read action resets nested reader scroll, focuses heading, reveals panel without hash/popstate re-render; responsive direction labels.",
+        "Pagination uses visible explorer width instead of hidden map canvas width."
+      ],
+      "browser_evidence": {
+        "reader": "Actual click resets scrollTop 558 to 0 and focuses reader-title; node URL preserved, hash empty.",
+        "pagination": "Actual next/previous after fix: seven records, 2/11 -> 3/11 -> 2/11. Before fix seven records became four and total pages changed 11 -> 18.",
+        "brand": "Visible link 미리내맨 홈 points to https://mirinaeman.com/."
+      },
+      "automated": "Release gate PASS",
+      "limits": [
+        "New mobile physical-device verification not performed."
+      ]
     }
   ]
 }

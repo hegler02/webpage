@@ -155,7 +155,7 @@
     },
     {
       "id": "research-evidence",
-      "kind": "data",
+      "kind": "file",
       "relation": {
         "statement": "연구 개요 아래에서 학위논문과 학술논문을 우선순위가 드러나는 묶음으로 나누고, 연구 프로젝트는 별도 탭으로 연결한다.",
         "enforcement": [

@@ -1,5 +1,5 @@
 {
-  "status": "implementation-verified; public deployment pending",
+  "status": "Release candidate verified; production promotion authorized",
   "design_authority": "approved-prototype.json",
   "data": {
     "nodes": 81,
@@ -42,5 +42,29 @@
     "prototype": "좋다",
     "production": "pending user feedback"
   },
-  "search_outcome": "Not measured; publication and schema validation are not indexing or AI citation."
+  "search_outcome": "Not measured; publication and schema validation are not indexing or AI citation.",
+  "preview": {
+    "commit": "30aa53fd33fed236ac44717a6a6c18b62c48a0e8",
+    "deployment": "dpl_M6fmgWTXcjQtKu8YBogN5GAmtwEi",
+    "state": "READY",
+    "og_probe": "PASS: unmodified official validator, legitimate Vercel temporary access cookies; full HTML, MIME, decoded 1200x630 image and exact SHA256 match",
+    "runtime_changes_after_preview": false
+  },
+  "l0": "Official validate_l0.py PASS; corrected pre-existing research-evidence kind=data to the supported kind=file and added release check",
+  "discovery": {
+    "title": "미리내의 별자리 — 작품에서 마음으로, 판단에서 다음 작업으로",
+    "description": "김준호의 작품과 개인적인 기록, 창작의 판단과 논문을 맥락으로 이어 읽는 공간. 미리내맨과 미리내벌스의 기록이 만납니다.",
+    "canonical": "https://mirinaeman.com/constellation/",
+    "schema": [
+      "CollectionPage",
+      "ItemList",
+      "CreativeWork",
+      "Person",
+      "DefinedTerm",
+      "ScholarlyArticle",
+      "Article"
+    ],
+    "relations": "creator is separate from contextual mentions; complete two-way relation reasons remain in visible HTML",
+    "og": "1200x630 JPEG, already approved Autumn image reused unchanged, local+preview validated"
+  }
 }

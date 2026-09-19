@@ -263,6 +263,8 @@ def main() -> int:
 
     for item in l0_contract.get("items", []):
         item_id = item.get("id", "unknown")
+        if item.get("kind") not in {"api", "event", "file", "gate", "report", "ui"}:
+            errors.append(f"L0 kind invalid: {item_id}")
         for axis in AXES:
             proof = item.get(axis)
             if not isinstance(proof, dict) or not proof.get("statement") or not proof.get("enforcement"):

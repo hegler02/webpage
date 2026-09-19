@@ -1,7 +1,11 @@
 """Render a readable concept hub and work introduction from one relationship source."""
 import argparse,json
+from urllib.parse import urlsplit
 from pathlib import Path
 from context_graph import load,person,concepts,work_node,esc,prose,PROFILE,CREATIVE_NOTES_LABEL,RELATED_WORKS_LABEL
+
+def outbound(url):
+ return ' target="_blank" rel="noopener noreferrer"' if urlsplit(url).hostname and urlsplit(url).hostname != 'mirinaeman.com' else ''
 
 def shell(d,title,desc,url,graph,content):
  og=url+'assets/og.jpg';alt='초가을 강변에서 각자의 시간을 보내는 다섯 세대 · 벌써, 가을'
@@ -17,15 +21,15 @@ def outputs():
  content=section('<h2>감정에서 시작하는 미디어</h2><p>'+prose(d['practice'])+'</p>')
  for c in d['concepts']:content+=section('<h2>'+esc(c['name'])+'</h2><p>'+prose(c['text'])+'</p>',c['id'])
  for w in d['works']:
-  content+=section('<h2 data-typography-break="approved">'+prose(w['title'])+'</h2><p>'+prose(w['summary'])+'</p><p>'+prose(w['reason'])+'</p><p>'+' · '.join('<a href="#'+i+'">'+esc(next(c['name'] for c in d['concepts'] if c['id']==i))+'</a>' for i in w['concepts'])+'</p><div class="actions"><a class="button" href="'+w.get('intro_url',w['url'])+'">'+('작품과 창작 맥락 읽기' if 'intro_url' in w else '노래 감상하기')+'</a></div>','work-'+w['body_id'])
+  content+=section('<h2 data-typography-break="approved">'+prose(w['title'])+'</h2><p>'+prose(w['summary'])+'</p><p>'+prose(w['reason'])+'</p><p>'+' · '.join('<a href="#'+i+'">'+esc(next(c['name'] for c in d['concepts'] if c['id']==i))+'</a>' for i in w['concepts'])+'</p><div class="actions"><a class="button" href="'+w.get('intro_url',w['url'])+'"'+outbound(w.get('intro_url',w['url']))+'>'+('작품과 창작 맥락 읽기' if 'intro_url' in w else '노래 감상하기')+'</a></div>','work-'+w['body_id'])
  content+=section('<h2>연결을 축적하는 실험</h2><p>'+prose(d['research']['question'])+'</p><p>'+prose(d['research']['status'])+'</p><p><a href="'+intro+'#judgment">벌써, 가을의 자막 수정에서 얻은 판단</a></p>','research')
  baseline=d['research']['baseline']
  content+=section('<h2>'+baseline['date']+' 기준 관측</h2><p>'+prose(baseline['method'])+'</p><ul>'+''.join('<li><strong>'+esc(o['query'])+'</strong><p>'+prose(o['result'])+'</p></li>' for o in baseline['outcomes'])+'</ul><p>'+prose(baseline['interpretation'])+'</p>','baseline')
  hub_html=shell(d,d['hub_title'],d['hub_description'],hub,graph,content)
  graph=[{'@type':'WebPage','@id':intro,'url':intro,'name':d['intro_title'],'description':d['intro_description'],'author':{'@id':d['creator']['id']},'mainEntity':{'@id':a['entity_id']},'relatedLink':[a['url'],hub]},person(d),work_node(d,a),*cs,{'@type':'Article','@id':intro+'#judgment','headline':d['autumn']['judgment_title'],'author':{'@id':d['creator']['id']},'about':{'@id':a['entity_id']},'description':d['autumn']['judgment'],'articleBody':d['autumn']['judgment']+' '+d['autumn']['lesson'],'mainEntityOfPage':{'@id':intro}}]
- content=section('<div class="actions"><a class="button primary" href="'+a['url']+'">노래·웹툰·이미지 시네마 감상하기</a></div><figure><img src="assets/og.jpg" width="1200" height="630" alt="'+esc(a['thumbnail']['alt'])+'"></figure><h2>갑자기 서늘해진 아침</h2><p>'+prose(d['autumn']['origin'])+'</p><h2>다섯 사람의 서로 다른 가을</h2><p>'+prose(a['reason'])+'</p><p>'+prose(d['autumn']['media'])+'</p>')
+ content=section('<div class="actions"><a class="button primary" href="'+a['url']+'"'+outbound(a['url'])+'>노래·웹툰·이미지 시네마 감상하기</a></div><figure><img src="assets/og.jpg" width="1200" height="630" alt="'+esc(a['thumbnail']['alt'])+'"></figure><h2>갑자기 서늘해진 아침</h2><p>'+prose(d['autumn']['origin'])+'</p><h2>다섯 사람의 서로 다른 가을</h2><p>'+prose(a['reason'])+'</p><p>'+prose(d['autumn']['media'])+'</p>')
  content+=section('<h2>'+esc(d['autumn']['judgment_title'])+'</h2><p>'+prose(d['autumn']['judgment'])+'</p><p>'+prose(d['autumn']['lesson'])+'</p>','judgment')
- content+=section('<h2>'+RELATED_WORKS_LABEL+'</h2>'+''.join('<h3 data-typography-break="approved">'+prose(w['title'])+'</h3><p>'+prose(w['reason'])+'</p><p><a href="'+w.get('intro_url',w['url'])+'">'+esc(w['title'])+' 살펴보기</a></p>' for w in d['works'] if w is not a)+'<p><a href="'+hub+'">'+CREATIVE_NOTES_LABEL+'</a>에서 작품을 잇는 창작 관점을 더 읽을 수 있다.</p>')
+ content+=section('<h2>'+RELATED_WORKS_LABEL+'</h2>'+''.join('<h3 data-typography-break="approved">'+prose(w['title'])+'</h3><p>'+prose(w['reason'])+'</p><p><a href="'+w.get('intro_url',w['url'])+'"'+outbound(w.get('intro_url',w['url']))+'>'+esc(w['title'])+' 살펴보기</a></p>' for w in d['works'] if w is not a)+'<p><a href="'+hub+'">'+CREATIVE_NOTES_LABEL+'</a>에서 작품을 잇는 창작 관점을 더 읽을 수 있다.</p>')
  intro_html=shell(d,d['intro_title'],d['intro_description'],intro,graph,content)
  return {PROFILE/'archive/image-cinema/index.html':hub_html,PROFILE/'archive/already-autumn/index.html':intro_html,PROFILE/'data/context-graph-export.json':json.dumps(d,ensure_ascii=False,indent=2)+'\n'}
 if __name__=='__main__':

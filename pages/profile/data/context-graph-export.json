@@ -126,6 +126,25 @@
       },
       "intro_url": "https://mirinaeman.com/archive/tuna-man/",
       "entity_id": "https://tuna-man.mirinaeman.chatgpt.site/#song"
+    },
+    {
+      "body_id": "unfold-your-turn",
+      "concepts": [
+        "image-cinema",
+        "interpretive-space"
+      ],
+      "reason": "509만 원 신제품을 보고 느낀 무심함이 자신의 생각을 노래로 펼치는 설렘으로 바뀐다. 같은 노래의 허스키와 그로울링을 듣고 이미지 시네마의 장면과 감정이 달라지는 과정을 비교한다. 보컬뿐 아니라 연주도 달라진 커버 결과이며 단일 변인 실험은 아니다.",
+      "entity_id": "https://unfold-your-turn.mirinaeman.chatgpt.site/#work",
+      "title": "펼칠 차례 — 같은 노래, 다른 목소리",
+      "url": "https://unfold-your-turn.mirinaeman.chatgpt.site/",
+      "summary": "509만 원 신제품보다 내 꿈을 펼치는 일이 더 설렌다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/unfold-your-turn.webp",
+        "alt": "헤드폰을 쓰고 자신의 노래를 즐기는 여성 창작자",
+        "width": 960,
+        "height": 540,
+        "focal_point": "65% 50%"
+      }
     }
   ],
   "autumn": {
@@ -166,5 +185,5 @@
   },
   "hub_url": "https://mirinaeman.com/archive/image-cinema/",
   "intro_url": "https://mirinaeman.com/archive/already-autumn/",
-  "source_sha256": "e35e4c7bc1b29b9d8311ea2c632765b240115626a5ea131ed83eee9d1b692260"
+  "source_sha256": "b5561755ce3d30a9e85cccd8d3a184bbc45d762818d9cd610d58cfccb9da62ad"
 }

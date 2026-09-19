@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "unfold-intro-share",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "kind": "project-generated",
+        "filename": "og.webp",
+        "path": "assets/og.webp",
+        "sha256": "a511427838b2cb99fc018caadcf9a6eebab33bcd1a984a26046866b6ec4a3b2d"
+      },
+      "delivery": {
+        "path": "assets/og.webp",
+        "mime": "image/webp",
+        "width": 1200,
+        "height": 630,
+        "sha256": "a511427838b2cb99fc018caadcf9a6eebab33bcd1a984a26046866b6ec4a3b2d"
+      }
+    }
+  ]
+}

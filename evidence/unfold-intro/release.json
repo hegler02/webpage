@@ -1,0 +1,25 @@
+{
+  "scope": "unfold-your-turn introduction",
+  "approval": "User approved independent introduction, context links, structured data and sitemap using the existing editorial design.",
+  "design": "Reuse existing approved profile styles.css and archive/image-cinema/context.css; no token or navigation changes.",
+  "source": "User conversation and original Mirinaeverse article read on 2026-09-20.",
+  "url_roles": {
+    "introduction": "https://mirinaeman.com/archive/unfold-your-turn/",
+    "watch": "https://unfold-your-turn.mirinaeman.chatgpt.site/",
+    "archive": "https://mirinaeman.com/archive/"
+  },
+  "incident": "Watch deployment, catalog and general context links were mistaken for complete editorial discovery coverage. Independent first-party introduction was missing.",
+  "correction": "Added original commentary, source and author identification, versions, related works, reciprocal links, own canonical and sitemap route.",
+  "gates": [
+    "check_unfold_intro.py runs within release_gate.py",
+    "Generated output drift, reciprocal links and external new-tab attributes checked",
+    "SEO/OG/Twitter/JSON-LD checked using validate_discovery",
+    "OG full local decode and localhost HTTP preview both passed"
+  ],
+  "limitations": [
+    "Search-engine indexing and AI citations not measured",
+    "Public and visual verification follow deployment"
+  ],
+  "plugins": "No new GSAP or WGSL: this is a reading page using an approved existing design.",
+  "acceptance": "Publication authorized; artistic acceptance not inferred."
+}

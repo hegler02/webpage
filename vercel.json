@@ -41,6 +41,10 @@
       "destination": "/pages/profile/archive/tuna-man/"
     },
     {
+      "source": "/archive/unfold-your-turn/",
+      "destination": "/pages/profile/archive/unfold-your-turn/"
+    },
+    {
       "source": "/constellation/",
       "destination": "/pages/profile/constellation/"
     },
@@ -364,6 +368,21 @@
     {
       "source": "/pages/profile/archive/tuna-man/",
       "destination": "/archive/tuna-man/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/unfold-your-turn/index.html",
+      "destination": "/archive/unfold-your-turn/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/unfold-your-turn/index",
+      "destination": "/archive/unfold-your-turn/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/unfold-your-turn/",
+      "destination": "/archive/unfold-your-turn/",
       "permanent": true
     }
   ]

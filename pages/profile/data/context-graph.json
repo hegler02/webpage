@@ -76,7 +76,8 @@
         "interpretive-space"
       ],
       "reason": "509만 원 신제품을 보고 느낀 무심함이 자신의 생각을 노래로 펼치는 설렘으로 바뀐다. 같은 노래의 허스키와 그로울링을 듣고 이미지 시네마의 장면과 감정이 달라지는 과정을 비교한다. 보컬뿐 아니라 연주도 달라진 커버 결과이며 단일 변인 실험은 아니다.",
-      "entity_id": "https://unfold-your-turn.mirinaeman.chatgpt.site/#work"
+      "entity_id": "https://unfold-your-turn.mirinaeman.chatgpt.site/#work",
+      "intro_path": "/archive/unfold-your-turn/"
     }
   ],
   "autumn": {

@@ -9,6 +9,29 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:harugyeol-ai-health",
+      "kind": "work",
+      "title": "AI를 활용해 헬스케어 앱 만들기 — 하루결",
+      "summary": "한 사람의 더 나은 하루를 위해 사용자 정의부터 화면·데이터 설계와 검증까지 AI와 함께 앱을 만드는 과정을 15장으로 경험합니다.",
+      "url": "https://harugyeol-ai-health.mirinaeman.chatgpt.site",
+      "image": "/pages/profile/assets/thumbnails/harugyeol-ai-health.webp",
+      "alt": "하루결 — AI를 활용해 헬스케어 앱 만들기 15장 웹 프레젠테이션 제목 카드",
+      "year": "2026",
+      "tags": [
+        "AI",
+        "education",
+        "web-presentation"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "한 사람의 더 나은 하루를 위해 사용자 정의부터 화면·데이터 설계와 검증까지 AI와 함께 앱을 만드는 과정을 15장으로 경험합니다."
+        }
+      ],
+      "introUrl": "https://mirinaeman.com/archive/harugyeol-ai-health/"
+    },
+    {
       "id": "work:wind-of-longing",
       "kind": "work",
       "title": "그리움의 바람",
@@ -1744,6 +1767,13 @@
   ],
   "edges": [
     {
+      "source": "work:harugyeol-ai-health",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:wind-of-longing",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2309,6 +2339,20 @@
       "label": "이어 읽는 작품",
       "reason": "같은 노래를 여러 미디어로 만나는 흐름을 이어 기억을 펼치는 세 가지 움직임을 비교합니다. 보컬 질감에서 감상 속도로 이어지는 창작 실험입니다.",
       "evidence": "https://mirinaeman.com/archive/unfold-your-turn/"
+    },
+    {
+      "source": "work:harugyeol-ai-health",
+      "target": "work:coding-body-message",
+      "label": "이어 읽는 작품",
+      "reason": "코딩을 메시지가 작동하는 몸으로 보는 강의 관점이 이 발표에서는 생활 기록 앱의 제작 흐름으로 구체화됩니다.",
+      "evidence": "https://mirinaeman.com/archive/harugyeol-ai-health/"
+    },
+    {
+      "source": "work:harugyeol-ai-health",
+      "target": "work:message-body-slide",
+      "label": "이어 읽는 작품",
+      "reason": "함축·여백·전환으로 메시지를 전달하는 웹 슬라이드 탐구가 이 발표의 레이아웃과 전환 연출로 이어집니다.",
+      "evidence": "https://mirinaeman.com/archive/harugyeol-ai-health/"
     },
     {
       "source": "paper:d9837dd6c236dbac",

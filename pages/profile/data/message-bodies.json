@@ -504,6 +504,32 @@
       "latest_deployed_at": "2026-08-29T02:23:22Z"
     },
     {
+      "body_id": "harugyeol-ai-health",
+      "title": "AI를 활용해 헬스케어 앱 만들기 — 하루결",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "user-request",
+        "web-presentation"
+      ],
+      "tags": [
+        "AI",
+        "education",
+        "web-presentation"
+      ],
+      "message_sentence": "한 사람의 더 나은 하루를 위해 사용자 정의부터 화면·데이터 설계와 검증까지 AI와 함께 앱을 만드는 과정을 15장으로 경험합니다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/harugyeol-ai-health.webp",
+        "alt": "하루결 — AI를 활용해 헬스케어 앱 만들기 15장 웹 프레젠테이션 제목 카드",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://harugyeol-ai-health.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-20T16:15:45.114236+00:00",
+      "latest_deployed_at": "2026-09-20T16:15:45.114236+00:00"
+    },
+    {
       "body_id": "home-was-inside",
       "title": "내가 집으로 가는 줄 알았지 | The Mirinaeman Project Music Album",
       "body_type": "SONGBODY",

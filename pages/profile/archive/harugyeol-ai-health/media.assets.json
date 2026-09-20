@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "harugyeol-intro-og",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "kind": "project-generated",
+        "filename": "og.jpg",
+        "path": "assets/og.jpg",
+        "sha256": "e70a87df06843f52549cc4f0536e500e6ee760dd2e0ac855a84f1db9a087aa6d"
+      },
+      "delivery": {
+        "path": "assets/og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "e70a87df06843f52549cc4f0536e500e6ee760dd2e0ac855a84f1db9a087aa6d"
+      }
+    }
+  ]
+}

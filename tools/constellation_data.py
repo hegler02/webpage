@@ -71,6 +71,11 @@ def build_graph(catalog=None, editorial=None):
     edge('work:'+unfold['body_id'],judgment_id,'목소리를 고른 이유',finding['paragraphs'][1],intro)
     for related in unfold['related']:
         edge('work:'+unfold['body_id'],'work:'+related['body_id'],'이어 읽는 작품',related['reason'],intro)
+    harugyeol=json.loads((PROFILE/'data/harugyeol-context.json').read_text())
+    health_node=next((n for n in nodes if n['id']=='work:harugyeol-ai-health'),None)
+    if health_node:
+        for related in harugyeol['related']:
+            edge(health_node['id'],'work:'+related['body_id'],'이어 읽는 작품',related['reason'],health_node['introUrl'])
     # Extension seam for future approved editorial records. Required fields are
     # allowlisted, so internal CQI metadata cannot become public accidentally.
     for item in editorial.get('nodes',[]):

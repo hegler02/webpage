@@ -49,6 +49,10 @@
       "destination": "/pages/profile/archive/wind-of-longing/"
     },
     {
+      "source": "/archive/harugyeol-ai-health/",
+      "destination": "/pages/profile/archive/harugyeol-ai-health/"
+    },
+    {
       "source": "/constellation/",
       "destination": "/pages/profile/constellation/"
     },
@@ -402,6 +406,21 @@
     {
       "source": "/pages/profile/archive/wind-of-longing/",
       "destination": "/archive/wind-of-longing/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/harugyeol-ai-health/index.html",
+      "destination": "/archive/harugyeol-ai-health/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/harugyeol-ai-health/index",
+      "destination": "/archive/harugyeol-ai-health/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/harugyeol-ai-health/",
+      "destination": "/archive/harugyeol-ai-health/",
       "permanent": true
     }
   ]

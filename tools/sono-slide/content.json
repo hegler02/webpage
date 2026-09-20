@@ -77,14 +77,14 @@
       "s13_4": "가사·보컬·스타일 수정",
       "s13_5": "앨범/랜딩페이지로 발표",
       "s14_title": "음원 하나를 넘어,<br><em>메시지가 머무는 작품으로.</em>",
-      "s14_c1_t": "내가 집으로 가는 줄 알았지",
-      "s14_c2_t": "찍어달란 말보다",
-      "s14_c3_t": "공포의 선풍기",
-      "s14_c4_t": "블루스 한미 대결",
-      "s14_p": "싱글 앨범 랜딩페이지",
-      "s14_p2": "메시지형 싱글",
-      "s14_p3": "이야기형 싱글",
-      "s14_p4": "장르 실험형 싱글",
+      "s14_c1_t": "그리움의 바람",
+      "s14_c2_t": "펼칠 차례",
+      "s14_c3_t": "벌써, 가을",
+      "s14_c4_t": "제주 WE",
+      "s14_p": "첫사랑의 기억 · 이미지 시네마",
+      "s14_p2": "같은 노래 · 다른 목소리",
+      "s14_p3": "세대마다 다른 가을",
+      "s14_p4": "당신과 나 · 다시 우리",
       "s15_title": "작곡 버튼이 아니라,<br><em>설계 파트너.</em>",
       "s15_p": "제작자: 동서울대학교 김준호 교수",
       "s15_link": "Sound Design Lab V2 접속",
@@ -178,14 +178,14 @@
       "s13_4": "Revise lyrics, vocal, and style",
       "s13_5": "Publish as an album or landing page",
       "s14_title": "Beyond an audio file.<br><em>A place for your message.</em>",
-      "s14_c1_t": "I Thought I Was Going Home",
-      "s14_c2_t": "More Than “Take My Picture”",
-      "s14_c3_t": "The Terrifying Fan",
-      "s14_c4_t": "Blues Korea–US Match",
-      "s14_p": "Single album landing page",
-      "s14_p2": "Message-driven single",
-      "s14_p3": "Story-driven single",
-      "s14_p4": "Genre experiment single",
+      "s14_c1_t": "Wind of Longing",
+      "s14_c2_t": "Your Turn to Unfold",
+      "s14_c3_t": "Already, Autumn",
+      "s14_c4_t": "JEJU WE",
+      "s14_p": "First love, remembered in cinema",
+      "s14_p2": "One song, different voices",
+      "s14_p3": "Autumn across generations",
+      "s14_p4": "You and me, together again",
       "s15_title": "More than a button.<br><em>A design partner.</em>",
       "s15_p": "Created by Prof. Junho Kim, Dong Seoul University",
       "s15_link": "Open Sound Design Lab V2",
@@ -217,5 +217,43 @@
       "key_hint": "Arrow keys to navigate · ESC to close",
       "skip": "Skip to presentation"
     }
-  }
+  },
+  "release_works": [
+    {
+      "body_id": "wind-of-longing",
+      "url": "https://wind-of-longing.mirinaeman.chatgpt.site/",
+      "image": "assets/release-wind-of-longing.webp",
+      "width": 960,
+      "height": 540,
+      "title_key": "s14_c1_t",
+      "description_key": "s14_p"
+    },
+    {
+      "body_id": "unfold-your-turn",
+      "url": "https://unfold-your-turn.mirinaeman.chatgpt.site/",
+      "image": "assets/release-unfold-your-turn.webp",
+      "width": 960,
+      "height": 540,
+      "title_key": "s14_c2_t",
+      "description_key": "s14_p2"
+    },
+    {
+      "body_id": "already-autumn",
+      "url": "https://already-autumn.mirinaeman.chatgpt.site/",
+      "image": "assets/release-already-autumn.webp",
+      "width": 960,
+      "height": 540,
+      "title_key": "s14_c3_t",
+      "description_key": "s14_p3"
+    },
+    {
+      "body_id": "jeju-we",
+      "url": "https://jeju-we-v2.mirinaeman.chatgpt.site/",
+      "image": "assets/release-jeju-we.webp",
+      "width": 960,
+      "height": 540,
+      "title_key": "s14_c4_t",
+      "description_key": "s14_p4"
+    }
+  ]
 }

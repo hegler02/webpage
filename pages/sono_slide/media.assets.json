@@ -162,6 +162,78 @@
         "height": 630,
         "sha256": "d6d31844bdc323cb8c9acc3e21c2cab38fdb5e69e2d1d724cff1eb6b136f5ac4"
       }
+    },
+    {
+      "id": "release-wind-of-longing",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "wind-of-longing.webp",
+        "sha256": "c6d22b9f82252f3a617f31aa94a7bf46aee66e33b0a9b586bfee272a24708e78",
+        "note": "Existing owner-published archive artwork for the user-selected work."
+      },
+      "provenance_url": "https://mirinaeman.com/pages/profile/assets/thumbnails/wind-of-longing.webp",
+      "delivery": {
+        "path": "assets/release-wind-of-longing.webp",
+        "mime": "image/webp",
+        "width": 960,
+        "height": 540,
+        "sha256": "c6d22b9f82252f3a617f31aa94a7bf46aee66e33b0a9b586bfee272a24708e78"
+      }
+    },
+    {
+      "id": "release-unfold-your-turn",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "unfold-your-turn.webp",
+        "sha256": "8f41d00fe3a58bb040cfdc0960dd563315a0425091a875584c27a8db6dbf8b83",
+        "note": "Existing owner-published archive artwork for the user-selected work."
+      },
+      "provenance_url": "https://mirinaeman.com/pages/profile/assets/thumbnails/unfold-your-turn.webp",
+      "delivery": {
+        "path": "assets/release-unfold-your-turn.webp",
+        "mime": "image/webp",
+        "width": 960,
+        "height": 540,
+        "sha256": "8f41d00fe3a58bb040cfdc0960dd563315a0425091a875584c27a8db6dbf8b83"
+      }
+    },
+    {
+      "id": "release-already-autumn",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "already-autumn.webp",
+        "sha256": "8b5e1c78aeb93e060b0be7e900f5f6cb386d1d61342f0b010dce74a8f7c311de",
+        "note": "Existing owner-published archive artwork for the user-selected work."
+      },
+      "provenance_url": "https://mirinaeman.com/pages/profile/assets/thumbnails/already-autumn.webp",
+      "delivery": {
+        "path": "assets/release-already-autumn.webp",
+        "mime": "image/webp",
+        "width": 960,
+        "height": 540,
+        "sha256": "8b5e1c78aeb93e060b0be7e900f5f6cb386d1d61342f0b010dce74a8f7c311de"
+      }
+    },
+    {
+      "id": "release-jeju-we",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "jeju-we.webp",
+        "sha256": "6255f0399363b9f0a94c3d9859f48664c2f36f3b60c8f56a4fca76a0a62a0bc4",
+        "note": "Existing owner-published archive artwork for the user-selected work."
+      },
+      "provenance_url": "https://mirinaeman.com/pages/profile/assets/thumbnails/jeju-we.webp",
+      "delivery": {
+        "path": "assets/release-jeju-we.webp",
+        "mime": "image/webp",
+        "width": 960,
+        "height": 540,
+        "sha256": "6255f0399363b9f0a94c3d9859f48664c2f36f3b60c8f56a4fca76a0a62a0bc4"
+      }
     }
   ]
 }

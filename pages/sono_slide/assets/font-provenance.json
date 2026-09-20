@@ -1,0 +1,12 @@
+{
+  "family": "Mirinae Music Sans",
+  "derived_from": "Pretendard",
+  "source_sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+  "license": "SIL Open Font License 1.1",
+  "license_file": "font-license.txt",
+  "source_author": "Kil Hyung-jin",
+  "source_project": "https://github.com/orioncactus/pretendard",
+  "delivery_sha256": "73418d3d031226a249754beb440ad92df0a8bad1e7e2a6e8b06b54627cb7dead",
+  "delivery_bytes": 84480,
+  "scope": "Characters in the complete lecture HTML and controller plus ASCII; variable weights preserved."
+}

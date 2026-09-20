@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "suno-start",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "HtaI4566PKc.png",
+        "sha256": "8bb86e69f6ff8738489f765fc9a64c048dbecc294f7f1e45b4acd93e04391143",
+        "note": "Existing owner-published lecture image; the original remains at provenance_url."
+      },
+      "provenance_url": "https://i.imghippo.com/files/HtaI4566PKc.png",
+      "delivery": {
+        "path": "assets/suno-start.webp",
+        "mime": "image/webp",
+        "width": 1800,
+        "height": 792,
+        "sha256": "939ab15376401afdf16a7afcc70d181ad1660a8d7e668263babbb50d0c30f99b"
+      }
+    },
+    {
+      "id": "suno-revise",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "zmZd3562.png",
+        "sha256": "7e6ad378dd861c62db24e9e736cfd9e4fd7b3c9cb5b01575d31e06bae3cb2b5d",
+        "note": "Existing owner-published lecture image; the original remains at provenance_url."
+      },
+      "provenance_url": "https://i.imghippo.com/files/zmZd3562.png",
+      "delivery": {
+        "path": "assets/suno-revise.webp",
+        "mime": "image/webp",
+        "width": 1800,
+        "height": 802,
+        "sha256": "ee3159d7440a682125951a1a67cd931234fc62551e61cfe89d5102a551b3cb7d"
+      }
+    },
+    {
+      "id": "suno-publish",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "UQtC9912vms.png",
+        "sha256": "6c5d9775b758b0fd1a19d73b62e706c15f987f53e00510469b5b1f6cf304e6b3",
+        "note": "Existing owner-published lecture image; the original remains at provenance_url."
+      },
+      "provenance_url": "https://i.imghippo.com/files/UQtC9912vms.png",
+      "delivery": {
+        "path": "assets/suno-publish.webp",
+        "mime": "image/webp",
+        "width": 1800,
+        "height": 754,
+        "sha256": "a3035969f6c87850816d26ae7ac7a466f198130e8eddd625e31a7e671456b10d"
+      }
+    },
+    {
+      "id": "sound-lab",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "wpLB8975ihc.png",
+        "sha256": "2e9e4890b1923575f28021ddc06569e10beacad97df53fd85c129e3bc2ef23bf",
+        "note": "Existing owner-published lecture image; the original remains at provenance_url."
+      },
+      "provenance_url": "https://i.imghippo.com/files/wpLB8975ihc.png",
+      "delivery": {
+        "path": "assets/sound-lab.webp",
+        "mime": "image/webp",
+        "width": 1800,
+        "height": 729,
+        "sha256": "7a95cd47756969d55a538944aabe11a20f6bad27c1134d082906935bb8545135"
+      }
+    },
+    {
+      "id": "album-home",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "home-was-inside.webp",
+        "sha256": "61d8bc6c656c8ff0e810b9b09ef11e89f73b975a8d9e3789551a9c77fd487b55",
+        "note": "Existing owner-published lecture image; the original remains at provenance_url."
+      },
+      "provenance_url": "https://mirinaeman.com/pages/profile/assets/thumbnails/home-was-inside.webp",
+      "delivery": {
+        "path": "assets/album-home.webp",
+        "mime": "image/webp",
+        "width": 960,
+        "height": 540,
+        "sha256": "61d8bc6c656c8ff0e810b9b09ef11e89f73b975a8d9e3789551a9c77fd487b55"
+      }
+    },
+    {
+      "id": "album-photo",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "listen-before-photo.webp",
+        "sha256": "407921a417c53e324eb95fb4a0fe421d784297eaf8d420734cd02ab0646f4075",
+        "note": "Existing owner-published lecture image; the original remains at provenance_url."
+      },
+      "provenance_url": "https://mirinaeman.com/pages/profile/assets/thumbnails/listen-before-photo.webp",
+      "delivery": {
+        "path": "assets/album-photo.webp",
+        "mime": "image/webp",
+        "width": 960,
+        "height": 540,
+        "sha256": "407921a417c53e324eb95fb4a0fe421d784297eaf8d420734cd02ab0646f4075"
+      }
+    },
+    {
+      "id": "album-fan",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "too-many-screws-left.webp",
+        "sha256": "c40e4f2892ef5d63c6144ff881bffcaade17e4a612b344e3261aedfcff7176ef",
+        "note": "Existing owner-published lecture image; the original remains at provenance_url."
+      },
+      "provenance_url": "https://mirinaeman.com/pages/profile/assets/thumbnails/too-many-screws-left.webp",
+      "delivery": {
+        "path": "assets/album-fan.webp",
+        "mime": "image/webp",
+        "width": 960,
+        "height": 540,
+        "sha256": "c40e4f2892ef5d63c6144ff881bffcaade17e4a612b344e3261aedfcff7176ef"
+      }
+    },
+    {
+      "id": "album-blues",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "sara-vs-natasha.webp",
+        "sha256": "67df0a7de32bac318f853f83a057655c69587b324a5603cf23677e3e61b29ede",
+        "note": "Existing owner-published lecture image; the original remains at provenance_url."
+      },
+      "provenance_url": "https://mirinaeman.com/pages/profile/assets/thumbnails/sara-vs-natasha.webp",
+      "delivery": {
+        "path": "assets/album-blues.webp",
+        "mime": "image/webp",
+        "width": 960,
+        "height": 540,
+        "sha256": "67df0a7de32bac318f853f83a057655c69587b324a5603cf23677e3e61b29ede"
+      }
+    },
+    {
+      "id": "lecture-og",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "kind": "project-generated",
+        "filename": "og.jpg",
+        "path": "assets/og.jpg",
+        "sha256": "a56440472e71ff53dcee7ca73b36ef928d90da11710014dd1e78af2b784beea8"
+      },
+      "delivery": {
+        "path": "assets/og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "a56440472e71ff53dcee7ca73b36ef928d90da11710014dd1e78af2b784beea8"
+      }
+    }
+  ]
+}

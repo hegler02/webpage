@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://mirinaeman.com/sitemap.xml
+Sitemap: https://mirinaeman.com/pages/sono_slide/sitemap.xml

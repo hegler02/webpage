@@ -32,7 +32,7 @@ function go(index,{history=true,animate=true}={}){
  current=target;
  controls.previous.disabled=current===0;controls.next.disabled=current===slides.length-1;
  controls.counter.innerHTML=`<strong>${pad(current+1)}</strong> / ${pad(slides.length)}`;
- controls.part.textContent=`PART ${pad(Number(next.dataset.part))} — ${parts[Number(next.dataset.part)-1]}`;
+ controls.part.textContent=`SIDE ${settings.sides[Number(next.dataset.part)-1]} — ${parts[Number(next.dataset.part)-1]}`;
  segments.forEach((b,i)=>{b.setAttribute('aria-current',String(i===current));b.toggleAttribute('data-past',i<current);});
  items.forEach(a=>a.setAttribute('aria-current',String(a.hash==='#'+next.id)));
  if(history&&/^https?:$/.test(location.protocol))window.history.pushState(null,'','#'+next.id);
@@ -81,7 +81,7 @@ function setLanguage(lang,writeURL=true){
  [controls.previous,controls.next,controls.menu,controls.share,controls.fullscreen].forEach((b,i)=>b.setAttribute('aria-label',labels[i]));
  document.querySelectorAll('[data-close]').forEach(b=>b.setAttribute('aria-label',labels[5]));
  segments.forEach((b,i)=>b.setAttribute('aria-label',`${i+1}: ${headingText(slides[i])}`));
- if(current>=0){controls.part.textContent=`PART ${pad(Number(slides[current].dataset.part))} — ${parts[Number(slides[current].dataset.part)-1]}`;controls.status.textContent=`${current+1} / ${slides.length}. ${headingText(slides[current])}`;}
+ if(current>=0){controls.part.textContent=`SIDE ${settings.sides[Number(slides[current].dataset.part)-1]} — ${parts[Number(slides[current].dataset.part)-1]}`;controls.status.textContent=`${current+1} / ${slides.length}. ${headingText(slides[current])}`;}
  if(writeURL){const url=new URL(location.href);if(lang==='en')url.searchParams.set('lang','en');else url.searchParams.delete('lang');history.replaceState(null,'',url);}
 }
 ['ko','en'].forEach(lang=>document.getElementById('lang-'+lang).addEventListener('click',()=>setLanguage(lang)));

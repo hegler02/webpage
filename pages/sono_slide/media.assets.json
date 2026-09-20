@@ -153,14 +153,14 @@
         "kind": "project-generated",
         "filename": "og.jpg",
         "path": "assets/og.jpg",
-        "sha256": "a56440472e71ff53dcee7ca73b36ef928d90da11710014dd1e78af2b784beea8"
+        "sha256": "d6d31844bdc323cb8c9acc3e21c2cab38fdb5e69e2d1d724cff1eb6b136f5ac4"
       },
       "delivery": {
         "path": "assets/og.jpg",
         "mime": "image/jpeg",
         "width": 1200,
         "height": 630,
-        "sha256": "a56440472e71ff53dcee7ca73b36ef928d90da11710014dd1e78af2b784beea8"
+        "sha256": "d6d31844bdc323cb8c9acc3e21c2cab38fdb5e69e2d1d724cff1eb6b136f5ac4"
       }
     }
   ]

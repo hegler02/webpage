@@ -42,3 +42,21 @@ The existing https://mirinaeman.com/pages/sono_slide/ route serves the refactor.
 Deployment 04c46f43a5f9e8a62518a5ffb96a1f79ae4a1c53 reached READY.
 Public HTML, OG JPEG and font return HTTP 200 with exact committed bytes.
 Korean opening and English scene 9 were checked in the production browser.
+
+## Record-sleeve revision
+- Previous layout was accepted; the user requested a music-specific expression.
+- Visually reviewed all 17 Korean and 17 English scenes at 1363×936.
+- Measured both languages: no headings/paragraphs/figures outside the stage,
+  no text horizontal overflow, no title/body overlap.
+- Phone 390×844: stage 390×219.375; tablet 768×1024: stage 768×432.
+  Both document widths equal their scroll widths; fixed 16:9 composition retained.
+- Script-disabled 1000px iframe: all 17 scenes exposed, width/scroll width 985px.
+  Adapted the reading layout to flowing columns so the sleeve remains complete.
+- Sleeve start/mid/end inspected; track clips reveal sequentially, then clear to
+  clip-path:none. Session rows use successive disclosure. Shelf starts with a
+  translation/rotation and settles all four covers to transform:none.
+- Rapid next/next/previous settles on scene 15 with one active scene, 16 inert
+  scenes, zero departing scenes, and aria-busy=false.
+- Manual reduced motion used for full-scene visual review: immediate complete layouts.
+- Local OG derivative visually inspected; 1200×630 and metadata/media gate pass.
+- Prior limitations still apply. This is technical verification, not final user acceptance.

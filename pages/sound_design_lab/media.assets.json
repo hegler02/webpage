@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "lecture-og",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "kind": "project-generated",
+        "filename": "og.jpg",
+        "path": "assets/og.jpg",
+        "sha256": "460e57a976831e2925de838086d89eca20c7f6fc418f1647ddf4d7a7d5ad4929"
+      },
+      "delivery": {
+        "path": "assets/og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "460e57a976831e2925de838086d89eca20c7f6fc418f1647ddf4d7a7d5ad4929"
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "family": "Mirinae Lab Sans",
+  "derived_from": "Pretendard",
+  "source_sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+  "license": "SIL Open Font License 1.1",
+  "license_file": "font-license.txt",
+  "source_author": "Kil Hyung-jin",
+  "source_project": "https://github.com/orioncactus/pretendard",
+  "delivery_sha256": "41412faee6f66da21cde1195e38de689f0da2f0ff672a07900e1d815a055c51e",
+  "delivery_bytes": 104580,
+  "scope": "Characters in the complete lecture HTML and controller plus ASCII; variable weights preserved."
+}

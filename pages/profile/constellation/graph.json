@@ -9,6 +9,31 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:wind-of-longing",
+      "kind": "work",
+      "title": "그리움의 바람",
+      "summary": "바람이 불면 돌아오는 첫사랑의 기억을 노래와 이미지 시네마와 웹툰으로 펼칩니다.",
+      "url": "https://wind-of-longing.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/wind-of-longing.webp",
+      "alt": "노을 진 들길에서 바람을 느끼며 첫사랑의 기억을 떠올리는 여인",
+      "year": "2026",
+      "tags": [
+        "music",
+        "image-cinema",
+        "webtoon",
+        "first-love",
+        "memory"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "바람이 불면 돌아오는 첫사랑의 기억을 노래와 이미지 시네마와 웹툰으로 펼칩니다."
+        }
+      ],
+      "introUrl": "https://mirinaeman.com/archive/wind-of-longing/"
+    },
+    {
       "id": "work:unfold-your-turn",
       "kind": "work",
       "title": "펼칠 차례 — 같은 노래, 다른 목소리",
@@ -1719,6 +1744,13 @@
   ],
   "edges": [
     {
+      "source": "work:wind-of-longing",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:unfold-your-turn",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2181,6 +2213,27 @@
       "evidence": "https://mirinaeman.com/archive/image-cinema/"
     },
     {
+      "source": "work:wind-of-longing",
+      "target": "concept:image-cinema",
+      "label": "함께 읽는 개념",
+      "reason": "바람을 느끼는 현재와 첫사랑의 기억이 공책과 들길의 장면으로 이어집니다. 노래가 흐르는 시간과 웹툰을 읽는 시간을 달리하고 이별의 사유는 관객의 기억이 머물 여백으로 남깁니다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:wind-of-longing",
+      "target": "concept:interpretive-space",
+      "label": "함께 읽는 개념",
+      "reason": "바람을 느끼는 현재와 첫사랑의 기억이 공책과 들길의 장면으로 이어집니다. 노래가 흐르는 시간과 웹툰을 읽는 시간을 달리하고 이별의 사유는 관객의 기억이 머물 여백으로 남깁니다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:wind-of-longing",
+      "target": "concept:felt-time",
+      "label": "함께 읽는 개념",
+      "reason": "바람을 느끼는 현재와 첫사랑의 기억이 공책과 들길의 장면으로 이어집니다. 노래가 흐르는 시간과 웹툰을 읽는 시간을 달리하고 이별의 사유는 관객의 기억이 머물 여백으로 남깁니다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
       "source": "work:already-autumn",
       "target": "judgment:autumn-subtitles",
       "label": "제작에서 배운 것",
@@ -2193,6 +2246,20 @@
       "label": "다음 작업의 기준",
       "reason": "이 작품에서 얻은 판단은 자막이 노래를 따라 읽게 도우면서도 이미지가 전달할 감정과 관객의 해석 공간을 가리지 않아야 한다는 것이다. 다음 작품에서는 모바일과 PC에서 실제 재생 중인 자막을 각각 확인한다. 이 판단은 검색 노출이나 AI 인용 효과의 증거와 구분한다.",
       "evidence": "https://mirinaeman.com/archive/already-autumn/"
+    },
+    {
+      "source": "work:wind-of-longing",
+      "target": "work:already-autumn",
+      "label": "이어 읽는 작품",
+      "reason": "바람과 시간의 감각이 노래와 장면으로 이어집니다. 계절을 맞는 여러 사람의 하루와 첫사랑을 떠올리는 한 사람의 기억을 나란히 읽을 수 있습니다.",
+      "evidence": "https://mirinaeman.com/archive/wind-of-longing/"
+    },
+    {
+      "source": "work:wind-of-longing",
+      "target": "work:unfold-your-turn",
+      "label": "이어 읽는 작품",
+      "reason": "노래가 웹툰과 이미지 시네마와 감상 화면으로 확장된 작품입니다. 목소리의 질감을 고른 앞선 작업에 이어 이번에는 기억을 여는 움직임과 읽는 속도를 살펴봅니다.",
+      "evidence": "https://mirinaeman.com/archive/wind-of-longing/"
     },
     {
       "source": "work:already-autumn",
@@ -2234,6 +2301,13 @@
       "target": "work:tuna-man",
       "label": "이어 읽는 작품",
       "reason": "펑크록의 리듬과 인물의 말투가 만나는 작품입니다. 튜나의 엉뚱한 자기소개와 펼칠 차례의 능청스러운 허스키가 각각 어떤 성격을 만드는지 이어 들어볼 수 있습니다.",
+      "evidence": "https://mirinaeman.com/archive/unfold-your-turn/"
+    },
+    {
+      "source": "work:unfold-your-turn",
+      "target": "work:wind-of-longing",
+      "label": "이어 읽는 작품",
+      "reason": "같은 노래를 여러 미디어로 만나는 흐름을 이어 기억을 펼치는 세 가지 움직임을 비교합니다. 보컬 질감에서 감상 속도로 이어지는 창작 실험입니다.",
       "evidence": "https://mirinaeman.com/archive/unfold-your-turn/"
     },
     {

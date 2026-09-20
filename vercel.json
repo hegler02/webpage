@@ -45,6 +45,10 @@
       "destination": "/pages/profile/archive/unfold-your-turn/"
     },
     {
+      "source": "/archive/wind-of-longing/",
+      "destination": "/pages/profile/archive/wind-of-longing/"
+    },
+    {
       "source": "/constellation/",
       "destination": "/pages/profile/constellation/"
     },
@@ -383,6 +387,21 @@
     {
       "source": "/pages/profile/archive/unfold-your-turn/",
       "destination": "/archive/unfold-your-turn/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/wind-of-longing/index.html",
+      "destination": "/archive/wind-of-longing/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/wind-of-longing/index",
+      "destination": "/archive/wind-of-longing/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/wind-of-longing/",
+      "destination": "/archive/wind-of-longing/",
       "permanent": true
     }
   ]

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "wind-share",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "kind": "project-generated",
+        "filename": "social.jpg",
+        "sha256": "3327b02ad46935e59df809ea72a17ee92e477a8ae2eb024b612db1aae4b3a6de"
+      },
+      "delivery": {
+        "path": "assets/og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "3327b02ad46935e59df809ea72a17ee92e477a8ae2eb024b612db1aae4b3a6de"
+      }
+    }
+  ]
+}

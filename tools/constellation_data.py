@@ -52,6 +52,10 @@ def build_graph(catalog=None, editorial=None):
     node('judgment:autumn-subtitles','judgment','자막에서 배운 것','그림을 가리던 자막을 아래로',ORIGIN+context['intro_path'],sourceLabel='제작 판단 · 벌써, 가을',sections=[{'title':'무엇이 문제였나','text':'모바일과 PC에서 자막이 높고 크게 놓여 장면을 가렸습니다.'},{'title':'어떻게 바꾸었나','text':a['judgment']},{'title':'다음 작업에 남길 것','text':a['lesson']}])
     edge('work:already-autumn','judgment:autumn-subtitles','제작에서 배운 것',a['judgment'],ORIGIN+context['intro_path'])
     edge('judgment:autumn-subtitles','concept:interpretive-space','다음 작업의 기준',a['lesson'],ORIGIN+context['intro_path'])
+    wind=json.loads((PROFILE/'data/wind-context.json').read_text())
+    wind_intro=ORIGIN+'/archive/wind-of-longing/'
+    for related in wind['related']:
+        edge('work:'+wind['body_id'],'work:'+related['body_id'],'이어 읽는 작품',related['reason'],wind_intro)
     essay=editorial['essay']
     node(essay['id'],'essay',essay['title'],essay['summary'],essay['url'],sourceLabel='미리내벌스 · 개인적인 기록',year='2026',sections=essay['sections'])
     edge('work:already-autumn',essay['id'],'작품을 낳은 마음','작가가 이 노래를 만든 마음과 다섯 세대의 가을을 선택한 이유를 직접 기록했습니다.',essay['url'])

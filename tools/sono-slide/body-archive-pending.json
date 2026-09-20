@@ -3,20 +3,19 @@
   "status": "CQI_SYNC_PENDING",
   "body_id": "suno-song-guide",
   "canonical_url": "https://mirinaeman.com/pages/sono_slide/",
-  "latest_deployed_at": "2026-09-20T18:43:35.003000+00:00",
+  "latest_deployed_at": "2026-09-20T22:04:10.896000+00:00",
   "deployment": {
-    "deployed_at": "2026-09-20T18:43:35.003000+00:00",
+    "deployed_at": "2026-09-20T22:04:10.896000+00:00",
     "url": "https://mirinaeman.com/pages/sono_slide/",
     "release_ref": "github-main",
-    "source_revision": "0e0a042b291cb3ea9e8780e75bad8dd8370877c9",
+    "source_revision": "f8c60911431f14497e895888e6d970a078e95be7",
     "status": "succeeded",
     "validation": [
-      "Vercel READY dpl_52CwbraeCPogbgrHGrPQgvbLEadx",
-      "Public HTML, CSS, motion and OG HTTP 200 with exact local bytes; production browser confirmed new cover",
-      "All 17 Korean and 17 English scenes visually reviewed; title and content bounds measured",
-      "390px and 768px stage bounds verified; script-free reading exposes 17 scenes without horizontal overflow",
-      "Sleeve, arrangement and notes transitions inspected; rapid navigation settles with one active scene",
-      "tools/sono-slide/check.py, repository release gate and OG preview HTTP validation passed"
+      "Vercel READY dpl_5eYMARym4rwgs3fowYD5m6By31WX",
+      "Production browser confirms all four requested replacement URLs and matching titles/artwork",
+      "Korean and English slide 14 screenshots reviewed; four equal card bounds and images loaded",
+      "Four destination pages open; JEJU WE audio and Already Autumn cinema advance on first-party media URLs",
+      "Suno lecture structure/discovery and repository release gate passed"
     ]
   },
   "thumbnail": {
@@ -28,6 +27,6 @@
     "focal_point": "50% 50%",
     "sha256": "a00e67e3861c5dfabb1a3bd1b0a3ab7a63ea3da99ed803396d2f7adcaaaf5c22"
   },
-  "reason": "Skill repository push returned HTTP 500 (local CQI commit 7d392de). Public runtime and catalog are deployed independently.",
-  "recovery": "Preserve existing body and prior history. Append the verified record-sleeve deployment. User accepted prior geometry and approved this expression change; final visual acceptance is pending. Project-scoped feedback is in feedback.jsonl, DESIGN.md and QA.md. Validate archive/catalog and persist through the skill repository. Do not create a duplicate body or promote GOLDEN."
+  "reason": "Skill repository push returned HTTP 500 (local CQI commit 2c2f701). Public runtime and catalog are deployed independently.",
+  "recovery": "Preserve prior body history. Append the verified four-work replacement deployment; localized card copy, assets and links are in content.json and feedback.jsonl. User authorized the four supplied URLs; final result acceptance pending. Validate archive/catalog and persist through the skill repository; no duplicate body or GOLDEN promotion."
 }

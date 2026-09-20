@@ -1247,12 +1247,15 @@
       "tags": [
         "agent",
         "ai",
-        "sound-design"
+        "sound-design",
+        "kinetic-typography",
+        "assembly",
+        "workshop"
       ],
-      "message_sentence": "AI 음악 제작을 에이전트 하네스로 구조화하는 Sound Design Lab 강의다.",
+      "message_sentence": "감각적 요청을 입력·해석·출력·검수로 구조화하고, 나만의 GPT 하네스를 조립하는 30장 강의다.",
       "thumbnail": {
         "path": "assets/thumbnails/sound-design-lab.webp",
-        "alt": "“Sound Design Lab V2 — Agent Harness Lecture” 제목을 담은 그래픽 썸네일",
+        "alt": "코발트색 HARNESS 타이포와 입력·해석·출력 설계도",
         "width": 960,
         "height": 540,
         "focal_point": "50% 50%"
@@ -1260,7 +1263,7 @@
       "canonical_url": "https://mirinaeman.com/pages/sound_design_lab/",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-07-30T10:30:22Z",
-      "latest_deployed_at": "2026-07-30T10:30:22Z"
+      "latest_deployed_at": "2026-09-20T23:04:39.732000+00:00"
     },
     {
       "body_id": "suno-song-guide",

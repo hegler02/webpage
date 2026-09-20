@@ -9,6 +9,31 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:sound-design-lab",
+      "kind": "work",
+      "title": "Sound Design Lab V2 — Agent Harness Lecture",
+      "summary": "감각적 요청을 입력·해석·출력·검수로 구조화하고, 나만의 GPT 하네스를 조립하는 30장 강의다.",
+      "url": "https://mirinaeman.com/pages/sound_design_lab/",
+      "image": "/pages/profile/assets/thumbnails/sound-design-lab.webp",
+      "alt": "코발트색 HARNESS 타이포와 입력·해석·출력 설계도",
+      "year": "2026",
+      "tags": [
+        "agent",
+        "ai",
+        "sound-design",
+        "kinetic-typography",
+        "assembly",
+        "workshop"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "감각적 요청을 입력·해석·출력·검수로 구조화하고, 나만의 GPT 하네스를 조립하는 30장 강의다."
+        }
+      ]
+    },
+    {
       "id": "work:suno-song-guide",
       "kind": "work",
       "title": "Suno로 원하는 노래 만들기",
@@ -1212,28 +1237,6 @@
       ]
     },
     {
-      "id": "work:sound-design-lab",
-      "kind": "work",
-      "title": "Sound Design Lab V2 — Agent Harness Lecture",
-      "summary": "AI 음악 제작을 에이전트 하네스로 구조화하는 Sound Design Lab 강의다.",
-      "url": "https://mirinaeman.com/pages/sound_design_lab/",
-      "image": "/pages/profile/assets/thumbnails/sound-design-lab.webp",
-      "alt": "“Sound Design Lab V2 — Agent Harness Lecture” 제목을 담은 그래픽 썸네일",
-      "year": "2026",
-      "tags": [
-        "agent",
-        "ai",
-        "sound-design"
-      ],
-      "sourceLabel": "작품 아카이브",
-      "sections": [
-        {
-          "title": "작품의 기록",
-          "text": "AI 음악 제작을 에이전트 하네스로 구조화하는 Sound Design Lab 강의다."
-        }
-      ]
-    },
-    {
       "id": "work:taste-expiration",
       "kind": "work",
       "title": "맛의 유통기한 | The Mirinaeman Project Music Album",
@@ -1767,6 +1770,13 @@
   ],
   "edges": [
     {
+      "source": "work:sound-design-lab",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:suno-song-guide",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2125,13 +2135,6 @@
     },
     {
       "source": "work:school-rule-knowledge-bot",
-      "target": "creator:joonho",
-      "label": "창작자",
-      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
-      "evidence": "https://mirinaeman.com/archive/"
-    },
-    {
-      "source": "work:sound-design-lab",
       "target": "creator:joonho",
       "label": "창작자",
       "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",

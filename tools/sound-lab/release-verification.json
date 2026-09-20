@@ -1,0 +1,58 @@
+[
+  {
+    "path": "pages/sound_design_lab/index.html",
+    "status": 200,
+    "bytes": 91858,
+    "content_type": "text/html; charset=utf-8",
+    "sha256": "1d04f70a6e48fed99c2a3490e19117f5b60e636ce828727872b6287cb7cfdd39"
+  },
+  {
+    "path": "pages/sound_design_lab/styles.css",
+    "status": 200,
+    "bytes": 30150,
+    "content_type": "text/css; charset=utf-8",
+    "sha256": "57b06e262eb54fed84cde745b8bed8c6ad1a6e50a617936675ea85150202ceb2"
+  },
+  {
+    "path": "pages/sound_design_lab/motion.js",
+    "status": 200,
+    "bytes": 5834,
+    "content_type": "application/javascript; charset=utf-8",
+    "sha256": "c835fbb4f73d5de844850c569d72652fefef447e479058e3b25f1d675faab65f"
+  },
+  {
+    "path": "pages/sound_design_lab/workbook.js",
+    "status": 200,
+    "bytes": 4097,
+    "content_type": "application/javascript; charset=utf-8",
+    "sha256": "94f19db8a3c09058267a4b38b3fc8bcfa65e3b93d07543defb193b9f266e3b51"
+  },
+  {
+    "path": "pages/sound_design_lab/assets/lecture-sans.woff2",
+    "status": 200,
+    "bytes": 104580,
+    "content_type": "font/woff2",
+    "sha256": "41412faee6f66da21cde1195e38de689f0da2f0ff672a07900e1d815a055c51e"
+  },
+  {
+    "path": "pages/sound_design_lab/assets/vendor/gsap-3.15.0.min.js",
+    "status": 200,
+    "bytes": 72928,
+    "content_type": "application/javascript; charset=utf-8",
+    "sha256": "42b6aa842a2a283850d7963f2cf1283cea1792c86f2bc059f0b23167a56ba6cd"
+  },
+  {
+    "path": "pages/sound_design_lab/assets/og.jpg",
+    "status": 200,
+    "bytes": 74395,
+    "content_type": "image/jpeg",
+    "sha256": "460e57a976831e2925de838086d89eca20c7f6fc418f1647ddf4d7a7d5ad4929"
+  },
+  {
+    "path": "pages/profile/assets/thumbnails/sound-design-lab.webp",
+    "status": 200,
+    "bytes": 25492,
+    "content_type": "image/webp",
+    "sha256": "65d5faebc8262dcef8592ee1d140893e099851fd01b8789954593167aff60a07"
+  }
+]

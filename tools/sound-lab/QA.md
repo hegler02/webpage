@@ -22,3 +22,9 @@ No claim of testing every OS, screen reader or GPU. Fullscreen depends on browse
 No live model calls or factual audio analysis are added. Search/AI discovery structure validation is not proof of indexing, ranking or citation.
 
 Production URL, exact commit and archive closeout are recorded after successful deployment in the CQI record.
+
+## Verified public release
+Runtime commit: 13f08e2a6a504ba47098b0c183d0d6f4c1323fab. Vercel READY: dpl_B8ae5cUJda1C48ancEZtoWNbndu8 at 2026-09-20T23:04:39.732Z.
+Existing public URL confirms 30 scenes and 32 fields. Eight runtime/media resources are HTTP 200 and byte-identical (release-verification.json).
+The archive export preserves all 56 existing bodies and updates only sound-design-lab metadata. No Work-menu change.
+Skill repository push failed with HTTP 500; exact CQI record and change are preserved in body-archive-pending.json for recovery. Public catalog publication is independent.

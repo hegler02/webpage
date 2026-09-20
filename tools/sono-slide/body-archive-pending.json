@@ -3,18 +3,20 @@
   "status": "CQI_SYNC_PENDING",
   "body_id": "suno-song-guide",
   "canonical_url": "https://mirinaeman.com/pages/sono_slide/",
-  "latest_deployed_at": "2026-09-20T18:16:11.042000+00:00",
+  "latest_deployed_at": "2026-09-20T18:43:35.003000+00:00",
   "deployment": {
-    "deployed_at": "2026-09-20T18:16:11.042000+00:00",
+    "deployed_at": "2026-09-20T18:43:35.003000+00:00",
     "url": "https://mirinaeman.com/pages/sono_slide/",
     "release_ref": "github-main",
-    "source_revision": "04c46f43a5f9e8a62518a5ffb96a1f79ae4a1c53",
+    "source_revision": "0e0a042b291cb3ea9e8780e75bad8dd8370877c9",
     "status": "succeeded",
     "validation": [
-      "Vercel READY dpl_A6dbnKi4k3o6vRXQe8D7iyEhqtan",
-      "All 17 Korean and 17 English scenes inspected; shared baselines and content bounds verified",
-      "390px and 768px viewport checks; outline, language, deep links, reduced motion and share fallback verified",
-      "tools/sono-slide/check.py and repository release gate passed"
+      "Vercel READY dpl_52CwbraeCPogbgrHGrPQgvbLEadx",
+      "Public HTML, CSS, motion and OG HTTP 200 with exact local bytes; production browser confirmed new cover",
+      "All 17 Korean and 17 English scenes visually reviewed; title and content bounds measured",
+      "390px and 768px stage bounds verified; script-free reading exposes 17 scenes without horizontal overflow",
+      "Sleeve, arrangement and notes transitions inspected; rapid navigation settles with one active scene",
+      "tools/sono-slide/check.py, repository release gate and OG preview HTTP validation passed"
     ]
   },
   "thumbnail": {
@@ -24,8 +26,8 @@
     "width": 960,
     "height": 540,
     "focal_point": "50% 50%",
-    "sha256": "22c09d91d5f1419c440d0ac39e533f77aee79db9af0033d2cf83cd92fd605bbe"
+    "sha256": "a00e67e3861c5dfabb1a3bd1b0a3ab7a63ea3da99ed803396d2f7adcaaaf5c22"
   },
-  "reason": "Skill repository push returned HTTP 500. Public runtime and catalog deployment are independent.",
-  "recovery": "Append this verified deployment to existing suno-song-guide evidence and preserve prior history. Project-scoped corrections are in tools/sono-slide/QA.md and DESIGN.md. Validate archive/catalog, then persist through the skill repository. Do not create a second body or promote GOLDEN."
+  "reason": "Skill repository push returned HTTP 500 (local CQI commit 7d392de). Public runtime and catalog are deployed independently.",
+  "recovery": "Preserve existing body and prior history. Append the verified record-sleeve deployment. User accepted prior geometry and approved this expression change; final visual acceptance is pending. Project-scoped feedback is in feedback.jsonl, DESIGN.md and QA.md. Validate archive/catalog and persist through the skill repository. Do not create a duplicate body or promote GOLDEN."
 }

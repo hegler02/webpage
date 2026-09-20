@@ -1,315 +1,105 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coding is the Body of the Message</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100%;background:#1a1a1a;display:flex;align-items:flex-start;justify-content:center;padding:24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo',sans-serif}
-#ac{width:960px;max-width:100%}
-#ac .sw{overflow:hidden;border-radius:20px;border:.5px solid #E6E1DC}
-#ac .st{display:flex;transition:transform 300ms cubic-bezier(.22,1,.36,1);will-change:transform}
-#ac .sl{min-width:100%;width:100%;aspect-ratio:16/9;display:flex;flex-direction:column;justify-content:center;padding:3rem 4rem;position:relative;overflow:hidden}
-#ac .dk{background:#1E1914;color:#FBF8F5}
-#ac .pr{background:#B23A26;color:#fff}
-#ac .lt{background:#FBF8F5;color:#1E1914}
-#ac .sn{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.25rem;background:#FFFFFF;border:.5px solid #E6E1DC;border-top:none;border-radius:0 0 20px 20px}
-#ac .lbl{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;opacity:.45;margin-bottom:1.5rem}
-#ac .hero{font-size:2.5rem;font-weight:700;line-height:1.2;margin-bottom:.75rem}
-#ac .ttl{font-size:1.75rem;font-weight:700;line-height:1.25;margin-bottom:.75rem;color:#1E1914}
-#ac .sub{font-size:.9375rem;line-height:1.6;color:#706757}
-#ac .bdg{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:9999px;font-size:11px;font-weight:500;margin-bottom:1rem}
-#ac .col2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.25rem}
-#ac .crd{background:#FFFFFF;border-radius:14px;padding:1.125rem;border:.5px solid #E6E1DC}
-#ac .chain{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:1.25rem}
-#ac .ci{padding:5px 12px;border-radius:9999px;font-size:.8125rem;font-weight:500;background:#FFFFFF;border:.5px solid #E6E1DC;color:#1E1914}
-#ac .ci.p{background:#B23A26;color:#fff;border-color:transparent}
-#ac .bignum{font-size:7rem;font-weight:800;line-height:1;opacity:.1;position:absolute;right:2.5rem;bottom:2rem;pointer-events:none}
-#ac .good{background:#EDF7EE;color:#1A5C2A}
-#ac .bad{background:#FEF0ED;color:#7A2018}
-#ac .p2{padding:4px 10px;border-radius:8px;font-size:.8125rem}
-#ac .rw{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-#ac a.lnk{display:inline-flex;align-items:center;gap:6px;padding:9px 22px;background:#fff;border-radius:9999px;text-decoration:none}
-#ac a.lnk:hover{opacity:.85}
-#ac a.lnk2{color:rgba(255,255,255,.6);font-size:.8125rem;text-decoration:none;display:inline-block;margin-top:.625rem;border-bottom:1px solid rgba(255,255,255,.3);line-height:1.4}
-#ac a.lnk2:hover{color:rgba(255,255,255,.85)}
-.nav-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border:1.5px solid #B0A89E;border-radius:9999px;background:#FFFFFF;color:#4A4035;font-size:13px;cursor:pointer;font-family:inherit;user-select:none;transition:background 120ms}
-.nav-btn:hover{background:#F0EDE9}
-.nav-btn.off{opacity:.3;pointer-events:none}
-.dots{display:flex;gap:5px;align-items:center}
-.dot{width:6px;height:6px;border-radius:50%;background:#B0A89E;cursor:pointer;transition:all 180ms;display:inline-block}
-.dot.on{width:20px;border-radius:3px;background:#B23A26}
-.cnt{font-size:12px;color:#9C9488;min-width:36px;text-align:center}
-</style>
-</head>
-<body>
-<div id="ac">
-<div class="sw"><div class="st" id="track">
-
-<!-- 01 -->
-<div class="sl dk" style="flex-direction:row;gap:2.5rem;align-items:center">
-  <div style="flex:1;min-width:0">
-    <div class="lbl">PART 1 — 왜 몸이 필요한가</div>
-    <h2 class="hero" style="color:#FBF8F5">AI한테 만들어달랬는데,<br>내가 원한 게 아니었다</h2>
-    <p class="sub" style="color:rgba(251,248,245,.55)">다들 한 번씩 겪었을 것이다. 왜 그럴까?</p>
-  </div>
-  <div style="flex:0 0 220px">
-    <img src="https://i.imghippo.com/files/gZg9697VGM.png" alt="Code Spec Bridge 예시" style="width:100%;border-radius:14px;display:block;opacity:.9">
-  </div>
-</div>
-
-<!-- 02 -->
-<div class="sl lt">
-  <div class="bdg" style="background:#FEF0ED;color:#B23A26">이유</div>
-  <h2 class="ttl">몸이 없어서다</h2>
-  <div class="col2">
-    <div class="crd" style="border-left:3px solid #2A7A40"><div style="font-size:.75rem;font-weight:600;color:#2A7A40;margin-bottom:.5rem">메시지 ✓</div><p style="font-size:.875rem;color:#1E1914">"쇼핑몰 만들어줘"<br>아이디어는 있다</p></div>
-    <div class="crd" style="border-left:3px solid #E8634A"><div style="font-size:.75rem;font-weight:600;color:#B23A26;margin-bottom:.5rem">몸 ✗</div><p style="font-size:.875rem;color:#1E1914">누구를 위해?<br>뭘 팔아? 언제까지?</p></div>
-  </div>
-  <p class="sub" style="margin-top:1rem">빈 자리를 AI가 채웠다 — AI 기본값으로.</p>
-</div>
-
-<!-- 03 -->
-<div class="sl lt" style="align-items:center;text-align:center">
-  <p style="font-size:.8125rem;color:#706757;margin-bottom:.75rem;font-style:italic">미디어 이론</p>
-  <h2 style="font-size:2.25rem;font-weight:700;line-height:1.2;color:#1E1914;margin-bottom:1rem">미디어는<br>메시지의 몸이다</h2>
-  <div style="width:40px;height:2px;background:#B23A26;margin:0 auto 1rem"></div>
-  <p style="font-size:1.0625rem;color:#706757">코드도 매체다<br>어떤 구조로 만드느냐가 곧 서비스의 메시지다</p>
-</div>
-
-<!-- 04 -->
-<div class="sl lt">
-  <h2 class="ttl">몸 자체가 메시지다</h2>
-  <p class="sub" style="margin-bottom:1.25rem">같은 영상, 다른 몸 → 다른 메시지</p>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
-    <div class="crd" style="text-align:center"><div style="font-size:1.5rem;margin-bottom:.5rem"><i class="ti ti-brand-instagram" style="color:#C13584"></i></div><div style="font-size:.8125rem;font-weight:600;color:#1E1914">인스타그램</div><div style="font-size:.75rem;color:#706757;margin-top:3px">감성·팔로워</div></div>
-    <div class="crd" style="text-align:center"><div style="font-size:1.5rem;margin-bottom:.5rem"><i class="ti ti-brand-youtube" style="color:#FF0000"></i></div><div style="font-size:.8125rem;font-weight:600;color:#1E1914">유튜브</div><div style="font-size:.75rem;color:#706757;margin-top:3px">시청·구독</div></div>
-    <div class="crd" style="text-align:center"><div style="font-size:1.5rem;margin-bottom:.5rem"><i class="ti ti-brand-twitter" style="color:#1DA1F2"></i></div><div style="font-size:.8125rem;font-weight:600;color:#1E1914">X</div><div style="font-size:.75rem;color:#706757;margin-top:3px">화제·확산</div></div>
-  </div>
-  <p class="sub" style="margin-top:1.125rem">앱도 마찬가지 — 화면 흐름, 기능 순서, 데이터 구조가 곧 서비스다</p>
-</div>
-
-<!-- 05 -->
-<div class="sl dk">
-  <div class="bignum">22</div>
-  <div class="lbl">PART 2 — 관문이 몸을 만든다</div>
-  <h2 class="hero" style="color:#FBF8F5">이게 안 되면<br>뒤는 없다</h2>
-  <p class="sub" style="color:rgba(251,248,245,.55)">아이디어가 코드가 되려면 통과해야 할 관문이 있다.<br>건너뛸 수 없다.</p>
-</div>
-
-<!-- 06 -->
-<div class="sl pr">
-  <div class="bdg" style="background:rgba(255,255,255,.18);color:#fff">★ 절대 관문</div>
-  <h2 style="font-size:4.5rem;font-weight:800;line-height:1;color:rgba(255,255,255,.15);margin-bottom:.25rem">WHAT</h2>
-  <h3 style="font-size:1.25rem;font-weight:600;color:#fff;margin-bottom:1.5rem">무엇을 만드는가 — 한 문장</h3>
-  <div style="background:rgba(0,0,0,.18);border-left:3px solid rgba(255,255,255,.35);border-radius:0 10px 10px 0;padding:.75rem 1rem;font-size:.875rem;color:rgba(255,255,255,.65);margin-bottom:.75rem">✗ "앱 만들어줘" → AI 기본값이 나온다</div>
-  <div style="background:rgba(255,255,255,.15);border-left:3px solid #fff;border-radius:0 10px 10px 0;padding:.75rem 1rem;font-size:.875rem;color:#fff">✓ "직장인이 점심 메뉴를 5초 안에 고르는 앱" → 내 생각이 나온다</div>
-</div>
-
-<!-- 07 -->
-<div class="sl lt">
-  <h2 class="ttl">누구를 위해, 어디까지</h2>
-  <div class="col2">
-    <div class="crd"><div class="rw"><div style="width:32px;height:32px;border-radius:50%;background:#FEF0ED;display:flex;align-items:center;justify-content:center"><i class="ti ti-user" style="color:#B23A26"></i></div><span style="font-weight:600;font-size:.9375rem;color:#1E1914">WHO</span></div><p style="font-size:.875rem;color:#706757">이 사람이 쓴다.<br>사용자 없으면 기능도 없다.</p></div>
-    <div class="crd"><div class="rw"><div style="width:32px;height:32px;border-radius:50%;background:#FEF0ED;display:flex;align-items:center;justify-content:center"><i class="ti ti-border-outer" style="color:#B23A26"></i></div><span style="font-weight:600;font-size:.9375rem;color:#1E1914">WHERE</span></div><p style="font-size:.875rem;color:#706757">이번엔 이건 안 한다.<br>경계 없으면 끝도 없다.</p></div>
-  </div>
-  <p class="sub" style="margin-top:1rem">범위를 모르면 아이디어는 늘어나기만 한다.</p>
-</div>
-
-<!-- 08 -->
-<div class="sl lt">
-  <h2 class="ttl">어떻게 실현하는가</h2>
-  <p class="sub" style="margin-bottom:1.25rem">WHAT을 실현하는 기능 체인. 한 줄 = 한 기능.</p>
-  <div class="chain">
-    <div class="ci p">WHAT</div><span style="color:#706757">→</span>
-    <div class="ci">F01. 회원가입</div><span style="color:#706757">→</span>
-    <div class="ci">F02. 물품 구매</div><span style="color:#706757">→</span>
-    <div class="ci">F03. 후원 연결</div><span style="color:#706757">→</span>
-    <div class="ci">F04. 알림 발송</div>
-  </div>
-  <div style="margin-top:1.125rem;padding:.875rem 1rem;background:#FEF0ED;border-radius:10px"><p style="font-size:.8125rem;color:#B23A26">기능이 WHAT을 커버하지 못하면 — 다시 돌아간다</p></div>
-</div>
-
-<!-- 09 -->
-<div class="sl lt">
-  <h2 class="ttl">약속이 끝까지 내려갔는가</h2>
-  <div class="col2" style="margin-top:1.25rem">
-    <div>
-      <div style="font-size:.75rem;font-weight:600;color:#B23A26;margin-bottom:.75rem">✗ DEPTH 실패</div>
-      <div style="padding:8px 12px;border-radius:8px;font-size:.8125rem;background:#FEF0ED;color:#706757;margin-bottom:4px">사장: "친절하게 하세요"</div>
-      <div style="width:1px;height:14px;background:#E6E1DC;margin-left:26px"></div>
-      <div style="padding:8px 12px;border-radius:8px;font-size:.8125rem;background:#FEF0ED;color:#706757;opacity:.4">알바: 전달 안 됨 ✗</div>
-    </div>
-    <div>
-      <div style="font-size:.75rem;font-weight:600;color:#2A7A40;margin-bottom:.75rem">✓ DEPTH 성공</div>
-      <div style="padding:8px 12px;border-radius:8px;font-size:.8125rem;background:#EDF7EE;color:#1A5C2A;margin-bottom:4px">기획서: 규칙 명시</div>
-      <div style="width:1px;height:14px;background:#A8D5B5;margin-left:26px"></div>
-      <div style="padding:8px 12px;border-radius:8px;font-size:.8125rem;background:#EDF7EE;color:#1A5C2A">코드: 규칙 강제 ✓</div>
-    </div>
-  </div>
-  <p class="sub" style="margin-top:1.125rem">선언만 하면 없는 것이다. 코드 끝까지 살아있어야 한다.</p>
-</div>
-
-<!-- 10 -->
-<div class="sl lt">
-  <h2 class="ttl">순서가 있는가, 증거가 있는가</h2>
-  <div class="col2">
-    <div class="crd">
-      <div style="font-size:.75rem;font-weight:600;color:#B23A26;margin-bottom:.75rem">⏱ TIME</div>
-      <p style="font-size:.875rem;color:#706757;margin-bottom:.75rem">화면이 순서대로 연결되는가?</p>
-      <div style="display:flex;align-items:center;gap:5px;font-size:.75rem"><span class="p2 bad">홈</span><span style="color:#706757">→</span><span class="p2 bad">상품</span><span style="color:#706757">→</span><span class="p2 bad">결제</span></div>
-    </div>
-    <div class="crd">
-      <div style="font-size:.75rem;font-weight:600;color:#B23A26;margin-bottom:.75rem">📊 EVIDENCE</div>
-      <p style="font-size:.875rem;color:#706757;margin-bottom:.75rem">완성 기준이 숫자로 나오는가?</p>
-      <div style="font-size:.8125rem"><div style="color:#706757;text-decoration:line-through">"잘 만들었다" ✗</div><div class="good" style="border-radius:6px;padding:3px 8px;display:inline-block;margin-top:4px">"사용자 100명" ✓</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- 11 -->
-<div class="sl lt">
-  <h2 class="ttl">내가 결정하고 AI가 채운다</h2>
-  <div class="col2" style="margin-top:1.25rem">
-    <div>
-      <div style="font-size:.75rem;font-weight:600;color:#B23A26;margin-bottom:.75rem">내가 직접 결정 (01~06)</div>
-      <div style="display:flex;flex-direction:column;gap:5px">
-        <div class="bad" style="border-radius:8px;padding:6px 10px;font-size:.8125rem">WHAT 한 문장</div>
-        <div class="bad" style="border-radius:8px;padding:6px 10px;font-size:.8125rem">WHO 정의</div>
-        <div class="bad" style="border-radius:8px;padding:6px 10px;font-size:.8125rem">DONE 완성 기준</div>
-        <div class="bad" style="border-radius:8px;padding:6px 10px;font-size:.8125rem">NOT 범위 경계</div>
-      </div>
-      <p style="font-size:.75rem;color:#706757;margin-top:.625rem">AI가 대신 못 한다</p>
-    </div>
-    <div>
-      <div style="font-size:.75rem;font-weight:600;color:#706757;margin-bottom:.75rem">AI가 자동 파생 (07~20)</div>
-      <div style="display:flex;flex-direction:column;gap:5px">
-        <div style="padding:6px 10px;background:#F0EDE9;border-radius:8px;font-size:.8125rem;color:#706757">화면·컴포넌트</div>
-        <div style="padding:6px 10px;background:#F0EDE9;border-radius:8px;font-size:.8125rem;color:#706757">데이터 모델</div>
-        <div style="padding:6px 10px;background:#F0EDE9;border-radius:8px;font-size:.8125rem;color:#706757">API 설계</div>
-        <div style="padding:6px 10px;background:#F0EDE9;border-radius:8px;font-size:.8125rem;color:#706757">에러 처리</div>
-      </div>
-      <p style="font-size:.75rem;color:#706757;margin-top:.625rem">내가 "맞나요?"만 한다</p>
-    </div>
-  </div>
-</div>
-
-<!-- 12 -->
-<div class="sl dk">
-  <div class="lbl">PART 3 — AI와 함께 가는 법</div>
-  <h2 class="hero" style="color:#FBF8F5;font-size:2rem">인과율이 흐르면<br>코드가 살아있다</h2>
-  <div style="display:flex;align-items:center;gap:8px;margin-top:1.5rem;flex-wrap:wrap">
-    <div style="padding:5px 12px;background:rgba(251,248,245,.1);border-radius:8px;font-size:.8125rem;color:rgba(251,248,245,.8)">WHAT</div><span style="color:rgba(251,248,245,.3)">→</span>
-    <div style="padding:5px 12px;background:rgba(251,248,245,.1);border-radius:8px;font-size:.8125rem;color:rgba(251,248,245,.8)">기능</div><span style="color:rgba(251,248,245,.3)">→</span>
-    <div style="padding:5px 12px;background:rgba(251,248,245,.1);border-radius:8px;font-size:.8125rem;color:rgba(251,248,245,.8)">화면</div><span style="color:rgba(251,248,245,.3)">→</span>
-    <div style="padding:5px 12px;background:rgba(251,248,245,.1);border-radius:8px;font-size:.8125rem;color:rgba(251,248,245,.8)">데이터</div><span style="color:rgba(251,248,245,.3)">→</span>
-    <div style="padding:5px 12px;background:rgba(251,248,245,.1);border-radius:8px;font-size:.8125rem;color:rgba(251,248,245,.8)">코드</div>
-  </div>
-  <p class="sub" style="color:rgba(251,248,245,.45);margin-top:1.125rem">하나라도 빠지면 파이프가 새고 — 개발이 막힌다</p>
-</div>
-
-<!-- 13 -->
-<div class="sl lt" style="flex-direction:row;gap:2.5rem;align-items:center">
-  <div style="flex:1;min-width:0">
-    <h2 class="ttl">이게 만들어진다</h2>
-    <p class="sub" style="margin-bottom:1.25rem">명세서 한 장이 코딩 에이전트에게 건네졌다</p>
-    <div style="padding:.875rem 1.125rem;background:#FBF8F5;border-radius:12px;border:.5px solid #E6E1DC;margin-bottom:1rem">
-      <div style="font-weight:700;font-size:1rem;color:#1E1914;margin-bottom:4px">에이블 캔버스</div>
-      <div style="font-size:.8125rem;color:#706757;line-height:1.5">기업이 물품을 구매하면<br>발달 장애인 작가를 후원하는 플랫폼</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:6px">
-      <span style="width:8px;height:8px;border-radius:50%;background:#2A7A40;display:inline-block;flex-shrink:0"></span>
-      <p style="font-size:.8125rem;color:#2A7A40;font-weight:600;margin:0">22개 관문 → 명세서 → 에이전트 → 실제 서비스</p>
-    </div>
-  </div>
-  <div style="flex:0 0 360px">
-    <a href="https://ablecanvas.web.app/" target="_blank" rel="noopener" style="display:block;text-decoration:none">
-      <img src="https://i.imghippo.com/files/dmNR5745mKw.png" alt="에이블 캔버스 서비스" style="width:100%;border-radius:16px;display:block;box-shadow:0 8px 32px rgba(30,25,20,.15);transition:opacity 150ms">
-      <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:center;gap:6px;padding:7px 16px;background:#1E1914;border-radius:9999px;font-size:.8125rem;font-weight:600;color:#FBF8F5">
-        <i class="ti ti-external-link" style="font-size:.875rem"></i> ablecanvas.web.app
-      </div>
-    </a>
-  </div>
-</div>
-
-<!-- 14 -->
-<div class="sl lt">
-  <h2 class="ttl">WHAT을 알면 AI는 실행자가 된다</h2>
-  <div class="col2" style="margin-top:1.25rem">
-    <div class="crd" style="border-top:3px solid #E8634A">
-      <div style="font-size:.75rem;font-weight:600;color:#B23A26;margin-bottom:.75rem">방향을 모를 때</div>
-      <div class="rw"><span class="bad p2" style="font-weight:500">AI</span><span style="font-size:.8125rem;color:#706757">운전사</span></div>
-      <div class="rw"><span style="padding:4px 10px;background:#F0EDE9;border-radius:8px;font-size:.8125rem;color:#706757">나</span><span style="font-size:.8125rem;color:#706757">승객</span></div>
-    </div>
-    <div class="crd" style="border-top:3px solid #2A7A40">
-      <div style="font-size:.75rem;font-weight:600;color:#2A7A40;margin-bottom:.75rem">방향을 알 때</div>
-      <div class="rw"><span class="good p2" style="font-weight:500">나</span><span style="font-size:.8125rem;color:#706757">운전사</span></div>
-      <div class="rw"><span class="good p2" style="font-weight:500">AI</span><span style="font-size:.8125rem;color:#706757">엔진</span></div>
-    </div>
-  </div>
-  <p class="sub" style="margin-top:1.125rem">도구는 생각을 대신 못 한다. 방향은 내가 잡는다. 실행은 AI가 한다.</p>
-</div>
-
-<!-- 15 -->
-<div class="sl pr" style="align-items:center;text-align:center">
-  <div style="font-size:.8125rem;color:rgba(255,255,255,.5);margin-bottom:1.125rem;font-weight:500;letter-spacing:.06em">CODE SPEC BRIDGE</div>
-  <h2 style="font-size:2.5rem;font-weight:800;line-height:1.15;color:#fff;margin-bottom:1.125rem">아이디어가 있다면,<br>몸을 만들어라</h2>
-  <p style="color:rgba(255,255,255,.65);font-size:.9375rem;margin-bottom:1.75rem">WHAT 한 문장부터 시작해라</p>
-  <a class="lnk" href="https://chatgpt.com/g/g-6a417a77b1648191b8b07d1e04872766-coding-is-the-body-of-the-message" target="_blank" rel="noopener">
-    <i class="ti ti-external-link" style="color:#B23A26;font-size:1rem"></i>
-    <span style="font-size:.875rem;font-weight:600;color:#B23A26">Coding is the body of the message →</span>
-  </a>
-  <div style="margin-top:1.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem">
-    <div style="width:20px;height:.5px;background:rgba(255,255,255,.25)"></div>
-    <span style="font-size:.75rem;color:rgba(255,255,255,.35)">참고</span>
-    <div style="width:20px;height:.5px;background:rgba(255,255,255,.25)"></div>
-  </div>
-  <a class="lnk2" href="https://mirinaeman.com/pages/github/" target="_blank" rel="noopener">Git &amp; Github 기초 →</a>
-</div>
-
-</div></div>
-
-<div class="sn">
-  <div id="pb" class="nav-btn off" role="button" tabindex="0">← 이전</div>
-  <div style="display:flex;align-items:center;gap:10px">
-    <div class="dots" id="dots"></div>
-    <span class="cnt" id="cnt">1 / 15</span>
-  </div>
-  <div id="nb" class="nav-btn" role="button" tabindex="0">다음 →</div>
-</div>
-</div>
-
-<script>
-(function(){
-const track=document.getElementById('track'),slides=track.querySelectorAll('.sl'),total=slides.length,pb=document.getElementById('pb'),nb=document.getElementById('nb'),cnt=document.getElementById('cnt'),dc=document.getElementById('dots');
-slides.forEach(s=>{s.style.minWidth='100%';s.style.width='100%'});
-let cur=0;
-const dots=Array.from({length:total},(_,i)=>{
-  const d=document.createElement('div');
-  d.className='dot'+(i===0?' on':'');
-  d.setAttribute('aria-label',`슬라이드 ${i+1}`);
-  d.onclick=()=>go(i);
-  dc.appendChild(d);return d
-});
-function go(n){
-  cur=Math.max(0,Math.min(total-1,n));
-  track.style.transform=`translateX(-${cur*100}%)`;
-  cnt.textContent=`${cur+1} / ${total}`;
-  pb.className='nav-btn'+(cur===0?' off':'');
-  nb.className='nav-btn'+(cur===total-1?' off':'');
-  dots.forEach((d,i)=>d.className='dot'+(i===cur?' on':''));
-}
-pb.onclick=()=>go(cur-1);
-nb.onclick=()=>go(cur+1);
-document.addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(cur+1)}
-  if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1)}
-});
-go(0);
-})();
-</script>
-</body>
-</html>
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1e1914"><meta name="color-scheme" content="dark light"><title>Coding is the Body of the Message — 코딩은 메시지의 몸이다</title>
+<meta name="description" content="김준호(미리내맨)의 15장 웹 강의. WHAT·사용자·범위·검증 기준을 정하고 AI와 함께 아이디어를 실제 서비스로 구체화하는 과정을 설명합니다.">
+<link rel="canonical" href="https://mirinaeman.com/pages/jeju_hak/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Coding is the Body of the Message — 코딩은 메시지의 몸이다">
+<meta property="og:description" content="김준호(미리내맨)의 15장 웹 강의. WHAT·사용자·범위·검증 기준을 정하고 AI와 함께 아이디어를 실제 서비스로 구체화하는 과정을 설명합니다.">
+<meta property="og:url" content="https://mirinaeman.com/pages/jeju_hak/">
+<meta property="og:image" content="https://mirinaeman.com/pages/jeju_hak/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Coding is the Body of the Message — 아이디어가 있다면 몸을 만들어라. 김준호의 웹 강의 제목 카드">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미리내맨">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Coding is the Body of the Message — 코딩은 메시지의 몸이다">
+<meta name="twitter:description" content="김준호(미리내맨)의 15장 웹 강의. WHAT·사용자·범위·검증 기준을 정하고 AI와 함께 아이디어를 실제 서비스로 구체화하는 과정을 설명합니다.">
+<meta name="twitter:image" content="https://mirinaeman.com/pages/jeju_hak/assets/og.jpg">
+<meta name="twitter:image:alt" content="Coding is the Body of the Message — 아이디어가 있다면 몸을 만들어라. 김준호의 웹 강의 제목 카드">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="assets/lecture-sans.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="styles.css?v=ccef30dc55fb">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://mirinaeman.com/pages/jeju_hak/", "url": "https://mirinaeman.com/pages/jeju_hak/", "name": "Coding is the Body of the Message — 코딩은 메시지의 몸이다", "description": "김준호(미리내맨)의 15장 웹 강의. WHAT·사용자·범위·검증 기준을 정하고 AI와 함께 아이디어를 실제 서비스로 구체화하는 과정을 설명합니다.", "inLanguage": "ko", "mainEntity": {"@id": "https://mirinaeman.com/pages/jeju_hak/#lecture"}, "author": {"@id": "https://mirinaeman.com/profile/#person"}, "relatedLink": ["https://mirinaeman.com/archive/harugyeol-ai-health/"]}, {"@type": "CreativeWork", "@id": "https://mirinaeman.com/pages/jeju_hak/#lecture", "url": "https://mirinaeman.com/pages/jeju_hak/", "name": "Coding is the Body of the Message — 코딩은 메시지의 몸이다", "description": "김준호(미리내맨)의 15장 웹 강의. WHAT·사용자·범위·검증 기준을 정하고 AI와 함께 아이디어를 실제 서비스로 구체화하는 과정을 설명합니다.", "learningResourceType": "슬라이드", "educationalUse": "교육", "creator": {"@id": "https://mirinaeman.com/profile/#person"}, "image": "https://mirinaeman.com/pages/jeju_hak/assets/og.jpg"}, {"@type": "Person", "@id": "https://mirinaeman.com/profile/#person", "name": "김준호", "alternateName": "미리내맨", "url": "https://mirinaeman.com/profile/"}]}</script>
+<script id="deck-settings" type="application/json">{"parts": ["왜 몸이 필요한가", "관문이 몸을 만든다", "AI와 함께 가는 법"]}</script>
+<script type="module" src="presentation.js?v=ccef30dc55fb"></script>
+<noscript><link rel="stylesheet" href="reading.css"></noscript></head><body>
+<a class="skip-link" href="#stage">발표 내용으로 건너뛰기</a><div class="app">
+<header class="app-header"><a class="brand" href="https://mirinaeman.com/archive/"><span class="brand-mark">{ M }</span><span>MIRINAEMAN / LECTURE</span></a><span class="header-title">Coding is the Body of the Message</span><div class="header-actions js-only"><button class="icon-button" id="share" aria-label="현재 슬라이드 링크 복사" title="현재 슬라이드 링크 복사"><svg viewBox="0 0 24 24" width="20" height="20" data-icon="true" fill="none" stroke="currentColor" focusable="false" aria-hidden="true"><path d="M9 15l6-6M8 7l2-2a5 5 0 0 1 7 7l-2 2M16 17l-2 2a5 5 0 0 1-7-7l2-2"/></svg></button><button class="icon-button" id="fullscreen" aria-label="전체화면" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" data-icon="true" fill="none" stroke="currentColor" focusable="false" aria-hidden="true"><path d="M4 9V4h5m6 0h5v5m0 6v5h-5M9 20H4v-5"/></svg></button><button class="icon-button" id="menu" aria-label="목차 열기" aria-expanded="false" aria-controls="outline"><svg viewBox="0 0 24 24" width="20" height="20" data-icon="true" fill="none" stroke="currentColor" focusable="false" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div></header>
+<main id="stage-viewport" class="stage-viewport"><div class="stage-wrap"><div id="stage" class="stage" aria-label="코딩은 메시지의 몸이다 — 15장 강의"><section id="slide-01" tabindex="-1" class="slide dark hero" data-part="1" data-layout="statement" data-chapter="true" aria-labelledby="title-01">
+ <div class="hero-copy">
+  <p class="eyebrow reveal">PART 01 <span>WHY A BODY?</span></p>
+  <p class="hero-prelude reveal">AI한테 만들어달랬는데,</p>
+  <h1 id="title-01" class="display reveal">내가 원한 게 <em>아니었다.</em></h1>
+  <p class="lead reveal">다들 한 번씩 겪었을 것이다.<br>왜 그럴까?</p>
+  <div class="hero-signature reveal"><span class="tiny">A LECTURE BY</span><a href="https://mirinaeman.com/profile/">김준호 <span>미리내맨</span></a></div>
+ </div>
+ <figure class="hero-image reveal"><img src="assets/bridge.webp" width="1024" height="1536" alt="아이디어를 코드로 연결하는 Code Spec Bridge의 작업 공간" fetchpriority="high"><figcaption><span>IDEA</span><span class="rule"></span><span>BODY</span></figcaption></figure>
+ <p class="hero-edition">CODING IS THE BODY OF THE MESSAGE</p>
+<span class="slide-index">01 / 15</span></section><section id="slide-02" tabindex="-1" class="slide light" data-part="1" data-layout="comparison" aria-labelledby="title-02">
+ <header class="slide-head"><p class="eyebrow reveal">01 / THE MISSING PIECE</p><h2 id="title-02" class="title reveal" data-typography-break="approved" data-typography-lines="2">아이디어는 있다.<br><em>몸이 없다.</em></h2><p class="lead reveal">비어 있는 자리를 AI가 자신의 기본값으로 채운다.</p></header>
+ <div class="content two">
+  <article class="panel reveal"><p class="panel-kicker">MESSAGE / 메시지</p><p class="quote">“쇼핑몰 만들어줘”</p><p class="panel-bottom">만들고 싶은 것은 있다.</p></article>
+  <article class="panel accent-panel reveal"><p class="panel-kicker">BODY / 구체적인 조건</p><div class="question-stack"><span>누구를 위해?</span><span>무엇을 팔아?</span><span>언제까지?</span></div><p class="panel-bottom">내가 정하지 않은 조건은 누가 정할까?</p></article>
+ </div><p class="takeaway">아이디어만 전달하면,<br><strong>결과의 방향도 AI에게 넘어간다.</strong></p>
+<span class="slide-index">02 / 15</span></section><section id="slide-03" tabindex="-1" class="slide light manifesto" data-part="1" data-layout="statement" aria-labelledby="title-03">
+ <p class="eyebrow reveal">THE CENTRAL IDEA / 이 강의의 관점</p>
+ <h2 id="title-03" class="manifesto-title reveal">미디어는 <em>메시지의 몸이다.</em></h2>
+ <div class="manifesto-line reveal"></div>
+ <div class="manifesto-bottom reveal"><span class="monogram" aria-hidden="true">{ M }</span><p>코드도 매체다.<br><strong>어떤 구조로 만드느냐가 곧 서비스의 메시지다.</strong></p></div>
+<span class="slide-index">03 / 15</span></section><section id="slide-04" tabindex="-1" class="slide light" data-part="1" data-layout="comparison" aria-labelledby="title-04">
+ <header class="slide-head"><p class="eyebrow reveal">02 / SAME CONTENT / DIFFERENT BODY</p><h2 id="title-04" class="title reveal" data-typography-break="approved" data-typography-lines="2">몸이 달라지면,<br><em>메시지도 달라진다.</em></h2><p class="lead reveal">같은 영상도 어떤 매체에 놓이느냐에 따라 다르게 경험된다.</p></header>
+ <div class="content three media-comparison">
+  <article class="media-panel reveal"><span class="panel-kicker">01 / INSTAGRAM</span><div class="media-frame portrait" aria-hidden="true"><span></span></div><h3>인스타그램</h3><p>감성 · 팔로워</p></article>
+  <article class="media-panel reveal"><span class="panel-kicker">02 / YOUTUBE</span><div class="media-frame landscape" aria-hidden="true"><span></span></div><h3>유튜브</h3><p>시청 · 구독</p></article>
+  <article class="media-panel reveal"><span class="panel-kicker">03 / X</span><div class="media-frame text-frame" aria-hidden="true"><span></span><span></span><span></span></div><h3>X</h3><p>화제 · 확산</p></article>
+ </div><p class="takeaway">앱도 마찬가지다.<br><strong>화면 흐름·기능 순서·데이터 구조가 곧 서비스다.</strong></p>
+<span class="slide-index">04 / 15</span></section><section id="slide-05" tabindex="-1" class="slide red chapter" data-part="2" data-layout="statement" data-chapter="true" aria-labelledby="title-05">
+ <p class="eyebrow reveal">PART 02 <span>THE GATES GIVE IT FORM</span></p>
+ <div class="chapter-body"><div><h2 id="title-05" class="display reveal">이게 안 되면 <em>뒤는 없다.</em></h2><p class="lead reveal">아이디어가 코드가 되려면<br>통과해야 할 관문이 있다.</p></div><div class="chapter-number reveal"><strong>22</strong><span>CODE SPEC BRIDGE / 관문</span></div></div>
+ <div class="chapter-foot reveal"><span>생각을 구체화하는 순서</span><span>건너뛸 수 없다. ↗</span></div>
+<span class="slide-index">05 / 15</span></section><section id="slide-06" tabindex="-1" class="slide dark" data-part="2" data-layout="comparison" aria-labelledby="title-06">
+ <header class="slide-head"><p class="eyebrow reveal">03 / THE FIRST GATE</p><h2 id="title-06" class="title reveal" data-typography-break="approved" data-typography-lines="2">무엇을 만드는가.<br><em>한 문장으로.</em></h2><p class="lead reveal">방향을 구체적으로 정할수록 내 생각에 가까워진다.</p></header>
+ <div class="content what-layout"><div class="word-block reveal"><strong>WHAT</strong><span>절대 관문</span></div><div class="prompt-stack"><article class="prompt reveal"><span class="panel-kicker">모호한 요청</span><p>“앱 만들어줘”</p><small>빈자리는 AI의 기본값으로 채워진다.</small></article><article class="prompt selected reveal"><span class="panel-kicker">구체적인 요청</span><p>“직장인이 점심 메뉴를<br>5초 안에 고르는 앱”</p><small>사용자·행동·완성 기준이 드러난다.</small></article></div></div>
+ <p class="takeaway">만들기 전에,<br><strong>무엇을 만들지 결정한다.</strong></p>
+<span class="slide-index">06 / 15</span></section><section id="slide-07" tabindex="-1" class="slide light" data-part="2" data-layout="comparison" aria-labelledby="title-07">
+ <header class="slide-head"><p class="eyebrow reveal">04 / PERSON & BOUNDARY</p><h2 id="title-07" class="title reveal" data-typography-break="approved" data-typography-lines="2">누구를 위해,<br><em>어디까지.</em></h2><p class="lead reveal">사용자와 경계가 있어야 기능을 고를 수 있다.</p></header>
+ <div class="content two"><article class="panel definition reveal"><span class="panel-kicker">사용자를 정한다</span><strong class="word">WHO</strong><h3>이 사람이 쓴다.</h3><p>사용자 없으면 기능도 없다.</p></article><article class="panel definition reveal"><span class="panel-kicker">범위를 정한다</span><strong class="word">WHERE</strong><h3>이번엔 이건 안 한다.</h3><p>경계 없으면 끝도 없다.</p></article></div>
+ <p class="takeaway">범위를 모르면,<br><strong>아이디어는 늘어나기만 한다.</strong></p>
+<span class="slide-index">07 / 15</span></section><section id="slide-08" tabindex="-1" class="slide dark" data-part="2" data-layout="flow" aria-labelledby="title-08">
+ <header class="slide-head"><p class="eyebrow reveal">05 / FROM INTENT TO FUNCTION</p><h2 id="title-08" class="title reveal">기능은 WHAT에서 <em>출발한다.</em></h2><p class="lead reveal">WHAT을 실현하는 기능 체인.<br>한 줄은 한 기능을 맡는다.</p></header>
+ <div class="content flow five"><article class="flow-node selected reveal"><span class="panel-kicker">목적</span><strong>WHAT</strong><p>무엇을<br>만드는가</p></article><article class="flow-node reveal"><span class="panel-kicker">F01</span><strong>가입</strong><p>회원가입</p></article><article class="flow-node reveal"><span class="panel-kicker">F02</span><strong>구매</strong><p>물품 구매</p></article><article class="flow-node reveal"><span class="panel-kicker">F03</span><strong>연결</strong><p>후원 연결</p></article><article class="flow-node reveal"><span class="panel-kicker">F04</span><strong>알림</strong><p>알림 발송</p></article></div>
+ <p class="takeaway">기능이 WHAT을 실현하지 못하면,<br><strong>다시 돌아간다.</strong></p>
+<span class="slide-index">08 / 15</span></section><section id="slide-09" tabindex="-1" class="slide light" data-part="2" data-layout="comparison" aria-labelledby="title-09">
+ <header class="slide-head"><p class="eyebrow reveal">06 / DEPTH</p><h2 id="title-09" class="title reveal">약속이 <em>끝까지 내려갔는가.</em></h2><p class="lead reveal">선언과 실제 동작 사이의 거리를 확인한다.</p></header>
+ <div class="content two"><article class="panel reveal"><span class="panel-kicker">선언에서 멈추면</span><div class="depth-step">사장 <strong>“친절하게 하세요”</strong></div><span class="depth-link broken" aria-hidden="true">↓</span><div class="depth-step muted">알바 <strong>전달 안 됨</strong></div></article><article class="panel accent-panel reveal"><span class="panel-kicker">구현까지 이어지면</span><div class="depth-step">기획서 <strong>규칙 명시</strong></div><span class="depth-link" aria-hidden="true">↓</span><div class="depth-step">코드 <strong>규칙 강제</strong></div></article></div>
+ <p class="takeaway">선언만 하면 없는 것이다.<br><strong>코드 끝까지 살아 있어야 한다.</strong></p>
+<span class="slide-index">09 / 15</span></section><section id="slide-10" tabindex="-1" class="slide light" data-part="2" data-layout="comparison" aria-labelledby="title-10">
+ <header class="slide-head"><p class="eyebrow reveal">07 / TIME & EVIDENCE</p><h2 id="title-10" class="title reveal" data-typography-break="approved" data-typography-lines="2">순서가 있는가.<br><em>증거가 있는가.</em></h2><p class="lead reveal">사용 흐름과 완성 기준을 눈앞에 꺼내 놓는다.</p></header>
+ <div class="content two"><article class="panel reveal"><span class="panel-kicker">TIME / 경험의 순서</span><h3>화면이 연결되는가?</h3><div class="mini-flow"><span>홈</span><b aria-hidden="true">→</b><span>상품</span><b aria-hidden="true">→</b><span>결제</span></div><p class="panel-bottom">사용자가 다음 행동으로 갈 수 있어야 한다.</p></article><article class="panel accent-panel reveal"><span class="panel-kicker">EVIDENCE / 확인할 기준</span><h3>무엇으로 확인할까?</h3><p class="crossed">“잘 만들었다”</p><p class="metric">100<span>명</span></p><p class="panel-bottom">예시: 사용자 수처럼 확인 가능한 기준을 정한다.</p></article></div>
+<span class="slide-index">10 / 15</span></section><section id="slide-11" tabindex="-1" class="slide light" data-part="2" data-layout="comparison" aria-labelledby="title-11">
+ <header class="slide-head"><p class="eyebrow reveal">08 / HUMAN JUDGMENT × AI</p><h2 id="title-11" class="title reveal" data-typography-break="approved" data-typography-lines="2">내가 결정하고,<br><em>AI와 구체화한다.</em></h2><p class="lead reveal">설계의 출발점과 결과를 검토하는 책임은 사람에게 있다.</p></header>
+ <div class="content two"><article class="panel reveal"><span class="panel-kicker">사람 / 방향과 판단</span><ul class="decision-list"><li><b>WHAT</b><span>무엇을 만드는가</span></li><li><b>WHO</b><span>누가 사용하는가</span></li><li><b>DONE</b><span>어떻게 완성을 확인하는가</span></li><li><b>NOT</b><span>무엇을 하지 않는가</span></li></ul></article><article class="panel accent-panel reveal"><span class="panel-kicker">AI / 구체화의 파트너</span><ul class="decision-list"><li><b>01</b><span>화면·컴포넌트</span></li><li><b>02</b><span>데이터 모델</span></li><li><b>03</b><span>API 설계</span></li><li><b>04</b><span>에러 처리</span></li></ul></article></div>
+ <p class="takeaway">AI가 구체화하고,<br><strong>내가 근거와 결과를 검증한다.</strong></p>
+<span class="slide-index">11 / 15</span></section><section id="slide-12" tabindex="-1" class="slide dark chapter" data-part="3" data-layout="flow" data-chapter="true" aria-labelledby="title-12">
+ <p class="eyebrow reveal">PART 03 <span>KEEP THE CAUSE ALIVE</span></p>
+ <h2 id="title-12" class="chapter-title reveal">인과율이 흐르면 <em>코드가 살아 있다.</em></h2>
+ <div class="chapter-flow flow five"><div class="flow-node selected reveal"><span>01</span><strong>WHAT</strong></div><div class="flow-node reveal"><span>02</span><strong>기능</strong></div><div class="flow-node reveal"><span>03</span><strong>화면</strong></div><div class="flow-node reveal"><span>04</span><strong>데이터</strong></div><div class="flow-node reveal"><span>05</span><strong>코드</strong></div></div>
+ <div class="chapter-foot reveal"><span>AI와 함께 가는 법</span><span>하나라도 빠지면, 개발이 막힌다.</span></div>
+<span class="slide-index">12 / 15</span></section><section id="slide-13" tabindex="-1" class="slide light" data-part="3" data-layout="case" aria-labelledby="title-13">
+ <header class="slide-head"><p class="eyebrow reveal">09 / FROM SPEC TO SERVICE</p><h2 id="title-13" class="title reveal">생각이 <em>서비스가 되는 순간.</em></h2><p class="lead reveal">명세서가 코딩 에이전트에게 건네졌다.</p></header>
+ <div class="content case-layout"><div class="case-copy reveal"><p class="panel-kicker">CASE STUDY</p><h3>에이블 캔버스</h3><p>기업이 물품을 구매하면<br>발달 장애인 작가를 후원하는 플랫폼</p><div class="case-chain"><span>22개 관문</span><span>명세서</span><span>에이전트</span><strong>실제 서비스</strong></div></div><figure class="case-image reveal"><img src="assets/ablecanvas.webp" width="1500" height="788" alt="ABLE CANVAS 에이블 캔버스의 캐릭터와 서비스 소개 이미지" loading="lazy"><figcaption><span>ABLE CANVAS</span><a href="https://ablecanvas.web.app/" target="_blank" rel="noopener">서비스 열기 ↗</a></figcaption></figure></div>
+<span class="slide-index">13 / 15</span></section><section id="slide-14" tabindex="-1" class="slide light" data-part="3" data-layout="comparison" aria-labelledby="title-14">
+ <header class="slide-head"><p class="eyebrow reveal">10 / WHO HOLDS THE DIRECTION?</p><h2 id="title-14" class="title reveal" data-typography-break="approved" data-typography-lines="2">방향은 내가,<br><em>실행은 AI와.</em></h2><p class="lead reveal">WHAT을 알면 AI의 실행을 내가 원하는 방향으로 이끌 수 있다.</p></header>
+ <div class="content two"><article class="panel role-panel reveal"><span class="panel-kicker">방향을 모를 때</span><div class="role-pair"><strong>AI</strong><span>운전사</span></div><div class="role-pair muted"><strong>나</strong><span>승객</span></div></article><article class="panel accent-panel role-panel reveal"><span class="panel-kicker">방향을 알 때</span><div class="role-pair"><strong>나</strong><span>운전사</span></div><div class="role-pair"><strong>AI</strong><span>엔진</span></div></article></div>
+ <p class="takeaway">판단을 맡기지 않고,<br><strong>가능성을 함께 넓힌다.</strong></p>
+<span class="slide-index">14 / 15</span></section><section id="slide-15" tabindex="-1" class="slide red finale" data-part="3" data-layout="statement" data-chapter="true" aria-labelledby="title-15">
+ <p class="eyebrow reveal">CODE SPEC BRIDGE / START WITH WHAT</p>
+ <h2 id="title-15" class="final-title reveal" data-typography-break="approved" data-typography-lines="2">아이디어가 있다면,<br><em>몸을 만들어라.</em></h2>
+ <div class="final-actions reveal"><p>WHAT 한 문장부터 시작하라.</p><a class="cta" href="https://chatgpt.com/g/g-6a417a77b1648191b8b07d1e04872766-coding-is-the-body-of-the-message" target="_blank" rel="noopener">Code Spec Bridge 시작하기 <span aria-hidden="true">↗</span></a></div>
+ <div class="related reveal"><a href="https://mirinaeman.com/pages/github/"><span>기초를 더 읽으려면</span>Git & GitHub →</a><a href="https://mirinaeman.com/archive/harugyeol-ai-health/"><span>앱 제작 흐름으로 이어가려면</span>AI로 헬스케어 앱 만들기 →</a><a href="https://mirinaeman.com/profile/"><span>강의와 제작</span>김준호 · 미리내맨 →</a></div>
+<span class="slide-index">15 / 15</span></section><div id="curtain" class="transition-curtain" aria-hidden="true"></div></div></div></main>
+<footer class="toolbar js-only"><div class="progress-label"><span id="position" class="position"></span><span id="current-part" class="current-part"></span></div><div class="segments" id="segments" aria-label="슬라이드 바로가기"></div><div class="nav-group"><span class="hint">← → / SPACE</span><button class="nav-button" id="previous" aria-label="이전 슬라이드">← 이전</button><button class="nav-button next" id="next" aria-label="다음 슬라이드">다음 →</button></div></footer>
+</div><p id="status" class="sr-only" role="status" aria-live="polite"></p><p id="notice" class="notice" role="status" aria-live="polite"></p>
+<dialog id="outline" class="dialog" aria-labelledby="outline-title"><div class="dialog-head"><h2 id="outline-title">생각에서 서비스까지</h2><button class="icon-button" data-close aria-label="목차 닫기"><svg viewBox="0 0 24 24" width="20" height="20" data-icon="true" fill="none" stroke="currentColor" focusable="false" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><nav class="outline-grid" aria-label="강의 목차"><div class="outline-group"><h3>PART 01 / 왜 몸이 필요한가</h3><a class="outline-link" href="#slide-01"><span>01</span>내가 원한 게 아니었다.</a><a class="outline-link" href="#slide-02"><span>02</span>아이디어는 있다. 몸이 없다.</a><a class="outline-link" href="#slide-03"><span>03</span>미디어는 메시지의 몸이다.</a><a class="outline-link" href="#slide-04"><span>04</span>몸이 달라지면, 메시지도 달라진다.</a></div><div class="outline-group"><h3>PART 02 / 관문이 몸을 만든다</h3><a class="outline-link" href="#slide-05"><span>05</span>이게 안 되면 뒤는 없다.</a><a class="outline-link" href="#slide-06"><span>06</span>무엇을 만드는가. 한 문장으로.</a><a class="outline-link" href="#slide-07"><span>07</span>누구를 위해, 어디까지.</a><a class="outline-link" href="#slide-08"><span>08</span>기능은 WHAT에서 출발한다.</a><a class="outline-link" href="#slide-09"><span>09</span>약속이 끝까지 내려갔는가.</a><a class="outline-link" href="#slide-10"><span>10</span>순서가 있는가. 증거가 있는가.</a><a class="outline-link" href="#slide-11"><span>11</span>내가 결정하고, AI와 구체화한다.</a></div><div class="outline-group"><h3>PART 03 / AI와 함께 가는 법</h3><a class="outline-link" href="#slide-12"><span>12</span>인과율이 흐르면 코드가 살아 있다.</a><a class="outline-link" href="#slide-13"><span>13</span>생각이 서비스가 되는 순간.</a><a class="outline-link" href="#slide-14"><span>14</span>방향은 내가, 실행은 AI와.</a><a class="outline-link" href="#slide-15"><span>15</span>아이디어가 있다면, 몸을 만들어라.</a></div></nav><div class="outline-footer"><a href="https://mirinaeman.com/profile/">김준호 · 미리내맨</a><label class="motion-option"><input id="reduce-motion" type="checkbox"> 모션 줄이기</label><span>방향키로 이동 · ESC로 닫기</span></div></dialog>
+<dialog id="share-dialog" class="dialog" aria-labelledby="share-title"><div class="dialog-head"><h2 id="share-title">현재 슬라이드 공유</h2><button class="icon-button" data-close aria-label="공유 창 닫기"><svg viewBox="0 0 24 24" width="20" height="20" data-icon="true" fill="none" stroke="currentColor" focusable="false" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><div class="share-field"><label for="share-url">아래 주소를 선택해 복사하세요.</label><input id="share-url" readonly></div></dialog>
+</body></html>

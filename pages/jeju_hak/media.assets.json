@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "bridge",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "gZg9697VGM.png",
+        "sha256": "1866e40e35ef5dbd346996030562ebf8ad8b0996050417692aa58c1a9e78c95e",
+        "note": "Existing owner-published lecture image; the original remains at provenance_url."
+      },
+      "provenance_url": "https://i.imghippo.com/files/gZg9697VGM.png",
+      "delivery": {
+        "path": "assets/bridge.webp",
+        "mime": "image/webp",
+        "width": 1024,
+        "height": 1536,
+        "sha256": "7512771873ab4677c3045eafcef3cb015790bfe215c3c17fcbfe0561bf4cd698"
+      }
+    },
+    {
+      "id": "ablecanvas",
+      "kind": "image",
+      "source": {
+        "kind": "user-provided",
+        "filename": "dmNR5745mKw.png",
+        "sha256": "ce0549d9cdb24aec85bed7b0d5fd058c8f52736933f250f50de10a219ef8c14b",
+        "note": "Existing owner-published lecture image; the original remains at provenance_url."
+      },
+      "provenance_url": "https://i.imghippo.com/files/dmNR5745mKw.png",
+      "delivery": {
+        "path": "assets/ablecanvas.webp",
+        "mime": "image/webp",
+        "width": 1500,
+        "height": 788,
+        "sha256": "412654e404799afbcf29f8a5490ad388a4cc77daae380042f37f2fc599791814"
+      }
+    },
+    {
+      "id": "lecture-og",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "kind": "project-generated",
+        "filename": "og.jpg",
+        "path": "assets/og.jpg",
+        "sha256": "33b82ca3da293d54e99a789d7ab883c73479aec674d0e405a2c31a4fe5125646"
+      },
+      "delivery": {
+        "path": "assets/og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "33b82ca3da293d54e99a789d7ab883c73479aec674d0e405a2c31a4fe5125646"
+      }
+    }
+  ]
+}

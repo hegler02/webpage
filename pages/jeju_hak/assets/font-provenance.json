@@ -1,0 +1,12 @@
+{
+  "family": "Mirinae Lecture Sans",
+  "derived_from": "Pretendard",
+  "source_sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+  "license": "SIL Open Font License 1.1",
+  "license_file": "font-license.txt",
+  "source_author": "Kil Hyung-jin",
+  "source_project": "https://github.com/orioncactus/pretendard",
+  "delivery_sha256": "f85aeb1dfd5ad078f12677f0b50f8ab4563c8d549c94f1410261226fe05cf321",
+  "delivery_bytes": 90792,
+  "scope": "Characters in the complete lecture HTML and controller plus ASCII; variable weights preserved."
+}

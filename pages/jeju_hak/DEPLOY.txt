@@ -1,0 +1,4 @@
+Existing deployment: hegler02/webpage main -> Vercel -> https://mirinaeman.com/pages/jeju_hak/
+Rebuild: python tools/jeju-hak/render.py
+Check: python tools/jeju-hak/render.py --check && python tools/release_gate.py
+Keep the existing public URL. Publish only the reviewed commit. Do not create another site.

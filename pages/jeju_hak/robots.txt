@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://mirinaeman.com/sitemap.xml
+Sitemap: https://mirinaeman.com/pages/jeju_hak/sitemap.xml

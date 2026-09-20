@@ -9,6 +9,28 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:suno-song-guide",
+      "kind": "work",
+      "title": "Suno로 원하는 노래 만들기",
+      "summary": "원하는 노래를 만들기 위한 프롬프트와 제작 흐름을 슬라이드의 몸으로 설명한다.",
+      "url": "https://mirinaeman.com/pages/sono_slide/",
+      "image": "/pages/profile/assets/thumbnails/suno-song-guide.webp",
+      "alt": "“Suno로 원하는 노래 만들기” 작품의 대표 이미지",
+      "year": "2026",
+      "tags": [
+        "ai",
+        "music",
+        "suno"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "원하는 노래를 만들기 위한 프롬프트와 제작 흐름을 슬라이드의 몸으로 설명한다."
+        }
+      ]
+    },
+    {
       "id": "work:coding-body-message",
       "kind": "work",
       "title": "Coding is the Body of the Message",
@@ -1212,28 +1234,6 @@
       ]
     },
     {
-      "id": "work:suno-song-guide",
-      "kind": "work",
-      "title": "Suno로 원하는 노래 만들기",
-      "summary": "원하는 노래를 만들기 위한 프롬프트와 제작 흐름을 슬라이드의 몸으로 설명한다.",
-      "url": "https://mirinaeman.com/pages/sono_slide/",
-      "image": "/pages/profile/assets/thumbnails/suno-song-guide.webp",
-      "alt": "“Suno로 원하는 노래 만들기” 작품의 대표 이미지",
-      "year": "2026",
-      "tags": [
-        "ai",
-        "music",
-        "suno"
-      ],
-      "sourceLabel": "작품 아카이브",
-      "sections": [
-        {
-          "title": "작품의 기록",
-          "text": "원하는 노래를 만들기 위한 프롬프트와 제작 흐름을 슬라이드의 몸으로 설명한다."
-        }
-      ]
-    },
-    {
       "id": "work:taste-expiration",
       "kind": "work",
       "title": "맛의 유통기한 | The Mirinaeman Project Music Album",
@@ -1767,6 +1767,13 @@
   ],
   "edges": [
     {
+      "source": "work:suno-song-guide",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:coding-body-message",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2125,13 +2132,6 @@
     },
     {
       "source": "work:sound-design-lab",
-      "target": "creator:joonho",
-      "label": "창작자",
-      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
-      "evidence": "https://mirinaeman.com/archive/"
-    },
-    {
-      "source": "work:suno-song-guide",
       "target": "creator:joonho",
       "label": "창작자",
       "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "status": "CQI_SYNC_PENDING",
+  "body_id": "suno-song-guide",
+  "canonical_url": "https://mirinaeman.com/pages/sono_slide/",
+  "latest_deployed_at": "2026-09-20T18:16:11.042000+00:00",
+  "deployment": {
+    "deployed_at": "2026-09-20T18:16:11.042000+00:00",
+    "url": "https://mirinaeman.com/pages/sono_slide/",
+    "release_ref": "github-main",
+    "source_revision": "04c46f43a5f9e8a62518a5ffb96a1f79ae4a1c53",
+    "status": "succeeded",
+    "validation": [
+      "Vercel READY dpl_A6dbnKi4k3o6vRXQe8D7iyEhqtan",
+      "All 17 Korean and 17 English scenes inspected; shared baselines and content bounds verified",
+      "390px and 768px viewport checks; outline, language, deep links, reduced motion and share fallback verified",
+      "tools/sono-slide/check.py and repository release gate passed"
+    ]
+  },
+  "thumbnail": {
+    "source_kind": "generated-title-card",
+    "path": "assets/thumbnails/suno-song-guide.webp",
+    "alt": "“Suno로 원하는 노래 만들기” 작품의 대표 이미지",
+    "width": 960,
+    "height": 540,
+    "focal_point": "50% 50%",
+    "sha256": "22c09d91d5f1419c440d0ac39e533f77aee79db9af0033d2cf83cd92fd605bbe"
+  },
+  "reason": "Skill repository push returned HTTP 500. Public runtime and catalog deployment are independent.",
+  "recovery": "Append this verified deployment to existing suno-song-guide evidence and preserve prior history. Project-scoped corrections are in tools/sono-slide/QA.md and DESIGN.md. Validate archive/catalog, then persist through the skill repository. Do not create a second body or promote GOLDEN."
+}

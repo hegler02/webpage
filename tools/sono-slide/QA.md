@@ -36,3 +36,9 @@
 Generated HTML, translation completeness, JavaScript syntax, media/discovery and
 repository release checks passed. OG artwork passed local and HTTP-preview
 validation and visual inspection.
+
+## Public verification
+The existing https://mirinaeman.com/pages/sono_slide/ route serves the refactor.
+Deployment 04c46f43a5f9e8a62518a5ffb96a1f79ae4a1c53 reached READY.
+Public HTML, OG JPEG and font return HTTP 200 with exact committed bytes.
+Korean opening and English scene 9 were checked in the production browser.

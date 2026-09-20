@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "status": "CQI_SYNC_PENDING",
+  "body_id": "coding-body-message",
+  "canonical_url": "https://mirinaeman.com/pages/jeju_hak/",
+  "latest_deployed_at": "2026-09-20T17:18:50.212000+00:00",
+  "deployment": {
+    "deployed_at": "2026-09-20T17:18:50.212000+00:00",
+    "url": "https://mirinaeman.com/pages/jeju_hak/",
+    "release_ref": "github-main",
+    "source_revision": "a101ed674d498a79bba37d23f0cdbe43fc298655",
+    "status": "succeeded",
+    "validation": [
+      "Vercel READY dpl_Vw9uGndKceDrRAiQi5quBbnGvrQm",
+      "Public HTML, OG and local font HTTP 200 with exact committed bytes",
+      "All 15 desktop and portrait scenes reviewed; navigation, deep links, reduced motion verified",
+      "tools/jeju-hak/check.py and repository release gate passed"
+    ]
+  },
+  "thumbnail": {
+    "source_kind": "generated-title-card",
+    "path": "assets/thumbnails/coding-body-message.webp",
+    "alt": "“Coding is the Body of the Message” 작품의 대표 이미지",
+    "width": 960,
+    "height": 540,
+    "focal_point": "50% 50%",
+    "sha256": "bcf985b38bcfdfe3f9ab99926fc03af313656e51e99c67623053ed6520ad976d"
+  },
+  "reason": "Skill repository push returned HTTP 500. Public runtime and catalog deployment are independent.",
+  "recovery": "Append this verified deployment to the existing coding-body-message record, preserve all prior history, and use tools/jeju-hak/QA.md and DESIGN.md as project-scoped correction evidence. Validate the archive and catalog, then persist through the skill repository. Do not create a second body ID or promote GOLDEN."
+}

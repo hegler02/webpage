@@ -9,6 +9,28 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:coding-body-message",
+      "kind": "work",
+      "title": "Coding is the Body of the Message",
+      "summary": "코딩을 메시지가 작동하는 몸으로 바라보는 미디어 철학을 강의 화면으로 설명한다.",
+      "url": "https://mirinaeman.com/pages/jeju_hak/",
+      "image": "/pages/profile/assets/thumbnails/coding-body-message.webp",
+      "alt": "“Coding is the Body of the Message” 작품의 대표 이미지",
+      "year": "2026",
+      "tags": [
+        "coding",
+        "mcluhan",
+        "lecture"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "코딩을 메시지가 작동하는 몸으로 바라보는 미디어 철학을 강의 화면으로 설명한다."
+        }
+      ]
+    },
+    {
       "id": "work:harugyeol-ai-health",
       "kind": "work",
       "title": "AI를 활용해 헬스케어 앱 만들기 — 하루결",
@@ -724,28 +746,6 @@
         {
           "title": "작품의 기록",
           "text": "지워진 이름을 증언으로 되돌리고 숨은 권력을 판결대에 세우는 음악의 몸이다."
-        }
-      ]
-    },
-    {
-      "id": "work:coding-body-message",
-      "kind": "work",
-      "title": "Coding is the Body of the Message",
-      "summary": "코딩을 메시지가 작동하는 몸으로 바라보는 미디어 철학을 강의 화면으로 설명한다.",
-      "url": "https://mirinaeman.com/pages/jeju_hak/",
-      "image": "/pages/profile/assets/thumbnails/coding-body-message.webp",
-      "alt": "“Coding is the Body of the Message” 작품의 대표 이미지",
-      "year": "2026",
-      "tags": [
-        "coding",
-        "mcluhan",
-        "lecture"
-      ],
-      "sourceLabel": "작품 아카이브",
-      "sections": [
-        {
-          "title": "작품의 기록",
-          "text": "코딩을 메시지가 작동하는 몸으로 바라보는 미디어 철학을 강의 화면으로 설명한다."
         }
       ]
     },
@@ -1767,6 +1767,13 @@
   ],
   "edges": [
     {
+      "source": "work:coding-body-message",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:harugyeol-ai-health",
       "target": "creator:joonho",
       "label": "창작자",
@@ -1971,13 +1978,6 @@
     },
     {
       "source": "work:chamgyoyuk",
-      "target": "creator:joonho",
-      "label": "창작자",
-      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
-      "evidence": "https://mirinaeman.com/archive/"
-    },
-    {
-      "source": "work:coding-body-message",
       "target": "creator:joonho",
       "label": "창작자",
       "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",

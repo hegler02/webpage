@@ -30,7 +30,7 @@
     },
     {
       "body_id": "ai-slave-slide",
-      "title": "AI 노예 vs AI 지휘관 · PASS v13",
+      "title": "AI 노예 vs AI 지휘관 — 판단권의 격차",
       "body_type": "SLIDEBODY",
       "source_kinds": [
         "education",
@@ -38,21 +38,26 @@
       ],
       "tags": [
         "ai",
+        "chartjs",
+        "gestalt",
+        "gsap",
+        "human-ai",
         "judgment",
-        "lecture"
+        "lecture",
+        "scroll-presentation"
       ],
       "message_sentence": "생성형 AI 시대의 격차를 정보가 아니라 판단권과 지휘 능력의 문제로 보여준다.",
       "thumbnail": {
         "path": "assets/thumbnails/ai-slave-slide.webp",
-        "alt": "“AI 노예 vs AI 지휘관 · PASS v13” 작품의 대표 이미지",
+        "alt": "AI 노예 vs AI 지휘관 강의의 대표 이미지: 기계와 인간의 주도권",
         "width": 960,
         "height": 540,
         "focal_point": "50% 50%"
       },
-      "canonical_url": "https://mirinaeman.com/pages/al_slave_slide/",
+      "canonical_url": "https://ai-commanders-gestalt.mirinaeman.chatgpt.site",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-07-30T10:30:22Z",
-      "latest_deployed_at": "2026-07-30T10:30:22Z"
+      "latest_deployed_at": "2026-09-21T23:53:11Z"
     },
     {
       "body_id": "ai-ti-judgment",

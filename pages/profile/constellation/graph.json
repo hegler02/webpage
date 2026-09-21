@@ -9,6 +9,33 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:ai-slave-slide",
+      "kind": "work",
+      "title": "AI 노예 vs AI 지휘관 — 판단권의 격차",
+      "summary": "생성형 AI 시대의 격차를 정보가 아니라 판단권과 지휘 능력의 문제로 보여준다.",
+      "url": "https://ai-commanders-gestalt.mirinaeman.chatgpt.site",
+      "image": "/pages/profile/assets/thumbnails/ai-slave-slide.webp",
+      "alt": "AI 노예 vs AI 지휘관 강의의 대표 이미지: 기계와 인간의 주도권",
+      "year": "2026",
+      "tags": [
+        "ai",
+        "chartjs",
+        "gestalt",
+        "gsap",
+        "human-ai",
+        "judgment",
+        "lecture",
+        "scroll-presentation"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "생성형 AI 시대의 격차를 정보가 아니라 판단권과 지휘 능력의 문제로 보여준다."
+        }
+      ]
+    },
+    {
       "id": "work:report-full-after",
       "kind": "work",
       "title": "AI 시대의 과제 지도와 평가 — 전체 30장 Before / After",
@@ -779,28 +806,6 @@
         {
           "title": "작품의 기록",
           "text": "기계가 만든 평균에 판단을 넘기지 말라는 경고가 거친 음악의 몸을 얻는다."
-        }
-      ]
-    },
-    {
-      "id": "work:ai-slave-slide",
-      "kind": "work",
-      "title": "AI 노예 vs AI 지휘관 · PASS v13",
-      "summary": "생성형 AI 시대의 격차를 정보가 아니라 판단권과 지휘 능력의 문제로 보여준다.",
-      "url": "https://mirinaeman.com/pages/al_slave_slide/",
-      "image": "/pages/profile/assets/thumbnails/ai-slave-slide.webp",
-      "alt": "“AI 노예 vs AI 지휘관 · PASS v13” 작품의 대표 이미지",
-      "year": "2026",
-      "tags": [
-        "ai",
-        "judgment",
-        "lecture"
-      ],
-      "sourceLabel": "작품 아카이브",
-      "sections": [
-        {
-          "title": "작품의 기록",
-          "text": "생성형 AI 시대의 격차를 정보가 아니라 판단권과 지휘 능력의 문제로 보여준다."
         }
       ]
     },
@@ -1800,6 +1805,13 @@
   ],
   "edges": [
     {
+      "source": "work:ai-slave-slide",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:report-full-after",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2018,13 +2030,6 @@
     },
     {
       "source": "work:ai-slave",
-      "target": "creator:joonho",
-      "label": "창작자",
-      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
-      "evidence": "https://mirinaeman.com/archive/"
-    },
-    {
-      "source": "work:ai-slave-slide",
       "target": "creator:joonho",
       "label": "창작자",
       "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",

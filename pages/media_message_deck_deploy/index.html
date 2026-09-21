@@ -1,1005 +1,315 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="#050505" name="theme-color"/><meta content="dark" name="color-scheme"/><title>미디어는 메시지의 몸이다 — 생성의 판단법</title><meta content="김준호의 12장 웹 프레젠테이션. 메시지·구조·검증을 클릭으로 조립하며 배우는 생성의 판단법." name="description"/><link href="https://mirinaeman.com/pages/media_message_deck_deploy/" rel="canonical"/><meta content="미디어는 메시지의 몸이다 — 생성의 판단법" property="og:title"/><meta content="김준호의 12장 웹 프레젠테이션. 메시지·구조·검증을 클릭으로 조립하며 배우는 생성의 판단법." property="og:description"/><meta content="https://mirinaeman.com/pages/media_message_deck_deploy/assets/og.jpg" property="og:image"/><meta content="검은 무대 위에 크게 놓인 메시지의 몸이라는 제목" property="og:image:alt"/><meta content="website" property="og:type"/><meta content="https://mirinaeman.com/pages/media_message_deck_deploy/" property="og:url"/><meta content="image/jpeg" property="og:image:type"/><meta content="1200" property="og:image:width"/><meta content="630" property="og:image:height"/><meta content="미디어는 메시지의 몸이다 — 생성의 판단법" name="twitter:title"/><meta content="김준호의 12장 웹 프레젠테이션. 메시지·구조·검증을 클릭으로 조립하며 배우는 생성의 판단법." name="twitter:description"/><meta content="https://mirinaeman.com/pages/media_message_deck_deploy/assets/og.jpg" name="twitter:image"/><meta content="검은 무대 위에 크게 놓인 메시지의 몸이라는 제목" name="twitter:image:alt"/><meta content="summary_large_image" name="twitter:card"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "@id": "https://mirinaeman.com/pages/media_message_deck_deploy/#lecture", "url": "https://mirinaeman.com/pages/media_message_deck_deploy/", "name": "미디어는 메시지의 몸이다 — 생성의 판단법", "description": "김준호의 12장 웹 프레젠테이션. 메시지·구조·검증을 클릭으로 조립하며 배우는 생성의 판단법.", "inLanguage": "ko", "learningResourceType": "Presentation", "creator": {"@type": "Person", "name": "김준호", "url": "https://mirinaeman.com/pages/profile/"}, "isRelatedTo": {"@type": "CreativeWork", "name": "매체는 메시지의 몸 — 미디어 철학", "url": "https://mirinaeman.com/pages/media/"}}</script><link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/><style>@font-face{font-family:MessageStage;src:url('assets/stage-sans.woff2') format('woff2');font-weight:100 900;font-display:swap}
+:root{color-scheme:dark;--body-elevated:#232429;--body-border:#85868b;--body-accent-ink:#050505;--body-focus:#8fd3ff;--grid-content:1440px;--grid-gutter:5vw;--grid-gap:24px;--measure-reading:60ch;--rhythm-breath:48px;--rhythm-pause:80px;--leading-lead:1.6;--leading-quote:1.4;--leading-ui:1.4;--motion-duration-instant:0s;--motion-ease-arrive:cubic-bezier(.16,1,.3,1);--motion-ease-settle:cubic-bezier(.76,0,.24,1);--motion-distance-small:32px;--motion-distance-medium:64px;--tracking-ui:.06em;--body-backdrop:#000000bb;--print-ink:#000000;--print-paper:#ffffff;--body-canvas:#050505;--body-ink:#f4f7fb;--body-ink-muted:#aeb7c8;--dim:#676971;--body-accent:#ffcf70;--body-link:#8fd3ff;--line:#303239;--body-surface:#141518;--font:MessageStage,-apple-system,BlinkMacSystemFont,'Noto Sans KR',sans-serif;--display:clamp(64px,10vw,160px);--statement:clamp(38px,6.2vw,96px);--word:clamp(28px,4.5vw,68px);--body:clamp(18px,2vw,28px);--small:14px;--micro:12px;--leading-display:1.16;--leading-title:1.24;--leading-reading:1.6;--tracking-display:-.04em;--tracking-title:-.025em;--tracking-label:.16em;--space:8px;--gap:clamp(20px,3vw,48px);--edge:clamp(24px,5vw,80px);--header:64px;--footer:76px;--measure:1440px;--weight:750;--radius:12px;--hit:44px;--stroke:1px;--z-ui:10;--motion-duration-long:.95s;--motion-duration-short:.28s;--motion-stagger:.07s}
+*{box-sizing:border-box}html{background:var(--body-canvas);color:var(--body-ink);font-family:var(--font);color-scheme:dark}body{margin:0}button,input,select{font:inherit}button,a,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.3}button,select{border:0;color:inherit;background:transparent;min-height:var(--hit)}a{color:var(--body-link)}@media(hover:hover) and (pointer:fine){button:hover,select:hover{color:var(--body-accent)}}:focus-visible{outline:2px solid var(--body-link);outline-offset:4px}p,h1,h2,h3{margin:0;word-break:keep-all;overflow-wrap:break-word}p{line-height:var(--leading-reading)}em{font-style:normal;color:var(--body-accent)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}.skip{position:fixed;top:-100px;left:var(--edge);z-index:30;background:var(--body-canvas);padding:var(--space)}.skip:focus{top:0}.toolbar{height:var(--header);padding:0 var(--edge);display:flex;align-items:center;justify-content:space-between;gap:var(--gap);position:relative;z-index:var(--z-ui);background:var(--body-canvas);border-bottom:var(--stroke) solid transparent}.brand{text-decoration:none;font-size:var(--micro);font-weight:600;letter-spacing:var(--tracking-label);color:var(--body-ink-muted);white-space:nowrap}.brand span{color:var(--dim)}.toolbar nav{display:flex;gap:calc(var(--space)*2);font-size:var(--small);color:var(--body-ink-muted)}#stage{display:none}.enhanced:not(.reading){overflow:hidden}.enhanced:not(.reading) .toolbar{position:fixed;inset:0 0 auto}.enhanced:not(.reading) #stage{display:block;height:100svh}.scene{display:none;position:absolute;inset:var(--header) 0 var(--footer);padding:var(--gap) var(--edge);overflow:hidden}.scene.is-active{display:grid;grid-template-rows:auto 1fr;gap:var(--gap)}.scene-label{font-size:var(--micro);letter-spacing:var(--tracking-label);color:var(--dim);text-align:center;font-weight:600}.composition{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:var(--gap);width:100%;max-width:var(--measure);margin:0 auto;min-height:0;text-align:center;position:relative}.stage-kicker,.whisper{font-size:var(--body);color:var(--body-ink-muted);font-weight:450}.undertone{font-size:var(--body);color:var(--body-ink-muted);max-width:55ch;text-wrap:balance}.statement{font-size:var(--statement);font-weight:var(--weight);line-height:var(--leading-title);letter-spacing:var(--tracking-title);text-wrap:balance}.atom{display:inline-block;font-weight:var(--weight);line-height:var(--leading-display);letter-spacing:var(--tracking-display)}.is-off{display:none!important}.accent{color:var(--body-accent)}.quiet{color:var(--body-ink-muted)}.title-assembly{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;column-gap:.16em;max-width:100%;font-size:var(--statement)}.title-assembly .message{font-size:var(--display);color:var(--body-accent)}.scene-body[data-beat="0"] .message{font-size:clamp(96px,18vw,260px)}.scene-body[data-beat="2"] .title-assembly{max-width:1000px}.scene-body[data-beat="2"] .message{font-size:var(--display)}.judgment-title{display:flex;gap:.3em;font-size:var(--statement);align-items:baseline;justify-content:center}.judgment-questions{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);margin-top:var(--gap)}.item{text-align:left;min-width:0}.item-no{display:block;font-size:var(--micro);letter-spacing:var(--tracking-label);color:var(--dim);margin-bottom:calc(var(--space)*2)}.item strong{font-size:var(--word);font-weight:600;line-height:var(--leading-title);letter-spacing:var(--tracking-title)}.item p{font-size:var(--body);color:var(--body-ink-muted);margin-top:calc(var(--space)*2)}.judgment-questions .item{border-top:var(--stroke) solid var(--line);padding-top:calc(var(--space)*3)}.judgment-questions .item.is-focus strong{color:var(--body-accent)}.judgment-questions .item:not(.is-focus){opacity:.28}.scene-judgment[data-beat="0"] .judgment-questions{display:none}.surface-words{display:flex;flex-wrap:wrap;gap:var(--gap);justify-content:center;width:100%}.surface-word{font-size:var(--word);border-bottom:var(--stroke) solid var(--line);padding:var(--gap) 0;color:var(--body-ink-muted)}.question-reveal{display:flex;flex-direction:column;align-items:center;gap:var(--gap)}.scene-late[data-beat="1"] .surface-words{position:absolute;top:0;justify-content:space-between;opacity:.22}.scene-late[data-beat="1"] .surface-word{font-size:var(--body)}.meaning-field{width:min(100%,1120px);height:min(40vh,340px);position:relative}.meaning-word{font-size:var(--word);position:absolute}.meaning-word:nth-child(1){left:4%;top:6%}.meaning-word:nth-child(2){left:55%;top:14%}.meaning-word:nth-child(3){left:26%;top:66%}.meaning-word:nth-child(4){left:84%;top:61%}.meaning-word:nth-child(5){left:8%;top:42%}.meaning-word:nth-child(6){left:67%;top:80%}.scene-gestalt[data-beat="1"] .meaning-field,.scene-gestalt[data-beat="2"] .meaning-field{display:grid;grid-template-columns:repeat(3,1fr);align-content:center;gap:var(--gap);height:min(40vh,340px)}.scene-gestalt:not([data-beat="0"]) .meaning-word{position:static}.scene-gestalt[data-beat="2"] .meaning-word:first-child,.scene-gestalt[data-beat="2"] .meaning-word:last-child{color:var(--body-accent)}.scene-gestalt[data-beat="2"] .meaning-word:not(:first-child):not(:last-child){color:var(--body-ink-muted)}.anatomy-lens{display:flex;width:100%;align-items:center;justify-content:center;gap:calc(var(--space)*2);min-height:260px}.level{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--space)*2);min-width:0;color:var(--dim);flex:1}.level-number{font-size:var(--micro);letter-spacing:var(--tracking-label)}.level strong{font-size:var(--body);font-weight:450;line-height:var(--leading-title)}.level.is-focus{flex:4;color:var(--body-accent)}.level.is-focus strong{font-size:var(--display);font-weight:var(--weight);letter-spacing:var(--tracking-display);line-height:var(--leading-display)}.scene-anatomy[data-beat="5"] .level strong{font-size:var(--word);color:var(--body-ink)}.anatomy-examples{width:min(100%,1100px);display:grid;gap:calc(var(--space)*2)}.anatomy-examples p{display:grid;grid-template-columns:1fr repeat(5,1fr);gap:var(--space);font-size:var(--small);align-items:center}.anatomy-examples p>span{color:var(--body-ink-muted)}.anatomy-examples b{font-weight:450;color:var(--dim)}.anatomy-examples b.is-focus{color:var(--body-accent)}.pipeline-hero{width:100%;min-height:240px;display:grid;place-items:center}.pipeline-focus{display:flex;align-items:center;justify-content:center;gap:var(--gap);width:100%}.huge-number{font-size:clamp(100px,17vw,250px);font-weight:350;line-height:var(--leading-display);letter-spacing:var(--tracking-display);color:var(--body-accent);font-variant-numeric:tabular-nums}.pipeline-focus strong{font-size:var(--word);font-weight:600;text-align:left;line-height:var(--leading-title);letter-spacing:var(--tracking-title)}.pipeline-index{display:flex;width:100%;list-style:none;padding:0;margin:0;gap:calc(var(--space)*2)}.pipeline-index li{flex:1;min-width:0;text-align:left;border-top:var(--stroke) solid var(--line);padding-top:calc(var(--space)*2);color:var(--dim)}.pipeline-index span{font-size:var(--small);display:block}.pipeline-index strong{display:none}.pipeline-index .is-focus{color:var(--body-accent);border-color:var(--body-accent)}.scene-pipeline[data-beat="8"] .pipeline-hero{display:none}.scene-pipeline[data-beat="8"] .pipeline-index{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}.scene-pipeline[data-beat="8"] .pipeline-index li{padding:calc(var(--space)*3) 0}.scene-pipeline[data-beat="8"] .pipeline-index strong{display:block;font-size:var(--body);color:var(--body-ink);font-weight:550;line-height:var(--leading-title);margin-top:calc(var(--space)*2)}.recognition{position:relative;width:100%;height:clamp(180px,32vh,320px)}.curve{position:absolute;inset:0;width:100%;height:100%;overflow:visible;color:var(--body-accent);opacity:1}.curve path{stroke:currentColor;stroke-width:2;fill:none;vector-effect:non-scaling-stroke}.scene-sequence[data-beat="0"] .curve{opacity:0}.curve-word{position:absolute;font-size:var(--body);padding:var(--space);background:var(--body-canvas);left:calc(var(--i)*17%);top:50%}.curve-word:nth-of-type(1){--i:0}.curve-word:nth-of-type(2){--i:1}.curve-word:nth-of-type(3){--i:2}.curve-word:nth-of-type(4){--i:3}.curve-word:nth-of-type(5){--i:4}.curve-word:nth-of-type(6){--i:5}.scene-sequence:not([data-beat="0"]) .curve-word:nth-of-type(1){top:72%}.scene-sequence:not([data-beat="0"]) .curve-word:nth-of-type(2){top:48%}.scene-sequence:not([data-beat="0"]) .curve-word:nth-of-type(3){top:9%;color:var(--body-accent)}.scene-sequence:not([data-beat="0"]) .curve-word:nth-of-type(4){top:36%}.scene-sequence:not([data-beat="0"]) .curve-word:nth-of-type(5){top:50%}.scene-sequence:not([data-beat="0"]) .curve-word:nth-of-type(6){top:6%;color:var(--body-accent)}.one-formula{display:flex;gap:var(--gap);align-items:center;justify-content:center}.one-number{font-size:clamp(160px,30vw,450px);font-weight:550;color:var(--body-accent)}.one-copy{display:flex;flex-direction:column;text-align:left;font-size:var(--word);font-weight:450;line-height:var(--leading-title);letter-spacing:var(--tracking-title)}.one-copy span{color:var(--body-ink-muted)}.one-copy strong{font-weight:var(--weight)}.competing-claims{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:var(--gap);width:100%}.claim{font-size:var(--word);color:var(--body-ink-muted);padding:var(--gap) 0}.scene-evidence[data-beat="1"] .claim{font-size:var(--display);color:var(--body-accent)}.scene-evidence[data-beat="2"] .claim{font-size:var(--body);color:var(--body-ink-muted);padding:0}.market-conclusion{font-size:var(--statement);font-weight:var(--weight);letter-spacing:var(--tracking-title);line-height:var(--leading-title)}.role-grid{display:grid;width:100%;grid-template-columns:repeat(3,1fr);gap:var(--gap);margin-top:calc(var(--space)*2)}.role-grid .item{border-top:var(--stroke) solid var(--line);padding-top:calc(var(--space)*2)}.role-grid .item strong{font-size:var(--body)}.role-grid .item p{font-size:var(--small)}.scene-roles[data-beat="0"] .role-grid{display:none}.scene-roles[data-beat="2"] .role-grid .item:not(:last-child){opacity:.18}.scene-roles[data-beat="2"] .role-grid .item:last-child strong{color:var(--body-accent)}.scene-roles[data-beat="2"] .role-grid .item:last-child{border-color:var(--body-accent)}.practice-track{display:flex;justify-content:center;gap:var(--gap);font-size:var(--body);color:var(--dim)}.practice-track .is-focus{color:var(--body-accent)}.practice-question{display:grid;place-items:center;min-height:250px;width:100%;max-width:1150px}.final-questions{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--space)*2)}.final-line{font-size:var(--statement)}.scene-final[data-beat="2"] .final-line:last-child,.scene-final[data-beat="3"] .final-line{color:var(--body-accent)}.transport{display:none;position:fixed;inset:auto 0 0;height:var(--footer);padding:0 var(--edge);align-items:center;gap:calc(var(--space)*3);z-index:var(--z-ui);background:var(--body-canvas);color:var(--body-ink-muted)}.enhanced:not(.reading) .transport{display:flex}.transport button{font-size:var(--body);width:var(--hit)}.position{display:flex;align-items:center;gap:calc(var(--space)*2);font-size:var(--micro)}.position select{max-width:260px;font-size:var(--micro);letter-spacing:var(--tracking-ui)}#beat-status{color:var(--body-ink-muted);white-space:nowrap}#beat-dots{display:flex;gap:var(--space);margin:auto}#beat-dots i{width:5px;height:5px;border-radius:50%;background:var(--line)}#beat-dots i.current{background:var(--body-accent)}.key-hint{font-size:var(--micro);color:var(--dim)}#reading{max-width:1100px;margin:auto;padding:var(--edge);font-size:var(--body)}.enhanced:not(.reading) #reading{display:none}.reader-intro,.original-section,.reader-outro{padding:calc(var(--gap)*2) 0;border-bottom:var(--stroke) solid var(--line)}#reading h2{font-size:var(--word);line-height:var(--leading-title);letter-spacing:var(--tracking-title);font-weight:var(--weight);margin:var(--gap) 0}#reading h2 br{display:none}.reader-number,.eyebrow{font-size:var(--small);color:var(--body-accent);letter-spacing:var(--tracking-label)}#reading .card,#reading .check,#reading .bad,#reading .good{margin:var(--gap) 0}#reading .small-label{font-size:var(--small);color:var(--body-ink-muted)}#reading .fake-title,#reading .fake-line,#reading .orbit{display:none}#reading .node,#reading .step,#reading .time-item{display:inline-block;margin:var(--space)}#reading .step b{color:var(--body-accent);margin-right:var(--space)}#reading .diagram,#reading .formula{padding:var(--gap) 0}#reading p{margin:calc(var(--space)*2) 0}#reading .primary,#reading .accent{color:var(--body-accent)}#reading button{color:var(--body-accent);border-bottom:var(--stroke) solid var(--body-accent)}dialog{max-width:calc(100% - 48px);padding:var(--gap);background:var(--body-surface);color:var(--body-ink);border:var(--stroke) solid var(--line);border-radius:var(--radius)}dialog::backdrop{background:var(--body-backdrop)}dialog input{width:100%;min-width:0;padding:var(--space);margin:var(--space) 0}dialog button{display:block;margin-left:auto}
+@media(max-width:900px){:root{--header:104px;--footer:72px;--display:clamp(56px,11vw,100px);--statement:clamp(32px,6.5vw,64px);--word:clamp(24px,4.8vw,44px);--body:clamp(16px,2.8vw,23px);--gap:24px;--edge:32px}.toolbar{flex-direction:column;justify-content:center;gap:0}.toolbar nav{gap:calc(var(--space)*2)}.brand{font-size:var(--micro)}.key-hint{display:none}.position select{max-width:200px}.anatomy-lens{min-height:200px}.pipeline-hero{min-height:220px}.role-grid{gap:calc(var(--space)*2)}.item p{margin-top:var(--space)}.scene-label{color:var(--body-ink-muted)}}
+@media(max-width:560px){:root{--edge:24px;--gap:20px;--display:clamp(48px,14vw,78px);--statement:clamp(30px,8.2vw,46px);--word:clamp(24px,7vw,34px);--body:18px;--small:13px;--footer:72px}.brand span{display:none}.toolbar nav{width:100%;justify-content:space-between;gap:0;font-size:var(--micro)}.scene{padding-top:var(--space);padding-bottom:var(--space)}.scene.is-active{gap:var(--space)}.scene-label{font-size:10px}.composition{gap:var(--gap)}.title-assembly{flex-direction:column;align-items:center;gap:var(--space)}.scene-body[data-beat="0"] .message{font-size:25vw}.judgment-title{flex-direction:column;align-items:center;gap:var(--space)}.judgment-questions{grid-template-columns:1fr;gap:calc(var(--space)*2);margin-top:0}.judgment-questions .item{display:grid;grid-template-columns:auto 1fr;gap:var(--space);padding-top:var(--space)}.judgment-questions .item-no{display:none}.judgment-questions .item strong{font-size:var(--body)}.judgment-questions .item p{font-size:var(--small);margin:0}.surface-words{flex-direction:column;gap:0}.surface-word{padding:var(--space) 0}.scene-late[data-beat="1"] .surface-words{display:none}.meaning-field{height:240px}.meaning-word{font-size:var(--body)}.meaning-word:nth-child(4){left:83%}.anatomy-lens{flex-wrap:wrap;min-height:210px;gap:var(--space)}.level{flex:1 1 15%}.level.is-focus{flex:1 1 100%;order:-1}.level strong{font-size:var(--small)}.level.is-focus strong{font-size:var(--display)}.scene-anatomy[data-beat="5"] .level strong{font-size:var(--body)}.anatomy-examples p{font-size:11px;gap:4px;grid-template-columns:1fr repeat(5,1fr)}.scene-anatomy[data-beat="5"] .anatomy-lens{min-height:140px}.pipeline-focus{flex-direction:column;gap:var(--space)}.pipeline-focus strong{text-align:center;font-size:var(--word)}.huge-number{font-size:130px}.scene-pipeline[data-beat="8"] .pipeline-index{grid-template-columns:repeat(2,1fr);gap:var(--space) var(--gap)}.scene-pipeline[data-beat="8"] .pipeline-index strong{font-size:var(--small);margin-top:var(--space)}.scene-pipeline[data-beat="8"] .pipeline-index li{padding:var(--space) 0}.recognition{height:210px}.curve-word{font-size:var(--small);padding:4px;left:calc(var(--i)*16%)}.one-number{font-size:210px}.one-copy{font-size:var(--word)}.competing-claims{flex-direction:column;gap:0}.claim{padding:var(--space) 0}.market-conclusion{font-size:var(--statement)}.role-grid{grid-template-columns:repeat(2,1fr);gap:var(--space) var(--gap)}.role-grid .item{padding-top:var(--space)}.role-grid .item-no{display:none}.role-grid .item p{font-size:var(--micro)}.practice-track{font-size:var(--small)}.practice-question{min-height:200px}.transport{gap:var(--space)}.position{flex:1;display:block}.position select{font-size:10px;max-width:185px;min-height:30px}.position #beat-status{display:block;font-size:10px;margin-left:4px}.transport #beat-dots{display:none}.final-line{font-size:var(--statement)}.scene-final[data-beat="3"] .final-line{font-size:var(--display)}#reading h2 br{display:initial}}
+@media(max-height:650px) and (min-width:901px){:root{--display:100px;--statement:64px;--word:44px;--body:21px;--header:48px;--footer:56px;--gap:20px}.scene{padding-top:var(--space)}.anatomy-lens,.pipeline-hero{min-height:160px}.huge-number{font-size:160px}.one-number{font-size:260px}.practice-question{min-height:160px}.role-grid .item-no{display:none}.meaning-field{height:220px}.recognition{height:190px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media print{.toolbar,.transport,#stage,.skip,button{display:none!important}#reading{display:block!important;max-width:none;padding:0;color:var(--print-ink)}.original-section{break-after:page}html{background:var(--print-paper)}#reading .primary,#reading .accent{color:var(--print-ink)}}
 
-  <title>미디어는 메시지의 몸이다</title>
-  <meta name="description" content="미디어는 메시지가 입는 몸이고, 게슈탈트는 그 몸이 살아 있는지 검증하는 법이라는 관점의 강의용 HTML 슬라이드 덱입니다." />
-  <meta property="og:title" content="미디어는 메시지의 몸이다" />
-  <meta property="og:description" content="메시지, 구조, 검증의 순서로 미디어 생성 원리를 설명하는 강의용 슬라이드입니다." />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary" />
-
-  <style>
-    :root {
-      --color-primary: #8fd3ff;
-      --color-accent: #ffcf70;
-      --color-bg: #0b0d12;
-      --color-bg-alt: #151925;
-      --color-surface: #202638;
-      --color-surface-2: #111622;
-      --color-text: #f4f7fb;
-      --color-text-muted: #aeb7c8;
-      --color-line: rgba(255,255,255,.16);
-      --font-primary: -apple-system, BlinkMacSystemFont, system-ui, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-      --slide-padding: clamp(2rem, 6vw, 5rem);
-      --gap-md: 1.5rem;
-      --gap-lg: 3rem;
-      --gap-xl: 5rem;
-      --z-controls: 100;
+p,li,dd{text-wrap:pretty}#share-url,code{overflow-wrap:anywhere}@media(pointer:coarse){button,select{min-height:var(--hit)}}
+:root[data-theme="light"]{color-scheme:light;--body-canvas:#f4f7fb;--body-surface:#ffffff;--body-elevated:#e7e8ed;--body-ink:#141518;--body-ink-muted:#50525a;--body-border:#74767e;--body-accent:#714300;--body-accent-ink:#ffffff;--body-focus:#00559a;--body-link:#00559a;--dim:#676971;--line:#b3b5bc}
+</style></head><body>
+<a class="skip" href="#reading">원문 읽기</a><header class="toolbar"><a class="brand" href="https://mirinaeman.com/pages/profile/">MIRINAEMAN <span>/ MESSAGE BODY</span></a><nav aria-label="발표 도구"><button aria-pressed="true" id="motion-toggle">모션 켜짐</button><button aria-pressed="false" id="read-toggle">원문 읽기</button><button aria-label="전체 화면" id="fullscreen">전체 화면</button><button id="share">공유</button></nav></header>
+<h1 class="sr-only">미디어는 메시지의 몸이다 — 생성의 판단법</h1><main aria-label="클릭으로 진행하는 12장 프레젠테이션" id="stage" tabindex="-1"><section aria-label="1장 미디어는 메시지의 몸 이다" class="scene scene-body" data-beats="3" data-scene="0" id="scene-1"><span class="scene-label">THE MESSAGE</span><div class="composition" data-experience-fallback="original-reading" data-experience-host="message-stage"><div class="title-assembly"><span class="atom frame-word" data-flip-id="medium" data-from="1">미디어는</span><span class="atom message" data-flip-id="message">메시지</span><span class="atom frame-word" data-flip-id="body" data-from="1">의 몸이다.</span></div><p class="undertone" data-from="2">게슈탈트는 그 몸이 살아 있는지 검증하는 법이다.</p></div></section><section aria-label="2장 오늘 배울 것은 디자인 팁이 아니라 생성의 판단법 이다" class="scene scene-judgment" data-beats="4" data-scene="1" id="scene-2"><span class="scene-label">THE JUDGMENT</span><div class="composition" data-experience-fallback="original-reading" data-experience-host="message-stage"><p class="stage-kicker">오늘 배울 것은</p><div class="judgment-title"><span class="atom quiet" data-flip-id="생성의">생성의</span><span class="atom accent" data-flip-id="판단법">판단법</span></div><div class="judgment-questions"><div class="item" data-flip-id="judgment-questions-0"><span class="item-no">01</span><strong>메시지</strong><p>무엇을 남길 것인가?</p></div><div class="item" data-flip-id="judgment-questions-1"><span class="item-no">02</span><strong>구조</strong><p>어떤 순서로 전달할 것인가?</p></div><div class="item" data-flip-id="judgment-questions-2"><span class="item-no">03</span><strong>검증</strong><p>그 몸이 살아 있는가?</p></div></div></div></section><section aria-label="3장 대부분의 생성은 너무 늦은 단계 에서 시작한다" class="scene scene-late" data-beats="3" data-scene="2" id="scene-3"><span class="scene-label">START EARLIER</span><div class="composition" data-experience-fallback="original-reading" data-experience-host="message-stage"><p class="stage-kicker">대부분의 생성은 너무 늦은 단계에서 시작한다.</p><div class="surface-words"><span class="atom surface-word" data-flip-id="레이아웃" data-until="1">레이아웃</span><span class="atom surface-word" data-flip-id="글자 수" data-until="1">글자 수</span><span class="atom surface-word" data-flip-id="색상" data-until="1">색상</span></div><div class="question-reveal" data-from="1"><span class="whisper">그 전에</span><p class="statement">무엇을 <em>남길 것인가?</em></p></div><p class="undertone" data-from="2">메시지와 인과를 먼저 정한다.<br/>레이아웃은 그 다음에 따라온다.</p></div></section><section aria-label="4장 미디어는 메시지가 입는 몸 이다" class="scene scene-gestalt" data-beats="3" data-scene="3" id="scene-4"><span class="scene-label">THE LIVING BODY</span><div class="composition" data-experience-fallback="original-reading" data-experience-host="message-stage"><p class="stage-kicker">미디어는 메시지가 입는 몸이다.</p><div class="meaning-field"><span class="atom meaning-word" data-flip-id="meaning-0">메시지</span><span class="atom meaning-word" data-flip-id="meaning-1">순서</span><span class="atom meaning-word" data-flip-id="meaning-2">장면</span><span class="atom meaning-word" data-flip-id="meaning-3">컷</span><span class="atom meaning-word" data-flip-id="meaning-4">리듬</span><span class="atom meaning-word" data-flip-id="meaning-5">기억</span></div><p class="undertone" data-at="0">같은 단어들.</p><p class="undertone" data-at="1">관계가 생기면 읽히는 방식이 달라진다.</p><p class="undertone" data-at="2">게슈탈트는 그 몸이 살아 있는지 검증하는 법이다.</p></div></section><section aria-label="5장 모든 미디어는 같은 해부학을 가진다" class="scene scene-anatomy" data-beats="6" data-scene="4" id="scene-5"><span class="scene-label">THE ANATOMY</span><div class="composition" data-experience-fallback="original-reading" data-experience-host="message-stage"><p class="stage-kicker">모든 미디어는 같은 해부학을 가진다.</p><div class="anatomy-lens"><div class="level" data-flip-id="level-0" data-level="0"><span class="level-number">L0</span><strong>전체</strong></div><div class="level" data-flip-id="level-1" data-level="1"><span class="level-number">L1</span><strong>시퀀스</strong></div><div class="level" data-flip-id="level-2" data-level="2"><span class="level-number">L2</span><strong>씬</strong></div><div class="level" data-flip-id="level-3" data-level="3"><span class="level-number">L3</span><strong>컷</strong></div><div class="level" data-flip-id="level-4" data-level="4"><span class="level-number">L4</span><strong>비트</strong></div></div><div class="anatomy-examples"><p><span>슬라이드</span><b data-level="0">덱</b><b data-level="1">섹션</b><b data-level="2">장표</b><b data-level="3">컴포넌트</b><b data-level="4">문장</b></p><p><span>영상</span><b data-level="0">작품</b><b data-level="1">시퀀스</b><b data-level="2">장면</b><b data-level="3">쇼트</b><b data-level="4">프레임</b></p><p><span>웹</span><b data-level="0">서비스</b><b data-level="1">플로우</b><b data-level="2">섹션</b><b data-level="3">UI</b><b data-level="4">클릭</b></p></div></div></section><section aria-label="6장 생성에는 올바른 순서 가 있다" class="scene scene-pipeline" data-beats="9" data-scene="5" id="scene-6"><span class="scene-label">THE ORDER</span><div class="composition" data-experience-fallback="original-reading" data-experience-host="message-stage"><p class="stage-kicker">생성에는 올바른 순서가 있다.</p><div class="pipeline-hero"><div class="pipeline-focus" data-at="0"><span class="huge-number">01</span><strong>메시지 정의</strong></div><div class="pipeline-focus" data-at="1"><span class="huge-number">02</span><strong>전체 서사구조</strong></div><div class="pipeline-focus" data-at="2"><span class="huge-number">03</span><strong>시퀀스 역할</strong></div><div class="pipeline-focus" data-at="3"><span class="huge-number">04</span><strong>씬의 단일 주장</strong></div><div class="pipeline-focus" data-at="4"><span class="huge-number">05</span><strong>컷의 역할</strong></div><div class="pipeline-focus" data-at="5"><span class="huge-number">06</span><strong>미디어 문법 번역</strong></div><div class="pipeline-focus" data-at="6"><span class="huge-number">07</span><strong>HTML/CSS 구현</strong></div><div class="pipeline-focus" data-at="7"><span class="huge-number">08</span><strong>접근성·반응형 검증</strong></div></div><ol class="pipeline-index"><li data-flip-id="step-0" data-index="0"><span>01</span><strong>메시지 정의</strong></li><li data-flip-id="step-1" data-index="1"><span>02</span><strong>전체 서사구조</strong></li><li data-flip-id="step-2" data-index="2"><span>03</span><strong>시퀀스 역할</strong></li><li data-flip-id="step-3" data-index="3"><span>04</span><strong>씬의 단일 주장</strong></li><li data-flip-id="step-4" data-index="4"><span>05</span><strong>컷의 역할</strong></li><li data-flip-id="step-5" data-index="5"><span>06</span><strong>미디어 문법 번역</strong></li><li data-flip-id="step-6" data-index="6"><span>07</span><strong>HTML/CSS 구현</strong></li><li data-flip-id="step-7" data-index="7"><span>08</span><strong>접근성·반응형 검증</strong></li></ol></div></section><section aria-label="7장 서사는 나열이 아니라 인식의 곡선 이다" class="scene scene-sequence" data-beats="3" data-scene="6" id="scene-7"><span class="scene-label">THE RECOGNITION</span><div class="composition" data-experience-fallback="original-reading" data-experience-host="message-stage"><p class="stage-kicker">서사는 나열이 아니라</p><p class="statement">인식의 <em>곡선</em>이다.</p><div class="recognition"><svg aria-hidden="true" class="curve" data-illustration="recognition-curve" height="300" preserveaspectratio="none" viewbox="0 0 1000 300" width="1000"><path d="M30 255 C170 255 205 100 360 65 S500 190 610 170 S760 230 970 40" pathlength="1"></path></svg><span class="atom curve-word" data-flip-id="curve-0">질문</span><span class="atom curve-word" data-flip-id="curve-1">긴장</span><span class="atom curve-word" data-flip-id="curve-2">전환</span><span class="atom curve-word" data-flip-id="curve-3">증거</span><span class="atom curve-word" data-flip-id="curve-4">적용</span><span class="atom curve-word" data-flip-id="curve-5">통찰</span></div><p class="undertone" data-from="2">순서가 의미를 만든다.</p></div></section><section aria-label="8장 1슬라이드 = 1씬 = 1주장" class="scene scene-one" data-beats="3" data-scene="7" id="scene-8"><span class="scene-label">ONE THING</span><div class="composition" data-experience-fallback="original-reading" data-experience-host="message-stage"><div class="one-formula"><span class="atom one-number" data-flip-id="one">1</span><div class="one-copy" data-from="1"><span>슬라이드</span><span>씬</span><strong>주장</strong></div></div><p class="undertone" data-from="2">“그리고”가 필요하면,<br/>이미 두 장이다.</p></div></section><section aria-label="9장 한 장에 두 주장을 넣으면 기억은 0개 가 된다" class="scene scene-evidence" data-beats="3" data-scene="8" id="scene-9"><span class="scene-label">MAKE IT CLEAR</span><div class="composition" data-experience-fallback="original-reading" data-experience-host="message-stage"><p class="stage-kicker">무엇을 기억해야 하는가?</p><div class="competing-claims"><span class="atom claim" data-flip-id="market">시장 규모</span><span class="atom claim secondary-claim" data-flip-id="competition" data-until="1">경쟁사 비교</span><span class="atom claim secondary-claim" data-flip-id="price" data-until="1">가격 정책</span></div><p class="market-conclusion" data-from="2">시장은 <em>충분히 크다.</em></p><p class="undertone" data-at="0">한 장에 세 역할이 섞여 청중의 시선이 분산된다.</p><p class="undertone" data-at="1">한 장은 시장 규모만 증명한다.</p><p class="undertone" data-at="2">경쟁과 가격은 다음 장으로 분리한다.</p></div></section><section aria-label="10장 컷은 장식이 아니라 역할 이다" class="scene scene-roles" data-beats="3" data-scene="9" id="scene-10"><span class="scene-label">EVERY ELEMENT HAS A JOB</span><div class="composition" data-experience-fallback="original-reading" data-experience-host="message-stage"><p class="stage-kicker">컷은 장식이 아니라</p><p class="statement"><em>역할</em>이다.</p><div class="role-grid"><div class="item" data-flip-id="role-grid-0"><span class="item-no">01</span><strong>주장</strong><p>이 씬의 핵심을 말한다</p></div><div class="item" data-flip-id="role-grid-1"><span class="item-no">02</span><strong>증거</strong><p>믿어야 할 이유를 준다</p></div><div class="item" data-flip-id="role-grid-2"><span class="item-no">03</span><strong>연결</strong><p>다음 씬으로 넘어간다</p></div><div class="item" data-flip-id="role-grid-3"><span class="item-no">04</span><strong>강조</strong><p>감정적 무게를 더한다</p></div><div class="item" data-flip-id="role-grid-4"><span class="item-no">05</span><strong>구조</strong><p>복잡한 정보를 정리한다</p></div><div class="item" data-flip-id="role-grid-5"><span class="item-no">06</span><strong>여백</strong><p>집중할 위치를 만든다</p></div></div><p class="undertone" data-from="2">각 요소는 메시지 안에서 해야 할 일이 있다.</p></div></section><section aria-label="11장 실습: 지금 만드는 슬라이드 하나를 8단계로 해부하라" class="scene scene-practice" data-beats="4" data-scene="10" id="scene-11"><span class="scene-label">YOUR TURN</span><div class="composition" data-experience-fallback="original-reading" data-experience-host="message-stage"><p class="stage-kicker">지금 만드는 슬라이드 하나를 해부하라.</p><div class="practice-track"><span data-index="0">메시지</span><span data-index="1">씬</span><span data-index="2">컷</span><span data-index="3">검증</span></div><div class="practice-question"><p class="statement" data-at="0">청중이 딱 하나만 기억할 문장은?</p><p class="statement" data-at="1">이 장표의 단일 주장은?</p><p class="statement" data-at="2">각 요소의 역할은 주장·증거·연결 중 무엇인가?</p><p class="statement" data-at="3">이 장표가 없어지면 덱이 무너지는가?</p></div><p class="undertone">내 슬라이드에 이 질문을 적용한다.</p></div></section><section aria-label="12장 메시지는 어떤 몸을 입고, 어떤 순서로, 어떤 흔적을 남기는가?" class="scene scene-final" data-beats="4" data-scene="11" id="scene-12"><span class="scene-label">WHAT REMAINS</span><div class="composition" data-experience-fallback="original-reading" data-experience-host="message-stage"><p class="stage-kicker" data-until="3">메시지는</p><div class="final-questions"><span class="atom final-line" data-flip-id="f-body" data-until="3">어떤 몸을 입고,</span><span class="atom final-line" data-flip-id="f-order" data-from="1" data-until="3">어떤 순서로,</span><span class="atom final-line" data-flip-id="f-memory" data-from="2">어떤 흔적을 남기는가?</span></div><p class="undertone" data-from="3">이 질문에서 생성이 시작된다.</p></div></section></main>
+<article id="reading" tabindex="-1"><header class="reader-intro"><p class="eyebrow">미리내맨 · 김준호</p><h2>미디어는 메시지의 몸이다</h2><p>김준호의 12장 웹 프레젠테이션.<br/>메시지·구조·검증을 클릭으로 조립하며 배우는 생성의 판단법.</p><p>초기 12장 원문을 보존했습니다.<br/>발표 화면에서는 같은 내용을 단계별로 조립합니다.</p><button id="start">발표 시작</button></header><section class="original-section" id="original-1"><span class="reader-number">01</span><div class="slide-inner column center">
+<p class="eyebrow">Lecture</p>
+<h2>미디어는 <span class="primary">메시지의 몸</span>이다</h2>
+<p>게슈탈트는 그 몸이 살아 있는지 검증하는 법이다.</p>
+</div></section><section class="original-section" id="original-2"><span class="reader-number">02</span><div class="slide-inner split">
+<div>
+<p class="eyebrow">Learning Goal</p>
+<h2>오늘 배울 것은 디자인 팁이 아니라 <span class="accent">생성의 판단법</span>이다</h2>
+</div>
+<div class="grid-3">
+<div class="card"><strong>메시지</strong><p>무엇을 남길 것인가?</p></div>
+<div class="card"><strong>구조</strong><p>어떤 순서로 전달할 것인가?</p></div>
+<div class="card"><strong>검증</strong><p>그 몸이 살아 있는가?</p></div>
+</div>
+</div></section><section class="original-section" id="original-3"><span class="reader-number">03</span><div class="slide-inner column">
+<p class="eyebrow">Problem</p>
+<h2>대부분의 생성은 <span class="accent">너무 늦은 단계</span>에서 시작한다</h2>
+<div class="compare">
+<div class="bad">
+<span class="small-label">Weak Generation</span>
+<div class="sample-slide">
+<div class="fake-title"></div>
+<div class="fake-line"></div>
+<div class="fake-line"></div>
+<div class="fake-line"></div>
+</div>
+<p>레이아웃,<br/>글자 수,<br/>색상부터 만진다.<br/>결과는 예쁘지만 맥락이 없다.</p>
+</div>
+<div class="good">
+<span class="small-label">Strong Generation</span>
+<div class="sample-slide">
+<div class="fake-title"></div>
+<div class="fake-line"></div>
+<div class="fake-line"></div>
+</div>
+<p>메시지와 인과를 먼저 정한다.<br/>레이아웃은 그 다음에 따라온다.</p>
+</div>
+</div>
+</div></section><section class="original-section" id="original-4"><span class="reader-number">04</span><div class="slide-inner split">
+<div>
+<p class="eyebrow">Core Concept</p>
+<h2>미디어는 메시지가 입는 <span class="primary">몸</span>이다</h2>
+<p>몸은 겉모양이 아니다.<br/>메시지가 움직이고,<br/>이어지고,<br/>기억되는 방식이다.</p>
+</div>
+<div aria-label="메시지가 순서, 장면, 컷, 리듬, 기억으로 확장되는 구조" class="diagram">
+<div class="orbit"></div>
+<div class="orbit"></div>
+<div class="orbit"></div>
+<span class="node n1">메시지</span>
+<span class="node n2">순서</span>
+<span class="node n3">장면</span>
+<span class="node n4">컷</span>
+<span class="node n5">리듬</span>
+<span class="node n6">기억</span>
+</div>
+</div></section><section class="original-section" id="original-5"><span class="reader-number">05</span><div class="slide-inner column">
+<p class="eyebrow">Anatomy</p>
+<h2>모든 미디어는 같은 해부학을 가진다</h2>
+<div class="formula">
+<span class="pill">전체</span><span>→</span>
+<span class="pill">시퀀스</span><span>→</span>
+<span class="pill">씬</span><span>→</span>
+<span class="pill">컷</span><span>→</span>
+<span class="pill">비트</span>
+</div>
+<div class="grid-3">
+<div class="card"><strong>슬라이드</strong><p>덱 → 섹션 → 장표 → 컴포넌트 → 문장</p></div>
+<div class="card"><strong>영상</strong><p>작품 → 시퀀스 → 장면 → 쇼트 → 프레임</p></div>
+<div class="card"><strong>웹</strong><p>서비스 → 플로우 → 섹션 → UI → 클릭</p></div>
+</div>
+</div></section><section class="original-section" id="original-6"><span class="reader-number">06</span><div class="slide-inner column">
+<p class="eyebrow">Eight-Step Pipeline</p>
+<h2>생성에는 <span class="accent">올바른 순서</span>가 있다</h2>
+<div class="steps">
+<div class="step"><b>01</b><span>메시지 정의</span></div>
+<div class="step"><b>02</b><span>전체 서사구조</span></div>
+<div class="step"><b>03</b><span>시퀀스 역할</span></div>
+<div class="step"><b>04</b><span>씬의 단일 주장</span></div>
+<div class="step"><b>05</b><span>컷의 역할</span></div>
+<div class="step"><b>06</b><span>미디어 문법 번역</span></div>
+<div class="step"><b>07</b><span>HTML/CSS 구현</span></div>
+<div class="step"><b>08</b><span>접근성·반응형 검증</span></div>
+</div>
+</div></section><section class="original-section" id="original-7"><span class="reader-number">07</span><div class="slide-inner split">
+<div>
+<p class="eyebrow">Sequence</p>
+<h2>서사는 나열이 아니라 <span class="primary">인식의 곡선</span>이다</h2>
+</div>
+<div class="timeline">
+<div class="time-item">질문</div>
+<div class="time-item">긴장</div>
+<div class="time-item">전환</div>
+<div class="time-item">증거</div>
+<div class="time-item">적용</div>
+<div class="time-item">통찰</div>
+</div>
+</div></section><section class="original-section" id="original-8"><span class="reader-number">08</span><div class="slide-inner column center">
+<p class="eyebrow">Scene Rule</p>
+<p class="quote">1슬라이드 = 1씬 = 1주장</p>
+<p>“그리고”가 필요하면,<br/>이미 두 장이다.</p>
+</div></section><section class="original-section" id="original-9"><span class="reader-number">09</span><div class="slide-inner split-wide">
+<div>
+<p class="eyebrow">Evidence: Before / After</p>
+<h2>한 장에 두 주장을 넣으면 <span class="accent">기억은 0개</span>가 된다</h2>
+<p>나쁜 장표는 정보를 많이 담아서 실패하는 것이 아니라,<br/>무엇을 기억해야 하는지 정하지 못해서 실패한다.</p>
+</div>
+<div class="compare">
+<div class="bad">
+<span class="small-label">Before</span>
+<p><strong>“시장 규모와 경쟁사 비교와 가격 정책”</strong></p>
+<p>한 장에 세 역할이 섞여 청중의 시선이 분산된다.</p>
+</div>
+<div class="good">
+<span class="small-label">After</span>
+<p><strong>“시장은 충분히 크다”</strong></p>
+<p>한 장은 시장 규모만 증명하고,<br/>경쟁과 가격은 다음 장으로 분리한다.</p>
+</div>
+</div>
+</div></section><section class="original-section" id="original-10"><span class="reader-number">10</span><div class="slide-inner split">
+<div>
+<p class="eyebrow">Cut Roles</p>
+<h2>컷은 장식이 아니라 <span class="primary">역할</span>이다</h2>
+<p>제목,<br/>본문,<br/>이미지,<br/>차트,<br/>여백은 모두 메시지 안에서 해야 할 일이 있어야 한다.</p>
+</div>
+<div class="checklist">
+<div class="check">주장 컷<br/><span class="muted">이 씬의 핵심을 말한다</span></div>
+<div class="check">증거 컷<br/><span class="muted">믿어야 할 이유를 준다</span></div>
+<div class="check">연결 컷<br/><span class="muted">다음 씬으로 넘어간다</span></div>
+<div class="check">강조 컷<br/><span class="muted">감정적 무게를 더한다</span></div>
+<div class="check">구조 컷<br/><span class="muted">복잡한 정보를 정리한다</span></div>
+<div class="check">여백 컷<br/><span class="muted">집중할 위치를 만든다</span></div>
+</div>
+</div></section><section class="original-section" id="original-11"><span class="reader-number">11</span><div class="slide-inner column">
+<p class="eyebrow">Practice</p>
+<h2>실습: 지금 만드는 슬라이드 하나를 <span class="accent">8단계로 해부하라</span></h2>
+<div class="grid-4">
+<div class="card highlight"><strong>1.<br/>메시지</strong><p>청중이 딱 하나만 기억할 문장은?</p></div>
+<div class="card"><strong>2.<br/>씬</strong><p>이 장표의 단일 주장은?</p></div>
+<div class="card"><strong>3.<br/>컷</strong><p>각 요소의 역할은 주장,<br/>증거,<br/>연결 중 무엇인가?</p></div>
+<div class="card"><strong>4.<br/>검증</strong><p>이 장표가 없어지면 덱이 무너지는가?</p></div>
+</div>
+</div></section><section class="original-section" id="original-12"><span class="reader-number">12</span><div class="slide-inner column center">
+<p class="eyebrow">Final Question</p>
+<h2 data-typography-break="approved" data-typography-lines="3">메시지는 어떤 몸을 입고,<br/>어떤 순서로,<br/>어떤 흔적을 남기는가?</h2>
+<p class="big-line accent">이 질문에서 생성이 시작된다.</p>
+</div></section><footer class="reader-outro"><p>매체별 표현 방식으로 이어지는 강의</p><a href="https://mirinaeman.com/pages/media/">매체는 메시지의 몸 — 미디어 철학 →</a></footer></article>
+<footer class="transport"><button aria-label="이전 단계" id="previous">←</button><div class="position"><label class="sr-only" for="scene-select">장면 선택</label><select id="scene-select"><option value="0">01 / 12 · THE MESSAGE</option><option value="1">02 / 12 · THE JUDGMENT</option><option value="2">03 / 12 · START EARLIER</option><option value="3">04 / 12 · THE LIVING BODY</option><option value="4">05 / 12 · THE ANATOMY</option><option value="5">06 / 12 · THE ORDER</option><option value="6">07 / 12 · THE RECOGNITION</option><option value="7">08 / 12 · ONE THING</option><option value="8">09 / 12 · MAKE IT CLEAR</option><option value="9">10 / 12 · EVERY ELEMENT HAS A JOB</option><option value="10">11 / 12 · YOUR TURN</option><option value="11">12 / 12 · WHAT REMAINS</option></select><span id="beat-status"></span></div><div aria-hidden="true" id="beat-dots"></div><span class="key-hint">클릭 · → 다음 단계</span><button aria-label="다음 단계" id="next">→</button></footer>
+<div class="sr-only" id="announcement" role="status"></div><dialog id="share-dialog"><p>페이지 주소</p><input aria-label="복사할 페이지 주소" id="share-url" readonly=""/><button id="close-share">닫기</button></dialog>
+<script id="stage-config" type="application/json">{"title": "미디어는 메시지의 몸이다 — 생성의 판단법", "description": "김준호의 12장 웹 프레젠테이션. 메시지·구조·검증을 클릭으로 조립하며 배우는 생성의 판단법.", "canonical": "https://mirinaeman.com/pages/media_message_deck_deploy/", "author": "김준호", "related": "https://mirinaeman.com/pages/media/", "image": "assets/og.jpg", "image_alt": "검은 무대 위에 크게 놓인 메시지의 몸이라는 제목", "runtime": {"gsap": "assets/vendor/gsap-3.15.0.min.js", "flip": "assets/vendor/Flip-3.15.0.min.js"}, "motion": {"duration": 0.95, "enter": 0.72, "exit": 0.28, "stagger": 0.07, "travel": 64, "ease": "expo.inOut", "arrival": "power3.out"}, "scenes": [{"slug": "body", "label": "THE MESSAGE", "beats": 3, "notes": ["단어 하나를 충분히 보여준다. 청중에게 무엇을 남기고 싶은지 묻는다.", "메시지가 몸을 얻는 순간을 보여준다.", "게슈탈트를 완성된 전체의 판단 기준으로 연결한다."]}, {"slug": "judgment", "label": "THE JUDGMENT", "beats": 4, "notes": ["디자인 팁을 나열하기 전에 판단의 기준이 필요하다.", "남길 메시지를 먼저 말한다.", "전달 순서를 정한다.", "완성된 전체가 의도대로 읽히는지 검증한다."]}, {"slug": "late", "label": "START EARLIER", "beats": 3, "notes": ["청중이 익숙한 제작 출발점을 먼저 보여준다.", "표면을 걷어내고 빠져 있던 질문을 드러낸다.", "원문에 제시된 제작 순서를 정리한다."]}, {"slug": "gestalt", "label": "THE LIVING BODY", "beats": 3, "notes": ["단어는 있으나 관계가 느슨한 상태를 보여준다.", "같은 단어를 배치만 바꿔 읽을 수 있는 순서로 조립한다.", "전체가 하나의 의미로 읽히는지 청중에게 묻는다."]}, {"slug": "anatomy", "label": "THE ANATOMY", "beats": 6, "notes": ["전체에서 출발한다.", "전체 안에서 시퀀스의 역할을 찾는다.", "시퀀스 안에서 씬의 주장을 찾는다.", "씬 안에서 컷의 역할을 찾는다.", "컷 안에서 비트의 리듬을 찾는다.", "축소해서 전체 구조와 세 매체의 대응을 함께 본다."]}, {"slug": "pipeline", "label": "THE ORDER", "beats": 9, "notes": ["메시지 정의 단계의 역할을 설명한다.", "전체 서사구조 단계의 역할을 설명한다.", "시퀀스 역할 단계의 역할을 설명한다.", "씬의 단일 주장 단계의 역할을 설명한다.", "컷의 역할 단계의 역할을 설명한다.", "미디어 문법 번역 단계의 역할을 설명한다.", "HTML/CSS 구현 단계의 역할을 설명한다.", "접근성·반응형 검증 단계의 역할을 설명한다.", "여덟 단계를 한 화면으로 회수한다. 구현보다 앞선 판단들이 보이도록 한다."]}, {"slug": "sequence", "label": "THE RECOGNITION", "beats": 3, "notes": ["단어가 나열된 상태를 먼저 보여준다.", "질문에서 통찰까지 인식의 변화가 이어지는 모습을 보여준다. 곡선은 개념도다.", "강의의 순서를 인식의 변화로 판단한다."]}, {"slug": "one", "label": "ONE THING", "beats": 3, "notes": ["숫자 하나만 남긴다. 잠시 멈춘다.", "한 슬라이드·한 씬·한 주장을 같은 숫자로 묶는다.", "복합 주장을 분리하는 제작 원칙을 제시한다."]}, {"slug": "evidence", "label": "MAKE IT CLEAR", "beats": 3, "notes": ["세 역할이 한 장에서 경쟁하게 보여준다.", "경쟁과 가격을 분리하고 시장 규모만 남긴다.", "남겨야 할 정보를 단일 주장으로 바꾼다. 기억은 0개라는 원문 표현은 강조를 위한 수사다."]}, {"slug": "roles", "label": "EVERY ELEMENT HAS A JOB", "beats": 3, "notes": ["컷의 역할을 선언한다.", "여섯 가지 역할로 화면의 요소를 해부한다.", "여백만 강조하며 집중할 위치를 만드는 기능을 시연한다."]}, {"slug": "practice", "label": "YOUR TURN", "beats": 4, "notes": ["자기 주제에서 한 문장을 고른다.", "그 문장이 이 장표의 단일 주장인지 확인한다.", "각 요소의 역할을 이름 붙인다.", "장표를 제거해 보고 전체 서사에서의 역할을 판단한다."]}, {"slug": "final", "label": "WHAT REMAINS", "beats": 4, "notes": ["몸을 묻는다.", "순서를 묻는다.", "남는 흔적을 묻는다.", "마지막 질문 하나에 머문다. 청중의 답을 기다린다."]}]}</script><script>/* One authority for scene/beat state. No DOM or animation ownership. */
+window.MessageState = (() => {
+  const clamp = (value,max) => Math.min(Math.max(0,value),max);
+  function parse(hash, scenes) {
+    const match = /^#(?:scene-)?(\d+)(?:\.(\d+))?$/.exec(hash);
+    const scene = clamp(match ? Number(match[1])-1 : 0, scenes.length-1);
+    return {scene, beat:clamp(match?.[2] ? Number(match[2])-1 : 0, scenes[scene].beats-1)};
+  }
+  function move(state,direction,scenes) {
+    const {scene,beat}=state;
+    if(direction>0){
+      if(beat<scenes[scene].beats-1)return {scene,beat:beat+1};
+      if(scene<scenes.length-1)return {scene:scene+1,beat:0};
+    }else{
+      if(beat>0)return {scene,beat:beat-1};
+      if(scene>0)return {scene:scene-1,beat:scenes[scene-1].beats-1};
     }
+    return {...state};
+  }
+  const hash = state => `#scene-${state.scene+1}.${state.beat+1}`;
+  return {parse,move,hash};
+})();
 
-    * {
-      box-sizing: border-box;
-      word-break: keep-all;
-      line-break: strict;
-    }
-
-    html,
-    body {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--color-bg);
-      color: var(--color-text);
-      font-family: var(--font-primary);
-      overscroll-behavior-y: none;
-    }
-
-    body {
-      overflow: hidden;
-    }
-
-    .slide-deck {
-      width: 100vw;
-      height: 100vh;
-      height: 100dvh;
-      background: var(--color-bg);
-      overflow: hidden;
-      position: relative;
-      outline: none;
-      cursor: default;
-    }
-
-    .slide-track {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      transform: translate3d(0, 0, 0);
-      transition: transform .38s ease;
-      will-change: transform;
-    }
-
-    .slide {
-      flex: 0 0 100%;
-      width: 100%;
-      height: 100%;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      padding: var(--slide-padding);
-      background:
-        radial-gradient(circle at 82% 16%, rgba(143,211,255,.18), transparent 28%),
-        radial-gradient(circle at 12% 88%, rgba(255,207,112,.13), transparent 34%),
-        var(--color-bg);
-    }
-
-    .slide-inner {
-      width: min(100%, 1600px);
-      height: 100%;
-      margin: 0 auto;
-      display: flex;
-    }
-
-    .column {
-      flex-direction: column;
-      justify-content: center;
-      gap: var(--gap-lg);
-    }
-
-    .split {
-      display: grid;
-      grid-template-columns: 1.04fr .96fr;
-      gap: var(--gap-xl);
-      align-items: center;
-    }
-
-    .split-wide {
-      display: grid;
-      grid-template-columns: 1.18fr .82fr;
-      gap: var(--gap-xl);
-      align-items: center;
-    }
-
-    .center {
-      align-items: center;
-      text-align: center;
-    }
-
-    h1,
-    h2,
-    h3,
-    p {
-      margin: 0;
-    }
-
-    h1 {
-      font-size: clamp(3rem, 6.5vw, 6.7rem);
-      line-height: 1.08;
-      letter-spacing: -.055em;
-    }
-
-    h2 {
-      font-size: clamp(2.35rem, 4.7vw, 5.1rem);
-      line-height: 1.14;
-      letter-spacing: -.05em;
-    }
-
-    h3 {
-      font-size: clamp(1.35rem, 2vw, 2.15rem);
-      line-height: 1.28;
-      letter-spacing: -.025em;
-    }
-
-    p,
-    li {
-      font-size: clamp(1.05rem, 1.55vw, 1.65rem);
-      line-height: 1.6;
-      color: var(--color-text-muted);
-    }
-
-    .eyebrow {
-      color: var(--color-primary);
-      font-size: clamp(.82rem, 1.05vw, 1.08rem);
-      font-weight: 800;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-
-    .accent {
-      color: var(--color-accent);
-    }
-
-    .primary {
-      color: var(--color-primary);
-    }
-
-    .muted {
-      color: var(--color-text-muted);
-    }
-
-    .big-line {
-      font-size: clamp(2.1rem, 3.8vw, 4.4rem);
-      line-height: 1.18;
-      letter-spacing: -.04em;
-      font-weight: 850;
-    }
-
-    .quote {
-      font-size: clamp(2.45rem, 5vw, 5.6rem);
-      line-height: 1.16;
-      letter-spacing: -.05em;
-      font-weight: 900;
-      max-width: 13ch;
-    }
-
-    .grid-3,
-    .grid-4 {
-      display: grid;
-      gap: var(--gap-md);
-    }
-
-    .grid-3 {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .grid-4 {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .card {
-      border: 1px solid var(--color-line);
-      background: rgba(255,255,255,.045);
-      border-radius: 1.5rem;
-      padding: clamp(1.1rem, 1.8vw, 1.8rem);
-      min-height: 9.5rem;
-    }
-
-    .card strong {
-      display: block;
-      color: var(--color-text);
-      font-size: clamp(1.15rem, 1.65vw, 1.85rem);
-      line-height: 1.22;
-      margin-bottom: .75rem;
-    }
-
-    .card p {
-      font-size: clamp(1rem, 1.28vw, 1.32rem);
-      line-height: 1.5;
-    }
-
-    .card.highlight {
-      background:
-        linear-gradient(135deg, rgba(143,211,255,.18), rgba(255,207,112,.1)),
-        rgba(255,255,255,.055);
-      border-color: rgba(143,211,255,.42);
-    }
-
-    .diagram {
-      position: relative;
-      min-height: 28rem;
-      border-radius: 2rem;
-      background:
-        linear-gradient(135deg, rgba(143,211,255,.16), rgba(255,207,112,.08)),
-        rgba(255,255,255,.04);
-      border: 1px solid var(--color-line);
-      overflow: hidden;
-    }
-
-    .orbit {
-      position: absolute;
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 999px;
-      inset: var(--i);
-    }
-
-    .node {
-      position: absolute;
-      border-radius: 999px;
-      padding: .7rem 1rem;
-      background: var(--color-surface);
-      color: var(--color-text);
-      border: 1px solid var(--color-line);
-      font-weight: 800;
-      font-size: clamp(.88rem, 1.13vw, 1.12rem);
-      white-space: nowrap;
-    }
-
-    .n1 { top: 10%; left: 50%; transform: translateX(-50%); }
-    .n2 { top: 28%; right: 12%; }
-    .n3 { bottom: 22%; right: 16%; }
-    .n4 { bottom: 12%; left: 48%; transform: translateX(-50%); }
-    .n5 { bottom: 24%; left: 13%; }
-    .n6 { top: 28%; left: 12%; }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-    }
-
-    .step {
-      padding: 1.15rem;
-      border-top: .28rem solid var(--color-primary);
-      background: rgba(255,255,255,.045);
-      border-radius: 1rem;
-      min-height: 8.2rem;
-    }
-
-    .step b {
-      display: block;
-      color: var(--color-accent);
-      font-size: .95rem;
-      margin-bottom: .5rem;
-    }
-
-    .step span {
-      display: block;
-      font-size: clamp(1rem, 1.3vw, 1.25rem);
-      line-height: 1.3;
-      font-weight: 800;
-    }
-
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: .8rem;
-      align-items: end;
-    }
-
-    .time-item {
-      min-height: calc(7rem + var(--h));
-      display: flex;
-      align-items: end;
-      padding: 1rem;
-      border-radius: 1rem;
-      background: linear-gradient(to top, rgba(143,211,255,.24), rgba(255,255,255,.04));
-      border: 1px solid var(--color-line);
-      font-weight: 800;
-      line-height: 1.25;
-    }
-
-    .formula {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: .85rem;
-      flex-wrap: wrap;
-      font-size: clamp(1.5rem, 2.6vw, 2.8rem);
-      line-height: 1.3;
-      font-weight: 900;
-    }
-
-    .pill {
-      border: 1px solid var(--color-line);
-      border-radius: 999px;
-      padding: .55rem 1rem;
-      background: rgba(255,255,255,.05);
-    }
-
-    .compare {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--gap-md);
-    }
-
-    .bad,
-    .good {
-      min-height: 18rem;
-      border-radius: 1.5rem;
-      padding: 1.5rem;
-      border: 1px solid var(--color-line);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .bad {
-      background: rgba(255,255,255,.04);
-    }
-
-    .good {
-      background:
-        linear-gradient(135deg, rgba(143,211,255,.18), rgba(255,207,112,.1)),
-        rgba(255,255,255,.05);
-      border-color: rgba(143,211,255,.45);
-    }
-
-    .small-label {
-      font-size: .9rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--color-text-muted);
-      font-weight: 800;
-    }
-
-    .sample-slide {
-      border-radius: 1.25rem;
-      background: var(--color-surface-2);
-      border: 1px solid var(--color-line);
-      padding: 1.2rem;
-      min-height: 11rem;
-      display: flex;
-      flex-direction: column;
-      gap: .8rem;
-    }
-
-    .fake-title {
-      height: 1.5rem;
-      width: 70%;
-      border-radius: 999px;
-      background: rgba(255,255,255,.24);
-    }
-
-    .fake-line {
-      height: .75rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,.12);
-    }
-
-    .fake-line:nth-child(2) { width: 95%; }
-    .fake-line:nth-child(3) { width: 82%; }
-    .fake-line:nth-child(4) { width: 88%; }
-
-    .checklist {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: .9rem;
-    }
-
-    .check {
-      border: 1px solid var(--color-line);
-      border-radius: 1rem;
-      padding: 1rem;
-      background: rgba(255,255,255,.045);
-      font-size: clamp(1rem, 1.3vw, 1.35rem);
-      line-height: 1.45;
-      color: var(--color-text);
-      font-weight: 750;
-    }
-
-    .slide-controls {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 4rem;
-      z-index: var(--z-controls);
-      pointer-events: none;
-      color: var(--color-text-muted);
-      font-size: .9rem;
-    }
-
-    .progress-shell {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: .28rem;
-      background: rgba(255,255,255,.12);
-    }
-
-    .progress-bar {
-      width: 8.333%;
-      height: 100%;
-      background: var(--color-primary);
-      transition: width .25s ease;
-    }
-
-    .page-number {
-      position: absolute;
-      right: 1rem;
-      bottom: .65rem;
-      padding: .35rem .6rem;
-      border-radius: 999px;
-      background: rgba(0,0,0,.34);
-      backdrop-filter: blur(8px);
-    }
-
-    .nav-button {
-      pointer-events: auto;
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 3.25rem;
-      height: 3.25rem;
-      border-radius: 999px;
-      border: 1px solid var(--color-line);
-      background: rgba(0,0,0,.24);
-      color: var(--color-text);
-      font-size: 1.8rem;
-      cursor: pointer;
-      z-index: var(--z-controls);
-      backdrop-filter: blur(10px);
-      opacity: .22;
-      transition: opacity .2s ease, background .2s ease;
-    }
-
-    .nav-button:hover {
-      opacity: 1;
-      background: rgba(143,211,255,.18);
-    }
-
-    .nav-button:disabled {
-      opacity: .1;
-      cursor: default;
-    }
-
-    .nav-prev {
-      left: 1rem;
-    }
-
-    .nav-next {
-      right: 1rem;
-    }
-
-    .click-zone-hint {
-      position: fixed;
-      left: 50%;
-      bottom: 1.2rem;
-      transform: translateX(-50%);
-      z-index: var(--z-controls);
-      color: rgba(244,247,251,.42);
-      font-size: .82rem;
-      pointer-events: none;
-      opacity: .65;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        overflow: hidden;
+/* GSAP owns transient style only; settled layout belongs to CSS. */
+window.MessageMotion = (() => {
+  let loading=null,enabled=true,context=null,animation=null,epoch=0;
+  const media=matchMedia('(prefers-reduced-motion: reduce)');
+  const loadScript=src=>new Promise((resolve,reject)=>{
+    const script=document.createElement('script');script.src=src;script.onload=resolve;script.onerror=()=>{script.remove();reject(new Error('Animation runtime unavailable'));};document.head.append(script);
+  });
+  function load(config){
+    if(!loading)loading=loadScript(config.runtime.gsap).then(()=>loadScript(config.runtime.flip)).then(()=>{gsap.registerPlugin(Flip);return true;}).catch(error=>{document.body.dataset.motion='fallback';console.warn(error.message);return false;});
+    return loading;
+  }
+  function settle(){epoch++;if(animation){animation.progress(1);animation.kill();animation=null;}if(context){context.revert();context=null;}}
+  const visible=node=>node.getClientRects().length>0 && getComputedStyle(node).visibility!=='hidden';
+  async function transition(previous,next,mutate,config,direction=1){
+    settle();const token=epoch;
+    const allowed=enabled&&!media.matches&&!document.hidden;
+    if(!allowed){mutate();return;}
+    // Apply a user command immediately even during the first runtime request.
+    if(!window.gsap||!window.Flip){mutate();const ready=await load(config);if(ready&&token===epoch&&enabled&&!media.matches)enter(next,config,direction);return;}
+    const same=previous===next;
+    const targets=same?[...next.querySelectorAll('[data-flip-id]')]:[];
+    const before=new Set([...next.querySelectorAll('[data-at],[data-from],.item')].filter(visible));
+    const flipState=targets.length?Flip.getState(targets,{props:'color,opacity'}):null;
+    mutate();
+    const m=config.motion;
+    context=gsap.context(()=>{
+      if(!same){
+        animation=gsap.timeline();
+        animation.fromTo(next.querySelector('.composition'),{opacity:0,y:direction*m.travel,scale:.965},{opacity:1,y:0,scale:1,duration:m.enter,ease:m.arrival,clearProps:'transform,opacity'});
+      }else{
+        animation=gsap.timeline();
+        if(flipState)animation.add(Flip.from(flipState,{duration:m.duration,ease:m.ease,scale:true,absoluteOnLeave:true,nested:true,prune:true,onEnter:els=>gsap.fromTo(els,{opacity:0,scale:.78},{opacity:1,scale:1,duration:m.enter,clearProps:'transform,opacity'}),onLeave:els=>gsap.to(els,{opacity:0,scale:.8,duration:m.exit})}),0);
+        const incoming=[...next.querySelectorAll('[data-at],[data-from],.item')].filter(n=>visible(n)&&!before.has(n)&&!n.hasAttribute('data-flip-id'));
+        if(incoming.length)animation.fromTo(incoming,{opacity:0,y:direction*m.travel*.5},{opacity:1,y:0,duration:m.enter,stagger:m.stagger,ease:m.arrival,clearProps:'transform,opacity'},m.exit);
+        if(next.classList.contains('scene-sequence')&&next.dataset.beat!=='0')animation.fromTo(next.querySelector('.curve path'),{strokeDasharray:1,strokeDashoffset:1},{strokeDashoffset:0,duration:m.duration,ease:'power2.inOut',clearProps:'strokeDasharray,strokeDashoffset'},0);
       }
+    },next);
+    animation?.eventCallback('onComplete',()=>{next.dataset.settled='true';});
+  }
+  function enter(next,config,direction){
+    context=gsap.context(()=>{animation=gsap.fromTo(next.querySelector('.composition'),{opacity:.3,y:direction*config.motion.travel*.5},{opacity:1,y:0,duration:config.motion.enter,ease:config.motion.arrival,clearProps:'transform,opacity'});},next);
+  }
+  function setEnabled(value){enabled=value;settle();}
+  function pause(){settle();}
+  function resume(){} // Finite, presenter-controlled motion does not auto-replay.
+  function destroy(){settle();}
+  function fallback(){setEnabled(false);}
+  media.addEventListener('change',()=>{settle();document.body.dataset.reducedMotion=String(media.matches);});
+  document.addEventListener('visibilitychange',()=>document.hidden?pause():resume());
+  return {transition,settle,setEnabled,pause,resume,destroy,fallback};
+})();
 
-      .slide {
-        padding: 2rem;
-        aspect-ratio: auto;
-      }
-
-      .split,
-      .split-wide,
-      .grid-3,
-      .grid-4,
-      .steps,
-      .timeline,
-      .compare,
-      .checklist {
-        grid-template-columns: 1fr;
-      }
-
-      .slide-inner {
-        overflow-y: auto;
-        padding-bottom: 4rem;
-      }
-
-      .diagram {
-        min-height: 22rem;
-      }
-
-      .nav-button {
-        width: 2.75rem;
-        height: 2.75rem;
-        font-size: 1.4rem;
-      }
-
-      .click-zone-hint {
-        display: none;
-      }
-    }
-
-    @media print {
-      body {
-        overflow: visible;
-      }
-
-      .slide-deck {
-        width: 100%;
-        height: auto;
-        overflow: visible;
-      }
-
-      .slide-track {
-        display: block;
-        transform: none !important;
-      }
-
-      .slide {
-        width: 100%;
-        height: auto;
-        min-height: auto;
-        aspect-ratio: 16 / 9;
-        page-break-after: always;
-        overflow: hidden;
-      }
-
-      .slide-controls,
-      .nav-button,
-      .click-zone-hint {
-        display: none;
-      }
-
-      * {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <main class="slide-deck" id="deck" tabindex="0" aria-label="강의 슬라이드">
-    <div class="slide-track" id="slideTrack">
-      <section class="slide" data-slide="1">
-        <div class="slide-inner column center">
-          <p class="eyebrow">Lecture</p>
-          <h1>미디어는<br><span class="primary">메시지의 몸</span>이다</h1>
-          <p>게슈탈트는 그 몸이 살아 있는지 검증하는 법이다.</p>
-        </div>
-        <!-- NOTES:
-        핵심 메시지를 첫 장에서 고정한다.
-        -->
-      </section>
-
-      <section class="slide" data-slide="2">
-        <div class="slide-inner split">
-          <div>
-            <p class="eyebrow">Learning Goal</p>
-            <h2>오늘 배울 것은<br>디자인 팁이 아니라<br><span class="accent">생성의 판단법</span>이다</h2>
-          </div>
-          <div class="grid-3">
-            <div class="card"><strong>메시지</strong><p>무엇을 남길 것인가?</p></div>
-            <div class="card"><strong>구조</strong><p>어떤 순서로 전달할 것인가?</p></div>
-            <div class="card"><strong>검증</strong><p>그 몸이 살아 있는가?</p></div>
-          </div>
-        </div>
-        <!-- NOTES:
-        강의 목표를 명시한다.
-        -->
-      </section>
-
-      <section class="slide" data-slide="3">
-        <div class="slide-inner column">
-          <p class="eyebrow">Problem</p>
-          <h2>대부분의 생성은<br><span class="accent">너무 늦은 단계</span>에서 시작한다</h2>
-          <div class="compare">
-            <div class="bad">
-              <span class="small-label">Weak Generation</span>
-              <div class="sample-slide">
-                <div class="fake-title"></div>
-                <div class="fake-line"></div>
-                <div class="fake-line"></div>
-                <div class="fake-line"></div>
-              </div>
-              <p>레이아웃, 글자 수, 색상부터 만진다. 결과는 예쁘지만 맥락이 없다.</p>
-            </div>
-            <div class="good">
-              <span class="small-label">Strong Generation</span>
-              <div class="sample-slide">
-                <div class="fake-title" style="width:45%; background:rgba(143,211,255,.5);"></div>
-                <div class="fake-line" style="width:90%;"></div>
-                <div class="fake-line" style="width:58%; background:rgba(255,207,112,.3);"></div>
-              </div>
-              <p>메시지와 인과를 먼저 정한다. 레이아웃은 그 다음에 따라온다.</p>
-            </div>
-          </div>
-        </div>
-        <!-- NOTES:
-        실패 원인을 비교로 보여준다.
-        -->
-      </section>
-
-      <section class="slide" data-slide="4">
-        <div class="slide-inner split">
-          <div>
-            <p class="eyebrow">Core Concept</p>
-            <h2>미디어는<br>메시지가 입는<br><span class="primary">몸</span>이다</h2>
-            <p>몸은 겉모양이 아니다. 메시지가 움직이고, 이어지고, 기억되는 방식이다.</p>
-          </div>
-          <div class="diagram" aria-label="메시지가 순서, 장면, 컷, 리듬, 기억으로 확장되는 구조">
-            <div class="orbit" style="--i: 10%;"></div>
-            <div class="orbit" style="--i: 24%;"></div>
-            <div class="orbit" style="--i: 38%;"></div>
-            <span class="node n1">메시지</span>
-            <span class="node n2">순서</span>
-            <span class="node n3">장면</span>
-            <span class="node n4">컷</span>
-            <span class="node n5">리듬</span>
-            <span class="node n6">기억</span>
-          </div>
-        </div>
-        <!-- NOTES:
-        몸이라는 은유를 설명한다.
-        -->
-      </section>
-
-      <section class="slide" data-slide="5">
-        <div class="slide-inner column">
-          <p class="eyebrow">Anatomy</p>
-          <h2>모든 미디어는<br>같은 해부학을 가진다</h2>
-          <div class="formula">
-            <span class="pill">전체</span><span>→</span>
-            <span class="pill">시퀀스</span><span>→</span>
-            <span class="pill">씬</span><span>→</span>
-            <span class="pill">컷</span><span>→</span>
-            <span class="pill">비트</span>
-          </div>
-          <div class="grid-3">
-            <div class="card"><strong>슬라이드</strong><p>덱 → 섹션 → 장표 → 컴포넌트 → 문장</p></div>
-            <div class="card"><strong>영상</strong><p>작품 → 시퀀스 → 장면 → 쇼트 → 프레임</p></div>
-            <div class="card"><strong>웹</strong><p>서비스 → 플로우 → 섹션 → UI → 클릭</p></div>
-          </div>
-        </div>
-        <!-- NOTES:
-        추상 원리를 구체 예시로 증명한다.
-        -->
-      </section>
-
-      <section class="slide" data-slide="6">
-        <div class="slide-inner column">
-          <p class="eyebrow">Eight-Step Pipeline</p>
-          <h2>생성에는<br><span class="accent">올바른 순서</span>가 있다</h2>
-          <div class="steps">
-            <div class="step"><b>01</b><span>메시지 정의</span></div>
-            <div class="step"><b>02</b><span>전체 서사구조</span></div>
-            <div class="step"><b>03</b><span>시퀀스 역할</span></div>
-            <div class="step"><b>04</b><span>씬의 단일 주장</span></div>
-            <div class="step"><b>05</b><span>컷의 역할</span></div>
-            <div class="step"><b>06</b><span>미디어 문법 번역</span></div>
-            <div class="step"><b>07</b><span>HTML/CSS 구현</span></div>
-            <div class="step"><b>08</b><span>접근성·반응형 검증</span></div>
-          </div>
-        </div>
-        <!-- NOTES:
-        실제 작업 순서를 제시한다.
-        -->
-      </section>
-
-      <section class="slide" data-slide="7">
-        <div class="slide-inner split">
-          <div>
-            <p class="eyebrow">Sequence</p>
-            <h2>서사는<br>나열이 아니라<br><span class="primary">인식의 곡선</span>이다</h2>
-          </div>
-          <div class="timeline">
-            <div class="time-item" style="--h: 1rem;">질문</div>
-            <div class="time-item" style="--h: 2rem;">긴장</div>
-            <div class="time-item" style="--h: 4rem;">전환</div>
-            <div class="time-item" style="--h: 3rem;">증거</div>
-            <div class="time-item" style="--h: 2rem;">적용</div>
-            <div class="time-item" style="--h: 1rem;">통찰</div>
-          </div>
-        </div>
-        <!-- NOTES:
-        순서가 의미를 만든다는 점을 설명한다.
-        -->
-      </section>
-
-      <section class="slide" data-slide="8">
-        <div class="slide-inner column center">
-          <p class="eyebrow">Scene Rule</p>
-          <p class="quote">1슬라이드 = 1씬 = 1주장</p>
-          <p>“그리고”가 필요하면, 이미 두 장이다.</p>
-        </div>
-        <!-- NOTES:
-        한 장에 하나의 주장만 남긴다.
-        -->
-      </section>
-
-      <section class="slide" data-slide="9">
-        <div class="slide-inner split-wide">
-          <div>
-            <p class="eyebrow">Evidence: Before / After</p>
-            <h2>한 장에 두 주장을 넣으면<br><span class="accent">기억은 0개</span>가 된다</h2>
-            <p>나쁜 장표는 정보를 많이 담아서 실패하는 것이 아니라, 무엇을 기억해야 하는지 정하지 못해서 실패한다.</p>
-          </div>
-          <div class="compare">
-            <div class="bad">
-              <span class="small-label">Before</span>
-              <p><strong>“시장 규모와 경쟁사 비교와 가격 정책”</strong></p>
-              <p>한 장에 세 역할이 섞여 청중의 시선이 분산된다.</p>
-            </div>
-            <div class="good">
-              <span class="small-label">After</span>
-              <p><strong>“시장은 충분히 크다”</strong></p>
-              <p>한 장은 시장 규모만 증명하고, 경쟁과 가격은 다음 장으로 분리한다.</p>
-            </div>
-          </div>
-        </div>
-        <!-- NOTES:
-        원칙을 사례로 증명한다.
-        -->
-      </section>
-
-      <section class="slide" data-slide="10">
-        <div class="slide-inner split">
-          <div>
-            <p class="eyebrow">Cut Roles</p>
-            <h2>컷은 장식이 아니라<br><span class="primary">역할</span>이다</h2>
-            <p>제목, 본문, 이미지, 차트, 여백은 모두 메시지 안에서 해야 할 일이 있어야 한다.</p>
-          </div>
-          <div class="checklist">
-            <div class="check">주장 컷<br><span class="muted">이 씬의 핵심을 말한다</span></div>
-            <div class="check">증거 컷<br><span class="muted">믿어야 할 이유를 준다</span></div>
-            <div class="check">연결 컷<br><span class="muted">다음 씬으로 넘어간다</span></div>
-            <div class="check">강조 컷<br><span class="muted">감정적 무게를 더한다</span></div>
-            <div class="check">구조 컷<br><span class="muted">복잡한 정보를 정리한다</span></div>
-            <div class="check">여백 컷<br><span class="muted">집중할 위치를 만든다</span></div>
-          </div>
-        </div>
-        <!-- NOTES:
-        컴포넌트를 의미 단위로 본다.
-        -->
-      </section>
-
-      <section class="slide" data-slide="11">
-        <div class="slide-inner column">
-          <p class="eyebrow">Practice</p>
-          <h2>실습: 지금 만드는 슬라이드 하나를<br><span class="accent">8단계로 해부하라</span></h2>
-          <div class="grid-4">
-            <div class="card highlight"><strong>1. 메시지</strong><p>청중이 딱 하나만 기억할 문장은?</p></div>
-            <div class="card"><strong>2. 씬</strong><p>이 장표의 단일 주장은?</p></div>
-            <div class="card"><strong>3. 컷</strong><p>각 요소의 역할은 주장, 증거, 연결 중 무엇인가?</p></div>
-            <div class="card"><strong>4. 검증</strong><p>이 장표가 없어지면 덱이 무너지는가?</p></div>
-          </div>
-        </div>
-        <!-- NOTES:
-        실제 강의 적용 슬라이드다.
-        -->
-      </section>
-
-      <section class="slide" data-slide="12">
-        <div class="slide-inner column center">
-          <p class="eyebrow">Final Question</p>
-          <h2>메시지는<br>어떤 몸을 입고,<br>어떤 순서로,<br>어떤 흔적을 남기는가?</h2>
-          <p class="big-line accent">이 질문에서 생성이 시작된다.</p>
-        </div>
-        <!-- NOTES:
-        전체 강의를 하나의 질문으로 회수한다.
-        -->
-      </section>
-    </div>
-  </main>
-
-  <button class="nav-button nav-prev" id="prevBtn" type="button" aria-label="이전 슬라이드">‹</button>
-  <button class="nav-button nav-next" id="nextBtn" type="button" aria-label="다음 슬라이드">›</button>
-
-  <div class="slide-controls" aria-hidden="true">
-    <div class="progress-shell">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-    <div class="page-number" id="pageNumber">01 / 12</div>
-  </div>
-
-  <div class="click-zone-hint">오른쪽 클릭·휠 아래: 다음 / 왼쪽 클릭·휠 위: 이전</div>
-
-  <script>
-    (function () {
-      const deck = document.getElementById('deck');
-      const track = document.getElementById('slideTrack');
-      const slides = Array.from(document.querySelectorAll('.slide'));
-      const progressBar = document.getElementById('progressBar');
-      const pageNumber = document.getElementById('pageNumber');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-
-      let current = 0;
-      const total = slides.length;
-
-      let wheelLocked = false;
-      let keyLocked = false;
-      let touchStartX = 0;
-      let touchStartY = 0;
-
-      function pad(n) {
-        return String(n).padStart(2, '0');
-      }
-
-      function clamp(n, min, max) {
-        return Math.max(min, Math.min(n, max));
-      }
-
-      function goTo(index) {
-        current = clamp(index, 0, total - 1);
-
-        track.style.transform = 'translate3d(' + (-current * 100) + '%, 0, 0)';
-        progressBar.style.width = ((current + 1) / total * 100) + '%';
-        pageNumber.textContent = pad(current + 1) + ' / ' + pad(total);
-
-        prevBtn.disabled = current === 0;
-        nextBtn.disabled = current === total - 1;
-
-        slides.forEach(function (slide, i) {
-          slide.setAttribute('aria-hidden', i === current ? 'false' : 'true');
-        });
-      }
-
-      function next() {
-        goTo(current + 1);
-      }
-
-      function prev() {
-        goTo(current - 1);
-      }
-
-      prevBtn.addEventListener('click', function (event) {
-        event.stopPropagation();
-        prev();
-        deck.focus();
+/* Presenter commands -> state -> settled DOM -> optional motion. */
+(() => {
+  const config=JSON.parse(document.getElementById('stage-config').textContent);
+  const scenes=[...document.querySelectorAll('.scene')];
+  const $=id=>document.getElementById(id);
+  const ui={stage:$('stage'),reader:$('reading'),previous:$('previous'),next:$('next'),select:$('scene-select'),beat:$('beat-status'),dots:$('beat-dots'),read:$('read-toggle'),motion:$('motion-toggle'),status:$('announcement')};
+  let state=MessageState.parse(location.hash,config.scenes),reading=false,motion=true;
+  const same=(a,b)=>a.scene===b.scene&&a.beat===b.beat;
+  function paint(){
+    scenes.forEach((scene,i)=>{
+      const active=i===state.scene;
+      scene.classList.toggle('is-active',active);scene.inert=!active;scene.setAttribute('aria-hidden',String(!active));
+      if(!active)return;
+      const beat=state.beat;scene.dataset.beat=beat;scene.dataset.settled='false';
+      scene.querySelectorAll('[data-from],[data-until],[data-at]').forEach(node=>{
+        const show=(!node.hasAttribute('data-from')||beat>=Number(node.dataset.from))&&(!node.hasAttribute('data-until')||beat<Number(node.dataset.until))&&(!node.hasAttribute('data-at')||beat===Number(node.dataset.at));
+        node.classList.toggle('is-off',!show);node.setAttribute('aria-hidden',String(!show));
       });
-
-      nextBtn.addEventListener('click', function (event) {
-        event.stopPropagation();
-        next();
-        deck.focus();
-      });
-
-      deck.addEventListener('click', function (event) {
-        deck.focus();
-
-        const clickedInteractive =
-          event.target.closest('button') ||
-          event.target.closest('a') ||
-          event.target.closest('input') ||
-          event.target.closest('textarea') ||
-          event.target.closest('select');
-
-        if (clickedInteractive) return;
-
-        const x = event.clientX;
-        const width = window.innerWidth;
-
-        if (x < width * 0.35) {
-          prev();
-        } else {
-          next();
-        }
-      });
-
-      window.addEventListener('wheel', function (event) {
-        event.preventDefault();
-
-        if (wheelLocked) return;
-
-        const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX)
-          ? event.deltaY
-          : event.deltaX;
-
-        if (Math.abs(delta) < 12) return;
-
-        if (delta > 0) {
-          next();
-        } else {
-          prev();
-        }
-
-        wheelLocked = true;
-        setTimeout(function () {
-          wheelLocked = false;
-        }, 520);
-      }, { passive: false });
-
-      function isTypingTarget() {
-        const active = document.activeElement;
-        const tag = active && active.tagName ? active.tagName.toLowerCase() : '';
-
-        return (
-          tag === 'input' ||
-          tag === 'textarea' ||
-          tag === 'select' ||
-          (active && active.isContentEditable)
-        );
-      }
-
-      function handleKey(event) {
-        if (isTypingTarget()) return;
-        if (keyLocked) return;
-
-        const nextKeys = ['ArrowRight', 'PageDown', ' ', 'Spacebar', 'Enter', 'N', 'n'];
-        const prevKeys = ['ArrowLeft', 'PageUp', 'Backspace', 'P', 'p'];
-
-        if (nextKeys.includes(event.key) || event.code === 'ArrowRight' || event.code === 'Space') {
-          event.preventDefault();
-          next();
-          keyLocked = true;
-          setTimeout(function () {
-            keyLocked = false;
-          }, 180);
-          return;
-        }
-
-        if (prevKeys.includes(event.key) || event.code === 'ArrowLeft') {
-          event.preventDefault();
-          prev();
-          keyLocked = true;
-          setTimeout(function () {
-            keyLocked = false;
-          }, 180);
-        }
-      }
-
-      window.addEventListener('keydown', handleKey, true);
-      document.addEventListener('keydown', handleKey, true);
-      deck.addEventListener('keydown', handleKey, true);
-
-      deck.addEventListener('touchstart', function (event) {
-        touchStartX = event.changedTouches[0].clientX;
-        touchStartY = event.changedTouches[0].clientY;
-      }, { passive: true });
-
-      deck.addEventListener('touchend', function (event) {
-        const dx = event.changedTouches[0].clientX - touchStartX;
-        const dy = event.changedTouches[0].clientY - touchStartY;
-
-        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
-          if (dx < 0) next();
-          if (dx > 0) prev();
-        }
-      }, { passive: true });
-
-      deck.setAttribute('tabindex', '0');
-
-      window.addEventListener('load', function () {
-        deck.focus();
-        goTo(0);
-      });
-
-      document.addEventListener('visibilitychange', function () {
-        if (!document.hidden) {
-          deck.focus();
-        }
-      });
-
-      goTo(0);
-    })();
-  </script>
-</body>
-</html>
+      scene.querySelectorAll('[data-level]').forEach(node=>node.classList.toggle('is-focus',beat===Number(node.dataset.level)));
+      scene.querySelectorAll('[data-index]').forEach(node=>node.classList.toggle('is-focus',beat===Number(node.dataset.index)));
+      scene.querySelectorAll('.judgment-questions .item').forEach((node,n)=>node.classList.toggle('is-focus',n===beat-1));
+    });
+    ui.select.value=String(state.scene);
+    const count=config.scenes[state.scene].beats;
+    ui.beat.textContent=`${state.beat+1} / ${count}`;
+    ui.dots.replaceChildren(...Array.from({length:count},(_,i)=>{const dot=document.createElement('i');dot.className=i===state.beat?'current':'';return dot;}));
+    ui.previous.disabled=state.scene===0&&state.beat===0;
+    ui.next.disabled=state.scene===scenes.length-1&&state.beat===count-1;
+    ui.status.textContent=`${state.scene+1}장, ${state.beat+1}단계. ${config.scenes[state.scene].notes[state.beat]}`;
+  }
+  function go(next,{animate=true,history=true,direction=1}={}){
+    if(same(next,state))return;
+    const old=scenes[state.scene];state=next;
+    if(history)window.history.replaceState(null,'',MessageState.hash(state));
+    if(animate&&!reading)MessageMotion.transition(old,scenes[state.scene],paint,config,direction);
+    else{MessageMotion.settle();paint();}
+  }
+  function advance(direction){go(MessageState.move(state,direction,config.scenes),{direction});}
+  function setReading(value){
+    MessageMotion.settle();reading=value;
+    document.body.classList.toggle('reading',reading);ui.read.setAttribute('aria-pressed',String(reading));ui.read.textContent=reading?'발표로 돌아가기':'원문 읽기';
+    if(reading){ui.reader.inert=false;ui.reader.removeAttribute('aria-hidden');ui.stage.inert=true;ui.reader.focus();window.scrollTo(0,0);}
+    else{ui.reader.inert=true;ui.reader.setAttribute('aria-hidden','true');ui.stage.inert=false;paint();window.scrollTo(0,0);ui.stage.focus();}
+  }
+  ui.previous.addEventListener('click',()=>advance(-1));ui.next.addEventListener('click',()=>advance(1));
+  ui.select.addEventListener('change',()=>go({scene:Number(ui.select.value),beat:0}));
+  ui.stage.addEventListener('click',event=>{if(!event.target.closest('button,a,input,select')&&!window.getSelection()?.toString())advance(1);});
+  ui.read.addEventListener('click',()=>setReading(!reading));$('start').addEventListener('click',()=>setReading(false));
+  document.querySelector('.skip').addEventListener('click',event=>{event.preventDefault();setReading(true);});
+  ui.motion.addEventListener('click',()=>{motion=!motion;MessageMotion.setEnabled(motion);ui.motion.setAttribute('aria-pressed',String(motion));ui.motion.textContent=motion?'모션 켜짐':'모션 꺼짐';});
+  document.addEventListener('keydown',event=>{
+    if(event.defaultPrevented||event.repeat||event.altKey||event.ctrlKey||event.metaKey||document.querySelector('dialog[open]'))return;
+    if(event.target.closest('input,textarea,select,[contenteditable]'))return;
+    if(event.key===' '&&event.target.closest('button,a'))return;
+    if(event.key==='Escape'&&reading){setReading(false);return;}
+    if(reading)return;
+    const actions={ArrowRight:()=>advance(1),ArrowLeft:()=>advance(-1),PageDown:()=>advance(1),PageUp:()=>advance(-1),' ':()=>advance(1),Home:()=>go({scene:0,beat:0}),End:()=>go({scene:scenes.length-1,beat:config.scenes.at(-1).beats-1})};
+    if(actions[event.key]){event.preventDefault();actions[event.key]();}
+  });
+  let touch=null;
+  ui.stage.addEventListener('touchstart',event=>{if(event.touches.length===1)touch={x:event.touches[0].clientX,y:event.touches[0].clientY};},{passive:true});
+  ui.stage.addEventListener('touchend',event=>{if(!touch)return;const end=event.changedTouches[0],dx=end.clientX-touch.x,dy=end.clientY-touch.y;touch=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){event.preventDefault();advance(dx<0?1:-1);}},{passive:false});
+  addEventListener('hashchange',()=>go(MessageState.parse(location.hash,config.scenes),{history:false}));
+  addEventListener('resize',()=>MessageMotion.settle());
+  $('fullscreen').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{ui.status.textContent='이 환경에서는 전체 화면을 사용할 수 없습니다.';}});
+  document.addEventListener('fullscreenchange',()=>{$('fullscreen').textContent=document.fullscreenElement?'전체 화면 종료':'전체 화면';MessageMotion.settle();});
+  $('share').addEventListener('click',async()=>{
+    if(navigator.share){try{await navigator.share({title:config.title,url:config.canonical});return;}catch(error){if(error.name==='AbortError')return;}}
+    try{await navigator.clipboard.writeText(config.canonical);ui.status.textContent='페이지 주소를 복사했습니다.';$('share').textContent='복사됨';}
+    catch{$('share-url').value=config.canonical;$('share-dialog').showModal();$('share-url').select();}
+  });
+  $('close-share').addEventListener('click',()=>$('share-dialog').close());
+  document.body.classList.add('enhanced');paint();ui.reader.inert=true;ui.reader.setAttribute('aria-hidden','true');
+  window.history.replaceState(null,'',MessageState.hash(state));
+  if(matchMedia('(max-width:900px) and (max-height:520px)').matches)setReading(true);
+})();
+</script></body></html>

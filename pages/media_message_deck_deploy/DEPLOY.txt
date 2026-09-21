@@ -1,0 +1,2 @@
+Canonical: https://mirinaeman.com/pages/media_message_deck_deploy/
+Serve this directory at the existing canonical path. index.html includes the compiled CSS and controller. Animation vendors and font are relative first-party assets. No build required for serving. Rebuild authoring sources with python3 tools/message-stage/render.py from the repository root. Original content remains readable without JavaScript. Root robots and sitemap remain owned by the existing domain.

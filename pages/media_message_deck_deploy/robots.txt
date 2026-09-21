@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mirinaeman.com/pages/media_message_deck_deploy/sitemap.xml

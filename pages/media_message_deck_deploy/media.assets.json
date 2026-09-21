@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "message-stage-og",
+      "role": "open-graph",
+      "kind": "image",
+      "source": {
+        "kind": "authored",
+        "filename": "og.jpg",
+        "path": "assets/og.jpg",
+        "sha256": "ab28e2fd97750dccb0b14ae72cff2fedcdf44030c2abb61e03cca9234a3358a6"
+      },
+      "delivery": {
+        "path": "assets/og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "ab28e2fd97750dccb0b14ae72cff2fedcdf44030c2abb61e03cca9234a3358a6"
+      }
+    }
+  ]
+}

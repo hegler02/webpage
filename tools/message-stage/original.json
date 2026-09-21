@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "미디어는 메시지의 몸 이다",
+    "html": "<div class=\"slide-inner column center\">\n<p class=\"eyebrow\">Lecture</p>\n<h1>미디어는<br/><span class=\"primary\">메시지의 몸</span>이다</h1>\n<p>게슈탈트는 그 몸이 살아 있는지 검증하는 법이다.</p>\n</div>",
+    "text": "Lecture 미디어는 메시지의 몸 이다 게슈탈트는 그 몸이 살아 있는지 검증하는 법이다."
+  },
+  {
+    "id": 2,
+    "title": "오늘 배울 것은 디자인 팁이 아니라 생성의 판단법 이다",
+    "html": "<div class=\"slide-inner split\">\n<div>\n<p class=\"eyebrow\">Learning Goal</p>\n<h2>오늘 배울 것은<br/>디자인 팁이 아니라<br/><span class=\"accent\">생성의 판단법</span>이다</h2>\n</div>\n<div class=\"grid-3\">\n<div class=\"card\"><strong>메시지</strong><p>무엇을 남길 것인가?</p></div>\n<div class=\"card\"><strong>구조</strong><p>어떤 순서로 전달할 것인가?</p></div>\n<div class=\"card\"><strong>검증</strong><p>그 몸이 살아 있는가?</p></div>\n</div>\n</div>",
+    "text": "Learning Goal 오늘 배울 것은 디자인 팁이 아니라 생성의 판단법 이다 메시지 무엇을 남길 것인가? 구조 어떤 순서로 전달할 것인가? 검증 그 몸이 살아 있는가?"
+  },
+  {
+    "id": 3,
+    "title": "대부분의 생성은 너무 늦은 단계 에서 시작한다",
+    "html": "<div class=\"slide-inner column\">\n<p class=\"eyebrow\">Problem</p>\n<h2>대부분의 생성은<br/><span class=\"accent\">너무 늦은 단계</span>에서 시작한다</h2>\n<div class=\"compare\">\n<div class=\"bad\">\n<span class=\"small-label\">Weak Generation</span>\n<div class=\"sample-slide\">\n<div class=\"fake-title\"></div>\n<div class=\"fake-line\"></div>\n<div class=\"fake-line\"></div>\n<div class=\"fake-line\"></div>\n</div>\n<p>레이아웃, 글자 수, 색상부터 만진다. 결과는 예쁘지만 맥락이 없다.</p>\n</div>\n<div class=\"good\">\n<span class=\"small-label\">Strong Generation</span>\n<div class=\"sample-slide\">\n<div class=\"fake-title\" style=\"width:45%; background:rgba(143,211,255,.5);\"></div>\n<div class=\"fake-line\" style=\"width:90%;\"></div>\n<div class=\"fake-line\" style=\"width:58%; background:rgba(255,207,112,.3);\"></div>\n</div>\n<p>메시지와 인과를 먼저 정한다. 레이아웃은 그 다음에 따라온다.</p>\n</div>\n</div>\n</div>",
+    "text": "Problem 대부분의 생성은 너무 늦은 단계 에서 시작한다 Weak Generation 레이아웃, 글자 수, 색상부터 만진다. 결과는 예쁘지만 맥락이 없다. Strong Generation 메시지와 인과를 먼저 정한다. 레이아웃은 그 다음에 따라온다."
+  },
+  {
+    "id": 4,
+    "title": "미디어는 메시지가 입는 몸 이다",
+    "html": "<div class=\"slide-inner split\">\n<div>\n<p class=\"eyebrow\">Core Concept</p>\n<h2>미디어는<br/>메시지가 입는<br/><span class=\"primary\">몸</span>이다</h2>\n<p>몸은 겉모양이 아니다. 메시지가 움직이고, 이어지고, 기억되는 방식이다.</p>\n</div>\n<div aria-label=\"메시지가 순서, 장면, 컷, 리듬, 기억으로 확장되는 구조\" class=\"diagram\">\n<div class=\"orbit\" style=\"--i: 10%;\"></div>\n<div class=\"orbit\" style=\"--i: 24%;\"></div>\n<div class=\"orbit\" style=\"--i: 38%;\"></div>\n<span class=\"node n1\">메시지</span>\n<span class=\"node n2\">순서</span>\n<span class=\"node n3\">장면</span>\n<span class=\"node n4\">컷</span>\n<span class=\"node n5\">리듬</span>\n<span class=\"node n6\">기억</span>\n</div>\n</div>",
+    "text": "Core Concept 미디어는 메시지가 입는 몸 이다 몸은 겉모양이 아니다. 메시지가 움직이고, 이어지고, 기억되는 방식이다. 메시지 순서 장면 컷 리듬 기억"
+  },
+  {
+    "id": 5,
+    "title": "모든 미디어는 같은 해부학을 가진다",
+    "html": "<div class=\"slide-inner column\">\n<p class=\"eyebrow\">Anatomy</p>\n<h2>모든 미디어는<br/>같은 해부학을 가진다</h2>\n<div class=\"formula\">\n<span class=\"pill\">전체</span><span>→</span>\n<span class=\"pill\">시퀀스</span><span>→</span>\n<span class=\"pill\">씬</span><span>→</span>\n<span class=\"pill\">컷</span><span>→</span>\n<span class=\"pill\">비트</span>\n</div>\n<div class=\"grid-3\">\n<div class=\"card\"><strong>슬라이드</strong><p>덱 → 섹션 → 장표 → 컴포넌트 → 문장</p></div>\n<div class=\"card\"><strong>영상</strong><p>작품 → 시퀀스 → 장면 → 쇼트 → 프레임</p></div>\n<div class=\"card\"><strong>웹</strong><p>서비스 → 플로우 → 섹션 → UI → 클릭</p></div>\n</div>\n</div>",
+    "text": "Anatomy 모든 미디어는 같은 해부학을 가진다 전체 → 시퀀스 → 씬 → 컷 → 비트 슬라이드 덱 → 섹션 → 장표 → 컴포넌트 → 문장 영상 작품 → 시퀀스 → 장면 → 쇼트 → 프레임 웹 서비스 → 플로우 → 섹션 → UI → 클릭"
+  },
+  {
+    "id": 6,
+    "title": "생성에는 올바른 순서 가 있다",
+    "html": "<div class=\"slide-inner column\">\n<p class=\"eyebrow\">Eight-Step Pipeline</p>\n<h2>생성에는<br/><span class=\"accent\">올바른 순서</span>가 있다</h2>\n<div class=\"steps\">\n<div class=\"step\"><b>01</b><span>메시지 정의</span></div>\n<div class=\"step\"><b>02</b><span>전체 서사구조</span></div>\n<div class=\"step\"><b>03</b><span>시퀀스 역할</span></div>\n<div class=\"step\"><b>04</b><span>씬의 단일 주장</span></div>\n<div class=\"step\"><b>05</b><span>컷의 역할</span></div>\n<div class=\"step\"><b>06</b><span>미디어 문법 번역</span></div>\n<div class=\"step\"><b>07</b><span>HTML/CSS 구현</span></div>\n<div class=\"step\"><b>08</b><span>접근성·반응형 검증</span></div>\n</div>\n</div>",
+    "text": "Eight-Step Pipeline 생성에는 올바른 순서 가 있다 01 메시지 정의 02 전체 서사구조 03 시퀀스 역할 04 씬의 단일 주장 05 컷의 역할 06 미디어 문법 번역 07 HTML/CSS 구현 08 접근성·반응형 검증"
+  },
+  {
+    "id": 7,
+    "title": "서사는 나열이 아니라 인식의 곡선 이다",
+    "html": "<div class=\"slide-inner split\">\n<div>\n<p class=\"eyebrow\">Sequence</p>\n<h2>서사는<br/>나열이 아니라<br/><span class=\"primary\">인식의 곡선</span>이다</h2>\n</div>\n<div class=\"timeline\">\n<div class=\"time-item\" style=\"--h: 1rem;\">질문</div>\n<div class=\"time-item\" style=\"--h: 2rem;\">긴장</div>\n<div class=\"time-item\" style=\"--h: 4rem;\">전환</div>\n<div class=\"time-item\" style=\"--h: 3rem;\">증거</div>\n<div class=\"time-item\" style=\"--h: 2rem;\">적용</div>\n<div class=\"time-item\" style=\"--h: 1rem;\">통찰</div>\n</div>\n</div>",
+    "text": "Sequence 서사는 나열이 아니라 인식의 곡선 이다 질문 긴장 전환 증거 적용 통찰"
+  },
+  {
+    "id": 8,
+    "title": "1슬라이드 = 1씬 = 1주장",
+    "html": "<div class=\"slide-inner column center\">\n<p class=\"eyebrow\">Scene Rule</p>\n<p class=\"quote\">1슬라이드 = 1씬 = 1주장</p>\n<p>“그리고”가 필요하면, 이미 두 장이다.</p>\n</div>",
+    "text": "Scene Rule 1슬라이드 = 1씬 = 1주장 “그리고”가 필요하면, 이미 두 장이다."
+  },
+  {
+    "id": 9,
+    "title": "한 장에 두 주장을 넣으면 기억은 0개 가 된다",
+    "html": "<div class=\"slide-inner split-wide\">\n<div>\n<p class=\"eyebrow\">Evidence: Before / After</p>\n<h2>한 장에 두 주장을 넣으면<br/><span class=\"accent\">기억은 0개</span>가 된다</h2>\n<p>나쁜 장표는 정보를 많이 담아서 실패하는 것이 아니라, 무엇을 기억해야 하는지 정하지 못해서 실패한다.</p>\n</div>\n<div class=\"compare\">\n<div class=\"bad\">\n<span class=\"small-label\">Before</span>\n<p><strong>“시장 규모와 경쟁사 비교와 가격 정책”</strong></p>\n<p>한 장에 세 역할이 섞여 청중의 시선이 분산된다.</p>\n</div>\n<div class=\"good\">\n<span class=\"small-label\">After</span>\n<p><strong>“시장은 충분히 크다”</strong></p>\n<p>한 장은 시장 규모만 증명하고, 경쟁과 가격은 다음 장으로 분리한다.</p>\n</div>\n</div>\n</div>",
+    "text": "Evidence: Before / After 한 장에 두 주장을 넣으면 기억은 0개 가 된다 나쁜 장표는 정보를 많이 담아서 실패하는 것이 아니라, 무엇을 기억해야 하는지 정하지 못해서 실패한다. Before “시장 규모와 경쟁사 비교와 가격 정책” 한 장에 세 역할이 섞여 청중의 시선이 분산된다. After “시장은 충분히 크다” 한 장은 시장 규모만 증명하고, 경쟁과 가격은 다음 장으로 분리한다."
+  },
+  {
+    "id": 10,
+    "title": "컷은 장식이 아니라 역할 이다",
+    "html": "<div class=\"slide-inner split\">\n<div>\n<p class=\"eyebrow\">Cut Roles</p>\n<h2>컷은 장식이 아니라<br/><span class=\"primary\">역할</span>이다</h2>\n<p>제목, 본문, 이미지, 차트, 여백은 모두 메시지 안에서 해야 할 일이 있어야 한다.</p>\n</div>\n<div class=\"checklist\">\n<div class=\"check\">주장 컷<br/><span class=\"muted\">이 씬의 핵심을 말한다</span></div>\n<div class=\"check\">증거 컷<br/><span class=\"muted\">믿어야 할 이유를 준다</span></div>\n<div class=\"check\">연결 컷<br/><span class=\"muted\">다음 씬으로 넘어간다</span></div>\n<div class=\"check\">강조 컷<br/><span class=\"muted\">감정적 무게를 더한다</span></div>\n<div class=\"check\">구조 컷<br/><span class=\"muted\">복잡한 정보를 정리한다</span></div>\n<div class=\"check\">여백 컷<br/><span class=\"muted\">집중할 위치를 만든다</span></div>\n</div>\n</div>",
+    "text": "Cut Roles 컷은 장식이 아니라 역할 이다 제목, 본문, 이미지, 차트, 여백은 모두 메시지 안에서 해야 할 일이 있어야 한다. 주장 컷 이 씬의 핵심을 말한다 증거 컷 믿어야 할 이유를 준다 연결 컷 다음 씬으로 넘어간다 강조 컷 감정적 무게를 더한다 구조 컷 복잡한 정보를 정리한다 여백 컷 집중할 위치를 만든다"
+  },
+  {
+    "id": 11,
+    "title": "실습: 지금 만드는 슬라이드 하나를 8단계로 해부하라",
+    "html": "<div class=\"slide-inner column\">\n<p class=\"eyebrow\">Practice</p>\n<h2>실습: 지금 만드는 슬라이드 하나를<br/><span class=\"accent\">8단계로 해부하라</span></h2>\n<div class=\"grid-4\">\n<div class=\"card highlight\"><strong>1. 메시지</strong><p>청중이 딱 하나만 기억할 문장은?</p></div>\n<div class=\"card\"><strong>2. 씬</strong><p>이 장표의 단일 주장은?</p></div>\n<div class=\"card\"><strong>3. 컷</strong><p>각 요소의 역할은 주장, 증거, 연결 중 무엇인가?</p></div>\n<div class=\"card\"><strong>4. 검증</strong><p>이 장표가 없어지면 덱이 무너지는가?</p></div>\n</div>\n</div>",
+    "text": "Practice 실습: 지금 만드는 슬라이드 하나를 8단계로 해부하라 1. 메시지 청중이 딱 하나만 기억할 문장은? 2. 씬 이 장표의 단일 주장은? 3. 컷 각 요소의 역할은 주장, 증거, 연결 중 무엇인가? 4. 검증 이 장표가 없어지면 덱이 무너지는가?"
+  },
+  {
+    "id": 12,
+    "title": "메시지는 어떤 몸을 입고, 어떤 순서로, 어떤 흔적을 남기는가?",
+    "html": "<div class=\"slide-inner column center\">\n<p class=\"eyebrow\">Final Question</p>\n<h2>메시지는<br/>어떤 몸을 입고,<br/>어떤 순서로,<br/>어떤 흔적을 남기는가?</h2>\n<p class=\"big-line accent\">이 질문에서 생성이 시작된다.</p>\n</div>",
+    "text": "Final Question 메시지는 어떤 몸을 입고, 어떤 순서로, 어떤 흔적을 남기는가? 이 질문에서 생성이 시작된다."
+  }
+]

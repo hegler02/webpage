@@ -1,0 +1,22 @@
+{
+  "title": "미디어는 메시지의 몸이다 — 생성의 판단법",
+  "description": "김준호의 12장 웹 프레젠테이션. 메시지·구조·검증을 클릭으로 조립하며 배우는 생성의 판단법.",
+  "canonical": "https://mirinaeman.com/pages/media_message_deck_deploy/",
+  "author": "김준호",
+  "related": "https://mirinaeman.com/pages/media/",
+  "image": "assets/og.jpg",
+  "image_alt": "검은 무대 위에 크게 놓인 메시지의 몸이라는 제목",
+  "runtime": {
+    "gsap": "assets/vendor/gsap-3.15.0.min.js",
+    "flip": "assets/vendor/Flip-3.15.0.min.js"
+  },
+  "motion": {
+    "duration": 0.95,
+    "enter": 0.72,
+    "exit": 0.28,
+    "stagger": 0.07,
+    "travel": 64,
+    "ease": "expo.inOut",
+    "arrival": "power3.out"
+  }
+}

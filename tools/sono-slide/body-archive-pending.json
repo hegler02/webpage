@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "CQI_SYNC_PENDING",
+  "status": "CQI_SYNCED",
   "body_id": "suno-song-guide",
   "canonical_url": "https://mirinaeman.com/pages/sono_slide/",
   "latest_deployed_at": "2026-09-20T22:04:10.896000+00:00",
@@ -27,6 +27,19 @@
     "focal_point": "50% 50%",
     "sha256": "a00e67e3861c5dfabb1a3bd1b0a3ab7a63ea3da99ed803396d2f7adcaaaf5c22"
   },
-  "reason": "Skill repository push returned HTTP 500 (local CQI commit 2c2f701). Public runtime and catalog are deployed independently.",
-  "recovery": "Preserve prior body history. Append the verified four-work replacement deployment; localized card copy, assets and links are in content.json and feedback.jsonl. User authorized the four supplied URLs; final result acceptance pending. Validate archive/catalog and persist through the skill repository; no duplicate body or GOLDEN promotion."
+  "reason": "Previous pending state resolved; official skill storage and public archive verified. See resolution and prior_pending_report.",
+  "recovery": "Preserve prior body history. Append the verified four-work replacement deployment; localized card copy, assets and links are in content.json and feedback.jsonl. User authorized the four supplied URLs; final result acceptance pending. Validate archive/catalog and persist through the skill repository; no duplicate body or GOLDEN promotion.",
+  "prior_pending_report": {
+    "status": "CQI_SYNC_PENDING",
+    "reason": "Skill repository push returned HTTP 500 (local CQI commit 2c2f701). Public runtime and catalog are deployed independently."
+  },
+  "resolution": {
+    "status": "VERIFIED",
+    "verified_at": "2026-09-21T08:00:29.169972+00:00",
+    "skill_remote_save": "VERIFIED: all 21 scoped files match the fetched official saved revision",
+    "catalog_sync": "PASS: 56 bodies; published catalog and changed resources match the validated export",
+    "evidence": "tools/cqi-recovery/verification.json",
+    "saved_skill_revision": "1507b85b4fbb7131ece5980ff99d7265950b9a4d",
+    "archive_revision": "85dae9d3f0527d3ee7148841f63647280032427a"
+  }
 }

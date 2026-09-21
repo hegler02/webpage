@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "body_id": "coding-body-message",
+  "title": "Coding is the Body of the Message",
+  "body_type": "SLIDEBODY",
+  "source_kinds": [
+    "education",
+    "media-philosophy"
+  ],
+  "tags": [
+    "coding",
+    "mcluhan",
+    "lecture"
+  ],
+  "message_sentence": "코딩을 메시지가 작동하는 몸으로 바라보는 미디어 철학을 강의 화면으로 설명한다.",
+  "thumbnail": {
+    "source_kind": "generated-title-card",
+    "path": "assets/thumbnails/coding-body-message.webp",
+    "alt": "“Coding is the Body of the Message” 작품의 대표 이미지",
+    "width": 960,
+    "height": 540,
+    "focal_point": "50% 50%",
+    "sha256": "bcf985b38bcfdfe3f9ab99926fc03af313656e51e99c67623053ed6520ad976d"
+  },
+  "canonical_url": "https://mirinaeman.com/pages/jeju_hak/",
+  "status": "DEPLOYED",
+  "first_deployed_at": "2026-07-30T10:30:22Z",
+  "latest_deployed_at": "2026-09-20T17:18:50.212000+00:00",
+  "deployments": [
+    {
+      "deployed_at": "2026-07-30T10:30:22Z",
+      "url": "https://mirinaeman.com/pages/jeju_hak/",
+      "release_ref": "github-main",
+      "source_revision": "014a0243d89c1b5c3050890df8767941a0369b9f",
+      "validation": [
+        "repository-index-present",
+        "vercel-pages-deployment-structure"
+      ],
+      "status": "succeeded"
+    },
+    {
+      "deployed_at": "2026-09-20T17:18:50.212000+00:00",
+      "url": "https://mirinaeman.com/pages/jeju_hak/",
+      "release_ref": "github-main",
+      "source_revision": "a101ed674d498a79bba37d23f0cdbe43fc298655",
+      "status": "succeeded",
+      "validation": [
+        "Vercel READY dpl_Vw9uGndKceDrRAiQi5quBbnGvrQm",
+        "Public HTML, OG and local font HTTP 200 with exact committed bytes",
+        "All 15 desktop and portrait scenes reviewed; navigation, deep links, reduced motion verified",
+        "tools/jeju-hak/check.py and repository release gate passed"
+      ]
+    }
+  ],
+  "incidents": [
+    {
+      "incident_id": "layout-and-runtime-refactor",
+      "scope": "PROJECT",
+      "status": "CORRECTED",
+      "observation": "Original fixed presentation frame and inconsistent content geometry limited large-screen and portrait delivery. During refactor, scene 6 prompt content and scene 11 panels exceeded their allocated body area.",
+      "root_cause": "Layout dimensions and presentation state lacked shared role-based constraints; content needed to fit its own body budget.",
+      "correction": "Established a scaled 1920x1080 stage, four layouts, common baselines and equal panels; tightened scene 6 and 11 internal spacing; added single-state interruptible navigation and approved portrait adaptation.",
+      "gate": "tools/jeju-hak/check.py guards generated source, 15 IDs, syntax and discovery; tools/jeju-hak/QA.md records browser bounds, panel equality, rapid navigation and verification limits.",
+      "human_judgment": "Implementation requested by user; final visual acceptance pending. No GOLDEN promotion."
+    }
+  ],
+  "invariants": [],
+  "approvals": [
+    {
+      "statement": "존나 멋지게 리펙토링해줘",
+      "scope": "Approved proposed refactor at the existing URL; not final acceptance."
+    }
+  ],
+  "golden_baseline": null,
+  "discovery": {
+    "canonical": "https://mirinaeman.com/pages/jeju_hak/",
+    "json_ld_types": [
+      "WebPage",
+      "CreativeWork",
+      "Person"
+    ],
+    "open_graph": "HTTP 200 image/jpeg, 1200x630, exact committed bytes",
+    "indexing": "not measured",
+    "ai_citation": "not measured",
+    "limitations": [
+      "Fullscreen API denied in verification browser; failure notice verified.",
+      "Physical touch and OS reduced-motion emulation not tested."
+    ]
+  }
+}

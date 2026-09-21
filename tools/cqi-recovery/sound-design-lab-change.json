@@ -1,0 +1,8 @@
+{
+  "reason": "사용자가 최종 배포본을 수락하고 CQI 반영을 요청하여 승인 기준선과 재사용 매칭을 등록한다.",
+  "evidence": [
+    "tools/sound-lab/feedback.jsonl#sound-lab-assembly-accepted-20260921",
+    "e893373939a43caaffc30c92c96465832a4ee737:tools/sound-lab/QA.md"
+  ],
+  "verdict": "accepted"
+}

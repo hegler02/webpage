@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "body_id": "harugyeol-ai-health",
+  "title": "AI를 활용해 헬스케어 앱 만들기 — 하루결",
+  "body_type": "SLIDEBODY",
+  "source_kinds": [
+    "user-request",
+    "web-presentation"
+  ],
+  "tags": [
+    "AI",
+    "education",
+    "web-presentation"
+  ],
+  "message_sentence": "한 사람의 더 나은 하루를 위해 사용자 정의부터 화면·데이터 설계와 검증까지 AI와 함께 앱을 만드는 과정을 15장으로 경험합니다.",
+  "canonical_url": "https://harugyeol-ai-health.mirinaeman.chatgpt.site",
+  "status": "DEPLOYED",
+  "first_deployed_at": "2026-09-20T16:15:45.114236+00:00",
+  "latest_deployed_at": "2026-09-20T16:15:45.114236+00:00",
+  "thumbnail": {
+    "source_kind": "generated-title-card",
+    "path": "assets/thumbnails/harugyeol-ai-health.webp",
+    "alt": "하루결 — AI를 활용해 헬스케어 앱 만들기 15장 웹 프레젠테이션 제목 카드",
+    "width": 960,
+    "height": 540,
+    "focal_point": "50% 50%",
+    "sha256": "057ddd0cd8e4491c1dfba8b2533745ee4e965d8e1372ccce8c546eb5d965db35"
+  },
+  "incidents": [
+    {
+      "incident_id": "layout-before-animation",
+      "scope": "PROJECT",
+      "status": "CORRECTED",
+      "observation": "세 장의 좌우 균형과 패널 높이 정렬이 반려됨.",
+      "root_cause": "공통 읽기 지점의 레이아웃 기준이 불일치.",
+      "correction": "승인된 균형 레이아웃을 유지하고 애니메이션은 그 구조 위에 적용.",
+      "gate": "MOTION_DESIGN.md and approved layout.css; no visual edits in public closeout."
+    },
+    {
+      "incident_id": "arrival-impact-rejected",
+      "scope": "PROJECT",
+      "status": "CORRECTED",
+      "observation": "전환음은 좋지만 도착 타격음과 잔향이 매우 어색하다는 사용자 피드백.",
+      "root_cause": "도착 시 추가된 타격음·음정·잔향이 전환음 뒤에 중복.",
+      "correction": "도착 음성 합성을 제거하고 전환음 유지.",
+      "gate": "scripts/test-sound.mjs asserts silent normal/finale/reverse arrivals."
+    }
+  ],
+  "invariants": [],
+  "deployments": [
+    {
+      "status": "succeeded",
+      "url": "https://harugyeol-ai-health.mirinaeman.chatgpt.site",
+      "deployed_at": "2026-09-20T16:15:45.114236+00:00",
+      "source_revision": "02cdadeaee1a64876e49916acff72de9b8278d97",
+      "artifact_sha256": "09684003d8d1176f065d1fe5be6e0136219d0e5890dc6103798a353d871d1aef",
+      "validation": "Build and TypeScript passed. Browser root metadata/schema/15 scenes verified. Access mode public confirmed. Automated unauthenticated Sites HTTP probe returned 403/error1010; no general visitor or crawler claim.",
+      "public_access": "public"
+    }
+  ],
+  "approvals": [
+    {
+      "statement": "매클루언 스킬을 보면 배포 후 mirinaeman.com 아카이브에 추가하는 방법있을꺼다. 그거 정독하고 추가해줘. 사이트는 전체공개로 해줘. 그리고 SEO, GEO 등 구조재대로 되어 있는지도 확인해줘",
+      "scope": "Public site and archive registration; not final aesthetic GOLDEN acceptance."
+    }
+  ],
+  "discovery": {
+    "introduction_url": "https://mirinaeman.com/archive/harugyeol-ai-health/",
+    "json_ld_types": [
+      "WebPage",
+      "CreativeWork",
+      "Person"
+    ],
+    "indexing": "not measured",
+    "ai_citation": "not measured",
+    "presentation_og_image": "absent; explicit social-image request required by Sites workflow",
+    "archive_og_image": "Validated live: HTTP 200 image/jpeg, 1200x630; exact committed SHA-256. Thumbnail HTTP 200 image/webp, 960x540; exact committed SHA-256.",
+    "archive_publication": {
+      "status": "READY",
+      "source_revision": "27e82d40e892a7b38320ff098c9ad1bb786060f7",
+      "deployment_id": "dpl_CqnbN9ifDRjtDwUMjRQSxV3ZPcba",
+      "verified_surfaces": [
+        "introduction",
+        "archive",
+        "home latest",
+        "sitemap",
+        "constellation and two contextual links"
+      ],
+      "http_status": 200,
+      "visible_h1_count": 1,
+      "canonical": "https://mirinaeman.com/archive/harugyeol-ai-health/"
+    }
+  }
+}

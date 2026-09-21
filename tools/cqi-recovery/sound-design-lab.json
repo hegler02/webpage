@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "body_id": "sound-design-lab",
+  "title": "Sound Design Lab V2 — Agent Harness Lecture",
+  "body_type": "SLIDEBODY",
+  "source_kinds": [
+    "education",
+    "music-production"
+  ],
+  "tags": [
+    "agent",
+    "ai",
+    "sound-design",
+    "kinetic-typography",
+    "assembly",
+    "workshop"
+  ],
+  "message_sentence": "감각적 요청을 입력·해석·출력·검수로 구조화하고, 나만의 GPT 하네스를 조립하는 30장 강의다.",
+  "thumbnail": {
+    "source_kind": "generated-title-card",
+    "path": "assets/thumbnails/sound-design-lab.webp",
+    "alt": "코발트색 HARNESS 타이포와 입력·해석·출력 설계도",
+    "width": 960,
+    "height": 540,
+    "focal_point": "50% 50%",
+    "sha256": "65d5faebc8262dcef8592ee1d140893e099851fd01b8789954593167aff60a07"
+  },
+  "canonical_url": "https://mirinaeman.com/pages/sound_design_lab/",
+  "status": "GOLDEN",
+  "first_deployed_at": "2026-07-30T10:30:22Z",
+  "latest_deployed_at": "2026-09-21T00:30:30.498000+00:00",
+  "deployments": [
+    {
+      "deployed_at": "2026-07-30T10:30:22Z",
+      "url": "https://mirinaeman.com/pages/sound_design_lab/",
+      "release_ref": "github-main",
+      "source_revision": "014a0243d89c1b5c3050890df8767941a0369b9f",
+      "validation": [
+        "repository-index-present",
+        "vercel-pages-deployment-structure"
+      ],
+      "status": "succeeded"
+    },
+    {
+      "deployed_at": "2026-09-20T23:04:39.732000+00:00",
+      "url": "https://mirinaeman.com/pages/sound_design_lab/",
+      "release_ref": "github-main",
+      "source_revision": "13f08e2a6a504ba47098b0c183d0d6f4c1323fab",
+      "status": "succeeded",
+      "validation": [
+        "Vercel READY dpl_B8ae5cUJda1C48ancEZtoWNbndu8 with mirinaeman.com alias",
+        "Production browser confirms assembly lecture at existing URL; 8 runtime/media resources HTTP 200 and byte-identical",
+        "30 scenes visually reviewed and body/stage bounds measured; 32 empty input scroll checks pass",
+        "32 fields filled, copied, restored after reload and cleared; 9/9 completion correct",
+        "Five routes, keyboard input guards, reduced motion, 390/768 viewports and script-free 30-scene reading verified",
+        "GSAP circuit and final assembly settle with no transient transforms or leaving scene",
+        "Project structure/discovery check and repository release gate passed"
+      ]
+    },
+    {
+      "deployed_at": "2026-09-21T00:30:30.498000+00:00",
+      "url": "https://mirinaeman.com/pages/sound_design_lab/",
+      "release_ref": "github-main",
+      "source_revision": "e657aa2ceced58b9836296c1cfc92e0c301804d6",
+      "status": "succeeded",
+      "validation": [
+        "Vercel READY dpl_EpgAUpJQYvLumy5RLeyctd23xjPP",
+        "Public route has styles.css?v=217608ec347a and five horizontal route choices",
+        "All five route states fit",
+        "QA equal-width columns and settled transforms verified",
+        "390px enhanced/static reading verified",
+        "Repository release gate PASS"
+      ]
+    }
+  ],
+  "incidents": [
+    {
+      "incident_id": "assembly-form-body-overflow",
+      "scope": "PROJECT",
+      "status": "CORRECTED",
+      "observation": "Five-field worksheets grew below the common body baseline; empty textareas showed scrollbars.",
+      "root_cause": "Grid min-content sizing and textarea line-height/padding exceeded allocated heights.",
+      "correction": "Set min-height:0, explicit five-field row budgets and fitting text/padding; retain a 592px shared body area.",
+      "gate": "tools/sound-lab/check.py validates 30-scene and 32-field identity; QA.md records every active scene body-bound and empty-input scroll measurement.",
+      "human_judgment": "사용자가 수정 배포본에 “기가 막히는구나”라고 응답하고 CQI 반영을 요청했다. 이 발표본의 결과 수락으로 기록한다."
+    },
+    {
+      "incident_id": "routing-qa-left-optical-weight",
+      "scope": "PROJECT",
+      "status": "CORRECTED",
+      "observation": "User identified left-heavy composition on scenes 13 and 15 while accepting the other 28.",
+      "root_cause": "Vertical route navigation and left-aligned content concentrated visible ink at left; large left QA color field overwhelmed lighter right questions.",
+      "correction": "Route choices now span the top with three output columns; QA uses a shallow full-width identity rail over five equal review columns. Only scene-specific CSS changed.",
+      "gate": "Five route panes individually fit; QA columns have equal widths and common bounds; existing GSAP finishes with no transforms; 390px reading and enhanced viewport contain content; check.py and release gate pass.",
+      "human_judgment": "사용자가 수정 배포본에 “기가 막히는구나”라고 응답하고 CQI 반영을 요청했다. 이 발표본의 결과 수락으로 기록한다."
+    }
+  ],
+  "invariants": [],
+  "approvals": [
+    {
+      "statement": "가자 이거 너무 좋아. 글자나 객체들이 동적으로 애니메이션되면서 조립이 되는데",
+      "scope": "Implementation approval for the proposed assembly laboratory, with large kinetic typography; not final result acceptance."
+    },
+    {
+      "statement": "이 두장만 좌측으로 쏠린듯한 느낌이 들어. 나머지는 매우 좋다. 이런게 되는구나!!!",
+      "scope": "Acceptance of the existing 28 scenes excluding 13/15. No GOLDEN promotion of the complete deck or revised two scenes."
+    },
+    {
+      "verdict": "accepted",
+      "statement": "기가 막히는구나",
+      "reference": "tools/sound-lab/feedback.jsonl#sound-lab-assembly-accepted-20260921",
+      "recorded_at": "2026-09-21T00:39:20.220962+00:00",
+      "artifact_sha256": "705bd1261bdae405781f32a4fc4c4d072d6c10259803223ce2effa7da909dc79"
+    }
+  ],
+  "golden_baseline": {
+    "baseline_id": "sound-lab-assembly-balanced-v1",
+    "artifact": {
+      "path": "tools/sound-lab/cqi/accepted-baseline.json",
+      "sha256": "705bd1261bdae405781f32a4fc4c4d072d6c10259803223ce2effa7da909dc79"
+    },
+    "approval": {
+      "verdict": "accepted",
+      "statement": "기가 막히는구나",
+      "reference": "tools/sound-lab/feedback.jsonl#sound-lab-assembly-accepted-20260921",
+      "recorded_at": "2026-09-21T00:39:20.220962+00:00",
+      "artifact_sha256": "705bd1261bdae405781f32a4fc4c4d072d6c10259803223ce2effa7da909dc79"
+    }
+  },
+  "discovery": {
+    "canonical": "https://mirinaeman.com/pages/sound_design_lab/",
+    "json_ld_types": [
+      "WebPage",
+      "CreativeWork",
+      "Person"
+    ],
+    "open_graph": "1200x630 first-party JPEG; source/media/discovery and live bytes verified",
+    "indexing": "not measured",
+    "ai_citation": "not measured",
+    "limitations": [
+      "Portrait mobile uniformly scales the complete slide; desktop/landscape is the main presentation context.",
+      "Fullscreen and OS accessibility combinations were not exhaustively tested."
+    ]
+  }
+}

@@ -159,5 +159,14 @@
     "McLuhan changes remain local; repeated receive-side non-fast-forward rejections despite fetch/rebase.",
     "Read and write advertisements returned different master IDs. Server-side cause is unconfirmed. No force push, credential changes, or data removal performed."
   ],
-  "bounded_retry_outcome": "Slide CQI saved; McLuhan archive persistence remains pending."
+  "bounded_retry_outcome": "Slide CQI saved; McLuhan archive persistence remains pending.",
+  "resolution": {
+    "status": "VERIFIED",
+    "verified_at": "2026-09-21T08:00:29.169972+00:00",
+    "skill_remote_save": "VERIFIED: all 21 scoped files match the fetched official saved revision",
+    "catalog_sync": "PASS: 56 bodies; published catalog and changed resources match the validated export",
+    "evidence": "tools/cqi-recovery/verification.json",
+    "saved_skill_revision": "1507b85b4fbb7131ece5980ff99d7265950b9a4d",
+    "archive_revision": "85dae9d3f0527d3ee7148841f63647280032427a"
+  }
 }

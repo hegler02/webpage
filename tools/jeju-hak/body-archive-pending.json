@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "CQI_SYNC_PENDING",
+  "status": "CQI_SYNCED",
   "body_id": "coding-body-message",
   "canonical_url": "https://mirinaeman.com/pages/jeju_hak/",
   "latest_deployed_at": "2026-09-20T17:18:50.212000+00:00",
@@ -26,6 +26,19 @@
     "focal_point": "50% 50%",
     "sha256": "bcf985b38bcfdfe3f9ab99926fc03af313656e51e99c67623053ed6520ad976d"
   },
-  "reason": "Skill repository push returned HTTP 500. Public runtime and catalog deployment are independent.",
-  "recovery": "Append this verified deployment to the existing coding-body-message record, preserve all prior history, and use tools/jeju-hak/QA.md and DESIGN.md as project-scoped correction evidence. Validate the archive and catalog, then persist through the skill repository. Do not create a second body ID or promote GOLDEN."
+  "reason": "Previous pending state resolved; official skill storage and public archive verified. See resolution and prior_pending_report.",
+  "recovery": "Append this verified deployment to the existing coding-body-message record, preserve all prior history, and use tools/jeju-hak/QA.md and DESIGN.md as project-scoped correction evidence. Validate the archive and catalog, then persist through the skill repository. Do not create a second body ID or promote GOLDEN.",
+  "prior_pending_report": {
+    "status": "CQI_SYNC_PENDING",
+    "reason": "Skill repository push returned HTTP 500. Public runtime and catalog deployment are independent."
+  },
+  "resolution": {
+    "status": "VERIFIED",
+    "verified_at": "2026-09-21T08:00:29.169972+00:00",
+    "skill_remote_save": "VERIFIED: all 21 scoped files match the fetched official saved revision",
+    "catalog_sync": "PASS: 56 bodies; published catalog and changed resources match the validated export",
+    "evidence": "tools/cqi-recovery/verification.json",
+    "saved_skill_revision": "1507b85b4fbb7131ece5980ff99d7265950b9a4d",
+    "archive_revision": "85dae9d3f0527d3ee7148841f63647280032427a"
+  }
 }

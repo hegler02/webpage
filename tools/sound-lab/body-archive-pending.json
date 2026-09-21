@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "status": "CQI_PARTIAL_SYNC",
+  "status": "CQI_SYNCED",
   "body_id": "sound-design-lab",
   "canonical_url": "https://mirinaeman.com/pages/sound_design_lab/",
   "latest_deployed_at": "2026-09-21T00:30:30.498000+00:00",
   "local_cqi_commit": "5ce1f9e",
   "revision_sha256": "6ffd6b1c516647510424fb1270c52b23bf7c3ba1371598a7707bc4aba4c438b5",
-  "reason": "Slide skill CQI files are confirmed in the remote stored revision. McLuhan save is still blocked by inconsistent read/write branch advertisements and non-fast-forward rejections.",
+  "reason": "Previous pending state resolved; official skill storage and public archive verified. See resolution and prior_pending_report.",
   "recovery": "Upsert this exact record and change through mcluhan-message-body. Preserve existing history, validate catalog, and persist through the skill repository. Do not create a duplicate body or infer GOLDEN acceptance.",
   "record": {
     "schema_version": 1,
@@ -165,6 +165,20 @@
   "slide_skill_recovery": "tools/sound-lab/cqi/slide-skill-recovery.patch",
   "combination_research": "tools/sound-lab/cqi/combination-research.json",
   "slide_skill_status": "VERIFIED",
-  "mcluhan_skill_status": "PENDING",
-  "persistence_verification": "tools/sound-lab/cqi/persistence-verification.json"
+  "mcluhan_skill_status": "VERIFIED",
+  "persistence_verification": "tools/sound-lab/cqi/persistence-verification.json",
+  "prior_pending_report": {
+    "status": "CQI_PARTIAL_SYNC",
+    "reason": "Slide skill CQI files are confirmed in the remote stored revision. McLuhan save is still blocked by inconsistent read/write branch advertisements and non-fast-forward rejections.",
+    "mcluhan_skill_status": "PENDING"
+  },
+  "resolution": {
+    "status": "VERIFIED",
+    "verified_at": "2026-09-21T08:00:29.169972+00:00",
+    "skill_remote_save": "VERIFIED: all 21 scoped files match the fetched official saved revision",
+    "catalog_sync": "PASS: 56 bodies; published catalog and changed resources match the validated export",
+    "evidence": "tools/cqi-recovery/verification.json",
+    "saved_skill_revision": "1507b85b4fbb7131ece5980ff99d7265950b9a4d",
+    "archive_revision": "85dae9d3f0527d3ee7148841f63647280032427a"
+  }
 }

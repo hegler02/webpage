@@ -1,0 +1,181 @@
+{
+  "verified_at": "2026-09-21T07:57:39.493426+00:00",
+  "skill_id": "6a5979cbf6388191bdc282f30a44aa19",
+  "saved_commit": "1507b85b4fbb7131ece5980ff99d7265950b9a4d",
+  "remote_commit": "1507b85b4fbb7131ece5980ff99d7265950b9a4d",
+  "files": [
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/message-bodies-registry.json",
+      "sha256": "e2a098d9396c84f894eadec7b2d3d5ec3ef106e3bb05a0d572bc5d9bad194393",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/project-evidence/coding-body-message.json",
+      "sha256": "59b23f1debdb050b6fd53c05782104275caf88c1a1856a3c6acd2e1f33099c84",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/project-evidence/harugyeol-ai-health.json",
+      "sha256": "9bbbdc68efabf6fb79f6c25e573f40e5e5bea45c05dec0e16778470961ea587e",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/project-evidence/image-agent.json",
+      "sha256": "e8da790e88afe66a3203fd108d7330c85f6e1c3e3e974db6568f982b15d0f29e",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/project-evidence/sound-design-lab.json",
+      "sha256": "46559377e059ef740c4e8f2088d80ac05ce6f2e81a0c2f559792e08c6f2eb60e",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/project-evidence/suno-song-guide.json",
+      "sha256": "7a37b09d5ee55cfc83aab001a624aa6e353d27b6ab189f5f7fc0ab5829476a88",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-events/coding-body-message/f24d8ad8cd76daf925fb0f03392b25ba0b7d16a4065a4a487f15b6d69d088996.json",
+      "sha256": "b401790a6ec5b7965148d67c8505d990d3559d089b5fdd58b64325ee6e1dfe6a",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-events/harugyeol-ai-health/bde22ef855761855b081a4a7c5d9e0b05f9b2e159e93042ef097f9f6288b65af.json",
+      "sha256": "6825893e2d0ecf60c81a8923aa95994dfff884ab5508c38dbbecc0733148b0b0",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-events/image-agent/8e0371cbe169629e849c87c2ba7cef89ce6adfe0aa5f6e66a7f92609709fcd64.json",
+      "sha256": "b347bc06c489334762af1a7862bb60b205d3f2dedee72c6755e7792f7dd6cd7b",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-events/sound-design-lab/3b92dee30b23f622f63d2295e6c5987f9a83af38c001ff6851c3da87993f7f83.json",
+      "sha256": "6289a067cf6f2fcc01ccbb13b63a43e12e6f98c037760b36ca587f51f409be4d",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-events/suno-song-guide/68c11183e50579209ece9f2d11f71b12ecda12aff473dfbadc1c38900d056874.json",
+      "sha256": "ebc5236811aa3f2ef7aee5d645ddd092d9a1a444508df4e10a399a89493c5b02",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/coding-body-message/d4d39a6db735954bb3524e84fb0d92fb242387c3477aa677718348f7105dc6d7.json",
+      "sha256": "c65e5af1434565efcabe858f2c1332d5c20d96ee8ebedadd5d3c82463adc54b3",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/coding-body-message/db67377659ca236c34da506c2e08f29408353ad50d36e602827c08143253c31b.json",
+      "sha256": "59b23f1debdb050b6fd53c05782104275caf88c1a1856a3c6acd2e1f33099c84",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/harugyeol-ai-health/d6385d421f1a1c65ff5abc51a53572f7be9377339138293969a832e8f78ef809.json",
+      "sha256": "9bbbdc68efabf6fb79f6c25e573f40e5e5bea45c05dec0e16778470961ea587e",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/image-agent/175a17371f5cb349fcd2d080ccea288e9cf60df134b24a8276a394affe422a9f.json",
+      "sha256": "68fd77ee14660ce469bab8651b978f45345a622e5b7ca2397bf2291d7c02bcf1",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/image-agent/c3f7727507b1b8dc74be71f22e7b3d62a7379f14a6a164cc22bc1ac2c26059be.json",
+      "sha256": "e8da790e88afe66a3203fd108d7330c85f6e1c3e3e974db6568f982b15d0f29e",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/sound-design-lab/3d2e35b459d122f9ace63f67459c06c8ab35f0e96377b5b2abcc3ccc28876d8a.json",
+      "sha256": "ec08e3ebbbfc2764a999c9e049bc21d3d4622f43d6619ba13b1330bcc6ca0782",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/sound-design-lab/6ffd6b1c516647510424fb1270c52b23bf7c3ba1371598a7707bc4aba4c438b5.json",
+      "sha256": "46559377e059ef740c4e8f2088d80ac05ce6f2e81a0c2f559792e08c6f2eb60e",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/suno-song-guide/1b65586b87cddf1225ce13e378b9b9f61bcf31348caa19bfbbafd6f5cff9daf6.json",
+      "sha256": "ecc99d97d4e87aabf066efa26d04f926c7fdd855b163ac0f0d03f1e78a3f455c",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/suno-song-guide/be59eb475158819c00d640183f028d4440759d8df04330ca04a9e32ecac506ac.json",
+      "sha256": "7a37b09d5ee55cfc83aab001a624aa6e353d27b6ab189f5f7fc0ab5829476a88",
+      "remote_equal": true
+    },
+    {
+      "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/success-matches/sound-lab-assembly-balanced-v1.json",
+      "sha256": "2190210f4d46f401094e09d939ccc0330551c976369fe291ab369924098afbb1",
+      "remote_equal": true
+    }
+  ],
+  "all_equal": true,
+  "bodies": [
+    "coding-body-message",
+    "suno-song-guide",
+    "harugyeol-ai-health",
+    "sound-design-lab",
+    "image-agent"
+  ],
+  "accepted_success_match": "sound-lab-assembly-balanced-v1",
+  "archive_status": "VERIFIED",
+  "public_checks": [
+    {
+      "path": "pages/profile/archive/index.html",
+      "status": 200,
+      "sha256": "750bee3ea08eb6d95844f8a3606baa0c76e534038b6ff6b8467f7adcab99dfd3",
+      "matches_release": true
+    },
+    {
+      "path": "pages/profile/constellation/graph.json",
+      "status": 200,
+      "sha256": "70346702c711aa8d3fdf2d4da21975e0a96c080b1a42ffdb6bd6ba2bc69060d3",
+      "matches_release": true
+    },
+    {
+      "path": "pages/profile/constellation/index.html",
+      "status": 200,
+      "sha256": "b48d36fb63cd098122ad6025cbe3aae30e2db712c3b3722085f92f06864f030a",
+      "matches_release": true
+    },
+    {
+      "path": "pages/profile/data/message-bodies.json",
+      "status": 200,
+      "sha256": "02db4585aa8cb172e7f62882d6cf513c39142011cca2cb8fc365b81301326cb3",
+      "matches_release": true
+    },
+    {
+      "path": "pages/profile/index.html",
+      "status": 200,
+      "sha256": "7bf95f81024708ccb0eee15a910b20c3d0ab27adf2e2057c99ba6fcfe1ab7b17",
+      "matches_release": true
+    },
+    {
+      "path": "pages/profile/sitemap.xml",
+      "status": 200,
+      "sha256": "5982ad3d797f4da493d0068c2065ec92320a5fb94fb4db074adc021ba203835a",
+      "matches_release": true
+    },
+    {
+      "path": "pages/profile/assets/thumbnails/image-agent.webp",
+      "status": 200,
+      "sha256": "287134f3de64b87abf9fca85d63164824d548f816b8c707888c922c1a0a40e7d",
+      "matches_release": true
+    },
+    {
+      "path": "pages/ImageAgent/index.html",
+      "status": 200,
+      "sha256": "bbb0df02f2f8fd8c48a729c2cca99fcd025f85e46b595ec7e4d8b23ba86c1ea6",
+      "matches_release": true
+    }
+  ],
+  "public_checked_at": "2026-09-21T08:00:29.169972+00:00",
+  "public_deployment": {
+    "id": "dpl_3WgjoWYg8dkhxSvqYqeYDzmyu5g6",
+    "state": "READY",
+    "source_revision": "85dae9d3f0527d3ee7148841f63647280032427a",
+    "alias": "mirinaeman.com"
+  },
+  "catalog_body_count": 56
+}

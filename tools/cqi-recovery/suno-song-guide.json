@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "body_id": "suno-song-guide",
+  "title": "Suno로 원하는 노래 만들기",
+  "body_type": "SLIDEBODY",
+  "source_kinds": [
+    "education",
+    "music-production"
+  ],
+  "tags": [
+    "ai",
+    "music",
+    "suno"
+  ],
+  "message_sentence": "원하는 노래를 만들기 위한 프롬프트와 제작 흐름을 슬라이드의 몸으로 설명한다.",
+  "thumbnail": {
+    "source_kind": "generated-title-card",
+    "path": "assets/thumbnails/suno-song-guide.webp",
+    "alt": "“Suno로 원하는 노래 만들기” 작품의 대표 이미지",
+    "width": 960,
+    "height": 540,
+    "focal_point": "50% 50%",
+    "sha256": "a00e67e3861c5dfabb1a3bd1b0a3ab7a63ea3da99ed803396d2f7adcaaaf5c22"
+  },
+  "canonical_url": "https://mirinaeman.com/pages/sono_slide/",
+  "status": "DEPLOYED",
+  "first_deployed_at": "2026-07-30T10:30:22Z",
+  "latest_deployed_at": "2026-09-20T22:04:10.896000+00:00",
+  "deployments": [
+    {
+      "deployed_at": "2026-07-30T10:30:22Z",
+      "url": "https://mirinaeman.com/pages/sono_slide/",
+      "release_ref": "github-main",
+      "source_revision": "014a0243d89c1b5c3050890df8767941a0369b9f",
+      "validation": [
+        "repository-index-present",
+        "vercel-pages-deployment-structure"
+      ],
+      "status": "succeeded"
+    },
+    {
+      "deployed_at": "2026-09-20T18:16:11.042000+00:00",
+      "url": "https://mirinaeman.com/pages/sono_slide/",
+      "release_ref": "github-main",
+      "source_revision": "04c46f43a5f9e8a62518a5ffb96a1f79ae4a1c53",
+      "status": "succeeded",
+      "validation": [
+        "Vercel READY dpl_A6dbnKi4k3o6vRXQe8D7iyEhqtan",
+        "All 17 Korean and 17 English scenes inspected; shared baselines and content bounds verified",
+        "390px and 768px viewport checks; outline, language, deep links, reduced motion and share fallback verified",
+        "tools/sono-slide/check.py and repository release gate passed"
+      ]
+    },
+    {
+      "deployed_at": "2026-09-20T18:43:35.003000+00:00",
+      "url": "https://mirinaeman.com/pages/sono_slide/",
+      "release_ref": "github-main",
+      "source_revision": "0e0a042b291cb3ea9e8780e75bad8dd8370877c9",
+      "status": "succeeded",
+      "validation": [
+        "Vercel READY dpl_52CwbraeCPogbgrHGrPQgvbLEadx",
+        "Public HTML, CSS, motion and OG HTTP 200 with exact local bytes; production browser confirmed new cover",
+        "All 17 Korean and 17 English scenes visually reviewed; title and content bounds measured",
+        "390px and 768px stage bounds verified; script-free reading exposes 17 scenes without horizontal overflow",
+        "Sleeve, arrangement and notes transitions inspected; rapid navigation settles with one active scene",
+        "tools/sono-slide/check.py, repository release gate and OG preview HTTP validation passed"
+      ]
+    },
+    {
+      "deployed_at": "2026-09-20T22:04:10.896000+00:00",
+      "url": "https://mirinaeman.com/pages/sono_slide/",
+      "release_ref": "github-main",
+      "source_revision": "f8c60911431f14497e895888e6d970a078e95be7",
+      "status": "succeeded",
+      "validation": [
+        "Vercel READY dpl_5eYMARym4rwgs3fowYD5m6By31WX",
+        "Production browser confirms all four requested replacement URLs and matching titles/artwork",
+        "Korean and English slide 14 screenshots reviewed; four equal card bounds and images loaded",
+        "Four destination pages open; JEJU WE audio and Already Autumn cinema advance on first-party media URLs",
+        "Suno lecture structure/discovery and repository release gate passed"
+      ]
+    }
+  ],
+  "incidents": [
+    {
+      "incident_id": "music-studio-refactor",
+      "scope": "PROJECT",
+      "status": "CORRECTED",
+      "observation": "Legacy 17-scene presentation lacked common geometry. Refactor review found inconsistent panel heading baselines and album image heights.",
+      "root_cause": "Text and artwork had independent intrinsic sizing within fixed slide budgets.",
+      "correction": "Added a shared 1920x1080 stage, content budgets, equal comparison panels, common text reservations and explicit album image geometry. First-party optimized assets remove failing remote media dependencies.",
+      "gate": "tools/sono-slide/check.py guards 17 scene IDs, translation completeness, source drift, syntax and media/discovery. tools/sono-slide/QA.md records visual and measured bounds for both languages and runtime behavior.",
+      "human_judgment": "User approved proposed implementation with 가자. Final visual acceptance pending; no GOLDEN promotion."
+    },
+    {
+      "incident_id": "expression-too-close-to-coding",
+      "scope": "PROJECT",
+      "status": "CORRECTED",
+      "observation": "User accepted the layout but found the visual pattern too similar to the coding presentation.",
+      "root_cause": "Shared header-card-fade grammar carried over across unrelated lecture subjects.",
+      "correction": "Preserved approved geometry; introduced record sleeves, cream paper spreads, arrangement tracks, session notes and release shelves with corresponding motion.",
+      "gate": "tools/sono-slide/QA.md documents 34-scene review, geometry and motion checks. DESIGN.md records the approved expression change.",
+      "human_judgment": "Prior layout accepted; user approved implementing the album-sleeve proposal. Final acceptance of this deployed design is pending; no GOLDEN promotion."
+    },
+    {
+      "incident_id": "replace-blocked-suno-examples",
+      "scope": "PROJECT",
+      "status": "CORRECTED",
+      "observation": "User reports the former linked works use blocked Suno CDN songs and supplies four replacement works.",
+      "root_cause": "The release shelf retained legacy examples; playback failure is user-reported, not independently reproduced.",
+      "correction": "Replace links, localized copy and artwork together; store complete release_works records in the content authority.",
+      "gate": "Generated HTML check, existing release gate and browser review of four URLs, matching artwork and both languages.",
+      "human_judgment": "Replacement explicitly authorized. Final result acceptance pending."
+    }
+  ],
+  "invariants": [],
+  "approvals": [
+    {
+      "statement": "가자",
+      "scope": "Approval to implement the proposed refactor at the existing URL; final visual acceptance pending."
+    },
+    {
+      "statement": "레이아웃은 좋다",
+      "scope": "Acceptance of prior layout geometry, not its repeated visual expression."
+    },
+    {
+      "statement": "그래 좋아 가보자",
+      "scope": "Approval to implement the proposed album-sleeve expression at the existing URL. Final result acceptance pending."
+    },
+    {
+      "statement": "이걸로 변경해줘",
+      "scope": "Replace slide 14 release examples with the four supplied published works; no wider design acceptance."
+    }
+  ],
+  "golden_baseline": null,
+  "discovery": {
+    "canonical": "https://mirinaeman.com/pages/sono_slide/",
+    "json_ld_types": [
+      "WebPage",
+      "CreativeWork",
+      "Person"
+    ],
+    "open_graph": "1200x630 first-party JPEG, local and preview HTTP validation passed",
+    "indexing": "not measured",
+    "ai_citation": "not measured",
+    "limitations": [
+      "Physical touch, projector hardware, fullscreen entry and OS reduced-motion emulation not verified.",
+      "Clipboard permission unavailable in local browser; selectable canonical-link fallback verified."
+    ]
+  }
+}

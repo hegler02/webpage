@@ -1,0 +1,8 @@
+{
+  "reason": "Restore the verified, previously pending CQI record through the official skill authority.",
+  "evidence": [
+    "User explicitly requests CQI permanent save and archive synchronization.",
+    "Preserved deployment and validation evidence for suno-song-guide"
+  ],
+  "verdict": "pending"
+}

@@ -1,0 +1,16 @@
+{
+  "attempt": 2,
+  "elapsed_seconds": 71.57,
+  "exit_code": 0,
+  "observations": [
+    "16:54:04.335629 http.c:849              <= Recv header: HTTP/1.1 200 OK",
+    "16:54:13.667735 http.c:849              <= Recv header: HTTP/2 200",
+    "          git< 0bb19b0b22e3dad9faa54cd9185dd7ce525c8dac refs/heads/master",
+    "          git< 0bb19b0b22e3dad9faa54cd9185dd7ce525c8dac refs/heads/master",
+    "          git> 0bb19b0b22e3dad9faa54cd9185dd7ce525c8dac 1507b85b4fbb7131ece5980ff99d7265950b9a4d refs/heads/master",
+    "          git< 009d0bb19b0b22e3dad9faa54cd9185dd7ce525c8dac 1507b85b4fbb7131ece5980ff99d7265950b9a4d refs/heads/master",
+    "16:54:13.696309 http.c:849              => Send header: Content-Length: 17999",
+    "16:55:15.842576 http.c:849              <= Recv header: HTTP/2 200"
+  ],
+  "note": "Only allowlisted response status, body length and branch advertisement metadata retained; no credentials or response bodies."
+}

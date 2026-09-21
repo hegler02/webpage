@@ -1,0 +1,41 @@
+diff --git a/skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/body-and-motion.md b/skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/body-and-motion.md
+index dda1c21..9de51ad 100644
+--- a/skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/body-and-motion.md
++++ b/skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/body-and-motion.md
+@@ -35,3 +35,13 @@
+ ## 환류
+ 
+ 프로젝트 feedback.jsonl을 공유한다. 연출의 실패/성공을 사건 ID, 몸, 효과, 환경, 수정 전후, 실제 반응에 연결한다. 다음 연출 전에 관련 사례를 읽는다. 전환 단독 작업에는 gestalt-transition-director를 사용할 수 있으나 이 챕터만으로도 구현을 끝낸다.
++
++## JS 조합 실험의 CQI
++
++사용자 목표는 약 100개의 라이브러리 조합 실험이다. 실험 ID에 라이브러리·버전, 역할 분담, 장면, 객체/속성 소유자, 브라우저·장치·화면·입력 조건을 연결한다. GSAP+Motion, GSAP+Three.js, Motion+Three.js, GSAP+Chart.js, GSAP+Motion+Three.js는 후보이며 아직 성공 조합으로 간주하지 않는다. 라이브러리 이름만 같은 색상 변형을 별도 조합으로 세지 않는다.
++
++같은 정지 레이아웃과 콘텐츠에서 단독 기준군과 조합을 비교한다. 글자 크기·굵기·자간·마스크·행 분해/조립은 중점 실험 대상이다. 서로 다른 장면의 아름다움을 성능 차이라고 해석하지 않는다. 동일 요소의 동일 속성을 두 엔진이 동시에 쓰는지, 재진입·역방향·빠른 이동·중단 후 일시 변형이 남는지 확인한다. 역할 분리나 중첩 컨테이너는 충돌을 줄이는 설계 후보이며 실제 무충돌을 보증하지 않는다.
++
++표현 적합성과 사용자의 판단은 프레임 시간·긴 작업·전송량·정리 후 잔류 같은 기술 관측과 분리한다. 수집하지 못한 지표는 미측정으로 둔다. 시작/중간/끝과 움직임 축소에서 읽힘·최종 배치·입력 응답을 확인하고, 실패→수정→재검증을 기존 프로젝트 feedback.jsonl에 연결한다. 상태는 계획/실행/검증/수락을 구분하며 공식 API 가능 여부를 곧바로 조합의 실증으로 올리지 않는다. 검토·수락된 조합만 재사용 성공 후보가 된다.
++
++공식 자료: [Motion 레이아웃](https://motion.dev/docs/react-layout-animations), [Motion React](https://motion.dev/docs/react), [GSAP context](https://gsap.com/docs/v3/GSAP/gsap.context()/). 문서는 실행 때 API와 버전을 다시 확인할 출처이며 현장 성능 증거가 아니다.
+diff --git a/skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/feedback-memory.md b/skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/feedback-memory.md
+index f682642..3112aaf 100644
+--- a/skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/feedback-memory.md
++++ b/skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/feedback-memory.md
+@@ -33,3 +33,9 @@ scripts/cqi_memory.py query --ledger /project/feedback.jsonl --query "한국어
+ 이전 성공의 반례가 나오면 삭제하지 말고 correction 또는 새 observation으로 조건을 좁힌다. 스킬 자체의 변경은 승인 범위와 스킬 저장 절차를 따른다. 임베드의 제공자·주소·오류, 폰트의 실제 패밀리·언어·화면 크기, 전환의 앞뒤 몸과 입력 순서를 남기면 같은 실수를 구체적으로 회피할 수 있다.
+ 
+ 저장 실패는 pending으로 보고하고 다음번에 기억한다고 약속하지 않는다. 이것은 기록·검색·모듈 개선을 통한 지식 축적이며 모델 가중치 학습이나 자동 품질 향상의 증명이 아니다.
++
++## 승인된 샘플 축적: Sound Lab 사례
++
++`seed-cases.jsonl`의 `sound-lab-assembly-balanced-reference-20260921`을 통해 원기록을 조회한다. 이 사례에서는 컨테이너의 바깥 정렬은 맞았지만 글자와 넓은 색 면적이 왼쪽에 집중돼 두 장이 반려되었다. 전환이 끝난 화면에서 내용의 밀도·여백·색 면적을 함께 살피고, 동등한 항목은 가로로 분산하는 후보를 검토한다. 모든 장면을 가운데 정렬하거나 다섯 열로 고정하라는 규칙은 아니다.
++
++사용자가 정정한 약 100개 샘플의 단위는 **GSAP·Framer Motion(Motion)·Three.js·Chart.js 등 JS 라이브러리의 조합 실험**이다. 사례 모양 100종이나 색상 변형 100종으로 바꾸지 않는다. 현재 Sound Lab은 GSAP 사용 사례이며 여러 라이브러리 조합의 성공으로 기록하지 않는다. 조합 연구에는 [몸·운율·전환](body-and-motion.md)의 실험 기준을 적용한다. 프로젝트 원기록의 정정 사건 `sound-lab-combination-unit-correction-20260921`을 함께 조회한다.
+diff --git a/skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/seed-cases.jsonl b/skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/seed-cases.jsonl
+index 3d812f6..70b9dfd 100644
+--- a/skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/seed-cases.jsonl
++++ b/skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/seed-cases.jsonl
+@@ -1,3 +1,4 @@
+ {"id": "slide-demo-feedback-20260905", "kind": "feedback", "context": {"project": "message-body-v1.2", "media": ["slide", "image", "webtoon"], "audience": "교수·크리에이터", "tags": ["썰렁", "복합 미디어", "표현"]}, "summary": "사용자가 최초 숫자·도형 중심 샘플을 썰렁하다고 평가하고 이미지·웹툰의 조립을 요청했다.", "quote": "썰렁하긴 하다 ㅋㅋㅋ", "followup_quote": "슬라이드는 복합 미디어야", "artifact": "libfile_f788a095ddac819195ccb50cec3a25c6", "cause_status": "suspected", "cause": "복합 미디어 철학에 비해 샘플이 숫자·도형과 동작 설명에 치우침", "acceptance": null, "scope": "이 샘플의 표현 밀도; 모든 덱에 이미지/웹툰 의무화 아님"}
+ {"id": "slide-video-stale-response-20260905", "kind": "observation", "context": {"media": "video", "providers": ["youtube", "vimeo", "file"], "environment": "Node mocks; rapid remount/scene changes"}, "summary": "이전 플레이어의 ready/error/재생 응답이 새 상태나 타이머에 간섭했고 native dispose가 명시적으로 소스를 해제하지 않았다.", "cause_status": "confirmed", "evidence": "7개 수정 후 회귀 검사 통과; 실제 브라우저 재생 미확인", "resolution": "콜백/비동기 후속 처리의 generation 검사, 로컬 player 참조, native pause/remove src/load", "source_file": "assets/video-embed.js", "scope": "재생 생명주기; 모든 제공자 오류 해결을 의미하지 않음", "timestamp": "2026-09-05T04:43:28.438906+00:00"}
+ {"id": "slide-v2-accepted-case-reference-20260906", "kind": "observation", "timestamp": "2026-09-06", "context": {"project": "message-body-v2", "media": ["slide", "image", "webtoon"], "tags": ["사용자 승인", "복합 미디어", "DESIGN.md", "폰트", "전환"]}, "summary": "텍스트·도형 중심의 썰렁하다는 피드백 뒤 이미지·웹툰, OPX Studio 표현 기준, Inter·Noto Sans CJK KR, 몸에 따른 전환을 적용한 후속 발표본을 사용자가 승인했다.", "source_ledger": "libfile_aca92ed8ca088191b286b554ac56300a", "source_event_ids": ["slide-demo-feedback-20260905", "slide-v2-user-approval-20260906"], "artifact": "libfile_ed95f12bd89c81919b914b3f92ce67d0", "scope": "이 발표본과 스킬 보완 결과의 사용자 수락만 확인. 원기록의 최신 정정·미확인 항목을 함께 읽고 적용한다. 실제 화면·전환·외부 영상 재생·청중 반응은 미확인. 모든 발표에 이 조합을 의무화하지 않는다."}
++{"id": "sound-lab-assembly-balanced-reference-20260921", "kind": "observation", "context": {"project": "sound-design-lab", "body": "SLIDEBODY", "tags": ["레이아웃", "좌측 쏠림", "타이포", "조립", "routing", "qa"]}, "summary": "13·15장의 시각적 무게를 가로 분산한 뒤 사용자가 배포된 조립형 발표본을 수락했다. 정렬된 박스와 균형 잡힌 실제 내용은 별도로 검토한다.", "source_ledger": "https://github.com/hegler02/webpage/blob/main/tools/sound-lab/feedback.jsonl", "source_event_ids": ["sound-lab-13-15-optical-balance", "sound-lab-assembly-accepted-20260921"], "artifact": "https://github.com/hegler02/webpage/tree/e893373939a43caaffc30c92c96465832a4ee737/pages/sound_design_lab", "scope": "한국어 강의의 동등 항목 비교와 분리·조립 설명. 색·폰트·다섯 열의 전역 템플릿화 금지. 수락·반례·수정의 최신 상태는 원기록을 조회한다.", "timestamp": "2026-09-21T00:39:57.939046+00:00"}

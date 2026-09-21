@@ -1,0 +1,39 @@
+{
+  "match_id": "sound-lab-assembly-balanced-v1",
+  "body_id": "sound-design-lab",
+  "revision_sha256": "6ffd6b1c516647510424fb1270c52b23bf7c3ba1371598a7707bc4aba4c438b5",
+  "message": "감각적 요청을 입력·해석·출력·검수로 구조화하고, 나만의 GPT 하네스를 조립하는 30장 강의다.",
+  "body": {
+    "type": "SLIDEBODY",
+    "description": "공통 무대 기준선 안에서 요청을 나누고 입력·해석·출력·검수를 조립한다. 13장은 선택과 결과를 가로 분산하고 15장은 검수를 동등한 다섯 열로 펼친다."
+  },
+  "surface": {
+    "reference": "tools/sound-lab/DESIGN.md",
+    "version": "e893373939a43caaffc30c92c96465832a4ee737",
+    "sha256": "a8de74d18342e23e9ba32f89d15cf2f3303133f5412b14ffa5cda588b7def236"
+  },
+  "fit_reason": "레이아웃이 읽힘을 유지하고 단어의 크기·굵기 변화 및 객체 조립이 분리·연결·완성이라는 메시지를 드러낸다. 두 장의 글자·색 면적 분산 수정 후 사용자가 수락했다.",
+  "applies_when": "동등한 선택지나 검수 항목을 비교하는 발표; 분리·연결·완성을 설명하는 교육",
+  "avoid_when": "긴 글, 불균등한 위계, 정서적 이미지 중심 장면에 다섯 열이나 조립 효과를 그대로 복사할 때",
+  "tags": [
+    "교육",
+    "레이아웃",
+    "좌측쏠림",
+    "kinetic-typography",
+    "assembly",
+    "routing",
+    "qa",
+    "korean"
+  ],
+  "artifact": {
+    "path": "tools/sound-lab/cqi/accepted-baseline.json",
+    "sha256": "705bd1261bdae405781f32a4fc4c4d072d6c10259803223ce2effa7da909dc79"
+  },
+  "approval": {
+    "verdict": "accepted",
+    "statement": "기가 막히는구나",
+    "reference": "tools/sound-lab/feedback.jsonl#sound-lab-assembly-accepted-20260921",
+    "recorded_at": "2026-09-21T00:39:20.220962+00:00",
+    "artifact_sha256": "705bd1261bdae405781f32a4fc4c4d072d6c10259803223ce2effa7da909dc79"
+  }
+}

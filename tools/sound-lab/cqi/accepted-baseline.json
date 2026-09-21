@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "source_repository": "hegler02/webpage",
+  "source_revision": "e893373939a43caaffc30c92c96465832a4ee737",
+  "canonical_url": "https://mirinaeman.com/pages/sound_design_lab/",
+  "files": [
+    {
+      "path": "pages/sound_design_lab/assets/favicon.svg",
+      "sha256": "91e01a078ee9d755c6b73fdb43ba71728e245300c003dee58f4bcfedcfa87e70",
+      "bytes": 191
+    },
+    {
+      "path": "pages/sound_design_lab/assets/font-license.txt",
+      "sha256": "d31ddd9f2bed32fd7e302a205cf2380ba0de6529152d239ef99cfb6f261bfc04",
+      "bytes": 4418
+    },
+    {
+      "path": "pages/sound_design_lab/assets/font-provenance.json",
+      "sha256": "042ecd8384837f64ee3027af5b1ff3c1b14bcc20a1d19105ff56b9fa7730e107",
+      "bytes": 561
+    },
+    {
+      "path": "pages/sound_design_lab/assets/lecture-sans.woff2",
+      "sha256": "41412faee6f66da21cde1195e38de689f0da2f0ff672a07900e1d815a055c51e",
+      "bytes": 104580
+    },
+    {
+      "path": "pages/sound_design_lab/assets/og.jpg",
+      "sha256": "460e57a976831e2925de838086d89eca20c7f6fc418f1647ddf4d7a7d5ad4929",
+      "bytes": 74395
+    },
+    {
+      "path": "pages/sound_design_lab/assets/vendor/gsap-3.15.0.min.js",
+      "sha256": "42b6aa842a2a283850d7963f2cf1283cea1792c86f2bc059f0b23167a56ba6cd",
+      "bytes": 72928
+    },
+    {
+      "path": "pages/sound_design_lab/index.html",
+      "sha256": "f7d92577ab4c7737b2eeabb1c36458ed798658522553172706cc8574723e000c",
+      "bytes": 91858
+    },
+    {
+      "path": "pages/sound_design_lab/media.assets.json",
+      "sha256": "7fb18a813f2211115f9186a2945f5578ea6416a3cac76a6deb29dd3e3502f8f0",
+      "bytes": 568
+    },
+    {
+      "path": "pages/sound_design_lab/motion.js",
+      "sha256": "c835fbb4f73d5de844850c569d72652fefef447e479058e3b25f1d675faab65f",
+      "bytes": 5834
+    },
+    {
+      "path": "pages/sound_design_lab/presentation.js",
+      "sha256": "b241d1b62acc99f8725399dd90ac7de088b2c5ab71fb7607880fda7f9a7d9809",
+      "bytes": 8997
+    },
+    {
+      "path": "pages/sound_design_lab/robots.txt",
+      "sha256": "572974c8031afc44ff5919d3ada3123bd8d51d43424b2b1a168f232d5d2821b4",
+      "bytes": 134
+    },
+    {
+      "path": "pages/sound_design_lab/sitemap.xml",
+      "sha256": "fc909971be9cc2abf0f37bafc09dc819c20fddc4e4411469585f4e1e5940a1db",
+      "bytes": 177
+    },
+    {
+      "path": "pages/sound_design_lab/styles.css",
+      "sha256": "a238f84d54e8aaf152b670a13ca23a09b588a3ca2ae6ad2cc8dded3e1582aee7",
+      "bytes": 31468
+    },
+    {
+      "path": "pages/sound_design_lab/workbook.js",
+      "sha256": "94f19db8a3c09058267a4b38b3fc8bcfa65e3b93d07543defb193b9f266e3b51",
+      "bytes": 4097
+    }
+  ],
+  "verification": "Each local runtime file byte-compared with the accepted deployed Git revision; earlier live browser and deployment checks are documented in tools/sound-lab/QA.md."
+}

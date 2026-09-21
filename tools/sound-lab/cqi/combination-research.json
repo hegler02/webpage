@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "status": "PLANNED",
+  "target_trials_approximately": 100,
+  "unit": "라이브러리 조합 + 역할 분담 + 장면의 실험",
+  "user_statement": "100개의 GSAP과 Framer, 다양한 js 들의 조합을 테스트해보는거지",
+  "current_evidence": {
+    "Sound Lab": "GSAP 단일 엔진의 조립 연출과 정지 레이아웃 수락. Framer Motion·Three.js·Chart.js 조합을 검증한 것이 아님."
+  },
+  "priority": "폰트의 크기·굵기·자간·마스크·분해/조립",
+  "candidate_combinations": [
+    {
+      "libraries": [
+        "GSAP",
+        "Motion for React"
+      ],
+      "hypothesis": "GSAP 타이포 타임라인 + Motion 패널 배치 전환"
+    },
+    {
+      "libraries": [
+        "GSAP",
+        "Three.js"
+      ],
+      "hypothesis": "GSAP 글자/카메라 타이밍 + Three.js 공간 렌더링"
+    },
+    {
+      "libraries": [
+        "Motion for React",
+        "Three.js"
+      ],
+      "hypothesis": "Motion 정보 패널 + Three.js 별도 캔버스 객체"
+    },
+    {
+      "libraries": [
+        "GSAP",
+        "Chart.js"
+      ],
+      "hypothesis": "GSAP 설명 연출 + Chart.js 데이터 차트"
+    },
+    {
+      "libraries": [
+        "GSAP",
+        "Motion for React",
+        "Three.js"
+      ],
+      "hypothesis": "타이포·패널·공간 객체를 분리한 통합 연출"
+    }
+  ],
+  "trial_record": [
+    "id",
+    "versions",
+    "roles",
+    "scene",
+    "property_owners",
+    "control",
+    "device_browser_viewport",
+    "input_sequence",
+    "measurements",
+    "failure",
+    "correction",
+    "retest",
+    "human_verdict",
+    "artifact_revision"
+  ],
+  "comparison": "동일 콘텐츠·정지 레이아웃·장치에서 단독 기준군과 조합 비교. 다른 색상만으로 새 조합을 만들지 않음.",
+  "evaluation": [
+    "표현 적합성과 사용자 수락",
+    "글자 읽힘과 최종 정렬",
+    "프레임 시간·긴 작업·전송량: 실제 측정한 값만",
+    "중단·역방향·재진입·빠른 이동의 충돌과 잔류",
+    "움직임 축소와 좁은 화면 조작"
+  ],
+  "status_policy": "계획은 실증이 아니다. 실행·기술 검증·사용자 수락을 구분한다. 미측정 지표는 비워 둔다."
+}

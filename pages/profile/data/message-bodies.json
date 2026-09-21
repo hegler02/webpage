@@ -612,7 +612,7 @@
     },
     {
       "body_id": "image-agent",
-      "title": "내 생각을 이미지로 옮기는 법",
+      "title": "단문 인과체인 — 내 생각을 이미지로 옮기는 법",
       "body_type": "SLIDEBODY",
       "source_kinds": [
         "education",
@@ -623,10 +623,10 @@
         "image",
         "lecture"
       ],
-      "message_sentence": "생각을 이미지 언어로 번역하는 생성형 AI 워크플로를 강의의 몸으로 펼친다.",
+      "message_sentence": "한 문장에 하나의 판단을 담고 앞 문장을 다음 문장의 기준으로 이어가며, 문장과 장면을 함께 수정하는 단문 인과체인 강의.",
       "thumbnail": {
         "path": "assets/thumbnails/image-agent.webp",
-        "alt": "“내 생각을 이미지로 옮기는 법” 제목을 담은 그래픽 썸네일",
+        "alt": "단문 인과체인 제목과 사각 안경을 연결한 이미지 하네스 강의",
         "width": 960,
         "height": 540,
         "focal_point": "50% 50%"
@@ -634,7 +634,7 @@
       "canonical_url": "https://mirinaeman.com/pages/ImageAgent/",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-07-30T10:30:22Z",
-      "latest_deployed_at": "2026-07-30T10:30:22Z"
+      "latest_deployed_at": "2026-09-21T05:27:51.135141Z"
     },
     {
       "body_id": "jeju-we",

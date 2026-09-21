@@ -9,6 +9,28 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:image-agent",
+      "kind": "work",
+      "title": "단문 인과체인 — 내 생각을 이미지로 옮기는 법",
+      "summary": "한 문장에 하나의 판단을 담고 앞 문장을 다음 문장의 기준으로 이어가며, 문장과 장면을 함께 수정하는 단문 인과체인 강의.",
+      "url": "https://mirinaeman.com/pages/ImageAgent/",
+      "image": "/pages/profile/assets/thumbnails/image-agent.webp",
+      "alt": "단문 인과체인 제목과 사각 안경을 연결한 이미지 하네스 강의",
+      "year": "2026",
+      "tags": [
+        "ai",
+        "image",
+        "lecture"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "한 문장에 하나의 판단을 담고 앞 문장을 다음 문장의 기준으로 이어가며, 문장과 장면을 함께 수정하는 단문 인과체인 강의."
+        }
+      ]
+    },
+    {
       "id": "work:sound-design-lab",
       "kind": "work",
       "title": "Sound Design Lab V2 — Agent Harness Lecture",
@@ -929,28 +951,6 @@
       ]
     },
     {
-      "id": "work:image-agent",
-      "kind": "work",
-      "title": "내 생각을 이미지로 옮기는 법",
-      "summary": "생각을 이미지 언어로 번역하는 생성형 AI 워크플로를 강의의 몸으로 펼친다.",
-      "url": "https://mirinaeman.com/pages/ImageAgent/",
-      "image": "/pages/profile/assets/thumbnails/image-agent.webp",
-      "alt": "“내 생각을 이미지로 옮기는 법” 제목을 담은 그래픽 썸네일",
-      "year": "2026",
-      "tags": [
-        "ai",
-        "image",
-        "lecture"
-      ],
-      "sourceLabel": "작품 아카이브",
-      "sections": [
-        {
-          "title": "작품의 기록",
-          "text": "생각을 이미지 언어로 번역하는 생성형 AI 워크플로를 강의의 몸으로 펼친다."
-        }
-      ]
-    },
-    {
       "id": "work:kimbujang-unsealed",
       "kind": "work",
       "title": "김부장 - 봉인해제 | 66호 테마곡",
@@ -1770,6 +1770,13 @@
   ],
   "edges": [
     {
+      "source": "work:image-agent",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:sound-design-lab",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2037,13 +2044,6 @@
     },
     {
       "source": "work:hwasan-insu",
-      "target": "creator:joonho",
-      "label": "창작자",
-      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
-      "evidence": "https://mirinaeman.com/archive/"
-    },
-    {
-      "source": "work:image-agent",
       "target": "creator:joonho",
       "label": "창작자",
       "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",

@@ -1,0 +1,1 @@
+Static presentation. Serve this directory at /pages/media/. All assets are relative and self-hosted. Keep the canonical URL when publishing to mirinaeman.com.

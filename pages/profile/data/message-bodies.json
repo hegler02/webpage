@@ -1075,6 +1075,36 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "report-full-after",
+      "title": "AI 시대의 과제 지도와 평가 — 전체 30장 Before / After",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "lecture",
+        "education",
+        "ai-assessment"
+      ],
+      "tags": [
+        "gsap",
+        "three-js",
+        "before-after",
+        "spatial-assembly",
+        "professor",
+        "six-axes"
+      ],
+      "message_sentence": "출제·지도·검증·평가의 전체 구조를 30장 강의와 공간 조립으로 이해하고, 원본과 비교하며 교수자의 최종 판단을 설계한다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/report-full-after.webp",
+        "alt": "AI가 쓴 글을 어떻게 평가할 것인가 — 30장 강의의 첫 화면",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://report-full-after.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-21T22:26:13.543792+00:00",
+      "latest_deployed_at": "2026-09-21T22:26:13.543792+00:00"
+    },
+    {
       "body_id": "sara-vs-natasha",
       "title": "SARA vs NATASHA — 난 살아 / Still Alive | The Mirinaeman Project Music Album",
       "body_type": "SONGBODY",

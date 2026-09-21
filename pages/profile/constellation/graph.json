@@ -9,6 +9,31 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:report-full-after",
+      "kind": "work",
+      "title": "AI 시대의 과제 지도와 평가 — 전체 30장 Before / After",
+      "summary": "출제·지도·검증·평가의 전체 구조를 30장 강의와 공간 조립으로 이해하고, 원본과 비교하며 교수자의 최종 판단을 설계한다.",
+      "url": "https://report-full-after.mirinaeman.chatgpt.site",
+      "image": "/pages/profile/assets/thumbnails/report-full-after.webp",
+      "alt": "AI가 쓴 글을 어떻게 평가할 것인가 — 30장 강의의 첫 화면",
+      "year": "2026",
+      "tags": [
+        "gsap",
+        "three-js",
+        "before-after",
+        "spatial-assembly",
+        "professor",
+        "six-axes"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "출제·지도·검증·평가의 전체 구조를 30장 강의와 공간 조립으로 이해하고, 원본과 비교하며 교수자의 최종 판단을 설계한다."
+        }
+      ]
+    },
+    {
       "id": "work:physical-ai-field-lab-ulsan-jeju",
       "kind": "work",
       "title": "Physical AI Field Lab: Ulsan x Jeju",
@@ -1774,6 +1799,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:report-full-after",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:physical-ai-field-lab-ulsan-jeju",
       "target": "creator:joonho",

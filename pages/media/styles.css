@@ -18,3 +18,5 @@ h1,h2,h3{text-wrap:balance;word-break:keep-all}p,dd,li{ text-wrap:pretty;word-br
 .enhanced [data-mode=image] .demo-stage .frame:not(:nth-child(2)){display:none}
 .crop-door img{transform-origin:22% 58%}.crop-trace img{transform-origin:80% 74%}
 @media(max-width:799px){.enhanced [data-mode=image] .demo-stage .frame{min-height:210px}}
+
+.body-demo[data-mode=image] .crop-room img{object-fit:contain}.knife-symbol{overflow:visible}

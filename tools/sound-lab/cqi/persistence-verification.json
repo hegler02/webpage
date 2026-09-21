@@ -1,0 +1,163 @@
+{
+  "checked_at": "2026-09-21T01:10:46.548043+00:00",
+  "remote_revision": "e688632a2309e27d0d952a291a01233d9bbb0283",
+  "skills": {
+    "slide_builder": {
+      "status": "VERIFIED",
+      "files": [
+        {
+          "path": "skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/feedback-memory.md",
+          "expected_git_blob": "3112aaf144dd76ca43a0560fd30bc9b8ee0c1eb1",
+          "remote_git_blob": "3112aaf144dd76ca43a0560fd30bc9b8ee0c1eb1",
+          "matches": true,
+          "remote_sha256": "6571d8457fe226491dd494d8112ead90f2e120636d6cf2d8d69d9e92d168e757"
+        },
+        {
+          "path": "skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/body-and-motion.md",
+          "expected_git_blob": "9de51ade1955039ccd7c49d8dedf36aa2f370169",
+          "remote_git_blob": "9de51ade1955039ccd7c49d8dedf36aa2f370169",
+          "matches": true,
+          "remote_sha256": "2f776f7c81a8d404e5d345a307aa022c3c004663fe2f60823e6d1cb90d913e04"
+        },
+        {
+          "path": "skill-6a9b883aa8808191b6b20dee0d5a2d1b/references/seed-cases.jsonl",
+          "expected_git_blob": "70b9dfdb05d34f13867bbd62de8663667b8a62d8",
+          "remote_git_blob": "70b9dfdb05d34f13867bbd62de8663667b8a62d8",
+          "matches": true,
+          "remote_sha256": "c34747357842f08b5ccdf515912a3551fa77241313feedbe7bb247544d0471eb"
+        }
+      ]
+    },
+    "mcluhan": {
+      "status": "PENDING",
+      "files": [
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/message-bodies-registry.json",
+          "expected_git_blob": "af3f61891fbf96b009ec4ac63ed754f6d628997f",
+          "remote_git_blob": "4579db06cc817fa295abf689a841a7e37101372a",
+          "matches": false,
+          "remote_sha256": "f6dcae73fe0a0107da5157fe3e33fade721c6743d7a25032ceb3a99bf90f8257"
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/project-evidence/coding-body-message.json",
+          "expected_git_blob": "54d732befa5035b0089f49143b952e29c0fcd7f8",
+          "remote_git_blob": "9ef648d061961e35f49119165305c1691dcdfe58",
+          "matches": false,
+          "remote_sha256": "c65e5af1434565efcabe858f2c1332d5c20d96ee8ebedadd5d3c82463adc54b3"
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/project-evidence/harugyeol-ai-health.json",
+          "expected_git_blob": "309bc799a2d3bae83549994a8df2f8fc430cb94f",
+          "remote_git_blob": null,
+          "matches": false,
+          "remote_sha256": null
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/project-evidence/sound-design-lab.json",
+          "expected_git_blob": "daca82af07d254dd421b1ecdf40443e4d0228569",
+          "remote_git_blob": "6ba405da3507d4923a0c81d92dba687e5ae2ee80",
+          "matches": false,
+          "remote_sha256": "ec08e3ebbbfc2764a999c9e049bc21d3d4622f43d6619ba13b1330bcc6ca0782"
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/project-evidence/suno-song-guide.json",
+          "expected_git_blob": "ecc43909955f3b342b78f9e34f48c0f2c6f34ed4",
+          "remote_git_blob": "c513a3cf38d8cbcec4d43203acb586b92768a659",
+          "matches": false,
+          "remote_sha256": "ecc99d97d4e87aabf066efa26d04f926c7fdd855b163ac0f0d03f1e78a3f455c"
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-events/coding-body-message/3840c3c994ca479e64db954467ac748c329259091fe9f889fd54f0fd71b6d95e.json",
+          "expected_git_blob": "313aef9be1d5d283db4e0a364b79592e01fa3c53",
+          "remote_git_blob": null,
+          "matches": false,
+          "remote_sha256": null
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-events/harugyeol-ai-health/553fcbd6d4565adf1cacda6901dc48cb6c626d7e236cc6d867d6e90715738235.json",
+          "expected_git_blob": "bf3327f6911f45329e9d9dfe1326ffb64aad7798",
+          "remote_git_blob": null,
+          "matches": false,
+          "remote_sha256": null
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-events/sound-design-lab/dfbf97f43cc2776af90ec3f947684de3dffb258fbb7cea954a72161d85f4f64e.json",
+          "expected_git_blob": "c765bd1b67d10c2337f8c5227901467b86c885d9",
+          "remote_git_blob": null,
+          "matches": false,
+          "remote_sha256": null
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-events/suno-song-guide/cb5b7d363c70ac3555ba07e6d7136192e83d63954c00686bf78a66bcb94f32c5.json",
+          "expected_git_blob": "33f76fc9f40a9c735bde35bfd93f408713b9d67f",
+          "remote_git_blob": null,
+          "matches": false,
+          "remote_sha256": null
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/coding-body-message/d4d39a6db735954bb3524e84fb0d92fb242387c3477aa677718348f7105dc6d7.json",
+          "expected_git_blob": "9ef648d061961e35f49119165305c1691dcdfe58",
+          "remote_git_blob": null,
+          "matches": false,
+          "remote_sha256": null
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/coding-body-message/db67377659ca236c34da506c2e08f29408353ad50d36e602827c08143253c31b.json",
+          "expected_git_blob": "54d732befa5035b0089f49143b952e29c0fcd7f8",
+          "remote_git_blob": null,
+          "matches": false,
+          "remote_sha256": null
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/harugyeol-ai-health/d6385d421f1a1c65ff5abc51a53572f7be9377339138293969a832e8f78ef809.json",
+          "expected_git_blob": "309bc799a2d3bae83549994a8df2f8fc430cb94f",
+          "remote_git_blob": null,
+          "matches": false,
+          "remote_sha256": null
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/sound-design-lab/3d2e35b459d122f9ace63f67459c06c8ab35f0e96377b5b2abcc3ccc28876d8a.json",
+          "expected_git_blob": "6ba405da3507d4923a0c81d92dba687e5ae2ee80",
+          "remote_git_blob": null,
+          "matches": false,
+          "remote_sha256": null
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/sound-design-lab/6ffd6b1c516647510424fb1270c52b23bf7c3ba1371598a7707bc4aba4c438b5.json",
+          "expected_git_blob": "daca82af07d254dd421b1ecdf40443e4d0228569",
+          "remote_git_blob": null,
+          "matches": false,
+          "remote_sha256": null
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/suno-song-guide/1b65586b87cddf1225ce13e378b9b9f61bcf31348caa19bfbbafd6f5cff9daf6.json",
+          "expected_git_blob": "c513a3cf38d8cbcec4d43203acb586b92768a659",
+          "remote_git_blob": null,
+          "matches": false,
+          "remote_sha256": null
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/revision-history/suno-song-guide/be59eb475158819c00d640183f028d4440759d8df04330ca04a9e32ecac506ac.json",
+          "expected_git_blob": "ecc43909955f3b342b78f9e34f48c0f2c6f34ed4",
+          "remote_git_blob": null,
+          "matches": false,
+          "remote_sha256": null
+        },
+        {
+          "path": "skill-6a5979cbf6388191bdc282f30a44aa19/references/success-matches/sound-lab-assembly-balanced-v1.json",
+          "expected_git_blob": "68eec1ccc1455a4d1df94a36267cf4d1064d1541",
+          "remote_git_blob": null,
+          "matches": false,
+          "remote_sha256": null
+        }
+      ]
+    }
+  },
+  "observations": [
+    "Slide save response timed out after 55 seconds; subsequent fetch and exact file comparison confirmed persistence.",
+    "Saved slide files remain identical after remote Materialized from stored content revisions.",
+    "McLuhan changes remain local; repeated receive-side non-fast-forward rejections despite fetch/rebase.",
+    "Read and write advertisements returned different master IDs. Server-side cause is unconfirmed. No force push, credential changes, or data removal performed."
+  ],
+  "bounded_retry_outcome": "Slide CQI saved; McLuhan archive persistence remains pending."
+}

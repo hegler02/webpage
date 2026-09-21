@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "status": "CQI_SYNC_PENDING",
+  "status": "CQI_PARTIAL_SYNC",
   "body_id": "sound-design-lab",
   "canonical_url": "https://mirinaeman.com/pages/sound_design_lab/",
   "latest_deployed_at": "2026-09-21T00:30:30.498000+00:00",
   "local_cqi_commit": "5ce1f9e",
   "revision_sha256": "6ffd6b1c516647510424fb1270c52b23bf7c3ba1371598a7707bc4aba4c438b5",
-  "reason": "Official skill saving returned HTTP 503/500. Project acceptance record, approved manifest, success match and recovery patches are preserved separately.",
+  "reason": "Slide skill CQI files are confirmed in the remote stored revision. McLuhan save is still blocked by inconsistent read/write branch advertisements and non-fast-forward rejections.",
   "recovery": "Upsert this exact record and change through mcluhan-message-body. Preserve existing history, validate catalog, and persist through the skill repository. Do not create a duplicate body or infer GOLDEN acceptance.",
   "record": {
     "schema_version": 1,
@@ -163,5 +163,8 @@
   },
   "success_match": "tools/sound-lab/cqi/success-match.json",
   "slide_skill_recovery": "tools/sound-lab/cqi/slide-skill-recovery.patch",
-  "combination_research": "tools/sound-lab/cqi/combination-research.json"
+  "combination_research": "tools/sound-lab/cqi/combination-research.json",
+  "slide_skill_status": "VERIFIED",
+  "mcluhan_skill_status": "PENDING",
+  "persistence_verification": "tools/sound-lab/cqi/persistence-verification.json"
 }

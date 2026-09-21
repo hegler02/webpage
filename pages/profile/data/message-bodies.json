@@ -1028,9 +1028,14 @@
         "physical-ai",
         "hackathon",
         "ulsan",
-        "jeju"
+        "jeju",
+        "causal-chain",
+        "kinetic-typography",
+        "gsap",
+        "motion-js",
+        "view-transitions"
       ],
-      "message_sentence": "울산과 제주 학생이 피지컬 AI 앱을 직접 만드는 해커톤 특강이 슬라이드의 몸을 얻는다.",
+      "message_sentence": "학생이 부품 검사 사례로 감지·판단·행동·검증을 연결하고, 불확실하면 멈추고 사람의 확인으로 다시 검증하는 피지컬 AI 앱을 설계한다.",
       "thumbnail": {
         "path": "assets/thumbnails/physical-ai-field-lab-ulsan-jeju.webp",
         "alt": "“Physical AI Field Lab: Ulsan x Jeju” 제목을 담은 그래픽 썸네일",
@@ -1041,7 +1046,7 @@
       "canonical_url": "https://physical-ai-field-lab-ulsan-jeju.mirinaeman.chatgpt.site",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-08-19T13:55:22Z",
-      "latest_deployed_at": "2026-08-19T14:03:07Z"
+      "latest_deployed_at": "2026-09-21T08:58:31.081669+00:00"
     },
     {
       "body_id": "red-light-run",

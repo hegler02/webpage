@@ -3,9 +3,9 @@
   "status": "CQI_SYNC_PENDING",
   "body_id": "sound-design-lab",
   "canonical_url": "https://mirinaeman.com/pages/sound_design_lab/",
-  "latest_deployed_at": "2026-09-20T23:04:39.732000+00:00",
-  "local_cqi_commit": "92a9355",
-  "revision_sha256": "87cf848eac49eeaec62ef5f61bfbf1783ca5541c853abfc3c853675dc9e199f5",
+  "latest_deployed_at": "2026-09-21T00:30:30.498000+00:00",
+  "local_cqi_commit": "08dbd76",
+  "revision_sha256": "5c984286b92f8c5170d66fd663778c171e60593cdc2b63734a9fb339e98f793f",
   "reason": "Skill repository push returned HTTP 500 and exit status 1; public runtime is independently deployed.",
   "recovery": "Upsert this exact record and change through mcluhan-message-body. Preserve existing history, validate catalog, and persist through the skill repository. Do not create a duplicate body or infer GOLDEN acceptance.",
   "record": {
@@ -38,7 +38,7 @@
     "canonical_url": "https://mirinaeman.com/pages/sound_design_lab/",
     "status": "DEPLOYED",
     "first_deployed_at": "2026-07-30T10:30:22Z",
-    "latest_deployed_at": "2026-09-20T23:04:39.732000+00:00",
+    "latest_deployed_at": "2026-09-21T00:30:30.498000+00:00",
     "deployments": [
       {
         "deployed_at": "2026-07-30T10:30:22Z",
@@ -66,6 +66,21 @@
           "GSAP circuit and final assembly settle with no transient transforms or leaving scene",
           "Project structure/discovery check and repository release gate passed"
         ]
+      },
+      {
+        "deployed_at": "2026-09-21T00:30:30.498000+00:00",
+        "url": "https://mirinaeman.com/pages/sound_design_lab/",
+        "release_ref": "github-main",
+        "source_revision": "e657aa2ceced58b9836296c1cfc92e0c301804d6",
+        "status": "succeeded",
+        "validation": [
+          "Vercel READY dpl_EpgAUpJQYvLumy5RLeyctd23xjPP",
+          "Public route has styles.css?v=217608ec347a and five horizontal route choices",
+          "All five route states fit",
+          "QA equal-width columns and settled transforms verified",
+          "390px enhanced/static reading verified",
+          "Repository release gate PASS"
+        ]
       }
     ],
     "incidents": [
@@ -78,6 +93,16 @@
         "correction": "Set min-height:0, explicit five-field row budgets and fitting text/padding; retain a 592px shared body area.",
         "gate": "tools/sound-lab/check.py validates 30-scene and 32-field identity; QA.md records every active scene body-bound and empty-input scroll measurement.",
         "human_judgment": "User approved the assembly laboratory direction and emphasized kinetic typography. Final deployed result acceptance pending."
+      },
+      {
+        "incident_id": "routing-qa-left-optical-weight",
+        "scope": "PROJECT",
+        "status": "CORRECTED",
+        "observation": "User identified left-heavy composition on scenes 13 and 15 while accepting the other 28.",
+        "root_cause": "Vertical route navigation and left-aligned content concentrated visible ink at left; large left QA color field overwhelmed lighter right questions.",
+        "correction": "Route choices now span the top with three output columns; QA uses a shallow full-width identity rail over five equal review columns. Only scene-specific CSS changed.",
+        "gate": "Five route panes individually fit; QA columns have equal widths and common bounds; existing GSAP finishes with no transforms; 390px reading and enhanced viewport contain content; check.py and release gate pass.",
+        "human_judgment": "Other 28 scenes accepted by the user; repaired 13 and 15 await human review."
       }
     ],
     "invariants": [],
@@ -85,6 +110,10 @@
       {
         "statement": "가자 이거 너무 좋아. 글자나 객체들이 동적으로 애니메이션되면서 조립이 되는데",
         "scope": "Implementation approval for the proposed assembly laboratory, with large kinetic typography; not final result acceptance."
+      },
+      {
+        "statement": "이 두장만 좌측으로 쏠린듯한 느낌이 들어. 나머지는 매우 좋다. 이런게 되는구나!!!",
+        "scope": "Acceptance of the existing 28 scenes excluding 13/15. No GOLDEN promotion of the complete deck or revised two scenes."
       }
     ],
     "golden_baseline": null,
@@ -105,11 +134,11 @@
     }
   },
   "change": {
-    "reason": "Refactor the existing Sound Design Lab lecture into the user-approved assembly laboratory with kinetic typography and a persistent 9-step canvas.",
+    "reason": "Correct optical balance on slides 13 and 15 while preserving user-approved 28 scenes and motion.",
     "evidence": [
-      "User: 가자 이거 너무 좋아 … 특히 폰트 애니메이션을 강조하면",
-      "13f08e2a6a504ba47098b0c183d0d6f4c1323fab:tools/sound-lab/DESIGN.md",
-      "13f08e2a6a504ba47098b0c183d0d6f4c1323fab:tools/sound-lab/QA.md"
+      "User feedback names the two attached screenshots",
+      "e657aa2ceced58b9836296c1cfc92e0c301804d6:tools/sound-lab/QA.md",
+      "e657aa2ceced58b9836296c1cfc92e0c301804d6:tools/sound-lab/feedback.jsonl"
     ],
     "verdict": "pending"
   }

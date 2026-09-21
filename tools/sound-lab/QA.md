@@ -37,3 +37,5 @@ Skill repository push failed with HTTP 500; exact CQI record and change are pres
 - 390px enhanced viewport fits exactly; 390px no-script reading mode has no document or targeted text overflow.
 - check.py and repository release gate pass. Generated HTML differs only in cache-busting asset query hashes.
 - Revised two scenes still await human visual acceptance.
+
+Balance runtime published as e657aa2ceced58b9836296c1cfc92e0c301804d6; Vercel READY dpl_EpgAUpJQYvLumy5RLeyctd23xjPP at 2026-09-21T00:30:30.498Z. The original public URL loads styles.css?v=217608ec347a; live screenshots confirm five horizontal choices on 13 and five equal review columns on 15. Archive export remains 56 bodies and changes only this body's deployment timestamp.

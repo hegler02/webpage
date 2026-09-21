@@ -28,3 +28,12 @@ Runtime commit: 13f08e2a6a504ba47098b0c183d0d6f4c1323fab. Vercel READY: dpl_B8ae
 Existing public URL confirms 30 scenes and 32 fields. Eight runtime/media resources are HTTP 200 and byte-identical (release-verification.json).
 The archive export preserves all 56 existing bodies and updates only sound-design-lab metadata. No Work-menu change.
 Skill repository push failed with HTTP 500; exact CQI record and change are preserved in body-archive-pending.json for recovery. Public catalog publication is independent.
+
+## Scoped balance repair: scenes 13 and 15
+- User accepted the other 28 scenes; this repair changes only `.routing` and `.qa-*` layout rules plus their static-reading/print equivalents. No text, controller, motion, media or other scene rules changed.
+- 13: five horizontal options; title / insufficient approach / designed output share the panel width. All five selected states show exactly one pane; headings and copy fit.
+- 15: full-width shallow QA rail; five equal 326.4px columns, common top/bottom and question baseline. Desktop screenshots reviewed.
+- Existing GSAP stagger completes: data-animating false, no leaving scene, all six assembly transforms none.
+- 390px enhanced viewport fits exactly; 390px no-script reading mode has no document or targeted text overflow.
+- check.py and repository release gate pass. Generated HTML differs only in cache-busting asset query hashes.
+- Revised two scenes still await human visual acceptance.

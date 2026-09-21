@@ -81,3 +81,6 @@ workbook.js는 9단계 32개 문자열을 브라우저에 저장한다. localSto
 hegler02/webpage main → Vercel, body_id sound-design-lab 유지.
 실제 배포 후 매클루언 원장에 덧붙이고 공개 카탈로그를 정식 렌더러로 갱신한다.
 이번 결과는 기술 검증 후 DEPLOYED이며 최종 사용자 수락을 기다린다.
+
+## Balance correction: 13 / 15
+The user identified residual left-side visual weight in these two scenes. Routing now puts equal choices across the top and distributes type, incomplete approach and intended output across the full body. QA now places its identity on a shallow full-width rail above five equal review columns. This is a project-specific correction: assess the distribution of visible ink and colored surfaces after motion settles, not just the outer grid bounds. Other 28 scenes, copy and motion are preserved.

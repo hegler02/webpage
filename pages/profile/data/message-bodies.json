@@ -1044,7 +1044,7 @@
         "focal_point": "50% 50%"
       },
       "canonical_url": "https://physical-ai-field-lab-ulsan-jeju.mirinaeman.chatgpt.site",
-      "status": "DEPLOYED",
+      "status": "GOLDEN",
       "first_deployed_at": "2026-08-19T13:55:22Z",
       "latest_deployed_at": "2026-09-21T10:08:21.491858+00:00"
     },

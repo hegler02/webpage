@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "body_id": "image-agent",
+  "title": "단문 인과체인 — 내 생각을 이미지로 옮기는 법",
+  "body_type": "SLIDEBODY",
+  "source_kinds": [
+    "education",
+    "visual-thinking"
+  ],
+  "tags": [
+    "ai",
+    "image",
+    "lecture"
+  ],
+  "message_sentence": "한 문장에 하나의 판단을 담고 앞 문장을 다음 문장의 기준으로 이어가며, 문장과 장면을 함께 수정하는 단문 인과체인 강의.",
+  "thumbnail": {
+    "source_kind": "generated-title-card",
+    "path": "assets/thumbnails/image-agent.webp",
+    "alt": "단문 인과체인 제목과 사각 안경을 연결한 이미지 하네스 강의",
+    "width": 960,
+    "height": 540,
+    "focal_point": "50% 50%",
+    "sha256": "287134f3de64b87abf9fca85d63164824d548f816b8c707888c922c1a0a40e7d"
+  },
+  "canonical_url": "https://mirinaeman.com/pages/ImageAgent/",
+  "status": "DEPLOYED",
+  "first_deployed_at": "2026-07-30T10:30:22Z",
+  "latest_deployed_at": "2026-09-21T05:27:51.135141Z",
+  "deployments": [
+    {
+      "deployed_at": "2026-07-30T10:30:22Z",
+      "url": "https://mirinaeman.com/pages/ImageAgent/",
+      "release_ref": "github-main",
+      "source_revision": "014a0243d89c1b5c3050890df8767941a0369b9f",
+      "validation": [
+        "repository-index-present",
+        "vercel-pages-deployment-structure"
+      ],
+      "status": "succeeded"
+    },
+    {
+      "deployed_at": "2026-09-21T05:27:51.135141Z",
+      "url": "https://mirinaeman.com/pages/ImageAgent/",
+      "release_ref": "github-main",
+      "source_revision": "43de93fe93292a69c13f6c14b24ae1fb8ba020e8",
+      "artifact_sha256": "bbb0df02f2f8fd8c48a729c2cca99fcd025f85e46b595ec7e4d8b23ba86c1ea6",
+      "validation": [
+        "http-200-public-html-byte-match",
+        "original-19-preserved",
+        "68-state-forward-reverse",
+        "19-settled-scenes-desktop-and-phone",
+        "320px-critical-scene-repair",
+        "lens-motion-and-reader-recovery",
+        "og-local-metadata"
+      ],
+      "status": "succeeded"
+    }
+  ],
+  "incidents": [
+    {
+      "incident_id": "image-chain-relational-semantics",
+      "scope": "PROJECT",
+      "status": "CORRECTED",
+      "observation": "Owner identified short-sentence causal chains as the central message. A decorative sequence could hide the relation between sentences.",
+      "root_cause": "Object attributes and condition-result relations can be conflated.",
+      "correction": "Each of 68 states has a sentence, relation and visible result. Scene 4 distinguishes dependency from causality; scene 18 chains rain, wet road and reflected light.",
+      "gate": "python3 tools/image-agent/validate.py; explicit relation assertions and original-text preservation",
+      "human_judgment": "Core message approved; deployed result acceptance pending."
+    },
+    {
+      "incident_id": "image-chain-height-budget",
+      "scope": "PROJECT",
+      "status": "CORRECTED",
+      "observation": "Two-line heading pushed scene 2 result below the desktop body; scene 10 caption exceeded the 320px scene boundary.",
+      "root_cause": "Automatic vertical margins and intrinsic diagram size escaped the available grid height; mobile pipeline minimum height overconsumed the body.",
+      "correction": "Composition uses height:100% and margin:0 auto; diagrams shrink within remaining space. Mobile pipeline minimum height is 160px.",
+      "gate": "tools/image-agent/qa-result.json: all 19 settled final scenes at 1348x900 and 390x844; five critical scenes at 320x740; scene 10 recheck caption bottom 658.42 < scene bottom 676.",
+      "human_judgment": "Technical repair verified; visual acceptance pending."
+    }
+  ],
+  "invariants": [],
+  "approvals": [
+    {
+      "kind": "implementation-and-publication",
+      "evidence": "오케이 가자..여기서 핵심은 단문 인과체인!!!",
+      "scope": "Approved bright image-studio refactor at existing ImageAgent URL; final experiential acceptance pending."
+    }
+  ],
+  "golden_baseline": null,
+  "validation_limits": [
+    "Generic dark-first/light-remap policy does not match the explicitly approved single-light design; no full static-validator PASS claimed.",
+    "Desktop and phone geometry checks cover all settled final scenes; not every intermediate frame or browser engine.",
+    "Generated diagrams are explanatory, not actual AI generation results."
+  ]
+}

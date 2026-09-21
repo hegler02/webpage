@@ -1,0 +1,18 @@
+{
+  "state": "ARCHIVE_PENDING",
+  "body_id": "image-agent",
+  "body_url": "https://mirinaeman.com/pages/ImageAgent/",
+  "record_file": "body-archive-record.json",
+  "change_file": "body-archive-change.json",
+  "record_revision": "c3f7727507b1b8dc74be71f22e7b3d62a7379f14a6a164cc22bc1ac2c26059be",
+  "skill_local_validation": "PASS",
+  "skill_remote_save": "Failed after two bounded attempts; final remote read confirms the ImageAgent record is unchanged.",
+  "catalog_sync": "blocked-by-pre-existing-record-drift",
+  "unrelated_body_ids": [
+    "coding-body-message",
+    "harugyeol-ai-health",
+    "sound-design-lab",
+    "suno-song-guide"
+  ],
+  "protection": "Do not overwrite the public catalog with an older export or remove existing works. Resume from verified official skill records."
+}

@@ -1,0 +1,9 @@
+{
+  "reason": "Refactor approved ImageAgent lecture around short-sentence causal chains and record verified layout corrections.",
+  "evidence": [
+    "User: 오케이 가자..여기서 핵심은 단문 인과체인!!!",
+    "tools/image-agent/qa-result.json",
+    "production commit 43de93fe93292a69c13f6c14b24ae1fb8ba020e8"
+  ],
+  "verdict": "pending"
+}

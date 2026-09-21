@@ -1,0 +1,56 @@
+{
+  "checked_at": "2026-09-21T05:27:51.135141Z",
+  "source_revision": "43de93fe93292a69c13f6c14b24ae1fb8ba020e8",
+  "content": {
+    "originals_preserved": 19,
+    "state_machine_forward_reverse_states": 68,
+    "font_glyph_coverage": "pass",
+    "og_metadata": "local-and-public-probe-pass"
+  },
+  "browser": {
+    "desktop_final_states": 19,
+    "desktop_viewport": [
+      1348,
+      900
+    ],
+    "phone_final_states": 19,
+    "phone_viewport": [
+      390,
+      844
+    ],
+    "narrow_scenes": [
+      4,
+      6,
+      10,
+      18,
+      19
+    ],
+    "narrow_viewport": [
+      320,
+      740
+    ],
+    "narrow_scene_10_fix": {
+      "caption_bottom": 658.421875,
+      "scene_bottom": 676
+    },
+    "motion": "First entrance, lens zoom interpolation, reverse and reading-return recovery inspected",
+    "reading_return": {
+      "scene": 6,
+      "beat": 2,
+      "viewBox": "0 0 640 420",
+      "heart_opacity": 0
+    },
+    "public_share": "canonical URL copy succeeded"
+  },
+  "production": {
+    "url": "https://mirinaeman.com/pages/ImageAgent/",
+    "http_status": 200,
+    "bytes_match_local": true,
+    "sha256": "bbb0df02f2f8fd8c48a729c2cca99fcd025f85e46b595ec7e4d8b23ba86c1ea6"
+  },
+  "limitations": [
+    "Generic dark-first/light-remap policy does not match the explicitly approved single-light design; no full static-validator PASS claimed.",
+    "Desktop and phone geometry checks cover all settled final scenes; not every intermediate frame or browser engine.",
+    "Generated diagrams are explanatory, not actual AI generation results."
+  ]
+}

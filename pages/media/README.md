@@ -1,44 +1,14 @@
-# Storyboard Timeline Template
+# 매체는 메시지의 몸
 
-`매체는 메시지의 몸` 36장 강의용 HTML 슬라이드입니다. 스토리보드형 미디어 프레임과 넷플릭스식 하단 타임라인을 사용합니다.
+김준호의 미디어 철학을 다루는 36장 웹 프레젠테이션입니다. 원문 문장과 참고 이미지 11장을 보존합니다.
 
-## 실행
+- 데스크톱: 좌우 방향키, Space, 이전·다음 버튼으로 진행합니다.
+- 상단 목차: 장면 직접 이동과 움직임 줄이기를 지원합니다.
+- 상단 책 아이콘: 전체 읽기와 발표 모드를 전환합니다. 작은 화면은 읽기로 시작합니다.
+- 14·34장: 같은 이야기를 이미지, 웹툰, 영상의 구조로 비교합니다.
+- 18장: 여백 조절로 패널 사이의 공간을 바꿉니다.
+- 참고 도해: 클릭하면 원본을 확대합니다.
 
-로컬 서버가 `samples` 폴더를 서빙 중이면 아래 URL로 엽니다.
+`index.html`에는 전체 강의가 정적 HTML로 포함됩니다. `deck.js`는 탐색과 입력을, `motion.js`는 GSAP·Flip 연출과 중단 처리를 맡습니다. 폰트와 이미지는 자체 제공하며 GSAP·Flip은 연출이 필요할 때 불러옵니다.
 
-```text
-http://127.0.0.1:4189/storyboard_timeline_template/index.html
-```
-
-## 구조
-
-```text
-storyboard_timeline_template/
-├── index.html   # 레이아웃 골격
-├── styles.css   # 스토리보드/필름 타임라인 디자인
-├── slides.js    # 36장 강의 내용 데이터
-└── deck.js      # 렌더링, 키보드, 타임라인 이동
-```
-
-## 수정 방법
-
-- 강의 내용은 `slides.js`의 `slides` 배열만 수정합니다.
-- 왼쪽 하이어라키는 `hierarchy` 배열에서 수정합니다.
-- 미디어 프레임 타입은 `media.mode`로 선택합니다.
-
-지원 모드:
-
-```text
-image    # 한 장면 / 이미지형
-webtoon  # 패널과 여백
-video    # 쇼트/컷 타임라인
-map      # 하이어라키 지도
-table    # 매체 비교표
-links    # 실습 에이전트 링크
-appendix # 16:9 별첨 이미지
-```
-
-## 의도
-
-레고 블록 템플릿은 지식봇/규정집처럼 모듈 조립을 설명할 때 적합합니다.
-이 템플릿은 이미지, 웹툰, 영상처럼 매체 변환과 시간/컷/프레임을 설명하는 강의에 맞춥니다.
+원문 권위는 `slides.js`와 `tools/media-body/source.json`입니다. `python tools/media-body/render.py`로 HTML을 재생성합니다. `python tools/media-body/check.py`로 원문·참고 이미지·폰트·검색 구조를 검사합니다.

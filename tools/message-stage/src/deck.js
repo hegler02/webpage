@@ -30,7 +30,7 @@
   }
   function go(next,{animate=true,history=true,direction=1}={}){
     if(same(next,state))return;
-    const old=scenes[state.scene];state=next;
+    const old=scenes.find(scene=>scene.classList.contains('is-active'));state=next;
     if(history)window.history.replaceState(null,'',MessageState.hash(state));
     if(animate&&!reading)MessageMotion.transition(old,scenes[state.scene],paint,config,direction);
     else{MessageMotion.settle();paint();}

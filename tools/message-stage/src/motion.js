@@ -3,7 +3,7 @@ window.MessageMotion = (() => {
   let loading=null,enabled=true,context=null,animation=null,epoch=0;
   const media=matchMedia('(prefers-reduced-motion: reduce)');
   const loadScript=src=>new Promise((resolve,reject)=>{
-    const script=document.createElement('script');script.src=src;script.onload=resolve;script.onerror=()=>{script.remove();reject(new Error('Animation runtime unavailable'));};document.head.append(script);
+    const script=document.createElement('script');script.src=src;const timer=setTimeout(()=>{script.remove();reject(new Error('Animation runtime timed out'));},5000);script.onload=()=>{clearTimeout(timer);resolve();};script.onerror=()=>{clearTimeout(timer);script.remove();reject(new Error('Animation runtime unavailable'));};document.head.append(script);
   });
   function load(config){
     if(!loading)loading=loadScript(config.runtime.gsap).then(()=>loadScript(config.runtime.flip)).then(()=>{gsap.registerPlugin(Flip);return true;}).catch(error=>{document.body.dataset.motion='fallback';console.warn(error.message);return false;});
@@ -15,8 +15,8 @@ window.MessageMotion = (() => {
     settle();const token=epoch;
     const allowed=enabled&&!media.matches&&!document.hidden;
     if(!allowed){mutate();return;}
-    // Apply a user command immediately even during the first runtime request.
-    if(!window.gsap||!window.Flip){mutate();const ready=await load(config);if(ready&&token===epoch&&enabled&&!media.matches)enter(next,config,direction);return;}
+    // The first deliberate advance loads the renderer while the readable opening holds.
+    if(!window.gsap||!window.Flip){const ready=await load(config);if(token!==epoch)return;if(!ready||!enabled||media.matches){mutate();return;}}
     const same=previous===next;
     const targets=same?[...next.querySelectorAll('[data-flip-id]')]:[];
     const before=new Set([...next.querySelectorAll('[data-at],[data-from],.item')].filter(visible));

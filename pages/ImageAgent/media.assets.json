@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "image-agent-og",
+      "role": "open-graph",
+      "kind": "image",
+      "source": {
+        "kind": "authored",
+        "filename": "og.jpg",
+        "path": "assets/og.jpg",
+        "sha256": "ced136a8d63e5e6a5fa1123386e81c9363e173aeb726ade64ff792618db0321b"
+      },
+      "delivery": {
+        "path": "assets/og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "ced136a8d63e5e6a5fa1123386e81c9363e173aeb726ade64ff792618db0321b"
+      }
+    }
+  ]
+}

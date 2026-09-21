@@ -1,0 +1,3 @@
+Canonical: https://mirinaeman.com/pages/ImageAgent/
+Rebuild: python3 tools/image-agent/render.py
+Runtime files are static. Preserve the ImageAgent path and its case.

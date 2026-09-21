@@ -1,0 +1,502 @@
+{
+  "title": "단문 인과체인 — 내 생각을 이미지로 옮기는 법",
+  "description": "김준호의 19장 이미지 하네스 강의. 단문 인과체인으로 대상과 조건을 연결하고, 문장을 수정하면 장면의 어느 부분이 바뀌는지 확인합니다.",
+  "canonical": "https://mirinaeman.com/pages/ImageAgent/",
+  "author": "김준호",
+  "agent": "https://chatgpt.com/g/g-69f085b428c88191960302b3654a8549-mirinaeman-image-harness",
+  "album": "https://mirinaeverse.com/album/fine/pretend.html",
+  "related": "https://mirinaeman.com/pages/media_message_deck_deploy/",
+  "image": "assets/og.jpg",
+  "image_alt": "단문 인과체인과 사각 안경의 렌즈를 연결한 이미지 하네스 강의",
+  "runtime": {
+    "gsap": "assets/vendor/gsap-3.15.0.min.js",
+    "flip": "assets/vendor/Flip-3.15.0.min.js"
+  },
+  "motion": {
+    "duration": 0.9,
+    "enter": 0.55,
+    "exit": 0.2,
+    "stagger": 0.08,
+    "travel": 32,
+    "ease": "power3.inOut",
+    "arrival": "power3.out",
+    "loadTimeout": 5000,
+    "swipeDistance": 60,
+    "swipeRatio": 1.5
+  },
+  "scenes": [
+    {
+      "slug": "opening",
+      "label": "IMAGE HARNESS",
+      "steps": [
+        {
+          "sentence": "생각을 한 문장으로 꺼낸다.",
+          "relation": "시작",
+          "result": "생각"
+        },
+        {
+          "sentence": "앞 문장을 이어서 구체화한다.",
+          "relation": "연결",
+          "result": "단문 인과체인"
+        },
+        {
+          "sentence": "고칠 문장과 바뀔 장면을 연결한다.",
+          "relation": "수정",
+          "result": "내가 고칠 수 있는 구조"
+        }
+      ],
+      "beats": 3
+    },
+    {
+      "slug": "problem",
+      "label": "01 / FIND THE BREAK",
+      "steps": [
+        {
+          "sentence": "쓸쓸한 이미지를 원한다.",
+          "relation": "의도",
+          "result": "감정은 있으나 장면의 기준은 모호하다."
+        },
+        {
+          "sentence": "거리는 비어 있다.",
+          "relation": "장면의 근거",
+          "result": "비어 있는 거리가 쓸쓸함을 뒷받침한다."
+        },
+        {
+          "sentence": "거리의 조명은 차갑다.",
+          "relation": "앞 대상에 연결",
+          "result": "거리의 조건을 한 문장씩 고칠 수 있다."
+        }
+      ],
+      "beats": 3
+    },
+    {
+      "slug": "comma",
+      "label": "02 / FROM WORDS TO RELATIONS",
+      "steps": [
+        {
+          "sentence": "cinematic, emotional, beautiful",
+          "relation": "키워드",
+          "result": "무엇을 바꿔야 하는가?"
+        },
+        {
+          "sentence": "거리는 밤이다.",
+          "relation": "대상 → 상태",
+          "result": "거리의 시간을 정한다."
+        },
+        {
+          "sentence": "밤의 거리는 비어 있다.",
+          "relation": "같은 대상 → 조건",
+          "result": "고칠 위치가 보인다."
+        }
+      ],
+      "beats": 3
+    },
+    {
+      "slug": "chain",
+      "label": "03 / THE CORE",
+      "steps": [
+        {
+          "sentence": "주인공은 안경을 쓴다.",
+          "relation": "대상을 지정한다",
+          "result": "주인공 → 안경"
+        },
+        {
+          "sentence": "안경은 사각형이다.",
+          "relation": "앞 대상의 속성을 정한다",
+          "result": "안경 → 형태"
+        },
+        {
+          "sentence": "그 안경의 왼쪽 렌즈는 빛에 반응한다.",
+          "relation": "구성 요소에 조건을 연결한다",
+          "result": "안경 → 왼쪽 렌즈 → 빛"
+        },
+        {
+          "sentence": "햇빛을 받으면 그 렌즈가 어두워진다.",
+          "relation": "조건에 결과를 연결한다",
+          "result": "햇빛 → 렌즈 변화"
+        }
+      ],
+      "beats": 4
+    },
+    {
+      "slug": "grammar",
+      "label": "04 / ONE SENTENCE",
+      "steps": [
+        {
+          "sentence": "예쁘고 쓸쓸한 밤거리",
+          "relation": "분리 전",
+          "result": "여러 판단이 한 문장에 겹쳐 있다."
+        },
+        {
+          "sentence": "거리는 밤이다.",
+          "relation": "시간",
+          "result": "시간을 정한다."
+        },
+        {
+          "sentence": "거리는 비어 있다.",
+          "relation": "밀도",
+          "result": "인물의 수를 정한다."
+        },
+        {
+          "sentence": "거리의 조명은 차갑다.",
+          "relation": "빛",
+          "result": "조명의 조건을 정한다."
+        }
+      ],
+      "beats": 4
+    },
+    {
+      "slug": "depth",
+      "label": "05 / FOLLOW THE SUBJECT",
+      "steps": [
+        {
+          "sentence": "주인공은 안경을 쓴다.",
+          "relation": "대상",
+          "result": "무엇을 그릴지 정한다."
+        },
+        {
+          "sentence": "안경은 사각형이다.",
+          "relation": "형태",
+          "result": "안경의 형태만 구체화한다."
+        },
+        {
+          "sentence": "안경테는 금테다.",
+          "relation": "재질",
+          "result": "프레임의 재질만 구체화한다."
+        },
+        {
+          "sentence": "왼쪽 렌즈에는 작은 하트가 있다.",
+          "relation": "하위 요소",
+          "result": "착용자 기준 왼쪽 렌즈에 표시한다."
+        },
+        {
+          "sentence": "햇빛을 받으면 그 렌즈가 어두워진다.",
+          "relation": "조건 → 결과",
+          "result": "지정한 렌즈의 반응을 확인한다."
+        }
+      ],
+      "beats": 5
+    },
+    {
+      "slug": "identity",
+      "label": "06 / IDENTITY FIRST",
+      "steps": [
+        {
+          "sentence": "대상은 같은 안경이다.",
+          "relation": "Entity IP",
+          "result": "형태와 핵심 특징을 유지한다."
+        },
+        {
+          "sentence": "배경은 같은 방이다.",
+          "relation": "World IP",
+          "result": "공간의 정체성을 유지한다."
+        },
+        {
+          "sentence": "허용한 속성만 바꾼다.",
+          "relation": "fixed / variable",
+          "result": "변수와 고정값을 분리한다."
+        }
+      ],
+      "beats": 3
+    },
+    {
+      "slug": "blank",
+      "label": "07 / CREATIVE BLANK",
+      "steps": [
+        {
+          "sentence": "핵심 대상과 시선 흐름을 고정한다.",
+          "relation": "고정",
+          "result": "중심은 움직이지 않는다."
+        },
+        {
+          "sentence": "주변 소품과 미세한 질감은 열어둔다.",
+          "relation": "여백",
+          "result": "허용한 주변 영역만 채워진다."
+        },
+        {
+          "sentence": "의도와 다른 추가 해석을 확인한다.",
+          "relation": "검토",
+          "result": "여백에도 검토할 기준이 있다."
+        }
+      ],
+      "beats": 3
+    },
+    {
+      "slug": "structure",
+      "label": "08 / COMPOSE THE SCENE",
+      "steps": [
+        {
+          "sentence": "가장 먼저 볼 대상을 정한다.",
+          "relation": "primary anchor",
+          "result": "첫 시선의 도착점"
+        },
+        {
+          "sentence": "대상에서 다음 요소로 시선을 잇는다.",
+          "relation": "flow path",
+          "result": "관계가 읽히는 경로"
+        },
+        {
+          "sentence": "중요도에 따라 크기와 밀도를 나눈다.",
+          "relation": "hierarchy / density",
+          "result": "주요 요소와 보조 요소"
+        },
+        {
+          "sentence": "장면에 비워둘 공간을 남긴다.",
+          "relation": "negative space",
+          "result": "시선이 쉴 자리"
+        }
+      ],
+      "beats": 4
+    },
+    {
+      "slug": "package",
+      "label": "09 / BEFORE GENERATION",
+      "steps": [
+        {
+          "sentence": "요청을 읽는다.",
+          "relation": "01 / 요청",
+          "result": "사용자가 말한 것"
+        },
+        {
+          "sentence": "의도를 해석한다.",
+          "relation": "02 / 해석",
+          "result": "무엇을 남길 것인가"
+        },
+        {
+          "sentence": "단문 인과체인을 구성한다.",
+          "relation": "03 / 구조",
+          "result": "무엇이 무엇에 연결되는가"
+        },
+        {
+          "sentence": "프롬프트 패키지를 제시한다.",
+          "relation": "04 / 프롬프트",
+          "result": "사용자가 읽고 수정한다."
+        },
+        {
+          "sentence": "명시적 생성 요청 후 실행한다.",
+          "relation": "05 / 생성",
+          "result": "승인한 구조를 이미지로 옮긴다."
+        }
+      ],
+      "beats": 5
+    },
+    {
+      "slug": "korean",
+      "label": "10 / SOURCE OF TRUTH",
+      "steps": [
+        {
+          "sentence": "한국어로 장면을 쓴다.",
+          "relation": "장면",
+          "result": "거리는 밤이다."
+        },
+        {
+          "sentence": "한국어로 제약을 쓴다.",
+          "relation": "제약",
+          "result": "거리에 사람을 추가하지 않는다."
+        },
+        {
+          "sentence": "자연어로 고칠 부분을 지정한다.",
+          "relation": "수정",
+          "result": "조명만 따뜻하게 바꾼다."
+        }
+      ],
+      "beats": 3
+    },
+    {
+      "slug": "english",
+      "label": "11 / SAME JUDGMENT",
+      "steps": [
+        {
+          "sentence": "거리는 밤이다.",
+          "relation": "한국어 원본",
+          "result": "The street is at night."
+        },
+        {
+          "sentence": "거리는 비어 있다.",
+          "relation": "같은 장면 조건",
+          "result": "The street is empty."
+        },
+        {
+          "sentence": "조명은 차갑다.",
+          "relation": "같은 빛 조건",
+          "result": "The lighting is cool."
+        }
+      ],
+      "beats": 3
+    },
+    {
+      "slug": "dsl",
+      "label": "12 / TRACE THE TRANSLATION",
+      "steps": [
+        {
+          "sentence": "조명은 차갑다.",
+          "relation": "원문 근거",
+          "result": "사용자가 정한 빛의 느낌"
+        },
+        {
+          "sentence": "차가운 색감의 조명으로 해석한다.",
+          "relation": "사용자용 의미",
+          "result": "색감의 방향을 설명한다."
+        },
+        {
+          "sentence": "cool-toned lighting",
+          "relation": "실행값",
+          "result": "확정한 의미를 실행 언어로 옮긴다."
+        }
+      ],
+      "beats": 3
+    },
+    {
+      "slug": "negative",
+      "label": "13 / KEEP THE CONSTRAINTS",
+      "steps": [
+        {
+          "sentence": "안경의 형태를 바꾸지 않는다.",
+          "relation": "대상 → 제약",
+          "result": "사각 프레임을 유지한다."
+        },
+        {
+          "sentence": "렌즈에 다른 장식을 추가하지 않는다.",
+          "relation": "하위 요소 → 제약",
+          "result": "작은 하트만 남긴다."
+        },
+        {
+          "sentence": "하트의 크기를 과장하지 않는다.",
+          "relation": "속성 → 제약",
+          "result": "작은 비율을 유지한다."
+        }
+      ],
+      "beats": 3
+    },
+    {
+      "slug": "patch",
+      "label": "14 / CHANGE ONE THING",
+      "steps": [
+        {
+          "sentence": "안경의 형태를 유지한다.",
+          "relation": "Preserve / 유지",
+          "result": "전체 프레임은 그대로 둔다."
+        },
+        {
+          "sentence": "렌즈의 하트를 뺀다.",
+          "relation": "Remove / 삭제",
+          "result": "선택한 표시만 지운다."
+        },
+        {
+          "sentence": "금테를 검은 테로 바꾼다.",
+          "relation": "Replace / 교체",
+          "result": "프레임 색만 바꾼다."
+        },
+        {
+          "sentence": "왼쪽 렌즈에 작은 별을 넣는다.",
+          "relation": "Add / 추가",
+          "result": "지정한 렌즈에만 표시한다."
+        }
+      ],
+      "beats": 4
+    },
+    {
+      "slug": "album",
+      "label": "15 / FROM EMOTION TO SCENE",
+      "steps": [
+        {
+          "sentence": "괜찮은 척한다.",
+          "relation": "감정",
+          "result": "겉으로 보이는 표정"
+        },
+        {
+          "sentence": "혼자 집으로 간다.",
+          "relation": "상황",
+          "result": "혼자인 인물과 귀갓길"
+        },
+        {
+          "sentence": "창문에 얼굴이 비친다.",
+          "relation": "관계",
+          "result": "실제 얼굴과 반사된 얼굴"
+        },
+        {
+          "sentence": "실제 표정과 반사가 다르다.",
+          "relation": "장면의 긴장",
+          "result": "말하지 않은 감정을 대비로 드러낸다."
+        }
+      ],
+      "beats": 4
+    },
+    {
+      "slug": "lock",
+      "label": "16 / HUMAN DECISION",
+      "steps": [
+        {
+          "sentence": "짧은 아이디어를 받는다.",
+          "relation": "입력",
+          "result": "먼저 의도를 묻는다."
+        },
+        {
+          "sentence": "프롬프트 패키지를 보여준다.",
+          "relation": "검토",
+          "result": "설명과 문장을 먼저 고친다."
+        },
+        {
+          "sentence": "명시적으로 생성을 요청한다.",
+          "relation": "실행",
+          "result": "그때 생성 단계로 간다."
+        }
+      ],
+      "beats": 3
+    },
+    {
+      "slug": "workshop",
+      "label": "17 / YOUR CAUSAL CHAIN",
+      "steps": [
+        {
+          "sentence": "편의점은 작다.",
+          "relation": "대상",
+          "result": "크기와 정체성"
+        },
+        {
+          "sentence": "편의점 주변은 밤이다.",
+          "relation": "배경",
+          "result": "시간과 공간"
+        },
+        {
+          "sentence": "비가 내려 앞 도로가 젖는다.",
+          "relation": "원인 → 결과",
+          "result": "비와 젖은 도로를 연결한다."
+        },
+        {
+          "sentence": "젖은 도로에 간판 불빛이 반사된다.",
+          "relation": "앞 결과 → 다음 조건",
+          "result": "젖은 표면과 빛의 반사를 연결한다."
+        },
+        {
+          "sentence": "주변 소품은 AI가 제안하게 둔다.",
+          "relation": "창작 여백",
+          "result": "핵심 인과를 고정한 뒤 여백을 연다."
+        }
+      ],
+      "beats": 5
+    },
+    {
+      "slug": "closing",
+      "label": "18 / WHAT REMAINS",
+      "steps": [
+        {
+          "sentence": "한 문장에 하나의 판단을 담는다.",
+          "relation": "단문",
+          "result": "무엇을 고칠지 보인다."
+        },
+        {
+          "sentence": "앞 문장을 다음 문장의 기준으로 삼는다.",
+          "relation": "연결",
+          "result": "무엇이 달라질지 추적한다."
+        },
+        {
+          "sentence": "수정 후 전체 장면을 다시 확인한다.",
+          "relation": "검증",
+          "result": "방향은 내가 잡는다."
+        }
+      ],
+      "beats": 3
+    }
+  ]
+}

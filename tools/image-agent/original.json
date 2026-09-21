@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "title": "내 생각을 이미지로 옮기는 법",
+    "html": "<section aria-label=\"1 / 19\" class=\"slide slide-01 hero\" data-slide=\"1\">\n<div class=\"slide-inner\">\n<div class=\"shell hero-shell\">\n<div class=\"hero-copy\"><div class=\"kicker\">IMAGE MAKING LECTURE</div><h1 class=\"display-title\">내 생각을<br/>이미지로 옮기는 법</h1><p class=\"lead\">단문 연결형 프롬프팅과 이미지 하네스</p><div class=\"big-line\">AI가 그리지만, 방향은 사용자가 잡는다.</div></div>\n<div aria-hidden=\"true\" class=\"visual flow-visual\"><div class=\"flow-line\"></div><span>생각</span><span>단문</span><span>연결</span><span>장면</span><span>수정</span><div class=\"professor-credit\">동서울대학교 김준호 교수</div></div>\n</div>\n</div>\n<!-- NOTES:\n        이 강의는 이미지 생성기 사용법이 아니다. 사용자가 원하는 장면을 설명하고, 수정하고, 다시 통제하는 방법을 다룬다. 핵심은 단어가 아니라 구조다.\n        -->\n</section>",
+    "text": "IMAGE MAKING LECTURE 내 생각을 이미지로 옮기는 법 단문 연결형 프롬프팅과 이미지 하네스 AI가 그리지만, 방향은 사용자가 잡는다. 생각 단문 연결 장면 수정 동서울대학교 김준호 교수"
+  },
+  {
+    "id": 2,
+    "title": "왜 결과가 내 생각과 달라질까",
+    "html": "<section aria-label=\"2 / 19\" class=\"slide slide-02 split\" data-slide=\"2\">\n<div class=\"slide-inner\">\n<div class=\"shell split-shell\"><div><div class=\"kicker\">PART A · PROBLEM</div><h1 class=\"display-title\">왜 결과가<br/>내 생각과 달라질까</h1><p class=\"lead\">AI가 못 그리는 것이 아니라, 생각이 수정 가능한 구조로 전달되지 않는 경우가 많다.</p></div>\n<div aria-hidden=\"true\" class=\"visual fog-visual\"><div class=\"cloud\">cinematic<br/>beautiful<br/>emotional</div><div class=\"block-stack\"><span>대상</span><span>조건</span><span>수정 지점</span></div></div></div>\n</div>\n<!-- NOTES:\n        많은 사용자는 결과가 마음에 안 들면 프롬프트를 더 길게 만든다. 하지만 길어지는 것과 통제되는 것은 다르다. 통제하려면 수정 가능한 단위가 필요하다.\n        -->\n</section>",
+    "text": "PART A · PROBLEM 왜 결과가 내 생각과 달라질까 AI가 못 그리는 것이 아니라, 생각이 수정 가능한 구조로 전달되지 않는 경우가 많다. cinematic beautiful emotional 대상 조건 수정 지점"
+  },
+  {
+    "id": 3,
+    "title": "많은 단어, 약한 구조",
+    "html": "<section aria-label=\"3 / 19\" class=\"slide slide-03 statement\" data-slide=\"3\">\n<div class=\"slide-inner\"><div class=\"shell comma-shell\"><div class=\"comma-copy\"><div class=\"kicker\">COMMA PROMPT</div><h1 class=\"display-title\">많은 단어,<br/>약한 구조</h1><p class=\"lead\">콤마 키워드는 빠르지만 어느 부분을 고쳐야 하는지 보기 어렵다.</p><div class=\"prompt-sample-inline quote-inline\">cinematic, emotional, beautiful, dramatic lighting, ultra detailed, moody, aesthetic, high contrast, atmospheric, soft glow</div></div><div class=\"comma-chip-panel\"><div class=\"chip-row\"><span class=\"chip\">많은 단어</span><span class=\"chip\">약한 구조</span><span class=\"chip\">어려운 수정</span></div></div></div></div>\n<!-- NOTES:\n        콤마 키워드는 모델에게 힌트를 던지는 방식이다. 사용자는 어떤 단어가 어떤 결과를 만들었는지 알기 어렵다. 그래서 결과 수정이 감으로 변한다.\n        -->\n</section>",
+    "text": "COMMA PROMPT 많은 단어, 약한 구조 콤마 키워드는 빠르지만 어느 부분을 고쳐야 하는지 보기 어렵다. cinematic, emotional, beautiful, dramatic lighting, ultra detailed, moody, aesthetic, high contrast, atmospheric, soft glow 많은 단어 약한 구조 어려운 수정"
+  },
+  {
+    "id": 4,
+    "title": "단문 연결은 생각의 구조다",
+    "html": "<section aria-label=\"4 / 19\" class=\"slide slide-05 chain\" data-slide=\"4\">\n<div class=\"slide-inner\">\n<div class=\"shell chain-shell\"><div class=\"kicker\">CORE IDEA</div><h1 class=\"display-title\">단문 연결은<br/>생각의 구조다</h1><p class=\"lead\">AI를 위한 꼼수가 아니라 사람이 자기 생각을 정리하는 방식이다.</p><div class=\"chain-flow\"><div class=\"step-dot\"><span>대상</span></div><div class=\"step-dot\"><span>속성</span></div><div class=\"step-dot\"><span>조건</span></div><div class=\"step-dot\"><span>결과</span></div><div class=\"step-dot\"><span>제약</span></div></div></div>\n</div>\n<!-- NOTES:\n        좋은 디자이너도 이런 단문 판단을 머릿속에서 빠르게 한다. 차이는 그 판단이 말로 드러나느냐 숨겨져 있느냐다. 단문 연결형은 그 과정을 사용자와 AI가 공유하게 만든다.\n        -->\n</section>",
+    "text": "CORE IDEA 단문 연결은 생각의 구조다 AI를 위한 꼼수가 아니라 사람이 자기 생각을 정리하는 방식이다. 대상 속성 조건 결과 제약"
+  },
+  {
+    "id": 5,
+    "title": "한 문장은 하나만 말한다",
+    "html": "<section aria-label=\"5 / 19\" class=\"slide slide-06 comparison\" data-slide=\"5\">\n<div class=\"slide-inner\">\n<div class=\"shell compare-shell\"><div><div class=\"kicker\">PART B · BASIC GRAMMAR</div><h1 class=\"display-title\">한 문장은<br/>하나만 말한다</h1><p class=\"lead\">한 문장에 여러 판단을 넣으면 수정 지점이 다시 흐려진다.</p></div><div class=\"compare-board\"><div class=\"bad-box\"><strong>나쁜 문장</strong><span>예쁘고 쓸쓸한 밤거리</span></div><div class=\"good-box\"><strong>좋은 문장</strong><div class=\"good-line\">거리는 밤이다</div><div class=\"good-line\">거리는 비어 있다</div><div class=\"good-line\">조명은 차갑다</div></div></div></div>\n</div>\n<!-- NOTES:\n        문장을 짧게 만드는 이유는 AI 때문만이 아니다. 사용자가 나중에 직접 바꿀 수 있게 하기 위해서다. 쓸쓸한보다 비어 있다, 차갑다, 작은 빛만 남아 있다가 더 고치기 쉽다.\n        -->\n</section>",
+    "text": "PART B · BASIC GRAMMAR 한 문장은 하나만 말한다 한 문장에 여러 판단을 넣으면 수정 지점이 다시 흐려진다. 나쁜 문장 예쁘고 쓸쓸한 밤거리 좋은 문장 거리는 밤이다 거리는 비어 있다 조명은 차갑다"
+  },
+  {
+    "id": 6,
+    "title": "깊은 묘사는 연결로 파고든다",
+    "html": "<section aria-label=\"6 / 19\" class=\"slide slide-07 tree\" data-slide=\"6\">\n<div class=\"slide-inner\">\n<div class=\"shell tree-shell\"><div><div class=\"kicker\">DEPTH</div><h1 class=\"display-title\">깊은 묘사는<br/>연결로 파고든다</h1><p class=\"lead\">디테일은 긴 형용사보다 하위 문장 연결로 깊어진다.</p></div><div class=\"tree-visual\"><div class=\"tree-node\">주인공은 안경을 쓴다</div><div class=\"tree-node\">안경은 사각형이다</div><div class=\"tree-node\">안경테는 금테다</div><div class=\"tree-node\">왼쪽 렌즈에는 작은 하트가 있다</div><div class=\"tree-node\">햇빛을 받으면 렌즈가 어두워진다</div></div></div>\n</div>\n<!-- NOTES:\n        안경이라는 하위 대상 안에 모양, 재질, 위치, 조건부 변화가 귀속된다. 사용자는 나중에 하트만 별도로 바꿀 수 있다.\n        -->\n</section>",
+    "text": "DEPTH 깊은 묘사는 연결로 파고든다 디테일은 긴 형용사보다 하위 문장 연결로 깊어진다. 주인공은 안경을 쓴다 안경은 사각형이다 안경테는 금테다 왼쪽 렌즈에는 작은 하트가 있다 햇빛을 받으면 렌즈가 어두워진다"
+  },
+  {
+    "id": 7,
+    "title": "대상과 배경을 먼저 고정한다",
+    "html": "<section aria-label=\"7 / 19\" class=\"slide slide-08 identity\" data-slide=\"7\">\n<div class=\"slide-inner\">\n<div class=\"shell identity-shell\"><div><div class=\"kicker\">IDENTITY FIRST</div><h1 class=\"display-title\">대상과 배경을<br/>먼저 고정한다</h1><p class=\"lead\">일관성은 스타일이 아니라 대상과 배경의 정체성에서 나온다.</p></div><div class=\"id-grid\"><div class=\"id-card\"><span>대상 정체성</span><strong>Entity IP</strong><small>인물, 의자, 안경, 자동차</small><div class=\"component-footer\"><em>fixed</em><em>variable</em></div></div><div class=\"id-card\"><span>배경 정체성</span><strong>World IP</strong><small>건물, 거리, 방, 세계관</small><div class=\"component-footer\"><em>fixed</em><em>variable</em></div></div></div></div>\n</div>\n<!-- NOTES:\n        인물만 캐릭터가 아니다. 장면 안의 의자, 안경, 자동차, 건물, 배경도 주인공이 될 수 있다. 같은 존재처럼 보이게 하려면 고정값과 변화값을 나눠야 한다.\n        -->\n</section>",
+    "text": "IDENTITY FIRST 대상과 배경을 먼저 고정한다 일관성은 스타일이 아니라 대상과 배경의 정체성에서 나온다. 대상 정체성 Entity IP 인물, 의자, 안경, 자동차 fixed variable 배경 정체성 World IP 건물, 거리, 방, 세계관 fixed variable"
+  },
+  {
+    "id": 8,
+    "title": "AI가 채울 여백을 따로 둔다",
+    "html": "<section aria-label=\"8 / 19\" class=\"slide slide-09 lockblank\" data-slide=\"8\">\n<div class=\"slide-inner\">\n<div class=\"shell lockblank-shell\"><div><div class=\"kicker\">CREATIVE BLANK</div><h1 class=\"display-title\">AI가 채울 여백을<br/>따로 둔다</h1><p class=\"lead\">AI 창의성은 모든 것을 맡기는 것이 아니라, 열어둔 영역만 채우게 하는 것이다.</p></div><div class=\"lock-board\"><div class=\"lock-col\"><strong>고정할 것</strong><span>핵심 대상, 배경, 시선 흐름</span></div><div class=\"lock-col\"><strong>열어둘 것</strong><span>소품, 미세한 질감, 분위기 보강</span></div><div class=\"lock-col\"><strong>확인할 것</strong><span>의도와 다른 추가 해석</span></div></div></div>\n</div>\n<!-- NOTES:\n        사용자가 중요한 것을 닫아야 한다. 동시에 모든 것을 닫으면 AI가 창의적으로 보강할 공간이 사라진다. 좋은 프롬프트는 고정과 여백의 균형이다.\n        -->\n</section>",
+    "text": "CREATIVE BLANK AI가 채울 여백을 따로 둔다 AI 창의성은 모든 것을 맡기는 것이 아니라, 열어둔 영역만 채우게 하는 것이다. 고정할 것 핵심 대상, 배경, 시선 흐름 열어둘 것 소품, 미세한 질감, 분위기 보강 확인할 것 의도와 다른 추가 해석"
+  },
+  {
+    "id": 9,
+    "title": "장면 구조는 스타일보다 먼저다",
+    "html": "<section aria-label=\"9 / 19\" class=\"slide slide-10 scene\" data-slide=\"9\">\n<div class=\"slide-inner\">\n<div class=\"shell scene-shell\"><div><div class=\"kicker\">SCENE STRUCTURE</div><h1 class=\"display-title\">장면 구조는<br/>스타일보다 먼저다</h1><p class=\"lead\">이미지가 읽히는 방식은 anchor, flow, hierarchy가 먼저 결정한다.</p></div><div class=\"chip-panel\"><div class=\"chip-row\"><span class=\"chip\">primary anchor</span><span class=\"chip\">flow path</span><span class=\"chip\">hierarchy</span><span class=\"chip\">density</span><span class=\"chip\">negative space</span></div></div></div>\n</div>\n<!-- NOTES:\n        스타일은 겉면이다. 장면 구조는 시선이 어디서 시작하고 어디서 끝나는지를 정한다. 구조가 약하면 어떤 스타일을 붙여도 결과가 흐려진다.\n        -->\n</section>",
+    "text": "SCENE STRUCTURE 장면 구조는 스타일보다 먼저다 이미지가 읽히는 방식은 anchor, flow, hierarchy가 먼저 결정한다. primary anchor flow path hierarchy density negative space"
+  },
+  {
+    "id": 10,
+    "title": "좋은 GPT는 바로 그리지 않는다",
+    "html": "<section aria-label=\"10 / 19\" class=\"slide slide-11 timeline\" data-slide=\"10\">\n<div class=\"slide-inner\">\n<div class=\"shell timeline-shell\"><div class=\"kicker\">PART C · PROMPT PACKAGE</div><h1 class=\"display-title\">좋은 GPT는<br/>바로 그리지 않는다</h1><p class=\"lead\">이미지 생성은 마지막 단계이고, 먼저 수정 가능한 프롬프트 패키지가 나와야 한다.</p><div class=\"timeline-visual\"><div class=\"time-step\"><b>1</b><span>요청</span></div><div class=\"time-step\"><b>2</b><span>해석</span></div><div class=\"time-step\"><b>3</b><span>구조</span></div><div class=\"time-step\"><b>4</b><span>프롬프트</span></div><div class=\"time-step\"><b>5</b><span>생성</span></div></div></div>\n</div>\n<!-- NOTES:\n        바로 생성하면 사용자는 결과만 받는다. 프롬프트 패키지가 있으면 사용자는 개입할 수 있다. 이 차이가 단순 이미지 생성기와 하네스의 차이다.\n        -->\n</section>",
+    "text": "PART C · PROMPT PACKAGE 좋은 GPT는 바로 그리지 않는다 이미지 생성은 마지막 단계이고, 먼저 수정 가능한 프롬프트 패키지가 나와야 한다. 1 요청 2 해석 3 구조 4 프롬프트 5 생성"
+  },
+  {
+    "id": 11,
+    "title": "한국어는 수정 원본이다",
+    "html": "<section aria-label=\"11 / 19\" class=\"slide slide-12 editor\" data-slide=\"11\">\n<div class=\"slide-inner\">\n<div class=\"shell editor-shell\"><div><div class=\"kicker\">KR SOURCE</div><h1 class=\"display-title\">한국어는<br/>수정 원본이다</h1><p class=\"lead\">한국어 프롬프트는 사용자가 읽고 고치기 위한 원본이다.</p></div><div class=\"editor-panel\"><div class=\"editor-top\">KR SOURCE</div><div class=\"edit-line\">한국어 프롬프트</div><div class=\"edit-line\">한국어 네거티브</div><div class=\"edit-line\">자연어 수정 포인트</div></div></div>\n</div>\n<!-- NOTES:\n        사용자가 영어 프롬프트만 받으면 수정이 어렵다. 한국어 단문 연결은 사용자가 직접 개입하는 편집 화면이다. 영어는 그 한국어 원본을 실행하기 위한 번역본이다.\n        -->\n</section>",
+    "text": "KR SOURCE 한국어는 수정 원본이다 한국어 프롬프트는 사용자가 읽고 고치기 위한 원본이다. KR SOURCE 한국어 프롬프트 한국어 네거티브 자연어 수정 포인트"
+  },
+  {
+    "id": 12,
+    "title": "영어는 실행 번역본이다",
+    "html": "<section aria-label=\"12 / 19\" class=\"slide slide-13 twocol\" data-slide=\"12\">\n<div class=\"slide-inner\">\n<div class=\"shell twocol-shell\"><div><div class=\"kicker\">EN EXECUTION</div><h1 class=\"display-title\">영어는<br/>실행 번역본이다</h1><p class=\"lead\">영어 프롬프트는 새 판단을 추가하는 곳이 아니라 한국어 원본을 실행형으로 옮기는 곳이다.</p></div><div class=\"two-panel\"><div><strong>KR</strong><ul><li>understand</li><li>revise</li><li>source of truth</li></ul></div><div><strong>EN</strong><ul><li>execute</li><li>compile</li><li>no new judgment</li></ul></div></div></div>\n</div>\n<!-- NOTES:\n        영어가 더 멋져 보인다고 새로운 내용을 넣으면 구조가 깨진다. 영어는 모델이 실행하기 쉬운 형태로 옮기는 역할이다.\n        -->\n</section>",
+    "text": "EN EXECUTION 영어는 실행 번역본이다 영어 프롬프트는 새 판단을 추가하는 곳이 아니라 한국어 원본을 실행형으로 옮기는 곳이다. KR understand revise source of truth EN execute compile no new judgment"
+  },
+  {
+    "id": 13,
+    "title": "실행값 변환표는 왜 필요한가",
+    "html": "<section aria-label=\"13 / 19\" class=\"slide slide-14 dsl\" data-slide=\"13\">\n<div class=\"slide-inner\">\n<div class=\"shell dsl-shell\"><div><div class=\"kicker\">DSL LAYER</div><h1 class=\"display-title\">실행값 변환표는<br/>왜 필요한가</h1><p class=\"lead\">사람의 말을 모델이 실행하기 쉬운 장면 값으로 바꾸는 중간층이다.</p></div><div class=\"dsl-visual\"><div class=\"dsl-flow\"><span>사람 말</span><span>실행값 변환표</span><span>실행 프롬프트</span></div><div class=\"dsl-row\"><strong>원문 근거</strong><span>사용자가 한 말</span></div><div class=\"dsl-row\"><strong>사용자용 의미</strong><span>왜 이 값이 필요한지</span></div><div class=\"dsl-row\"><strong>실행값</strong><span>모델이 읽을 장면 값</span></div></div></div>\n</div>\n<!-- NOTES:\n        내부 용어만 던지면 사용자는 이해하기 어렵다. 각 실행값에는 원문 근거와 사용자용 의미가 붙어야 한다. 이 중간층 덕분에 스타일 전환과 세부 수정이 쉬워진다.\n        -->\n</section>",
+    "text": "DSL LAYER 실행값 변환표는 왜 필요한가 사람의 말을 모델이 실행하기 쉬운 장면 값으로 바꾸는 중간층이다. 사람 말 실행값 변환표 실행 프롬프트 원문 근거 사용자가 한 말 사용자용 의미 왜 이 값이 필요한지 실행값 모델이 읽을 장면 값"
+  },
+  {
+    "id": 14,
+    "title": "네거티브도 단문으로 쓴다",
+    "html": "<section aria-label=\"14 / 19\" class=\"slide slide-15 negative\" data-slide=\"14\">\n<div class=\"slide-inner\">\n<div class=\"shell negative-shell\"><div><div class=\"kicker\">NEGATIVE PROMPT</div><h1 class=\"display-title\">네거티브도<br/>단문으로 쓴다</h1><p class=\"lead\">네거티브 프롬프트는 금지어 목록이 아니라 지켜야 할 제약의 단문 연결이다.</p></div><div class=\"guardrail\"><div class=\"guard-item\">바꾸지 않는다</div><div class=\"guard-item\">추가하지 않는다</div><div class=\"guard-item\">흐트러뜨리지 않는다</div><div class=\"guard-item\">과장하지 않는다</div></div></div>\n</div>\n<!-- NOTES:\n        네거티브는 결과를 망치지 않기 위한 보호 장치다. 한국어 네거티브가 먼저 있어야 사용자가 제약을 이해하고 수정할 수 있다. 영어 네거티브는 그 실행 번역본이다.\n        -->\n</section>",
+    "text": "NEGATIVE PROMPT 네거티브도 단문으로 쓴다 네거티브 프롬프트는 금지어 목록이 아니라 지켜야 할 제약의 단문 연결이다. 바꾸지 않는다 추가하지 않는다 흐트러뜨리지 않는다 과장하지 않는다"
+  },
+  {
+    "id": 15,
+    "title": "수정은 패치처럼 한다",
+    "html": "<section aria-label=\"15 / 19\" class=\"slide slide-16 patch\" data-slide=\"15\">\n<div class=\"slide-inner\">\n<div class=\"shell patch-shell\"><div><div class=\"kicker\">PATCH GRAMMAR</div><h1 class=\"display-title\">수정은<br/>패치처럼 한다</h1><p class=\"lead\">수정 요청은 Preserve, Remove, Replace, Add로 나누면 안정된다.</p></div><div class=\"patch-grid\"><div class=\"patch-cell\"><strong>Preserve</strong><span>유지할 것</span></div><div class=\"patch-cell\"><strong>Remove</strong><span>뺄 것</span></div><div class=\"patch-cell\"><strong>Replace</strong><span>바꿀 것</span></div><div class=\"patch-cell\"><strong>Add</strong><span>추가할 것</span></div></div></div>\n</div>\n<!-- NOTES:\n        유지할 것을 먼저 선언하지 않으면 원래 장점이 사라진다. 제거할 것, 바꿀 것, 추가할 것을 나누면 수정이 명확해진다.\n        -->\n</section>",
+    "text": "PATCH GRAMMAR 수정은 패치처럼 한다 수정 요청은 Preserve, Remove, Replace, Add로 나누면 안정된다. Preserve 유지할 것 Remove 뺄 것 Replace 바꿀 것 Add 추가할 것"
+  },
+  {
+    "id": 16,
+    "title": "앨범커버 만들기 사례",
+    "html": "<section aria-label=\"16 / 19\" class=\"slide slide-17 album\" data-slide=\"16\">\n<div class=\"slide-inner\">\n<div class=\"shell album-shell\"><div><div class=\"kicker\">PART D · CASE STUDY</div><h1 class=\"display-title\">앨범커버<br/>만들기 사례</h1><p class=\"lead\">가사나 감정도 단문 연결로 장면 구조가 될 수 있다.</p></div><div class=\"lyric-panel\"><div class=\"lyric-stack\"><div class=\"lyric-line\">괜찮은 척한다</div><div class=\"lyric-line\">혼자 집으로 간다</div><div class=\"lyric-line\">창문에 얼굴이 비친다</div><div class=\"lyric-line\">실제 표정과 반사가 다르다</div></div></div><div class=\"album-cta\"><a class=\"album-cover-link\" href=\"https://mirinaeverse.com/album/fine/pretend.html\" rel=\"noopener noreferrer\" target=\"_blank\">앨범 커버 보기</a></div></div>\n</div>\n<!-- NOTES:\n        노래 가사는 그대로 그림이 되지 않는다. 정서, 상황, 시선, 배경을 분리해야 한다. 단문 연결은 감정을 장면으로 번역하는 다리다.\n        -->\n</section>",
+    "text": "PART D · CASE STUDY 앨범커버 만들기 사례 가사나 감정도 단문 연결로 장면 구조가 될 수 있다. 괜찮은 척한다 혼자 집으로 간다 창문에 얼굴이 비친다 실제 표정과 반사가 다르다 앨범 커버 보기"
+  },
+  {
+    "id": 17,
+    "title": "짧은 아이디어는 생성 명령이 아니다",
+    "html": "<section aria-label=\"17 / 19\" class=\"slide slide-26 lock\" data-slide=\"17\">\n<div class=\"slide-inner\">\n<div class=\"shell stop-shell\"><div><div class=\"kicker\">GENERATION LOCK</div><h1 class=\"display-title\">짧은 아이디어는<br/>생성 명령이 아니다</h1><p class=\"lead\">먼저 프롬프트 패키지 요청으로 처리해야 한다.</p></div><div class=\"stop-visual\"><div class=\"stop-badge\">STOP</div><div class=\"stop-list\"><div class=\"stop-item\">바로 생성 금지</div><div class=\"stop-item\">설명 먼저</div><div class=\"stop-item\">프롬프트 먼저</div><div class=\"stop-item\">명시적 생성만 실행</div></div></div></div>\n</div>\n<!-- NOTES:\n        모나리자를 감상하는 남자 같은 입력은 아이디어다. 하네스는 바로 이미지를 만들지 않고 먼저 구조를 세워야 한다. 생성은 사용자가 명확히 요청했을 때만 한다.\n        -->\n</section>",
+    "text": "GENERATION LOCK 짧은 아이디어는 생성 명령이 아니다 먼저 프롬프트 패키지 요청으로 처리해야 한다. STOP 바로 생성 금지 설명 먼저 프롬프트 먼저 명시적 생성만 실행"
+  },
+  {
+    "id": 18,
+    "title": "한 문장 이미지를 구조화하기",
+    "html": "<section aria-label=\"18 / 19\" class=\"slide slide-27 worksheet\" data-slide=\"18\">\n<div class=\"slide-inner\">\n<div class=\"shell worksheet-shell\"><div><div class=\"kicker\">PART F · WORKSHOP 1</div><h1 class=\"display-title\">한 문장 이미지를<br/>구조화하기</h1><p class=\"lead\">짧은 입력도 대상, 배경, 구조, 여백으로 나눌 수 있다.</p><div class=\"prompt-line\">입력: 비 오는 밤의 작은 편의점</div></div><div class=\"worksheet-grid\"><div class=\"worksheet-cell\"><span>대상</span></div><div class=\"worksheet-cell\"><span>배경</span></div><div class=\"worksheet-cell\"><span>시선 흐름</span></div><div class=\"worksheet-cell\"><span>열어둘 디테일</span></div></div></div>\n</div>\n<!-- NOTES:\n        학생에게 짧은 입력 하나를 준다. 먼저 단문 인과 체인으로 나누게 한다. 이후 AI가 채워도 되는 여백을 따로 적게 한다.\n        -->\n</section>",
+    "text": "PART F · WORKSHOP 1 한 문장 이미지를 구조화하기 짧은 입력도 대상, 배경, 구조, 여백으로 나눌 수 있다. 입력: 비 오는 밤의 작은 편의점 대상 배경 시선 흐름 열어둘 디테일"
+  },
+  {
+    "id": 19,
+    "title": "내가 고칠 수 있는 구조를 만든다",
+    "html": "<section aria-label=\"19 / 19\" class=\"slide slide-30 closing\" data-slide=\"19\">\n<div class=\"slide-inner\">\n<div class=\"shell closing-shell\"><div class=\"kicker\">TAKEAWAY</div><h1 class=\"display-title\">내가 고칠 수 있는<br/>구조를 만든다</h1><p class=\"closing-message lead\">이미지 만들기의 핵심은 AI가 알아서 그리게 하는 것이 아니라<br/>사람이 수정 가능한 구조를 만드는 것이다.</p><a class=\"gpts-link\" href=\"https://chatgpt.com/g/g-69f085b428c88191960302b3654a8549-mirinaeman-image-harness\" rel=\"noopener noreferrer\" target=\"_blank\">이미지 하네스 에이전트 열기</a></div>\n</div>\n<!-- NOTES:\n        강의의 결론은 단순하다. 사용자는 디자이너처럼 도구를 다루지 않아도 된다. 대신 자기 생각을 수정 가능한 문장 구조로 만들면 된다.\n        -->\n</section>",
+    "text": "TAKEAWAY 내가 고칠 수 있는 구조를 만든다 이미지 만들기의 핵심은 AI가 알아서 그리게 하는 것이 아니라 사람이 수정 가능한 구조를 만드는 것이다. 이미지 하네스 에이전트 열기"
+  }
+]

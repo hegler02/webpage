@@ -38,6 +38,7 @@
       ],
       "tags": [
         "ai",
+        "charcoal-amber",
         "chartjs",
         "drawsvg",
         "flip",
@@ -48,7 +49,8 @@
         "lecture",
         "motion-js",
         "scroll-presentation",
-        "spatial-narrative"
+        "spatial-narrative",
+        "visual-hierarchy"
       ],
       "message_sentence": "생성형 AI 시대의 격차를 정보가 아니라 판단권과 지휘 능력의 문제로 보여준다.",
       "thumbnail": {
@@ -61,7 +63,7 @@
       "canonical_url": "https://ai-commanders-gestalt.mirinaeman.chatgpt.site",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-07-30T10:30:22Z",
-      "latest_deployed_at": "2026-09-22T04:18:13.086382+00:00"
+      "latest_deployed_at": "2026-09-22T05:29:14.887476+00:00"
     },
     {
       "body_id": "ai-ti-judgment",

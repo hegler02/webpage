@@ -19,6 +19,7 @@
       "year": "2026",
       "tags": [
         "ai",
+        "charcoal-amber",
         "chartjs",
         "drawsvg",
         "flip",
@@ -29,7 +30,8 @@
         "lecture",
         "motion-js",
         "scroll-presentation",
-        "spatial-narrative"
+        "spatial-narrative",
+        "visual-hierarchy"
       ],
       "sourceLabel": "작품 아카이브",
       "sections": [

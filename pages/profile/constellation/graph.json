@@ -20,12 +20,16 @@
       "tags": [
         "ai",
         "chartjs",
+        "drawsvg",
+        "flip",
         "gestalt",
         "gsap",
         "human-ai",
         "judgment",
         "lecture",
-        "scroll-presentation"
+        "motion-js",
+        "scroll-presentation",
+        "spatial-narrative"
       ],
       "sourceLabel": "작품 아카이브",
       "sections": [

@@ -9,6 +9,31 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:we-fixed-it",
+      "kind": "work",
+      "title": "내가 고친 거네",
+      "summary": "손은 안 댔지만 공은 있네. 재봉틀 바늘을 둘러싼 부부의 수리 소동이 내가에서 우리가로 풀리는 실사 이미지 시네마와 웹툰.",
+      "url": "https://we-fixed-it.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/we-fixed-it.webp",
+      "alt": "재봉틀 앞에서 웃음을 나누는 부부와 사용되지 않은 빨간 니퍼",
+      "year": "2026",
+      "tags": [
+        "audio",
+        "webtoon",
+        "image-cinema",
+        "photoreal",
+        "couple"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "손은 안 댔지만 공은 있네. 재봉틀 바늘을 둘러싼 부부의 수리 소동이 내가에서 우리가로 풀리는 실사 이미지 시네마와 웹툰."
+        }
+      ],
+      "introUrl": "https://mirinaeman.com/archive/we-fixed-it/"
+    },
+    {
       "id": "work:ai-slave-slide",
       "kind": "work",
       "title": "AI 노예 vs AI 지휘관 — 판단권의 격차",
@@ -1811,6 +1836,13 @@
   ],
   "edges": [
     {
+      "source": "work:we-fixed-it",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:ai-slave-slide",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2312,6 +2344,20 @@
       "target": "concept:felt-time",
       "label": "함께 읽는 개념",
       "reason": "바람을 느끼는 현재와 첫사랑의 기억이 공책과 들길의 장면으로 이어집니다. 노래가 흐르는 시간과 웹툰을 읽는 시간을 달리하고 이별의 사유는 관객의 기억이 머물 여백으로 남깁니다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:we-fixed-it",
+      "target": "concept:image-cinema",
+      "label": "함께 읽는 개념",
+      "reason": "남편이 니퍼를 쓰기 전에 아내가 바늘을 뽑습니다. 다가오는 손과 집중하는 표정 사이의 시간을 관객이 이어 보며 부부의 농담을 완성합니다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:we-fixed-it",
+      "target": "concept:interpretive-space",
+      "label": "함께 읽는 개념",
+      "reason": "남편이 니퍼를 쓰기 전에 아내가 바늘을 뽑습니다. 다가오는 손과 집중하는 표정 사이의 시간을 관객이 이어 보며 부부의 농담을 완성합니다.",
       "evidence": "https://mirinaeman.com/archive/image-cinema/"
     },
     {

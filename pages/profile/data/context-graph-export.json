@@ -169,6 +169,27 @@
       },
       "intro_url": "https://mirinaeman.com/archive/wind-of-longing/",
       "entity_id": "https://wind-of-longing.mirinaeman.chatgpt.site/#work"
+    },
+    {
+      "body_id": "we-fixed-it",
+      "concepts": [
+        "image-cinema",
+        "interpretive-space"
+      ],
+      "reason": "남편이 니퍼를 쓰기 전에 아내가 바늘을 뽑습니다. 다가오는 손과 집중하는 표정 사이의 시간을 관객이 이어 보며 부부의 농담을 완성합니다.",
+      "intro_path": "/archive/we-fixed-it/",
+      "title": "내가 고친 거네",
+      "url": "https://we-fixed-it.mirinaeman.chatgpt.site/",
+      "summary": "손은 안 댔지만 공은 있네. 재봉틀 바늘을 둘러싼 부부의 수리 소동이 내가에서 우리가로 풀리는 실사 이미지 시네마와 웹툰.",
+      "thumbnail": {
+        "path": "assets/thumbnails/we-fixed-it.webp",
+        "alt": "재봉틀 앞에서 웃음을 나누는 부부와 사용되지 않은 빨간 니퍼",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "intro_url": "https://mirinaeman.com/archive/we-fixed-it/",
+      "entity_id": "https://we-fixed-it.mirinaeman.chatgpt.site/#cinema"
     }
   ],
   "autumn": {
@@ -209,5 +230,5 @@
   },
   "hub_url": "https://mirinaeman.com/archive/image-cinema/",
   "intro_url": "https://mirinaeman.com/archive/already-autumn/",
-  "source_sha256": "aa16e0a89c4c6b4f83827fdcbc0c431617f07f2ad82600730c452ce135a39062"
+  "source_sha256": "d1ab62ca4177070d7f354882334db91f90d3bc3a5bf956f44c1848c90f6fa35b"
 }

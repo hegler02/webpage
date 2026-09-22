@@ -53,6 +53,10 @@
       "destination": "/pages/profile/archive/harugyeol-ai-health/"
     },
     {
+      "source": "/archive/we-fixed-it/",
+      "destination": "/pages/profile/archive/we-fixed-it/"
+    },
+    {
       "source": "/constellation/",
       "destination": "/pages/profile/constellation/"
     },
@@ -421,6 +425,21 @@
     {
       "source": "/pages/profile/archive/harugyeol-ai-health/",
       "destination": "/archive/harugyeol-ai-health/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/we-fixed-it/index.html",
+      "destination": "/archive/we-fixed-it/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/we-fixed-it/index",
+      "destination": "/archive/we-fixed-it/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/we-fixed-it/",
+      "destination": "/archive/we-fixed-it/",
       "permanent": true
     }
   ]

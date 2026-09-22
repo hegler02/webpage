@@ -88,6 +88,15 @@
       ],
       "reason": "바람을 느끼는 현재와 첫사랑의 기억이 공책과 들길의 장면으로 이어집니다. 노래가 흐르는 시간과 웹툰을 읽는 시간을 달리하고 이별의 사유는 관객의 기억이 머물 여백으로 남깁니다.",
       "intro_path": "/archive/wind-of-longing/"
+    },
+    {
+      "body_id": "we-fixed-it",
+      "concepts": [
+        "image-cinema",
+        "interpretive-space"
+      ],
+      "reason": "남편이 니퍼를 쓰기 전에 아내가 바늘을 뽑습니다. 다가오는 손과 집중하는 표정 사이의 시간을 관객이 이어 보며 부부의 농담을 완성합니다.",
+      "intro_path": "/archive/we-fixed-it/"
     }
   ],
   "autumn": {

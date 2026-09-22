@@ -1554,6 +1554,35 @@
       "latest_deployed_at": "2026-09-19T14:41:43.574213+00:00"
     },
     {
+      "body_id": "we-fixed-it",
+      "title": "내가 고친 거네",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-audio",
+        "user-lyrics",
+        "domestic-comedy"
+      ],
+      "tags": [
+        "audio",
+        "webtoon",
+        "image-cinema",
+        "photoreal",
+        "couple"
+      ],
+      "message_sentence": "손은 안 댔지만 공은 있네. 재봉틀 바늘을 둘러싼 부부의 수리 소동이 내가에서 우리가로 풀리는 실사 이미지 시네마와 웹툰.",
+      "thumbnail": {
+        "path": "assets/thumbnails/we-fixed-it.webp",
+        "alt": "재봉틀 앞에서 웃음을 나누는 부부와 사용되지 않은 빨간 니퍼",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://we-fixed-it.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-22T15:33:52.708935+00:00",
+      "latest_deployed_at": "2026-09-22T15:33:52.708935+00:00"
+    },
+    {
       "body_id": "wind-of-longing",
       "title": "그리움의 바람",
       "body_type": "SONGBODY",

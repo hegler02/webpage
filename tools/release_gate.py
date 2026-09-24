@@ -390,6 +390,9 @@ def main() -> int:
     if "Sitemap: https://mirinaeman.com/sitemap.xml" not in robots:
         errors.append("robots sitemap authority mismatch")
 
+    jotdagado = subprocess.run([sys.executable, str(ROOT / "tools/render_jotdagado_intro.py"), "--check"], cwd=ROOT)
+    if jotdagado.returncode:
+        errors.append("Jotdagado introduction gate failed")
     repair = subprocess.run([sys.executable, str(ROOT / "tools/render_repair_intro.py"), "--check"], cwd=ROOT)
     if repair.returncode:
         errors.append("Repair introduction gate failed")

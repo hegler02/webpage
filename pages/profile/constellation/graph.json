@@ -9,6 +9,33 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:jotdagado",
+      "kind": "work",
+      "title": "좋다가도",
+      "summary": "보고 싶어 와 놓고 집에 가고 싶다가도, 말없이 건넨 송편 하나에 잠깐 마음을 접는 추석.",
+      "url": "https://jotdagado.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/jotdagado.webp",
+      "alt": "추석에 돌아온 딸의 어깨에 손을 얹고 반기는 어머니",
+      "year": "2026",
+      "tags": [
+        "audio",
+        "webtoon",
+        "image-cinema",
+        "photoreal",
+        "chuseok",
+        "gsap",
+        "motion"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "보고 싶어 와 놓고 집에 가고 싶다가도, 말없이 건넨 송편 하나에 잠깐 마음을 접는 추석."
+        }
+      ],
+      "introUrl": "https://mirinaeman.com/archive/jotdagado/"
+    },
+    {
       "id": "work:we-fixed-it",
       "kind": "work",
       "title": "내가 고친 거네",
@@ -1836,6 +1863,13 @@
   ],
   "edges": [
     {
+      "source": "work:jotdagado",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:we-fixed-it",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2358,6 +2392,20 @@
       "target": "concept:interpretive-space",
       "label": "함께 읽는 개념",
       "reason": "남편이 니퍼를 쓰기 전에 아내가 바늘을 뽑습니다. 다가오는 손과 집중하는 표정 사이의 시간을 관객이 이어 보며 부부의 농담을 완성합니다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:jotdagado",
+      "target": "concept:image-cinema",
+      "label": "함께 읽는 개념",
+      "reason": "명절의 반가움과 짜증을 하나의 정답으로 정리하지 않는다. 요리하는 손과 말없이 건넨 송편 사이에 관객 자신의 가족 경험이 들어오도록 구성한다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:jotdagado",
+      "target": "concept:interpretive-space",
+      "label": "함께 읽는 개념",
+      "reason": "명절의 반가움과 짜증을 하나의 정답으로 정리하지 않는다. 요리하는 손과 말없이 건넨 송편 사이에 관객 자신의 가족 경험이 들어오도록 구성한다.",
       "evidence": "https://mirinaeman.com/archive/image-cinema/"
     },
     {

@@ -190,6 +190,27 @@
       },
       "intro_url": "https://mirinaeman.com/archive/we-fixed-it/",
       "entity_id": "https://we-fixed-it.mirinaeman.chatgpt.site/#cinema"
+    },
+    {
+      "body_id": "jotdagado",
+      "concepts": [
+        "image-cinema",
+        "interpretive-space"
+      ],
+      "reason": "명절의 반가움과 짜증을 하나의 정답으로 정리하지 않는다. 요리하는 손과 말없이 건넨 송편 사이에 관객 자신의 가족 경험이 들어오도록 구성한다.",
+      "intro_path": "/archive/jotdagado/",
+      "title": "좋다가도",
+      "url": "https://jotdagado.mirinaeman.chatgpt.site/",
+      "summary": "보고 싶어 와 놓고 집에 가고 싶다가도, 말없이 건넨 송편 하나에 잠깐 마음을 접는 추석.",
+      "thumbnail": {
+        "path": "assets/thumbnails/jotdagado.webp",
+        "alt": "추석에 돌아온 딸의 어깨에 손을 얹고 반기는 어머니",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "intro_url": "https://mirinaeman.com/archive/jotdagado/",
+      "entity_id": "https://jotdagado.mirinaeman.chatgpt.site/#film"
     }
   ],
   "autumn": {
@@ -230,5 +251,5 @@
   },
   "hub_url": "https://mirinaeman.com/archive/image-cinema/",
   "intro_url": "https://mirinaeman.com/archive/already-autumn/",
-  "source_sha256": "d1ab62ca4177070d7f354882334db91f90d3bc3a5bf956f44c1848c90f6fa35b"
+  "source_sha256": "f879fc1d4df50e5ee31ca3f4f4b7e172c1135ea6ad5634f9f036b45edce711d3"
 }

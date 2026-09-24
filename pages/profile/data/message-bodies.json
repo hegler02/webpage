@@ -679,6 +679,37 @@
       "latest_deployed_at": "2026-09-12T09:31:17.365183+00:00"
     },
     {
+      "body_id": "jotdagado",
+      "title": "좋다가도",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-audio",
+        "embedded-lyrics",
+        "chuseok-family"
+      ],
+      "tags": [
+        "audio",
+        "webtoon",
+        "image-cinema",
+        "photoreal",
+        "chuseok",
+        "gsap",
+        "motion"
+      ],
+      "message_sentence": "보고 싶어 와 놓고 집에 가고 싶다가도, 말없이 건넨 송편 하나에 잠깐 마음을 접는 추석.",
+      "thumbnail": {
+        "path": "assets/thumbnails/jotdagado.webp",
+        "alt": "추석에 돌아온 딸의 어깨에 손을 얹고 반기는 어머니",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://jotdagado.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-24T09:07:23.779734+00:00",
+      "latest_deployed_at": "2026-09-24T09:07:23.779734+00:00"
+    },
+    {
       "body_id": "kimbujang-unsealed",
       "title": "김부장 - 봉인해제 | 66호 테마곡",
       "body_type": "SONGBODY",

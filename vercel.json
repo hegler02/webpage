@@ -57,6 +57,10 @@
       "destination": "/pages/profile/archive/we-fixed-it/"
     },
     {
+      "source": "/archive/jotdagado/",
+      "destination": "/pages/profile/archive/jotdagado/"
+    },
+    {
       "source": "/constellation/",
       "destination": "/pages/profile/constellation/"
     },
@@ -440,6 +444,21 @@
     {
       "source": "/pages/profile/archive/we-fixed-it/",
       "destination": "/archive/we-fixed-it/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/jotdagado/index.html",
+      "destination": "/archive/jotdagado/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/jotdagado/index",
+      "destination": "/archive/jotdagado/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/jotdagado/",
+      "destination": "/archive/jotdagado/",
       "permanent": true
     }
   ]

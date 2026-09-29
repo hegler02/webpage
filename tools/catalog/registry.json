@@ -9,7 +9,7 @@
       "kind": "스킬",
       "category": "개발",
       "name": "Mirinaeman’s Coding is the body of the message",
-      "version": "1.2.3",
+      "version": "1.2.4",
       "status": "preparing",
       "install_url": null,
       "summary": "질문과 답변으로 자신의 판단을 세우고, 메시지를 PRD와 작동하는 웹앱으로 만듭니다.",
@@ -28,6 +28,10 @@
       "privacy_version": "2026-09-30-draft",
       "policy_status": "draft",
       "changes": [
+        {
+          "version": "1.2.4",
+          "text": "BQ2 메모 저장·새로고침 확인이 사용자의 실제 휴대폰에서 수행됐음을 반영했습니다. 대상 앱·행동·기기·증거 출처를 구분하도록 검증 기록을 보완했습니다."
+        },
         {
           "version": "1.2.3",
           "text": "CQI 목적 제한, 개인정보 최소화, 공통 공유에 대한 별도 동의 규칙을 추가했습니다."

@@ -22,10 +22,12 @@ def outputs():
             assert x['install_url'] and x['install_url'].startswith('https://') and x['policy_status']=='approved','Public item needs verified install link and approved policy'
         else: assert not x['install_url'],'Do not expose installation before public verification'
         status_text=LABELS[status]
-        cards.append(f'<article class="card tool-card" data-tool data-kind="{e(x["kind"])}"><div class="card-body hub-stack"><span class="tag">{e(x["category"])} · {e(x["kind"])} · {status_text}</span><h2><a href="{path}">{e(x["name"])}</a></h2><p>{e(x["summary"])}</p><p class="muted">v{e(x["version"])}</p><a class="button" href="{path}">사용 방법 살펴보기</a></div></article>')
+        display_name=x.get('display_name',x['name'])
+        icon=(f'<img class="hub-icon" src="{e(x["icon"])}" width="80" height="80" alt="">' if x.get('icon') else '')
+        cards.append(f'<article class="card tool-card" data-tool data-kind="{e(x["kind"])}"><div class="card-body hub-stack">{icon}<span class="tag">{e(x["category"])} · {e(x["kind"])} · {status_text}</span><h2><a href="{path}">{e(display_name)}</a></h2><p>{e(x["summary"])}</p><p class="muted">v{e(x["version"])}</p><a class="button" href="{path}">사용 방법 살펴보기</a></div></article>')
         links=''.join(f'<a class="button" href="{path}{p}/">{t}</a>' for p,t in [('support','사용 안내·문의'),('privacy','개인정보 안내'),('terms','이용약관')])
         install=f'<a class="button primary" href="{e(x["install_url"] or "")}">설치하기</a>' if status=='public' else f'<p class="hub-notice">{status_text}입니다. 공개 설치가 확인되면 설치 링크를 제공합니다.</p>'
-        heading=f'<a href="/tools/">← 전체 목록</a><span class="eyebrow">{e(x["kind"])} · {status_text} · v{e(x["version"])}</span><h1>{e(x["name"])}</h1><p class="lede">{e(x["summary"])}</p>'
+        heading=f'<a href="/tools/">← 전체 목록</a><span class="eyebrow">{e(x["kind"])} · {status_text} · v{e(x["version"])}</span>{icon}<h1>{e(display_name)}</h1><p class="muted">{e(x["name"])}</p><p class="lede">{e(x["summary"])}</p>'
         steps='<ol>'+''.join(f'<li>{e(s)}</li>' for s in x['steps'])+'</ol>'
         requirements='<ul>'+''.join(f'<li>{e(s)}</li>' for s in x['requirements'])+'</ul>'
         changes=''.join(f'<article><h3>v{e(c["version"])}</h3><p>{e(c["text"])}</p></article>' for c in x['changes'])

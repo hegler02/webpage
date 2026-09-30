@@ -9,6 +9,30 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:for-tomorrow",
+      "kind": "work",
+      "title": "내일을 위해…",
+      "summary": "더 나은 내일을 위한 한밤의 약속. 장엄한 록발라드와 실사 이미지로 작은 다짐의 끝을 기다린다.",
+      "url": "https://for-tomorrow.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/for-tomorrow.webp",
+      "alt": "푸른 무대와 금빛 역광 속에서 검정 일렉기타를 연주하는 비장한 록커 — 내일을 위해…",
+      "year": "2026",
+      "tags": [
+        "image-cinema",
+        "audio",
+        "rock-ballad",
+        "gestalt",
+        "gsap"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "더 나은 내일을 위한 한밤의 약속. 장엄한 록발라드와 실사 이미지로 작은 다짐의 끝을 기다린다."
+        }
+      ]
+    },
+    {
       "id": "work:astra-motion-study",
       "kind": "work",
       "title": "메시지는 몸을 얻는다",
@@ -1932,6 +1956,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:for-tomorrow",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:astra-motion-study",
       "target": "creator:joonho",

@@ -460,6 +460,35 @@
       "latest_deployed_at": "2026-09-06T03:20:32.028673+00:00"
     },
     {
+      "body_id": "for-tomorrow",
+      "title": "내일을 위해…",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "music",
+        "greeting-gif",
+        "humor"
+      ],
+      "tags": [
+        "image-cinema",
+        "audio",
+        "rock-ballad",
+        "gestalt",
+        "gsap"
+      ],
+      "message_sentence": "더 나은 내일을 위한 한밤의 약속. 장엄한 록발라드와 실사 이미지로 작은 다짐의 끝을 기다린다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/for-tomorrow.webp",
+        "alt": "푸른 무대와 금빛 역광 속에서 검정 일렉기타를 연주하는 비장한 록커 — 내일을 위해…",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://for-tomorrow.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-30T14:14:10.949233+00:00",
+      "latest_deployed_at": "2026-09-30T14:32:56.549413+00:00"
+    },
+    {
       "body_id": "gileodo-geudaero-astra",
       "title": "길어도 그대로 — Astra 105만 토큰",
       "body_type": "SONGBODY",

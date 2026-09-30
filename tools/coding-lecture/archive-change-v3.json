@@ -1,0 +1,9 @@
+{
+  "reason": "User rejected v2 upper-heavy layouts throughout deck; recompose body regions vertically.",
+  "evidence": [
+    "User: 전체적으로 살펴봐. 전체가 다 그렇다",
+    "tools/coding-lecture/feedback.jsonl",
+    "tools/coding-lecture/QA.json"
+  ],
+  "verdict": "pending"
+}

@@ -16,7 +16,7 @@
   "message_sentence": "완전 초보가 자신의 판단을 PRD·개발·검증·배포까지 연결한다.",
   "status": "DEPLOYED",
   "first_deployed_at": "2026-09-30T06:30:05.291000+00:00",
-  "latest_deployed_at": "2026-09-30T07:08:23.801000+00:00",
+  "latest_deployed_at": "2026-09-30T07:25:30.640000+00:00",
   "thumbnail": {
     "path": "assets/thumbnails/mirinaeman-coding-lab.webp",
     "alt": "내 생각을, 작동하는 앱으로 대표 화면",
@@ -44,6 +44,14 @@
       "source_revision": "e02bc08de127fdf8f5469ae92e47491227f2a8fe",
       "deployment_id": "dpl_HQ6g5E14pREVeNx9YB58eqJyFMHL",
       "verification": "Production READY. All 30 scenes rendered and visually reviewed; local desktop/compact bounds and JS error checks passed. Shared title/body/footer grid, 19 light and 11 dark scenes. Authenticated branch-preview OG HTTP probe PASS. Preview slide 29 observed in browser."
+    },
+    {
+      "status": "succeeded",
+      "url": "https://mirinaeman.com/pages/coding-lab/",
+      "deployed_at": "2026-09-30T07:25:30.640000+00:00",
+      "source_revision": "2edeef9fdc8f3a2f29ac4f6c52167e026408df34",
+      "deployment_id": "dpl_FChAobFynsBLNMfWhvecvQQbNXsc",
+      "verification": "Production READY; canonical CSS byte-identical to tested source. All 30 slides visually reviewed, bounds/JS errors zero, reading 30 and compact/reduced-motion checked."
     }
   ],
   "approvals": [],
@@ -53,9 +61,9 @@
     "scope": "Public production deployment and archive registration; not final content acceptance."
   },
   "layout_revision": {
-    "version": 2,
-    "feedback": "Left-heavy layouts, unused right areas, repeated black background and inconsistent layout rejected by user. User requested all affected slides corrected.",
-    "correction": "Shared grid and type hierarchy; paired examples on 1,5,10,11,19,25,29; horizontal installation steps; centered sparse quotations; consistent multi-column layouts.",
+    "version": 3,
+    "feedback": "User rejected lower empty regions throughout deck, showing 23 and 24.",
+    "correction": "Vertical body composition, numbered processes, full two-row check/document grids, equal-height prompt companions; all 30 reviewed.",
     "evidence": "hegler02/webpage tools/coding-lecture/feedback.jsonl and QA.json",
     "verdict": "pending user review"
   }

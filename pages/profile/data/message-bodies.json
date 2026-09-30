@@ -234,7 +234,7 @@
       "message_sentence": "원본을 확인하며 BQ2 결과를 한 항목씩 이해하고 질문을 남긴다.",
       "thumbnail": {
         "path": "assets/thumbnails/bq2-read-with-me.webp",
-        "alt": "차근차근 · BQ2 결과 읽기 대표 화면",
+        "alt": "차근차근 — 내 결과를, 한 항목씩. 결과지의 한 항목을 펼치는 표지",
         "width": 960,
         "height": 540,
         "focal_point": "50% 50%"
@@ -242,7 +242,7 @@
       "canonical_url": "https://bq2-read-with-me.vercel.app/",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-09-30T06:28:48.210000+00:00",
-      "latest_deployed_at": "2026-09-30T06:28:48.210000+00:00"
+      "latest_deployed_at": "2026-09-30T08:17:39.131000+00:00"
     },
     {
       "body_id": "chamgyoyuk",

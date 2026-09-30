@@ -15,15 +15,15 @@
   "message_sentence": "원본을 확인하며 BQ2 결과를 한 항목씩 이해하고 질문을 남긴다.",
   "status": "DEPLOYED",
   "first_deployed_at": "2026-09-30T06:28:48.210000+00:00",
-  "latest_deployed_at": "2026-09-30T06:28:48.210000+00:00",
+  "latest_deployed_at": "2026-09-30T08:17:39.131000+00:00",
   "thumbnail": {
     "path": "assets/thumbnails/bq2-read-with-me.webp",
-    "alt": "차근차근 · BQ2 결과 읽기 대표 화면",
+    "alt": "차근차근 — 내 결과를, 한 항목씩. 결과지의 한 항목을 펼치는 표지",
     "width": 960,
     "height": 540,
     "focal_point": "50% 50%",
-    "sha256": "f0f71b8b0012ee4ba84fdf51a1570ae207310aff87210a29d4a9190db6dfbd78",
-    "source_kind": "page-capture"
+    "sha256": "9b294ad00c81bd25f8cd5d482fa8b510b2824e2c0b95f81fcafd70e368c4451d",
+    "source_kind": "generated-title-card"
   },
   "incidents": [],
   "invariants": [],
@@ -35,6 +35,14 @@
       "source_revision": "311393d5cc09c76c27755a14c3f964354bd44e0e",
       "deployment_id": "dpl_83P7cjaYszHwhrUiud53e2VEFVWn",
       "verification": "Production READY; unauthenticated canonical URL HTTP 200. Personal reports redirect to login; synthetic UI/API and owner-isolation checks passed. Real personal PDF and paid AI remain unverified."
+    },
+    {
+      "status": "succeeded",
+      "url": "https://bq2-read-with-me.vercel.app/",
+      "deployed_at": "2026-09-30T08:17:39.131000+00:00",
+      "source_revision": "067a7ee5c6405b9c854dc29a12e5d220721ebe8e",
+      "deployment_id": "dpl_F7VDUWZgfcYpb3yyDpxgWXjGH25d",
+      "verification": "Production READY. Live OG/Twitter tags resolve to public 1200x630 JPEG; HTTP 200 and exact image bytes verified. Typecheck passed. Scope is sharing metadata, not paid-AI E2E."
     }
   ],
   "approvals": [],
@@ -42,5 +50,16 @@
     "statement": "승인...그리고 강의자료는 좀더 보완하자. 일단은 모두 전체공개로 배포하고 아카이브 등록한다",
     "received_at": "2026-09-30T15:27:18+09:00",
     "scope": "Public production deployment and archive registration; not final content acceptance."
+  },
+  "sharing_cover": {
+    "version": 1,
+    "image_url": "https://bq2-read-with-me.vercel.app/og-bq2-v1.jpg",
+    "dimensions": [
+      1200,
+      630
+    ],
+    "sha256": "1b6bd28a73cbc1dfcb588f3a96a40191ba828d433e197ffa4002ca85d9c3a53b",
+    "approval": "오케이, 2026-09-30T17:12:42+09:00; approval to implement, result acceptance pending",
+    "scope": "OG/Twitter metadata and archive thumbnail only"
   }
 }

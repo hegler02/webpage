@@ -9,6 +9,29 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:bq2-read-with-me",
+      "kind": "work",
+      "title": "차근차근 · BQ2 결과 읽기",
+      "summary": "원본을 확인하며 BQ2 결과를 한 항목씩 이해하고 질문을 남긴다.",
+      "url": "https://bq2-read-with-me.vercel.app/",
+      "image": "/pages/profile/assets/thumbnails/bq2-read-with-me.webp",
+      "alt": "차근차근 — 내 결과를, 한 항목씩. 결과지의 한 항목을 펼치는 표지",
+      "year": "2026",
+      "tags": [
+        "webapp",
+        "BQ2",
+        "reading",
+        "privacy"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "원본을 확인하며 BQ2 결과를 한 항목씩 이해하고 질문을 남긴다."
+        }
+      ]
+    },
+    {
       "id": "work:mirinaeman-coding-lab",
       "kind": "work",
       "title": "내 생각을, 작동하는 앱으로",
@@ -29,29 +52,6 @@
         {
           "title": "작품의 기록",
           "text": "완전 초보가 자신의 판단을 PRD·개발·검증·배포까지 연결한다."
-        }
-      ]
-    },
-    {
-      "id": "work:bq2-read-with-me",
-      "kind": "work",
-      "title": "차근차근 · BQ2 결과 읽기",
-      "summary": "원본을 확인하며 BQ2 결과를 한 항목씩 이해하고 질문을 남긴다.",
-      "url": "https://bq2-read-with-me.vercel.app/",
-      "image": "/pages/profile/assets/thumbnails/bq2-read-with-me.webp",
-      "alt": "차근차근 · BQ2 결과 읽기 대표 화면",
-      "year": "2026",
-      "tags": [
-        "webapp",
-        "BQ2",
-        "reading",
-        "privacy"
-      ],
-      "sourceLabel": "작품 아카이브",
-      "sections": [
-        {
-          "title": "작품의 기록",
-          "text": "원본을 확인하며 BQ2 결과를 한 항목씩 이해하고 질문을 남긴다."
         }
       ]
     },
@@ -1910,14 +1910,14 @@
   ],
   "edges": [
     {
-      "source": "work:mirinaeman-coding-lab",
+      "source": "work:bq2-read-with-me",
       "target": "creator:joonho",
       "label": "창작자",
       "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
       "evidence": "https://mirinaeman.com/archive/"
     },
     {
-      "source": "work:bq2-read-with-me",
+      "source": "work:mirinaeman-coding-lab",
       "target": "creator:joonho",
       "label": "창작자",
       "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",

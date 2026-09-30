@@ -163,6 +163,7 @@ def main() -> int:
     subprocess.run([sys.executable, str(ROOT / "tools/check_context_graph.py")], check=True)
     errors: list[str] = []
     project_checks = (
+        ([sys.executable, str(ROOT / "tools/render_fan_intro.py"), "--check"], "Fan cinema introduction gate"),
         ([sys.executable, str(ROOT / "tools/catalog/render.py"), "--check"], "Tool catalog gate"),
         ([sys.executable, str(ROOT / "tools/sound-lab/check.py")], "Sound Lab structure and discovery gate"),
         ([sys.executable, str(ROOT / "tools/sono-slide/check.py")], "Suno lecture structure and discovery gate"),

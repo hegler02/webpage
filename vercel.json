@@ -61,6 +61,10 @@
       "destination": "/pages/profile/archive/jotdagado/"
     },
     {
+      "source": "/archive/fan-cinema-comparison/",
+      "destination": "/pages/profile/archive/fan-cinema-comparison/"
+    },
+    {
       "source": "/constellation/",
       "destination": "/pages/profile/constellation/"
     },
@@ -459,6 +463,21 @@
     {
       "source": "/pages/profile/archive/jotdagado/",
       "destination": "/archive/jotdagado/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/fan-cinema-comparison/index.html",
+      "destination": "/archive/fan-cinema-comparison/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/fan-cinema-comparison/index",
+      "destination": "/archive/fan-cinema-comparison/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/fan-cinema-comparison/",
+      "destination": "/archive/fan-cinema-comparison/",
       "permanent": true
     }
   ]

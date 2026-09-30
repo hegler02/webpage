@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "fan-introduction-og",
+      "role": "open-graph",
+      "kind": "image",
+      "delivery": {
+        "path": "assets/og.jpg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "154ca9cfa412b67a90a3210d3cc40b95335f9b193d285b345ce239a057401e86",
+        "mime": "image/jpeg"
+      }
+    }
+  ]
+}

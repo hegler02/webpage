@@ -1,0 +1,7 @@
+{
+  "public_site": "succeeded",
+  "central_skill_record": "pending",
+  "reason": "Save returned HTTP 500; successful remote re-read confirmed record absent.",
+  "record_preserved": "tools/fan-cinema-comparison/body-record.json",
+  "public_catalog": "Official body_archive.py export; current published prior records preserved exactly."
+}

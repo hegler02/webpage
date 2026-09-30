@@ -9,6 +9,32 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:fan-cinema-comparison",
+      "kind": "work",
+      "title": "공포의 선풍기 · 두 개의 시선",
+      "summary": "선풍기를 조립하고 실제로 남은 나사에서 시작된 생활 호러. 같은 노래 위에 서로 다른 편집을 얹은 V2와 V3를 같은 시점에서 비교하며, 구도·그림자·가림·몽타주가 만드는 불안을 경험한다.",
+      "url": "https://fan-cinema-comparison.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/fan-cinema-comparison.webp",
+      "alt": "어두운 방에서 선풍기와 남은 나사를 앞에 둔 비장한 남자 — 공포의 선풍기",
+      "year": "2026",
+      "tags": [
+        "image-cinema",
+        "audio",
+        "horror",
+        "gestalt",
+        "montage",
+        "comparison"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "선풍기를 조립하고 실제로 남은 나사에서 시작된 생활 호러. 같은 노래 위에 서로 다른 편집을 얹은 V2와 V3를 같은 시점에서 비교하며, 구도·그림자·가림·몽타주가 만드는 불안을 경험한다."
+        }
+      ],
+      "introUrl": "https://mirinaeman.com/archive/fan-cinema-comparison/"
+    },
+    {
       "id": "work:for-tomorrow",
       "kind": "work",
       "title": "내일을 위해…",
@@ -1956,6 +1982,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:fan-cinema-comparison",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:for-tomorrow",
       "target": "creator:joonho",

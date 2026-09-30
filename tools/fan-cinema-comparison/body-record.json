@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "body_id": "fan-cinema-comparison",
+  "title": "공포의 선풍기 · 두 개의 시선",
+  "body_type": "SONGBODY",
+  "source_kinds": [
+    "user-provided-audio",
+    "true-story",
+    "generated-image-cinema"
+  ],
+  "tags": [
+    "image-cinema",
+    "audio",
+    "horror",
+    "gestalt",
+    "montage",
+    "comparison"
+  ],
+  "message_sentence": "선풍기를 조립하고 실제로 남은 나사에서 시작된 생활 호러. 같은 노래 위에 서로 다른 편집을 얹은 V2와 V3를 같은 시점에서 비교하며, 구도·그림자·가림·몽타주가 만드는 불안을 경험한다.",
+  "thumbnail": {
+    "source_kind": "project-owned",
+    "path": "assets/thumbnails/fan-cinema-comparison.webp",
+    "alt": "어두운 방에서 선풍기와 남은 나사를 앞에 둔 비장한 남자 — 공포의 선풍기",
+    "width": 960,
+    "height": 540,
+    "focal_point": "50% 50%",
+    "sha256": "68ed8cc4bacab37a7446d24b66d23e5226236298c5663231f07eddab02ef6709"
+  },
+  "canonical_url": "https://fan-cinema-comparison.mirinaeman.chatgpt.site/",
+  "status": "DEPLOYED",
+  "first_deployed_at": "2026-09-30T17:43:46.966279+00:00",
+  "latest_deployed_at": "2026-09-30T17:43:46.966279+00:00",
+  "deployments": [
+    {
+      "deployed_at": "2026-09-30T17:43:46.966279+00:00",
+      "url": "https://fan-cinema-comparison.mirinaeman.chatgpt.site/",
+      "release_ref": "appgdep_6abd4a47451481919252d88a9b3bb25c",
+      "source_revision": "db39881c988d3a92c2217fff0273dade37af8b63",
+      "artifact_sha256": "810a87f0547deeccc3b721da65669a90d254e8d79873ccfb824a8095c4b8b9f2",
+      "status": "succeeded",
+      "validation": [
+        "Native deployment succeeded; public access revision 2.",
+        "PC 1440/mobile 390: single audio, 43 shots, deterministic reverse seek, time-preserving V2/V3 comparison, captions, reduced motion and replay passed.",
+        "True-story prologue 4.2–9.66s: complete Korean glyphs, gradual title/hold/blackout, next shot and reverse seek checked.",
+        "Archive registration authorized; no Work-menu selection. Search indexing and AI citation not measured."
+      ]
+    }
+  ],
+  "incidents": [],
+  "invariants": [],
+  "approvals": [
+    {
+      "kind": "public-deployment-and-archive-registration",
+      "statement": "배포하고 mirinaeman.com에 올려",
+      "recorded_at": "2026-09-30T17:41:52+00:00"
+    }
+  ],
+  "design_authority": {
+    "path": "DESIGN.md",
+    "source": "Existing V2/V3 comparison design and approved true-story prologue; preserve the earlier work."
+  },
+  "human_judgment": {
+    "status": "pending",
+    "note": "Public registration approved; final artistic result acceptance is not inferred."
+  },
+  "scope_notes": [
+    "Separate comparison work. Preserve V2 original. Archive/home/constellation listing; Work-menu not selected.",
+    "Central skill persistence and public registration tracked separately."
+  ],
+  "feedback": [
+    {
+      "statement": "V3에도 이거 들어가면 좋을것 같다",
+      "action": "Added actual-leftover-screws title over fan shadow, followed by blackout; approved with 반영하자.",
+      "scope": "PROJECT",
+      "verdict": "pending"
+    }
+  ]
+}

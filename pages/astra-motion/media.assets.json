@@ -1,0 +1,16 @@
+{
+  "assets": [
+    {
+      "id": "astra-motion-cover",
+      "role": "open-graph",
+      "kind": "image",
+      "delivery": {
+        "path": "og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "bd487b964f52277634304e2dd34c11b5f26a7c7f20129694188338dcfa9326d5"
+      }
+    }
+  ]
+}

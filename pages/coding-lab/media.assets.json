@@ -26,7 +26,7 @@
       "source": {
         "kind": "project-generated",
         "filename": "og.webp",
-        "sha256": "43b78c852cc4b8fc4b2776f67edd921dbb4a896a39403f4e8ddc215ccf09be4d",
+        "sha256": "55ea97e5f5104bfec1ff998a4d52a8e3fa089b21b4850e3939d63cf4a9665283",
         "note": "First-party UI screenshot; no personal report data."
       },
       "delivery": {
@@ -34,7 +34,7 @@
         "mime": "image/webp",
         "width": 1200,
         "height": 630,
-        "sha256": "43b78c852cc4b8fc4b2776f67edd921dbb4a896a39403f4e8ddc215ccf09be4d"
+        "sha256": "55ea97e5f5104bfec1ff998a4d52a8e3fa089b21b4850e3939d63cf4a9665283"
       }
     }
   ]

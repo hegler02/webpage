@@ -13,6 +13,20 @@
   "jsErrors": 0,
   "readingModeVisibleSlides": 30,
   "reducedMotion": "checked",
-  "userAcceptance": "not yet",
-  "appRealPaidAI": "not run"
+  "userAcceptance": "pending review after revision",
+  "appRealPaidAI": "not run",
+  "layoutVersion": 2,
+  "allSlidesVisuallyReviewed": true,
+  "lightSlides": 19,
+  "darkSlides": 11,
+  "companionSlides": [
+    1,
+    5,
+    10,
+    11,
+    19,
+    25,
+    29
+  ],
+  "glyphCoverage": "Korean characters covered; arrow uses system fallback"
 }

@@ -6,10 +6,10 @@
       "role": "open-graph",
       "kind": "image",
       "delivery": {
-        "path": "assets/og.jpg",
+        "path": "assets/og-psycho-v1.jpg",
         "width": 1200,
         "height": 630,
-        "sha256": "154ca9cfa412b67a90a3210d3cc40b95335f9b193d285b345ce239a057401e86",
+        "sha256": "983dea6dd3e354eea3a8fabf537f645a369b4dac17c22c91021674b4805c1885",
         "mime": "image/jpeg"
       }
     }

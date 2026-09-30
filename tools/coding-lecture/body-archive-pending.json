@@ -1,6 +1,6 @@
 {
-  "status": "CATALOG_PENDING",
-  "reason": "Public production deployments verified; archive closeout in progress.",
+  "status": "PUBLISHED",
+  "reason": "Public app, lecture, archive cards, thumbnails and exact live catalog verified. Canonical archive save succeeded after two HTTP 500 responses; post-save verification tracked in release record.",
   "records": [
     {
       "body_id": "bq2-read-with-me",
@@ -95,5 +95,8 @@
         "scope": "Public production deployment and archive registration; not final content acceptance."
       }
     }
-  ]
+  ],
+  "public_catalog_verified_at": "2026-09-30T06:35:19.320137+00:00",
+  "public_catalog_url": "https://mirinaeman.com/archive/",
+  "catalog_source_revision": "11973b05f93d92ec10317e478b862b237b477514"
 }

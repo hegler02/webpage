@@ -6,14 +6,10 @@ Build: `python3 tools/coding-lecture/build.py` then `tools/coding-lecture/node_m
 
 Validation performed: 30 slide bounds, no JavaScript errors, 1920x1212 and 390x844 viewport, rapid previous/next, reduced motion, reading mode reveals 30 slides, Korean font coverage. Discovery, OG local image, media manifest and existing homepage release gates pass. These are technical checks, not instructor/student acceptance.
 
-## Publication hold
-Automatic approval review rejected app main update because it requires explicit main-branch authorization. Both production changes are prepared on feature branches. Do not bypass that rejection or mark archive registration complete.
+## Publication status — 2026-09-30
 
-After explicit user approval to update `hegler02/bq2-read-with-me main` and `hegler02/webpage main`:
-1. Confirm current branches and merge only approved changes. Verify app and lecture deployments and canonical URLs.
-2. Load body-archive-pending.json. Set each record's DEPLOYED state, deployment times and actual source identity from verified deployment responses.
-3. Use the McLuhan body_archive.py upsert and validate_body_archive.py. Persist only affected skill evidence/index through the personal skill save procedure.
-4. Export public catalog to pages/profile/data/message-bodies.json, run tools/render_archive.py and tools/release_gate.py, publish catalog via existing branch path.
-5. Verify both cards, thumbnails and canonical URLs on mirinaeman.com/archive/, and validate_catalog_sync.py. No Work-menu listing is authorized.
+The user explicitly approved both main updates, full public deployment and two archive registrations. Production app and lecture are live at https://bq2-read-with-me.vercel.app/ and https://mirinaeman.com/pages/coding-lab/ (unauthenticated HTTP 200 verified). The app personal-report route correctly redirects unauthenticated visitors to login. Preview-only Supabase environment variables remain absent; production configuration works. The lecture authenticated preview OG HTTP probe passed.
+
+McLuhan records were upserted as DEPLOYED, not GOLDEN. The user asked to refine the lecture later; publication permission is not final content acceptance. The sanitized catalog and archive/constellation/home outputs have been generated and release-gated for publication. Verify live body IDs and canonical URLs after the catalog deployment.
 
 App real personal-PDF and paid AI operation remain distinct from synthetic UI/API tests. Public plugin marketplace submission is not complete; do not tell students it is already publicly listed.

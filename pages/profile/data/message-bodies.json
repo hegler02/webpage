@@ -123,6 +123,33 @@
       "latest_deployed_at": "2026-09-14T14:34:00.159262+00:00"
     },
     {
+      "body_id": "astra-motion-study",
+      "title": "메시지는 몸을 얻는다",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "creative-direction",
+        "interactive-presentation"
+      ],
+      "tags": [
+        "motion",
+        "message-body",
+        "human-ai",
+        "scroll-presentation"
+      ],
+      "message_sentence": "사람이 뼈대를 세우고 AI가 흐름을 설계할 때, 메시지는 몸을 얻습니다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/astra-motion-study.webp",
+        "alt": "메시지는 몸을 얻는다 — 기준, 흐름, 표현이 하나로 모이는 모션 장면",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/astra-motion/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-09-30T10:34:46+00:00",
+      "latest_deployed_at": "2026-09-30T10:34:46+00:00"
+    },
+    {
       "body_id": "baekje-renaissance",
       "title": "검이불루, 화이불치 2026 | BAEKJE RENAISSANCE 2026",
       "body_type": "SCREENBODY",

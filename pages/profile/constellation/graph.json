@@ -9,6 +9,29 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:astra-motion-study",
+      "kind": "work",
+      "title": "메시지는 몸을 얻는다",
+      "summary": "사람이 뼈대를 세우고 AI가 흐름을 설계할 때, 메시지는 몸을 얻습니다.",
+      "url": "https://mirinaeman.com/pages/astra-motion/",
+      "image": "/pages/profile/assets/thumbnails/astra-motion-study.webp",
+      "alt": "메시지는 몸을 얻는다 — 기준, 흐름, 표현이 하나로 모이는 모션 장면",
+      "year": "2026",
+      "tags": [
+        "motion",
+        "message-body",
+        "human-ai",
+        "scroll-presentation"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "사람이 뼈대를 세우고 AI가 흐름을 설계할 때, 메시지는 몸을 얻습니다."
+        }
+      ]
+    },
+    {
       "id": "work:bq2-read-with-me",
       "kind": "work",
       "title": "차근차근 · BQ2 결과 읽기",
@@ -1909,6 +1932,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:astra-motion-study",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:bq2-read-with-me",
       "target": "creator:joonho",

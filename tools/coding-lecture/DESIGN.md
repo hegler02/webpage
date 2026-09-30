@@ -11,3 +11,7 @@
 GSAP은 장면과 data-reveal의 transform/opacity, Motion은 조작부 scale와 진행 막대만 소유한다. 기존 빠른 이동 취소, 키보드, 읽기 모드, reduced motion 유지.
 
 검증: 전체 장표의 실제 렌더·좌우 배치·넘침·글꼴, 1920×1212 및 390×844, 읽기 모드 30장과 reduced motion 확인. 결과는 QA.json과 feedback.jsonl에 저장한다. 사용자 최종 수용은 아직 받지 않았다.
+
+## Vertical composition v3
+
+The user rejected v2 upper-heavy composition across the deck, with slides 23/24 as examples. Prior source bb0fb2fdc9481fd16ec0fc62fb7462bae81edc61 remains preserved. Body layouts now allocate 480–550px vertically, balancing label and explanation positions. Processes carry step numbers; check/document grids use two full rows. Prompt and companion regions stretch together; quote content is centered within its body region. Installation steps reserve separate button space. Hero composition and reading-mode reflow remain. All 30 renders were reviewed; this is implementation verification, not user acceptance. Source feedback: coding-lab-v2-bottom-space-rejected.

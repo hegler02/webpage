@@ -13,9 +13,9 @@
   "jsErrors": 0,
   "readingModeVisibleSlides": 30,
   "reducedMotion": "checked",
-  "userAcceptance": "pending review after revision",
+  "userAcceptance": "pending; v2 rejected for upper-heavy composition",
   "appRealPaidAI": "not run",
-  "layoutVersion": 2,
+  "layoutVersion": 3,
   "allSlidesVisuallyReviewed": true,
   "lightSlides": 19,
   "darkSlides": 11,
@@ -29,6 +29,5 @@
     29
   ],
   "glyphCoverage": "Korean characters covered; arrow uses system fallback",
-  "previewOG": "PASS on branch preview using official share authentication",
-  "previewBrowser": "Slide 29 companion example and text observed in cloud browser"
+  "verticalComposition": "All 30 reviewed after final CSS; 480–550px body grids; installation button clearance checked"
 }

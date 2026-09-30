@@ -13,7 +13,7 @@
   "jsErrors": 0,
   "readingModeVisibleSlides": 30,
   "reducedMotion": "checked",
-  "userAcceptance": "pending; v2 rejected for upper-heavy composition",
+  "userAcceptance": "intro v4 accepted; whole-deck final acceptance not established",
   "appRealPaidAI": "not run",
   "layoutVersion": 3,
   "allSlidesVisuallyReviewed": true,
@@ -41,6 +41,6 @@
     "reading": "30 slides; no horizontal overflow",
     "appLink": "https://bq2-read-with-me.vercel.app/",
     "jsErrors": 0,
-    "userAcceptance": "pending"
+    "userAcceptance": "accepted: 굿이다, 2026-09-30T16:46:26+09:00; intro only"
   }
 }

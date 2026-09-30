@@ -1,0 +1,37 @@
+{
+  "baseline_id": "coding-lab-intro-v4-accepted-20260930",
+  "scope": "Slide 1 intro and its animation lifecycle only; not whole-deck or app acceptance",
+  "source_revision": "496e0fb3a6eb623fecfc99e26cff404034e61602",
+  "deployed_revision": "bd6a0978fc2f710c945c332fdeb1ca2b714e0f73",
+  "url": "https://mirinaeman.com/pages/coding-lab/#slide-1",
+  "approval": {
+    "statement": "굿이다",
+    "received_at": "2026-09-30T16:46:26+09:00"
+  },
+  "files": [
+    {
+      "path": "tools/coding-lecture/intro.html",
+      "sha256": "6bef0c29681490e16b7fb507fc80b372ac0baa5dc92b1b9bdfc1580cae7e777e"
+    },
+    {
+      "path": "tools/coding-lecture/intro.js",
+      "sha256": "5f47ce09ba4ebb6507ab4579e0a2a921c6e4430a223d506eff67eaf7c15e1994"
+    },
+    {
+      "path": "pages/coding-lab/intro.css",
+      "sha256": "56dba08d3e021f2834c04e721c356fa3894051ea32bb8cecdca1021384d66667"
+    },
+    {
+      "path": "tools/coding-lecture/runtime.js",
+      "sha256": "a4d32179bbb13cb81dc97a79617dd9c3b565898317e99cfca3accfc92944edeb"
+    },
+    {
+      "path": "pages/coding-lab/assets/lecture-sans.woff2",
+      "sha256": "18a9fe0275358f93ce1079a2c502804032a8b6e7eb13dd2baffa7da37135187b"
+    },
+    {
+      "path": "tools/coding-lecture/evidence/intro-v4.webp",
+      "sha256": "35b4a103cb4d1c19d7c3297805e476b987a96ecd9ba1c6f1faa550bbdc37d8a9"
+    }
+  ]
+}

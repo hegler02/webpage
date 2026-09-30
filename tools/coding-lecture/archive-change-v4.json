@@ -1,0 +1,9 @@
+{
+  "reason": "Approved kinetic intro redesign with new representative thumbnail.",
+  "evidence": [
+    "User approved intro plan: 가자",
+    "tools/coding-lecture/QA.json",
+    "tools/coding-lecture/evidence/intro-v4.webp"
+  ],
+  "verdict": "pending"
+}

@@ -16,14 +16,14 @@
   "message_sentence": "완전 초보가 자신의 판단을 PRD·개발·검증·배포까지 연결한다.",
   "status": "DEPLOYED",
   "first_deployed_at": "2026-09-30T06:30:05.291000+00:00",
-  "latest_deployed_at": "2026-09-30T07:25:30.640000+00:00",
+  "latest_deployed_at": "2026-09-30T07:41:08.108000+00:00",
   "thumbnail": {
     "path": "assets/thumbnails/mirinaeman-coding-lab.webp",
     "alt": "내 생각을, 작동하는 앱으로 대표 화면",
     "width": 960,
     "height": 540,
     "focal_point": "50% 50%",
-    "sha256": "04baf453635c0202cbfacf0a9f38c158cdfff4a0cc727e39313c8ad96bfd66b5",
+    "sha256": "a6788737f5b133482435c28d37997e199dcc8f3f2e57b1dcdbc944f8675cbe6b",
     "source_kind": "page-capture"
   },
   "incidents": [],
@@ -52,6 +52,14 @@
       "source_revision": "2edeef9fdc8f3a2f29ac4f6c52167e026408df34",
       "deployment_id": "dpl_FChAobFynsBLNMfWhvecvQQbNXsc",
       "verification": "Production READY; canonical CSS byte-identical to tested source. All 30 slides visually reviewed, bounds/JS errors zero, reading 30 and compact/reduced-motion checked."
+    },
+    {
+      "status": "succeeded",
+      "url": "https://mirinaeman.com/pages/coding-lab/",
+      "deployed_at": "2026-09-30T07:41:08.108000+00:00",
+      "source_revision": "496e0fb3a6eb623fecfc99e26cff404034e61602",
+      "deployment_id": "dpl_5XVK73kKTfGvbAT2H3awToyJKWWN",
+      "verification": "Production READY; public intro CSS exact match. GSAP start/middle/end reviewed; rapid exit/reentry, compact, reduced motion, reading checks passed. Public intro observed in cloud browser."
     }
   ],
   "approvals": [],
@@ -66,5 +74,12 @@
     "correction": "Vertical body composition, numbered processes, full two-row check/document grids, equal-height prompt companions; all 30 reviewed.",
     "evidence": "hegler02/webpage tools/coding-lecture/feedback.jsonl and QA.json",
     "verdict": "pending user review"
+  },
+  "intro_revision": {
+    "version": 4,
+    "scope": "slide 1; host animation cleanup",
+    "approval": "가자 after concrete intro plan",
+    "result": "pending user acceptance",
+    "evidence": "tools/coding-lecture/QA.json and feedback.jsonl"
   }
 }

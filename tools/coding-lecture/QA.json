@@ -29,5 +29,18 @@
     29
   ],
   "glyphCoverage": "Korean characters covered; arrow uses system fallback",
-  "verticalComposition": "All 30 reviewed after final CSS; 480–550px body grids; installation button clearance checked"
+  "verticalComposition": "All 30 reviewed after final CSS; 480–550px body grids; installation button clearance checked",
+  "introVersion": 4,
+  "introChecks": {
+    "startMiddleEnd": "visually reviewed",
+    "slidesOneTwoBounds": "PASS",
+    "rapidExitReentry": "0 hidden targets after settle",
+    "desktop": "1920x1212",
+    "compact": "390x844; no horizontal overflow",
+    "reducedMotion": "all intro targets visible",
+    "reading": "30 slides; no horizontal overflow",
+    "appLink": "https://bq2-read-with-me.vercel.app/",
+    "jsErrors": 0,
+    "userAcceptance": "pending"
+  }
 }

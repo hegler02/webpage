@@ -15,3 +15,7 @@ GSAP은 장면과 data-reveal의 transform/opacity, Motion은 조작부 scale와
 ## Vertical composition v3
 
 The user rejected v2 upper-heavy composition across the deck, with slides 23/24 as examples. Prior source bb0fb2fdc9481fd16ec0fc62fb7462bae81edc61 remains preserved. Body layouts now allocate 480–550px vertically, balancing label and explanation positions. Processes carry step numbers; check/document grids use two full rows. Prompt and companion regions stretch together; quote content is centered within its body region. Installation steps reserve separate button space. Hero composition and reading-mode reflow remain. All 30 renders were reviewed; this is implementation verification, not user acceptance. Source feedback: coding-lab-v2-bottom-space-rejected.
+
+## Intro v4 — approved opening scene
+
+User approved centered oversized typography, teal emphasis, idea → app → public URL choreography, dark graphite depth, and a finite ending on the human decision. Only slide 1 gains this surface. intro.html is the semantic scene; intro.css owns its tokens/layout; intro.js owns its finite GSAP timeline. Host navigation kills and clears [data-intro] alongside regular reveal targets. Motion owns intro-link brightness only; GSAP owns its opacity/translation. Ordinary control scales remain unchanged. Shared navigation commits slide 2 as before. Reduced motion/reading mode render final content immediately. Baseline d2f9fe5ad993aa932cf75f5b69ae21cf27f5787b remains preserved.

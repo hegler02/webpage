@@ -16,14 +16,14 @@
   "message_sentence": "완전 초보가 자신의 판단을 PRD·개발·검증·배포까지 연결한다.",
   "status": "DEPLOYED",
   "first_deployed_at": "2026-09-30T06:30:05.291000+00:00",
-  "latest_deployed_at": "2026-09-30T06:30:05.291000+00:00",
+  "latest_deployed_at": "2026-09-30T07:08:23.801000+00:00",
   "thumbnail": {
     "path": "assets/thumbnails/mirinaeman-coding-lab.webp",
     "alt": "내 생각을, 작동하는 앱으로 대표 화면",
     "width": 960,
     "height": 540,
     "focal_point": "50% 50%",
-    "sha256": "63abf10dbb909558e8fe91110e71f9a5e9e3e207e2fe6a4608d7021d513daabf",
+    "sha256": "04baf453635c0202cbfacf0a9f38c158cdfff4a0cc727e39313c8ad96bfd66b5",
     "source_kind": "page-capture"
   },
   "incidents": [],
@@ -36,6 +36,14 @@
       "source_revision": "3bf785c04ce1d47a9eaa0c4cd8f6a2ce779412e2",
       "deployment_id": "dpl_7Unxh3SwdtLafgdcZv7bCimtUPjW",
       "verification": "Production READY; unauthenticated canonical URL HTTP 200. 30 slides; desktop/mobile, reduced motion, reading mode and keyboard checks passed; authenticated preview OG HTTP probe PASS."
+    },
+    {
+      "status": "succeeded",
+      "url": "https://mirinaeman.com/pages/coding-lab/",
+      "deployed_at": "2026-09-30T07:08:23.801000+00:00",
+      "source_revision": "e02bc08de127fdf8f5469ae92e47491227f2a8fe",
+      "deployment_id": "dpl_HQ6g5E14pREVeNx9YB58eqJyFMHL",
+      "verification": "Production READY. All 30 scenes rendered and visually reviewed; local desktop/compact bounds and JS error checks passed. Shared title/body/footer grid, 19 light and 11 dark scenes. Authenticated branch-preview OG HTTP probe PASS. Preview slide 29 observed in browser."
     }
   ],
   "approvals": [],
@@ -43,5 +51,12 @@
     "statement": "승인...그리고 강의자료는 좀더 보완하자. 일단은 모두 전체공개로 배포하고 아카이브 등록한다",
     "received_at": "2026-09-30T15:27:18+09:00",
     "scope": "Public production deployment and archive registration; not final content acceptance."
+  },
+  "layout_revision": {
+    "version": 2,
+    "feedback": "Left-heavy layouts, unused right areas, repeated black background and inconsistent layout rejected by user. User requested all affected slides corrected.",
+    "correction": "Shared grid and type hierarchy; paired examples on 1,5,10,11,19,25,29; horizontal installation steps; centered sparse quotations; consistent multi-column layouts.",
+    "evidence": "hegler02/webpage tools/coding-lecture/feedback.jsonl and QA.json",
+    "verdict": "pending user review"
   }
 }

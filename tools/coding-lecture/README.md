@@ -13,3 +13,7 @@ The user explicitly approved both main updates, full public deployment and two a
 McLuhan records were upserted as DEPLOYED, not GOLDEN. The user asked to refine the lecture later; publication permission is not final content acceptance. The sanitized catalog and archive/constellation/home outputs have been generated and release-gated for publication. Live archive body IDs, canonical URLs, both thumbnail bytes, and exact catalog equality have been verified. Archive screenshot: evidence/archive-live.jpg. Catalog production source: 11973b05f93d92ec10317e478b862b237b477514.
 
 App real personal-PDF and paid AI operation remain distinct from synthetic UI/API tests. Public plugin marketplace submission is not complete; do not tell students it is already publicly listed.
+
+## Layout revision 2
+
+User requested correction across all 30 slides: one-sided content, repeated black backgrounds and inconsistent layout. Shared title/body/footer coordinates, paired examples, horizontal steps and 19 light / 11 dark scenes are implemented. All 30 rendered scenes reviewed; no overflow or JavaScript errors in the local desktop/compact checks. See DESIGN.md, QA.json, feedback.jsonl and evidence/slide-29-v2.webp. Result acceptance remains pending.

@@ -1,0 +1,10 @@
+{
+  "reason": "User requested correcting left-heavy layouts throughout the 30-slide lecture and avoiding repeated all-black presentation. Shared grids, balanced examples, light/dark scene roles and updated thumbnail implemented.",
+  "evidence": [
+    "2026-09-30 user feedback and approval",
+    "tools/coding-lecture/feedback.jsonl",
+    "tools/coding-lecture/QA.json",
+    "tools/coding-lecture/evidence/slide-29-v2.webp"
+  ],
+  "verdict": "pending"
+}

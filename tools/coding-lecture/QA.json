@@ -28,5 +28,7 @@
     25,
     29
   ],
-  "glyphCoverage": "Korean characters covered; arrow uses system fallback"
+  "glyphCoverage": "Korean characters covered; arrow uses system fallback",
+  "previewOG": "PASS on branch preview using official share authentication",
+  "previewBrowser": "Slide 29 companion example and text observed in cloud browser"
 }

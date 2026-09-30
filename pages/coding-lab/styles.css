@@ -43,3 +43,9 @@ body:not(.reading) .kind-quote:not(:has(.takeaway)) .scene-body{min-height:550px
 @media(max-width:650px){.toolbar,.controls{padding:8px;gap:6px}.deck-title,#fullscreen{display:none}.toolbar>div{gap:6px}.toolbar>a{font-size:14px}.controls select{min-width:70px;max-width:28vw;font-size:12px}.controls button{padding:7px 10px;font-size:12px}.reading .slide h2{font-size:35px}.reading blockquote{font-size:26px}.reading .eyebrow{font-size:20px}.reading .eyebrow span{display:none}.reading .prompt-body button{font-size:18px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 @media print{body{background:white;color:black}.toolbar,.controls,.progress,.skip,#notes-panel{display:none!important}.stage,.viewport{position:static!important;transform:none!important;height:auto!important;width:auto!important;overflow:visible!important}.slide,.js:not(.reading) .slide{display:block!important;position:relative!important;break-after:page;width:1920px;height:1080px;transform:none!important;opacity:1!important}.slide *{opacity:1!important;visibility:visible!important;transform:none!important}.takeaway{position:absolute}@page{size:landscape;margin:0}}
+
+/* Sharing feedback is outside the scaled stage and never takes focus. */
+.share-toast{--toast-bg:#102a25;--toast-border:#83efd6;position:fixed;z-index:100;width:max-content;max-width:min(360px,calc(100vw - 24px));padding:14px 18px;background:var(--toast-bg);border:1px solid var(--toast-border);border-radius:12px;box-shadow:0 12px 32px #0006;color:#f4fffc;font:16px/1.55 var(--font);word-break:keep-all;pointer-events:none}
+.share-toast[data-state=error]{--toast-bg:#3a2020;--toast-border:#f2aaaa}
+.share-toast[hidden]{display:none}
+@media print{.share-toast{display:none!important}}

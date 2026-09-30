@@ -1,0 +1,71 @@
+{
+  "status": "ARCHIVE_PENDING",
+  "reason": "Production main updates blocked by automatic approval review; explicit user main approval required. Do not claim public registration before verified deployment.",
+  "records": [
+    {
+      "body_id": "bq2-read-with-me",
+      "title": "차근차근 · BQ2 결과 읽기",
+      "body_type": "SCREENBODY",
+      "source_kinds": [
+        "user-request"
+      ],
+      "tags": [
+        "webapp",
+        "BQ2",
+        "reading",
+        "privacy"
+      ],
+      "canonical_url": "https://bq2-read-with-me.vercel.app/",
+      "message_sentence": "원본을 확인하며 BQ2 결과를 한 항목씩 이해하고 질문을 남긴다.",
+      "status": "DRAFT",
+      "first_deployed_at": null,
+      "latest_deployed_at": null,
+      "thumbnail": {
+        "path": "assets/thumbnails/bq2-read-with-me.webp",
+        "alt": "차근차근 · BQ2 결과 읽기 대표 화면",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%",
+        "sha256": "f0f71b8b0012ee4ba84fdf51a1570ae207310aff87210a29d4a9190db6dfbd78",
+        "source_kind": "page-capture"
+      },
+      "incidents": [],
+      "invariants": [],
+      "deployments": [],
+      "approvals": []
+    },
+    {
+      "body_id": "mirinaeman-coding-lab",
+      "title": "내 생각을, 작동하는 앱으로",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "user-request"
+      ],
+      "tags": [
+        "lecture",
+        "coding",
+        "GSAP",
+        "Motion",
+        "beginner"
+      ],
+      "canonical_url": "https://mirinaeman.com/pages/coding-lab/",
+      "message_sentence": "완전 초보가 자신의 판단을 PRD·개발·검증·배포까지 연결한다.",
+      "status": "DRAFT",
+      "first_deployed_at": null,
+      "latest_deployed_at": null,
+      "thumbnail": {
+        "path": "assets/thumbnails/mirinaeman-coding-lab.webp",
+        "alt": "내 생각을, 작동하는 앱으로 대표 화면",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%",
+        "sha256": "63abf10dbb909558e8fe91110e71f9a5e9e3e207e2fe6a4608d7021d513daabf",
+        "source_kind": "page-capture"
+      },
+      "incidents": [],
+      "invariants": [],
+      "deployments": [],
+      "approvals": []
+    }
+  ]
+}

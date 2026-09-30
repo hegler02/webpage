@@ -1,0 +1,18 @@
+{
+  "slides": 30,
+  "browser": "Chromium 153",
+  "viewport": [
+    1920,
+    1212
+  ],
+  "compact": [
+    390,
+    844
+  ],
+  "slideOverflow": 0,
+  "jsErrors": 0,
+  "readingModeVisibleSlides": 30,
+  "reducedMotion": "checked",
+  "userAcceptance": "not yet",
+  "appRealPaidAI": "not run"
+}

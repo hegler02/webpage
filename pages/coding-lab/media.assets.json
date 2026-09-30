@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "app-sample",
+      "kind": "image",
+      "role": "content",
+      "source": {
+        "kind": "project-generated",
+        "filename": "app-sample.webp",
+        "sha256": "f348ec2fc50d6a6ac532bc283b20b8fc60cdad28b3e41180c4824ff34173dff3",
+        "note": "First-party UI screenshot; no personal report data."
+      },
+      "delivery": {
+        "path": "assets/app-sample.webp",
+        "mime": "image/webp",
+        "width": 1400,
+        "height": 1000,
+        "sha256": "f348ec2fc50d6a6ac532bc283b20b8fc60cdad28b3e41180c4824ff34173dff3"
+      }
+    },
+    {
+      "id": "og",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "kind": "project-generated",
+        "filename": "og.webp",
+        "sha256": "43b78c852cc4b8fc4b2776f67edd921dbb4a896a39403f4e8ddc215ccf09be4d",
+        "note": "First-party UI screenshot; no personal report data."
+      },
+      "delivery": {
+        "path": "assets/og.webp",
+        "mime": "image/webp",
+        "width": 1200,
+        "height": 630,
+        "sha256": "43b78c852cc4b8fc4b2776f67edd921dbb4a896a39403f4e8ddc215ccf09be4d"
+      }
+    }
+  ]
+}

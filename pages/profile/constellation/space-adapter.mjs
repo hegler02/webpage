@@ -47,8 +47,8 @@ export async function mount(host,labels,status,{onFailure,onSelect=()=>{}}){
    // Creator overview uses sparse spokes, keeping the galaxy legible.
    if(!active)continue;
    const middle=a.position.clone().lerp(b.position,.5);middle.y+=Math.min(2,a.position.distanceTo(b.position)*.12);
-   const curve=new T.QuadraticBezierCurve3(a.position,middle,b.position),line=new T.Line(new T.BufferGeometry().setFromPoints(curve.getPoints(36)),new T.LineBasicMaterial({color:'#a9cfff',transparent:true,opacity:data.overview?.09:.28,depthWrite:false}));world.add(line);dynamic.push(line);
-   if(webgl){pulses.push({curve,offset:random()});pulsePos.push(0,0,0);pulseCol.push(.7,.86,1);pulseSize.push(2);}
+   const curve=new T.QuadraticBezierCurve3(a.position,middle,b.position),line=new T.Line(new T.BufferGeometry().setFromPoints(curve.getPoints(36)),new T.LineBasicMaterial({color:'#a9cfff',transparent:true,opacity:(data.overview||selectedId==='creator:joonho')?.055:.28,depthWrite:false}));world.add(line);dynamic.push(line);
+   if(webgl&&selectedId!=='creator:joonho'){pulses.push({curve,offset:random()});pulsePos.push(0,0,0);pulseCol.push(.7,.86,1);pulseSize.push(2);}
   }
   if(pulses.length){const obj=points(pulsePos,pulseCol,pulseSize);objects.pop();dynamic.push(obj);pulses.mesh=obj;}
   if(selected&&!data.overview&&data.selected!=='creator:joonho'){targetFocus.copy(selected.position);targetRadius=width<600?18:14;}

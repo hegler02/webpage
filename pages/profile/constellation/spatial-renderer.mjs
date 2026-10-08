@@ -12,12 +12,12 @@ function svgRenderer(THREE){
     domElement:svg,setPixelRatio(){},
     setSize(w,h){width=w;height=h;svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.setAttribute('width',w);svg.setAttribute('height',h);},
     render(scene,camera){
-      const fragments=[];scene.updateMatrixWorld(true);
+      const fragments=['<defs>'+['#83bdff','#d4a5ff','#6fe0db','#ffd399','#fff0dc'].map((c,i)=>`<radialGradient id="glow${i}"><stop offset="0" stop-color="${c}" stop-opacity="1"/><stop offset=".2" stop-color="${c}" stop-opacity=".7"/><stop offset="1" stop-color="${c}" stop-opacity="0"/></radialGradient>`).join('')+'</defs>'];scene.updateMatrixWorld(true);
       scene.traverse(object=>{
         if(!object.isLine&&!object.isPoints)return;
         const a=object.geometry.attributes.position,color='#'+object.material.color.getHexString();
         if(object.isLine){const coords=[];for(let i=0;i<a.count;i++){const [x,y]=point(a.getX(i),a.getY(i),a.getZ(i),object.matrixWorld,camera);coords.push(`${i?'L':'M'}${x.toFixed(2)},${y.toFixed(2)}`);}fragments.push(`<path d="${coords.join(' ')}" fill="none" stroke="${color}" stroke-opacity="${object.material.opacity}" stroke-width="1"/>`);}
-        else{for(let i=0;i<a.count;i++){const [x,y]=point(a.getX(i),a.getY(i),a.getZ(i),object.matrixWorld,camera);if(x>=0&&x<=width&&y>=0&&y<=height)fragments.push(`<circle cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r=".7" fill="${color}" opacity="${object.material.opacity}"/>`);}}
+        else{for(let i=0;i<a.count;i++){const [x,y]=point(a.getX(i),a.getY(i),a.getZ(i),object.matrixWorld,camera);if(x>=0&&x<=width&&y>=0&&y<=height)fragments.push(`<circle cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="${Math.max(1.2,(object.geometry.attributes.aSize?.getX(i)||.5)*2)}" fill="url(#glow${i%5})" opacity="${object.material.opacity}"/>`);}}
       });
       svg.innerHTML=fragments.join('');
     },dispose(){svg.replaceChildren();},forceContextLoss(){}

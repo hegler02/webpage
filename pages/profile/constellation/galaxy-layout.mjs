@@ -1,5 +1,5 @@
 // Spatial grouping is a browsing aid; only graph edges assert relationships.
-export const GALAXY={arms:4,radius:14,turns:1.35,coreRadius:1.6,desktopParticles:18000,mobileParticles:8000,fallbackParticles:420,backgroundParticles:900,flightEase:4,near:.1,far:180,zoomMin:6,zoomMax:65};
+export const GALAXY={arms:4,radius:14,turns:1.35,coreRadius:1.6,desktopParticles:18000,mobileParticles:8000,fallbackParticles:1800,backgroundParticles:900,flightEase:4,near:.1,far:180,zoomMin:6,zoomMax:65};
 export const SECTORS=[{name:'음악과 장면',color:'#83bdff'},{name:'이야기와 세계',color:'#d4a5ff'},{name:'연구와 발견',color:'#6fe0db'},{name:'생각과 일상',color:'#ffd399'}];
 export function hash(text){let h=2166136261;for(const c of text){h^=c.codePointAt(0);h=Math.imul(h,16777619);}return h>>>0;}
 export function sector(node){

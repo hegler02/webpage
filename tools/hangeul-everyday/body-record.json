@@ -20,7 +20,7 @@
   "canonical_url": "https://hangeul-everyday.mirinaeman.chatgpt.site/",
   "status": "DEPLOYED",
   "first_deployed_at": "2026-10-08T22:42:39.028069+00:00",
-  "latest_deployed_at": "2026-10-08T22:42:39.028069+00:00",
+  "latest_deployed_at": "2026-10-08T23:40:59.171466+00:00",
   "thumbnail": {
     "source_kind": "project-owned",
     "path": "assets/thumbnails/hangeul-everyday.webp",
@@ -41,6 +41,18 @@
         "Sites deployment succeeded; audience public.",
         "67 shots and 28 assets passed timeline and source-audio identity checks.",
         "Full public playback visual QA remains unverified."
+      ]
+    },
+    {
+      "deployed_at": "2026-10-08T23:40:59.171466+00:00",
+      "url": "https://hangeul-everyday.mirinaeman.chatgpt.site/",
+      "status": "succeeded",
+      "release_ref": "appgdep_6ac829fd82c48191b6c71653fef1735a",
+      "source_revision": "c2d581e41f8b7adf1fd51b5ff5bcd31ee517b6ab",
+      "validation": [
+        "Band vocalist OG and Twitter image match the archive subject; 1200x630 JPEG.",
+        "Discovery validator passed with HTTP preview metadata, MIME, dimensions and exact image bytes.",
+        "Public galaxy work node, creator and image-cinema connections verified in browser."
       ]
     }
   ],

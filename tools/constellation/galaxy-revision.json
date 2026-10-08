@@ -1,0 +1,11 @@
+{
+  "name": "미리내맨 은하수",
+  "status": "IMPLEMENTED_PENDING_PRODUCTION_VERIFICATION",
+  "approval": ["가자 지금있는건 three.js 가 아니다. 저렇게 멋없는건 첨봤어", "미리내맨 은하수"],
+  "feedback": "Previous fixed-position, paginated spatial view did not deliver the user's intended galaxy experience.",
+  "changes": ["One galaxy includes all public graph records; list pagination remains independent.", "Deterministic semantic sectors arrange records without inventing graph relationships.", "Additive point shaders form spiral arms and a luminous core; selected factual connections carry animated light.", "Camera flies to a selected record; pointer, keyboard, wheel and pinch controls explore the same space.", "Projected captions use collision suppression and progressive disclosure; source text remains in reader and static index."],
+  "validation": ["Repository release gate PASS", "Real Three.js SVG projection/lifecycle test PASS", "Deterministic layout and complete record coverage PASS", "Preview UI search for 아구, selection, reader and URL restoration verified", "Preview DOM: 92 labels and no desktop horizontal overflow; selected record settles at map center"],
+  "limitations": ["Cloud browser has GPU disabled; hardware WebGL visual quality and frame rate are not measured.", "Physical mobile touch and screen-reader verification pending."],
+  "human_judgment": "pending",
+  "scope": "Existing constellation experience only; catalog content and work menu unchanged."
+}

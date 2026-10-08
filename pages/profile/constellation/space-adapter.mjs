@@ -31,14 +31,15 @@ export async function mount(host,labels,status,{onFailure,onSelect=()=>{}}){
  points(core,coreColors,coreSizes,.65);
  if(webgl){const p=[],c=[],s=[];for(let i=0;i<G.backgroundParticles;i++){p.push((random()-.5)*95,(random()-.5)*70,-20-random()*50);c.push(.45,.55,.8);s.push(.25+random()*.6);}const sky=points(p,c,s);world.remove(sky);scene.add(sky);}
  function dispose(obj){obj.geometry?.dispose();obj.material?.dispose();obj.parent?.remove(obj);}
- let dynamic=[];
+ let dynamic=[],connected=new Set();
  function update(data){
   current=data;dynamic.forEach(dispose);dynamic=[];pickables.length=0;pulses.length=0;byId.clear();
   positions=layout(data.universe||data.visible);
+  connected=new Set([data.selected,...data.edges.filter(e=>e.source===data.selected||e.target===data.selected).map(e=>e.source===data.selected?e.target:e.source)]);
   const enabled=new Set(data.visible.map(n=>n.id));
   (data.universe||data.visible).forEach(n=>{
    const entry=positions.get(n.id),color=entry.sector<0?new T.Color('#fff0c9'):colors[entry.sector];
-   const obj=new T.Mesh(new T.SphereGeometry(n.kind==='creator'?.22:.115,10,8),new T.MeshBasicMaterial({color,transparent:true,opacity:enabled.has(n.id)?1:.17}));obj.position.fromArray(entry.position);obj.userData.node=n.id;world.add(obj);dynamic.push(obj);if(enabled.has(n.id))pickables.push(obj);byId.set(n.id,obj);
+   const obj=new T.Mesh(new T.SphereGeometry(n.kind==='creator'?.22:.115,10,8),new T.MeshBasicMaterial({color,transparent:true,opacity:enabled.has(n.id)?(data.overview||connected.has(n.id)?1:.28):.17}));obj.position.fromArray(entry.position);obj.userData.node=n.id;world.add(obj);dynamic.push(obj);if(enabled.has(n.id))pickables.push(obj);byId.set(n.id,obj);
   });
   const selected=byId.get(data.selected),selectedId=data.selected;
   const pulsePos=[],pulseCol=[],pulseSize=[];
@@ -66,7 +67,8 @@ export async function mount(host,labels,status,{onFailure,onSelect=()=>{}}){
    button.style.zIndex=String(n.id===current.selected?20:10);
    const important=n.id===current.selected||n.id===hover;
    const rect={x:x-85,y:y+14,w:170,h:55},overlap=occupied.some(r=>Math.abs(r.x-rect.x)<170&&Math.abs(r.y-rect.y)<62);
-   const reveal=important||(!overlap&&occupied.length<(width<600?4:9));
+   const reveal=important||((current.overview||connected.has(n.id))&&!overlap&&occupied.length<(width<600?4:9));
+   button.style.opacity=current.overview||connected.has(n.id)||important?'1':'.4';
    button.setAttribute('data-caption',reveal?'true':'false');button.setAttribute('data-sector',String(positions.get(n.id).sector));
    if(reveal&&inView)occupied.push(rect);
   }

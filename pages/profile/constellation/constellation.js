@@ -4,7 +4,7 @@ const $=id=>document.getElementById(id);
 $('menu').addEventListener('click',()=>{const open=$('menu').getAttribute('aria-expanded')!=='true';$('menu').setAttribute('aria-expanded',String(open));$('main-nav').classList.toggle('open',open);});
 const root=$('interactive'),space=$('map'),labels=$('nodes'),explorer=root.querySelector('.explorer');
 let graph,db,state,adapter=null,loading=false,failed=false,visible=false,dead=false,trail=[],latest,limit=7;
-function fallback(reason){failed=true;adapter?.destroy();adapter=null;space.classList.add('flat');$('engine-status').textContent=reason||'평면 지도';$('map-help').textContent='작품을 눌러 연결 읽기';}
+function fallback(reason){space.classList.remove('loading');failed=true;adapter?.destroy();adapter=null;space.classList.add('flat');$('engine-status').textContent=reason||'평면 지도';$('map-help').textContent='작품을 눌러 연결 읽기';}
 async function reconcile(){
   const active=state?.view==='map'&&visible&&!document.hidden&&!dead;
   if(!active){adapter?.pause();return;}
@@ -14,7 +14,7 @@ async function reconcile(){
   try{const {mount}=await import('./space-adapter.mjs');if(dead)return;
     adapter=await mount($('canvas-host'),labels,$('engine-status'),{onFailure:fallback,onSelect:choose});
     if(dead){adapter.destroy();adapter=null;return;}
-    space.classList.remove('flat');adapter.update(latest);
+    space.classList.remove('flat','loading');labels.scrollTop=0;adapter.update(latest);
     if(state.view!=='map'||!visible||document.hidden)adapter.pause();
   }catch(error){fallback('3D 사용 불가 · 평면 지도');}finally{loading=false;}
 }
@@ -78,7 +78,7 @@ window.addEventListener('pageshow',e=>{if(e.persisted){dead=false;reconcile();}}
 try{
   const response=await fetch('/pages/profile/constellation/graph.json');if(!response.ok)throw new Error('graph');
   graph=await response.json();db=model(graph);state=db.fromURL(location.href);trail=[state.selected];
-  root.hidden=false;document.querySelector('.reading-index').open=false;space.classList.add('flat');
+  root.hidden=false;document.querySelector('.reading-index').open=false;space.classList.add('flat','loading');
   render();
   if(state.missing)$('notice').textContent='요청한 기록을 찾을 수 없어 시작 지도를 열었습니다. 목록에서 확인해 주세요.';
 }catch(error){$('notice').textContent='탐색 화면을 불러오지 못했습니다. 아래 전체 기록에서 읽을 수 있습니다.';document.querySelector('.reading-index').open=true;}

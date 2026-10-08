@@ -9,6 +9,31 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:agu-girls",
+      "kind": "work",
+      "title": "A.G.U Girls — 아구, 뭐야?!",
+      "summary": "양포항 언양점에서 아귀 요리를 맛본 놀라움이 A.G.U Girls의 노래와 이미지 시네마와 웹툰이 되었습니다. 첫눈에는 흠. 한입에는 음!",
+      "url": "https://agu-girls.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/agu-girls.webp",
+      "alt": "A.G.U Girls 세 멤버와 아구 뭐야 타이틀 — 양포항에서 만난 맛있는 반전",
+      "year": "2026",
+      "tags": [
+        "audio",
+        "image-cinema",
+        "webtoon",
+        "food",
+        "yangpohang",
+        "gestalt"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "양포항 언양점에서 아귀 요리를 맛본 놀라움이 A.G.U Girls의 노래와 이미지 시네마와 웹툰이 되었습니다. 첫눈에는 흠. 한입에는 음!"
+        }
+      ]
+    },
+    {
       "id": "work:fan-cinema-comparison",
       "kind": "work",
       "title": "공포의 선풍기 · 두 개의 시선",
@@ -1982,6 +2007,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:agu-girls",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:fan-cinema-comparison",
       "target": "creator:joonho",

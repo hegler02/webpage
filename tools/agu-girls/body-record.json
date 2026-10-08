@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "body_id": "agu-girls",
+  "title": "A.G.U Girls — 아구, 뭐야?!",
+  "body_type": "SONGBODY",
+  "source_kinds": [
+    "user-provided-audio",
+    "true-story",
+    "generated-image-cinema",
+    "generated-webtoon"
+  ],
+  "tags": [
+    "audio",
+    "image-cinema",
+    "webtoon",
+    "food",
+    "yangpohang",
+    "gestalt"
+  ],
+  "message_sentence": "양포항 언양점에서 아귀 요리를 맛본 놀라움이 A.G.U Girls의 노래와 이미지 시네마와 웹툰이 되었습니다. 첫눈에는 흠. 한입에는 음!",
+  "canonical_url": "https://agu-girls.mirinaeman.chatgpt.site/",
+  "status": "DEPLOYED",
+  "first_deployed_at": "2026-10-08T12:13:49.581807+00:00",
+  "latest_deployed_at": "2026-10-08T12:49:13.391674+00:00",
+  "thumbnail": {
+    "source_kind": "project-owned",
+    "path": "assets/thumbnails/agu-girls.webp",
+    "alt": "A.G.U Girls 세 멤버와 아구 뭐야 타이틀 — 양포항에서 만난 맛있는 반전",
+    "width": 960,
+    "height": 540,
+    "focal_point": "50% 50%",
+    "sha256": "600a08979cddf954fea8f3781a93cf4f578d8ff3860f92ff6bf77b16b475abec"
+  },
+  "deployments": [
+    {
+      "deployed_at": "2026-10-08T12:49:13.391674+00:00",
+      "url": "https://agu-girls.mirinaeman.chatgpt.site/",
+      "release_ref": "appgdep_6ac7913a66608191ac900c22ac77de96",
+      "source_revision": "e8910c32ec8bebd8e709b22e491017fb2d2e84e0",
+      "status": "succeeded",
+      "validation": [
+        "Sites native publication succeeded; public access revision 2.",
+        "Project content/media/link checks and JavaScript syntax passed.",
+        "Managed browser QA and Google route response not verified."
+      ]
+    }
+  ],
+  "incidents": [],
+  "invariants": [],
+  "approvals": [
+    {
+      "kind": "public-deployment-and-archive-registration",
+      "statement": "매클루언 스킬에 보면 mirinaeman.com으로 업로드 하는 방법이 나와있다. 이 사이트를 업로드해줘",
+      "recorded_at": "2026-10-08T22:17:33+09:00"
+    }
+  ],
+  "human_judgment": {
+    "status": "pending",
+    "note": "Registration authorized; artistic acceptance is not inferred."
+  },
+  "related_bodies": [
+    {
+      "body_id": "noreut-galchi-album",
+      "relationship": "한 끼의 놀라움이 노래와 시네마가 된 경험을 공유한다."
+    }
+  ],
+  "scope_notes": [
+    "Register archive/home/constellation with existing renderers. No Work-menu selection.",
+    "Food experience connects to 노릇 through visible existing link in the viewing page. Search indexing and AI citations not measured."
+  ]
+}

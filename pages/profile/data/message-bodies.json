@@ -3,6 +3,37 @@
   "generated_from": "MESSAGE BODIES CQI archive",
   "bodies": [
     {
+      "body_id": "agu-girls",
+      "title": "A.G.U Girls — 아구, 뭐야?!",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-provided-audio",
+        "true-story",
+        "generated-image-cinema",
+        "generated-webtoon"
+      ],
+      "tags": [
+        "audio",
+        "image-cinema",
+        "webtoon",
+        "food",
+        "yangpohang",
+        "gestalt"
+      ],
+      "message_sentence": "양포항 언양점에서 아귀 요리를 맛본 놀라움이 A.G.U Girls의 노래와 이미지 시네마와 웹툰이 되었습니다. 첫눈에는 흠. 한입에는 음!",
+      "thumbnail": {
+        "path": "assets/thumbnails/agu-girls.webp",
+        "alt": "A.G.U Girls 세 멤버와 아구 뭐야 타이틀 — 양포항에서 만난 맛있는 반전",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://agu-girls.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-08T12:13:49.581807+00:00",
+      "latest_deployed_at": "2026-10-08T12:49:13.391674+00:00"
+    },
+    {
       "body_id": "ai-slave",
       "title": "A.I Slave | The Mirinaeman Project Music Album",
       "body_type": "SONGBODY",

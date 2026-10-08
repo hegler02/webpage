@@ -658,6 +658,36 @@
       "latest_deployed_at": "2026-08-29T02:23:22Z"
     },
     {
+      "body_id": "hangeul-everyday",
+      "title": "평소에 잘해 — 한글날에만 | 짜장면 밴드",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-provided-audio",
+        "lyrics",
+        "generated-image-cinema"
+      ],
+      "tags": [
+        "audio",
+        "image-cinema",
+        "hangeul",
+        "listening",
+        "band",
+        "gestalt"
+      ],
+      "message_sentence": "한글날 하루의 뜨거운 마음이 평소의 경청으로 이어지기를. 짜장면 밴드의 노래와 실사 이미지 시네마가 남의 말을 고치기 전에 서로의 말을 듣자고 권합니다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/hangeul-everyday.webp",
+        "alt": "짜장면 밴드의 남자 보컬이 기타를 치며 노래하고 베이스와 드럼이 함께 연주하는 장면",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://hangeul-everyday.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-08T22:42:39.028069+00:00",
+      "latest_deployed_at": "2026-10-08T22:42:39.028069+00:00"
+    },
+    {
       "body_id": "harugyeol-ai-health",
       "title": "AI를 활용해 헬스케어 앱 만들기 — 하루결",
       "body_type": "SLIDEBODY",

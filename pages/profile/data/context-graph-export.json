@@ -211,6 +211,23 @@
       },
       "intro_url": "https://mirinaeman.com/archive/jotdagado/",
       "entity_id": "https://jotdagado.mirinaeman.chatgpt.site/#film"
+    },
+    {
+      "body_id": "hangeul-everyday",
+      "concepts": [
+        "image-cinema"
+      ],
+      "reason": "한글날의 열정과 평소의 경청 사이 간극을 달력·대화·밴드 연주 장면으로 펼칩니다. 노래와 정지 이미지의 편집으로 일상에서 말을 듣는 태도를 돌아보게 하는 이미지 시네마입니다.",
+      "title": "평소에 잘해 — 한글날에만 | 짜장면 밴드",
+      "url": "https://hangeul-everyday.mirinaeman.chatgpt.site/",
+      "summary": "한글날 하루의 뜨거운 마음이 평소의 경청으로 이어지기를. 짜장면 밴드의 노래와 실사 이미지 시네마가 남의 말을 고치기 전에 서로의 말을 듣자고 권합니다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/hangeul-everyday.webp",
+        "alt": "짜장면 밴드의 남자 보컬이 기타를 치며 노래하고 베이스와 드럼이 함께 연주하는 장면",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      }
     }
   ],
   "autumn": {
@@ -251,5 +268,5 @@
   },
   "hub_url": "https://mirinaeman.com/archive/image-cinema/",
   "intro_url": "https://mirinaeman.com/archive/already-autumn/",
-  "source_sha256": "f879fc1d4df50e5ee31ca3f4f4b7e172c1135ea6ad5634f9f036b45edce711d3"
+  "source_sha256": "c03887e41265f0289e9bbf64dfdbb762552352fd173a851dcedf1de235704ecd"
 }

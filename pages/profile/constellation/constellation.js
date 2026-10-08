@@ -12,7 +12,7 @@ async function reconcile(){
   if(loading||failed)return;
   loading=true;
   try{const {mount}=await import('./space-adapter.mjs');if(dead)return;
-    adapter=await mount($('canvas-host'),labels,$('engine-status'),{onFailure:fallback});
+    adapter=await mount($('canvas-host'),labels,$('engine-status'),{onFailure:fallback,onSelect:choose});
     if(dead){adapter.destroy();adapter=null;return;}
     space.classList.remove('flat');adapter.update(latest);
     if(state.view!=='map'||!visible||document.hidden)adapter.pause();
@@ -21,15 +21,15 @@ async function reconcile(){
 function setURL(replace=false){const url=db.toURL(state,location.href);history[replace?'replaceState':'pushState'](null,'',url);}
 function render(){
   limit=explorer.clientWidth<600?4:7;
-  const w=db.window(state,limit);state.page=w.page;latest={visible:w.visible,edges:graph.edges,selected:state.selected};
+  const w=db.window(state,limit);state.page=w.page;const mapNodes=state.query||state.scope==='papers'?w.all:graph.nodes;latest={visible:mapNodes,universe:graph.nodes,edges:graph.edges,selected:state.selected,overview:state.overview};
   $('scope').value=state.scope;$('search').value=state.query;
   $('map-view').setAttribute('aria-pressed',String(state.view==='map'));
   $('list-view').setAttribute('aria-pressed',String(state.view==='list'));
   space.hidden=state.view!=='map';$('record-list').hidden=state.view!=='list';
   $('result-count').textContent=`전체 ${graph.nodes.length}개 기록 · ${graph.edges.length}개 연결 / 현재 범위 ${w.all.length}개`;
-  $('page-count').textContent=`${w.page+1} / ${w.pages}`;$('previous').disabled=w.page===0;$('next').disabled=w.page===w.pages-1;
+  root.classList.toggle('list-mode',state.view==='list');$('page-count').textContent=`${w.page+1} / ${w.pages}`;$('previous').disabled=w.page===0;$('next').disabled=w.page===w.pages-1;
   $('location').textContent=state.query?`“${state.query}” 검색`:state.overview?'작품과 마음이 이어지는 자리':db.byId.get(state.selected).title;
-  renderLabels(labels,w.visible,state.selected);renderList($('record-list'),w.visible,state.selected);
+  renderLabels(labels,mapNodes,state.selected);renderList($('record-list'),w.visible,state.selected);
   const n=db.byId.get(state.selected);renderReader($('reader-content'),n,db.neighbors(n.id));
   renderTrail($('history'),trail,db.byId);
   if(!w.visible.length){space.classList.add('empty-map');}else space.classList.remove('empty-map');
@@ -64,7 +64,7 @@ $('reset').addEventListener('click',()=>{state={...state,scope:'context',query:'
 for(const [id,delta] of [['previous',-1],['next',1]])$(id).addEventListener('click',()=>{state.page+=delta;setURL();render();$(delta<0?'previous':'next').disabled&&$(delta<0?'next':'previous').focus();});
 $('share').addEventListener('click',async()=>{
   const url=db.toURL(state,'https://mirinaeman.com/constellation/').href;
-  try{if(navigator.share){await navigator.share({title:'미리내의 별자리',url});$('notice').textContent='공유 창을 닫았습니다.';return;}}
+  try{if(navigator.share){await navigator.share({title:'미리내맨 은하수',url});$('notice').textContent='공유 창을 닫았습니다.';return;}}
   catch(e){if(e.name==='AbortError')return;}
   try{await navigator.clipboard.writeText(url);$('notice').textContent='연결 주소를 복사했습니다.';}
   catch{const input=$('share-url');input.hidden=false;input.value=url;input.focus();input.select();$('notice').textContent='이 주소를 선택해 복사해 주세요.';}

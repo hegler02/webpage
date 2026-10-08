@@ -30,7 +30,7 @@ def outputs():
         if n['kind'] not in ('creator','concept','topic'):
             item['mentions']=[{'@id':node_url(other),'name':byid[other]['title']} for other,e in linked[n['id']] if byid[other]['kind']!='creator']
         items.append({'@type':'ListItem','position':i+1,'item':item})
-    schema={'@context':'https://schema.org','@type':'CollectionPage','@id':base,'url':base,'name':'미리내의 별자리','description':'김준호의 작품과 개인적인 기록, 창작의 판단과 논문을 맥락으로 이어 읽는 공간.','mainEntity':{'@type':'ItemList','numberOfItems':len(g['nodes']),'itemListElement':items}}
+    schema={'@context':'https://schema.org','@type':'CollectionPage','@id':base,'url':base,'name':'미리내맨 은하수','description':'김준호의 작품과 개인적인 기록, 창작의 판단과 논문을 맥락으로 이어 읽는 공간.','mainEntity':{'@type':'ItemList','numberOfItems':len(g['nodes']),'itemListElement':items}}
     page=(ROOT/'tools/constellation/page.html').read_text().replace('{{NAV}}',nav).replace('{{INDEX}}',''.join(entries)).replace('{{JSONLD}}',json.dumps(schema,ensure_ascii=False).replace('</','<\\/'))
     return {PROFILE/'constellation/index.html':page,PROFILE/'constellation/graph.json':json.dumps(g,ensure_ascii=False,indent=2)+'\n'}
 

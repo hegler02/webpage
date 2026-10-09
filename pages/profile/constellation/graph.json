@@ -9,6 +9,29 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:on-stage",
+      "kind": "work",
+      "title": "무대에 서다 — 김준호",
+      "summary": "오랫동안 운동하며 한 번은 서보고 싶었던 무대. 김준호의 첫 피트니스 대회 기록을 다섯 장의 바디 프로필과 음악으로 엮은 48초 이미지 시네마.",
+      "url": "https://mirinaeman.com/pages/on-stage/",
+      "image": "/pages/profile/assets/thumbnails/on-stage.webp",
+      "alt": "붉은 조명 아래 정면을 바라보는 김준호의 바디 프로필",
+      "year": "2026",
+      "tags": [
+        "image-cinema",
+        "portrait",
+        "fitness",
+        "personal-story"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "오랫동안 운동하며 한 번은 서보고 싶었던 무대. 김준호의 첫 피트니스 대회 기록을 다섯 장의 바디 프로필과 음악으로 엮은 48초 이미지 시네마."
+        }
+      ]
+    },
+    {
       "id": "work:hangeul-everyday",
       "kind": "work",
       "title": "평소에 잘해 — 한글날에만 | 짜장면 밴드",
@@ -2033,6 +2056,13 @@
   ],
   "edges": [
     {
+      "source": "work:on-stage",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:hangeul-everyday",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2632,6 +2662,13 @@
       "target": "concept:image-cinema",
       "label": "함께 읽는 개념",
       "reason": "한글날의 열정과 평소의 경청 사이 간극을 달력·대화·밴드 연주 장면으로 펼칩니다. 노래와 정지 이미지의 편집으로 일상에서 말을 듣는 태도를 돌아보게 하는 이미지 시네마입니다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:on-stage",
+      "target": "concept:image-cinema",
+      "label": "함께 읽는 개념",
+      "reason": "오랫동안 바라던 첫 대회 출전의 기억을 다섯 장의 바디 프로필과 음악으로 다시 펼칩니다. 정지 사진 속 시선과 자세를 시간 위에 엮어 개인의 경험을 감상하는 이미지 시네마입니다.",
       "evidence": "https://mirinaeman.com/archive/image-cinema/"
     },
     {

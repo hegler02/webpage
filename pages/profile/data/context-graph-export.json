@@ -228,6 +228,24 @@
         "height": 540,
         "focal_point": "50% 50%"
       }
+    },
+    {
+      "body_id": "on-stage",
+      "concepts": [
+        "image-cinema"
+      ],
+      "reason": "오랫동안 바라던 첫 대회 출전의 기억을 다섯 장의 바디 프로필과 음악으로 다시 펼칩니다. 정지 사진 속 시선과 자세를 시간 위에 엮어 개인의 경험을 감상하는 이미지 시네마입니다.",
+      "entity_id": "https://mirinaeman.com/pages/on-stage/#work",
+      "title": "무대에 서다 — 김준호",
+      "url": "https://mirinaeman.com/pages/on-stage/",
+      "summary": "오랫동안 운동하며 한 번은 서보고 싶었던 무대. 김준호의 첫 피트니스 대회 기록을 다섯 장의 바디 프로필과 음악으로 엮은 48초 이미지 시네마.",
+      "thumbnail": {
+        "path": "assets/thumbnails/on-stage.webp",
+        "alt": "붉은 조명 아래 정면을 바라보는 김준호의 바디 프로필",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      }
     }
   ],
   "autumn": {
@@ -268,5 +286,5 @@
   },
   "hub_url": "https://mirinaeman.com/archive/image-cinema/",
   "intro_url": "https://mirinaeman.com/archive/already-autumn/",
-  "source_sha256": "74caa87dac69c0a62b2d740b5fe29f35e9bbd1da4e510eb5affa5016995fb8a7"
+  "source_sha256": "9357998bcf4ade79fae4cbaef8b838bdf6a7850faaac0982a57cae0665c282fc"
 }

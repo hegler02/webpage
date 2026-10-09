@@ -84,6 +84,21 @@ def render(source, data):
     else:
         boundary = source.index('</section>',source.index('<main'))+len('</section>')
         source = source[:boundary]+contact+source[boundary:]
+    film = data.get('featured_film')
+    film_start, film_end = '<!-- CREATOR_FILM_START -->', '<!-- CREATOR_FILM_END -->'
+    if film:
+        feature = (film_start + '<section class="section creator-film" id="on-stage" aria-labelledby="creator-film-title"><div class="wrap">'
+            '<a class="creator-film-card" href="'+esc(film['url'])+'">'
+            '<img src="'+esc(film['image'])+'" width="960" height="540" loading="lazy" alt="'+esc(film['alt'])+'">'
+            '<div class="creator-film-copy"><span class="eyebrow">A PERSONAL FILM · 00:48</span>'
+            '<h2 id="creator-film-title">'+bilingual(film['title'])+'</h2>'
+            '<p>'+bilingual(film['description'])+'</p>'
+            '<span class="creator-film-action">'+bilingual({'ko':'48초 감상 ↗','en':'Watch the 48-second film ↗'})+'</span>'
+            '</div></a></div></section>'+film_end)
+        if film_start in source:
+            source = re.sub(re.escape(film_start)+'.*?'+re.escape(film_end),lambda _:feature,source,flags=re.S)
+        else:
+            source = source.replace(END, END+feature, 1)
     return source
 
 def main():

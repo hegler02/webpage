@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "body_id": "on-stage",
+  "title": "무대에 서다 — 김준호",
+  "body_type": "STORYBODY",
+  "source_kinds": [
+    "user-provided-photographs",
+    "personal-competition-journal",
+    "procedural-audio"
+  ],
+  "tags": [
+    "image-cinema",
+    "portrait",
+    "fitness",
+    "personal-story"
+  ],
+  "message_sentence": "오랫동안 운동하며 한 번은 서보고 싶었던 무대. 김준호의 첫 피트니스 대회 기록을 다섯 장의 바디 프로필과 음악으로 엮은 48초 이미지 시네마.",
+  "canonical_url": "https://mirinaeman.com/pages/on-stage/",
+  "status": "DEPLOYED",
+  "first_deployed_at": "2026-10-09T02:22:58.340325+00:00",
+  "latest_deployed_at": "2026-10-09T02:22:58.340325+00:00",
+  "thumbnail": {
+    "source_kind": "project-owned",
+    "path": "assets/thumbnails/on-stage.webp",
+    "alt": "붉은 조명 아래 정면을 바라보는 김준호의 바디 프로필",
+    "width": 960,
+    "height": 540,
+    "focal_point": "50% 50%",
+    "sha256": "47c3b1076d4d05b157ad5b015f64533ed17add1f3e0baab71794cdf998688296"
+  },
+  "deployments": [
+    {
+      "deployed_at": "2026-10-09T02:22:58.340325+00:00",
+      "url": "https://mirinaeman.com/pages/on-stage/",
+      "status": "succeeded",
+      "source_revision": "52adb68317226e0052bf8c3c28cbbf4878c84097",
+      "release_ref": "52adb68317226e0052bf8c3c28cbbf4878c84097",
+      "validation": [
+        "Public HTTP page and metadata verified.",
+        "Public OG JPEG and 48-second WAV match release bytes.",
+        "Public browser playback started, duration 48 seconds, all five original photographs loaded.",
+        "Existing catalog release gate passed."
+      ]
+    }
+  ],
+  "incidents": [],
+  "invariants": [],
+  "approvals": [
+    {
+      "kind": "publication-and-profile-archive-constellation",
+      "statement": "좋다 가자",
+      "recorded_at": "2026-10-09T02:22:58.340325+00:00"
+    }
+  ],
+  "human_judgment": {
+    "status": "accepted",
+    "note": "User accepted the revised local cinema with 좋다 and approved the proposed publication placement. This is scoped artistic acceptance, not a GOLDEN baseline."
+  },
+  "scope_notes": [
+    "Publish standalone cinema, profile feature, archive and constellation. Preserve Work-menu selection.",
+    "Original five user photographs retained without retouching. Thumbnail and OG are crops of photograph 4.",
+    "Procedural music, not a live recording."
+  ]
+}

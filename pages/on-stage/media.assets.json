@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "on-stage-og",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "description": "Crop of user-provided photograph 4, matching the archive thumbnail subject."
+      },
+      "delivery": {
+        "path": "media/og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "27322c89009b57ecc4473775ff84a43ab97d9aa25d9c302a939eab42b8ac69ea"
+      }
+    }
+  ]
+}

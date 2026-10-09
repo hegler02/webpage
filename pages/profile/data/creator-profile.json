@@ -55,5 +55,18 @@
   "image": {
     "url": "https://mirinaeman.com/assets/images/profile-hero.webp",
     "alt": "종이 기록과 렌즈 및 데이터 빛이 만나는 김준호의 작업 공간"
+  },
+  "featured_film": {
+    "url": "https://mirinaeman.com/pages/on-stage/",
+    "image": "../assets/thumbnails/on-stage.webp",
+    "alt": "붉은 조명 아래 정면을 바라보는 김준호의 바디 프로필",
+    "title": {
+      "ko": "무대에 서다",
+      "en": "On Stage"
+    },
+    "description": {
+      "ko": "오랫동안 운동하며, 한 번은 서보고 싶었던 무대. 김준호의 첫 피트니스 대회와 그 순간을 담은 이미지 시네마.",
+      "en": "A stage he had long wanted to stand on. An image cinema about Joonho Kim’s first fitness competition, told through his body-profile photographs."
+    }
   }
 }

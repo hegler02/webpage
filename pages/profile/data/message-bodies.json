@@ -1206,6 +1206,34 @@
       "latest_deployed_at": "2026-09-12T05:33:20.511215+00:00"
     },
     {
+      "body_id": "on-stage",
+      "title": "무대에 서다 — 김준호",
+      "body_type": "STORYBODY",
+      "source_kinds": [
+        "user-provided-photographs",
+        "personal-competition-journal",
+        "procedural-audio"
+      ],
+      "tags": [
+        "image-cinema",
+        "portrait",
+        "fitness",
+        "personal-story"
+      ],
+      "message_sentence": "오랫동안 운동하며 한 번은 서보고 싶었던 무대. 김준호의 첫 피트니스 대회 기록을 다섯 장의 바디 프로필과 음악으로 엮은 48초 이미지 시네마.",
+      "thumbnail": {
+        "path": "assets/thumbnails/on-stage.webp",
+        "alt": "붉은 조명 아래 정면을 바라보는 김준호의 바디 프로필",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/on-stage/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-09T02:22:58.340325+00:00",
+      "latest_deployed_at": "2026-10-09T02:22:58.340325+00:00"
+    },
+    {
       "body_id": "one-more-guest-album",
       "title": "한 명만 더 부를께 | The Mirinaeman Project Music Album",
       "body_type": "SONGBODY",

@@ -8,7 +8,7 @@ const cuts=[0,9,18,28,38,48,58,70];
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const stage=document.querySelector('#stage'), playButton=document.querySelector('#play'), scrub=document.querySelector('#scrub');
 let renderer, scene, camera, sculpture, points, lines, uniforms, adapter, time=0, playing=false, anchor=0, raf=0, act=-1;
-let sound;
+let sound,creationImage,creationPlane;
 const arrays=[], colors=new Float32Array(COUNT*3), seeds=new Float32Array(COUNT),pathProgress=new Float32Array(COUNT),keepers=new Float32Array(COUNT);
 const lerp=(a,b,t)=>a+(b-a)*t;
 function random(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
@@ -44,44 +44,28 @@ function forms(){
 function put(shape,i,x,y,z){arrays[shape].set([x,y,z],i*3);}
 
 function peopleAndWorld(){
-  // Each color keeps its own person. The same point IDs become the galaxy.
-  const paths=[
-    'M 423 306 C 407 287 413 267 426 246 C 438 218 464 210 487 225 C 499 233 504 248 504 260 L 513 274 L 502 279 Q 503 289 494 293 L 484 294 L 481 310 C 474 324 483 340 500 357 L 526 378 Q 539 375 555 351 Q 569 335 573 343 Q 575 354 567 367 Q 549 398 532 404 Q 516 409 492 397 L 455 373 C 435 402 437 437 432 470 C 430 499 452 511 478 526 C 501 540 514 564 508 583 C 500 604 469 611 446 617 L 388 634 Q 412 647 451 646 L 491 646 Q 505 650 501 660 Q 494 669 468 670 L 363 668 C 335 664 334 642 346 621 C 359 598 383 582 412 568 C 380 554 358 541 354 517 C 349 489 371 466 376 443 C 379 415 372 387 387 358 C 399 335 419 328 423 306 Z',
-    'M 513 257 L 510 245 L 500 238 L 510 227 Q 506 215 511 202 C 515 183 532 174 551 179 C 577 184 588 205 580 226 Q 575 246 558 256 L 555 278 C 561 290 582 294 594 311 C 611 333 610 363 615 396 C 619 430 630 456 631 486 C 631 513 613 530 593 543 C 615 553 635 570 638 590 C 642 614 623 630 599 638 L 557 651 Q 536 660 510 660 L 459 661 Q 444 658 448 650 Q 452 643 475 641 L 527 627 L 567 602 C 548 588 525 583 510 569 C 493 551 494 529 503 505 L 518 462 C 508 437 503 409 501 382 L 480 404 Q 467 416 453 412 L 420 398 Q 408 391 413 386 Q 418 382 430 386 L 454 392 Q 465 381 483 352 C 493 334 509 316 520 304 Q 529 288 528 273 L 525 260 Z'
-  ];
-  const canvas=document.createElement('canvas');canvas.width=1000;canvas.height=800;
+  const canvas=document.createElement('canvas');canvas.width=creationImage.naturalWidth;canvas.height=creationImage.naturalHeight;
   const ctx=canvas.getContext('2d',{willReadFrequently:true});
-  paths.forEach((path,person)=>{
-    ctx.clearRect(0,0,1000,800);ctx.fillStyle='white';ctx.fill(new Path2D(path));
-    const pixels=ctx.getImageData(0,0,1000,800).data,body=[],outline=[];
-    for(let y=100;y<700;y+=2)for(let x=250;x<770;x+=2){
-      const at=(y*1000+x)*4+3;
-      if(pixels[at]>128){
-        const edge=pixels[at-16]<128||pixels[at+16]<128||pixels[at-16000]<128||pixels[at+16000]<128;
-        const p=[(x-500)/185,(400-y)/185];body.push(p);if(edge)outline.push(p);
-      }
-    }
-    const dust=random(40917+person);
-    for(let j=0;j<COUNT/2;j++){
-      const i=person*COUNT/2+j,pool=dust()<.42?outline:body,p=pool[Math.floor(dust()*pool.length)];
-      const softness=.008+dust()*.018;
-      const x=(p[0]-(person===0?-.35:.45))*.8,y=(p[1]+.1)*.8;
-      const turn=person===0?-.18:.18,side=person===0?-1:1;
-      put(5,i,x*Math.cos(turn)-y*Math.sin(turn)+side*.83+(dust()-.5)*softness,x*Math.sin(turn)+y*Math.cos(turn)-side*.24+(dust()-.5)*softness,(dust()+dust()-1)*.15);
-    }
-  });
+  // Sample the approved artwork, replacing the rejected hand-drawn silhouettes.
+  canvas.width=creationImage.naturalWidth;canvas.height=creationImage.naturalHeight;
+  ctx.drawImage(creationImage,0,0);
+  const imagePixels=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+  const pools=[[],[]];
+  for(let y=0;y<canvas.height;y+=2)for(let x=0;x<canvas.width;x+=2){
+    const k=(y*canvas.width+x)*4;
+    if(Math.max(imagePixels[k],imagePixels[k+1],imagePixels[k+2])>70)pools[x<canvas.width/2?0:1].push([x,y]);
+  }
+  const sample=random(51839);
+  for(let i=0;i<COUNT;i++){
+    const pool=pools[i<COUNT/2?0:1],p=pool[Math.floor(sample()*pool.length)];
+    put(5,i,(p[0]/canvas.width-.5)*5.8,(.5-p[1]/canvas.height)*5.8*canvas.height/canvas.width,(sample()-.5)*.1);
+  }
   const star=random(20261009);
-  const inversePose=new THREE.Quaternion().setFromEuler(new THREE.Euler(1.04,0,-.24)).invert();
   for(let i=0;i<COUNT;i++){
     const arm=i<COUNT/2?0:1,rad=Math.pow(star(),i%5===0?2.3:.72)*8.4;
     const angle=arm*Math.PI+rad*.64+(star()-.5)*(.45+.065*rad);
     const thickness=(star()+star()+star()-1.5)*(.06+.025*rad);
-    if(i%3===0){
-      // Distinct silhouettes remain readable inside the shared galactic flow.
-      keepers[i]=1;
-      const p=new THREE.Vector3(arrays[5][i*3]*1.25,arrays[5][i*3+1]*1.25,arrays[5][i*3+2]).applyQuaternion(inversePose);
-      put(6,i,p.x,p.y,p.z);
-    }else if(i%7===0){
+    if(i%7===0){
       put(6,i,(star()-.5)*21,(star()-.5)*8,(star()-.5)*18);
     }else put(6,i,Math.cos(angle)*rad,thickness,Math.sin(angle)*rad);
   }
@@ -115,6 +99,9 @@ function init(){
   renderer.setClearColor(0x000000);renderer.setPixelRatio(Math.min(devicePixelRatio,2));stage.appendChild(renderer.domElement);
   scene=new THREE.Scene();camera=new THREE.PerspectiveCamera(34,1,.1,100);camera.position.set(0,0,7.6);
   sculpture=new THREE.Group();scene.add(sculpture);
+  const texture=new THREE.Texture(creationImage);texture.colorSpace=THREE.SRGBColorSpace;texture.needsUpdate=true;
+  creationPlane=new THREE.Mesh(new THREE.PlaneGeometry(5.8,5.8*creationImage.naturalHeight/creationImage.naturalWidth),new THREE.MeshBasicMaterial({map:texture,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false}));
+  scene.add(creationPlane);
   const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(arrays[0],3));geo.setAttribute('target',new THREE.BufferAttribute(arrays[1],3));geo.setAttribute('tint',new THREE.BufferAttribute(colors,3));geo.setAttribute('seed',new THREE.BufferAttribute(seeds,1));
   geo.setAttribute('pathProgress',new THREE.BufferAttribute(pathProgress,1));
   geo.setAttribute('keeper',new THREE.BufferAttribute(keepers,1));
@@ -126,7 +113,7 @@ function init(){
   wire.setIndex(indices);lines=new THREE.LineSegments(wire,new THREE.ShaderMaterial({uniforms,vertexShader:vertex,fragmentShader:lineFragment,transparent:true,depthWrite:false}));sculpture.add(lines);
   resize();window.addEventListener('resize',resize);
   renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();setPlaying(false);document.querySelector('#error').hidden=false;});
-  adapter=createMotionAdapter({duration:DURATION,seek:render,fallback:fail,reduced:reduced.matches,holdForProgress:p=>{const t=p*DURATION;return(t<9?5:t<18?14:t<28?24:t<38?34:t<48?46:t<58?56:t<70?68:76)/DURATION;},dispose:()=>{renderer.dispose();points.geometry.dispose();points.material.dispose();lines.geometry.dispose();lines.material.dispose();}});
+  adapter=createMotionAdapter({duration:DURATION,seek:render,fallback:fail,reduced:reduced.matches,holdForProgress:p=>{const t=p*DURATION;return(t<9?5:t<18?14:t<28?24:t<38?34:t<48?46:t<58?56:t<70?68:76)/DURATION;},dispose:()=>{creationPlane.material.map.dispose();creationPlane.material.dispose();creationPlane.geometry.dispose();renderer.dispose();points.geometry.dispose();points.material.dispose();lines.geometry.dispose();lines.material.dispose();}});
   adapter.setProgress(0);
 }
 function resize(){
@@ -150,6 +137,13 @@ function render(t){
   uniforms.drawProgress.value=state.draw;
   sculpture.rotation.set(state.rx,state.ry,state.rz);sculpture.scale.setScalar(state.scale);
   camera.position.z=(stage.clientWidth<700?12.8:7.6)*state.dolly;
+  const reveal=Math.min(1,Math.max(0,(t-51)/3));
+  const fit=Math.min(1,(2*Math.tan(THREE.MathUtils.degToRad(17))*(stage.clientWidth<700?12.8:7.6)*camera.aspect*.92)/5.8);
+  creationPlane.position.set(0,sculpture.position.y,.08);
+  creationPlane.scale.setScalar(fit*state.scale*(1+(state.dolly-1)*.45));
+  sculpture.scale.setScalar(state.scale*lerp(1,fit,Math.min(1,Math.max(0,(t-48)/5))));
+  creationPlane.material.opacity=reveal*(1-state.world*.18);
+  uniforms.pointScale.value=state.pointSize*(1-reveal*.45);
   document.querySelector('.identity').style.opacity=String(state.identity);
   if(renderer.domElement.width<1)return;renderer.render(scene,camera);
   const next=cuts.reduce((a,c,i)=>t>=c?i:a,0);
@@ -200,7 +194,9 @@ function seek(t){if(sound?.active)sound.seek(t);else if(playing)anchor=performan
 function fail(error){console.error(error);const message=document.querySelector('#error');message.hidden=false;message.textContent='3D 장면을 열 수 없습니다. '+captions.join(' ');setPlaying(false);}
 async function boot(){
   try{
-    await document.fonts.load('700 390px Pretendard');await document.fonts.ready;forms();init();lucide.createIcons();
+    await document.fonts.load('700 390px Pretendard');await document.fonts.ready;
+    creationImage=new Image();creationImage.src='assets/creation-harmony-v1.png';await creationImage.decode();
+    forms();init();lucide.createIcons();
     initShare();
     const soundButton=document.querySelector('#sound'),soundNotice=document.querySelector('#sound-status');
     sound=createSoundPlayer({render:update,onStatus:({status,muted,active})=>{

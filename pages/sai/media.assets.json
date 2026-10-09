@@ -33,6 +33,23 @@
         "source_kind": "project-owned",
         "note": "Original procedural score with a world coda. The original melodic material is retained; two voices open into a shared galaxy. No external samples or narration."
       }
+    },
+    {
+      "asset_id": "creation-harmony-v1",
+      "role": "cinema-image-plate",
+      "kind": "image",
+      "alt": "산호색 여성과 청록색 남성이 은하수 속에서 손을 뻗고 손끝 사이에 작은 여백을 남긴다",
+      "delivery": {
+        "path": "assets/creation-harmony-v1.png",
+        "mime": "image/png",
+        "width": 1536,
+        "height": 1024,
+        "sha256": "9f1808ba0213b15d4fa5f48fe23d5ffcea62dd188be79c8949e99dea6a343bca"
+      },
+      "provenance": {
+        "source_kind": "ai-generated",
+        "note": "Generated creation-inspired styleframe explicitly approved by the user. Used as both particle sampling source and additive image plate; no claim of simulated human movement."
+      }
     }
   ]
 }

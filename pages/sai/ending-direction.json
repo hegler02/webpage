@@ -1,0 +1,24 @@
+{
+  "revision": "world-coda-1",
+  "baseline_commit": "8affd7030e68120782b5713baf64faaad6778845",
+  "message": "너와 나의 사이가, 우리 모두의 세계로.",
+  "approved_direction": "Retain two distinct colors and identities; lean together, open the same particles into a galaxy, offer voluntary exploration without redirect.",
+  "duration": 76,
+  "particle_ids": 17280,
+  "scenes": [
+    {"range": [43.8, 48], "event": "Hold SAI lettering through the original final chord and a breath."},
+    {"range": [48, 53], "event": "The two colors reform into two seated figures in contact."},
+    {"range": [53, 58], "event": "Hold the two distinct figures before expanding their relationship."},
+    {"range": [58, 66], "event": "The same particle IDs unfold into spiral arms; a small trace of the figures remains at the origin."},
+    {"range": [63, 72], "event": "The camera retreats; gentle differential rotation reveals a larger world."},
+    {"range": [70, 76], "event": "Closing phrase, score resolution, and voluntary galaxy link."}
+  ],
+  "catalog_application": [
+    {"slug": "text-particle-dissolve", "card": "vendor/awesome-ai-motion/effects/text-particle-dissolve/README.md", "adaptation": "No disappearance or opacity wipe: preserve point IDs through lettering, distinct figures, and galaxy targets. Existing GSAP paused timeline owns the morph."},
+    {"slug": "differential-galaxy", "card": "vendor/awesome-ai-motion/effects/differential-galaxy/README.md", "adaptation": "Seeded four-arm galaxy and 2:1 inner-to-outer angular speed in the vertex shader. Driven only by media time, not a second animation loop."}
+  ],
+  "implementation": ["film.js", "style.css", "index.html", "assets/sound-player.mjs", "assets/sai-world-score.mp3"],
+  "audio_authoring": "E:/다운로드/mirinaeman_SKILL/sai/evidence/ending-authoring/project.json",
+  "verification": "E:/다운로드/mirinaeman_SKILL/sai/evidence/ending-verification.json",
+  "human_acceptance": "Pending review of the implemented coda. Direction approved; technical validation is not aesthetic acceptance."
+}

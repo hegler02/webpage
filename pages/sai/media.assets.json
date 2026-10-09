@@ -26,12 +26,12 @@
       "delivery": {
         "mime": "audio/mpeg",
         "duration": 136,
-        "sha256": "10b3ab3b1626e4d0a2c7431f7b837afbfc6efdf1427b92330afd5348061f739f",
-        "path": "assets/sai-taeguk-slow-score.mp3"
+        "sha256": "1d468ad0017269300c8e621b01be0dd6f7f1f396b14452c083f0735095ff0ae1",
+        "path": "assets/sai-original-repeat-score.mp3"
       },
       "provenance": {
         "source_kind": "project-owned",
-        "note": "Original procedural score with a world coda. The original melodic material is retained; two voices open into a shared galaxy. No external samples or narration."
+        "note": "Original 48-second lossless score repeated three times at native speed. Four-second crossfades at 44 and 88 seconds yield 136 seconds. Encoded once; no time stretching, external samples or narration."
       }
     },
     {

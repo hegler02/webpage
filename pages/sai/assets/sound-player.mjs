@@ -1,6 +1,6 @@
 import {createAudioClock} from './motion-audio-clock.mjs';
 
-export const track=Object.freeze({playback:Object.freeze({src:'assets/sai-taeguk-slow-score.mp3',mime:'audio/mpeg'}),provenance:'Original procedural score with cosmic turns; evidence/slow-taeguk.mjs'});
+export const track=Object.freeze({playback:Object.freeze({src:'assets/sai-original-repeat-score.mp3',mime:'audio/mpeg'}),provenance:'Original 48-second lossless score repeated three times at native speed with 4-second crossfades; evidence/repeat-original-score.mjs'});
 export function mediaStatus(state,event,paused=true){
   if(event==='play-intent')return 'loading';
   if(event==='autoplay-blocked')return 'paused';

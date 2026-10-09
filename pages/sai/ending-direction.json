@@ -1,15 +1,15 @@
 {
-  "revision": "world-coda-1",
+  "revision": "world-coda-yin-yang-2",
   "baseline_commit": "8affd7030e68120782b5713baf64faaad6778845",
   "message": "너와 나의 사이가, 우리 모두의 세계로.",
-  "approved_direction": "Retain two distinct colors and identities; lean together, open the same particles into a galaxy, offer voluntary exploration without redirect.",
+  "approved_direction": "Male and female silhouettes symbolize two distinct complementary forces, not a literal gender doctrine. Separated silhouettes remain within two circulating galactic arms: harmony without erasing difference. Voluntary exploration, no redirect.",
   "duration": 76,
   "particle_ids": 17280,
   "scenes": [
     {"range": [43.8, 48], "event": "Hold SAI lettering through the original final chord and a breath."},
-    {"range": [48, 53], "event": "The two colors reform into two seated figures in contact."},
+    {"range": [48, 53], "event": "The two colors reform into separated, counterposed organic silhouettes."},
     {"range": [53, 58], "event": "Hold the two distinct figures before expanding their relationship."},
-    {"range": [58, 66], "event": "The same particle IDs unfold into spiral arms; a small trace of the figures remains at the origin."},
+    {"range": [58, 66], "event": "Two complementary spiral arms unfold from the same point IDs. One third of the particles retain distinct readable silhouettes within the galaxy."},
     {"range": [63, 72], "event": "The camera retreats; gentle differential rotation reveals a larger world."},
     {"range": [70, 76], "event": "Closing phrase, score resolution, and voluntary galaxy link."}
   ],

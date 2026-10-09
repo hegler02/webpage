@@ -3,13 +3,13 @@ import {createSoundPlayer} from './assets/sound-player.mjs';
 import {initShare} from './assets/share.mjs';
 
 const DURATION=76, COLS=240, ROWS=72, COUNT=COLS*ROWS;
-const captions=['처음에는, 서로 다른 점이었다.','서로를 바라보자, 방향이 생겼다.','닿은 자리에, 관계가 자랐다.','함께 지난 시간이, 우리의 결이 되었다.','우리는 혼자보다, 사이에서 선명해진다.','서로를 지우지 않고, 서로에게 기대어.','작은 사이 하나가, 하나의 우주를 연다.','너와 나의 사이가, 우리 모두의 세계로.'];
+const captions=['처음에는, 서로 다른 점이었다.','서로를 바라보자, 방향이 생겼다.','닿은 자리에, 관계가 자랐다.','함께 지난 시간이, 우리의 결이 되었다.','우리는 혼자보다, 사이에서 선명해진다.','서로 다른 채, 하나의 흐름 안에서.','둘 사이의 여백에도, 우주는 흐른다.','너와 나의 사이가, 우리 모두의 세계로.'];
 const cuts=[0,9,18,28,38,48,58,70];
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const stage=document.querySelector('#stage'), playButton=document.querySelector('#play'), scrub=document.querySelector('#scrub');
 let renderer, scene, camera, sculpture, points, lines, uniforms, adapter, time=0, playing=false, anchor=0, raf=0, act=-1;
 let sound;
-const arrays=[], colors=new Float32Array(COUNT*3), seeds=new Float32Array(COUNT),pathProgress=new Float32Array(COUNT);
+const arrays=[], colors=new Float32Array(COUNT*3), seeds=new Float32Array(COUNT),pathProgress=new Float32Array(COUNT),keepers=new Float32Array(COUNT);
 const lerp=(a,b,t)=>a+(b-a)*t;
 function random(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 const rnd=random(61729);
@@ -65,17 +65,22 @@ function peopleAndWorld(){
     for(let j=0;j<COUNT/2;j++){
       const i=person*COUNT/2+j,pool=dust()<.42?outline:body,p=pool[Math.floor(dust()*pool.length)];
       const softness=.008+dust()*.018;
-      put(5,i,p[0]+(dust()-.5)*softness,p[1]+(dust()-.5)*softness,(dust()+dust()-1)*.15);
+      const x=(p[0]-(person===0?-.35:.45))*.8,y=(p[1]+.1)*.8;
+      const turn=person===0?-.18:.18,side=person===0?-1:1;
+      put(5,i,x*Math.cos(turn)-y*Math.sin(turn)+side*.83+(dust()-.5)*softness,x*Math.sin(turn)+y*Math.cos(turn)-side*.24+(dust()-.5)*softness,(dust()+dust()-1)*.15);
     }
   });
   const star=random(20261009);
+  const inversePose=new THREE.Quaternion().setFromEuler(new THREE.Euler(1.04,0,-.24)).invert();
   for(let i=0;i<COUNT;i++){
-    const arm=i%4,rad=Math.pow(star(),i%5===0?2.3:.72)*8.4;
-    const angle=arm*Math.PI/2+rad*.64+(star()-.5)*(.45+.065*rad);
+    const arm=i<COUNT/2?0:1,rad=Math.pow(star(),i%5===0?2.3:.72)*8.4;
+    const angle=arm*Math.PI+rad*.64+(star()-.5)*(.45+.065*rad);
     const thickness=(star()+star()+star()-1.5)*(.06+.025*rad);
-    if(i%19===0){
-      // A small trace of the two people remains at the origin of the world.
-      put(6,i,arrays[5][i*3]*.16,arrays[5][i*3+2],-arrays[5][i*3+1]*.16);
+    if(i%3===0){
+      // Distinct silhouettes remain readable inside the shared galactic flow.
+      keepers[i]=1;
+      const p=new THREE.Vector3(arrays[5][i*3]*1.25,arrays[5][i*3+1]*1.25,arrays[5][i*3+2]).applyQuaternion(inversePose);
+      put(6,i,p.x,p.y,p.z);
     }else if(i%7===0){
       put(6,i,(star()-.5)*21,(star()-.5)*8,(star()-.5)*18);
     }else put(6,i,Math.cos(angle)*rad,thickness,Math.sin(angle)*rad);
@@ -83,7 +88,7 @@ function peopleAndWorld(){
 }
 
 const vertex=`
-attribute vec3 target; attribute vec3 tint; attribute float seed; attribute float pathProgress;
+attribute vec3 target; attribute vec3 tint; attribute float seed; attribute float pathProgress; attribute float keeper;
 uniform float blend; uniform float seconds; uniform float pointScale; uniform float weave; uniform float world; uniform float contact;
 varying vec3 vColor; varying float vFade; varying float vPath;
 void main(){
@@ -92,13 +97,13 @@ void main(){
   p.z+=arc*sin(seed*31.4)*.35;
   p.y+=arc*sin(seed*18.0)*.16;
   float radius=length(p.xz);
-  float orbit=max(0.0,seconds-66.0)*.018*mix(2.0,1.0,clamp(radius/8.4,0.0,1.0))*world;
+  float orbit=max(0.0,seconds-66.0)*.018*mix(2.0,1.0,clamp(radius/8.4,0.0,1.0))*world*(1.0-keeper);
   p.xz=mat2(cos(orbit),-sin(orbit),sin(orbit),cos(orbit))*p.xz;
   vec4 mv=modelViewMatrix*vec4(p,1.0);
   gl_Position=projectionMatrix*mv;
   float sharedLight=contact*exp(-length(p.xy-vec2(-.04,.88))*5.0);
   gl_PointSize=clamp(pointScale*(1.0+seed*.45+world*step(.98,seed)*2.5+sharedLight*1.8)/(-mv.z),1.0,mix(4.0,9.0,max(world,contact)));
-  vColor=mix(tint,vec3(1.0),min(1.0,weave*.45+world*.62+sharedLight));
+  vColor=mix(tint,vec3(1.0),min(1.0,weave*.45+world*.62*(1.0-keeper)+sharedLight));
   vFade=(.55+seed*.4)*(1.0-world*.22+world*.22*sin(seconds*.65+seed*60.0));
   vPath=pathProgress;
 }`;
@@ -112,6 +117,7 @@ function init(){
   sculpture=new THREE.Group();scene.add(sculpture);
   const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(arrays[0],3));geo.setAttribute('target',new THREE.BufferAttribute(arrays[1],3));geo.setAttribute('tint',new THREE.BufferAttribute(colors,3));geo.setAttribute('seed',new THREE.BufferAttribute(seeds,1));
   geo.setAttribute('pathProgress',new THREE.BufferAttribute(pathProgress,1));
+  geo.setAttribute('keeper',new THREE.BufferAttribute(keepers,1));
   uniforms={blend:{value:0},seconds:{value:0},pointScale:{value:15},world:{value:0},contact:{value:0},weave:{value:0},lineOpacity:{value:.12},drawProgress:{value:0}};
   const material=new THREE.ShaderMaterial({uniforms,vertexShader:vertex,fragmentShader:fragment,transparent:true,depthWrite:false,blending:THREE.NormalBlending});
   points=new THREE.Points(geo,material);sculpture.add(points);

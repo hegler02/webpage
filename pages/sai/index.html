@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <title>사이 — 우리 모두 사이좋게 지내요 | 김준호</title>
+  <meta name="description" content="우리 모두 사이좋게 지내요. 서로 다른 두 존재가 만나 하나의 세계를 만드는 48초의 생성형 시네마. 김준호와 AI가 함께 만든 다섯 악장과 원본 사운드.">
+  <link rel="canonical" href="https://mirinaeman.com/pages/sai/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="사이 — 우리 모두 사이좋게 지내요 | 김준호">
+  <meta property="og:description" content="우리 모두 사이좋게 지내요. 서로 다른 두 존재가 만나 하나의 세계를 만드는 48초의 생성형 시네마. 김준호와 AI가 함께 만든 다섯 악장과 원본 사운드.">
+  <meta property="og:url" content="https://mirinaeman.com/pages/sai/">
+  <meta property="og:image" content="https://mirinaeman.com/pages/sai/assets/og.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="산호색과 청록색 입자 리본이 하나의 고리로 얽히는 사이의 관계 악장">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="사이 — 우리 모두 사이좋게 지내요 | 김준호">
+  <meta name="twitter:description" content="우리 모두 사이좋게 지내요. 서로 다른 두 존재가 만나 하나의 세계를 만드는 48초의 생성형 시네마. 김준호와 AI가 함께 만든 다섯 악장과 원본 사운드.">
+  <meta name="twitter:image" content="https://mirinaeman.com/pages/sai/assets/og.jpg">
+  <meta name="twitter:image:alt" content="산호색과 청록색 입자 리본이 하나의 고리로 얽히는 사이의 관계 악장">
+  <link rel="icon" href="../profile/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://mirinaeman.com/pages/sai/#page","url":"https://mirinaeman.com/pages/sai/","name":"사이 — 우리 모두 사이좋게 지내요","mainEntity":{"@id":"https://mirinaeman.com/pages/sai/#work"}},{"@type":"CreativeWork","@id":"https://mirinaeman.com/pages/sai/#work","url":"https://mirinaeman.com/pages/sai/","name":"사이 — The Space Between","inLanguage":"ko","description":"점·시선·관계·기억·사이. 같은 입자들이 다섯 악장을 지나 하나의 글자가 되고, 두 음색이 하나의 화음으로 만납니다.","creator":{"@type":"Person","@id":"https://mirinaeman.com/#person","name":"김준호","url":"https://mirinaeman.com/profile/"},"image":"https://mirinaeman.com/pages/sai/assets/og.jpg"}]}</script>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="assets/lucide.min.js"></script>
+  <script defer src="assets/gsap.min.js"></script>
+  <script defer src="assets/motion-host-adapter.js"></script>
+  <script type="module" src="film.js"></script>
+</head>
+<body>
+  <main id="film" aria-label="사이, 다섯 악장의 생성형 시네마">
+    <div id="stage" role="img" aria-label="두 개의 입자 조각이 서로 얽혀 직물이 되고, 마지막에는 사이란 글자가 된다"></div>
+    <header>
+      <a class="wordmark" href="#" aria-label="사이 처음으로">SAI<span>김준호 / 2026</span></a>
+      <span class="edition">THE SPACE BETWEEN</span>
+      <button id="fullscreen" class="icon-button" aria-label="전체 화면" title="전체 화면"><i data-lucide="maximize"></i></button>
+    </header>
+    <div class="identity"><p class="eyebrow">A FILM IN FIVE MOVEMENTS</p><h1>사이</h1><p class="dedication">너와 나 사이,<br>없던 세계가 생긴다.</p></div>
+    <div class="side-label" aria-hidden="true">DISTANCE BECOMES RELATION</div>
+    <div class="scene-caption" aria-live="polite"><span id="chapter-number">01</span><p id="caption">처음에는, 서로 다른 점이었다.</p></div>
+    <footer>
+      <nav id="chapters" aria-label="악장"><button data-time="0" aria-current="step"><span>01</span>점</button><button data-time="9"><span>02</span>시선</button><button data-time="18"><span>03</span>관계</button><button data-time="28"><span>04</span>기억</button><button data-time="38"><span>05</span>사이</button></nav>
+      <div class="transport"><button id="play" class="icon-button" aria-label="재생" title="재생"><i data-lucide="play"></i></button><button id="restart" class="icon-button" aria-label="처음부터" title="처음부터"><i data-lucide="rotate-ccw"></i></button><button id="sound" class="icon-button" aria-label="소리 켜기" title="소리 켜기" aria-pressed="false"><i data-lucide="volume-x"></i></button><span id="time">00:00</span><input id="scrub" aria-label="작품의 시간" type="range" min="0" max="48" value="0" step="0.01"><span class="duration">00:48</span><span class="signature">A STUDY IN TOGETHERNESS</span></div>
+    </footer>
+    <p id="sound-status" role="status" hidden></p>
+    <p id="error" role="alert" hidden>이 환경에서는 3D 장면을 열 수 없습니다. 아래의 작품 문장을 읽을 수 있습니다.</p>
+    <noscript><section class="fallback"><h2>사이</h2><p>처음에는, 서로 다른 점이었다.<br>서로를 바라보자, 방향이 생겼다.<br>닿은 자리에, 관계가 자랐다.<br>함께 지난 시간이, 우리의 결이 되었다.<br>우리는 혼자보다, 사이에서 선명해진다.</p></section></noscript>
+  </main>
+  <section class="sr-only" aria-label="작품 전문"><p>처음에는, 서로 다른 점이었다. 서로를 바라보자, 방향이 생겼다. 닿은 자리에, 관계가 자랐다. 함께 지난 시간이, 우리의 결이 되었다. 우리는 혼자보다, 사이에서 선명해진다.</p></section>
+</body>
+</html>

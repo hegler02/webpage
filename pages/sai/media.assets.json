@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "asset_id": "sai-og",
+      "role": "open-graph",
+      "kind": "image",
+      "alt": "산호색과 청록색 입자 리본이 하나의 고리로 얽히는 사이의 관계 악장",
+      "delivery": {
+        "url": "https://mirinaeman.com/pages/sai/assets/og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "8fac9f72e0db7ed7a05350bb5d8b7ce57b22bdeea2ca1aa7604059441b71f7f2",
+        "path": "assets/og.jpg"
+      },
+      "provenance": {
+        "source_kind": "project-owned",
+        "note": "Deterministic capture of the existing 3D sculpture at 24 seconds."
+      }
+    },
+    {
+      "asset_id": "sai-score",
+      "role": "soundtrack",
+      "kind": "audio",
+      "delivery": {
+        "mime": "audio/mpeg",
+        "duration": 48,
+        "sha256": "d0a3e9cc1cda90703386b3395e6dab88afbbd933bb02a6ba785601e8aa789b9f",
+        "path": "assets/sai-score.mp3"
+      },
+      "provenance": {
+        "source_kind": "project-owned",
+        "note": "Original procedural 50-note score. No external samples or narration."
+      }
+    }
+  ]
+}

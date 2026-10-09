@@ -84,7 +84,8 @@ function peopleAndWorld(){
 
 const vertex=`
 attribute vec3 target; attribute vec3 tint; attribute float seed; attribute float pathProgress;
-uniform float blend; uniform float seconds; uniform float pointScale; uniform float weave; uniform float world; uniform float contact; uniform float spin; uniform float harmony;
+uniform float blend; uniform float seconds; uniform float pointScale; uniform float weave; uniform float world; uniform float contact; uniform float spin; uniform float harmony; uniform float energy;
+uniform vec3 coral; uniform vec3 turquoise;
 varying vec3 vColor; varying float vFade; varying float vPath;
 void main(){
   vec3 p=mix(position,target,blend);
@@ -98,8 +99,9 @@ void main(){
   gl_Position=projectionMatrix*mv;
   float sharedLight=contact*exp(-length(p.xy-vec2(-.04,.88))*5.0);
   gl_PointSize=clamp(pointScale*(1.0+seed*.45+world*step(.98,seed)*2.5+sharedLight*1.8)/(-mv.z),1.0,mix(4.0,9.0,max(world,contact)));
-  vColor=mix(tint,vec3(1.0),min(1.0,weave*.45+world*.62*(1.0-harmony*.9)+sharedLight));
-  vFade=(.55+seed*.4)*(1.0-world*.22+world*.22*sin(seconds*.65+seed*60.0));
+  vec3 pigment=mix(tint,tint.r>tint.g?coral:turquoise,harmony*.75);
+  vColor=mix(pigment,vec3(1.0),min(1.0,weave*.45+world*.28*(1.0-harmony)+sharedLight));
+  vFade=(.55+seed*.4)*(1.0-world*.22+world*.22*sin(seconds*.65+seed*60.0))*mix(1.0,energy,world);
   vPath=pathProgress;
 }`;
 const fragment=`varying vec3 vColor; varying float vFade; uniform float world; void main(){float d=length(gl_PointCoord-vec2(.5));if(d>.5)discard;gl_FragColor=vec4(vColor,vFade*smoothstep(.5,mix(.25,.12,world),d));}`;
@@ -124,7 +126,7 @@ function init(){
   scene.add(creationPlane);
   const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(arrays[0],3));geo.setAttribute('target',new THREE.BufferAttribute(arrays[1],3));geo.setAttribute('tint',new THREE.BufferAttribute(colors,3));geo.setAttribute('seed',new THREE.BufferAttribute(seeds,1));
   geo.setAttribute('pathProgress',new THREE.BufferAttribute(pathProgress,1));
-  uniforms={blend:{value:0},seconds:{value:0},pointScale:{value:15},world:{value:0},contact:{value:0},spin:{value:0},harmony:{value:0},weave:{value:0},lineOpacity:{value:.12},drawProgress:{value:0}};
+  uniforms={blend:{value:0},seconds:{value:0},pointScale:{value:15},world:{value:0},contact:{value:0},spin:{value:0},harmony:{value:0},energy:{value:1},coral:{value:colorA},turquoise:{value:colorB},weave:{value:0},lineOpacity:{value:.12},drawProgress:{value:0}};
   const material=new THREE.ShaderMaterial({uniforms,vertexShader:vertex,fragmentShader:fragment,transparent:true,depthWrite:false,blending:THREE.NormalBlending});
   points=new THREE.Points(geo,material);sculpture.add(points);
   const wire=geo.clone(), indices=[];
@@ -156,6 +158,8 @@ function render(t){
   uniforms.seconds.value=t;uniforms.world.value=state.world;uniforms.pointScale.value=state.pointSize;
   uniforms.contact.value=state.contact;
   uniforms.spin.value=state.spin;uniforms.harmony.value=state.harmony;
+  // Fixed-size stars need less energy when the same point count occupies a smaller canvas.
+  uniforms.energy.value=Math.max(lerp(.18,.32,state.harmony),Math.min(1,(stage.clientHeight/480)**2));
   points.material.blending=state.world>0||state.contact>0?THREE.AdditiveBlending:THREE.NormalBlending;
   uniforms.drawProgress.value=state.draw;
   scene.rotation.z=-state.drift;

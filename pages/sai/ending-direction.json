@@ -1,10 +1,11 @@
 {
-  "revision": "world-coda-scatter-drift-lifecycle-9",
+  "revision": "world-coda-responsive-color-preservation-10",
   "baseline_commit": "8affd7030e68120782b5713baf64faaad6778845",
   "message": "너와 나의 사이가, 우리 모두의 세계로.",
   "approved_direction": "Male and female silhouettes symbolize two distinct complementary forces, not a literal gender doctrine. Separated silhouettes remain within two circulating galactic arms: harmony without erasing difference. Voluntary exploration, no redirect.",
   "duration": 136,
   "particle_ids": 17280,
+  "color_preservation": "Reduce additive star energy on compact canvases, reduce galaxy whitening, and gradually restore original coral/turquoise pigments during taeguk completion. Geometry, rotation, music and duration are unchanged. Pixel regression: tools/test_sai_color.mjs.",
   "scenes": [
     {"range": [43.8, 48], "event": "Hold SAI lettering through the original final chord and a breath."},
     {"range": [48, 56], "event": "Existing particles move gradually into targets sampled from the approved artwork. The plate reveals over 49–58 seconds with smoothstep easing; no completed-figure hold."},

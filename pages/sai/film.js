@@ -8,8 +8,9 @@ const cuts=[0,9,18,28,38,48,58,70];
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const stage=document.querySelector('#stage'), playButton=document.querySelector('#play'), scrub=document.querySelector('#scrub');
 let renderer, scene, camera, sculpture, points, lines, uniforms, adapter, time=0, playing=false, anchor=0, raf=0, act=-1;
-let sound,creationImage,creationPlane;
-const arrays=[], colors=new Float32Array(COUNT*3), seeds=new Float32Array(COUNT),pathProgress=new Float32Array(COUNT),keepers=new Float32Array(COUNT);
+let sound,creationImage,creationPlane,disposeShare,disposed=false,playIcon;
+const events=new AbortController();
+const arrays=[], colors=new Float32Array(COUNT*3), seeds=new Float32Array(COUNT),pathProgress=new Float32Array(COUNT);
 const lerp=(a,b,t)=>a+(b-a)*t;
 function random(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 const rnd=random(61729);
@@ -47,7 +48,6 @@ function peopleAndWorld(){
   const canvas=document.createElement('canvas');canvas.width=creationImage.naturalWidth;canvas.height=creationImage.naturalHeight;
   const ctx=canvas.getContext('2d',{willReadFrequently:true});
   // Sample the approved artwork, replacing the rejected hand-drawn silhouettes.
-  canvas.width=creationImage.naturalWidth;canvas.height=creationImage.naturalHeight;
   ctx.drawImage(creationImage,0,0);
   const imagePixels=ctx.getImageData(0,0,canvas.width,canvas.height).data;
   const pools=[[],[]];
@@ -83,7 +83,7 @@ function peopleAndWorld(){
 }
 
 const vertex=`
-attribute vec3 target; attribute vec3 tint; attribute float seed; attribute float pathProgress; attribute float keeper;
+attribute vec3 target; attribute vec3 tint; attribute float seed; attribute float pathProgress;
 uniform float blend; uniform float seconds; uniform float pointScale; uniform float weave; uniform float world; uniform float contact; uniform float spin; uniform float harmony;
 varying vec3 vColor; varying float vFade; varying float vPath;
 void main(){
@@ -124,32 +124,33 @@ function init(){
   scene.add(creationPlane);
   const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(arrays[0],3));geo.setAttribute('target',new THREE.BufferAttribute(arrays[1],3));geo.setAttribute('tint',new THREE.BufferAttribute(colors,3));geo.setAttribute('seed',new THREE.BufferAttribute(seeds,1));
   geo.setAttribute('pathProgress',new THREE.BufferAttribute(pathProgress,1));
-  geo.setAttribute('keeper',new THREE.BufferAttribute(keepers,1));
   uniforms={blend:{value:0},seconds:{value:0},pointScale:{value:15},world:{value:0},contact:{value:0},spin:{value:0},harmony:{value:0},weave:{value:0},lineOpacity:{value:.12},drawProgress:{value:0}};
   const material=new THREE.ShaderMaterial({uniforms,vertexShader:vertex,fragmentShader:fragment,transparent:true,depthWrite:false,blending:THREE.NormalBlending});
   points=new THREE.Points(geo,material);sculpture.add(points);
   const wire=geo.clone(), indices=[];
   for(let row=0;row<ROWS;row+=3)for(let col=0;col<COLS-1;col++){indices.push(row*COLS+col,row*COLS+col+1);}
   wire.setIndex(indices);lines=new THREE.LineSegments(wire,new THREE.ShaderMaterial({uniforms,vertexShader:vertex,fragmentShader:lineFragment,transparent:true,depthWrite:false}));sculpture.add(lines);
-  resize();window.addEventListener('resize',resize);
-  renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();setPlaying(false);document.querySelector('#error').hidden=false;});
+  resize();window.addEventListener('resize',resize,{signal:events.signal});
+  renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();setPlaying(false);document.querySelector('#error').hidden=false;},{signal:events.signal});
   adapter=createMotionAdapter({duration:DURATION,seek:render,fallback:fail,reduced:reduced.matches,holdForProgress:p=>{const t=p*DURATION;return(t<9?5:t<18?14:t<28?24:t<38?34:t<48?46:t<58?56:t<70?68:t<95.826087?84.347826:t<124.52174?118.782609:DURATION)/DURATION;},dispose:()=>{creationPlane.material.map.dispose();creationPlane.material.dispose();creationPlane.geometry.dispose();renderer.dispose();points.geometry.dispose();points.material.dispose();lines.geometry.dispose();lines.material.dispose();}});
   adapter.setProgress(0);
 }
 function resize(){
+  if(disposed)return;
   const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();
   sculpture.position.y=matchMedia('(max-width:700px), (max-height:500px)').matches?0:.35;
   render(time);
 }
 function render(t){
+  if(disposed)return;
   // Stretch only the galaxy coda; the media clock remains the playback authority.
   t=t<=70?t:70+(t-70)*46/66;
   // One paused GSAP timeline defines every morph and camera pose; seeking is reversible.
   timeline.seek(t,false);
   const s=Math.min(6,Math.floor(state.morph)),fraction=state.morph-s;
   for(const geometry of [points.geometry,lines.geometry]){
-    geometry.attributes.position.array=arrays[s];geometry.attributes.position.needsUpdate=true;
-    geometry.attributes.target.array=arrays[s+1];geometry.attributes.target.needsUpdate=true;
+    if(geometry.attributes.position.array!==arrays[s]){geometry.attributes.position.array=arrays[s];geometry.attributes.position.needsUpdate=true;}
+    if(geometry.attributes.target.array!==arrays[s+1]){geometry.attributes.target.array=arrays[s+1];geometry.attributes.target.needsUpdate=true;}
   }
   uniforms.blend.value=fraction;uniforms.weave.value=state.weave;uniforms.lineOpacity.value=state.line;
   uniforms.seconds.value=t;uniforms.world.value=state.world;uniforms.pointScale.value=state.pointSize;
@@ -157,7 +158,8 @@ function render(t){
   uniforms.spin.value=state.spin;uniforms.harmony.value=state.harmony;
   points.material.blending=state.world>0||state.contact>0?THREE.AdditiveBlending:THREE.NormalBlending;
   uniforms.drawProgress.value=state.draw;
-  sculpture.rotation.set(state.rx,state.ry,state.rz);sculpture.scale.setScalar(state.scale);
+  scene.rotation.z=-state.drift;
+  sculpture.rotation.set(state.rx,state.ry,state.rz);
   const baseZ=Math.max(7.6,3.3/(Math.tan(THREE.MathUtils.degToRad(17))*camera.aspect));
   camera.position.z=baseZ*state.dolly;
   const revealProgress=Math.min(1,Math.max(0,(t-49)/9));
@@ -178,7 +180,7 @@ function render(t){
   const local=t-cuts[act];const caption=document.querySelector('#caption');
   caption.style.clipPath=reduced.matches?'none':`inset(${(1-Math.min(1,local/1.05))*100}% 0 0 0)`;
 }
-const state={morph:0,rx:.30,ry:-.48,rz:-.12,scale:1,weave:0,line:.14,draw:0,dolly:1,world:0,contact:0,pointSize:15,identity:1,spin:0,harmony:0};
+const state={morph:0,rx:.30,ry:-.48,rz:-.12,scale:1,weave:0,line:.14,draw:0,dolly:1,world:0,contact:0,pointSize:15,identity:1,spin:0,harmony:0,drift:0};
 const timeline=gsap.timeline({paused:true});
 timeline.to(state,{ry:.38,rx:-.15,rz:.1,duration:7.5,ease:'sine.inOut'},0);
 timeline.to(state,{morph:1,duration:2.3,ease:'power3.inOut'},8);
@@ -196,18 +198,20 @@ timeline.to(state,{morph:5,scale:.95,identity:.2,weave:0,pointSize:18,duration:8
 timeline.to(state,{morph:6,world:1,rx:1.04,ry:0,rz:-.24,scale:1,pointSize:27,identity:0,duration:12,ease:'sine.inOut'},56);
 timeline.to(state,{dolly:1.9,duration:20,ease:'sine.inOut'},52);
 timeline.to(state,{dolly:1.9,duration:4},72);
+timeline.to(state,{drift:.22,duration:20,ease:'sine.inOut'},58);
 timeline.to(state,{spin:Math.PI*4,duration:36,ease:'sine.inOut'},70);
 timeline.to(state,{morph:7,harmony:1,rx:Math.PI/2,rz:0,pointSize:22,duration:20,ease:'sine.inOut'},88);
 timeline.to(state,{scale:1.04,duration:8,ease:'sine.inOut'},108);
 
 function update(t){
+  if(disposed)return;
   time=Math.min(DURATION,Math.max(0,t));adapter?.setProgress(time/DURATION);scrub.value=time;scrub.style.setProperty('--progress',`${time/DURATION*100}%`);
   document.querySelector('#time').textContent=`${String(Math.floor(time/60)).padStart(2,'0')}:${String(Math.floor(time%60)).padStart(2,'0')}`;
   const portal=document.querySelector('#world-link');portal.hidden=time<71;
   document.querySelector('#film').classList.toggle('ending',time>=70);
   portal.style.opacity=String(Math.min(1,Math.max(0,(time-71)/2)));portal.inert=time<72;
 }
-function icon(name){playButton.innerHTML=`<i data-lucide="${name}"></i>`;lucide.createIcons();}
+function icon(name){if(playIcon===name)return;playIcon=name;playButton.innerHTML=`<i data-lucide="${name}"></i>`;lucide.createIcons();}
 function showPlaying(value){
   playing=value;cancelAnimationFrame(raf);icon(playing?'pause':time>=DURATION?'rotate-ccw':'play');playButton.setAttribute('aria-label',playing?'일시정지':time>=DURATION?'다시 재생':'재생');playButton.title=playButton.getAttribute('aria-label');
 }
@@ -219,12 +223,18 @@ function setPlaying(value){
 function tick(now){update((now-anchor)/1000);if(time>=DURATION){setPlaying(false);return;}raf=requestAnimationFrame(tick);}
 function seek(t){if(sound?.active)sound.seek(t);else if(playing)anchor=performance.now()-t*1000;update(t);if(!playing)showPlaying(false);}
 function fail(error){console.error(error);const message=document.querySelector('#error');message.hidden=false;message.textContent='3D 장면을 열 수 없습니다. '+captions.join(' ');setPlaying(false);}
+function destroy(){
+  if(disposed)return;
+  setPlaying(false);disposed=true;cancelAnimationFrame(raf);events.abort();disposeShare?.();sound?.destroy();adapter?.destroy();timeline.kill();renderer?.domElement.remove();
+  for(const control of document.querySelectorAll('#sound,#play,#restart,.wordmark,[data-time],#fullscreen'))control.onclick=null;
+  if(window.__film)window.__film.ready=false;
+}
 async function boot(){
   try{
     await document.fonts.load('700 390px Pretendard');await document.fonts.ready;
     creationImage=new Image();creationImage.src='assets/creation-harmony-v1.png';await creationImage.decode();
     forms();init();lucide.createIcons();
-    initShare();
+    disposeShare=initShare();
     const soundButton=document.querySelector('#sound'),soundNotice=document.querySelector('#sound-status');
     sound=createSoundPlayer({render:update,onStatus:({status,muted,active})=>{
       showPlaying(status==='playing');
@@ -238,13 +248,13 @@ async function boot(){
     playButton.onclick=()=>{if(time>=DURATION)seek(0);setPlaying(!playing);};
     document.querySelector('#restart').onclick=()=>{seek(0);setPlaying(true);};
     document.querySelector('.wordmark').onclick=e=>{e.preventDefault();seek(0);setPlaying(false);};
-    scrub.addEventListener('input',()=>seek(Number(scrub.value)));
+    scrub.addEventListener('input',()=>seek(Number(scrub.value)),{signal:events.signal});
     document.querySelectorAll('[data-time]').forEach(b=>b.onclick=()=>seek(Number(b.dataset.time)));
     document.querySelector('#fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('#film').requestFullscreen();}catch(e){document.querySelector('#fullscreen').title='전체 화면을 사용할 수 없습니다';}};
-    document.addEventListener('keydown',e=>{if(e.target instanceof HTMLInputElement)return;if(e.code==='Space'){e.preventDefault();if(time>=DURATION)seek(0);setPlaying(!playing);}if(e.code==='ArrowRight')seek(Math.min(DURATION,time+2));if(e.code==='ArrowLeft')seek(Math.max(0,time-2));});
-    document.addEventListener('visibilitychange',()=>{if(document.hidden)setPlaying(false);});
-    reduced.addEventListener('change',()=>{setPlaying(false);adapter.setReduced(reduced.matches);update(time);});
-    window.__film={seek:t=>{setPlaying(false);seek(t);},state:()=>({time,playing,act,reduced:reduced.matches,points:COUNT,pose:Object.fromEntries(Object.entries(state).filter(([,v])=>typeof v==='number')),sound:sound.status,audioActive:sound.active,muted:sound.media.muted,audioTime:sound.media.currentTime,audioDuration:sound.media.duration}),destroy:()=>{setPlaying(false);sound.destroy();adapter.destroy();},render,ready:true};
+    document.addEventListener('keydown',e=>{if(e.target instanceof Element&&e.target.closest('button,a,input,textarea,select,dialog,[contenteditable]'))return;if(e.code==='Space'){e.preventDefault();if(time>=DURATION)seek(0);setPlaying(!playing);}if(e.code==='ArrowRight')seek(Math.min(DURATION,time+2));if(e.code==='ArrowLeft')seek(Math.max(0,time-2));},{signal:events.signal});
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)setPlaying(false);},{signal:events.signal});
+    reduced.addEventListener('change',()=>{setPlaying(false);adapter.setReduced(reduced.matches);update(time);},{signal:events.signal});
+    window.__film={seek:t=>{if(disposed)return;setPlaying(false);seek(t);},state:()=>({time,playing,act,reduced:reduced.matches,points:COUNT,pose:Object.fromEntries(Object.entries(state).filter(([,v])=>typeof v==='number')),sound:sound.status,audioActive:sound.active,muted:sound.media.muted,audioTime:sound.media.currentTime,audioDuration:sound.media.duration}),destroy,render,ready:true};
     sound.enable(0,!reduced.matches);
   }catch(e){fail(e);}
 }

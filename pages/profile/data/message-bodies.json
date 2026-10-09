@@ -1375,6 +1375,35 @@
       "latest_deployed_at": "2026-09-21T22:26:13.543792+00:00"
     },
     {
+      "body_id": "sai",
+      "title": "사이 — 우리 모두 사이좋게 지내요",
+      "body_type": "SCREENBODY",
+      "source_kinds": [
+        "original-generative-cinema",
+        "original-procedural-score",
+        "human-ai-dialogue"
+      ],
+      "tags": [
+        "motion",
+        "audio",
+        "generative-cinema",
+        "togetherness",
+        "gestalt"
+      ],
+      "message_sentence": "우리 모두 사이좋게 지내요. 서로 다른 두 존재가 점·시선·관계·기억을 지나 하나의 세계를 만듭니다. 두 입자 리본과 두 음색이 함께 만든 48초의 사이.",
+      "thumbnail": {
+        "path": "assets/thumbnails/sai.webp",
+        "alt": "산호색과 청록색 입자 리본이 하나의 고리로 얽히는 사이의 관계 악장",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/sai/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-09T10:35:51.206Z",
+      "latest_deployed_at": "2026-10-09T10:35:51.206Z"
+    },
+    {
       "body_id": "sara-vs-natasha",
       "title": "SARA vs NATASHA — 난 살아 / Still Alive | The Mirinaeman Project Music Album",
       "body_type": "SONGBODY",

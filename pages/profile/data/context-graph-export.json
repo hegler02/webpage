@@ -246,6 +246,23 @@
         "height": 540,
         "focal_point": "50% 50%"
       }
+    },
+    {
+      "body_id": "sai",
+      "concepts": [
+        "interpretive-space"
+      ],
+      "reason": "서로 다른 두 입자 리본이 관계와 기억을 거쳐 같은 글자가 됩니다. 건반과 종소리 사이의 여백에 관객이 자신의 관계를 떠올리도록 둡니다. 정지 이미지 편집이 아니라 생성형 3D 장면이라는 차이를 보존합니다.",
+      "title": "사이 — 우리 모두 사이좋게 지내요",
+      "url": "https://mirinaeman.com/pages/sai/",
+      "summary": "우리 모두 사이좋게 지내요. 서로 다른 두 존재가 점·시선·관계·기억을 지나 하나의 세계를 만듭니다. 두 입자 리본과 두 음색이 함께 만든 48초의 사이.",
+      "thumbnail": {
+        "path": "assets/thumbnails/sai.webp",
+        "alt": "산호색과 청록색 입자 리본이 하나의 고리로 얽히는 사이의 관계 악장",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      }
     }
   ],
   "autumn": {
@@ -286,5 +303,5 @@
   },
   "hub_url": "https://mirinaeman.com/archive/image-cinema/",
   "intro_url": "https://mirinaeman.com/archive/already-autumn/",
-  "source_sha256": "9357998bcf4ade79fae4cbaef8b838bdf6a7850faaac0982a57cae0665c282fc"
+  "source_sha256": "9048397e5b5b978df99483fe47958f72819a38e66007cd8256172cc5545050fe"
 }

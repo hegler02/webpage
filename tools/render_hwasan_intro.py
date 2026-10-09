@@ -112,7 +112,7 @@ def render():
 {editorial_html}
 </main><footer class="footer"><div class="wrap"><p>© 미리내맨 · mirinaeman.com</p></div></footer></body></html>
 '''
-    card = f'''{START}<article class="card feature"><img class="card-media" src="../{e(body['thumbnail']['path'])}" alt="{e(body['thumbnail']['alt'])}" loading="lazy"><div class="card-body"><span class="tag">MUSIC · IMAGE CINEMA · WEBTOON</span><h2>{e(body['title'])}</h2><p>{e(body['message_sentence'])}</p><div class="actions"><a class="button" href="{url}">작품 소개</a></div></div></article>{END}'''
+    card = f'''{START}<a class="card feature" href="{url}"><img class="card-media" src="../{e(body['thumbnail']['path'])}" alt="{e(body['thumbnail']['alt'])}" loading="lazy"><div class="card-body"><span class="tag">MUSIC · IMAGE CINEMA · WEBTOON</span><h2>{e(body['title'])}</h2><p>{e(body['message_sentence'])}</p></div></a>{END}'''
     work = PROFILE / 'work/index.html'
     original = work.read_text()
     if START in original:

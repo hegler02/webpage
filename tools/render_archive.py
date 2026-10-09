@@ -107,7 +107,6 @@ def body_card(body: dict, compact: bool = False, asset_prefix: str = "./") -> st
         f'<div class="body-card-meta"><span class="tag">{esc(body["body_type"])}</span><time datetime="{date}">{date[:4]}</time></div>'
         f'<h3>{esc(body["title"])}</h3><p>{esc(body["message_sentence"])}</p>'
         f'<div class="body-tags" aria-label="태그">{tags}</div>'
-        '<span class="body-card-link"><span data-ko>작품 열기</span><span data-en lang="en">Open body</span><span aria-hidden="true">↗</span></span>'
         '</div></a></article>'
     )
 

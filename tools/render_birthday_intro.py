@@ -33,7 +33,7 @@ def outputs():
 <section class="section"><div class="wrap"><figure><img src="assets/birthday-og.png" width="1200" height="630" alt="{e(d['og']['alt'])}" loading="lazy"></figure></div></section>
 <section class="section"><div class="wrap"><div style="max-width:var(--measure)"><h2>생일 축하해</h2><p>노래 원작 · {e(d['creator'])}</p>{lyrics}</div></div></section></main><footer class="footer"><div class="wrap"><p>© 미리내맨 · mirinaeman.com</p></div></footer></body></html>'''
     start='<!-- BIRTHDAY_INTRO_START -->';end='<!-- BIRTHDAY_INTRO_END -->'
-    card=f'{start}<article class="card feature"><img class="card-media" src="../{e(b["thumbnail"]["path"])}" width="960" height="540" alt="{e(b["thumbnail"]["alt"])}" loading="lazy"><div class="card-body"><span class="tag">MUSIC · IMAGE CINEMA · WEBTOON</span><h2>{e(b["title"])}</h2><p>{e(b["message_sentence"])}</p><div class="actions"><a class="button" href="{url}">작품 소개</a></div></div></article>{end}'
+    card=f'{start}<a class="card feature" href="{url}"><img class="card-media" src="../{e(b["thumbnail"]["path"])}" width="960" height="540" alt="{e(b["thumbnail"]["alt"])}" loading="lazy"><div class="card-body"><span class="tag">MUSIC · IMAGE CINEMA · WEBTOON</span><h2>{e(b["title"])}</h2><p>{e(b["message_sentence"])}</p></div></a>{end}'
     work=PROFILE/'work/index.html';text=work.read_text()
     if start in text: text=text[:text.index(start)]+card+text[text.index(end)+len(end):]
     else:

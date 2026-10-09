@@ -75,7 +75,11 @@ const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersect
 const resizeObserver=new ResizeObserver(()=>{if(state&&limit!==(explorer.clientWidth<600?4:7)){state.page=0;render();}});resizeObserver.observe(explorer);
 document.addEventListener('visibilitychange',reconcile);
 window.ProfileBus?.on('menu:changed',reconcile);
-window.addEventListener('pagehide',()=>{clearTimeout(searchTimer);dead=true;adapter?.destroy();adapter=null;});
+window.addEventListener('pagehide',e=>{
+  clearTimeout(searchTimer);dead=true;
+  if(e.persisted){adapter?.pause();return;}
+  adapter?.destroy();adapter=null;
+});
 window.addEventListener('pageshow',e=>{if(e.persisted){dead=false;reconcile();}});
 try{
   const response=await fetch('/pages/profile/constellation/graph.json');if(!response.ok)throw new Error('graph');

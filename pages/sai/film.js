@@ -46,24 +46,26 @@ function put(shape,i,x,y,z){arrays[shape].set([x,y,z],i*3);}
 function peopleAndWorld(){
   // Each color keeps its own person. The same point IDs become the galaxy.
   const paths=[
-    'M 445 290 C 408 281 365 246 367 205 C 369 158 412 135 454 154 C 488 169 505 204 492 232 L 505 251 L 485 262 L 483 283 C 473 296 460 299 445 290 Z M 410 286 C 370 294 352 339 348 402 L 336 515 Q 284 540 265 611 Q 256 659 306 676 L 474 676 Q 520 658 491 632 L 401 601 L 422 458 Q 460 472 500 422 L 536 368 Q 541 349 520 351 L 472 407 L 441 367 Q 460 315 410 286 Z',
-    'M 516 261 L 510 243 L 492 234 L 505 218 C 493 204 498 179 508 159 C 526 121 571 116 603 137 C 638 160 638 208 620 238 C 607 259 586 267 567 258 L 565 287 Q 609 301 623 362 L 654 510 Q 710 544 735 605 Q 758 662 695 676 L 525 676 Q 493 658 526 634 L 602 600 L 563 459 L 545 375 Q 536 338 523 322 L 511 292 Z'
+    'M 423 306 C 407 287 413 267 426 246 C 438 218 464 210 487 225 C 499 233 504 248 504 260 L 513 274 L 502 279 Q 503 289 494 293 L 484 294 L 481 310 C 474 324 483 340 500 357 L 526 378 Q 539 375 555 351 Q 569 335 573 343 Q 575 354 567 367 Q 549 398 532 404 Q 516 409 492 397 L 455 373 C 435 402 437 437 432 470 C 430 499 452 511 478 526 C 501 540 514 564 508 583 C 500 604 469 611 446 617 L 388 634 Q 412 647 451 646 L 491 646 Q 505 650 501 660 Q 494 669 468 670 L 363 668 C 335 664 334 642 346 621 C 359 598 383 582 412 568 C 380 554 358 541 354 517 C 349 489 371 466 376 443 C 379 415 372 387 387 358 C 399 335 419 328 423 306 Z',
+    'M 513 257 L 510 245 L 500 238 L 510 227 Q 506 215 511 202 C 515 183 532 174 551 179 C 577 184 588 205 580 226 Q 575 246 558 256 L 555 278 C 561 290 582 294 594 311 C 611 333 610 363 615 396 C 619 430 630 456 631 486 C 631 513 613 530 593 543 C 615 553 635 570 638 590 C 642 614 623 630 599 638 L 557 651 Q 536 660 510 660 L 459 661 Q 444 658 448 650 Q 452 643 475 641 L 527 627 L 567 602 C 548 588 525 583 510 569 C 493 551 494 529 503 505 L 518 462 C 508 437 503 409 501 382 L 480 404 Q 467 416 453 412 L 420 398 Q 408 391 413 386 Q 418 382 430 386 L 454 392 Q 465 381 483 352 C 493 334 509 316 520 304 Q 529 288 528 273 L 525 260 Z'
   ];
   const canvas=document.createElement('canvas');canvas.width=1000;canvas.height=800;
   const ctx=canvas.getContext('2d',{willReadFrequently:true});
   paths.forEach((path,person)=>{
     ctx.clearRect(0,0,1000,800);ctx.fillStyle='white';ctx.fill(new Path2D(path));
-    const pixels=ctx.getImageData(0,0,1000,800).data,body=[];
+    const pixels=ctx.getImageData(0,0,1000,800).data,body=[],outline=[];
     for(let y=100;y<700;y+=2)for(let x=250;x<770;x+=2){
       const at=(y*1000+x)*4+3;
       if(pixels[at]>128){
         const edge=pixels[at-16]<128||pixels[at+16]<128||pixels[at-16000]<128||pixels[at+16000]<128;
-        if(edge||((x*13+y*7)%11===0))body.push([(x-500)/185,(400-y)/185]);
+        const p=[(x-500)/185,(400-y)/185];body.push(p);if(edge)outline.push(p);
       }
     }
+    const dust=random(40917+person);
     for(let j=0;j<COUNT/2;j++){
-      const i=person*COUNT/2+j,p=body[Math.floor(j/(COUNT/2)*body.length)];
-      put(5,i,p[0],p[1],(seeds[i]-.5)*.10);
+      const i=person*COUNT/2+j,pool=dust()<.42?outline:body,p=pool[Math.floor(dust()*pool.length)];
+      const softness=.008+dust()*.018;
+      put(5,i,p[0]+(dust()-.5)*softness,p[1]+(dust()-.5)*softness,(dust()+dust()-1)*.15);
     }
   });
   const star=random(20261009);

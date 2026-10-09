@@ -1,5 +1,15 @@
-(() => {
+(function initializeProfile() {
 if (window.__profileAppInitialized) return;
+if (!document.querySelector('[data-menu-toggle]') || !document.querySelector('[data-drawer]')) {
+  if (!window.__profileAppWaitingForNavigation) {
+    window.__profileAppWaitingForNavigation = true;
+    window.addEventListener('navigation:ready', () => {
+      window.__profileAppWaitingForNavigation = false;
+      initializeProfile();
+    }, { once: true });
+  }
+  return;
+}
 window.__profileAppInitialized = true;
 window.ProfileBus = (() => {
   const target = new EventTarget();
@@ -89,7 +99,13 @@ window.ProfileBus = (() => {
       else if(!e.shiftKey&&(i===items.length-1||i<0)){e.preventDefault();items[0].focus();}
     }
   });
-  wide.addEventListener('change',()=>set(false));
+  wide.addEventListener('change',()=>{
+    const inDrawer = drawer.contains(document.activeElement);
+    const onButton = document.activeElement === button;
+    set(false);
+    if (!wide.matches && inDrawer) button.focus();
+    else if (wide.matches && onButton) drawer.querySelector('a')?.focus();
+  });
   addEventListener('pagehide',()=>set(false));
   addEventListener('pageshow',()=>set(false));
   set(false);
@@ -100,6 +116,7 @@ window.ProfileBus = (() => {
   const audio = player?.querySelector('audio');
   const title = player?.querySelector('[data-player-title]');
   const close = player?.querySelector('[data-player-close]');
+  let playVersion = 0;
 
   document.addEventListener('click', async (event) => {
     const soundcloudButton = event.target.closest('[data-soundcloud-url]');
@@ -133,6 +150,7 @@ window.ProfileBus = (() => {
     }
     const audioButton = event.target.closest('[data-audio-src]');
     if (!audioButton || !audio || !player) return;
+    const version = ++playVersion;
     const avatar = player.querySelector('.player-avatar img[data-src]');
     if (avatar && !avatar.src) avatar.src = avatar.dataset.src;
     if (audio.dataset.current !== audioButton.dataset.audioSrc) {
@@ -143,10 +161,15 @@ window.ProfileBus = (() => {
     }
     title.replaceChildren(audioButton.dataset.title);
     player.classList.add('is-open'); player.removeAttribute('aria-hidden');
-    try { await audio.play(); } catch (_) { audio.controls = true; }
+    try { await audio.play(); } catch (_) {
+      if (version === playVersion) audio.controls = true;
+      return;
+    }
+    if (version !== playVersion) return;
     ProfileBus.emit('media:loaded', { provider: 'audio', title: audioButton.dataset.title });
   });
   close?.addEventListener('click', () => {
+    ++playVersion;
     audio.pause(); audio.removeAttribute('src'); audio.load(); delete audio.dataset.current;
     player.classList.remove('is-open'); player.setAttribute('aria-hidden', 'true');
   });

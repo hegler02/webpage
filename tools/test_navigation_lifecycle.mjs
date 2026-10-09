@@ -22,7 +22,16 @@ const ctx=vm.createContext(sandbox);
 // Browser globals alias window properties.
 Object.defineProperty(sandbox,'ProfileBus',{get:()=>win.ProfileBus});
 const code=fs.readFileSync(new URL('../pages/profile/app.js',import.meta.url),'utf8');
-vm.runInContext(code,ctx);const count=Object.values(doc.handlers).flat().length;
+const mountedQuery=doc.querySelector;
+doc.querySelector=()=>null;
+vm.runInContext(code,ctx);vm.runInContext(code,ctx);
+assert.equal(win.__profileAppInitialized,undefined);
+assert.equal(win.handlers['navigation:ready'].length,1);
+assert.equal(Object.values(doc.handlers).flat().length,0);
+doc.querySelector=mountedQuery;
+win.fire('navigation:ready');
+assert.equal(win.__profileAppInitialized,true);
+const count=Object.values(doc.handlers).flat().length;
 vm.runInContext(code,ctx);assert.equal(Object.values(doc.handlers).flat().length,count);assert.equal(button.handlers.click.length,1);
 assert.equal(drawer.inert,true);
 for(let i=0;i<50;i++){
@@ -34,4 +43,10 @@ for(let i=0;i<50;i++){
 button.fire('click');wide.matches=true;wide.fire('change');assert.equal(drawer.inert,false);assert.equal(main.inert,false);
 wide.matches=false;wide.fire('change');button.fire('click');win.fire('pagehide');win.fire('pageshow');assert.equal(drawer.inert,true);assert.equal(main.inert,false);
 assert.equal(requests,0);
+wide.matches=true;wide.fire('change');links[0].focus();
+wide.matches=false;wide.fire('change');assert.equal(doc.activeElement,button);
+wide.matches=true;wide.fire('change');assert.equal(doc.activeElement,links[0]);
+main.focus();wide.matches=false;wide.fire('change');assert.equal(doc.activeElement,main);
+wide.matches=true;wide.fire('change');assert.equal(doc.activeElement,main);
+console.log('Directional focus PASS: both breakpoint directions and outside focus preservation.');
 console.log('Navigation lifecycle PASS: duplicate initialization, 50 cycles, focus wrap, preserved inert, breakpoint, page restore, zero fetch. DOM fixture only.');

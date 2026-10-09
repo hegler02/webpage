@@ -2,7 +2,7 @@ import * as THREE from './assets/three.module.min.js';
 import {createSoundPlayer} from './assets/sound-player.mjs';
 import {initShare} from './assets/share.mjs';
 
-const DURATION=116, COLS=240, ROWS=72, COUNT=COLS*ROWS;
+const DURATION=136, COLS=240, ROWS=72, COUNT=COLS*ROWS;
 const captions=['처음에는, 서로 다른 점이었다.','서로를 바라보자, 방향이 생겼다.','닿은 자리에, 관계가 자랐다.','함께 지난 시간이, 우리의 결이 되었다.','우리는 혼자보다, 사이에서 선명해진다.','서로 다른 채, 하나의 흐름 안에서.','둘 사이의 여백에도, 우주는 흐른다.','너와 나의 사이가, 우리 모두의 세계로.'];
 const cuts=[0,9,18,28,38,48,58,70];
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -133,7 +133,7 @@ function init(){
   wire.setIndex(indices);lines=new THREE.LineSegments(wire,new THREE.ShaderMaterial({uniforms,vertexShader:vertex,fragmentShader:lineFragment,transparent:true,depthWrite:false}));sculpture.add(lines);
   resize();window.addEventListener('resize',resize);
   renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();setPlaying(false);document.querySelector('#error').hidden=false;});
-  adapter=createMotionAdapter({duration:DURATION,seek:render,fallback:fail,reduced:reduced.matches,holdForProgress:p=>{const t=p*DURATION;return(t<9?5:t<18?14:t<28?24:t<38?34:t<48?46:t<58?56:t<70?68:t<88?80:t<108?104:DURATION)/DURATION;},dispose:()=>{creationPlane.material.map.dispose();creationPlane.material.dispose();creationPlane.geometry.dispose();renderer.dispose();points.geometry.dispose();points.material.dispose();lines.geometry.dispose();lines.material.dispose();}});
+  adapter=createMotionAdapter({duration:DURATION,seek:render,fallback:fail,reduced:reduced.matches,holdForProgress:p=>{const t=p*DURATION;return(t<9?5:t<18?14:t<28?24:t<38?34:t<48?46:t<58?56:t<70?68:t<95.826087?84.347826:t<124.52174?118.782609:DURATION)/DURATION;},dispose:()=>{creationPlane.material.map.dispose();creationPlane.material.dispose();creationPlane.geometry.dispose();renderer.dispose();points.geometry.dispose();points.material.dispose();lines.geometry.dispose();lines.material.dispose();}});
   adapter.setProgress(0);
 }
 function resize(){
@@ -143,6 +143,8 @@ function resize(){
   render(time);
 }
 function render(t){
+  // Stretch only the galaxy coda; the media clock remains the playback authority.
+  t=t<=70?t:70+(t-70)*46/66;
   // One paused GSAP timeline defines every morph and camera pose; seeking is reversible.
   timeline.seek(t,false);
   const s=Math.min(6,Math.floor(state.morph)),fraction=state.morph-s;

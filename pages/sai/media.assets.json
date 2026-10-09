@@ -25,9 +25,9 @@
       "kind": "audio",
       "delivery": {
         "mime": "audio/mpeg",
-        "duration": 76,
-        "sha256": "e66a804c0bac052a431b2cc90d0bad12667cbca330a7c0941827f956d1470449",
-        "path": "assets/sai-world-score.mp3"
+        "duration": 116,
+        "sha256": "67ade1ec7d98fab6e1a95797c901fefd183e1c5b52d293b45a2ddd00f65a6cea",
+        "path": "assets/sai-taeguk-score.mp3"
       },
       "provenance": {
         "source_kind": "project-owned",

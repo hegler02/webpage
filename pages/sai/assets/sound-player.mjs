@@ -1,6 +1,6 @@
 import {createAudioClock} from './motion-audio-clock.mjs';
 
-export const track=Object.freeze({playback:Object.freeze({src:'assets/sai-world-score.mp3',mime:'audio/mpeg'}),provenance:'Original procedural score with world coda; evidence/ending-authoring/project.json'});
+export const track=Object.freeze({playback:Object.freeze({src:'assets/sai-taeguk-score.mp3',mime:'audio/mpeg'}),provenance:'Original procedural score with cosmic turns; evidence/taeguk-authoring/project.json'});
 export function mediaStatus(state,event,paused=true){
   if(event==='play-intent')return 'loading';
   if(event==='autoplay-blocked')return 'paused';

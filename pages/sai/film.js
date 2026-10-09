@@ -2,7 +2,7 @@ import * as THREE from './assets/three.module.min.js';
 import {createSoundPlayer} from './assets/sound-player.mjs';
 import {initShare} from './assets/share.mjs';
 
-const DURATION=76, COLS=240, ROWS=72, COUNT=COLS*ROWS;
+const DURATION=116, COLS=240, ROWS=72, COUNT=COLS*ROWS;
 const captions=['처음에는, 서로 다른 점이었다.','서로를 바라보자, 방향이 생겼다.','닿은 자리에, 관계가 자랐다.','함께 지난 시간이, 우리의 결이 되었다.','우리는 혼자보다, 사이에서 선명해진다.','서로 다른 채, 하나의 흐름 안에서.','둘 사이의 여백에도, 우주는 흐른다.','너와 나의 사이가, 우리 모두의 세계로.'];
 const cuts=[0,9,18,28,38,48,58,70];
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -16,7 +16,7 @@ const rnd=random(61729);
 const colorA=new THREE.Color('#ff6248'),colorB=new THREE.Color('#65d5c1'),colorC=new THREE.Color('#ffffff');
 
 function forms(){
-  for(let s=0;s<7;s++)arrays.push(new Float32Array(COUNT*3));
+  for(let s=0;s<8;s++)arrays.push(new Float32Array(COUNT*3));
   for(let i=0;i<COUNT;i++){
     const row=Math.floor(i/COLS),col=i%COLS,u=col/(COLS-1)*Math.PI*2,v=row/(ROWS-1)*2-1,half=row<ROWS/2?-1:1;
     const local=(row%(ROWS/2))/(ROWS/2-1)*2-1;
@@ -69,11 +69,22 @@ function peopleAndWorld(){
       put(6,i,(star()-.5)*21,(star()-.5)*8,(star()-.5)*18);
     }else put(6,i,Math.cos(angle)*rad,thickness,Math.sin(angle)*rad);
   }
+  const harmony=random(90271);
+  for(let i=0;i<COUNT;i++){
+    let x,y,coral;
+    do{
+      x=harmony()*2-1;y=harmony()*2-1;
+      coral=x<0;
+      if(x*x+(y-.5)*(y-.5)<.25)coral=true;
+      if(x*x+(y+.5)*(y+.5)<.25)coral=false;
+    }while(x*x+y*y>1||coral!==(i<COUNT/2));
+    put(7,i,x*2.8,(harmony()-.5)*.055,y*2.8);
+  }
 }
 
 const vertex=`
 attribute vec3 target; attribute vec3 tint; attribute float seed; attribute float pathProgress; attribute float keeper;
-uniform float blend; uniform float seconds; uniform float pointScale; uniform float weave; uniform float world; uniform float contact;
+uniform float blend; uniform float seconds; uniform float pointScale; uniform float weave; uniform float world; uniform float contact; uniform float spin; uniform float harmony;
 varying vec3 vColor; varying float vFade; varying float vPath;
 void main(){
   vec3 p=mix(position,target,blend);
@@ -81,13 +92,13 @@ void main(){
   p.z+=arc*sin(seed*31.4)*.35;
   p.y+=arc*sin(seed*18.0)*.16;
   float radius=length(p.xz);
-  float orbit=max(0.0,seconds-66.0)*.018*mix(2.0,1.0,clamp(radius/8.4,0.0,1.0))*world*(1.0-keeper);
+  float orbit=spin+max(0.0,seconds-66.0)*.018*mix(2.0,1.0,clamp(radius/8.4,0.0,1.0))*world*(1.0-harmony);
   p.xz=mat2(cos(orbit),-sin(orbit),sin(orbit),cos(orbit))*p.xz;
   vec4 mv=modelViewMatrix*vec4(p,1.0);
   gl_Position=projectionMatrix*mv;
   float sharedLight=contact*exp(-length(p.xy-vec2(-.04,.88))*5.0);
   gl_PointSize=clamp(pointScale*(1.0+seed*.45+world*step(.98,seed)*2.5+sharedLight*1.8)/(-mv.z),1.0,mix(4.0,9.0,max(world,contact)));
-  vColor=mix(tint,vec3(1.0),min(1.0,weave*.45+world*.62*(1.0-keeper)+sharedLight));
+  vColor=mix(tint,vec3(1.0),min(1.0,weave*.45+world*.62*(1.0-harmony*.9)+sharedLight));
   vFade=(.55+seed*.4)*(1.0-world*.22+world*.22*sin(seconds*.65+seed*60.0));
   vPath=pathProgress;
 }`;
@@ -114,7 +125,7 @@ function init(){
   const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(arrays[0],3));geo.setAttribute('target',new THREE.BufferAttribute(arrays[1],3));geo.setAttribute('tint',new THREE.BufferAttribute(colors,3));geo.setAttribute('seed',new THREE.BufferAttribute(seeds,1));
   geo.setAttribute('pathProgress',new THREE.BufferAttribute(pathProgress,1));
   geo.setAttribute('keeper',new THREE.BufferAttribute(keepers,1));
-  uniforms={blend:{value:0},seconds:{value:0},pointScale:{value:15},world:{value:0},contact:{value:0},weave:{value:0},lineOpacity:{value:.12},drawProgress:{value:0}};
+  uniforms={blend:{value:0},seconds:{value:0},pointScale:{value:15},world:{value:0},contact:{value:0},spin:{value:0},harmony:{value:0},weave:{value:0},lineOpacity:{value:.12},drawProgress:{value:0}};
   const material=new THREE.ShaderMaterial({uniforms,vertexShader:vertex,fragmentShader:fragment,transparent:true,depthWrite:false,blending:THREE.NormalBlending});
   points=new THREE.Points(geo,material);sculpture.add(points);
   const wire=geo.clone(), indices=[];
@@ -122,7 +133,7 @@ function init(){
   wire.setIndex(indices);lines=new THREE.LineSegments(wire,new THREE.ShaderMaterial({uniforms,vertexShader:vertex,fragmentShader:lineFragment,transparent:true,depthWrite:false}));sculpture.add(lines);
   resize();window.addEventListener('resize',resize);
   renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();setPlaying(false);document.querySelector('#error').hidden=false;});
-  adapter=createMotionAdapter({duration:DURATION,seek:render,fallback:fail,reduced:reduced.matches,holdForProgress:p=>{const t=p*DURATION;return(t<9?5:t<18?14:t<28?24:t<38?34:t<48?46:t<58?56:t<70?68:76)/DURATION;},dispose:()=>{creationPlane.material.map.dispose();creationPlane.material.dispose();creationPlane.geometry.dispose();renderer.dispose();points.geometry.dispose();points.material.dispose();lines.geometry.dispose();lines.material.dispose();}});
+  adapter=createMotionAdapter({duration:DURATION,seek:render,fallback:fail,reduced:reduced.matches,holdForProgress:p=>{const t=p*DURATION;return(t<9?5:t<18?14:t<28?24:t<38?34:t<48?46:t<58?56:t<70?68:t<88?80:t<108?104:DURATION)/DURATION;},dispose:()=>{creationPlane.material.map.dispose();creationPlane.material.dispose();creationPlane.geometry.dispose();renderer.dispose();points.geometry.dispose();points.material.dispose();lines.geometry.dispose();lines.material.dispose();}});
   adapter.setProgress(0);
 }
 function resize(){
@@ -134,7 +145,7 @@ function resize(){
 function render(t){
   // One paused GSAP timeline defines every morph and camera pose; seeking is reversible.
   timeline.seek(t,false);
-  const s=Math.min(5,Math.floor(state.morph)),fraction=state.morph-s;
+  const s=Math.min(6,Math.floor(state.morph)),fraction=state.morph-s;
   for(const geometry of [points.geometry,lines.geometry]){
     geometry.attributes.position.array=arrays[s];geometry.attributes.position.needsUpdate=true;
     geometry.attributes.target.array=arrays[s+1];geometry.attributes.target.needsUpdate=true;
@@ -142,6 +153,7 @@ function render(t){
   uniforms.blend.value=fraction;uniforms.weave.value=state.weave;uniforms.lineOpacity.value=state.line;
   uniforms.seconds.value=t;uniforms.world.value=state.world;uniforms.pointScale.value=state.pointSize;
   uniforms.contact.value=state.contact;
+  uniforms.spin.value=state.spin;uniforms.harmony.value=state.harmony;
   points.material.blending=state.world>0||state.contact>0?THREE.AdditiveBlending:THREE.NormalBlending;
   uniforms.drawProgress.value=state.draw;
   sculpture.rotation.set(state.rx,state.ry,state.rz);sculpture.scale.setScalar(state.scale);
@@ -164,7 +176,7 @@ function render(t){
   const local=t-cuts[act];const caption=document.querySelector('#caption');
   caption.style.clipPath=reduced.matches?'none':`inset(${(1-Math.min(1,local/1.05))*100}% 0 0 0)`;
 }
-const state={morph:0,rx:.30,ry:-.48,rz:-.12,scale:1,weave:0,line:.14,draw:0,dolly:1,world:0,contact:0,pointSize:15,identity:1};
+const state={morph:0,rx:.30,ry:-.48,rz:-.12,scale:1,weave:0,line:.14,draw:0,dolly:1,world:0,contact:0,pointSize:15,identity:1,spin:0,harmony:0};
 const timeline=gsap.timeline({paused:true});
 timeline.to(state,{ry:.38,rx:-.15,rz:.1,duration:7.5,ease:'sine.inOut'},0);
 timeline.to(state,{morph:1,duration:2.3,ease:'power3.inOut'},8);
@@ -182,6 +194,9 @@ timeline.to(state,{morph:5,scale:.95,identity:.2,weave:0,pointSize:18,duration:8
 timeline.to(state,{morph:6,world:1,rx:1.04,ry:0,rz:-.24,scale:1,pointSize:27,identity:0,duration:12,ease:'sine.inOut'},56);
 timeline.to(state,{dolly:1.9,duration:20,ease:'sine.inOut'},52);
 timeline.to(state,{dolly:1.9,duration:4},72);
+timeline.to(state,{spin:Math.PI*4,duration:36,ease:'sine.inOut'},70);
+timeline.to(state,{morph:7,harmony:1,rx:Math.PI/2,rz:0,pointSize:22,duration:20,ease:'sine.inOut'},88);
+timeline.to(state,{scale:1.04,duration:8,ease:'sine.inOut'},108);
 
 function update(t){
   time=Math.min(DURATION,Math.max(0,t));adapter?.setProgress(time/DURATION);scrub.value=time;scrub.style.setProperty('--progress',`${time/DURATION*100}%`);

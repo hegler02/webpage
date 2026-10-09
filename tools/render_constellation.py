@@ -11,7 +11,6 @@ def esc(s): return html.escape(str(s),quote=True)
 
 def outputs():
     g=build_graph();manifest=json.loads((PROFILE/'site.manifest.json').read_text());base=ORIGIN+'/constellation/'
-    nav=''.join(f'<a href="{ORIGIN+r["public_path"]}"'+(' aria-current="page"' if r['key']=='constellation' else '')+f'>{esc(r["ko"])}</a>' for r in manifest['routes'])
     entries=[];linked={n['id']:[] for n in g['nodes']};byid={n['id']:n for n in g['nodes']}
     node_url=lambda id:base+'?node='+quote(id,safe='')
     for e in g['edges']:
@@ -31,7 +30,7 @@ def outputs():
             item['mentions']=[{'@id':node_url(other),'name':byid[other]['title']} for other,e in linked[n['id']] if byid[other]['kind']!='creator']
         items.append({'@type':'ListItem','position':i+1,'item':item})
     schema={'@context':'https://schema.org','@type':'CollectionPage','@id':base,'url':base,'name':'미리내맨 은하수','description':'김준호의 작품과 개인적인 기록, 창작의 판단과 논문을 맥락으로 이어 읽는 공간.','mainEntity':{'@type':'ItemList','numberOfItems':len(g['nodes']),'itemListElement':items}}
-    page=(ROOT/'tools/constellation/page.html').read_text().replace('{{NAV}}',nav).replace('{{INDEX}}',''.join(entries)).replace('{{JSONLD}}',json.dumps(schema,ensure_ascii=False).replace('</','<\\/'))
+    page=(ROOT/'tools/constellation/page.html').read_text().replace('{{INDEX}}',''.join(entries)).replace('{{JSONLD}}',json.dumps(schema,ensure_ascii=False).replace('</','<\\/'))
     return {PROFILE/'constellation/index.html':page,PROFILE/'constellation/graph.json':json.dumps(g,ensure_ascii=False,indent=2)+'\n'}
 
 if __name__=='__main__':

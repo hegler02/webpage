@@ -1,7 +1,6 @@
 import {model} from './graph-model.mjs';
 import {renderReader,renderLabels,renderList,renderTrail} from './graph-view.mjs';
 const $=id=>document.getElementById(id);
-$('menu').addEventListener('click',()=>{const open=$('menu').getAttribute('aria-expanded')!=='true';$('menu').setAttribute('aria-expanded',String(open));$('main-nav').classList.toggle('open',open);});
 const root=$('interactive'),space=$('map'),labels=$('nodes'),explorer=root.querySelector('.explorer');
 let graph,db,state,adapter=null,loading=false,failed=false,visible=false,dead=false,trail=[],latest,limit=7;
 function fallback(reason){space.classList.remove('loading');failed=true;adapter?.destroy();adapter=null;space.classList.add('flat');$('engine-status').textContent=reason||'평면 지도';$('map-help').textContent='작품을 눌러 연결 읽기';}

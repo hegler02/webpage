@@ -1,5 +1,5 @@
 {
-  "revision": "world-coda-continuous-4",
+  "revision": "world-coda-complete-scatter-5",
   "baseline_commit": "8affd7030e68120782b5713baf64faaad6778845",
   "message": "너와 나의 사이가, 우리 모두의 세계로.",
   "approved_direction": "Male and female silhouettes symbolize two distinct complementary forces, not a literal gender doctrine. Separated silhouettes remain within two circulating galactic arms: harmony without erasing difference. Voluntary exploration, no redirect.",
@@ -8,7 +8,8 @@
   "scenes": [
     {"range": [43.8, 48], "event": "Hold SAI lettering through the original final chord and a breath."},
     {"range": [48, 56], "event": "Existing particles move gradually into targets sampled from the approved artwork. The plate reveals over 49–58 seconds with smoothstep easing; no completed-figure hold."},
-    {"range": [56, 68], "event": "The same point IDs continue into two spiral arms. The approved raster plate preserves anatomy and the fingertip gap: mixed media, not simulated human movement."},
+    {"range": [56, 68], "event": "The same point IDs continue outward into two spiral arms. The approved raster plate preserves anatomy before gradually dissolving as deterministic fine-grain fragments from 58 to 69 seconds."},
+    {"range": [69, 76], "event": "No figure plate or figure-shaped particle targets remain. Only the shared galaxy, closing phrase and voluntary exploration link remain."},
     {"range": [52, 72], "event": "Continuous camera retreat overlaps both transformations so the middle never becomes a separate stopped scene."},
     {"range": [70, 76], "event": "Closing phrase, score resolution, and voluntary galaxy link."}
   ],

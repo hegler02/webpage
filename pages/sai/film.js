@@ -101,6 +101,15 @@ function init(){
   sculpture=new THREE.Group();scene.add(sculpture);
   const texture=new THREE.Texture(creationImage);texture.colorSpace=THREE.SRGBColorSpace;texture.needsUpdate=true;
   creationPlane=new THREE.Mesh(new THREE.PlaneGeometry(5.8,5.8*creationImage.naturalHeight/creationImage.naturalWidth),new THREE.MeshBasicMaterial({map:texture,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false}));
+  creationPlane.material.userData.dissolve={value:0};
+  creationPlane.material.onBeforeCompile=shader=>{
+    shader.uniforms.figureDissolve=creationPlane.material.userData.dissolve;
+    shader.fragmentShader='uniform float figureDissolve;\n'+shader.fragmentShader;
+    shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',`#include <map_fragment>
+      float grain=fract(sin(dot(floor(vMapUv*vec2(768.0,512.0)),vec2(12.9898,78.233)))*43758.5453);
+      float remaining=figureDissolve<=0.0?1.0:figureDissolve>=1.0?0.0:smoothstep(figureDissolve-.08,figureDissolve+.08,grain);
+      diffuseColor.a*=remaining;`);
+  };
   scene.add(creationPlane);
   const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(arrays[0],3));geo.setAttribute('target',new THREE.BufferAttribute(arrays[1],3));geo.setAttribute('tint',new THREE.BufferAttribute(colors,3));geo.setAttribute('seed',new THREE.BufferAttribute(seeds,1));
   geo.setAttribute('pathProgress',new THREE.BufferAttribute(pathProgress,1));
@@ -143,8 +152,11 @@ function render(t){
   creationPlane.position.set(0,sculpture.position.y,.08);
   creationPlane.scale.setScalar(fit*state.scale*(1+(state.dolly-1)*.45));
   sculpture.scale.setScalar(state.scale*lerp(1,fit,Math.min(1,Math.max(0,(t-48)/5))));
-  creationPlane.material.opacity=reveal*(1-state.world*.18);
-  uniforms.pointScale.value=state.pointSize*(1-reveal*.45);
+  const scatterProgress=Math.min(1,Math.max(0,(t-58)/11));
+  const scatter=scatterProgress*scatterProgress*(3-2*scatterProgress);
+  creationPlane.material.userData.dissolve.value=scatter;
+  creationPlane.material.opacity=reveal*(1-scatter);
+  uniforms.pointScale.value=state.pointSize*(1-reveal*(1-scatter)*.45);
   document.querySelector('.identity').style.opacity=String(state.identity);
   if(renderer.domElement.width<1)return;renderer.render(scene,camera);
   const next=cuts.reduce((a,c,i)=>t>=c?i:a,0);

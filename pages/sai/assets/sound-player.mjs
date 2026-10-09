@@ -3,6 +3,7 @@ import {createAudioClock} from './motion-audio-clock.mjs';
 export const track=Object.freeze({playback:Object.freeze({src:'assets/sai-score.mp3',mime:'audio/mpeg'}),provenance:'Original procedural score; evidence/audio-authoring/project.json'});
 export function mediaStatus(state,event,paused=true){
   if(event==='play-intent')return 'loading';
+  if(event==='autoplay-blocked')return 'paused';
   if(event==='error')return 'error';
   if(state==='error')return state;
   if(event==='playing')return 'playing';
@@ -22,7 +23,7 @@ export function createSoundPlayer({render,onStatus}){
   for(const event of ['playing','pause','ended','waiting','stalled','loadedmetadata','canplay','error'])media.addEventListener(event,()=>notify(event));
   async function play(){
     wanted=true;const token=++attempt;notify('play-intent');
-    try{await ready;if(token!==attempt||!wanted)return;await clock.play();}catch(error){if(token===attempt&&wanted){media.pause();notify('error');}}
+    try{await ready;if(token!==attempt||!wanted)return;await clock.play();}catch(error){if(token===attempt&&wanted){media.pause();notify(error.name==='NotAllowedError'?'autoplay-blocked':'error');}}
   }
   return {
     get active(){return active;},

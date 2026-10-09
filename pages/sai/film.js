@@ -154,7 +154,7 @@ async function boot(){
     document.addEventListener('visibilitychange',()=>{if(document.hidden)setPlaying(false);});
     reduced.addEventListener('change',()=>{setPlaying(false);adapter.setReduced(reduced.matches);update(time);});
     window.__film={seek:t=>{setPlaying(false);seek(t);},state:()=>({time,playing,act,reduced:reduced.matches,points:COUNT,sound:sound.status,audioActive:sound.active,muted:sound.media.muted,audioTime:sound.media.currentTime,audioDuration:sound.media.duration}),destroy:()=>{setPlaying(false);sound.destroy();adapter.destroy();},render,ready:true};
-    if(!reduced.matches)setPlaying(true);
+    sound.enable(0,!reduced.matches);
   }catch(e){fail(e);}
 }
 boot();

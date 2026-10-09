@@ -137,7 +137,8 @@ function render(t){
   uniforms.drawProgress.value=state.draw;
   sculpture.rotation.set(state.rx,state.ry,state.rz);sculpture.scale.setScalar(state.scale);
   camera.position.z=(stage.clientWidth<700?12.8:7.6)*state.dolly;
-  const reveal=Math.min(1,Math.max(0,(t-51)/3));
+  const revealProgress=Math.min(1,Math.max(0,(t-49)/9));
+  const reveal=revealProgress*revealProgress*(3-2*revealProgress);
   const fit=Math.min(1,(2*Math.tan(THREE.MathUtils.degToRad(17))*(stage.clientWidth<700?12.8:7.6)*camera.aspect*.92)/5.8);
   creationPlane.position.set(0,sculpture.position.y,.08);
   creationPlane.scale.setScalar(fit*state.scale*(1+(state.dolly-1)*.45));
@@ -165,12 +166,9 @@ timeline.to(state,{morph:4,rx:0,ry:0,rz:0,scale:.92,line:0,weave:.45,duration:3.
 timeline.to(state,{line:0,duration:.4,ease:'power1.out'},37);
 timeline.to(state,{scale:1.01,duration:3.4,ease:'sine.inOut'},40.8);
 timeline.to(state,{scale:1.01,duration:3.8},44.2);
-timeline.to(state,{morph:5,scale:.86,identity:.2,weave:0,duration:5,ease:'power3.inOut'},48);
-timeline.to(state,{scale:.885,pointSize:18,duration:4,ease:'sine.inOut'},53);
-timeline.to(state,{contact:1,duration:1.5,ease:'sine.inOut'},56.5);
-timeline.to(state,{contact:0,duration:4,ease:'sine.inOut'},58);
-timeline.to(state,{morph:6,world:1,rx:1.04,ry:0,rz:-.32,scale:1,pointSize:23,identity:0,duration:8,ease:'power2.inOut'},58);
-timeline.to(state,{dolly:1.9,rz:-.24,pointSize:27,duration:9,ease:'sine.inOut'},63);
+timeline.to(state,{morph:5,scale:.95,identity:.2,weave:0,pointSize:18,duration:8,ease:'sine.inOut'},48);
+timeline.to(state,{morph:6,world:1,rx:1.04,ry:0,rz:-.24,scale:1,pointSize:27,identity:0,duration:12,ease:'sine.inOut'},56);
+timeline.to(state,{dolly:1.9,duration:20,ease:'sine.inOut'},52);
 timeline.to(state,{dolly:1.9,duration:4},72);
 
 function update(t){

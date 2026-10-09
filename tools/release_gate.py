@@ -173,6 +173,7 @@ def main() -> int:
         ([sys.executable, str(ROOT / "tools/render_harugyeol_intro.py"), "--check"], "Harugyeol introduction gate"),
         ([sys.executable, str(ROOT / "tools/check_wind_intro.py")], "Wind editorial discovery gate"),
         ([sys.executable, str(ROOT / "tools/check_constellation_discovery.py")], "Constellation discovery gate"),
+        (["node", str(ROOT / "tools" / "test_navigation_lifecycle.mjs")], "Navigation lifecycle gate"),
         (["node", str(ROOT / "tools" / "test_constellation_renderer.mjs")], "Constellation projection lifecycle gate"),
         (["node", str(ROOT / "tools" / "test_constellation_state.mjs")], "Constellation state gate"),
         ([sys.executable, str(ROOT / "tools" / "check_unfold_intro.py")], "Unfold editorial discovery gate"),

@@ -5,7 +5,7 @@ const root=$('interactive'),space=$('map'),labels=$('nodes'),explorer=root.query
 let graph,db,state,adapter=null,loading=false,failed=false,visible=false,dead=false,trail=[],latest,limit=7;
 function fallback(reason){space.classList.remove('loading');failed=true;adapter?.destroy();adapter=null;space.classList.add('flat');$('engine-status').textContent=reason||'평면 지도';$('map-help').textContent='작품을 눌러 연결 읽기';}
 async function reconcile(){
-  const active=state?.view==='map'&&visible&&!document.hidden&&!dead;
+  const active=state?.view==='map'&&visible&&!document.hidden&&!document.body.classList.contains('drawer-open')&&!dead;
   if(!active){adapter?.pause();return;}
   if(adapter){adapter.resume();return;}
   if(loading||failed)return;
@@ -14,7 +14,7 @@ async function reconcile(){
     adapter=await mount($('canvas-host'),labels,$('engine-status'),{onFailure:fallback,onSelect:choose});
     if(dead){adapter.destroy();adapter=null;return;}
     space.classList.remove('flat','loading');labels.scrollTop=0;adapter.update(latest);
-    if(state.view!=='map'||!visible||document.hidden)adapter.pause();
+    if(state.view!=='map'||!visible||document.hidden||document.body.classList.contains('drawer-open'))adapter.pause();
   }catch(error){fallback('3D 사용 불가 · 평면 지도');}finally{loading=false;}
 }
 function setURL(replace=false){const url=db.toURL(state,location.href);history[replace?'replaceState':'pushState'](null,'',url);}
@@ -56,9 +56,10 @@ $('read-selected').addEventListener('click',e=>{
   reader.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
 });
 root.addEventListener('click',e=>{const button=e.target.closest('[data-node]');if(button)choose(button.dataset.node,{fromList:!!button.closest('#record-list')});});
-for(const view of ['map','list'])$(view+'-view').addEventListener('click',()=>{state.view=view;setURL();render();});
+for(const view of ['map','list'])$(view+'-view').addEventListener('click',()=>{if(state.view===view)return;state.view=view;setURL();render();});
 $('scope').addEventListener('change',()=>{state.scope=$('scope').value;state.page=0;state.overview=true;setURL();render();});
-$('search').addEventListener('input',()=>{state.query=$('search').value;state.page=0;setURL(true);render();});
+let searchTimer;
+$('search').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{if(dead)return;const query=$('search').value;if(state.query===query)return;state.query=query;state.page=0;setURL(true);render();},120);});
 $('reset').addEventListener('click',()=>{state={...state,scope:'context',query:'',overview:true,page:0};adapter?.reset();setURL();render();});
 for(const [id,delta] of [['previous',-1],['next',1]])$(id).addEventListener('click',()=>{state.page+=delta;setURL();render();$(delta<0?'previous':'next').disabled&&$(delta<0?'next':'previous').focus();});
 $('share').addEventListener('click',async()=>{
@@ -72,7 +73,8 @@ window.addEventListener('popstate',()=>{if(!db)return;state=db.fromURL(location.
 const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;reconcile();},{threshold:.01});observer.observe(space);
 const resizeObserver=new ResizeObserver(()=>{if(state&&limit!==(explorer.clientWidth<600?4:7)){state.page=0;render();}});resizeObserver.observe(explorer);
 document.addEventListener('visibilitychange',reconcile);
-window.addEventListener('pagehide',()=>{dead=true;adapter?.destroy();adapter=null;});
+window.ProfileBus?.on('menu:changed',reconcile);
+window.addEventListener('pagehide',()=>{clearTimeout(searchTimer);dead=true;adapter?.destroy();adapter=null;});
 window.addEventListener('pageshow',e=>{if(e.persisted){dead=false;reconcile();}});
 try{
   const response=await fetch('/pages/profile/constellation/graph.json');if(!response.ok)throw new Error('graph');

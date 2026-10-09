@@ -1,7 +1,8 @@
 (() => {
   const mount = document.querySelector('site-navigation[data-page]');
   const ownScript = document.currentScript;
-  if (!mount || !ownScript?.src) return;
+  if (!mount || !ownScript?.src || mount.dataset.initialized) return;
+  mount.dataset.initialized = "true";
 
   const page = mount.dataset.page;
   const assetRoot = new URL('.', ownScript.src);

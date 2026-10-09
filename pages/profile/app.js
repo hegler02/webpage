@@ -1,3 +1,6 @@
+(() => {
+if (window.__profileAppInitialized) return;
+window.__profileAppInitialized = true;
 window.ProfileBus = (() => {
   const target = new EventTarget();
   return {
@@ -51,16 +54,45 @@ window.ProfileBus = (() => {
   const button = document.querySelector('[data-menu-toggle]');
   const drawer = document.querySelector('[data-drawer]');
   if (!button || !drawer) return;
-  const setIcon = (opened) => { button.querySelector('[data-menu-open]')?.toggleAttribute('hidden', opened); button.querySelector('[data-menu-close]')?.toggleAttribute('hidden', !opened); button.querySelector('[data-menu-label]')?.toggleAttribute('hidden', opened); };
-  const close = () => { drawer.classList.remove('is-open'); button.setAttribute('aria-expanded', 'false'); button.setAttribute('aria-label', '메뉴 열기'); setIcon(false); document.body.classList.remove('drawer-open'); };
-  const open = () => { drawer.classList.add('is-open'); button.setAttribute('aria-expanded', 'true'); button.setAttribute('aria-label', '메뉴 닫기'); setIcon(true); document.body.classList.add('drawer-open'); drawer.querySelector('a')?.focus(); };
-  button.addEventListener('click', () => drawer.classList.contains('is-open') ? close() : open());
-  drawer.addEventListener('click', (event) => { if (event.target.closest('a')) close(); });
-  document.addEventListener('pointerdown', (event) => { if (drawer.classList.contains('is-open') && !drawer.contains(event.target) && !button.contains(event.target)) close(); });
-  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && drawer.classList.contains('is-open')) { close(); button.focus(); } });
   const wide = matchMedia('(min-width: 56.001rem)');
-  const resize = (event) => { if (event.matches) close(); };
-  if (wide.addEventListener) wide.addEventListener('change', resize); else wide.addListener(resize);
+  const background = [...document.querySelectorAll('main, body > footer')];
+  const priorInert = new Map();
+  let opened = false;
+  const set = (next, restore = false) => {
+    next = next && !wide.matches;
+    const changed = opened !== next;
+    opened = next;
+    drawer.classList.toggle('is-open', next);
+    drawer.inert = !next && !wide.matches;
+    button.setAttribute('aria-expanded', String(next));
+    button.setAttribute('aria-label', next ? '메뉴 닫기' : '메뉴 열기');
+    for (const [selector, hidden] of [['[data-menu-open]',next],['[data-menu-close]',!next],['[data-menu-label]',next]]) button.querySelector(selector)?.toggleAttribute('hidden',hidden);
+    document.body.classList.toggle('drawer-open', next);
+    background.forEach(el => {
+      if (next) { if (!priorInert.has(el)) priorInert.set(el,el.inert); el.inert=true; }
+      else if(priorInert.has(el)) { el.inert=priorInert.get(el); priorInert.delete(el); }
+    });
+    if (changed) ProfileBus.emit('menu:changed', { open: next });
+    if (next) drawer.querySelector('a')?.focus();
+    else if (restore) button.focus();
+  };
+  button.addEventListener('click',()=>set(!opened,true));
+  drawer.addEventListener('click',e=>{if(e.target.closest('a'))set(false);});
+  document.addEventListener('pointerdown',e=>{if(opened&&!drawer.contains(e.target)&&!button.contains(e.target))set(false,true);});
+  document.addEventListener('keydown',e=>{
+    if(!opened)return;
+    if(e.key==='Escape'){e.preventDefault();set(false,true);return;}
+    if(e.key==='Tab'){
+      const items=[...drawer.querySelectorAll('a[href]'),button];
+      const i=items.indexOf(document.activeElement);
+      if(e.shiftKey && i<=0){e.preventDefault();items.at(-1).focus();}
+      else if(!e.shiftKey&&(i===items.length-1||i<0)){e.preventDefault();items[0].focus();}
+    }
+  });
+  wide.addEventListener('change',()=>set(false));
+  addEventListener('pagehide',()=>set(false));
+  addEventListener('pageshow',()=>set(false));
+  set(false);
 })();
 
 (() => {
@@ -181,3 +213,5 @@ window.ProfileBus = (() => {
 
 document.documentElement.classList.add('js');
 window.ProfileBus?.emit('app:ready');
+
+})();

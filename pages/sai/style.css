@@ -8,3 +8,45 @@
 #world-link{position:absolute;z-index:3;bottom:190px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-size:13px;min-height:44px;padding:8px 0;border-bottom:1px solid #ffffff65;white-space:nowrap}#world-link[hidden]{display:none}#world-link:hover{border-color:#65d5c1;color:#65d5c1}#world-link svg{width:18px;height:18px}.identity{will-change:opacity}.scene-caption p{white-space:normal;max-width:100%;text-wrap:balance}.ending .scene-caption{bottom:264px}.ending .scene-caption p{font-size:20px}@media(max-width:700px){#world-link{bottom:188px;font-size:12px}nav button span{display:none}nav button{font-size:11px}.ending .scene-caption p{font-size:17px}}@media(max-height:600px) and (min-width:701px){#world-link{bottom:168px}.ending .scene-caption{bottom:236px}}
 .header-actions{display:flex;gap:8px}.header-actions a{color:inherit;text-decoration:none}#share:disabled{opacity:.5;cursor:wait}#share-status{position:absolute;top:80px;right:40px;font-size:11px;color:var(--muted);z-index:4}#share-dialog{width:min(420px,calc(100% - 40px));padding:24px;border:1px solid var(--border);border-radius:5px;background:#000;color:#fff}#share-dialog::backdrop{background:#000a}#share-dialog form{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}#share-dialog h2{font-size:18px;font-weight:500;margin:0}#share-link{width:100%;min-width:0;padding:12px;background:#111;color:#fff;border:1px solid var(--border);font:13px var(--font)}@media(max-width:700px){.header-actions .icon-button{width:40px;height:44px}#share-status{top:76px;right:20px}}@media(max-width:380px){.wordmark span{display:none}}
 #sound[aria-pressed="true"]{border-color:var(--muted);background:var(--ghost)}#sound[data-status="loading"],#sound[data-status="buffering"]{opacity:.6}#sound-status{position:absolute;right:40px;bottom:148px;max-width:300px;font-size:11px;line-height:1.7;color:var(--muted);background:#000c;padding:8px 12px;z-index:4}#sound[data-status="error"]{border-color:#ff6248}@media(max-width:700px){#sound-status{left:20px;right:20px;bottom:140px;max-width:none}}
+#film{min-height:0;height:100dvh}
+.scene-caption p{word-break:keep-all;overflow-wrap:break-word}
+@media(max-width:700px){
+  #stage{top:84px;bottom:340px}
+  .ending #stage{bottom:340px}
+  header{top:max(12px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right))}
+  footer{bottom:max(16px,env(safe-area-inset-bottom));left:16px;right:16px}
+  .identity{left:16px;right:16px;top:84px;display:grid;grid-template-columns:72px 1fr;align-items:center;gap:12px}
+  .identity .eyebrow{display:none}
+  .identity h1{font-size:36px;margin:0}
+  .identity .dedication{font-size:11px;line-height:1.7}
+}
+@media(max-width:700px) and (max-height:650px){
+  #stage{top:104px;bottom:304px}
+  .ending #stage{bottom:304px}
+  .scene-caption{bottom:132px}
+  .ending .scene-caption{bottom:224px}
+  #world-link{bottom:160px}
+  nav{margin-bottom:8px}
+  .identity .eyebrow{margin-bottom:6px}
+  .identity{top:64px}
+  .identity h1{font-size:36px;margin:0}
+}
+@media(max-height:500px) and (min-aspect-ratio:4/3){
+  header{top:max(8px,env(safe-area-inset-top));left:16px;right:16px}
+  .edition,.side-label,.signature,.wordmark span{display:none}
+  #stage,.ending #stage{top:64px;bottom:104px;right:232px}
+  .identity{top:72px;left:16px;right:auto;display:block}
+  .identity h1{font-size:32px;margin-bottom:6px}
+  .identity .eyebrow{font-size:9px;margin-bottom:4px}
+  .dedication{font-size:11px}
+  .scene-caption,.ending .scene-caption{top:88px;bottom:auto;left:auto;right:16px;width:200px;gap:8px}
+  .scene-caption p,.ending .scene-caption p{font-size:14px;line-height:1.7}
+  #world-link{top:176px;bottom:auto;left:auto;right:16px;width:200px;justify-content:center;transform:none;font-size:12px}
+  footer{left:16px;right:16px;bottom:max(12px,env(safe-area-inset-bottom))}
+  nav{margin-bottom:6px;gap:0;justify-content:space-between}
+  nav button{height:32px;min-width:0;font-size:11px}
+  nav button span{display:none}
+  .transport{gap:8px}
+  #restart{display:none}
+  #sound-status{right:16px;left:auto;bottom:104px;max-width:200px}
+}

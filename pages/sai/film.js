@@ -138,8 +138,7 @@ function init(){
 }
 function resize(){
   const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();
-  camera.position.z=w<700?12.8:7.6;
-  sculpture.position.y=w<700?-.13:.35;
+  sculpture.position.y=matchMedia('(max-width:700px), (max-height:500px)').matches?0:.35;
   render(time);
 }
 function render(t){
@@ -159,10 +158,11 @@ function render(t){
   points.material.blending=state.world>0||state.contact>0?THREE.AdditiveBlending:THREE.NormalBlending;
   uniforms.drawProgress.value=state.draw;
   sculpture.rotation.set(state.rx,state.ry,state.rz);sculpture.scale.setScalar(state.scale);
-  camera.position.z=(stage.clientWidth<700?12.8:7.6)*state.dolly;
+  const baseZ=Math.max(7.6,3.3/(Math.tan(THREE.MathUtils.degToRad(17))*camera.aspect));
+  camera.position.z=baseZ*state.dolly;
   const revealProgress=Math.min(1,Math.max(0,(t-49)/9));
   const reveal=revealProgress*revealProgress*(3-2*revealProgress);
-  const fit=Math.min(1,(2*Math.tan(THREE.MathUtils.degToRad(17))*(stage.clientWidth<700?12.8:7.6)*camera.aspect*.92)/5.8);
+  const fit=Math.min(1,(2*Math.tan(THREE.MathUtils.degToRad(17))*baseZ*camera.aspect*.92)/5.8);
   creationPlane.position.set(0,sculpture.position.y,.08);
   creationPlane.scale.setScalar(fit*state.scale*(1+(state.dolly-1)*.45));
   sculpture.scale.setScalar(state.scale*lerp(1,fit,Math.min(1,Math.max(0,(t-48)/5))));

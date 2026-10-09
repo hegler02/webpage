@@ -1,5 +1,6 @@
 import * as THREE from './assets/three.module.min.js';
 import {createSoundPlayer} from './assets/sound-player.mjs';
+import {initShare} from './assets/share.mjs';
 
 const DURATION=48, COLS=240, ROWS=72, COUNT=COLS*ROWS;
 const captions=['처음에는, 서로 다른 점이었다.','서로를 바라보자, 방향이 생겼다.','닿은 자리에, 관계가 자랐다.','함께 지난 시간이, 우리의 결이 되었다.','우리는 혼자보다, 사이에서 선명해진다.'];
@@ -132,6 +133,7 @@ function fail(error){console.error(error);const message=document.querySelector('
 async function boot(){
   try{
     await document.fonts.load('700 390px Pretendard');await document.fonts.ready;forms();init();lucide.createIcons();
+    initShare();
     const soundButton=document.querySelector('#sound'),soundNotice=document.querySelector('#sound-status');
     sound=createSoundPlayer({render:update,onStatus:({status,muted,active})=>{
       showPlaying(status==='playing');

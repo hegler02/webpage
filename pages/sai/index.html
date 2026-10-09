@@ -35,7 +35,7 @@
     <header>
       <a class="wordmark" href="#" aria-label="사이 처음으로">SAI<span>김준호 / 2026</span></a>
       <span class="edition">THE SPACE BETWEEN</span>
-      <button id="fullscreen" class="icon-button" aria-label="전체 화면" title="전체 화면"><i data-lucide="maximize"></i></button>
+      <div class="header-actions"><a id="home" class="icon-button" href="/" aria-label="홈으로 돌아가기" title="홈으로 돌아가기"><i data-lucide="house"></i></a><button id="share" class="icon-button" aria-label="공유하기" title="공유하기"><i data-lucide="share-2"></i></button><button id="fullscreen" class="icon-button" aria-label="전체 화면" title="전체 화면"><i data-lucide="maximize"></i></button></div>
     </header>
     <div class="identity"><p class="eyebrow">A FILM IN FIVE MOVEMENTS</p><h1>사이</h1><p class="dedication">너와 나 사이,<br>없던 세계가 생긴다.</p></div>
     <div class="side-label" aria-hidden="true">DISTANCE BECOMES RELATION</div>
@@ -45,6 +45,8 @@
       <div class="transport"><button id="play" class="icon-button" aria-label="재생" title="재생"><i data-lucide="play"></i></button><button id="restart" class="icon-button" aria-label="처음부터" title="처음부터"><i data-lucide="rotate-ccw"></i></button><button id="sound" class="icon-button" aria-label="소리 켜기" title="소리 켜기" aria-pressed="false"><i data-lucide="volume-x"></i></button><span id="time">00:00</span><input id="scrub" aria-label="작품의 시간" type="range" min="0" max="48" value="0" step="0.01"><span class="duration">00:48</span><span class="signature">A STUDY IN TOGETHERNESS</span></div>
     </footer>
     <p id="sound-status" role="status" hidden></p>
+    <p id="share-status" role="status" hidden></p>
+    <dialog id="share-dialog"><form method="dialog"><h2>사이 공유하기</h2><button class="icon-button" aria-label="닫기" title="닫기"><i data-lucide="x"></i></button></form><input id="share-link" type="url" readonly aria-label="공유 주소" value="https://mirinaeman.com/pages/sai/"></dialog>
     <p id="error" role="alert" hidden>이 환경에서는 3D 장면을 열 수 없습니다. 아래의 작품 문장을 읽을 수 있습니다.</p>
     <noscript><section class="fallback"><h2>사이</h2><p>처음에는, 서로 다른 점이었다.<br>서로를 바라보자, 방향이 생겼다.<br>닿은 자리에, 관계가 자랐다.<br>함께 지난 시간이, 우리의 결이 되었다.<br>우리는 혼자보다, 사이에서 선명해진다.</p></section></noscript>
   </main>

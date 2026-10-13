@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f1115">
+<title>학교의 시간, 세상의 시간 — AIDX 교육과정 개발 에이전트</title>
+<meta name="description" content="교육과정은 1년에 한 번 바뀌지만 세상은 매일 바뀝니다. 학교와 세상의 시간 격차를 6축 입체 그물과 한국고등직업교육 매트릭스로 줄이는 AIDX 교육과정 개발 에이전트의 기술 발표입니다.">
+<link rel="canonical" href="https://mirinaeman.com/pages/aidx-curriculum-agent/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="학교의 시간, 세상의 시간 — AIDX 교육과정 개발 에이전트">
+<meta property="og:description" content="학교와 세상의 시간 격차를 줄이는 교육과정 분석. (사)한국고등직업교육학회 · 동서울대학교 김준호 교수">
+<meta property="og:url" content="https://mirinaeman.com/pages/aidx-curriculum-agent/">
+<meta property="og:image" content="https://mirinaeman.com/pages/aidx-curriculum-agent/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script type="module" src="deck.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#stage">발표 내용으로 건너뛰기</a>
+<div class="room" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<main class="viewport" id="viewport">
+  <div class="stage" id="stage" aria-roledescription="발표" aria-label="학교의 시간, 세상의 시간 — 10장">
+
+    <!-- 1. 표지: 느린 시계와 빠른 시계 -->
+    <section class="slide s-cover is-active" data-index="1" aria-label="1 / 10 표지">
+      <div class="cover-text">
+        <p class="eyebrow" data-enter="rise">(사)한국고등직업교육학회 · AIDX</p>
+        <h1 class="display" data-enter="rise" data-delay="120">학교의 시간,<br>세상의 시간</h1>
+        <p class="lede" data-enter="rise" data-delay="260">AIDX 시대 교육과정 개발 에이전트<br><b>한국고등직업교육 매트릭스</b></p>
+        <div class="byline" data-enter="rise" data-delay="420">
+          <span class="lab">개발자</span>
+          <strong>동서울대학교 김준호 교수</strong>
+          <span>(사)한국고등직업교육학회 부회장</span>
+        </div>
+      </div>
+      <div class="clocks" id="clocks" data-enter="fade" data-delay="200">
+        <figure class="clock slow" id="clock-slow">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="92" class="face"/>
+            <g class="ticks"><line x1="100" y1="12" x2="100" y2="30"/></g>
+            <line x1="100" y1="100" x2="100" y2="30" class="hand"/>
+            <circle cx="100" cy="100" r="6" class="pin"/>
+          </svg>
+          <figcaption><span class="lab">SCHOOL</span>학교 · 1년에 한 번</figcaption>
+        </figure>
+        <figure class="clock fast" id="clock-fast">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="92" class="face"/>
+            <g class="ticks" id="fast-ticks"></g>
+            <line x1="100" y1="100" x2="100" y2="22" class="hand"/>
+            <circle cx="100" cy="100" r="6" class="pin"/>
+          </svg>
+          <figcaption><span class="lab">WORLD</span>세상 · 자고 일어나면</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 2. 문제: 두 시간 막대 -->
+    <section class="slide s-problem" data-index="2" aria-label="2 / 10 문제">
+      <header class="slide-head">
+        <p class="eyebrow" data-enter="rise">02 · 문제</p>
+        <h2 class="title" data-enter="rise" data-delay="80">교육과정은 1년에 한 번 바뀌지만,<br>세상은 매일 바뀝니다</h2>
+      </header>
+      <svg class="timelines" viewBox="0 0 1600 360" aria-hidden="true">
+        <g class="tl-school">
+          <circle cx="40" cy="90" r="16" class="tl-dot slow" id="tl-school-start"/>
+          <line x1="40" y1="90" x2="1560" y2="90" class="tl-line draw" pathLength="1"/>
+          <g class="tl-years" id="tl-years"></g>
+          <text x="40" y="40" class="tl-label">학교 · 교육과정 개편</text>
+        </g>
+        <g class="tl-world">
+          <circle cx="40" cy="270" r="16" class="tl-dot fast" id="tl-world-start"/>
+          <line x1="40" y1="270" x2="1560" y2="270" class="tl-line world draw" pathLength="1"/>
+          <g class="tl-days" id="tl-days"></g>
+          <text x="40" y="335" class="tl-label">세상 · 직무 · 도구 · 정책</text>
+        </g>
+      </svg>
+      <ul class="points three">
+        <li data-enter="rise" data-delay="900"><b>1년</b>교육과정 개편 주기는 1년, 교과목은 그보다 더 깁니다.</li>
+        <li data-enter="rise" data-delay="1020"><b>3년</b>AI가 등장하고 3년, 직무와 도구와 정책이 달마다 바뀝니다.</li>
+        <li data-enter="rise" data-delay="1140"><b>졸업</b>졸업할 즈음에는 이미 지난 세상을 배운 셈이 됩니다.</li>
+      </ul>
+    </section>
+
+    <!-- 3. 관점: 시간의 격차 -->
+    <section class="slide s-view" data-index="3" aria-label="3 / 10 관점">
+      <header class="slide-head">
+        <p class="eyebrow" data-enter="rise">03 · 관점</p>
+        <h2 class="title" data-enter="rise" data-delay="80">격차를 <em>시간의 격차</em>로 봤습니다</h2>
+        <p class="sub" data-enter="rise" data-delay="160">학교 자료는 느리고, 세상 자료는 빠릅니다. 그 사이가 교육과정의 격차입니다.</p>
+      </header>
+      <div class="streams">
+        <div class="stream slow" data-enter="slide-l" data-delay="240">
+          <p class="lab">SLOW · 학교</p>
+          <h3>느린 흐름</h3>
+          <ul><li>교육과정표</li><li>학과 발전계획</li><li>대학알리미 공시</li></ul>
+        </div>
+        <div class="gap" data-enter="gap" data-delay="520">
+          <span class="gap-band"></span>
+          <p><b>격차</b>지금 무엇이<br>비어 있는가</p>
+        </div>
+        <div class="stream fast" data-enter="slide-r" data-delay="240">
+          <p class="lab">FAST · 세상</p>
+          <h3>빠른 흐름</h3>
+          <ul><li>정부 정책</li><li>채용과 직무</li><li>자격 (Q-Net)</li><li>지역 산업</li><li>해외 표준</li></ul>
+        </div>
+      </div>
+      <p class="note" data-enter="rise" data-delay="760">대학알리미는 서버가 밤마다 최신 공시를 찾아 <b>전국 160개교 3,955개 모집단위</b>를 읽고, 바뀐 학과만 다시 계산합니다.</p>
+      <p class="quote" data-enter="rise" data-delay="900">격차를 줄이려면 먼저 격차를 재야 했습니다.</p>
+    </section>
+
+    <!-- 4. 6축 입체 그물 -->
+    <section class="slide s-net" data-index="4" aria-label="4 / 10 6축 입체 그물">
+      <header class="slide-head">
+        <p class="eyebrow" data-enter="rise">04 · 6축 입체 그물</p>
+        <h2 class="title" data-enter="rise" data-delay="80">학과의 역량을 <em>날줄</em>로,<br>세상의 여섯 축을 <em>씨줄</em>로 엮었습니다</h2>
+      </header>
+      <div class="net-wrap">
+        <svg class="net" id="net" viewBox="0 0 1000 620" aria-hidden="true"></svg>
+        <ul class="net-legend">
+          <li data-enter="rise" data-delay="1500"><span class="key warp"></span><div><b>날줄 · 세로</b>학과의 전공역량. 교육과정표와 대학알리미에서 뽑습니다.</div></li>
+          <li data-enter="rise" data-delay="1620"><span class="key weft"></span><div><b>씨줄 · 가로 6축</b>정부·정책 / 교육부 / 지역·산업 / 학교·학과 / 기업·직무 / 해외 표준</div></li>
+          <li data-enter="rise" data-delay="1740"><span class="key node"></span><div><b>교차점</b>역량 하나를 몇 개 축의 근거가 받치는가. 여러 축이 받치면 입체입니다.</div></li>
+          <li data-enter="rise" data-delay="1860"><span class="key empty"></span><div><b>빈 교차점</b>세상은 요구하는데 교육과정에는 없는 곳입니다.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 5. 교육학 이론을 코드로 -->
+    <section class="slide s-theory" data-index="5" aria-label="5 / 10 교육학 이론을 코드로">
+      <header class="slide-head">
+        <p class="eyebrow" data-enter="rise">05 · 교육학 이론을 코드로</p>
+        <h2 class="title" data-enter="rise" data-delay="80">함께 연구한 교수님들의 지도로,<br>교육학 이론을 규칙으로 옮겼습니다</h2>
+      </header>
+      <div class="chain" id="chain">
+        <div class="link" data-enter="pop" data-delay="300"><span class="lab">01</span><b>결과</b>역량을 먼저 정하고</div>
+        <span class="arrow" data-enter="fade" data-delay="420"></span>
+        <div class="link" data-enter="pop" data-delay="480"><span class="lab">02</span><b>평가</b>확인할 평가를 정하고</div>
+        <span class="arrow" data-enter="fade" data-delay="600"></span>
+        <div class="link" data-enter="pop" data-delay="660"><span class="lab">03</span><b>내용 · 배치</b>가르칠 것과 순서를 정합니다</div>
+        <p class="chain-note" data-enter="fade" data-delay="800">이 사슬이 끊긴 제안은 보고서에 나오기 전에 걸러집니다.</p>
+      </div>
+      <ul class="theories">
+        <li data-enter="rise" data-delay="900"><b>백워드 설계</b><small>Wiggins &amp; McTighe</small>결과 → 평가 → 내용의 순서</li>
+        <li data-enter="rise" data-delay="980"><b>블룸 개정 분류</b><small>Anderson &amp; Krathwohl, 2001</small>역량 문장의 동사로 인지 수준과 지식 유형 판정</li>
+        <li data-enter="rise" data-delay="1060"><b>ABCD 목표 진술</b><small>조건 · 정도</small>학습 목표에 조건과 정도까지</li>
+        <li data-enter="rise" data-delay="1140"><b>평가-수준 정합</b><small>목표와 평가</small>창조 수준 목표를 객관식으로만 평가하면 어긋남</li>
+        <li data-enter="rise" data-delay="1220"><b>AI 평가 척도 AIAS</b><small>Perkins 외, 2024</small>과목마다 AI를 어디까지 허용할지 제안</li>
+        <li data-enter="rise" data-delay="1300"><b>교수자 진단 42문항</b><small>환경 12 + AI-TPACK 30</small>교수자의 AI 준비도가 AIAS 수준의 상한</li>
+      </ul>
+      <p class="principle" data-enter="sweep" data-delay="1500">AI는 제안하고, 확정은 규칙과 사람이 합니다.</p>
+    </section>
+
+    <!-- 6. 한국고등직업교육 매트릭스 -->
+    <section class="slide s-matrix" data-index="6" aria-label="6 / 10 한국고등직업교육 매트릭스">
+      <header class="slide-head">
+        <p class="eyebrow" data-enter="rise">06 · 한국고등직업교육 매트릭스</p>
+        <h2 class="title" data-enter="rise" data-delay="80">입체 그물 + 교육학 규칙 + 매트릭스 알고리즘<br>= 학과 진단 보고서</h2>
+      </header>
+      <div class="equation">
+        <span class="term" data-enter="merge" data-delay="200">입체 그물</span><i>+</i>
+        <span class="term" data-enter="merge" data-delay="300">교육학 규칙</span><i>+</i>
+        <span class="term" data-enter="merge" data-delay="400">매트릭스 알고리즘</span><i>=</i>
+        <span class="term result" data-enter="pop" data-delay="700">학과 진단 보고서</span>
+      </div>
+      <div class="matrix-grid">
+        <div class="indicators">
+          <p class="lab" data-enter="fade" data-delay="900">매트릭스가 재는 것</p>
+          <ol>
+            <li data-enter="rise" data-delay="960">근거로 받쳐진 역량 비율</li>
+            <li data-enter="rise" data-delay="1040">입체도 · 두 축 이상이 받치는 역량</li>
+            <li data-enter="rise" data-delay="1120">근거 두께</li>
+            <li data-enter="rise" data-delay="1200">비어 있는 축</li>
+            <li data-enter="rise" data-delay="1280">보강할 역량</li>
+          </ol>
+        </div>
+        <div class="report-toc">
+          <p class="lab" data-enter="fade" data-delay="900">보고서 구성 · 8장 + 부록 · 26개 섹션</p>
+          <ol>
+            <li data-enter="rise" data-delay="1000"><span>Ⅰ</span>요약</li>
+            <li data-enter="rise" data-delay="1060"><span>Ⅱ</span>환경 분석</li>
+            <li data-enter="rise" data-delay="1120"><span>Ⅲ</span>현 교육과정 분석</li>
+            <li data-enter="rise" data-delay="1180"><span>Ⅳ</span>요구 · 근거 분석</li>
+            <li data-enter="rise" data-delay="1240"><span>Ⅴ</span>진단</li>
+            <li data-enter="rise" data-delay="1300" class="hl"><span>Ⅵ</span>교육과정 제안</li>
+            <li data-enter="rise" data-delay="1360"><span>Ⅶ</span>질 관리 (CQI)</li>
+            <li data-enter="rise" data-delay="1420"><span>Ⅷ</span>결론</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Duck Boat UI -->
+    <section class="slide s-duck" data-index="7" aria-label="7 / 10 Duck Boat UI">
+      <header class="slide-head">
+        <p class="eyebrow" data-enter="rise">07 · Duck Boat UI</p>
+        <h2 class="title" data-enter="rise" data-delay="80">사용자는 쉽게, 뒤처리는 코드가</h2>
+      </header>
+      <div class="above">
+        <p class="lab" data-enter="fade" data-delay="300">수면 위 · 교수님이 하는 일</p>
+        <ol class="actions">
+          <li data-enter="rise" data-delay="380"><b>자료 올리기</b></li>
+          <li data-enter="rise" data-delay="460"><b>결과 보기</b></li>
+          <li data-enter="rise" data-delay="540"><b>설문 응답</b></li>
+        </ol>
+      </div>
+      <div class="water" data-enter="water" data-delay="200"><span></span></div>
+      <div class="below">
+        <p class="lab" data-enter="fade" data-delay="760">수면 아래 · 서버가 하는 일</p>
+        <ol class="pipeline">
+          <li data-enter="rise" data-delay="820">문서 읽기</li>
+          <li data-enter="rise" data-delay="900">분류</li>
+          <li data-enter="rise" data-delay="980">6축 근거 연결</li>
+          <li data-enter="rise" data-delay="1060">매트릭스 계산</li>
+          <li data-enter="rise" data-delay="1140">보고서 작성</li>
+          <li data-enter="rise" data-delay="1220">저장</li>
+        </ol>
+        <p class="note" data-enter="rise" data-delay="1380">교육과정은 기밀이라 1인 1세션, 결과는 서버에 봉인하고, 시험 공간은 따로 둡니다.</p>
+      </div>
+    </section>
+
+    <!-- 8. 근거와 검증 -->
+    <section class="slide s-trust" data-index="8" aria-label="8 / 10 근거와 검증">
+      <header class="slide-head">
+        <p class="eyebrow" data-enter="rise">08 · 믿을 수 있는 분석</p>
+        <h2 class="title" data-enter="rise" data-delay="80">모든 판단에는 따라갈 수 있는<br>출처가 붙습니다</h2>
+      </header>
+      <div class="trust-grid">
+        <article class="cite" data-enter="rise" data-delay="300">
+          <p class="lab">근거 카드</p>
+          <p class="claim">"이 역량은 지역·산업과 기업·직무, 두 축의 근거가 받칩니다."</p>
+          <ul class="sources"><li><span>지역·산업</span>원문 링크 · 인용</li><li><span>기업·직무</span>원문 링크 · 인용</li></ul>
+          <p class="small">근거마다 원문 링크와 인용이 붙습니다. 지어낸 내용이 아니라는 증거입니다.</p>
+        </article>
+        <div class="rules">
+          <div class="rule" data-enter="rise" data-delay="460"><b>AI는 후보만</b>규칙과 사람의 검토가 확정합니다.</div>
+          <div class="checks" data-enter="pop" data-delay="620">
+            <span class="big" id="count-176">176</span>
+            <p><b>검사 176개</b>분석 엔진은 176개의 검토 기준을 모두 통과해야만 교육과정 분석에 쓰입니다.</p>
+          </div>
+          <div class="rule" data-enter="rise" data-delay="800"><b>실제 브라우저로 시험</b>크롬 · 엣지 · 사파리 · 파이어폭스 엔진으로 화면을 직접 확인합니다.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. 순환 -->
+    <section class="slide s-loop" data-index="9" aria-label="9 / 10 순환">
+      <header class="slide-head">
+        <p class="eyebrow" data-enter="rise">09 · 참여할수록 줄어드는 격차</p>
+        <h2 class="title" data-enter="rise" data-delay="80">교수님의 자료와 세상의 변화가<br>계속 보고서를 진화시킵니다</h2>
+      </header>
+      <div class="loop">
+        <ol class="triggers">
+          <li data-enter="slide-l" data-delay="300"><span class="lab">01</span>교수님이 학과 정보를 올릴 때</li>
+          <li data-enter="slide-l" data-delay="400"><span class="lab">02</span>학회가 새 자료를 넣을 때 (CQI)</li>
+          <li data-enter="slide-l" data-delay="500"><span class="lab">03</span>대학알리미의 과목이 바뀔 때</li>
+        </ol>
+        <svg class="cycle" viewBox="0 0 560 560" aria-hidden="true">
+          <circle cx="280" cy="280" r="210" class="ring draw" pathLength="1"/>
+          <g class="cycle-nodes">
+            <g transform="translate(280 70)"><circle r="12"/><text y="-26">그물 다시 짜기</text></g>
+            <g transform="translate(490 280)"><circle r="12"/><text x="26" y="9" class="start">기본 보고서 자동 갱신</text></g>
+            <g transform="translate(280 490)"><circle r="12"/><text y="44">판 이력 · 지표 변화</text></g>
+            <g transform="translate(70 280)"><circle r="12"/><text x="-26" y="9" class="end">다음 주기</text></g>
+          </g>
+        </svg>
+        <div class="editions" aria-hidden="true">
+          <p class="lab" data-enter="fade" data-delay="900">판 이력</p>
+          <div class="bars"><i style="--h:.34" data-enter="grow" data-delay="980"></i><i style="--h:.46" data-enter="grow" data-delay="1060"></i><i style="--h:.58" data-enter="grow" data-delay="1140"></i><i style="--h:.71" data-enter="grow" data-delay="1220"></i><i style="--h:.83" data-enter="grow" data-delay="1300"></i></div>
+          <p class="small">그림은 개념 예시입니다</p>
+        </div>
+      </div>
+      <p class="quote" data-enter="rise" data-delay="1400">한 번 쓰고 끝나는 보고서가 아니라, 해마다 더 정교해지는 보고서입니다.</p>
+    </section>
+
+    <!-- 10. 비전 -->
+    <section class="slide s-vision" data-index="10" aria-label="10 / 10 비전">
+      <svg class="swarm" id="swarm" viewBox="0 0 1920 1080" aria-hidden="true"></svg>
+      <header class="slide-head center">
+        <p class="eyebrow" data-enter="rise">10 · 한 학과에서 학회 전체로</p>
+        <h2 class="title" data-enter="rise" data-delay="80">학교와 세상의 시간 격차를 함께 줄입니다</h2>
+      </header>
+      <ul class="vision-points">
+        <li data-enter="rise" data-delay="1700"><b>19</b>회원대학</li>
+        <li data-enter="rise" data-delay="1800"><b>약 600</b>등록 학과</li>
+        <li data-enter="rise" data-delay="1900"><b>공통 격차</b>공통 교육과정 · 정책 제안의 근거</li>
+      </ul>
+      <p class="closing" data-enter="sweep" data-delay="2200">교육과정은 1년에 한 번 바뀌어도,<br><b>격차는 매일 줄일 수 있습니다.</b></p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="toolbar">
+  <span class="brand"><img src="assets/favicon.svg" alt="" width="22" height="18">AIDX · 한국고등직업교육 매트릭스</span>
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+  <span class="position" id="position">01 / 10</span>
+  <div class="nav">
+    <button type="button" id="prev" aria-label="이전 장">←</button>
+    <button type="button" id="next" aria-label="다음 장">→</button>
+    <button type="button" id="full" aria-label="전체 화면">⤢</button>
+  </div>
+</footer>
+<p class="rotate-hint" aria-hidden="true">휴대폰을 가로로 돌리면 크게 보입니다</p>
+<div class="overlay" id="overlay" aria-hidden="true"></div>
+<p class="sr-only" id="status" role="status" aria-live="polite"></p>
+</body>
+</html>

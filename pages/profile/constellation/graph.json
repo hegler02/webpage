@@ -9,6 +9,37 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:aidx-curriculum-agent",
+      "kind": "work",
+      "title": "학교의 시간, 세상의 시간 — AIDX 교육과정 개발 에이전트",
+      "summary": "학교와 세상의 시간 격차를 6축 입체 그물과 한국고등직업교육 매트릭스로 재고 줄이는 교육과정 개발 에이전트를 보여준다.",
+      "url": "https://mirinaeman.com/pages/aidx-curriculum-agent/",
+      "image": "/pages/profile/assets/thumbnails/aidx-curriculum-agent.webp",
+      "alt": "학교의 시간, 세상의 시간 — 느린 파랑 시계와 빠른 금빛 시계가 놓인 AIDX 교육과정 개발 에이전트 발표 표지",
+      "year": "2026",
+      "tags": [
+        "slide",
+        "lecture",
+        "16:9",
+        "aidx",
+        "curriculum",
+        "gestalt",
+        "transition",
+        "match-cut",
+        "line-draw",
+        "zoom-to-detail",
+        "dot-regroup",
+        "kohvea"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "학교와 세상의 시간 격차를 6축 입체 그물과 한국고등직업교육 매트릭스로 재고 줄이는 교육과정 개발 에이전트를 보여준다."
+        }
+      ]
+    },
+    {
       "id": "work:sai",
       "kind": "work",
       "title": "사이 — 우리 모두 사이좋게 지내요",
@@ -2079,6 +2110,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:aidx-curriculum-agent",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:sai",
       "target": "creator:joonho",

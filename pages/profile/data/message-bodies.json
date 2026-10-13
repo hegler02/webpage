@@ -125,6 +125,41 @@
       "latest_deployed_at": "2026-09-02T16:59:12Z"
     },
     {
+      "body_id": "aidx-curriculum-agent",
+      "title": "학교의 시간, 세상의 시간 — AIDX 교육과정 개발 에이전트",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "curriculum-research"
+      ],
+      "tags": [
+        "slide",
+        "lecture",
+        "16:9",
+        "aidx",
+        "curriculum",
+        "gestalt",
+        "transition",
+        "match-cut",
+        "line-draw",
+        "zoom-to-detail",
+        "dot-regroup",
+        "kohvea"
+      ],
+      "message_sentence": "학교와 세상의 시간 격차를 6축 입체 그물과 한국고등직업교육 매트릭스로 재고 줄이는 교육과정 개발 에이전트를 보여준다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/aidx-curriculum-agent.webp",
+        "alt": "학교의 시간, 세상의 시간 — 느린 파랑 시계와 빠른 금빛 시계가 놓인 AIDX 교육과정 개발 에이전트 발표 표지",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/aidx-curriculum-agent/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-13T07:02:13.830Z",
+      "latest_deployed_at": "2026-10-13T07:02:13.830Z"
+    },
+    {
       "body_id": "already-autumn",
       "title": "벌써, 가을",
       "body_type": "SONGBODY",

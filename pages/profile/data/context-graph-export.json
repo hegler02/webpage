@@ -263,6 +263,23 @@
         "height": 540,
         "focal_point": "50% 50%"
       }
+    },
+    {
+      "body_id": "first-night-exorcist",
+      "concepts": [
+        "interpretive-space"
+      ],
+      "reason": "독자가 보물지도를 따라가듯 부적과 시선을 좇아 큰 그림 속 단서를 발견한다. 화면 밖에 무엇이 있을지 상상하며 스크롤로 이야기를 이어 간다.",
+      "title": "겁쟁이 퇴마사의 첫 출근 — 부적을 따라",
+      "url": "https://first-night-exorcist.mirinaeman.chatgpt.site/",
+      "summary": "보물지도를 따라가듯, 여섯 개의 큰 그림 속 단서를 스크롤로 발견하는 만화. 부적을 따라 시선이 움직이고 대사와 효과음이 이어지며, 겁쟁이 퇴마사의 첫 출근이 펼쳐진다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/first-night-exorcist.webp",
+        "alt": "나무문 뒤에서 등불을 들고 방 안을 살피는 겁쟁이 퇴마사",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      }
     }
   ],
   "autumn": {
@@ -303,5 +320,5 @@
   },
   "hub_url": "https://mirinaeman.com/archive/image-cinema/",
   "intro_url": "https://mirinaeman.com/archive/already-autumn/",
-  "source_sha256": "0a480dfe06fd8f53161259a0a71b4ce7beeefa2d5a7566d6fc13e58fe47931d7"
+  "source_sha256": "7dd2a391780183dbfc80f8d029f8ef359adba5284bd3f9340b7876a6cc3efb1f"
 }

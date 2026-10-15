@@ -585,6 +585,34 @@
       "latest_deployed_at": "2026-09-06T03:20:32.028673+00:00"
     },
     {
+      "body_id": "first-night-exorcist",
+      "title": "겁쟁이 퇴마사의 첫 출근 — 부적을 따라",
+      "body_type": "STORYBODY",
+      "source_kinds": [
+        "generated-comic-art",
+        "scroll-driven-story"
+      ],
+      "tags": [
+        "comic",
+        "interactive",
+        "scroll-story",
+        "cool-media",
+        "gestalt"
+      ],
+      "message_sentence": "보물지도를 따라가듯, 여섯 개의 큰 그림 속 단서를 스크롤로 발견하는 만화. 부적을 따라 시선이 움직이고 대사와 효과음이 이어지며, 겁쟁이 퇴마사의 첫 출근이 펼쳐진다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/first-night-exorcist.webp",
+        "alt": "나무문 뒤에서 등불을 들고 방 안을 살피는 겁쟁이 퇴마사",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://first-night-exorcist.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-15T22:27:43.761194+00:00",
+      "latest_deployed_at": "2026-10-15T22:27:43.761194+00:00"
+    },
+    {
       "body_id": "for-tomorrow",
       "title": "내일을 위해…",
       "body_type": "SLIDEBODY",

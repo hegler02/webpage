@@ -9,6 +9,30 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:first-night-exorcist",
+      "kind": "work",
+      "title": "겁쟁이 퇴마사의 첫 출근 — 부적을 따라",
+      "summary": "보물지도를 따라가듯, 여섯 개의 큰 그림 속 단서를 스크롤로 발견하는 만화. 부적을 따라 시선이 움직이고 대사와 효과음이 이어지며, 겁쟁이 퇴마사의 첫 출근이 펼쳐진다.",
+      "url": "https://first-night-exorcist.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/first-night-exorcist.webp",
+      "alt": "나무문 뒤에서 등불을 들고 방 안을 살피는 겁쟁이 퇴마사",
+      "year": "2026",
+      "tags": [
+        "comic",
+        "interactive",
+        "scroll-story",
+        "cool-media",
+        "gestalt"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "보물지도를 따라가듯, 여섯 개의 큰 그림 속 단서를 스크롤로 발견하는 만화. 부적을 따라 시선이 움직이고 대사와 효과음이 이어지며, 겁쟁이 퇴마사의 첫 출근이 펼쳐진다."
+        }
+      ]
+    },
+    {
       "id": "work:drone-cinema-2026",
       "kind": "work",
       "title": "드론 촬영의 이해 — 높이보다, 시선을 바꾼다",
@@ -2135,6 +2159,13 @@
   ],
   "edges": [
     {
+      "source": "work:first-night-exorcist",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:drone-cinema-2026",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2776,6 +2807,13 @@
       "target": "concept:interpretive-space",
       "label": "함께 읽는 개념",
       "reason": "서로 다른 두 입자 리본이 관계와 기억을 거쳐 같은 글자가 됩니다. 건반과 종소리 사이의 여백에 관객이 자신의 관계를 떠올리도록 둡니다. 정지 이미지 편집이 아니라 생성형 3D 장면이라는 차이를 보존합니다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:first-night-exorcist",
+      "target": "concept:interpretive-space",
+      "label": "함께 읽는 개념",
+      "reason": "독자가 보물지도를 따라가듯 부적과 시선을 좇아 큰 그림 속 단서를 발견한다. 화면 밖에 무엇이 있을지 상상하며 스크롤로 이야기를 이어 간다.",
       "evidence": "https://mirinaeman.com/archive/image-cinema/"
     },
     {

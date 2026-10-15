@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "body_id": "first-night-exorcist",
+  "title": "겁쟁이 퇴마사의 첫 출근 — 부적을 따라",
+  "body_type": "STORYBODY",
+  "source_kinds": [
+    "generated-comic-art",
+    "scroll-driven-story"
+  ],
+  "tags": [
+    "comic",
+    "interactive",
+    "scroll-story",
+    "cool-media",
+    "gestalt"
+  ],
+  "message_sentence": "보물지도를 따라가듯, 여섯 개의 큰 그림 속 단서를 스크롤로 발견하는 만화. 부적을 따라 시선이 움직이고 대사와 효과음이 이어지며, 겁쟁이 퇴마사의 첫 출근이 펼쳐진다.",
+  "canonical_url": "https://first-night-exorcist.mirinaeman.chatgpt.site/",
+  "status": "DEPLOYED",
+  "first_deployed_at": "2026-10-15T22:27:43.761194+00:00",
+  "latest_deployed_at": "2026-10-15T22:27:43.761194+00:00",
+  "thumbnail": {
+    "source_kind": "project-owned",
+    "path": "assets/thumbnails/first-night-exorcist.webp",
+    "alt": "나무문 뒤에서 등불을 들고 방 안을 살피는 겁쟁이 퇴마사",
+    "width": 960,
+    "height": 540,
+    "focal_point": "50% 50%",
+    "sha256": "abe6511255345fa6f3690a0e170c477cd6035194d3f0629511c608650bcd77aa"
+  },
+  "deployments": [
+    {
+      "deployed_at": "2026-10-15T22:27:43.761194+00:00",
+      "url": "https://first-night-exorcist.mirinaeman.chatgpt.site/",
+      "status": "succeeded",
+      "release_ref": "appgdep_6ad1534c49248191afc44e6280205d56",
+      "source_revision": "c47cabf1458c5b624bbf0fae2fc78333e73fffd9",
+      "validation": [
+        "Sites v19 deployment succeeded. Access mode public, policy revision 2, confirmed by get_site.",
+        "Production browser loaded the scroll comic and six scene navigation.",
+        "Unauthenticated urllib was blocked by edge error 1010; anonymous browser access was not independently established.",
+        "6006 camera states and 2828 speech layout states passed before this audience change."
+      ]
+    }
+  ],
+  "incidents": [],
+  "invariants": [],
+  "approvals": [
+    {
+      "kind": "public-deployment-and-catalog-registration",
+      "statement": "이거 전체 공개로 베포하고 mirinaeman.com 에 등록해라. 이런 형태가 내 생각이다.",
+      "recorded_at": "2026-10-16T00:00:00+09:00"
+    }
+  ],
+  "human_judgment": {
+    "status": "accepted",
+    "note": "User accepted this scroll-based form and authorized public access and registration. No GOLDEN baseline inferred."
+  },
+  "scope_notes": [
+    "Preserve original artwork and v19 story implementation. Register archive, home latest cards and constellation. Preserve Work-menu selection."
+  ]
+}

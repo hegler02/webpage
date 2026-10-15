@@ -417,6 +417,35 @@
       "latest_deployed_at": "2026-09-11T15:33:48.752388+00:00"
     },
     {
+      "body_id": "drone-cinema-2026",
+      "title": "드론 촬영의 이해 — 높이보다, 시선을 바꾼다",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "lecture-concept",
+        "generated-images",
+        "interactive-presentation"
+      ],
+      "tags": [
+        "drone",
+        "lecture",
+        "gestalt",
+        "cinema",
+        "interactive"
+      ],
+      "message_sentence": "김준호 교수의 드론 강의. 해안이 깨어나는 시간이라는 가상 프로젝트를 따라 기획·촬영·편집의 판단을 31장 인터랙티브 슬라이드로 익힌다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/drone-cinema-2026.webp",
+        "alt": "아침 햇빛 아래 바다와 해안 산책로를 내려다본 드론 강의의 생성 이미지",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://drone-cinema-2026.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-15T07:51:16.443733+00:00",
+      "latest_deployed_at": "2026-10-15T07:51:16.443733+00:00"
+    },
+    {
       "body_id": "eagle-five-love",
       "title": "독수리 오형제의 애틋한 사랑",
       "body_type": "STORYBODY",

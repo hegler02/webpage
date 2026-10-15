@@ -9,6 +9,30 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:drone-cinema-2026",
+      "kind": "work",
+      "title": "드론 촬영의 이해 — 높이보다, 시선을 바꾼다",
+      "summary": "김준호 교수의 드론 강의. 해안이 깨어나는 시간이라는 가상 프로젝트를 따라 기획·촬영·편집의 판단을 31장 인터랙티브 슬라이드로 익힌다.",
+      "url": "https://drone-cinema-2026.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/drone-cinema-2026.webp",
+      "alt": "아침 햇빛 아래 바다와 해안 산책로를 내려다본 드론 강의의 생성 이미지",
+      "year": "2026",
+      "tags": [
+        "drone",
+        "lecture",
+        "gestalt",
+        "cinema",
+        "interactive"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "김준호 교수의 드론 강의. 해안이 깨어나는 시간이라는 가상 프로젝트를 따라 기획·촬영·편집의 판단을 31장 인터랙티브 슬라이드로 익힌다."
+        }
+      ]
+    },
+    {
       "id": "work:aidx-curriculum-agent",
       "kind": "work",
       "title": "학교의 시간, 세상의 시간 — AIDX 교육과정 개발 에이전트",
@@ -2110,6 +2134,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:drone-cinema-2026",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:aidx-curriculum-agent",
       "target": "creator:joonho",

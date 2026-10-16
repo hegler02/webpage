@@ -280,6 +280,23 @@
         "height": 540,
         "focal_point": "50% 50%"
       }
+    },
+    {
+      "body_id": "ilseon",
+      "concepts": [
+        "interpretive-space"
+      ],
+      "reason": "움직이지 않는 인물과 대숲 사이로 검기와 잎 한 장이 흐른다. 독자는 손끝과 칼날에 남은 단서를 따라 내려가며 화면에 보이지 않은 베는 순간을 상상한다.",
+      "title": "일선 一線 — 보이지 않은 한 번",
+      "url": "https://ilseon-ink.mirinaeman.chatgpt.site/",
+      "summary": "열 걸음의 거리와 뽑히지 않은 검. 손끝과 칼날과 잎 한 장을 따라 내려가며 보이지 않은 한 번을 상상하는 수묵 무협 단편.",
+      "thumbnail": {
+        "path": "assets/thumbnails/ilseon.webp",
+        "alt": "대숲에서 붉은 띠의 검객이 긴 검을 내민 일선의 권두화",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      }
     }
   ],
   "autumn": {
@@ -320,5 +337,5 @@
   },
   "hub_url": "https://mirinaeman.com/archive/image-cinema/",
   "intro_url": "https://mirinaeman.com/archive/already-autumn/",
-  "source_sha256": "7dd2a391780183dbfc80f8d029f8ef359adba5284bd3f9340b7876a6cc3efb1f"
+  "source_sha256": "1b4c9fd119630348b2cc7b9ec4979e0049793dbb0757d0f53c530510d045990c"
 }

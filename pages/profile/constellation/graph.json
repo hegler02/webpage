@@ -9,6 +9,30 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:ilseon",
+      "kind": "work",
+      "title": "일선 一線 — 보이지 않은 한 번",
+      "summary": "열 걸음의 거리와 뽑히지 않은 검. 손끝과 칼날과 잎 한 장을 따라 내려가며 보이지 않은 한 번을 상상하는 수묵 무협 단편.",
+      "url": "https://ilseon-ink.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/ilseon.webp",
+      "alt": "대숲에서 붉은 띠의 검객이 긴 검을 내민 일선의 권두화",
+      "year": "2026",
+      "tags": [
+        "webtoon",
+        "martial-arts",
+        "scroll-story",
+        "cool-media",
+        "gestalt"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "열 걸음의 거리와 뽑히지 않은 검. 손끝과 칼날과 잎 한 장을 따라 내려가며 보이지 않은 한 번을 상상하는 수묵 무협 단편."
+        }
+      ]
+    },
+    {
       "id": "work:first-night-exorcist",
       "kind": "work",
       "title": "겁쟁이 퇴마사의 첫 출근 — 부적을 따라",
@@ -2159,6 +2183,13 @@
   ],
   "edges": [
     {
+      "source": "work:ilseon",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:first-night-exorcist",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2814,6 +2845,13 @@
       "target": "concept:interpretive-space",
       "label": "함께 읽는 개념",
       "reason": "독자가 보물지도를 따라가듯 부적과 시선을 좇아 큰 그림 속 단서를 발견한다. 화면 밖에 무엇이 있을지 상상하며 스크롤로 이야기를 이어 간다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:ilseon",
+      "target": "concept:interpretive-space",
+      "label": "함께 읽는 개념",
+      "reason": "움직이지 않는 인물과 대숲 사이로 검기와 잎 한 장이 흐른다. 독자는 손끝과 칼날에 남은 단서를 따라 내려가며 화면에 보이지 않은 베는 순간을 상상한다.",
       "evidence": "https://mirinaeman.com/archive/image-cinema/"
     },
     {

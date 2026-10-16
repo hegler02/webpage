@@ -887,6 +887,34 @@
       "latest_deployed_at": "2026-09-10T22:50:13Z"
     },
     {
+      "body_id": "ilseon",
+      "title": "일선 一線 — 보이지 않은 한 번",
+      "body_type": "STORYBODY",
+      "source_kinds": [
+        "generated-comic-art",
+        "scroll-driven-story"
+      ],
+      "tags": [
+        "webtoon",
+        "martial-arts",
+        "scroll-story",
+        "cool-media",
+        "gestalt"
+      ],
+      "message_sentence": "열 걸음의 거리와 뽑히지 않은 검. 손끝과 칼날과 잎 한 장을 따라 내려가며 보이지 않은 한 번을 상상하는 수묵 무협 단편.",
+      "thumbnail": {
+        "path": "assets/thumbnails/ilseon.webp",
+        "alt": "대숲에서 붉은 띠의 검객이 긴 검을 내민 일선의 권두화",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://ilseon-ink.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-16T00:08:10.170302+00:00",
+      "latest_deployed_at": "2026-10-16T00:08:10.170302+00:00"
+    },
+    {
       "body_id": "image-agent",
       "title": "단문 인과체인 — 내 생각을 이미지로 옮기는 법",
       "body_type": "SLIDEBODY",

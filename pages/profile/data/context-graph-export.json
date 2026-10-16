@@ -297,6 +297,23 @@
         "height": 540,
         "focal_point": "50% 50%"
       }
+    },
+    {
+      "body_id": "rain-has-stopped",
+      "concepts": [
+        "interpretive-space"
+      ],
+      "reason": "젖은 발자국과 책, 우산을 따라 큰 그림 속 공간을 탐색하며 두 사람의 엇갈린 말과 가까워지는 마음을 발견한다.",
+      "title": "비 그쳤는데요",
+      "url": "https://rain-has-stopped.mirinaeman.chatgpt.site/",
+      "summary": "우산 하나, 엇갈린 방향. 젖은 발자국에서 책방과 우산 아래로 시선을 따라가며, 조금 더 같이 있고 싶은 두 사람의 마음을 발견하는 공간 만화.",
+      "thumbnail": {
+        "path": "assets/thumbnails/rain-has-stopped.webp",
+        "alt": "비 오는 작은 책방에서 마주친 윤서와 도윤",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      }
     }
   ],
   "autumn": {
@@ -337,5 +354,5 @@
   },
   "hub_url": "https://mirinaeman.com/archive/image-cinema/",
   "intro_url": "https://mirinaeman.com/archive/already-autumn/",
-  "source_sha256": "1b4c9fd119630348b2cc7b9ec4979e0049793dbb0757d0f53c530510d045990c"
+  "source_sha256": "b34763d5454b4641c662473fe9298b68ba47adfb5514d24a0c8848d2d452a0a6"
 }

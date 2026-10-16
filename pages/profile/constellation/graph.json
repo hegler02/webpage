@@ -9,6 +9,31 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:rain-has-stopped",
+      "kind": "work",
+      "title": "비 그쳤는데요",
+      "summary": "우산 하나, 엇갈린 방향. 젖은 발자국에서 책방과 우산 아래로 시선을 따라가며, 조금 더 같이 있고 싶은 두 사람의 마음을 발견하는 공간 만화.",
+      "url": "https://rain-has-stopped.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/rain-has-stopped.webp",
+      "alt": "비 오는 작은 책방에서 마주친 윤서와 도윤",
+      "year": "2026",
+      "tags": [
+        "comic",
+        "romantic-comedy",
+        "interactive",
+        "scroll-story",
+        "cool-media",
+        "gestalt"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "우산 하나, 엇갈린 방향. 젖은 발자국에서 책방과 우산 아래로 시선을 따라가며, 조금 더 같이 있고 싶은 두 사람의 마음을 발견하는 공간 만화."
+        }
+      ]
+    },
+    {
       "id": "work:ilseon",
       "kind": "work",
       "title": "일선 一線 — 보이지 않은 한 번",
@@ -2183,6 +2208,13 @@
   ],
   "edges": [
     {
+      "source": "work:rain-has-stopped",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:ilseon",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2852,6 +2884,13 @@
       "target": "concept:interpretive-space",
       "label": "함께 읽는 개념",
       "reason": "움직이지 않는 인물과 대숲 사이로 검기와 잎 한 장이 흐른다. 독자는 손끝과 칼날에 남은 단서를 따라 내려가며 화면에 보이지 않은 베는 순간을 상상한다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:rain-has-stopped",
+      "target": "concept:interpretive-space",
+      "label": "함께 읽는 개념",
+      "reason": "젖은 발자국과 책, 우산을 따라 큰 그림 속 공간을 탐색하며 두 사람의 엇갈린 말과 가까워지는 마음을 발견한다.",
       "evidence": "https://mirinaeman.com/archive/image-cinema/"
     },
     {

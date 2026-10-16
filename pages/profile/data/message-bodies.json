@@ -1439,6 +1439,35 @@
       "latest_deployed_at": "2026-09-21T10:08:21.491858+00:00"
     },
     {
+      "body_id": "rain-has-stopped",
+      "title": "비 그쳤는데요",
+      "body_type": "STORYBODY",
+      "source_kinds": [
+        "generated-comic-art",
+        "scroll-driven-story"
+      ],
+      "tags": [
+        "comic",
+        "romantic-comedy",
+        "interactive",
+        "scroll-story",
+        "cool-media",
+        "gestalt"
+      ],
+      "message_sentence": "우산 하나, 엇갈린 방향. 젖은 발자국에서 책방과 우산 아래로 시선을 따라가며, 조금 더 같이 있고 싶은 두 사람의 마음을 발견하는 공간 만화.",
+      "thumbnail": {
+        "path": "assets/thumbnails/rain-has-stopped.webp",
+        "alt": "비 오는 작은 책방에서 마주친 윤서와 도윤",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://rain-has-stopped.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-16T00:32:00.283279+00:00",
+      "latest_deployed_at": "2026-10-16T00:32:00.283279+00:00"
+    },
+    {
       "body_id": "red-light-run",
       "title": "빨간불인데 뛰고싶어 | Mirinaeman",
       "body_type": "SONGBODY",

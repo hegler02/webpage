@@ -142,6 +142,13 @@
         "interpretive-space"
       ],
       "reason": "움직이지 않는 인물과 대숲 사이로 검기와 잎 한 장이 흐른다. 독자는 손끝과 칼날에 남은 단서를 따라 내려가며 화면에 보이지 않은 베는 순간을 상상한다."
+    },
+    {
+      "body_id": "rain-has-stopped",
+      "concepts": [
+        "interpretive-space"
+      ],
+      "reason": "젖은 발자국과 책, 우산을 따라 큰 그림 속 공간을 탐색하며 두 사람의 엇갈린 말과 가까워지는 마음을 발견한다."
     }
   ],
   "autumn": {

@@ -1,0 +1,7 @@
+{
+  "reason": "Move discovery thumbnail crop upward to include both faces after visual inspection. Story art remains unchanged.",
+  "evidence": [
+    "Visual inspection of generated 960x540 thumbnail before catalog publication."
+  ],
+  "verdict": "pending"
+}

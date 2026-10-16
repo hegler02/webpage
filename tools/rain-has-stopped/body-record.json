@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "body_id": "rain-has-stopped",
+  "title": "비 그쳤는데요",
+  "body_type": "STORYBODY",
+  "source_kinds": [
+    "generated-comic-art",
+    "scroll-driven-story"
+  ],
+  "tags": [
+    "comic",
+    "romantic-comedy",
+    "interactive",
+    "scroll-story",
+    "cool-media",
+    "gestalt"
+  ],
+  "message_sentence": "우산 하나, 엇갈린 방향. 젖은 발자국에서 책방과 우산 아래로 시선을 따라가며, 조금 더 같이 있고 싶은 두 사람의 마음을 발견하는 공간 만화.",
+  "canonical_url": "https://rain-has-stopped.mirinaeman.chatgpt.site/",
+  "status": "DEPLOYED",
+  "first_deployed_at": "2026-10-16T00:32:00.283279+00:00",
+  "latest_deployed_at": "2026-10-16T00:32:00.283279+00:00",
+  "thumbnail": {
+    "source_kind": "project-owned",
+    "path": "assets/thumbnails/rain-has-stopped.webp",
+    "alt": "비 오는 작은 책방에서 마주친 윤서와 도윤",
+    "width": 960,
+    "height": 540,
+    "focal_point": "50% 50%",
+    "sha256": "97a7ad51cbd81d0d135e66e0778e5c5b23c5e6203f5592dbcd48df6b2de09925"
+  },
+  "deployments": [
+    {
+      "deployed_at": "2026-10-16T00:32:00.283279+00:00",
+      "url": "https://rain-has-stopped.mirinaeman.chatgpt.site/",
+      "status": "succeeded",
+      "release_ref": "appgdep_6ad1706d95808191a37ce0fc523723b9",
+      "source_revision": "0548f587db59c80682c554aecf21d2ed0658d2a9",
+      "validation": [
+        "Sites v1 deployment succeeded; get_site confirms public audience and current live URL.",
+        "Unauthenticated HTTP 200 for page, story, camera code and all four original images; seven assets match source SHA-256. Hosting adds page-level HTML.",
+        "Public browser loaded the title, four scene links and ending.",
+        "Pre-release checks: 4004 camera states, 4848 speech layout states, desktop and mobile dialogue/transition inspection. Approved bookshelf hand is retained."
+      ]
+    }
+  ],
+  "incidents": [],
+  "invariants": [],
+  "approvals": [
+    {
+      "kind": "public-deployment-and-catalog-registration",
+      "statement": "gpt site 전제 공개 배포 후 mirinaemna.com 에 등록하자. 이거 재미있네",
+      "recorded_at": "2026-10-16T09:00:00+09:00"
+    }
+  ],
+  "human_judgment": {
+    "status": "accepted",
+    "note": "User approved corrected hand direction, enjoyed the ending, and authorized public deployment and catalog registration. No GOLDEN baseline inferred."
+  },
+  "scope_notes": [
+    "Preserve approved artwork and scroll-camera story. Register catalog, home latest cards and constellation; preserve curated Work menu."
+  ]
+}

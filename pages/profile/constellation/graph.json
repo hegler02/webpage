@@ -9,6 +9,30 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:first-pitch-200",
+      "kind": "work",
+      "title": "초구 · FIRST PITCH",
+      "summary": "17번 한서윤의 첫 메이저리그 등판. 흰 공이 불꽃으로 변해 미트에 꽂히고, 200km/h 전광판과 관중의 표정이 편견을 뒤집는 세로형 야구 단편.",
+      "url": "https://first-pitch-200.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/first-pitch-200.webp",
+      "alt": "포수 쪽을 향해 정면으로 공을 던지는 17번 한서윤",
+      "year": "2026",
+      "tags": [
+        "webtoon",
+        "baseball",
+        "scroll-story",
+        "cool-media",
+        "gestalt"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "17번 한서윤의 첫 메이저리그 등판. 흰 공이 불꽃으로 변해 미트에 꽂히고, 200km/h 전광판과 관중의 표정이 편견을 뒤집는 세로형 야구 단편."
+        }
+      ]
+    },
+    {
       "id": "work:rain-has-stopped",
       "kind": "work",
       "title": "비 그쳤는데요",
@@ -2208,6 +2232,13 @@
   ],
   "edges": [
     {
+      "source": "work:first-pitch-200",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:rain-has-stopped",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2891,6 +2922,13 @@
       "target": "concept:interpretive-space",
       "label": "함께 읽는 개념",
       "reason": "젖은 발자국과 책, 우산을 따라 큰 그림 속 공간을 탐색하며 두 사람의 엇갈린 말과 가까워지는 마음을 발견한다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:first-pitch-200",
+      "target": "concept:interpretive-space",
+      "label": "함께 읽는 개념",
+      "reason": "불꽃이 된 공 뒤에 미트 속 평범한 흰 공과 200km/h 전광판, 웃음을 멈춘 관중을 놓는다. 독자는 설명 대신 이 단서들을 이어 여성 투수를 향한 태도의 변화를 읽는다.",
       "evidence": "https://mirinaeman.com/archive/image-cinema/"
     },
     {

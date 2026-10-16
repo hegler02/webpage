@@ -613,6 +613,34 @@
       "latest_deployed_at": "2026-10-15T22:27:43.761194+00:00"
     },
     {
+      "body_id": "first-pitch-200",
+      "title": "초구 · FIRST PITCH",
+      "body_type": "STORYBODY",
+      "source_kinds": [
+        "generated-comic-art",
+        "scroll-driven-story"
+      ],
+      "tags": [
+        "webtoon",
+        "baseball",
+        "scroll-story",
+        "cool-media",
+        "gestalt"
+      ],
+      "message_sentence": "17번 한서윤의 첫 메이저리그 등판. 흰 공이 불꽃으로 변해 미트에 꽂히고, 200km/h 전광판과 관중의 표정이 편견을 뒤집는 세로형 야구 단편.",
+      "thumbnail": {
+        "path": "assets/thumbnails/first-pitch-200.webp",
+        "alt": "포수 쪽을 향해 정면으로 공을 던지는 17번 한서윤",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://first-pitch-200.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-16T04:36:57.373266+00:00",
+      "latest_deployed_at": "2026-10-16T04:36:57.373266+00:00"
+    },
+    {
       "body_id": "for-tomorrow",
       "title": "내일을 위해…",
       "body_type": "SLIDEBODY",

@@ -314,6 +314,23 @@
         "height": 540,
         "focal_point": "50% 50%"
       }
+    },
+    {
+      "body_id": "first-pitch-200",
+      "concepts": [
+        "interpretive-space"
+      ],
+      "reason": "불꽃이 된 공 뒤에 미트 속 평범한 흰 공과 200km/h 전광판, 웃음을 멈춘 관중을 놓는다. 독자는 설명 대신 이 단서들을 이어 여성 투수를 향한 태도의 변화를 읽는다.",
+      "title": "초구 · FIRST PITCH",
+      "url": "https://first-pitch-200.mirinaeman.chatgpt.site/",
+      "summary": "17번 한서윤의 첫 메이저리그 등판. 흰 공이 불꽃으로 변해 미트에 꽂히고, 200km/h 전광판과 관중의 표정이 편견을 뒤집는 세로형 야구 단편.",
+      "thumbnail": {
+        "path": "assets/thumbnails/first-pitch-200.webp",
+        "alt": "포수 쪽을 향해 정면으로 공을 던지는 17번 한서윤",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      }
     }
   ],
   "autumn": {
@@ -354,5 +371,5 @@
   },
   "hub_url": "https://mirinaeman.com/archive/image-cinema/",
   "intro_url": "https://mirinaeman.com/archive/already-autumn/",
-  "source_sha256": "4ad3a966ad4b58abb271f5f3f027365fc15c375e421db95af2d89eff09aaef35"
+  "source_sha256": "cfe67728bb85f3c2841059067d17db639318bad653d52242f8d89a13fc44c8b5"
 }

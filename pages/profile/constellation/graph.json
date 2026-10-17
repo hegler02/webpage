@@ -9,6 +9,40 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:aidx-curriculum-agent",
+      "kind": "work",
+      "title": "학교의 시간, 세상의 시간 — AIDX 교육과정 개발 에이전트",
+      "summary": "학교와 세상의 시간 격차를 국내외 18곳 출처의 6축 입체 그물과 한국고등직업교육 매트릭스로 재고, 19개교 551개 학과 메타분석으로 줄일 곳을 제안하는 교육과정 개발 에이전트를 보여준다.",
+      "url": "https://mirinaeman.com/pages/aidx-curriculum-agent/",
+      "image": "/pages/profile/assets/thumbnails/aidx-curriculum-agent.webp",
+      "alt": "학교의 시간, 세상의 시간 — 느린 파랑 시계와 빠른 금빛 시계가 놓인 AIDX 교육과정 개발 에이전트 발표 표지",
+      "year": "2026",
+      "tags": [
+        "slide",
+        "lecture",
+        "16:9",
+        "aidx",
+        "curriculum",
+        "gestalt",
+        "transition",
+        "match-cut",
+        "line-draw",
+        "zoom-to-detail",
+        "dot-regroup",
+        "kohvea",
+        "meta-analysis",
+        "sources",
+        "morph-to-label"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "학교와 세상의 시간 격차를 국내외 18곳 출처의 6축 입체 그물과 한국고등직업교육 매트릭스로 재고, 19개교 551개 학과 메타분석으로 줄일 곳을 제안하는 교육과정 개발 에이전트를 보여준다."
+        }
+      ]
+    },
+    {
       "id": "work:mirinae-motion-atelier",
       "kind": "work",
       "title": "미리내맨 모션 아뜰리에",
@@ -149,37 +183,6 @@
         {
           "title": "작품의 기록",
           "text": "김준호 교수의 드론 강의. 해안이 깨어나는 시간이라는 가상 프로젝트를 따라 기획·촬영·편집의 판단을 31장 인터랙티브 슬라이드로 익힌다."
-        }
-      ]
-    },
-    {
-      "id": "work:aidx-curriculum-agent",
-      "kind": "work",
-      "title": "학교의 시간, 세상의 시간 — AIDX 교육과정 개발 에이전트",
-      "summary": "학교와 세상의 시간 격차를 6축 입체 그물과 한국고등직업교육 매트릭스로 재고 줄이는 교육과정 개발 에이전트를 보여준다.",
-      "url": "https://mirinaeman.com/pages/aidx-curriculum-agent/",
-      "image": "/pages/profile/assets/thumbnails/aidx-curriculum-agent.webp",
-      "alt": "학교의 시간, 세상의 시간 — 느린 파랑 시계와 빠른 금빛 시계가 놓인 AIDX 교육과정 개발 에이전트 발표 표지",
-      "year": "2026",
-      "tags": [
-        "slide",
-        "lecture",
-        "16:9",
-        "aidx",
-        "curriculum",
-        "gestalt",
-        "transition",
-        "match-cut",
-        "line-draw",
-        "zoom-to-detail",
-        "dot-regroup",
-        "kohvea"
-      ],
-      "sourceLabel": "작품 아카이브",
-      "sections": [
-        {
-          "title": "작품의 기록",
-          "text": "학교와 세상의 시간 격차를 6축 입체 그물과 한국고등직업교육 매트릭스로 재고 줄이는 교육과정 개발 에이전트를 보여준다."
         }
       ]
     },
@@ -2255,6 +2258,13 @@
   ],
   "edges": [
     {
+      "source": "work:aidx-curriculum-agent",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:mirinae-motion-atelier",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2291,13 +2301,6 @@
     },
     {
       "source": "work:drone-cinema-2026",
-      "target": "creator:joonho",
-      "label": "창작자",
-      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
-      "evidence": "https://mirinaeman.com/archive/"
-    },
-    {
-      "source": "work:aidx-curriculum-agent",
       "target": "creator:joonho",
       "label": "창작자",
       "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",

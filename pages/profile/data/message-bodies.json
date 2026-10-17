@@ -144,9 +144,12 @@
         "line-draw",
         "zoom-to-detail",
         "dot-regroup",
-        "kohvea"
+        "kohvea",
+        "meta-analysis",
+        "sources",
+        "morph-to-label"
       ],
-      "message_sentence": "학교와 세상의 시간 격차를 6축 입체 그물과 한국고등직업교육 매트릭스로 재고 줄이는 교육과정 개발 에이전트를 보여준다.",
+      "message_sentence": "학교와 세상의 시간 격차를 국내외 18곳 출처의 6축 입체 그물과 한국고등직업교육 매트릭스로 재고, 19개교 551개 학과 메타분석으로 줄일 곳을 제안하는 교육과정 개발 에이전트를 보여준다.",
       "thumbnail": {
         "path": "assets/thumbnails/aidx-curriculum-agent.webp",
         "alt": "학교의 시간, 세상의 시간 — 느린 파랑 시계와 빠른 금빛 시계가 놓인 AIDX 교육과정 개발 에이전트 발표 표지",
@@ -157,7 +160,7 @@
       "canonical_url": "https://mirinaeman.com/pages/aidx-curriculum-agent/",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-10-13T07:02:13.830Z",
-      "latest_deployed_at": "2026-10-13T07:02:13.830Z"
+      "latest_deployed_at": "2026-10-17T18:22:47.219Z"
     },
     {
       "body_id": "already-autumn",

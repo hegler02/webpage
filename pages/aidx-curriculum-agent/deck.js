@@ -39,7 +39,14 @@ const netGeom = { x0: 230, x1: 960, y0: 70, y1: 560 };
   AXES.forEach((_, r) => { for (let c = 0; c < COMPS; c += 1) { const x = x0 + c * dx; const y = y0 + r * dy; const filled = pattern[r][c] === "1";
     if (filled) el("circle", { cx: x, cy: y, r: 9, class: "node pop", "data-order": r * COMPS + c }, nodes);
     else { const g = el("g", { class: "pop", "data-order": r * COMPS + c }, nodes); el("circle", { cx: x, cy: y, r: 22, class: "empty-halo" }, g); const ring = el("circle", { cx: x, cy: y, r: 13, class: "empty" }, g); if (r === 2 && c === 3) ring.id = "gap-cell"; } } }); }
-// 10장: 19개 회원대학 × 약 600개 학과 점
+// 8장: 551개 학과 메타분석 - 회원교 한 줄에 그 학교 학과 수만큼 한 칸씩 (원천 장부 2026-10-18, 학교별 학과 수의 합 551)
+const SCHOOL_DEPARTMENTS = [36, 32, 46, 52, 26, 29, 47, 37, 27, 34, 8, 20, 11, 35, 15, 26, 32, 28, 10];
+const tiles = document.getElementById("tiles");
+{ const defs = el("defs", {}, tiles); const grad = el("linearGradient", { id: "tile-band", x1: 0, y1: 0, x2: 1, y2: 1 }, defs);
+  el("stop", { offset: "0", "stop-color": "#14508f" }, grad); el("stop", { offset: "1", "stop-color": "#0f8a7f" }, grad);
+  const cols = Math.max(...SCHOOL_DEPARTMENTS); const gap = 2.5; const w = (760 - gap * (cols - 1)) / cols; const rowH = 520 / SCHOOL_DEPARTMENTS.length; let order = 0;
+  SCHOOL_DEPARTMENTS.forEach((n, row) => { for (let c = 0; c < n; c += 1) el("rect", { x: c * (w + gap), y: row * rowH + 3, width: w, height: rowH - 6, rx: 2, class: "tile", "data-tile": order++ }, tiles); }); }
+// 12장: 19개 회원대학 × 약 600개 학과 점
 const swarm = document.getElementById("swarm");
 const SCHOOLS = 19, DEPTS = 596;
 const swarmDots = [];
@@ -82,6 +89,8 @@ function enter(slide, base = 0) {
   [...slide.querySelectorAll(".draw")].forEach((line, i) => play(line, [{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 900, delay: base + 200 + i * 70, easing: "cubic-bezier(.65, 0, .35, 1)" }));
   // 그물 교차점: 선이 다 그어진 뒤 차례로
   slide.querySelectorAll(".pop[data-order]").forEach((node) => play(node, [{ opacity: 0, transform: "scale(.2)" }, { opacity: 1, transform: "none" }], { duration: 420, delay: base + 1250 + Number(node.dataset.order) * 9, easing: "cubic-bezier(.34, 1.56, .64, 1)" }));
+  // 551칸: 학과마다 한 칸씩, 학교 줄을 따라 차례로
+  slide.querySelectorAll(".tile").forEach((node) => play(node, [{ opacity: 0, transform: "scale(.3)" }, { opacity: 1, transform: "none" }], { duration: 360, delay: base + 300 + Number(node.dataset.tile) * 2.4 }));
   if (slide.classList.contains("s-vision")) swarmIn(base);
 }
 function swarmIn(base) {
@@ -103,8 +112,32 @@ const LINKS = {
   },
   // 2→3 두 막대 사이의 틈이 격차가 된다
   "2>3": (from, to) => { play(from, [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "scaleY(.6)" }], { duration: 500, fill: "forwards" }); enter(to, 200); return true; },
-  // 4→5 그물의 빈칸 하나로 들어가면 규칙 사슬이 있다 (좌표 확대)
+  // 3→4 느린 흐름과 빠른 흐름의 상자가 출처 18곳의 줄로 펼쳐진다: 빠른 흐름은 다섯 축의 줄, 느린 흐름은 학교·학과 줄
+  "3>4": (from, to) => {
+    const pairs = [[".stream.fast", "#axis-rows", "var(--fast)"], [".stream.slow", "#axis-rows li.school", "var(--slow)"]];
+    for (const [a, b, color] of pairs) { const r0 = rectIn(from.querySelector(a)); const r1 = rectIn(to.querySelector(b)); const g = ghost(r0, { borderRadius: "18px", border: `3px solid ${color}`, background: "rgba(255, 255, 255, .04)" });
+      play(g, [{ left: `${r0.left}px`, top: `${r0.top}px`, width: `${r0.width}px`, height: `${r0.height}px`, opacity: 1 }, { left: `${r1.left}px`, top: `${r1.top}px`, width: `${r1.width}px`, height: `${r1.height}px`, opacity: .9 }, { left: `${r1.left}px`, top: `${r1.top}px`, width: `${r1.width}px`, height: `${r1.height}px`, opacity: 0 }], { duration: 1100, easing: "cubic-bezier(.65, 0, .35, 1)", fill: "forwards" })?.finished.then(() => g.remove()).catch(() => {}); }
+    play(from, [{ opacity: 1 }, { opacity: 0 }], { duration: 450, fill: "forwards" });
+    enter(to, 450);
+    return true;
+  },
+  // 4→5 여섯 축의 이름이 그물의 씨줄 이름 자리로 옮겨 간다: 출처의 줄이 곧 씨줄이다
   "4>5": (from, to) => {
+    const labels = [...to.querySelectorAll(".axis-label")];
+    from.querySelectorAll("#axis-rows li[data-axis] .axis-name").forEach((name) => {
+      const target = labels[Number(name.closest("li").dataset.axis)]; if (!target) return;
+      // the name lands on the net's own label: same right edge, same height (the label is smaller), then gives way to it
+      const r0 = rectIn(name); const r1 = rectIn(target); const k = stage.getBoundingClientRect().width / 1920; const shrink = r1.height / r0.height;
+      const g = ghost(r0, { color: "var(--on-dark)", fontWeight: "900", fontSize: getComputedStyle(name).fontSize, lineHeight: getComputedStyle(name).lineHeight, width: "auto", height: "auto", whiteSpace: "nowrap" }); g.textContent = name.textContent;
+      const landed = { left: `${r1.right - r0.width * shrink}px`, top: `${r1.top}px`, transform: `scale(${k * shrink})` };
+      play(g, [{ left: `${r0.left}px`, top: `${r0.top}px`, transform: `scale(${k})`, opacity: 1 }, { ...landed, opacity: 1 }, { ...landed, opacity: 0 }], { duration: 1200, easing: "cubic-bezier(.65, 0, .35, 1)", fill: "forwards" })?.finished.then(() => g.remove()).catch(() => {});
+    });
+    play(from, [{ opacity: 1 }, { opacity: 0 }], { duration: 450, fill: "forwards" });
+    enter(to, 600);
+    return true;
+  },
+  // 5→6 그물의 빈칸 하나로 들어가면 규칙 사슬이 있다 (좌표 확대)
+  "5>6": (from, to) => {
     const cell = from.querySelector("#gap-cell"); const chain = to.querySelector("#chain"); if (!cell || !chain) return false;
     const r0 = rectIn(cell); const r1 = rectIn(chain); const g = ghost(r0, { borderRadius: "50%", border: "3px solid var(--gold)", background: "rgba(240, 211, 140, .12)" });
     // 그물은 빈칸을 기준으로 커진다: 화면 가운데가 아니라 그 빈칸 안으로 들어간다
@@ -114,8 +147,17 @@ const LINKS = {
     enter(to, 700);
     return true;
   },
-  // 6→7 수면 선이 화면을 가른다
-  "6>7": (from, to) => { play(from, [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(-80px)" }], { duration: 600, fill: "forwards" }); enter(to, 150); return true; }
+  // 7→8 한 학과의 '학과 진단 보고서'가 551개 학과의 메타분석으로 넓어진다: 결과 상자가 칸 묶음 자리로 내려앉고, 칸이 학교 줄을 따라 채워진다
+  "7>8": (from, to) => {
+    const result = from.querySelector(".equation .term.result"); const field = to.querySelector("#tiles"); if (!result || !field) return false;
+    const r0 = rectIn(result); const r1 = rectIn(field); const g = ghost(r0, { borderRadius: "14px", background: "linear-gradient(118deg, var(--band-from), var(--band-mid) 48%, var(--band-to))", boxShadow: "0 18px 50px rgba(15, 138, 127, .35)" });
+    play(g, [{ left: `${r0.left}px`, top: `${r0.top}px`, width: `${r0.width}px`, height: `${r0.height}px`, opacity: 1 }, { left: `${r1.left}px`, top: `${r1.top}px`, width: `${r1.width}px`, height: `${r1.height}px`, opacity: .55 }, { left: `${r1.left}px`, top: `${r1.top}px`, width: `${r1.width}px`, height: `${r1.height}px`, opacity: 0 }], { duration: 1000, easing: "cubic-bezier(.65, 0, .35, 1)", fill: "forwards" })?.finished.then(() => g.remove()).catch(() => {});
+    play(from, [{ opacity: 1 }, { opacity: 0 }], { duration: 450, fill: "forwards" });
+    enter(to, 650);
+    return true;
+  },
+  // 8→9 수면 선이 화면을 가른다
+  "8>9": (from, to) => { play(from, [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(-80px)" }], { duration: 600, fill: "forwards" }); enter(to, 150); return true; }
 };
 
 // ---- 이동 ----

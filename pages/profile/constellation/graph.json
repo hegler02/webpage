@@ -9,6 +9,29 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:mirinae-motion-atelier",
+      "kind": "work",
+      "title": "미리내맨 모션 아뜰리에",
+      "summary": "본인 전용 · 로그인 필요. 837개 모션 도감과 실제 사용 장면 200개를 둘러보고, 문구와 이미지를 바꿔 내 작업에 가져오는 모션 작업실.",
+      "url": "https://mirinae-motion-atelier.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/mirinae-motion-atelier.webp",
+      "alt": "종이비행기를 든 미리내맨 모션 아뜰리에 캐릭터",
+      "year": "2026",
+      "tags": [
+        "motion",
+        "typography",
+        "recipes",
+        "owner-only"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "본인 전용 · 로그인 필요. 837개 모션 도감과 실제 사용 장면 200개를 둘러보고, 문구와 이미지를 바꿔 내 작업에 가져오는 모션 작업실."
+        }
+      ]
+    },
+    {
       "id": "work:first-pitch-200",
       "kind": "work",
       "title": "초구 · FIRST PITCH",
@@ -2231,6 +2254,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:mirinae-motion-atelier",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:first-pitch-200",
       "target": "creator:joonho",

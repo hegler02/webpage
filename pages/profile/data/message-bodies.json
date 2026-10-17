@@ -1245,6 +1245,34 @@
       "latest_deployed_at": "2026-09-06T05:53:51.461840+00:00"
     },
     {
+      "body_id": "mirinae-motion-atelier",
+      "title": "미리내맨 모션 아뜰리에",
+      "body_type": "KNOWLEDGEBODY",
+      "source_kinds": [
+        "interactive-motion-library",
+        "generated-images",
+        "learning-recipes"
+      ],
+      "tags": [
+        "motion",
+        "typography",
+        "recipes",
+        "owner-only"
+      ],
+      "message_sentence": "본인 전용 · 로그인 필요. 837개 모션 도감과 실제 사용 장면 200개를 둘러보고, 문구와 이미지를 바꿔 내 작업에 가져오는 모션 작업실.",
+      "thumbnail": {
+        "path": "assets/thumbnails/mirinae-motion-atelier.webp",
+        "alt": "종이비행기를 든 미리내맨 모션 아뜰리에 캐릭터",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinae-motion-atelier.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-17T01:21:00.604014+00:00",
+      "latest_deployed_at": "2026-10-17T01:21:00.604014+00:00"
+    },
+    {
       "body_id": "mirinaeman-coding-lab",
       "title": "내 생각을, 작동하는 앱으로",
       "body_type": "SLIDEBODY",

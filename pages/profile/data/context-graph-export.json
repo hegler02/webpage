@@ -331,6 +331,25 @@
         "height": 540,
         "focal_point": "50% 50%"
       }
+    },
+    {
+      "body_id": "bindaetteok-gentleman",
+      "concepts": [
+        "image-cinema",
+        "interpretive-space",
+        "felt-time"
+      ],
+      "reason": "폴카 노래의 말맛과 박자에 맞춰 실사 프레임의 가림과 글자 창을 열고, 빈 접시와 추가 한 장을 늦게 발견하게 하는 공간 시네마다.",
+      "title": "빈대떡 신사",
+      "url": "https://bindaetteok-gentleman.mirinaeman.chatgpt.site/",
+      "summary": "비를 핑계 삼아 집에 남은 신사. 한 장만 먹겠다는 말과 자꾸 늘어나는 빈대떡 사이의 능청을 원곡과 실사 공간 연출로 즐기는 하루.",
+      "thumbnail": {
+        "path": "assets/thumbnails/bindaetteok-gentleman.webp",
+        "alt": "비 내리는 문턱에서 집 안을 곁눈질하는 조끼 차림 신사",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 24%"
+      }
     }
   ],
   "autumn": {
@@ -371,5 +390,5 @@
   },
   "hub_url": "https://mirinaeman.com/archive/image-cinema/",
   "intro_url": "https://mirinaeman.com/archive/already-autumn/",
-  "source_sha256": "cfe67728bb85f3c2841059067d17db639318bad653d52242f8d89a13fc44c8b5"
+  "source_sha256": "6771214233a737011d631c4320f7045c2a048ce600acf7dede0a93f93186d7c2"
 }

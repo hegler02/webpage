@@ -9,6 +9,31 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:bindaetteok-gentleman",
+      "kind": "work",
+      "title": "빈대떡 신사",
+      "summary": "비를 핑계 삼아 집에 남은 신사. 한 장만 먹겠다는 말과 자꾸 늘어나는 빈대떡 사이의 능청을 원곡과 실사 공간 연출로 즐기는 하루.",
+      "url": "https://bindaetteok-gentleman.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/bindaetteok-gentleman.webp",
+      "alt": "비 내리는 문턱에서 집 안을 곁눈질하는 조끼 차림 신사",
+      "year": "2026",
+      "tags": [
+        "song",
+        "polka",
+        "rain",
+        "spatial-cinema",
+        "kinetic-typography",
+        "gestalt"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "비를 핑계 삼아 집에 남은 신사. 한 장만 먹겠다는 말과 자꾸 늘어나는 빈대떡 사이의 능청을 원곡과 실사 공간 연출로 즐기는 하루."
+        }
+      ]
+    },
+    {
       "id": "work:aidx-curriculum-agent",
       "kind": "work",
       "title": "학교의 시간, 세상의 시간 — AIDX 교육과정 개발 에이전트",
@@ -2258,6 +2283,13 @@
   ],
   "edges": [
     {
+      "source": "work:bindaetteok-gentleman",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:aidx-curriculum-agent",
       "target": "creator:joonho",
       "label": "창작자",
@@ -2962,6 +2994,27 @@
       "target": "concept:interpretive-space",
       "label": "함께 읽는 개념",
       "reason": "불꽃이 된 공 뒤에 미트 속 평범한 흰 공과 200km/h 전광판, 웃음을 멈춘 관중을 놓는다. 독자는 설명 대신 이 단서들을 이어 여성 투수를 향한 태도의 변화를 읽는다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:bindaetteok-gentleman",
+      "target": "concept:image-cinema",
+      "label": "함께 읽는 개념",
+      "reason": "폴카 노래의 말맛과 박자에 맞춰 실사 프레임의 가림과 글자 창을 열고, 빈 접시와 추가 한 장을 늦게 발견하게 하는 공간 시네마다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:bindaetteok-gentleman",
+      "target": "concept:interpretive-space",
+      "label": "함께 읽는 개념",
+      "reason": "폴카 노래의 말맛과 박자에 맞춰 실사 프레임의 가림과 글자 창을 열고, 빈 접시와 추가 한 장을 늦게 발견하게 하는 공간 시네마다.",
+      "evidence": "https://mirinaeman.com/archive/image-cinema/"
+    },
+    {
+      "source": "work:bindaetteok-gentleman",
+      "target": "concept:felt-time",
+      "label": "함께 읽는 개념",
+      "reason": "폴카 노래의 말맛과 박자에 맞춰 실사 프레임의 가림과 글자 창을 열고, 빈 접시와 추가 한 장을 늦게 발견하게 하는 공간 시네마다.",
       "evidence": "https://mirinaeman.com/archive/image-cinema/"
     },
     {

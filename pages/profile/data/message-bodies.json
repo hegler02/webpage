@@ -285,6 +285,36 @@
       "latest_deployed_at": "2026-09-12T13:46:41.621022+00:00"
     },
     {
+      "body_id": "bindaetteok-gentleman",
+      "title": "빈대떡 신사",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-provided-audio",
+        "generated-photoreal-art",
+        "audio-driven-scroll-story"
+      ],
+      "tags": [
+        "song",
+        "polka",
+        "rain",
+        "spatial-cinema",
+        "kinetic-typography",
+        "gestalt"
+      ],
+      "message_sentence": "비를 핑계 삼아 집에 남은 신사. 한 장만 먹겠다는 말과 자꾸 늘어나는 빈대떡 사이의 능청을 원곡과 실사 공간 연출로 즐기는 하루.",
+      "thumbnail": {
+        "path": "assets/thumbnails/bindaetteok-gentleman.webp",
+        "alt": "비 내리는 문턱에서 집 안을 곁눈질하는 조끼 차림 신사",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 24%"
+      },
+      "canonical_url": "https://bindaetteok-gentleman.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-18T07:19:12.808236+00:00",
+      "latest_deployed_at": "2026-10-18T07:58:33.184195+00:00"
+    },
+    {
       "body_id": "birthday-your-day",
       "title": "생일 축하해 — 오늘은 너의 자리",
       "body_type": "SONGBODY",

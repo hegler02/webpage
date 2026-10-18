@@ -1,5 +1,5 @@
 {
-  "buildCommand": "python3 -m pip install --target /tmp/deps -r requirements-build.txt && export PYTHONPATH=/tmp/deps && python3 tools/sibang/render_intro.py && python3 tools/render_archive.py && python3 tools/release_gate.py",
+  "buildCommand": "python3 -m pip install -t /tmp/deps -r requirements-build.txt && export PYTHONPATH=/tmp/deps && python3 tools/sibang/render_intro.py && python3 tools/render_public_routes.py && python3 tools/render_archive.py && python3 tools/release_gate.py",
   "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": true,

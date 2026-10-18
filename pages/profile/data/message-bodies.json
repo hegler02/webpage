@@ -1723,6 +1723,36 @@
       "latest_deployed_at": "2026-09-04T12:04:19Z"
     },
     {
+      "body_id": "sibang-sibang",
+      "title": "시방시방 — 시방 트리오",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-provided-audio",
+        "generated-webtoon",
+        "image-cinema"
+      ],
+      "tags": [
+        "노래",
+        "트로트",
+        "웹툰",
+        "이미지 시네마",
+        "AI",
+        "풍자"
+      ],
+      "message_sentence": "AI님 앞에서 한없이 공손해지는 세 사람. 돈은 내가 내고 눈치도 내가 보는 시방 트리오의 웹툰 트로트 뮤직비디오.",
+      "thumbnail": {
+        "path": "assets/thumbnails/sibang-sibang.webp",
+        "alt": "시방시방 제목과 비 내리는 도시에서 AI님 앞에 모인 시방 트리오 세 사람의 첫 시안",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://sibang-sibang.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-18T13:54:47.657263+00:00",
+      "latest_deployed_at": "2026-10-18T14:04:21.006230+00:00"
+    },
+    {
       "body_id": "snail-time-jeju",
       "title": "달팽이의 시간",
       "body_type": "SONGBODY",

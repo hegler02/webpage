@@ -39,8 +39,8 @@ const netGeom = { x0: 230, x1: 960, y0: 70, y1: 560 };
   AXES.forEach((_, r) => { for (let c = 0; c < COMPS; c += 1) { const x = x0 + c * dx; const y = y0 + r * dy; const filled = pattern[r][c] === "1";
     if (filled) el("circle", { cx: x, cy: y, r: 9, class: "node pop", "data-order": r * COMPS + c }, nodes);
     else { const g = el("g", { class: "pop", "data-order": r * COMPS + c }, nodes); el("circle", { cx: x, cy: y, r: 22, class: "empty-halo" }, g); const ring = el("circle", { cx: x, cy: y, r: 13, class: "empty" }, g); if (r === 2 && c === 3) ring.id = "gap-cell"; } } }); }
-// 8장: 551개 학과 메타분석 - 회원교 한 줄에 그 학교 학과 수만큼 한 칸씩 (원천 장부 2026-10-18, 학교별 학과 수의 합 551)
-const SCHOOL_DEPARTMENTS = [36, 32, 46, 52, 26, 29, 47, 37, 27, 34, 8, 20, 11, 35, 15, 26, 32, 28, 10];
+// 8장: 552개 학과 메타분석 - 회원교 한 줄에 그 학교 학과 수만큼 한 칸씩 (원천 장부 2026-10-19, 학교별 학과 수의 합 552)
+const SCHOOL_DEPARTMENTS = [11, 36, 35, 27, 20, 46, 10, 32, 15, 30, 8, 34, 47, 52, 37, 28, 26, 26, 32];
 const tiles = document.getElementById("tiles");
 { const defs = el("defs", {}, tiles); const grad = el("linearGradient", { id: "tile-band", x1: 0, y1: 0, x2: 1, y2: 1 }, defs);
   el("stop", { offset: "0", "stop-color": "#14508f" }, grad); el("stop", { offset: "1", "stop-color": "#0f8a7f" }, grad);
@@ -89,7 +89,7 @@ function enter(slide, base = 0) {
   [...slide.querySelectorAll(".draw")].forEach((line, i) => play(line, [{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 900, delay: base + 200 + i * 70, easing: "cubic-bezier(.65, 0, .35, 1)" }));
   // 그물 교차점: 선이 다 그어진 뒤 차례로
   slide.querySelectorAll(".pop[data-order]").forEach((node) => play(node, [{ opacity: 0, transform: "scale(.2)" }, { opacity: 1, transform: "none" }], { duration: 420, delay: base + 1250 + Number(node.dataset.order) * 9, easing: "cubic-bezier(.34, 1.56, .64, 1)" }));
-  // 551칸: 학과마다 한 칸씩, 학교 줄을 따라 차례로
+  // 552칸: 학과마다 한 칸씩, 학교 줄을 따라 차례로
   slide.querySelectorAll(".tile").forEach((node) => play(node, [{ opacity: 0, transform: "scale(.3)" }, { opacity: 1, transform: "none" }], { duration: 360, delay: base + 300 + Number(node.dataset.tile) * 2.4 }));
   if (slide.classList.contains("s-vision")) swarmIn(base);
 }
@@ -147,7 +147,7 @@ const LINKS = {
     enter(to, 700);
     return true;
   },
-  // 7→8 한 학과의 '학과 진단 보고서'가 551개 학과의 메타분석으로 넓어진다: 결과 상자가 칸 묶음 자리로 내려앉고, 칸이 학교 줄을 따라 채워진다
+  // 7→8 한 학과의 '학과 진단 보고서'가 552개 학과의 메타분석으로 넓어진다: 결과 상자가 칸 묶음 자리로 내려앉고, 칸이 학교 줄을 따라 채워진다
   "7>8": (from, to) => {
     const result = from.querySelector(".equation .term.result"); const field = to.querySelector("#tiles"); if (!result || !field) return false;
     const r0 = rectIn(result); const r1 = rectIn(field); const g = ghost(r0, { borderRadius: "14px", background: "linear-gradient(118deg, var(--band-from), var(--band-mid) 48%, var(--band-to))", boxShadow: "0 18px 50px rgba(15, 138, 127, .35)" });
@@ -156,8 +156,8 @@ const LINKS = {
     enter(to, 650);
     return true;
   },
-  // 8→9 수면 선이 화면을 가른다
-  "8>9": (from, to) => { play(from, [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(-80px)" }], { duration: 600, fill: "forwards" }); enter(to, 150); return true; }
+  // 9→10 수면 선이 화면을 가른다 (2026-10-19, 9장 '학과에서 직업까지'가 메타분석과 Duck Boat 사이에 들어옴)
+  "9>10": (from, to) => { play(from, [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(-80px)" }], { duration: 600, fill: "forwards" }); enter(to, 150); return true; }
 };
 
 // ---- 이동 ----

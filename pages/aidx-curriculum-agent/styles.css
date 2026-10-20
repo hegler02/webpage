@@ -273,7 +273,7 @@ html, body { margin: 0; height: 100%; background: var(--room); color: var(--on-d
   .toolbar { gap: 14px; padding: 0 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .room i, .clock .hand { animation: none; }
+  .room i, .clock.slow .hand, .clock.fast .hand { animation: none; }
   .progress span { transition: none; }
 }
 

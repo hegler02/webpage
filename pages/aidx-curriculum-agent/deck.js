@@ -193,6 +193,7 @@ document.getElementById("prev").addEventListener("click", prev);
 document.getElementById("full").addEventListener("click", () => { const d = document.documentElement; (document.fullscreenElement ? document.exitFullscreen() : d.requestFullscreen?.())?.catch?.(() => {}); });
 window.addEventListener("keydown", (e) => {
   if (e.altKey || e.ctrlKey || e.metaKey) return;
+  if ([" ", "Enter"].includes(e.key) && e.target.closest?.("button")) return;
   if (["ArrowRight", "PageDown", " ", "Enter"].includes(e.key)) { e.preventDefault(); next(); }
   else if (["ArrowLeft", "PageUp", "Backspace"].includes(e.key)) { e.preventDefault(); prev(); }
   else if (e.key === "Home") { e.preventDefault(); go(0); }

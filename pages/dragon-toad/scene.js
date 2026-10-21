@@ -578,6 +578,15 @@ function resize(){
  buildLayout();L.ouFace=[L.ouGather[0]+OUYANG.face[0]*L.S,L.ouGather[1]+OUYANG.face[1]*L.S];
  allocate();simT=0;
 }
+// The cover's buttons start the piece from the first breath; the sound button counts as the tap browsers require.
+window.startScene=withSound=>{
+ const snd=window.sceneSound;
+ if(withSound&&snd&&!snd.on){snd.enable();$('#sound').textContent='소리 끄기';$('#sound').setAttribute('aria-pressed','true');}
+ const cover=$('#cover');if(cover){cover.classList.add('gone');cover.inert=true;}
+ if(!ready){pendingStart=true;$('#msg').hidden=false;return;} // paintings still loading: begin as soon as they arrive
+ t=0;snd?.seek(0);setPlaying(true);
+};
+let pendingStart=false;
 window.seekScene=s=>{setPlaying(false);t=clamp(s,0,BEAT.end);if(ready&&L.creatures){advanceTo(t);render(t);}};
 window.sceneBeat=s=>s<BEAT.release?'홍칠공 · 기운을 모은다':s<BEAT.form?'장풍이 뻗는다':s<5.2?'먹 속에서 용의 얼굴이 맺힌다':s<BEAT.formed?'용의 몸이 꼬리까지 맺힌다':s<BEAT.cut?'용이 협곡으로 내리꽂힌다'
  :s<BEAT.release2?'구양봉 · 땅의 기운을 빨아들인다':s<BEAT.toadForm?'합마공이 솟구친다':s<BEAT.turn?'먹 속에서 두꺼비가 맺힌다':s<BEAT.turned?'두꺼비가 휘돌아 등을 보인다'
@@ -587,6 +596,6 @@ Promise.all([
  loadTexture('toad-turn',{as:'toadBack',mips:true,crop:[.5,.5,.5,.5]}),
  loadTexture('hong-sequence'),loadTexture('ouyang-sequence'),loadTexture('gorge-flight'),loadTexture('collision-sequence'),
  loadTexture('dragon-sequence',{as:'paint',crop:[.004,.004,.49,.26],wrap:gl.MIRRORED_REPEAT})
-]).then(()=>{resize();ready=true;$('#msg').hidden=true;setPlaying(true);})
+]).then(()=>{resize();ready=true;$('#msg').hidden=true;if(!$('#cover')||pendingStart){t=0;window.sceneSound?.seek(0);setPlaying(true);}}) // a cover waits for the viewer's choice
  .catch(e=>{$('#msg').textContent='원화를 불러오지 못했습니다: '+e.message;});
 requestAnimationFrame(frame);

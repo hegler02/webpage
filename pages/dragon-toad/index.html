@@ -50,23 +50,70 @@ button:focus-visible,#seek:focus-visible{outline:2px solid var(--seal);outline-o
 #msg{position:fixed;left:16px;right:16px;bottom:96px;text-align:center;color:var(--ink-soft);z-index:3}
 #end{position:fixed;inset:0;z-index:3;display:grid;place-content:center;justify-items:center;gap:14px;padding:16px 16px 120px;text-align:center;background:var(--paper-veil)}
 #end .eyebrow{font-size:11px;letter-spacing:.24em;color:var(--seal);margin:0}
-#end h1{font-size:clamp(30px,5.4vw,64px);font-weight:500;letter-spacing:-.04em;line-height:1.4;margin:0;text-wrap:balance}
+#end h2{font-size:clamp(30px,5.4vw,64px);font-weight:500;letter-spacing:-.04em;line-height:1.4;margin:0;text-wrap:balance}
 #end p{margin:0;font-size:clamp(15px,1.8vw,19px)}
 #end button{margin-top:10px;background:transparent;border:1px solid var(--ink-soft);color:var(--ink);font:inherit;padding:12px 22px;cursor:pointer}
 #end .credit{font-size:11px;color:var(--ink-soft);line-height:1.8}
 .noscript{position:fixed;inset:0;display:grid;place-content:center;padding:16px;text-align:center;background:var(--paper)}
+
+/* Cover: two masters of equal rank, facing each other across one seam. Portrait stacks them, landscape sets them side by side. */
+#cover{position:fixed;inset:0;z-index:6;display:grid;grid-template-columns:100%;grid-template-rows:minmax(0,1fr) auto minmax(0,1fr);background:var(--paper);overflow:hidden;transition:opacity .9s ease,visibility .9s}
+#cover.gone{opacity:0;visibility:hidden}
+.master{position:relative;overflow:hidden;margin:0}
+.master img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:approach 1.8s cubic-bezier(.2,.7,.2,1) both}
+.hong img{object-position:50% 4%;transform:scaleX(-1);--from:translateY(-5%) scaleX(-1);--to:translateY(0) scaleX(-1)}
+.ouyang img{object-position:50% 12%;--from:translateY(5%);--to:translateY(0)}
+.hong{-webkit-mask-image:linear-gradient(to bottom,#000 62%,transparent 98%);mask-image:linear-gradient(to bottom,#000 62%,transparent 98%)}
+.ouyang{-webkit-mask-image:linear-gradient(to top,#000 62%,transparent 98%);mask-image:linear-gradient(to top,#000 62%,transparent 98%)}
+@keyframes approach{from{opacity:0;transform:var(--from)}to{opacity:1;transform:var(--to)}}
+.master figcaption{position:absolute;writing-mode:vertical-rl;display:flex;gap:10px;align-items:flex-start;font-size:13px;letter-spacing:.12em;color:var(--ink);text-shadow:0 0 12px var(--paper),0 0 4px var(--paper)}
+.master figcaption b{font-size:20px;font-weight:600;color:var(--seal);letter-spacing:.2em}
+.master figcaption small{font-size:12px;color:var(--ink-soft)}
+.master figcaption span,.master figcaption small{white-space:nowrap}
+.hong figcaption{top:calc(env(safe-area-inset-top,0px) + 16px);left:16px}
+.ouyang figcaption{bottom:16px;right:16px}
+.seam{display:grid;justify-items:center;text-align:center;gap:12px;padding:14px 16px;animation:rise 1.2s .5s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.seam .eyebrow{margin:0;font-size:11px;letter-spacing:.24em;color:var(--seal)}
+.seam h1{margin:0;font-size:clamp(30px,8.4vw,56px);font-weight:500;letter-spacing:-.04em;line-height:1.25;text-wrap:balance}
+.seam p{margin:0;font-size:14px;line-height:1.7;color:var(--ink-soft)}
+.seam .choices{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:4px}
+.seam button{font:inherit;font-size:14px;padding:12px 20px;min-height:44px;cursor:pointer;border:1px solid var(--ink);background:transparent;color:var(--ink)}
+.seam button.primary{background:var(--ink);color:var(--paper)}
+.seam .note{font-size:11px;color:var(--ink-soft)}
+@media (min-aspect-ratio:1/1){
+ #cover{grid-template-rows:100%;grid-template-columns:minmax(0,1fr) minmax(280px,28%) minmax(0,1fr)}
+ .hong{-webkit-mask-image:linear-gradient(to right,#000 74%,transparent 100%);mask-image:linear-gradient(to right,#000 74%,transparent 100%)}
+ .ouyang{-webkit-mask-image:linear-gradient(to left,#000 74%,transparent 100%);mask-image:linear-gradient(to left,#000 74%,transparent 100%)}
+ .hong img{object-position:60% 20%;--from:translateX(-4%) scaleX(-1);--to:translateX(0) scaleX(-1)}
+ .ouyang img{object-position:62% 20%;--from:translateX(4%);--to:translateX(0)}
+ .seam{align-content:center}
+ .seam h1{font-size:clamp(34px,3.6vw,58px)}
+}
+@media (prefers-reduced-motion:reduce){.master img,.seam{animation:none}.master img{transform:var(--to)}}
 </style>
 <script>window.SCENE_ASSETS='assets/';window.SCENE_FILES={dragon:'dragon.webp',toad:'toad.webp','toad-turn':'toad-turn.webp','hong-sequence':'hong-sequence.webp','ouyang-sequence':'ouyang-sequence.webp','gorge-flight':'gorge-flight.webp','dragon-sequence':'dragon-sequence.webp','collision-sequence':'collision-sequence.webp'};</script>
 <script defer src="scene.js"></script>
 <script defer src="sound.js"></script>
 </head>
 <body>
+<section id="cover" aria-label="표지">
+ <figure class="master hong"><img src="assets/hong.webp" alt="검은 누더기 도포의 홍칠공이 바위 위에서 아래를 내려다보며 장법을 뻗는다"><figcaption><b>北丐</b><span>홍칠공</span><small>하늘에서 내려다본다</small></figcaption></figure>
+ <div class="seam">
+  <p class="eyebrow">降龍 · 蛤蟆 &nbsp;수묵 무협 · 31초</p>
+  <h1>용이 내리고,<br>독이 오른다</h1>
+  <p>누가 위인지 가리지 않는다.<br>두 시선이 부딪칠 뿐이다.</p>
+  <div class="choices"><button class="primary" type="button" id="start-sound">소리와 함께 감상하기</button><button type="button" id="start-quiet">소리 없이 보기</button></div>
+  <p class="note">아이폰은 무음 스위치를 꺼야 소리가 납니다.</p>
+ </div>
+ <figure class="master ouyang"><img src="assets/ouyang.webp" alt="흰 도포의 구양봉이 낮은 자세에서 하늘을 올려다보며 두 손을 뻗는다"><figcaption><b>西毒</b><span>구양봉</span><small>땅에서 올려다본다</small></figcaption></figure>
+</section>
 <canvas id="gl" role="img" aria-label="홍칠공의 장풍이 먹의 흐름이 되어 용으로 맺히며 내려가고, 구양봉의 합마공은 두꺼비로 맺혀 휘돌아 오른다. 두 기운이 맞닿아 밀어붙이다 먹으로 터진다."></canvas>
 <div id="flash" aria-hidden="true"></div>
 <p id="tag" aria-live="off"><b>降龍 · 蛤蟆</b><span id="beat">홍칠공 · 기운을 모은다</span></p>
 <div id="end" hidden>
  <p class="eyebrow">降龍十八掌 · 蛤蟆功</p>
- <h1>천지가 숨을 멈췄다.</h1>
+ <h2>천지가 숨을 멈췄다.</h2>
  <p>승부는,<br>먹 속에 남았다.</p>
  <button id="replay" type="button">다시 감상하기</button>
  <p class="credit">김용의 인물과 무공에서 착안한 비공식 창작 장면<br>AI 수묵 원화 · 실시간 먹 유체 · 합성 효과음</p>
@@ -87,5 +134,6 @@ addEventListener('DOMContentLoaded',()=>{
  (function loop(){try{if(window.sceneBeat)el.textContent=sceneBeat(t);}catch{}requestAnimationFrame(loop);})();
 });
 </script>
+<script>document.getElementById('start-sound').onclick=()=>startScene(true);document.getElementById('start-quiet').onclick=()=>startScene(false);</script>
 </body>
 </html>

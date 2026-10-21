@@ -423,6 +423,35 @@
       "latest_deployed_at": "2026-09-20T17:18:50.212000+00:00"
     },
     {
+      "body_id": "coffee-confession-comic",
+      "title": "고백도 반품되나요?",
+      "body_type": "STORYBODY",
+      "source_kinds": [
+        "webtoon",
+        "project-owned-art",
+        "user-original-music"
+      ],
+      "tags": [
+        "웹툰",
+        "로맨틱 코미디",
+        "인터랙티브",
+        "10컷",
+        "원곡 음악"
+      ],
+      "message_sentence": "잘못 건넨 커피 한 잔이 두 사람의 꽤 괜찮은 시작이 되는 로맨틱 코미디 단편.",
+      "thumbnail": {
+        "path": "assets/thumbnails/coffee-confession-comic.webp",
+        "alt": "햇살 가득한 카페에서 커피를 기다리며 서로 바라보는 서윤과 도하",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 38%"
+      },
+      "canonical_url": "https://coffee-confession-comic.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-20T02:29:17.686583+00:00",
+      "latest_deployed_at": "2026-10-20T04:48:12.932582+00:00"
+    },
+    {
       "body_id": "dont-you-want-my-money",
       "title": "내 돈도 안 받냐",
       "body_type": "SONGBODY",

@@ -9,6 +9,30 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:coffee-confession-comic",
+      "kind": "work",
+      "title": "고백도 반품되나요?",
+      "summary": "잘못 건넨 커피 한 잔이 두 사람의 꽤 괜찮은 시작이 되는 로맨틱 코미디 단편.",
+      "url": "https://coffee-confession-comic.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/coffee-confession-comic.webp",
+      "alt": "햇살 가득한 카페에서 커피를 기다리며 서로 바라보는 서윤과 도하",
+      "year": "2026",
+      "tags": [
+        "웹툰",
+        "로맨틱 코미디",
+        "인터랙티브",
+        "10컷",
+        "원곡 음악"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "잘못 건넨 커피 한 잔이 두 사람의 꽤 괜찮은 시작이 되는 로맨틱 코미디 단편."
+        }
+      ]
+    },
+    {
       "id": "work:sibang-sibang",
       "kind": "work",
       "title": "시방시방 — 시방 트리오",
@@ -2308,6 +2332,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:coffee-confession-comic",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:sibang-sibang",
       "target": "creator:joonho",

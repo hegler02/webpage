@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "dragon-toad-og",
+      "asset_id": "dragon-toad-og",
+      "role": "open-graph",
+      "kind": "image",
+      "alt": "협곡 위에서 내리꽂히는 먹빛 용이 등을 보인 두꺼비의 머리를 짓누르는 충돌 직전의 장면",
+      "source": {
+        "kind": "project-generated",
+        "filename": "dragon-toad-contact-21.95s.png",
+        "sha256": "2bf5eb026435b98e45b2da0a8ce7705c1273c46cd192f08554a890f2a57835e1"
+      },
+      "delivery": {
+        "url": "https://mirinaeman.com/pages/dragon-toad/assets/og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "506a26930cf48d21031a177bd668d214a63434601365ebcf9910eac699fef7e9",
+        "path": "assets/og.jpg"
+      },
+      "provenance": {
+        "source_kind": "project-owned",
+        "note": "Deterministic capture of the running scene at 21.95 s (contact before rupture), 1280×720 viewport at 1.5× pixel ratio, cropped around the contact point."
+      }
+    }
+  ]
+}

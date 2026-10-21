@@ -479,6 +479,35 @@
       "latest_deployed_at": "2026-09-11T15:33:48.752388+00:00"
     },
     {
+      "body_id": "dragon-toad",
+      "title": "降龍 · 蛤蟆 — 용이 내리고, 독이 오른다",
+      "body_type": "SCREENBODY",
+      "source_kinds": [
+        "ai-ink-paintings",
+        "real-time-ink-fluid",
+        "browser-synthesized-sound"
+      ],
+      "tags": [
+        "motion",
+        "webgl",
+        "ink-wash",
+        "wuxia",
+        "audio"
+      ],
+      "message_sentence": "장풍은 용이 되어 내리고, 합마공은 두꺼비가 되어 오른다. 먹 속에서 맺히고 맞부딪치는 31초 수묵 무협.",
+      "thumbnail": {
+        "path": "assets/thumbnails/dragon-toad.webp",
+        "alt": "협곡 위에서 내리꽂히는 먹빛 용이 등을 보인 두꺼비의 머리를 짓누르는 충돌 직전의 장면",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 45%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/dragon-toad/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-21T04:11:04.639000+00:00",
+      "latest_deployed_at": "2026-10-21T04:11:04.639000+00:00"
+    },
+    {
       "body_id": "drone-cinema-2026",
       "title": "드론 촬영의 이해 — 높이보다, 시선을 바꾼다",
       "body_type": "SLIDEBODY",

@@ -9,6 +9,30 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:dragon-toad",
+      "kind": "work",
+      "title": "降龍 · 蛤蟆 — 용이 내리고, 독이 오른다",
+      "summary": "장풍은 용이 되어 내리고, 합마공은 두꺼비가 되어 오른다. 먹 속에서 맺히고 맞부딪치는 31초 수묵 무협.",
+      "url": "https://mirinaeman.com/pages/dragon-toad/",
+      "image": "/pages/profile/assets/thumbnails/dragon-toad.webp",
+      "alt": "협곡 위에서 내리꽂히는 먹빛 용이 등을 보인 두꺼비의 머리를 짓누르는 충돌 직전의 장면",
+      "year": "2026",
+      "tags": [
+        "motion",
+        "webgl",
+        "ink-wash",
+        "wuxia",
+        "audio"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "장풍은 용이 되어 내리고, 합마공은 두꺼비가 되어 오른다. 먹 속에서 맺히고 맞부딪치는 31초 수묵 무협."
+        }
+      ]
+    },
+    {
       "id": "work:coffee-confession-comic",
       "kind": "work",
       "title": "고백도 반품되나요?",
@@ -2332,6 +2356,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:dragon-toad",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:coffee-confession-comic",
       "target": "creator:joonho",

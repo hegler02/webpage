@@ -9,6 +9,33 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:daughter-twice-carousel",
+      "kind": "work",
+      "title": "딸을 두 번 키우는 남자",
+      "summary": "손녀가 멈춰 있던 가족의 회전목마를 다시 돌리고 젊은 할아버지는 같은 사랑을 새로 배운다.",
+      "url": "https://daughter-twice-carousel.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/daughter-twice-carousel.webp",
+      "alt": "황금빛 회전목마 앞에서 손녀와 마주 웃는 젊은 할아버지의 판타지 웹툰",
+      "year": "2026",
+      "tags": [
+        "audio",
+        "image-cinema",
+        "webtoon",
+        "fantasy",
+        "family",
+        "generations",
+        "scrollytelling",
+        "gestalt"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "손녀가 멈춰 있던 가족의 회전목마를 다시 돌리고 젊은 할아버지는 같은 사랑을 새로 배운다."
+        }
+      ]
+    },
+    {
       "id": "work:dragon-toad",
       "kind": "work",
       "title": "降龍 · 蛤蟆 — 용이 내리고, 독이 오른다",
@@ -2356,6 +2383,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:daughter-twice-carousel",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:dragon-toad",
       "target": "creator:joonho",

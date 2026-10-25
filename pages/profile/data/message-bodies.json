@@ -452,6 +452,38 @@
       "latest_deployed_at": "2026-10-20T04:48:12.932582+00:00"
     },
     {
+      "body_id": "daughter-twice-carousel",
+      "title": "딸을 두 번 키우는 남자",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-provided-audio",
+        "generated-webtoon-art",
+        "scroll-image-cinema"
+      ],
+      "tags": [
+        "audio",
+        "image-cinema",
+        "webtoon",
+        "fantasy",
+        "family",
+        "generations",
+        "scrollytelling",
+        "gestalt"
+      ],
+      "message_sentence": "손녀가 멈춰 있던 가족의 회전목마를 다시 돌리고 젊은 할아버지는 같은 사랑을 새로 배운다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/daughter-twice-carousel.webp",
+        "alt": "황금빛 회전목마 앞에서 손녀와 마주 웃는 젊은 할아버지의 판타지 웹툰",
+        "width": 960,
+        "height": 540,
+        "focal_point": "60% 50%"
+      },
+      "canonical_url": "https://daughter-twice-carousel.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-25T05:22:28.920774+00:00",
+      "latest_deployed_at": "2026-10-25T05:22:28.920774+00:00"
+    },
+    {
       "body_id": "dont-you-want-my-money",
       "title": "내 돈도 안 받냐",
       "body_type": "SONGBODY",

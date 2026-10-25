@@ -9,6 +9,29 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:walk-with-you-ep01",
+      "kind": "work",
+      "title": "산책만 같이 할게요 — 1화 내일 갚을게요",
+      "summary": "봉투 한 장의 친절이 내일도 함께 걷고 싶은 약속으로 이어지는 미리내맨의 첫 숏 드라마.",
+      "url": "https://walk-with-you-ep01.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/walk-with-you-ep01.webp",
+      "alt": "산책길에서 비숑과 푸들을 데리고 만난 두 사람",
+      "year": "2026",
+      "tags": [
+        "video",
+        "short-drama",
+        "dogs",
+        "original-soundtrack"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "봉투 한 장의 친절이 내일도 함께 걷고 싶은 약속으로 이어지는 미리내맨의 첫 숏 드라마."
+        }
+      ]
+    },
+    {
       "id": "work:daughter-twice-carousel",
       "kind": "work",
       "title": "딸을 두 번 키우는 남자",
@@ -2383,6 +2406,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:walk-with-you-ep01",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:daughter-twice-carousel",
       "target": "creator:joonho",

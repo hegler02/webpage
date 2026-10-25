@@ -2200,6 +2200,33 @@
       "latest_deployed_at": "2026-09-19T14:41:43.574213+00:00"
     },
     {
+      "body_id": "walk-with-you-ep01",
+      "title": "산책만 같이 할게요 — 1화 내일 갚을게요",
+      "body_type": "SCREENBODY",
+      "source_kinds": [
+        "romantic-comedy",
+        "daily-life"
+      ],
+      "tags": [
+        "video",
+        "short-drama",
+        "dogs",
+        "original-soundtrack"
+      ],
+      "message_sentence": "봉투 한 장의 친절이 내일도 함께 걷고 싶은 약속으로 이어지는 미리내맨의 첫 숏 드라마.",
+      "thumbnail": {
+        "path": "assets/thumbnails/walk-with-you-ep01.webp",
+        "alt": "산책길에서 비숑과 푸들을 데리고 만난 두 사람",
+        "width": 960,
+        "height": 540,
+        "focal_point": "65% 50%"
+      },
+      "canonical_url": "https://walk-with-you-ep01.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-25T14:06:59Z",
+      "latest_deployed_at": "2026-10-25T14:06:59Z"
+    },
+    {
       "body_id": "we-fixed-it",
       "title": "내가 고친 거네",
       "body_type": "SONGBODY",

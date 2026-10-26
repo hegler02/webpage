@@ -2339,6 +2339,33 @@
       "status": "DEPLOYED",
       "first_deployed_at": "2026-09-20T07:51:34.974501+00:00",
       "latest_deployed_at": "2026-09-20T07:51:34.974501+00:00"
+    },
+    {
+      "body_id": "wuxia-causal-prompt-study",
+      "title": "상상은 어떻게 액션이 되는가 — 단문인과체인 연구",
+      "body_type": "KNOWLEDGEBODY",
+      "source_kinds": [
+        "prompt-research",
+        "wuxia"
+      ],
+      "tags": [
+        "video",
+        "causal-chain",
+        "case-study",
+        "editing"
+      ],
+      "message_sentence": "감독의 상상을 짧은 인과 문장으로 연결하고 생성 결과를 편집해 결투의 몸을 만든다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/wuxia-causal-prompt-study.webp",
+        "alt": "동방불패와 영호충의 결투 — 단문인과체인 사례 연구",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://wuxia-causal-prompt-study.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-26T23:40:16.551965+00:00",
+      "latest_deployed_at": "2026-10-26T23:47:32.452801+00:00"
     }
   ]
 }

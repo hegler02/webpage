@@ -9,6 +9,29 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:walk-with-you-ep02",
+      "kind": "work",
+      "title": "산책만 같이 할게요 — 2화 얘가 안 가려고 해서요",
+      "summary": "봉투를 돌려주러 온 여자와 강아지 핑계를 대는 남자 — 오늘도 산책이 조금 길어진다",
+      "url": "https://walk-with-you-ep02.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/walk-with-you-ep02.webp",
+      "alt": "산책만 같이 할게요 2화 얘가 안 가려고 해서요 — 산책길의 두 주인공",
+      "year": "2026",
+      "tags": [
+        "video",
+        "short-drama",
+        "dogs",
+        "original-soundtrack"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "봉투를 돌려주러 온 여자와 강아지 핑계를 대는 남자 — 오늘도 산책이 조금 길어진다"
+        }
+      ]
+    },
+    {
       "id": "work:dji-drone-prep",
       "kind": "work",
       "title": "DJI 드론 실습 사전 준비 — 비행은 현장에서, 준비는 지금",
@@ -2432,6 +2455,13 @@
   ],
   "edges": [
     {
+      "source": "work:walk-with-you-ep02",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
+    {
       "source": "work:dji-drone-prep",
       "target": "creator:joonho",
       "label": "창작자",
@@ -3298,6 +3328,13 @@
       "label": "이어 읽는 작품",
       "reason": "함축·여백·전환으로 메시지를 전달하는 웹 슬라이드 탐구가 이 발표의 레이아웃과 전환 연출로 이어집니다.",
       "evidence": "https://mirinaeman.com/archive/harugyeol-ai-health/"
+    },
+    {
+      "source": "work:walk-with-you-ep01",
+      "target": "work:walk-with-you-ep02",
+      "label": "두 번째 산책",
+      "reason": "1화에서 빌린 봉투를 돌려주며 두 사람이 다시 만나는 후속 이야기",
+      "evidence": "https://walk-with-you-ep02.mirinaeman.chatgpt.site/"
     },
     {
       "source": "paper:d9837dd6c236dbac",

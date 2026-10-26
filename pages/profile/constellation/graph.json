@@ -9,6 +9,31 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:dji-drone-prep",
+      "kind": "work",
+      "title": "DJI 드론 실습 사전 준비 — 비행은 현장에서, 준비는 지금",
+      "summary": "내 기체와 조종기에 맞춰 앱 설치·저장공간·촬영 시간·실습 준비를 확인하는 재사용형 웹 프레젠테이션.",
+      "url": "https://dji-drone-prep.mirinaeman.chatgpt.site",
+      "image": "/pages/profile/assets/thumbnails/dji-drone-prep.webp",
+      "alt": "드론과 조종기, 배터리를 정돈한 DJI 실습 사전 준비 대표 장면",
+      "year": "2026",
+      "tags": [
+        "drone",
+        "dji",
+        "education",
+        "web-presentation",
+        "preparation",
+        "gestalt"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "내 기체와 조종기에 맞춰 앱 설치·저장공간·촬영 시간·실습 준비를 확인하는 재사용형 웹 프레젠테이션."
+        }
+      ]
+    },
+    {
       "id": "work:walk-with-you-ep01",
       "kind": "work",
       "title": "산책만 같이 할게요 — 1화 내일 갚을게요",
@@ -2406,6 +2431,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:dji-drone-prep",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:walk-with-you-ep01",
       "target": "creator:joonho",

@@ -484,6 +484,35 @@
       "latest_deployed_at": "2026-10-25T05:22:28.920774+00:00"
     },
     {
+      "body_id": "dji-drone-prep",
+      "title": "DJI 드론 실습 사전 준비 — 비행은 현장에서, 준비는 지금",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "user-provided-html",
+        "education"
+      ],
+      "tags": [
+        "drone",
+        "dji",
+        "education",
+        "web-presentation",
+        "preparation",
+        "gestalt"
+      ],
+      "message_sentence": "내 기체와 조종기에 맞춰 앱 설치·저장공간·촬영 시간·실습 준비를 확인하는 재사용형 웹 프레젠테이션.",
+      "thumbnail": {
+        "path": "assets/thumbnails/dji-drone-prep.webp",
+        "alt": "드론과 조종기, 배터리를 정돈한 DJI 실습 사전 준비 대표 장면",
+        "width": 960,
+        "height": 540,
+        "focal_point": "65% 50%"
+      },
+      "canonical_url": "https://dji-drone-prep.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-26T03:27:27.322457+00:00",
+      "latest_deployed_at": "2026-10-26T03:27:27.322457+00:00"
+    },
+    {
       "body_id": "dont-you-want-my-money",
       "title": "내 돈도 안 받냐",
       "body_type": "SONGBODY",

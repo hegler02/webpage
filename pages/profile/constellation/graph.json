@@ -9,6 +9,30 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:cheongnyeon-wangmandu",
+      "kind": "work",
+      "title": "청년왕만두 — 한 입의 행복, 한 끼의 추억",
+      "summary": "과장된 만두의 크기를 행복의 크기로 전환하여 가족의 따뜻한 한 끼와 야탑 방문을 연결한다",
+      "url": "https://cheongnyeon-wangmandu.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/cheongnyeon-wangmandu.webp",
+      "alt": "따뜻한 가족 식탁에 놓인 상상 속 왕만두 — 청년왕만두 브랜드 필름",
+      "year": "2026",
+      "tags": [
+        "food",
+        "local-business",
+        "gestalt",
+        "AI",
+        "brand-film"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "과장된 만두의 크기를 행복의 크기로 전환하여 가족의 따뜻한 한 끼와 야탑 방문을 연결한다"
+        }
+      ]
+    },
+    {
       "id": "work:wuxia-causal-prompt-study",
       "kind": "work",
       "title": "상상은 어떻게 액션이 되는가 — 단문인과체인 연구",
@@ -2477,6 +2501,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:cheongnyeon-wangmandu",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:wuxia-causal-prompt-study",
       "target": "creator:joonho",

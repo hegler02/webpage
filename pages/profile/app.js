@@ -64,7 +64,7 @@ window.ProfileBus = (() => {
   const button = document.querySelector('[data-menu-toggle]');
   const drawer = document.querySelector('[data-drawer]');
   if (!button || !drawer) return;
-  const wide = matchMedia('(min-width: 56.001rem)');
+  const wide = matchMedia('(min-width: 80.001rem)');
   const background = [...document.querySelectorAll('main, body > footer')];
   const priorInert = new Map();
   let opened = false;

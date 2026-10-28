@@ -12,11 +12,12 @@
     : new URL(declaredHome || '/', location.href);
   const routeRoot = location.protocol === 'file:' ? assetRoot : home;
 
-  const routes = /* GENERATED_ROUTES_START */[{"key":"home","path":"","ko":"홈","en":"Home"},{"key":"work","path":"work/","ko":"작업","en":"Work"},{"key":"archive","path":"archive/","ko":"아카이브","en":"Archive"},{"key":"constellation","path":"constellation/","ko":"별자리","en":"Constellation"},{"key":"books","path":"books/","ko":"저서·연구","en":"Books & research"},{"key":"mirinae","path":"mirinae/","ko":"미리내","en":"Mirinae"},{"key":"profile","path":"profile/","ko":"프로필","en":"Profile"}]/* GENERATED_ROUTES_END */;
+  const routes = /* GENERATED_ROUTES_START */[{"key":"home","path":"","ko":"홈","en":"Home"},{"key":"work","path":"work/","ko":"작업","en":"Work"},{"key":"archive","path":"archive/","ko":"아카이브","en":"Archive"},{"key":"notes","path":"notes/","ko":"작품해설","en":"Work notes"},{"key":"constellation","path":"constellation/","ko":"별자리","en":"Constellation"},{"key":"books","path":"books/","ko":"저서·연구","en":"Books & research"},{"key":"mirinae","path":"mirinae/","ko":"미리내","en":"Mirinae"},{"key":"profile","path":"profile/","ko":"프로필","en":"Profile"}]/* GENERATED_ROUTES_END */;
   const shapes = {
     home: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5M9 21v-7h6v7"/>',
     work: '<rect x="3" y="6" width="18" height="14" rx="2"/><path d="m3 10 4-4m2 4 4-4m2 4 4-4M7 3h14l-2 3H5z"/>',
     archive: '<path d="M4 5h16v4H4zM4 11h16v8H4z"/><path d="M8 14h8M8 17h5"/>',
+    notes: '<path d="M5 3h14v18H5zM8 7h8M8 11h8M8 15h5"/>',
     books: '<path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H11v18H7.5A3.5 3.5 0 0 0 4 23zM20 5.5A3.5 3.5 0 0 0 16.5 2H13v18h3.5A3.5 3.5 0 0 1 20 23z"/>',
     mirinae: '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/>',
     profile: '<circle cx="12" cy="8" r="4"/><path d="M4 22a8 8 0 0 1 16 0"/>'

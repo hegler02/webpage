@@ -93,6 +93,14 @@
       "destination": "/pages/profile/archive/:path*"
     },
     {
+      "source": "/notes/",
+      "destination": "/pages/profile/notes/"
+    },
+    {
+      "source": "/notes/:path*",
+      "destination": "/pages/profile/notes/:path*"
+    },
+    {
       "source": "/books/",
       "destination": "/pages/profile/books/"
     },
@@ -197,6 +205,21 @@
     {
       "source": "/pages/profile/archive/",
       "destination": "/archive/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/notes/index.html",
+      "destination": "/notes/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/notes/index",
+      "destination": "/notes/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/notes/",
+      "destination": "/notes/",
       "permanent": true
     },
     {

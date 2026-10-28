@@ -403,6 +403,9 @@ def main() -> int:
     tuna = subprocess.run([sys.executable, str(ROOT / "tools/check_tuna_intro.py")], cwd=ROOT)
     if tuna.returncode:
         errors.append("Tuna introduction gate failed")
+    covers = subprocess.run([sys.executable, str(ROOT / "tools/work_note_thumbnails.py")], cwd=ROOT)
+    if covers.returncode:
+        errors.append("Work-note thumbnail contract failed")
 
     if errors:
         for error in errors:

@@ -149,3 +149,11 @@ a.card:not(.feature){display:block}
 .body-card{transition:transform var(--card-action-duration) var(--card-action-ease),border-color var(--card-action-duration) var(--card-action-ease)}
 @media(hover:hover) and (pointer:fine){a.card:hover,.body-card:has(.body-card-hit:hover){transform:translateY(calc(-1 * var(--card-action-lift)));border-color:var(--card-action-border)}}
 @media(prefers-reduced-motion:reduce){a.card,.body-card{transition:none}a.card:hover,.body-card:has(.body-card-hit:hover){transform:none}}
+
+/* Editorial covers belong to work notes; artwork archive media is unchanged. */
+.work-notes-hero{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+.work-note-thumbnail{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.work-note-card h2{word-break:keep-all;overflow-wrap:normal;text-wrap:balance}
+.page-hero .work-notes-disclosure{font-size:.85rem;color:var(--soft)}
+.page-hero .work-note-card p{margin-top:0;font-size:1rem}
+@media(max-width:56rem){.work-notes-hero{grid-template-columns:1fr}}

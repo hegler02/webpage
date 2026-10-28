@@ -134,6 +134,11 @@ def render_archive(bodies: list[dict], manifest: dict) -> str:
         separators=(",", ":"),
     )
     cards = "".join(body_card(body, asset_prefix="../") for body in bodies)
+    reading_cards = "".join(
+        f'<a class="card" href="{esc(item["path"])}"><div class="card-body">'
+        f'<h3>{esc(item["title"])}</h3><p>{esc(item["description"])}</p></div></a>'
+        for item in manifest.get("archive_reading", [])
+    )
     return f'''<!doctype html>
 <html lang="ko" data-lang="ko" data-theme="light">
 <head>
@@ -167,6 +172,12 @@ def render_archive(bodies: list[dict], manifest: dict) -> str:
       <div class="wrap archive-hero-grid">
         <div><span class="eyebrow">MESSAGE BODIES · CQI ARCHIVE</span><h1><span data-ko>이야기는 매체를 만날 때 몸을 얻는다.</span><span data-en lang="en">A story gains a body when it meets its medium.</span></h1></div>
         <div class="archive-intro"><strong><span data-visible-count>{len(bodies)}</span><small> BODIES</small></strong><p><span data-ko>노래도, 슬라이드도, 화면도 같은 모양을 강요받지 않습니다. 각 메시지는 자신에게 맞는 몸으로 남습니다.</span><span data-en lang="en">Songs, slides, screens, and stories keep the body their message requires.</span></p></div>
+      </div>
+    </section>
+    <section class="section" aria-labelledby="archive-reading-title">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">READ &amp; EXPLORE</span><h2 id="archive-reading-title">작품 해설과 강의 자료</h2></div><p>작품에 담긴 생각을 읽고, 장면과 움직임으로 표현한 과정을 살펴봅니다.</p></div>
+        <div class="grid three">{reading_cards}</div>
       </div>
     </section>
     <section class="section archive-section">
@@ -210,6 +221,7 @@ def rendered_routes(manifest: dict) -> str:
 def render_sitemap(manifest: dict, bodies: list[dict]) -> str:
     urls = [manifest["public_home"].rstrip("/") + route["public_path"] for route in manifest["routes"]]
     urls.extend(manifest["public_home"].rstrip("/") + path for path in manifest.get("editorial_pages", []))
+    urls.extend(manifest["public_home"].rstrip("/") + path for path in manifest.get("additional_sitemap_paths", []))
     urls.extend(body["canonical_url"] for body in bodies if urlparse(body["canonical_url"]).netloc == "mirinaeman.com")
     unique = list(dict.fromkeys(urls))
     body = "".join(f"<url><loc>{esc(url)}</loc></url>" for url in unique)

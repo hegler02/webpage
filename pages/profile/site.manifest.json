@@ -80,5 +80,23 @@
     "/archive/fan-cinema-comparison/",
     "/archive/sibang-sibang/"
   ],
+  "additional_sitemap_paths": ["/coding/"],
+  "archive_reading": [
+    {
+      "path": "/archive/fan-cinema-comparison/",
+      "title": "공포의 선풍기 — 두 편의 시네마",
+      "description": "같은 노래가 V2와 V3에서 어떻게 다른 장면과 리듬을 얻었는지 읽고, 두 작품을 비교 감상합니다."
+    },
+    {
+      "path": "/archive/sibang-sibang/",
+      "title": "시방 시방 — 노래에서 이미지 시네마로",
+      "description": "AI와 창작하는 과정의 답답함을 노래와 32컷 웹툰으로 풀어낸 작품의 배경을 읽습니다."
+    },
+    {
+      "path": "/pages/astra-motion/",
+      "title": "메시지는 몸을 얻는다 — 모션 강의",
+      "description": "미리내맨과 아스트라의 모션 자료에서 메시지를 화면의 움직임으로 표현하는 방식을 살펴봅니다."
+    }
+  ],
   "external_images": 0
 }

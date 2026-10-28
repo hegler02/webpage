@@ -69,6 +69,10 @@
       "destination": "/pages/profile/archive/sibang-sibang/"
     },
     {
+      "source": "/notes/cheongnyeon-wangmandu/",
+      "destination": "/pages/profile/notes/cheongnyeon-wangmandu/"
+    },
+    {
       "source": "/constellation/",
       "destination": "/pages/profile/constellation/"
     },
@@ -520,6 +524,21 @@
     {
       "source": "/pages/profile/archive/sibang-sibang/",
       "destination": "/archive/sibang-sibang/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/notes/cheongnyeon-wangmandu/index.html",
+      "destination": "/notes/cheongnyeon-wangmandu/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/notes/cheongnyeon-wangmandu/index",
+      "destination": "/notes/cheongnyeon-wangmandu/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/notes/cheongnyeon-wangmandu/",
+      "destination": "/notes/cheongnyeon-wangmandu/",
       "permanent": true
     }
   ]

@@ -1,6 +1,12 @@
 {
   "version": 1,
   "entries": {
+    "/notes/cheongnyeon-wangmandu/": {
+      "image": "/assets/images/work-notes/cheongnyeon-wangmandu-message.webp",
+      "small": "/assets/images/work-notes/cheongnyeon-wangmandu-message-600.webp",
+      "alt": "왕만두 식탁과 영상 모니터, 마이크, 웹 화면이 빛으로 이어진 가상의 제작 공간",
+      "kind": "ai-generated-editorial-cover"
+    },
     "/archive/fan-cinema-comparison/": {
       "image": "/assets/images/work-notes/fan-cinema-leftover-screws.webp",
       "small": "/assets/images/work-notes/fan-cinema-leftover-screws-600.webp",

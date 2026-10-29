@@ -39,7 +39,8 @@
       "body_type": "SLIDEBODY",
       "source_kinds": [
         "book",
-        "education"
+        "education",
+        "case-study"
       ],
       "tags": [
         "lecture",
@@ -47,7 +48,7 @@
         "judgment",
         "media-literacy"
       ],
-      "message_sentence": "김준호의 책을 바탕으로 미디어의 몸과 생성형 AI 시대의 판단권을 살펴보는 강의 슬라이드.",
+      "message_sentence": "김준호의 책과 청년왕만두 제작 사례로 살펴보는 미디어의 몸과 생성형 AI 시대의 판단권.",
       "thumbnail": {
         "path": "assets/thumbnails/ai-judgment-lecture.webp",
         "alt": "AI는 어떻게 내 판단을 빌려가는가 — 두 얼굴의 석상과 제목을 담은 강의 표지",
@@ -56,9 +57,9 @@
         "focal_point": "50% 50%"
       },
       "canonical_url": "https://ai-judgment-lecture.mirinaeman.chatgpt.site/",
-      "status": "GOLDEN",
+      "status": "DEPLOYED",
       "first_deployed_at": "2026-10-29T18:08:58.117655+00:00",
-      "latest_deployed_at": "2026-10-29T18:08:58.117655+00:00"
+      "latest_deployed_at": "2026-10-29T18:37:59.201151+00:00"
     },
     {
       "body_id": "ai-slave",

@@ -35,7 +35,7 @@
     },
     {
       "body_id": "ai-judgment-lecture",
-      "title": "AI는 어떻게 내 판단을 빌려가는가 — 2시간 강의",
+      "title": "AI는 어떻게 내 판단을 빌려가는가",
       "body_type": "SLIDEBODY",
       "source_kinds": [
         "book",
@@ -47,7 +47,7 @@
         "judgment",
         "media-literacy"
       ],
-      "message_sentence": "김준호의 책을 바탕으로 미디어의 몸과 생성형 AI 시대의 판단권을 살펴보는 44장, 2시간 강의.",
+      "message_sentence": "김준호의 책을 바탕으로 미디어의 몸과 생성형 AI 시대의 판단권을 살펴보는 강의 슬라이드.",
       "thumbnail": {
         "path": "assets/thumbnails/ai-judgment-lecture.webp",
         "alt": "AI는 어떻게 내 판단을 빌려가는가 — 두 얼굴의 석상과 제목을 담은 강의 표지",

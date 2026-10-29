@@ -9,6 +9,29 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:ai-judgment-lecture",
+      "kind": "work",
+      "title": "AI는 어떻게 내 판단을 빌려가는가 — 2시간 강의",
+      "summary": "김준호의 책을 바탕으로 미디어의 몸과 생성형 AI 시대의 판단권을 살펴보는 44장, 2시간 강의.",
+      "url": "https://ai-judgment-lecture.mirinaeman.chatgpt.site/",
+      "image": "/pages/profile/assets/thumbnails/ai-judgment-lecture.webp",
+      "alt": "AI는 어떻게 내 판단을 빌려가는가 — 두 얼굴의 석상과 제목을 담은 강의 표지",
+      "year": "2026",
+      "tags": [
+        "lecture",
+        "ai-literacy",
+        "judgment",
+        "media-literacy"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "김준호의 책을 바탕으로 미디어의 몸과 생성형 AI 시대의 판단권을 살펴보는 44장, 2시간 강의."
+        }
+      ]
+    },
+    {
       "id": "work:dji-fly-classroom",
       "kind": "work",
       "title": "DJI Fly 촬영 교실 — 화면을 읽고, 움직임을 설계하다",
@@ -2531,6 +2554,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:ai-judgment-lecture",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:dji-fly-classroom",
       "target": "creator:joonho",

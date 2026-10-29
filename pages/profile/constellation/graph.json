@@ -9,6 +9,35 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:dji-fly-classroom",
+      "kind": "work",
+      "title": "DJI Fly 촬영 교실 — 화면을 읽고, 움직임을 설계하다",
+      "summary": "Mini 4 Pro와 Avata 2의 화면·메뉴·조작 325개를 공식 자료, 위치 확대, 입력과 촬영 결과의 비교로 익힌다.",
+      "url": "https://dji-fly-classroom.mirinaeman.chatgpt.site",
+      "image": "/pages/profile/assets/thumbnails/dji-fly-classroom.webp",
+      "alt": "DJI Fly 촬영 교실 — 공식 카메라 화면과 화면·조종·촬영의 연결을 소개하는 남색 강의 표지",
+      "year": "2026",
+      "tags": [
+        "slide",
+        "lecture",
+        "dji-fly",
+        "mini-4-pro",
+        "avata-2",
+        "drone",
+        "camera",
+        "control",
+        "gestalt",
+        "transition"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "Mini 4 Pro와 Avata 2의 화면·메뉴·조작 325개를 공식 자료, 위치 확대, 입력과 촬영 결과의 비교로 익힌다."
+        }
+      ]
+    },
+    {
       "id": "work:cheongnyeon-wangmandu",
       "kind": "work",
       "title": "청년왕만두 — 한 입의 행복, 한 끼의 추억",
@@ -2502,6 +2531,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:dji-fly-classroom",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:cheongnyeon-wangmandu",
       "target": "creator:joonho",

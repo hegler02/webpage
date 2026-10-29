@@ -397,6 +397,34 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "cheongnyeon-wangmandu",
+      "title": "청년왕만두 — 한 입의 행복, 한 끼의 추억",
+      "body_type": "SCREENBODY",
+      "source_kinds": [
+        "video",
+        "image"
+      ],
+      "tags": [
+        "food",
+        "local-business",
+        "gestalt",
+        "AI",
+        "brand-film"
+      ],
+      "message_sentence": "과장된 만두의 크기를 행복의 크기로 전환하여 가족의 따뜻한 한 끼와 야탑 방문을 연결한다",
+      "thumbnail": {
+        "path": "assets/thumbnails/cheongnyeon-wangmandu.webp",
+        "alt": "따뜻한 가족 식탁에 놓인 상상 속 왕만두 — 청년왕만두 브랜드 필름",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://cheongnyeon-wangmandu.mirinaeman.chatgpt.site/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-27T09:12:05.570794+00:00",
+      "latest_deployed_at": "2026-10-27T09:12:05.570794+00:00"
+    },
+    {
       "body_id": "coding-body-message",
       "title": "Coding is the Body of the Message",
       "body_type": "SLIDEBODY",
@@ -511,6 +539,40 @@
       "status": "DEPLOYED",
       "first_deployed_at": "2026-10-26T03:27:27.322457+00:00",
       "latest_deployed_at": "2026-10-26T03:27:27.322457+00:00"
+    },
+    {
+      "body_id": "dji-fly-classroom",
+      "title": "DJI Fly 촬영 교실 — 화면을 읽고, 움직임을 설계하다",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "official-manual",
+        "official-tutorial"
+      ],
+      "tags": [
+        "slide",
+        "lecture",
+        "dji-fly",
+        "mini-4-pro",
+        "avata-2",
+        "drone",
+        "camera",
+        "control",
+        "gestalt",
+        "transition"
+      ],
+      "message_sentence": "Mini 4 Pro와 Avata 2의 화면·메뉴·조작 325개를 공식 자료, 위치 확대, 입력과 촬영 결과의 비교로 익힌다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/dji-fly-classroom.webp",
+        "alt": "DJI Fly 촬영 교실 — 공식 카메라 화면과 화면·조종·촬영의 연결을 소개하는 남색 강의 표지",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://dji-fly-classroom.mirinaeman.chatgpt.site",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-10-29T03:08:35.217195+00:00",
+      "latest_deployed_at": "2026-10-29T03:08:35.217195+00:00"
     },
     {
       "body_id": "dont-you-want-my-money",
@@ -2366,34 +2428,6 @@
       "status": "DEPLOYED",
       "first_deployed_at": "2026-10-26T23:40:16.551965+00:00",
       "latest_deployed_at": "2026-10-26T23:47:32.452801+00:00"
-    },
-    {
-      "body_id": "cheongnyeon-wangmandu",
-      "title": "청년왕만두 — 한 입의 행복, 한 끼의 추억",
-      "body_type": "SCREENBODY",
-      "source_kinds": [
-        "video",
-        "image"
-      ],
-      "tags": [
-        "food",
-        "local-business",
-        "gestalt",
-        "AI",
-        "brand-film"
-      ],
-      "message_sentence": "과장된 만두의 크기를 행복의 크기로 전환하여 가족의 따뜻한 한 끼와 야탑 방문을 연결한다",
-      "thumbnail": {
-        "path": "assets/thumbnails/cheongnyeon-wangmandu.webp",
-        "alt": "따뜻한 가족 식탁에 놓인 상상 속 왕만두 — 청년왕만두 브랜드 필름",
-        "width": 960,
-        "height": 540,
-        "focal_point": "50% 50%"
-      },
-      "canonical_url": "https://cheongnyeon-wangmandu.mirinaeman.chatgpt.site/",
-      "status": "DEPLOYED",
-      "first_deployed_at": "2026-10-27T09:12:05.570794+00:00",
-      "latest_deployed_at": "2026-10-27T09:12:05.570794+00:00"
     }
   ]
 }

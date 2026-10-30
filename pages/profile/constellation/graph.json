@@ -9,6 +9,29 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:prompt-atelier",
+      "kind": "work",
+      "title": "프롬프트 아뜰리에 — AI가 그렸어도, 내 그림",
+      "summary": "머릿속 장면이 그대로 나오게, 단문 인과 체인으로 내 의도를 AI에게 정확히 전하는 법을 배운다.",
+      "url": "https://prompt-atelier-mu.vercel.app/",
+      "image": "/pages/profile/assets/thumbnails/prompt-atelier.webp",
+      "alt": "AI가 그렸어도, 내 그림 — 레슨 그림들이 흐르는 프롬프트 아뜰리에 인트로 표지",
+      "year": "2026",
+      "tags": [
+        "webapp",
+        "prompt",
+        "causal-chain",
+        "education"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "머릿속 장면이 그대로 나오게, 단문 인과 체인으로 내 의도를 AI에게 정확히 전하는 법을 배운다."
+        }
+      ]
+    },
+    {
       "id": "work:ai-judgment-lecture",
       "kind": "work",
       "title": "AI는 어떻게 내 판단을 빌려가는가",
@@ -2554,6 +2577,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:prompt-atelier",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:ai-judgment-lecture",
       "target": "creator:joonho",

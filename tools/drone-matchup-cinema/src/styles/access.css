@@ -1,0 +1,5 @@
+:root[data-theme="light"]{color-scheme:light;--body-canvas:#f1eee7;--body-surface:#e4dfd5;--body-elevated:#ffffff;--body-ink:#14212c;--body-ink-muted:#465866;--body-accent:#86501c;--body-accent-ink:#ffffff;--body-border:#657583;--body-focus:#71400c}
+.hero-shade{background:var(--hero-shade-wide)}.hero{color:var(--film-ink)}.hero-content .eyebrow,.hero-deck{color:var(--film-ink)}.hero-bottom span{color:var(--film-muted)}.hero .action,.action{color:var(--body-accent-ink)}.outline{color:var(--ink)}.play-invitation{color:var(--film-ink)}.play-invitation small{color:var(--film-muted)}.scene-caption{color:var(--film-ink)}
+@media(hover:hover) and (pointer:fine){a:hover{text-decoration:underline;text-underline-offset:5px}button:hover{filter:brightness(1.1)}}
+@media(pointer:coarse){button,a.action,.masthead nav a{min-height:48px}button:active{outline:2px solid var(--focus);outline-offset:3px}}
+@media(max-width:700px){.hero-shade{background:var(--hero-shade-compact)}.share svg{display:none}.masthead nav{font-size:var(--text-small)}}

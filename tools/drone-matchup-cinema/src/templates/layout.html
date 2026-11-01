@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{head}}
+<meta name="theme-color" content="#0b141c">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>{{css}}</style>
+</head>
+<body>
+<a class="skip" href="#main">본문 바로가기</a>
+<header class="masthead">
+  <a class="brand" href="#top" aria-label="서울 상공 처음으로">MIRINAEMAN <span>FILM NOTES</span></a>
+  <nav aria-label="주요 메뉴"><a href="#screening">영상 감상</a><a href="#director">연출노트</a><button class="share" id="theme" type="button" aria-pressed="false">밝게 보기</button><button class="share" id="share" type="button">{{share_icon}}<span>페이지 공유</span></button></nav>
+</header>
+<main id="main">
+{{hero}}
+{{screening}}
+{{story}}
+{{judgment}}
+</main>
+<footer class="footer"><div class="wrap footer-inner"><p>연출·프롬프트 {{creator}}<span>영상 생성 Kling · 편집 및 웹 제작 AI 협업</span></p><a href="{{archive_url}}">미리내맨 아카이브</a><a href="#top">처음으로</a></div></footer>
+<div class="share-feedback" id="share-feedback" role="status" hidden></div>
+<script id="site-data" type="application/json">{{runtime_data}}</script>
+<script>{{js}}</script>
+</body></html>

@@ -1,0 +1,2 @@
+Static subpath: https://mirinaeman.com/pages/drone-matchup-cinema/
+Deploy only this public directory. Host root robots and sitemap remain host-owned. Local file preview is supported. No media request before play intent.

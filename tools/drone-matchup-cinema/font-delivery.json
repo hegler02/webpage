@@ -1,0 +1,23 @@
+[
+  {
+    "font": "BlackHanSans-Regular",
+    "source_sha256": "31960809284026681774a8e52dc19ebcad26cf69b0ad9d560f288296fbb52739",
+    "delivery_sha256": "42b99b358bca08d326c7bd810d9ddc36301bd1fb0626039dcf10eac09db8684e",
+    "source_bytes": 998424,
+    "delivery_bytes": 30964
+  },
+  {
+    "font": "PretendardVariable",
+    "source_sha256": "678e90ac50de85c405b6981507f851da1600232d24a16eeed405e6b5a9fa290f",
+    "delivery_sha256": "be258eecc7824f4d1f08fed685b6168c95b1966b4d0c3a7721ca604770f7289d",
+    "source_bytes": 6739320,
+    "delivery_bytes": 85972
+  },
+  {
+    "font": "Teko",
+    "source_sha256": "d1321889f262bbbff632e7976349853399cd097b6f382d4b19790c915c13c1ae",
+    "delivery_sha256": "d3ad83120d2c9ca66907a310bba3d4d13799ead6948019d9fa6fdc8116fb2610",
+    "source_bytes": 292108,
+    "delivery_bytes": 9600
+  }
+]

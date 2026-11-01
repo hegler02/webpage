@@ -688,6 +688,36 @@
       "latest_deployed_at": "2026-10-15T07:51:16.443733+00:00"
     },
     {
+      "body_id": "drone-matchup-cinema",
+      "title": "서울 상공 — 인과관계는 내가 연출한다",
+      "body_type": "STORYBODY",
+      "source_kinds": [
+        "user-video",
+        "classroom-demonstration",
+        "causal-prompt"
+      ],
+      "tags": [
+        "video",
+        "drone",
+        "kling",
+        "ai-literacy",
+        "causal-chain",
+        "scrollytelling"
+      ],
+      "message_sentence": "드론 매치업 강의에서 Kling으로 만든 킹콩과 드론 영상. 인과관계를 설계하고 AI가 생성한 디테일을 판단하고 수정하는 연출 과정을 영상과 스크롤로 읽습니다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/drone-matchup-cinema.webp",
+        "alt": "서울 상공 — 도시를 배경으로 한 굵은 한글 영상 타이틀",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/drone-matchup-cinema/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-11-01T10:08:46.414235+00:00",
+      "latest_deployed_at": "2026-11-01T10:08:46.414235+00:00"
+    },
+    {
       "body_id": "eagle-five-love",
       "title": "독수리 오형제의 애틋한 사랑",
       "body_type": "STORYBODY",

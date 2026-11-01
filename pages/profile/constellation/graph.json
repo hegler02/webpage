@@ -9,6 +9,31 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:drone-matchup-cinema",
+      "kind": "work",
+      "title": "서울 상공 — 인과관계는 내가 연출한다",
+      "summary": "드론 매치업 강의에서 Kling으로 만든 킹콩과 드론 영상. 인과관계를 설계하고 AI가 생성한 디테일을 판단하고 수정하는 연출 과정을 영상과 스크롤로 읽습니다.",
+      "url": "https://mirinaeman.com/pages/drone-matchup-cinema/",
+      "image": "/pages/profile/assets/thumbnails/drone-matchup-cinema.webp",
+      "alt": "서울 상공 — 도시를 배경으로 한 굵은 한글 영상 타이틀",
+      "year": "2026",
+      "tags": [
+        "video",
+        "drone",
+        "kling",
+        "ai-literacy",
+        "causal-chain",
+        "scrollytelling"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "드론 매치업 강의에서 Kling으로 만든 킹콩과 드론 영상. 인과관계를 설계하고 AI가 생성한 디테일을 판단하고 수정하는 연출 과정을 영상과 스크롤로 읽습니다."
+        }
+      ]
+    },
+    {
       "id": "work:prompt-atelier",
       "kind": "work",
       "title": "프롬프트 아뜰리에 — AI가 그렸어도, 내 그림",
@@ -2577,6 +2602,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:drone-matchup-cinema",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:prompt-atelier",
       "target": "creator:joonho",

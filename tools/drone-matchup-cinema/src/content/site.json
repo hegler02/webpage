@@ -7,7 +7,7 @@
   "creator": "미리내맨",
   "date": "2026-11-01",
   "archive_url": "https://mirinaeman.com/archive/",
-  "film": {"src": "assets/seoul-sky-v1.mp4", "poster": "assets/poster.webp", "duration": 41, "width": 1920, "height": 1080},
+  "film": {"src": "assets/seoul-sky-v2.mp4", "poster": "assets/poster.webp", "duration": 41, "width": 1920, "height": 1080},
   "og": {"path": "assets/og.jpg", "alt": "서울 상공 — 도시와 킹콩 장면 위에 놓인 굵은 한글 타이틀", "width": 1200, "height": 630, "mime": "image/jpeg"},
   "statement": "인과관계는 내가 연출한다. 디테일은 AI가 생성한다. 판단과 수정은 내가 한다.",
   "prompt": [

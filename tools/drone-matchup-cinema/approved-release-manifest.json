@@ -1,0 +1,174 @@
+{
+  "baseline_id": "drone-matchup-cinema-final-20261101",
+  "source_revision": "e5160c78ee77efc65c1f91cd561652ea639bb222",
+  "canonical": "https://mirinaeman.com/pages/drone-matchup-cinema/",
+  "files": [
+    {
+      "path": "site/public/DEPLOY.txt",
+      "git_path": "pages/drone-matchup-cinema/DEPLOY.txt",
+      "bytes": 220,
+      "sha256": "2c73d010a7ae6a056aa5e07aaa56fcd0b81682361fa36740fd5cec52d2083df6",
+      "comparison": "CRLF-to-LF"
+    },
+    {
+      "path": "site/public/assets/ending.webp",
+      "git_path": "pages/drone-matchup-cinema/assets/ending.webp",
+      "bytes": 247534,
+      "sha256": "0cd8874a4f15ca2fa7893bc5a6ebfb6fa926829adc4c6141e89c5f7f9e9f21ca",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/favicon.svg",
+      "git_path": "pages/drone-matchup-cinema/assets/favicon.svg",
+      "bytes": 180,
+      "sha256": "78bb2b59207227beaa18ebd746533398e88b6bd4dd540a2bb06a86baf2928bbd",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/fonts/BlackHanSans-OFL.txt",
+      "git_path": "pages/drone-matchup-cinema/assets/fonts/BlackHanSans-OFL.txt",
+      "bytes": 4399,
+      "sha256": "c324192c8b3a988bae45a9a7e4ac1258b684739003bda114e0523423440457c9",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/fonts/BlackHanSans-Regular.woff2",
+      "git_path": "pages/drone-matchup-cinema/assets/fonts/BlackHanSans-Regular.woff2",
+      "bytes": 30964,
+      "sha256": "42b99b358bca08d326c7bd810d9ddc36301bd1fb0626039dcf10eac09db8684e",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/fonts/Pretendard-OFL.txt",
+      "git_path": "pages/drone-matchup-cinema/assets/fonts/Pretendard-OFL.txt",
+      "bytes": 4418,
+      "sha256": "d31ddd9f2bed32fd7e302a205cf2380ba0de6529152d239ef99cfb6f261bfc04",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/fonts/PretendardVariable.woff2",
+      "git_path": "pages/drone-matchup-cinema/assets/fonts/PretendardVariable.woff2",
+      "bytes": 85972,
+      "sha256": "be258eecc7824f4d1f08fed685b6168c95b1966b4d0c3a7721ca604770f7289d",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/fonts/Teko-OFL.txt",
+      "git_path": "pages/drone-matchup-cinema/assets/fonts/Teko-OFL.txt",
+      "bytes": 4385,
+      "sha256": "4a193c54e911c1e8194d4db657423f2527f54a1239f24cb67ecb09128dc9f065",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/fonts/Teko.woff2",
+      "git_path": "pages/drone-matchup-cinema/assets/fonts/Teko.woff2",
+      "bytes": 9600,
+      "sha256": "d3ad83120d2c9ca66907a310bba3d4d13799ead6948019d9fa6fdc8116fb2610",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/hero.webp",
+      "git_path": "pages/drone-matchup-cinema/assets/hero.webp",
+      "bytes": 233416,
+      "sha256": "e2694c0ee11e732eb96254c33f14aeb1258243fe68f196a7c2778fde6898bf42",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/og.jpg",
+      "git_path": "pages/drone-matchup-cinema/assets/og.jpg",
+      "bytes": 65321,
+      "sha256": "df2d20a9000371928e7a8a9b064046dbfb3de06003629f8f405c6fe2d5cdad27",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/poster.webp",
+      "git_path": "pages/drone-matchup-cinema/assets/poster.webp",
+      "bytes": 39314,
+      "sha256": "cfca5e71f3be3ccf2b4e8582d60c61fade0cc3df531c18c764c69c5398834758",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/scene-1.webp",
+      "git_path": "pages/drone-matchup-cinema/assets/scene-1.webp",
+      "bytes": 139740,
+      "sha256": "8bdc62949afaa34dcd5239e6168c7130c2a5012869bdf9c4cf99672cb2021c28",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/scene-2.webp",
+      "git_path": "pages/drone-matchup-cinema/assets/scene-2.webp",
+      "bytes": 65270,
+      "sha256": "b02f237989c8701e1f612a11a7f1e03b0b11844e46808752c22c69b9ee0d7c09",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/scene-3.webp",
+      "git_path": "pages/drone-matchup-cinema/assets/scene-3.webp",
+      "bytes": 85768,
+      "sha256": "9036484edc9895a330813fabef477daaea468b1e365e9bb518e3e36f4a64a69b",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/scene-4.webp",
+      "git_path": "pages/drone-matchup-cinema/assets/scene-4.webp",
+      "bytes": 159096,
+      "sha256": "9408b6a66b03c7edad74b1c73a045f590fe3414df476c430674cabf670b92d04",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/seoul-sky-v1.mp4",
+      "git_path": "pages/drone-matchup-cinema/assets/seoul-sky-v1.mp4",
+      "bytes": 18909194,
+      "sha256": "135ec1a4728b608842ccdc7c13c01d7c5647bce7f7db3727e97c81341c8f1012",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/assets/seoul-sky-v2.mp4",
+      "git_path": "pages/drone-matchup-cinema/assets/seoul-sky-v2.mp4",
+      "bytes": 18942074,
+      "sha256": "85737e6bf329cc489d7a0fdccc05ffb0dbbb5b8f6aa904f6be334ff043f10cf3",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/favicon.svg",
+      "git_path": "pages/drone-matchup-cinema/favicon.svg",
+      "bytes": 180,
+      "sha256": "78bb2b59207227beaa18ebd746533398e88b6bd4dd540a2bb06a86baf2928bbd",
+      "comparison": "raw"
+    },
+    {
+      "path": "site/public/index.html",
+      "git_path": "pages/drone-matchup-cinema/index.html",
+      "bytes": 41785,
+      "sha256": "19441c74933a9dcb24cc0316335c43d4654470b9e7fda9dc682e210a7f474f5d",
+      "comparison": "CRLF-to-LF"
+    },
+    {
+      "path": "site/public/robots.txt",
+      "git_path": "pages/drone-matchup-cinema/robots.txt",
+      "bytes": 94,
+      "sha256": "bf10dfaad269d3121245ab41ef92549a141be28cc30502b792d01cc854a5fb76",
+      "comparison": "CRLF-to-LF"
+    },
+    {
+      "path": "site/public/site.manifest.json",
+      "git_path": "pages/drone-matchup-cinema/site.manifest.json",
+      "bytes": 4082,
+      "sha256": "16932a57d8585be0d42bd745efa9397c26f71f97ba0f71f572d0d239401da497",
+      "comparison": "CRLF-to-LF"
+    },
+    {
+      "path": "site/public/sitemap.xml",
+      "git_path": "pages/drone-matchup-cinema/sitemap.xml",
+      "bytes": 179,
+      "sha256": "aae792783e9088ca01cf174d4f997dd860f196769b7050fe001d95ee5622c1e5",
+      "comparison": "raw"
+    }
+  ],
+  "master": {
+    "path": "final/seoul-sky-master-A-music-v2.mp4",
+    "sha256": "b61e6d7dd913f17ce4bb4ee075ee237fc7a62a1501e7c8643e3afc9091d5c762",
+    "bytes": 42779961
+  },
+  "source_preserved_sha256": "ea7c2d8d300d806d626f8219651f0f077416d5228c4deb9652ad63b22fdc9e09"
+}

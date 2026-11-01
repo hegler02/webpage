@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "asset_id": "lecture-cover",
+      "kind": "image",
+      "role": "open-graph",
+      "delivery": {
+        "path": "assets/og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "sha256": "8905c59a483ec2b429b0536774a55154de2eb6ead68ec44e16baac776e824a1b"
+      }
+    }
+  ]
+}

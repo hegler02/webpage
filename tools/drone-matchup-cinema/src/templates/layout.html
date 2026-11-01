@@ -12,7 +12,8 @@
 <a class="skip" href="#main">본문 바로가기</a>
 <header class="masthead">
   <a class="brand" href="#top" aria-label="서울 상공 처음으로">MIRINAEMAN <span>FILM NOTES</span></a>
-  <nav aria-label="주요 메뉴"><a href="#screening">영상 감상</a><a href="#director">연출노트</a><button class="share" id="theme" type="button" aria-pressed="false">밝게 보기</button><button class="share" id="share" type="button">{{share_icon}}<span>페이지 공유</span></button></nav>
+  <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false" aria-label="메뉴 열기" hidden><span>메뉴</span><svg data-icon="control" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" fill="none" aria-hidden="true" focusable="false"><g class="menu-bars"><path d="M4 6h16M4 12h16M4 18h16"/></g><g class="menu-cross"><path d="m6 6 12 12M18 6 6 18"/></g></svg></button>
+  <nav id="main-navigation" aria-label="주요 메뉴"><div class="nav-items"><a href="#screening">영상 감상</a><a href="#director">연출노트</a><button class="share" id="theme" type="button" aria-pressed="false">밝게 보기</button><button class="share" id="share" type="button">{{share_icon}}<span>페이지 공유</span></button></div></nav>
 </header>
 <main id="main">
 {{hero}}

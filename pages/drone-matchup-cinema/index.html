@@ -41,13 +41,34 @@
 @media(hover:hover) and (pointer:fine){a:hover{text-decoration:underline;text-underline-offset:5px}button:hover{filter:brightness(1.1)}}
 @media(pointer:coarse){button,a.action,.masthead nav a{min-height:48px}button:active{outline:2px solid var(--focus);outline-offset:3px}}
 @media(max-width:700px){.hero-shade{background:var(--hero-shade-compact)}.share svg{display:none}.masthead nav{font-size:var(--text-small)}}
+
+.masthead{position:fixed;z-index:30;top:0;box-shadow:0 1px 0 var(--line)}
+.masthead nav .nav-items{display:flex;align-items:center;gap:28px}
+.menu-toggle{display:none;align-items:center;justify-content:center;gap:12px;min-width:80px;min-height:48px;background:transparent;border:1px solid var(--line);padding:8px 12px;font-size:var(--text-small)}
+.menu-toggle svg{width:24px;height:24px}.menu-cross{display:none}
+.menu-toggle[aria-expanded="true"] .menu-bars{display:none}.menu-toggle[aria-expanded="true"] .menu-cross{display:block}
+@media(max-width:1100px){.masthead nav .nav-items{gap:20px}}
+@media(max-width:700px){
+ .masthead nav .nav-items{gap:8px;justify-content:space-between;width:100%}
+ .has-navigation{--header-height:72px}
+ .has-navigation .masthead{flex-direction:row;align-items:center;justify-content:space-between;gap:16px;padding-block:0}
+ .has-navigation .brand span{display:none}
+ .has-navigation .menu-toggle{display:inline-flex}
+ .has-navigation .masthead nav{position:absolute;top:100%;left:0;right:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:0fr;justify-content:stretch;visibility:hidden;background:var(--bg);padding-inline:var(--gutter);border-bottom:1px solid var(--line);transition:grid-template-rows var(--motion-duration) var(--motion-ease),visibility 0s var(--motion-duration)}
+ .has-navigation .masthead nav .nav-items{min-height:0;overflow:hidden;display:flex;flex-direction:column;align-items:stretch;gap:0;opacity:0;transform:translateY(-8px);transition:opacity var(--motion-duration-short),transform var(--motion-duration) var(--motion-ease)}
+ .has-navigation .masthead nav a,.has-navigation .masthead nav button{width:100%;min-height:56px;padding:14px 4px;border-top:1px solid var(--line);text-align:left;justify-content:flex-start}
+ .has-navigation .masthead nav .share svg{display:block}
+ .has-navigation .masthead[data-menu-open="true"] nav{grid-template-rows:1fr;visibility:visible;transition-delay:0s}
+ .has-navigation .masthead[data-menu-open="true"] .nav-items{opacity:1;transform:translateY(0)}
+}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">본문 바로가기</a>
 <header class="masthead">
   <a class="brand" href="#top" aria-label="서울 상공 처음으로">MIRINAEMAN <span>FILM NOTES</span></a>
-  <nav aria-label="주요 메뉴"><a href="#screening">영상 감상</a><a href="#director">연출노트</a><button class="share" id="theme" type="button" aria-pressed="false">밝게 보기</button><button class="share" id="share" type="button"><svg data-icon="control" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke="currentColor" fill="none"><path d="M12 16V3m-5 5 5-5 5 5M5 13v7h14v-7"/></svg><span>페이지 공유</span></button></nav>
+  <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false" aria-label="메뉴 열기" hidden><span>메뉴</span><svg data-icon="control" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" fill="none" aria-hidden="true" focusable="false"><g class="menu-bars"><path d="M4 6h16M4 12h16M4 18h16"/></g><g class="menu-cross"><path d="m6 6 12 12M18 6 6 18"/></g></svg></button>
+  <nav id="main-navigation" aria-label="주요 메뉴"><div class="nav-items"><a href="#screening">영상 감상</a><a href="#director">연출노트</a><button class="share" id="theme" type="button" aria-pressed="false">밝게 보기</button><button class="share" id="share" type="button"><svg data-icon="control" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke="currentColor" fill="none"><path d="M12 16V3m-5 5 5-5 5 5M5 13v7h14v-7"/></svg><span>페이지 공유</span></button></div></nav>
 </header>
 <main id="main">
 <section class="hero" id="top" aria-labelledby="title">
@@ -142,6 +163,28 @@
 })();
 
 (() => {
+  const header=document.querySelector('.masthead');
+  const toggle=document.getElementById('menu-toggle');
+  const nav=document.getElementById('main-navigation');
+  const mobile=matchMedia('(max-width:700px)');
+  let open=false;
+  function setOpen(next,restoreFocus=false){
+    open=mobile.matches&&next;
+    header.dataset.menuOpen=String(open);
+    toggle.setAttribute('aria-expanded',String(open));
+    toggle.setAttribute('aria-label',open?'메뉴 닫기':'메뉴 열기');
+    nav.inert=mobile.matches&&!open;
+    if(restoreFocus)toggle.focus({preventScroll:true});
+  }
+  document.documentElement.classList.add('has-navigation');toggle.hidden=false;setOpen(false);
+  toggle.addEventListener('click',()=>setOpen(!open));
+  nav.addEventListener('click',e=>{if(e.target.closest('a,button'))setOpen(false,nav.contains(document.activeElement));});
+  document.addEventListener('click',e=>{if(open&&!header.contains(e.target))setOpen(false);});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open){e.preventDefault();setOpen(false,true);}});
+  mobile.addEventListener('change',()=>setOpen(false));
+})();
+
+(() => {
   const data=JSON.parse(document.getElementById('site-data').textContent);
   const film=document.getElementById('film');
   const start=document.getElementById('film-start');
@@ -169,7 +212,13 @@
   film.addEventListener('waiting',()=>{if(!['ended','error'].includes(state))set('loading');});
   film.addEventListener('stalled',()=>{if(!film.paused&&!['ended','error'].includes(state))set('loading');});
   film.addEventListener('pause',()=>{if(!['ended','error'].includes(state)&&!film.ended)set('paused');});
-  film.addEventListener('ended',()=>set('ended'));
+  film.addEventListener('ended',()=>{
+    const restoreFocus=document.activeElement===film;
+    set('ended');film.hidden=true;film.controls=false;start.hidden=false;
+    if(document.fullscreenElement===film)document.exitFullscreen().catch(()=>{});
+    if(film.webkitDisplayingFullscreen&&typeof film.webkitExitFullscreen==='function')film.webkitExitFullscreen();
+    if(restoreFocus)start.focus({preventScroll:true});
+  });
   film.addEventListener('error',()=>set('error'));
   document.querySelectorAll('.scene-jump').forEach(button=>button.addEventListener('click',()=>{
     document.dispatchEvent(new CustomEvent('film:seek-requested'));activate(Number(button.dataset.time));

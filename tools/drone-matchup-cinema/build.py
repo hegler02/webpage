@@ -29,8 +29,8 @@ def build():
         return text
     for name in ['hero','screening','story','judgment']:
         values[name]=fill((SRC/f'templates/partials/{name}.html').read_text(encoding='utf-8')).replace('<br class="semantic-break">',' ')
-    values['css']='\n'.join((SRC/f'styles/{name}.css').read_text(encoding='utf-8') for name in ['tokens','page','access'])
-    values['js']='\n'.join((SRC/f'scripts/{name}.js').read_text(encoding='utf-8') for name in ['scroll','media','share','theme'])
+    values['css']='\n'.join((SRC/f'styles/{name}.css').read_text(encoding='utf-8') for name in ['tokens','page','access','navigation'])
+    values['js']='\n'.join((SRC/f'scripts/{name}.js').read_text(encoding='utf-8') for name in ['scroll','navigation','media','share','theme'])
     text=fill((SRC/'templates/layout.html').read_text(encoding='utf-8'))
     assert not re.search(r'\{\{\w+\}\}',text)
     assert '\ufffd' not in text

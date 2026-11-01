@@ -26,7 +26,13 @@
   film.addEventListener('waiting',()=>{if(!['ended','error'].includes(state))set('loading');});
   film.addEventListener('stalled',()=>{if(!film.paused&&!['ended','error'].includes(state))set('loading');});
   film.addEventListener('pause',()=>{if(!['ended','error'].includes(state)&&!film.ended)set('paused');});
-  film.addEventListener('ended',()=>set('ended'));
+  film.addEventListener('ended',()=>{
+    const restoreFocus=document.activeElement===film;
+    set('ended');film.hidden=true;film.controls=false;start.hidden=false;
+    if(document.fullscreenElement===film)document.exitFullscreen().catch(()=>{});
+    if(film.webkitDisplayingFullscreen&&typeof film.webkitExitFullscreen==='function')film.webkitExitFullscreen();
+    if(restoreFocus)start.focus({preventScroll:true});
+  });
   film.addEventListener('error',()=>set('error'));
   document.querySelectorAll('.scene-jump').forEach(button=>button.addEventListener('click',()=>{
     document.dispatchEvent(new CustomEvent('film:seek-requested'));activate(Number(button.dataset.time));

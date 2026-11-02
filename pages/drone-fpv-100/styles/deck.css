@@ -1,0 +1,747 @@
+/* 강의 덱: 1920×1080 무대를 창에 맞춰 축소한다. 모든 값은 --cmp-deck-* 토큰이다. */
+body[data-mode="lesson"] {
+  background: var(--cmp-deck-blackout);
+  color: var(--cmp-deck-ink);
+  overflow: hidden;
+  height: var(--cmp-deck-viewport);
+  }
+body[data-mode="lesson"] main {
+  padding: 0;
+  }
+.deck-fit {
+  position: fixed;
+  inset: 0;
+  }
+.deck {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--cmp-deck-w);
+  height: var(--cmp-deck-h);
+  overflow: hidden;
+  background: var(--cmp-deck-bg);
+  color: var(--cmp-deck-ink);
+  --cmp-deck-ratio-active: var(--cmp-deck-ratio);
+  transform-origin: center;
+  transform: translate(-50%, -50%);
+  font-size: var(--cmp-deck-body-m);
+  line-height: 1.5;
+  }
+
+/* 공유 요소: 한 장의 원화가 슬라이드마다 자리와 크기를 바꾼다 */
+.deck-hero {
+  position: absolute;
+  overflow: hidden;
+  margin: 0;
+  background: var(--cmp-deck-surface);
+  transition: all var(--cmp-deck-dur) var(--cmp-deck-ease);
+  left: 0;
+  top: 0;
+  width: var(--cmp-deck-w);
+  height: var(--cmp-deck-h);
+  border-radius: 0;
+  }
+.deck-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.06);
+  transition: transform var(--cmp-deck-zoom-time) linear;
+  }
+.deck[data-kind="cover"] .deck-hero img {
+  object-fit: cover;
+  transform: scale(1);
+  }
+.deck-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--cmp-deck-dur) var(--cmp-deck-ease);
+  background: linear-gradient(180deg, transparent 18%, var(--cmp-deck-bg) 88%);
+  }
+.deck[data-kind="cover"] .deck-hero::after,
+.deck[data-kind="apply"] .deck-hero::after {
+  opacity: var(--cmp-deck-opaque);
+  }
+.deck[data-kind="apply"] .deck-hero::after {
+  background: linear-gradient(90deg, var(--cmp-deck-bg) 8%, transparent 100%);
+  }
+.deck[data-kind="observe"] .deck-hero {
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u180);
+  width: var(--cmp-deck-hero-w);
+  height: min(var(--cmp-deck-hero-h), calc(var(--cmp-deck-hero-w) / var(--cmp-deck-ratio-active)));
+  border-radius: var(--cmp-deck-radius);
+  }
+.deck[data-kind="design"] .deck-hero {
+  left: var(--cmp-deck-u1040);
+  top: var(--cmp-deck-u220);
+  width: var(--cmp-deck-small-w);
+  height: min(var(--cmp-deck-small-h), calc(var(--cmp-deck-small-w) / var(--cmp-deck-ratio-active)));
+  border-radius: var(--cmp-deck-radius);
+  }
+.deck[data-kind="video"] .deck-hero {
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u180);
+  width: var(--cmp-deck-video-w);
+  height: var(--cmp-deck-video-h);
+  border-radius: var(--cmp-deck-radius);
+  opacity: 0;
+  }
+.deck[data-kind="note"] .deck-hero {
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u220);
+  width: var(--cmp-deck-small-w);
+  height: min(var(--cmp-deck-small-h), calc(var(--cmp-deck-small-w) / var(--cmp-deck-ratio-active)));
+  border-radius: var(--cmp-deck-radius);
+  }
+.deck[data-kind="apply"] .deck-hero {
+  opacity: var(--cmp-deck-opaque);
+  }
+
+.deck[data-ratio="wide"] {
+  --cmp-deck-ratio-active: var(--cmp-deck-ratio-wide);
+  }
+
+/* 슬라이드와 순차 등장 */
+.slide {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  }
+.slide.on {
+  pointer-events: auto;
+  }
+.r {
+  opacity: 0;
+  transform: translateY(var(--cmp-deck-lift));
+  filter: blur(var(--cmp-deck-blur));
+  transition: opacity var(--cmp-deck-dur-text) var(--cmp-deck-ease), transform var(--cmp-deck-dur) var(--cmp-deck-ease), filter var(--cmp-deck-dur-text) var(--cmp-deck-ease);
+  transition-delay: 0s;
+  }
+.slide.on .r {
+  opacity: var(--cmp-deck-opaque);
+  transform: none;
+  filter: none;
+  transition-delay: calc(var(--cmp-deck-order, 0) * var(--cmp-deck-stagger) + var(--cmp-deck-delay));
+  }
+.r[data-i="0"] {
+  --cmp-deck-order: 0;
+  }
+.r[data-i="1"] {
+  --cmp-deck-order: 1;
+  }
+.r[data-i="2"] {
+  --cmp-deck-order: 2;
+  }
+.r[data-i="3"] {
+  --cmp-deck-order: 3;
+  }
+.r[data-i="4"] {
+  --cmp-deck-order: 4;
+  }
+.r[data-i="5"] {
+  --cmp-deck-order: 5;
+  }
+.r[data-i="6"] {
+  --cmp-deck-order: 6;
+  }
+.r[data-i="7"] {
+  --cmp-deck-order: 7;
+  }
+.r[data-i="8"] {
+  --cmp-deck-order: 8;
+  }
+.eyebrow-d {
+  font-size: var(--cmp-deck-caption);
+  letter-spacing: var(--cmp-deck-tracking-wide);
+  color: var(--cmp-deck-sand);
+  font-weight: 500;
+  }
+.eyebrow-d span {
+  color: var(--cmp-deck-ink3);
+  margin-left: var(--cmp-deck-u14);
+  letter-spacing: var(--cmp-deck-tracking-label);
+  }
+.deck h1 {
+  font-size: var(--cmp-deck-title);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: var(--cmp-deck-tracking-tight);
+  }
+.deck h2 {
+  font-size: var(--cmp-deck-heading);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: var(--cmp-deck-tracking-tight);
+  }
+.deck h3 {
+  font-size: var(--cmp-deck-u36);
+  font-weight: 600;
+  line-height: 1.3;
+  }
+.deck p {
+  color: var(--cmp-deck-ink2);
+  }
+.lead-d {
+  font-size: var(--cmp-deck-lead);
+  line-height: 1.5;
+  }
+.chip {
+  display: inline-block;
+  font-size: var(--cmp-deck-caption);
+  padding: var(--cmp-deck-u8) var(--cmp-deck-u18);
+  border: var(--cmp-deck-u1) solid var(--cmp-deck-line);
+  border-radius: var(--cmp-deck-pill);
+  color: var(--cmp-deck-ink2);
+  margin: 0 var(--cmp-deck-u10) 0 0;
+  }
+.btn-d {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cmp-deck-u12);
+  font-size: var(--cmp-deck-body-m);
+  padding: var(--cmp-deck-u18) var(--cmp-deck-u32);
+  border-radius: var(--cmp-deck-pill);
+  border: var(--cmp-deck-u1) solid var(--cmp-deck-line);
+  color: var(--cmp-deck-ink);
+  background: var(--cmp-deck-glass);
+  text-decoration: none;
+  transition: background var(--cmp-deck-dur-fast), transform var(--cmp-deck-dur-fast);
+  }
+.btn-d:hover {
+  background: var(--cmp-deck-line);
+  }
+.btn-d.pri {
+  background: var(--cmp-deck-ink);
+  color: var(--cmp-deck-on-light);
+  border-color: var(--cmp-deck-ink);
+  }
+.btn-d .icon {
+  width: var(--cmp-deck-u26);
+  height: var(--cmp-deck-u26);
+  }
+
+/* 표지 */
+.s-cover .t {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  right: var(--cmp-deck-inset);
+  bottom: var(--cmp-deck-u96);
+  }
+.s-cover h1 {
+  margin-top: var(--cmp-deck-u14);
+  max-width: var(--cmp-deck-u1500);
+  }
+.s-cover .lead-d {
+  margin-top: var(--cmp-deck-u28);
+  max-width: var(--cmp-deck-u1400);
+  }
+.s-cover .meta {
+  margin-top: var(--cmp-deck-u34);
+  }
+
+/* 관찰 지점 */
+.s-observe .head {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u88);
+  }
+.s-observe .list {
+  position: absolute;
+  left: var(--cmp-deck-u1300);
+  top: var(--cmp-deck-u180);
+  width: var(--cmp-deck-u500);
+  display: grid;
+  gap: var(--cmp-deck-u40);
+  }
+.card-d {
+  border-left: var(--cmp-deck-u3) solid var(--cmp-deck-sand);
+  padding-left: var(--cmp-deck-u28);
+  }
+.card-d b {
+  color: var(--cmp-deck-sand);
+  margin-right: var(--cmp-deck-u12);
+  font-weight: 600;
+  }
+.card-d p {
+  font-size: var(--cmp-deck-body-m);
+  margin-top: var(--cmp-deck-u8);
+  }
+.s-observe .caption {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u842);
+  width: var(--cmp-deck-hero-w);
+  font-size: var(--cmp-deck-caption);
+  color: var(--cmp-deck-ink3);
+  }
+
+/* 촬영 설계 */
+.s-design .head {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u96);
+  width: var(--cmp-deck-u900);
+  }
+.s-design h2 {
+  white-space: nowrap;
+  }
+.s-design .steps {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u270);
+  width: var(--cmp-deck-u860);
+  display: grid;
+  gap: var(--cmp-deck-u24);
+  }
+.step-d {
+  display: grid;
+  grid-template-columns: var(--cmp-deck-u100) 1fr;
+  gap: var(--cmp-deck-u20);
+  padding-top: var(--cmp-deck-u24);
+  border-top: var(--cmp-deck-u1) solid var(--cmp-deck-line);
+  }
+.step-d .n {
+  font-size: var(--cmp-deck-u80);
+  font-weight: 300;
+  color: var(--cmp-deck-sand);
+  line-height: 1;
+  }
+.step-d p {
+  font-size: var(--cmp-deck-body-m);
+  margin-top: var(--cmp-deck-u8);
+  }
+.s-design .aside {
+  position: absolute;
+  left: var(--cmp-deck-u1040);
+  top: calc(var(--cmp-deck-u220) + min(var(--cmp-deck-small-h), calc(var(--cmp-deck-small-w) / var(--cmp-deck-ratio-active))) + var(--cmp-deck-gap-sm));
+  width: var(--cmp-deck-u760);
+  }
+.s-design .aside p {
+  font-size: var(--cmp-deck-caption);
+  color: var(--cmp-deck-ink3);
+  }
+
+/* 원본 영상 */
+.s-video .head {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u88);
+  }
+.s-video .frame {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u180);
+  width: var(--cmp-deck-video-w);
+  height: var(--cmp-deck-video-h);
+  border-radius: var(--cmp-deck-radius);
+  overflow: hidden;
+  background: var(--cmp-deck-blackout);
+  }
+.s-video iframe,
+.s-video video {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  }
+.s-video .media-unavailable {
+  height: 100%;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: var(--cmp-deck-u24);
+  padding: var(--cmp-deck-u64);
+  }
+.s-video .aside {
+  position: absolute;
+  left: var(--cmp-deck-u1400);
+  top: var(--cmp-deck-u180);
+  width: var(--cmp-deck-u400);
+  display: grid;
+  gap: var(--cmp-deck-u32);
+  }
+.s-video .aside h3 {
+  font-size: var(--cmp-deck-u30);
+  }
+.s-video .aside p {
+  font-size: var(--cmp-deck-u24);
+  margin-top: var(--cmp-deck-u6);
+  line-height: 1.45;
+  }
+.s-video .actions {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u880);
+  display: flex;
+  align-items: center;
+  gap: var(--cmp-deck-u16);
+  }
+.s-video .status {
+  font-size: var(--cmp-deck-caption);
+  color: var(--cmp-deck-ink3);
+  }
+
+/* 제작 노트 */
+.s-note .head {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u88);
+  right: var(--cmp-deck-inset);
+  }
+.s-note .head h2 {
+  margin-top: var(--cmp-deck-u10);
+  font-size: var(--cmp-deck-u56);
+  }
+.s-note .rows {
+  position: absolute;
+  left: var(--cmp-deck-u960);
+  top: var(--cmp-deck-u198);
+  width: var(--cmp-deck-u840);
+  display: grid;
+  gap: var(--cmp-deck-u12);
+  }
+.note-row-d {
+  display: grid;
+  grid-template-columns: var(--cmp-deck-u56) 1fr;
+  gap: var(--cmp-deck-u24);
+  padding-top: var(--cmp-deck-u14);
+  border-top: var(--cmp-deck-u1) solid var(--cmp-deck-line);
+  }
+.note-row-d .num {
+  font-size: var(--cmp-deck-u40);
+  color: var(--cmp-deck-sand);
+  font-weight: 300;
+  line-height: 1.1;
+  }
+.deck .note-entry {
+  display: block;
+  height: auto;
+  max-width: none;
+  margin: 0;
+  }
+.deck .note-row {
+  display: block;
+  padding: 0;
+  border: 0;
+  }
+.note-row-d h3 {
+  font-size: var(--cmp-deck-u30);
+  margin-bottom: var(--cmp-deck-u8);
+  color: var(--cmp-deck-sand);
+  }
+.note-row-d p {
+  font-size: var(--cmp-deck-body-m);
+  color: var(--cmp-deck-ink);
+  line-height: 1.42;
+  }
+.s-note .left {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: calc(var(--cmp-deck-u210) + min(var(--cmp-deck-small-h), calc(var(--cmp-deck-small-w) / var(--cmp-deck-ratio-active))) + var(--cmp-deck-gap-sm));
+  width: var(--cmp-deck-small-w);
+  display: grid;
+  gap: var(--cmp-deck-u18);
+  justify-items: start;
+  }
+.s-note .left p {
+  font-size: var(--cmp-deck-caption);
+  color: var(--cmp-deck-ink3);
+  }
+
+/* 적용 */
+.s-apply .t {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: 0;
+  bottom: 0;
+  width: var(--cmp-deck-u1160);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  }
+.s-apply h2 {
+  margin-top: var(--cmp-deck-u14);
+  font-size: var(--cmp-deck-u84);
+  }
+.s-apply .lead-d {
+  margin-top: var(--cmp-deck-u36);
+  color: var(--cmp-deck-ink);
+  }
+.s-apply .why {
+  margin-top: var(--cmp-deck-u24);
+  font-size: var(--cmp-deck-body-m);
+  color: var(--cmp-deck-ink2);
+  }
+.s-apply .next {
+  margin-top: var(--cmp-deck-u52);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cmp-deck-u16);
+  }
+
+
+/* 프롬프트 */
+.deck[data-kind="prompt"] .deck-hero {
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u180);
+  width: var(--cmp-deck-small-w);
+  height: var(--cmp-deck-small-h);
+  opacity: 0;
+  }
+.s-prompt .head {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u84);
+  width: var(--cmp-deck-u1680);
+  }
+.s-prompt .head h2 {
+  margin-top: var(--cmp-deck-u6);
+  font-size: var(--cmp-deck-u52);
+  }
+.s-prompt .purpose {
+  margin-top: var(--cmp-deck-u6);
+  font-size: var(--cmp-deck-u24);
+  color: var(--cmp-deck-ink);
+  }
+.s-prompt .limit {
+  margin-top: var(--cmp-deck-u4);
+  font-size: var(--cmp-deck-u18);
+  color: var(--cmp-deck-ink3);
+  }
+.prompt-tools {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u262);
+  width: var(--cmp-deck-u1680);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  }
+.prompt-tools .seg,
+.prompt-tools .tools {
+  display: flex;
+  gap: var(--cmp-deck-u10);
+  }
+.btn-d.mini {
+  font-size: var(--cmp-deck-u20);
+  padding: var(--cmp-deck-u6) var(--cmp-deck-u18);
+  }
+.btn-d.mini[aria-pressed="true"] {
+  background: var(--cmp-deck-ink);
+  color: var(--cmp-deck-on-light);
+  border-color: var(--cmp-deck-ink);
+  }
+.chain-sheet {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u316);
+  width: var(--cmp-deck-u1680);
+  background: var(--cmp-deck-surface);
+  border: var(--cmp-deck-u1) solid var(--cmp-deck-line);
+  border-radius: var(--cmp-deck-radius);
+  padding: var(--cmp-deck-u10) var(--cmp-deck-u24) var(--cmp-deck-u12);
+  }
+.chain-sheet .cols,
+.chain-set .pair {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  column-gap: var(--cmp-deck-u40);
+  }
+.chain-sheet .cols {
+  font-size: var(--cmp-deck-u16);
+  color: var(--cmp-deck-ink3);
+  padding-bottom: var(--cmp-deck-u6);
+  border-bottom: var(--cmp-deck-u1) solid var(--cmp-deck-line);
+  }
+.chain,
+.neg ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  }
+.chain li {
+  display: grid;
+  grid-template-columns: var(--cmp-deck-u56) 1fr;
+  font-size: var(--cmp-deck-u20);
+  line-height: 1.32;
+  padding: var(--cmp-deck-u3) 0;
+  border-bottom: var(--cmp-deck-u1) solid var(--cmp-deck-line);
+  }
+.chain li:last-child {
+  border-bottom: 0;
+  }
+.chain .sn {
+  color: var(--cmp-deck-ink3);
+  font-size: var(--cmp-deck-u16);
+  padding-top: var(--cmp-deck-u3);
+  }
+.chain .yes {
+  color: var(--cmp-deck-ink);
+  }
+.neg {
+  padding-top: var(--cmp-deck-u3);
+  }
+.neg-title {
+  font-size: var(--cmp-deck-u20);
+  line-height: 1.32;
+  color: var(--cmp-deck-no);
+  font-weight: 700;
+  padding: var(--cmp-deck-u3) 0;
+  }
+.neg li {
+  font-size: var(--cmp-deck-u20);
+  line-height: 1.32;
+  padding: var(--cmp-deck-u3) 0;
+  color: var(--cmp-deck-ink);
+  }
+.neg li b {
+  color: var(--cmp-deck-no);
+  font-weight: 700;
+  margin-left: var(--cmp-deck-u4);
+  }
+.chain-set.is-long {
+  max-height: var(--cmp-deck-u528);
+  overflow-y: auto;
+  }
+.chain-set.is-long .chain li,
+.chain-set.is-long .neg li,
+.chain-set.is-long .neg-title {
+  font-size: var(--cmp-deck-u18);
+  }
+.s-prompt .judge {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u918);
+  width: var(--cmp-deck-u1680);
+  display: flex;
+  align-items: baseline;
+  gap: var(--cmp-deck-u28);
+  }
+.s-prompt .judge h3 {
+  font-size: var(--cmp-deck-u20);
+  color: var(--cmp-deck-sand);
+  white-space: nowrap;
+  }
+.s-prompt .judge ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--cmp-deck-u28);
+  }
+.s-prompt .judge li {
+  font-size: var(--cmp-deck-u18);
+  color: var(--cmp-deck-ink2);
+  }
+.s-prompt .boundary {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  top: var(--cmp-deck-u952);
+  width: var(--cmp-deck-u1500);
+  font-size: var(--cmp-deck-u16);
+  color: var(--cmp-deck-ink3);
+  }
+
+/* 크롬: 상단 표시줄, 하단 단계 이동 */
+.hud {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  right: var(--cmp-deck-inset);
+  top: var(--cmp-deck-top);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--cmp-deck-caption);
+  color: var(--cmp-deck-ink2);
+  z-index: var(--cmp-deck-layer-hud);
+  }
+.hud a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cmp-deck-u10);
+  padding: var(--cmp-deck-u8) var(--cmp-deck-u4);
+  }
+.hud a:hover {
+  color: var(--cmp-deck-ink);
+  }
+.hud .icon {
+  width: var(--cmp-deck-u24);
+  height: var(--cmp-deck-u24);
+  }
+.stepnav {
+  position: absolute;
+  left: var(--cmp-deck-inset);
+  right: var(--cmp-deck-inset);
+  bottom: var(--cmp-deck-u28);
+  display: flex;
+  align-items: center;
+  gap: var(--cmp-deck-u8);
+  z-index: var(--cmp-deck-layer-nav);
+  }
+.stepnav button.step-tab {
+  background: none;
+  border: 0;
+  color: var(--cmp-deck-ink3);
+  font-size: var(--cmp-deck-caption);
+  padding: var(--cmp-deck-u10) var(--cmp-deck-u18);
+  border-radius: var(--cmp-deck-pill);
+  transition: color var(--cmp-deck-dur-fast), background var(--cmp-deck-dur-fast);
+  }
+.stepnav button.step-tab[aria-current="step"] {
+  color: var(--cmp-deck-ink);
+  background: var(--cmp-deck-glass);
+  }
+.stepnav .arrows {
+  margin-left: auto;
+  display: flex;
+  gap: var(--cmp-deck-u12);
+  }
+.stepnav .arrows button {
+  width: var(--cmp-deck-u64);
+  height: var(--cmp-deck-u64);
+  border-radius: 50%;
+  border: var(--cmp-deck-u1) solid var(--cmp-deck-line);
+  background: var(--cmp-deck-glass);
+  color: var(--cmp-deck-ink);
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(var(--cmp-deck-u8));
+  }
+.stepnav .arrows .icon {
+  width: var(--cmp-deck-u28);
+  height: var(--cmp-deck-u28);
+  }
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--cmp-deck-progress);
+  display: flex;
+  z-index: var(--cmp-deck-layer-top);
+  }
+.progress span {
+  flex: 1;
+  background: transparent;
+  transition: background var(--cmp-deck-dur-fast);
+  }
+.progress span.done {
+  background: var(--cmp-deck-sand);
+  }
+.deck :focus-visible {
+  outline: var(--cmp-deck-u3) solid var(--cmp-deck-ice);
+  outline-offset: var(--cmp-deck-u3);
+  }
+@media (prefers-reduced-motion: reduce) {
+  .deck *,
+  .deck-hero {
+    transition-duration: var(--cmp-deck-dur-instant) !important;
+    transition-delay: var(--cmp-deck-dur-none) !important;
+    }
+  }

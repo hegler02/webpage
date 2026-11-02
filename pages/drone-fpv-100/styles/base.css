@@ -1,0 +1,108 @@
+@font-face {
+  font-family: 'Pretendard Variable';
+  src: url('../assets/fonts/PretendardVariable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  }
+* {
+  box-sizing: border-box;
+  }
+html {
+  font-size: var(--sys-unit);
+  }
+body {
+  margin: 0;
+  font-family: var(--sys-font);
+  font-size: var(--sys-text-body);
+  font-weight: var(--sys-weight-regular);
+  line-height: var(--sys-leading-body);
+  color: var(--sys-text);
+  background: var(--sys-canvas);
+  word-break: keep-all;
+  overflow-wrap: normal;
+  font-synthesis: none;
+  }
+h1,h2,h3,p,figure,dl,dd {
+  margin: 0;
+  }
+h1,h2,h3 {
+  line-height: var(--sys-leading-title);
+  letter-spacing: var(--sys-tracking);
+  font-weight: var(--sys-weight-strong);
+  text-wrap: balance;
+  }
+h1 {
+  font-size: var(--sys-text-title);
+  }
+h2,h3 {
+  font-size: var(--sys-text-section);
+  }
+button,input,select {
+  font: inherit;
+  color: inherit;
+  }
+button,a {
+  touch-action: manipulation;
+  }
+button {
+  cursor: pointer;
+  }
+a {
+  color: inherit;
+  text-underline-offset: var(--sys-space-tiny);
+  }
+button:disabled {
+  opacity: var(--sys-disabled);
+  cursor: default;
+  }
+[hidden] {
+  display: none !important;
+  }
+:focus-visible {
+  outline: var(--sys-focus-width) solid var(--sys-focus-color);
+  outline-offset: var(--sys-focus-offset);
+  }
+svg {
+  display: block;
+  }
+.icon {
+  width: var(--sys-icon);
+  height: var(--sys-icon);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--sys-icon-stroke);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+  }
+.skip {
+  position: absolute;
+  top: var(--sys-offscreen);
+  padding: var(--sys-space-default);
+  background: var(--sys-surface);
+  z-index: var(--sys-layer);
+  }
+.skip:focus {
+  top: 0;
+  }
+.muted {
+  color: var(--sys-text-muted);
+  }
+.eyebrow {
+  color: var(--sys-accent);
+  font-size: var(--sys-text-caption);
+  font-weight: var(--sys-weight-strong);
+  }
+.title-word {
+  display: inline-block;
+  }
+.empty {
+  text-align: center;
+  padding: var(--sys-space-large);
+  background: var(--sys-surface);
+  border-radius: var(--sys-radius-panel);
+  }
+.empty p {
+  margin-block: var(--sys-space-default);
+  }

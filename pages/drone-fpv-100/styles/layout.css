@@ -1,0 +1,150 @@
+body {
+  min-height: var(--sys-screen);
+  }
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sys-space-default);
+  min-height: var(--sys-header);
+  padding-inline: var(--sys-page-inset);
+  }
+main {
+  padding: var(--sys-space-default) var(--sys-page-inset);
+  }
+.interactive body {
+  height: var(--sys-screen);
+  display: grid;
+  grid-template-rows: auto minmax(0,1fr);
+  }
+.interactive main {
+  min-height: 0;
+  }
+.catalogue {
+  display: grid;
+  grid-template-rows: auto auto minmax(0,1fr) auto;
+  gap: var(--sys-space-compact);
+  height: 100%;
+  }
+.catalogue-bottom,.catalogue-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sys-space-default);
+  }
+.filters {
+  display: grid;
+  grid-template-columns: minmax(0,2fr) repeat(3,minmax(0,1fr)) auto;
+  align-items: end;
+  gap: var(--sys-space-compact);
+  }
+.case-grid {
+  display: grid;
+  grid-template-columns: var(--sys-catalogue-columns);
+  grid-template-rows: var(--cmp-catalogue-rows);
+  column-gap: var(--sys-space-default);
+  row-gap: 0;
+  min-height: 0;
+  }
+.lesson {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto minmax(0,1fr);
+  gap: var(--sys-space-compact);
+  }
+.lesson-heading {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-items: start;
+  gap: var(--sys-space-default);
+  }
+.lesson-heading h1 {
+  margin-top: var(--sys-space-tiny);
+  }
+.lesson-heading .summary {
+  margin-top: var(--sys-space-small);
+  }
+.lesson-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sys-space-default);
+  }
+.lesson-surface,.lesson-view {
+  min-height: 0;
+  }
+.lesson-view {
+  height: 100%;
+  }
+.analysis-grid {
+  display: grid;
+  grid-template-columns: var(--cmp-lesson-columns);
+  gap: var(--cmp-lesson-gap);
+  height: 100%;
+  min-height: 0;
+  }
+.scene-column {
+  display: grid;
+  grid-template-rows: minmax(0,1fr) auto;
+  gap: var(--sys-space-compact);
+  min-width: 0;
+  min-height: 0;
+  }
+.media-figure {
+  display: grid;
+  grid-template-rows: minmax(0,1fr) auto;
+  min-height: 0;
+  margin: 0;
+  }
+.image-wrap {
+  position: relative;
+  min-height: 0;
+  }
+.image-wrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  }
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: var(--sys-space-compact);
+  }
+.explanation {
+  display: grid;
+  align-content: start;
+  gap: var(--sys-space-default);
+  min-width: 0;
+  }
+.technique-list {
+  display: grid;
+  gap: var(--sys-space-default);
+  }
+.video-layout {
+  display: grid;
+  grid-template-columns: var(--cmp-lesson-columns);
+  gap: var(--cmp-lesson-gap);
+  height: 100%;
+  }
+.video-frame {
+  position: relative;
+  min-height: var(--cmp-media-min);
+  }
+.video-frame iframe,.video-frame video {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  }
+.video-main {
+  display: grid;
+  grid-template-rows: minmax(0,1fr) auto;
+  gap: var(--sys-space-small);
+  min-height: 0;
+  }
+.video-aside {
+  display: grid;
+  align-content: start;
+  gap: var(--sys-space-default);
+  }

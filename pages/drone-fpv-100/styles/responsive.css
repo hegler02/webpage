@@ -1,0 +1,221 @@
+@media (max-width: 900px) {
+  html {
+  font-size: var(--sys-mobile-unit);
+  }
+.interactive body {
+  height: auto;
+  display: block;
+  }
+.site-header {
+  padding: var(--sys-space-compact) var(--sys-space-default);
+  flex-wrap: wrap;
+  }
+main {
+  padding: var(--sys-space-default);
+  }
+.catalogue,.lesson {
+  height: auto;
+  }
+.catalogue-title,.catalogue-bottom,.lesson-toolbar {
+  align-items: start;
+  flex-wrap: wrap;
+  }
+.filters {
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+.filters .search-field {
+  grid-column: 1 / -1;
+  }
+.case-grid {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  row-gap: var(--sys-space-default);
+  }
+.case-card {
+  grid-row: auto;
+  grid-template-columns: minmax(0,1fr) minmax(0,1.4fr);
+  grid-template-rows: auto;
+  }
+.card-copy,.card-summary,.card-summary tbody {
+  grid-row: auto;
+  grid-template-rows: auto;
+  }
+.card-visual {
+  min-height: var(--sys-media-min);
+  border-radius: var(--cmp-card-radius) 0 0 var(--cmp-card-radius);
+  }
+.analysis-grid,.video-layout {
+  grid-template-columns: 1fr;
+  height: auto;
+  }
+.lesson-heading {
+  grid-template-columns: 1fr;
+  }
+.scene-column {
+  grid-template-rows: auto auto;
+  }
+.image-wrap {
+  aspect-ratio: var(--sys-video-ratio);
+  }
+.video-frame {
+  aspect-ratio: var(--sys-video-ratio);
+  min-height: var(--sys-mobile-media);
+  }
+.lesson-view {
+  height: auto;
+  }
+.focus-grid {
+  grid-template-columns: 1fr;
+  }
+.explanation,.video-aside {
+  margin-top: var(--sys-space-default);
+  }
+.tabs {
+  flex-wrap: wrap;
+  }
+.header-context {
+  display: none;
+  }
+.note-book,.note-entry {
+  height: auto;
+  }
+.note-heading,.note-body {
+  padding-left: 0;
+  }
+.note-body {
+  display: block;
+  }
+.note-row {
+  grid-template-columns: 1fr;
+  gap: var(--sys-space-small);
+  }
+.note-footer {
+  flex-wrap: wrap;
+  }
+.lesson-notes .lesson-heading h1 {
+  font-size: var(--sys-text-title);
+  }
+body:has(.lesson-notes) .site-header,body:has(.lesson-notes) main {
+  padding-inline: var(--sys-space-default);
+  }
+.note-prose {
+  font-size: var(--sys-text-body);
+  }
+}
+@media (max-width: 520px) {
+  .case-card {
+  grid-template-columns: 1fr;
+  }
+.card-visual {
+  aspect-ratio: var(--sys-video-ratio);
+  border-radius: var(--cmp-card-radius) var(--cmp-card-radius) 0 0;
+  }
+.tabs button {
+  padding-inline: var(--sys-space-compact);
+  }
+.lesson-surface {
+  padding: var(--sys-space-default);
+  }
+.case-nav {
+  flex-wrap: wrap;
+  }
+}
+@media print {
+  .interactive body {
+  height: auto;
+  display: block;
+  }
+.lesson,.lesson-view,.catalogue {
+  height: auto;
+  display: block;
+  }
+.tabs,.filters,.case-nav,.page-nav {
+  display: none;
+  }
+}
+@media (max-width: 900px) {
+  :root {
+  --ref-deck-unit: 1px;
+  }
+  body[data-mode="lesson"] {
+  overflow: auto;
+  height: auto;
+  }
+.deck-fit {
+  position: static;
+  }
+.deck {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  transform: none;
+  padding: var(--sys-space-default);
+  font-size: var(--sys-text-body);
+  }
+.deck-hero {
+  position: static;
+  width: auto;
+  height: auto;
+  aspect-ratio: var(--sys-video-ratio);
+  opacity: var(--cmp-deck-opaque) !important;
+  border-radius: var(--sys-radius-card) !important;
+  transition: none;
+  }
+.deck-hero::after {
+  display: none;
+  }
+.slide,.slide .t,.slide .head,.slide .list,.slide .steps,.slide .aside,.slide .frame,.slide .rows,.slide .left,.slide .actions,.slide .caption {
+  position: static;
+  width: auto;
+  height: auto;
+  inset: auto;
+  }
+.slide {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sys-space-section);
+  padding-block: var(--sys-space-large);
+  pointer-events: auto;
+  }
+.slide .r {
+  opacity: var(--cmp-deck-opaque);
+  transform: none;
+  filter: none;
+  }
+.deck h1 {
+  font-size: var(--sys-text-title);
+  }
+.deck h2,.s-apply h2,.s-note .head h2 {
+  font-size: var(--sys-text-card);
+  }
+.deck h3,.step-d .n,.note-row-d .num {
+  font-size: var(--sys-text-reading);
+  }
+.lead-d,.step-d p,.card-d p,.note-row-d p,.s-video .aside p,.s-apply .why {
+  font-size: var(--sys-text-body);
+  }
+.s-video .frame {
+  aspect-ratio: var(--sys-video-ratio);
+  min-height: var(--sys-mobile-media);
+  }
+.slide .actions {
+  flex-wrap: wrap;
+  }
+.stepnav {
+  position: sticky;
+  bottom: 0;
+  overflow-x: auto;
+  background: var(--cmp-deck-bg);
+  padding: var(--sys-space-compact);
+  }
+.step-tab {
+  white-space: nowrap;
+  }
+.stepnav .arrows,.hud,.progress {
+  display: none;
+  }
+.hud {
+  position: static;
+  }
+}

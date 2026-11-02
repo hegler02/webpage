@@ -1,0 +1,162 @@
+.lesson-title-work,.lesson-subtitle {
+  display: none;
+}
+body:has(.lesson-notes) .site-header,body:has(.lesson-notes) main {
+  padding-inline: var(--cmp-notes-page-inset);
+}
+body:has(.lesson-notes) .site-header {
+  background: var(--sys-clear);
+}
+body:has(.lesson-notes) .brand {
+  font-weight: var(--sys-weight-regular);
+}
+.lesson-notes .lesson-title-full,.lesson-notes .summary,.lesson-notes .source-credit {
+  display: none;
+}
+.lesson-notes .lesson-title-work,.lesson-notes .lesson-subtitle {
+  display: block;
+}
+.lesson-notes .lesson-heading h1 {
+  font-size: var(--cmp-notes-case-title);
+  font-weight: var(--sys-weight-regular);
+}
+.lesson-subtitle {
+  font-size: var(--sys-text-reading);
+  color: var(--sys-text-muted);
+  margin-top: var(--sys-space-tiny);
+}
+.lesson-notes .lesson-toolbar {
+  border-bottom: var(--sys-border-width) solid var(--sys-border-color);
+}
+.lesson-notes .tabs {
+  padding: 0;
+  gap: var(--sys-space-large);
+  background: var(--sys-clear);
+}
+.lesson-notes .tabs button {
+  border: 0;
+  border-bottom: var(--cmp-notes-tab-underline) solid var(--sys-clear);
+  border-radius: 0;
+  background: var(--sys-clear);
+  padding-inline: 0;
+  color: var(--sys-text-muted);
+  font-weight: var(--sys-weight-regular);
+}
+.lesson-notes .tabs button[aria-selected=true] {
+  border-bottom-color: var(--sys-text);
+  color: var(--sys-text);
+}
+.lesson-notes .tabs button:hover {
+  color: var(--sys-text);
+}
+.lesson-notes .lesson-surface {
+  border: 0;
+  border-radius: 0;
+  background: var(--sys-clear);
+  padding: 0;
+}
+.note-book {
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(0,1fr) auto;
+  min-height: 0;
+  padding-top: var(--cmp-notes-top);
+}
+.note-pages {
+  min-height: 0;
+}
+.note-entry {
+  display: grid;
+  grid-template-rows: auto minmax(0,1fr) auto;
+  height: 100%;
+  max-width: var(--cmp-notes-width);
+  margin-inline: auto;
+  min-height: 0;
+}
+.note-heading {
+  padding-left: var(--cmp-notes-inset);
+  padding-bottom: var(--sys-space-section);
+}
+.note-kind {
+  font-size: var(--sys-text-caption);
+  font-weight: var(--sys-weight-regular);
+  color: var(--sys-text-muted);
+  margin-bottom: var(--cmp-notes-heading-gap);
+}
+.note-heading h2 {
+  font-size: var(--cmp-notes-title);
+  font-weight: var(--sys-weight-regular);
+  text-wrap: pretty;
+}
+.note-body {
+  padding-left: var(--cmp-notes-inset);
+  display: grid;
+  grid-auto-rows: minmax(min-content,1fr);
+  min-height: 0;
+}
+.note-row {
+  display: grid;
+  grid-template-columns: var(--cmp-notes-label) minmax(0,1fr);
+  gap: var(--cmp-notes-gap);
+  align-items: baseline;
+  align-content: center;
+  padding-block: var(--cmp-notes-row-padding);
+  border-top: var(--sys-border-width) solid var(--sys-border-color);
+}
+.note-row:first-child {
+  border-top: 0;
+}
+.note-label {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sys-space-default);
+  font-size: var(--sys-text-body);
+  line-height: var(--sys-leading-body);
+  font-weight: var(--sys-weight-regular);
+  letter-spacing: normal;
+  color: var(--sys-text-subtle);
+  text-wrap: pretty;
+}
+.note-number {
+  font-variant-numeric: tabular-nums;
+}
+.note-prose {
+  min-width: 0;
+  font-size: var(--cmp-notes-body);
+  line-height: var(--sys-leading-body);
+  color: var(--sys-text);
+}
+.note-paragraph + .note-paragraph {
+  margin-top: var(--cmp-notes-paragraph-gap);
+}
+.note-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sys-space-section);
+  padding-block: var(--sys-space-default);
+  border-top: var(--sys-border-width) solid var(--sys-border-color);
+}
+.note-source {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sys-space-default);
+  color: var(--sys-text-subtle);
+  font-size: var(--sys-text-caption);
+}
+.note-source > :first-child,.note-footer .button {
+  flex: none;
+}
+.note-original {
+  margin: 0;
+  padding: var(--sys-space-default) var(--cmp-notes-inset);
+  color: var(--sys-text-muted);
+  font-size: var(--sys-text-small);
+}
+.note-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--sys-space-default);
+  font-size: var(--sys-text-small);
+}

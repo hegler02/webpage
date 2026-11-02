@@ -9,6 +9,31 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:message-body-plugins",
+      "kind": "work",
+      "title": "도구가 바뀌어도 메시지는 이어진다 — 미리내맨 플러그인 안내",
+      "summary": "소리에서 코딩까지 일곱 미디어 도구를 내려받고, 내 환경에 설치해 배우던 제작을 이어가는 PC 강의 안내.",
+      "url": "https://mirinaeman.com/pages/message-body-plugins/",
+      "image": "/pages/profile/assets/thumbnails/message-body-plugins.webp",
+      "alt": "소리 파형과 필름, 유리 화면이 하나로 이어지는 흑백 미디어 조형",
+      "year": "2026",
+      "tags": [
+        "slide",
+        "lecture",
+        "education",
+        "plugins",
+        "message-body",
+        "gestalt"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "소리에서 코딩까지 일곱 미디어 도구를 내려받고, 내 환경에 설치해 배우던 제작을 이어가는 PC 강의 안내."
+        }
+      ]
+    },
+    {
       "id": "work:drone-matchup-cinema",
       "kind": "work",
       "title": "서울 상공 — 인과관계는 내가 연출한다",
@@ -2602,6 +2627,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:message-body-plugins",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:drone-matchup-cinema",
       "target": "creator:joonho",

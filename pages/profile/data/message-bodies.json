@@ -1488,6 +1488,36 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "message-body-plugins",
+      "title": "도구가 바뀌어도 메시지는 이어진다 — 미리내맨 플러그인 안내",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "creator-tools",
+        "official-documentation"
+      ],
+      "tags": [
+        "slide",
+        "lecture",
+        "education",
+        "plugins",
+        "message-body",
+        "gestalt"
+      ],
+      "message_sentence": "소리에서 코딩까지 일곱 미디어 도구를 내려받고, 내 환경에 설치해 배우던 제작을 이어가는 PC 강의 안내.",
+      "thumbnail": {
+        "path": "assets/thumbnails/message-body-plugins.webp",
+        "alt": "소리 파형과 필름, 유리 화면이 하나로 이어지는 흑백 미디어 조형",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/message-body-plugins/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-11-02T00:02:27.084307+00:00",
+      "latest_deployed_at": "2026-11-02T00:02:27.084307+00:00"
+    },
+    {
       "body_id": "message-body-slide",
       "title": "말에 몸을 입히다",
       "body_type": "SLIDEBODY",

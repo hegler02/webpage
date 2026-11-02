@@ -16,5 +16,6 @@ export function initCatalogue(){
  form.addEventListener('input',()=>{page=0;show();});form.addEventListener('change',()=>{page=0;show();});
  form.addEventListener('reset',event=>{event.preventDefault();for(const key of fields)form.elements[key].value='';page=0;show();});
  root.querySelector('#empty-reset').addEventListener('click',()=>{form.reset();form.elements.query.focus();});
+ addEventListener('keydown',event=>{if(event.altKey||event.ctrlKey||event.metaKey||event.target.closest('input,select,textarea'))return;if(event.key==='ArrowRight'&&!root.querySelector('#page-next').disabled){page++;show();event.preventDefault();}else if(event.key==='ArrowLeft'&&!root.querySelector('#page-prev').disabled){page--;show();event.preventDefault();}});
  root.querySelector('#page-prev').addEventListener('click',()=>{page--;show();});root.querySelector('#page-next').addEventListener('click',()=>{page++;show();});show();
 }

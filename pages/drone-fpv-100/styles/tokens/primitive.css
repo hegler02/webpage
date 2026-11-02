@@ -180,4 +180,18 @@
   --ref-deck-u952: calc(952 * var(--ref-deck-unit));
   --ref-deck-u2: calc(2 * var(--ref-deck-unit));
   --ref-deck-u528: calc(528 * var(--ref-deck-unit));
+  --ref-deck-u196: calc(196 * var(--ref-deck-unit));
+  --ref-deck-u560: calc(560 * var(--ref-deck-unit));
+  --ref-deck-u320: calc(320 * var(--ref-deck-unit));
+  --ref-deck-u290: calc(290 * var(--ref-deck-unit));
+  --ref-deck-u19: calc(19 * var(--ref-deck-unit));
+  --ref-deck-u94: calc(94 * var(--ref-deck-unit));
+  --ref-deck-u340: calc(340 * var(--ref-deck-unit));
+  --ref-deck-u44: calc(44 * var(--ref-deck-unit));
+  --ref-deck-u282: calc(282 * var(--ref-deck-unit));
+  --ref-deck-u17: calc(17 * var(--ref-deck-unit));
+  --ref-deck-u274: calc(274 * var(--ref-deck-unit));
+  --ref-deck-scrim: rgba(10, 12, 15, 0.72);
+  --ref-deck-disabled: 0.4;
+  --ref-deck-u292: calc(292 * var(--ref-deck-unit));
 }

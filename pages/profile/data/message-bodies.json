@@ -688,6 +688,39 @@
       "latest_deployed_at": "2026-10-15T07:51:16.443733+00:00"
     },
     {
+      "body_id": "drone-fpv-100",
+      "title": "드론·FPV 촬영 사례 100선",
+      "body_type": "KNOWLEDGEBODY",
+      "source_kinds": [
+        "education",
+        "creator-primary-sources",
+        "case-study",
+        "generated-teaching-illustration",
+        "causal-chain-prompts"
+      ],
+      "tags": [
+        "drone",
+        "fpv",
+        "cinematography",
+        "lecture",
+        "case-study",
+        "causal-chain",
+        "kling"
+      ],
+      "message_sentence": "드론·FPV 촬영 100개 사례를 장면 읽기·촬영 설계·원본 영상·번역한 제작 노트로 읽고, 단문 인과 체인으로 Kling 프롬프트를 만들어 직접 시험해 보는 사례 도감입니다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/drone-fpv-100.webp",
+        "alt": "눈 덮인 도로와 사막 도로에서 같은 자동차의 구도를 맞춘 가상 학습 장면을 나란히 비교한 그림",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/drone-fpv-100/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-11-02T04:12:36+00:00",
+      "latest_deployed_at": "2026-11-02T04:12:36+00:00"
+    },
+    {
       "body_id": "drone-matchup-cinema",
       "title": "서울 상공 — 인과관계는 내가 연출한다",
       "body_type": "STORYBODY",

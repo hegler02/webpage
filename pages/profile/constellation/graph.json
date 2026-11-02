@@ -9,6 +9,32 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:drone-fpv-100",
+      "kind": "work",
+      "title": "드론·FPV 촬영 사례 100선",
+      "summary": "드론·FPV 촬영 100개 사례를 장면 읽기·촬영 설계·원본 영상·번역한 제작 노트로 읽고, 단문 인과 체인으로 Kling 프롬프트를 만들어 직접 시험해 보는 사례 도감입니다.",
+      "url": "https://mirinaeman.com/pages/drone-fpv-100/",
+      "image": "/pages/profile/assets/thumbnails/drone-fpv-100.webp",
+      "alt": "눈 덮인 도로와 사막 도로에서 같은 자동차의 구도를 맞춘 가상 학습 장면을 나란히 비교한 그림",
+      "year": "2026",
+      "tags": [
+        "drone",
+        "fpv",
+        "cinematography",
+        "lecture",
+        "case-study",
+        "causal-chain",
+        "kling"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "드론·FPV 촬영 100개 사례를 장면 읽기·촬영 설계·원본 영상·번역한 제작 노트로 읽고, 단문 인과 체인으로 Kling 프롬프트를 만들어 직접 시험해 보는 사례 도감입니다."
+        }
+      ]
+    },
+    {
       "id": "work:message-body-plugins",
       "kind": "work",
       "title": "도구가 바뀌어도 메시지는 이어진다 — 미리내맨 플러그인 안내",
@@ -2627,6 +2653,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:drone-fpv-100",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:message-body-plugins",
       "target": "creator:joonho",

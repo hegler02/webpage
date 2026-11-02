@@ -975,6 +975,25 @@ body[data-mode="catalogue"] main {
   font-weight: var(--sys-weight-regular);
   color: var(--cmp-deck-ink3);
   }
+.g-status {
+  display: inline-block;
+  width: max-content;
+  margin-top: var(--sys-space-tiny);
+  padding: var(--sys-space-tiny) var(--sys-space-compact);
+  font-size: var(--sys-text-caption);
+  font-weight: var(--sys-weight-strong);
+  border-radius: var(--cmp-deck-pill);
+  border: var(--sys-border-width) solid var(--cmp-deck-line);
+  }
+.g-status.g-ok {
+  color: var(--cmp-deck-ice);
+  }
+.g-status.g-test {
+  color: var(--cmp-deck-sand);
+  }
+.g-status.g-no {
+  color: var(--cmp-deck-no);
+  }
 .g-def {
   color: var(--cmp-deck-ink);
   font-size: var(--sys-text-body);

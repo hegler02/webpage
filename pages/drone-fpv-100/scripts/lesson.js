@@ -42,7 +42,7 @@ export function initLesson(){
   const toggle=sheet.querySelector('[data-lang-toggle]')||document.createElement('button'),copies=[...sheet.querySelectorAll('[data-copy]')];
   let english=false;
   const showLists=()=>{sets.forEach(set=>{const hasEnglish=Boolean(set.querySelector('[data-chain="en"]'));set.querySelectorAll('[data-chain]').forEach(list=>{list.hidden=list.dataset.chain!==(english&&hasEnglish?'en':'ko');});});const current=sets.find(set=>!set.hidden);toggle.disabled=!current.querySelector('[data-chain="en"]');toggle.textContent=english&&!toggle.disabled?'한국어':'EN';};
-  setButtons.forEach(button=>button.addEventListener('click',()=>{setButtons.forEach(other=>other.setAttribute('aria-pressed',String(other===button)));sets.forEach(set=>{set.hidden=set.dataset.chainSet!==button.dataset.set;});showLists();}));
+  setButtons.forEach(button=>button.addEventListener('click',()=>{setButtons.forEach(other=>other.setAttribute('aria-pressed',String(other===button)));sets.forEach(set=>{set.hidden=set.dataset.chainSet!==button.dataset.set;});sheet.querySelectorAll('[data-for]').forEach(el=>{el.hidden=el.dataset.for!==button.dataset.set;});showLists();}));
   toggle.addEventListener('click',()=>{english=!english;showLists();});
   const lines=(pair,part)=>part==='prompt'?[...pair.querySelectorAll('.chain .yes')].map(item=>item.textContent):[...pair.querySelectorAll('.neg li')].map(item=>item.textContent.trim());
   copies.forEach(copy=>{

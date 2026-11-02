@@ -132,4 +132,42 @@ html {
 .catalogue .cat-note {
   font-size: var(--sys-text-caption);
   }
+.s-prompt .prompt-tools,.s-prompt .chain-sheet,.s-prompt .judge {
+  position: static;
+  width: auto;
+  }
+.s-prompt .prompt-tools,.s-prompt .seg,.s-prompt .tools,.s-prompt .judge,.s-prompt .judge ul {
+  flex-wrap: wrap;
+  }
+.s-prompt .prompt-tools {
+  gap: var(--sys-space-small);
+  }
+.chain-sheet .cols {
+  display: none;
+  }
+.chain-set .pair {
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--sys-space-default);
+  }
+.chain-set.is-long {
+  max-height: none;
+  overflow: visible;
+  }
+.chain li,.neg li,.neg-title,.chain-set.is-long .chain li,.chain-set.is-long .neg li {
+  font-size: var(--sys-text-small);
+  }
+.chain li {
+  grid-template-columns: var(--sys-space-large) minmax(0, 1fr);
+  }
+.s-prompt .judge {
+  display: grid;
+  gap: var(--sys-space-small);
+  }
+.s-prompt .judge ul {
+  display: grid;
+  gap: var(--sys-space-tiny);
+  }
+.s-prompt .judge li,.s-prompt .judge h3,.s-prompt .head h2 {
+  font-size: var(--sys-text-small);
+  }
 }

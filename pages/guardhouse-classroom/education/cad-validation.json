@@ -1,0 +1,69 @@
+{
+  "verifiedAt": "2026-11-03T23:19:47.274Z",
+  "results": [
+    {
+      "id": "S-101",
+      "sha256": "c2d18259dfd5f59f39c9f8262c7c22fc910652a228332a3ecf1631543c4911b6",
+      "entities": 3565,
+      "geometryAndTexts": 3563,
+      "nativeDimensions": 2,
+      "passed": true
+    },
+    {
+      "id": "S-102",
+      "sha256": "492a73dc0e11c10ad47fcb634ffe4f1ed60f9435f50d4b6edb9e105a8299d17b",
+      "entities": 616,
+      "geometryAndTexts": 615,
+      "nativeDimensions": 1,
+      "passed": true
+    },
+    {
+      "id": "E-101",
+      "sha256": "b1c37f25eb00db87d040d804427fec6d1850671938861912628ef0d3901b7be6",
+      "entities": 1692,
+      "geometryAndTexts": 1691,
+      "nativeDimensions": 1,
+      "passed": true
+    },
+    {
+      "id": "E-102",
+      "sha256": "feea37bcde7b44d41e1db8670d5f74b09b9279360775017b55ed65255cfc3d33",
+      "entities": 1642,
+      "geometryAndTexts": 1641,
+      "nativeDimensions": 1,
+      "passed": true
+    },
+    {
+      "id": "E-103",
+      "sha256": "3d10ef15999c58e6a1cf5d59562a6fc92f32bc07687f492379de19ec474f6893",
+      "entities": 107,
+      "geometryAndTexts": 107,
+      "nativeDimensions": 0,
+      "passed": true
+    },
+    {
+      "id": "F-101",
+      "sha256": "34e0843f0687926ce69a19177235563f615bfcc3f12428bf7cd31e4aa4dabc5a",
+      "entities": 1656,
+      "geometryAndTexts": 1656,
+      "nativeDimensions": 0,
+      "passed": true
+    },
+    {
+      "id": "F-102",
+      "sha256": "838bf2cf11fd1618f1af7e4eedac3b72177f75b5a3110d93cd0cd3cb553fb82d",
+      "entities": 47,
+      "geometryAndTexts": 47,
+      "nativeDimensions": 0,
+      "passed": true
+    },
+    {
+      "id": "M-101",
+      "sha256": "c5ed20bae4c5f70e5197f471f6b839c27e6de59154a5d0db10bcb2627ca0fece",
+      "entities": 30,
+      "geometryAndTexts": 30,
+      "nativeDimensions": 0,
+      "passed": true
+    }
+  ]
+}

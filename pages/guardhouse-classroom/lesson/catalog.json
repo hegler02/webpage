@@ -1,0 +1,1756 @@
+[
+  {
+    "id": "A-101",
+    "title": "1층 평면도",
+    "name": "A-101_1층_평면도_R4.dwg",
+    "dxf": "A-101_1층_평면도_R4.dxf",
+    "sha256": "60cd026edb80525e272a6ff693eef810d34f408ef4ded8b6e53fb3bb0a4a5bd1",
+    "entities": 1511,
+    "nativeDimensions": 11,
+    "dimensions": [
+      {
+        "handle": "5F7",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          5300,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 2400
+      },
+      {
+        "handle": "60A",
+        "a": [
+          5300,
+          5800
+        ],
+        "b": [
+          7300,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 2000
+      },
+      {
+        "handle": "619",
+        "a": [
+          7300,
+          5800
+        ],
+        "b": [
+          10900,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 3600
+      },
+      {
+        "handle": "628",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          10900,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 8000
+      },
+      {
+        "handle": "637",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          2900,
+          7600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 1800
+      },
+      {
+        "handle": "646",
+        "a": [
+          2900,
+          7600
+        ],
+        "b": [
+          2900,
+          9600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 2000
+      },
+      {
+        "handle": "655",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          2900,
+          9600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 3800
+      },
+      {
+        "handle": "687",
+        "a": [
+          5550,
+          9700
+        ],
+        "b": [
+          6450,
+          9700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 900
+      },
+      {
+        "handle": "696",
+        "a": [
+          9000,
+          9700
+        ],
+        "b": [
+          10800,
+          9700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 1800
+      },
+      {
+        "handle": "6A5",
+        "a": [
+          7350,
+          5700
+        ],
+        "b": [
+          8350,
+          5700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 1000
+      },
+      {
+        "handle": "6B4",
+        "a": [
+          9000,
+          5700
+        ],
+        "b": [
+          10800,
+          5700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 1800
+      }
+    ],
+    "bytes": 132425,
+    "checks": [
+      {
+        "handle": "5F7",
+        "expected": 2400,
+        "geometric": 2400,
+        "stored": 2400,
+        "pass": true
+      },
+      {
+        "handle": "60A",
+        "expected": 2000,
+        "geometric": 2000,
+        "stored": 2000,
+        "pass": true
+      },
+      {
+        "handle": "619",
+        "expected": 3600,
+        "geometric": 3600,
+        "stored": 3600,
+        "pass": true
+      },
+      {
+        "handle": "628",
+        "expected": 8000,
+        "geometric": 8000,
+        "stored": 8000,
+        "pass": true
+      },
+      {
+        "handle": "637",
+        "expected": 1800,
+        "geometric": 1800,
+        "stored": 1800,
+        "pass": true
+      },
+      {
+        "handle": "646",
+        "expected": 2000,
+        "geometric": 2000,
+        "stored": 2000,
+        "pass": true
+      },
+      {
+        "handle": "655",
+        "expected": 3800,
+        "geometric": 3800,
+        "stored": 3800,
+        "pass": true
+      },
+      {
+        "handle": "687",
+        "expected": 900,
+        "geometric": 900,
+        "stored": 900,
+        "pass": true
+      },
+      {
+        "handle": "696",
+        "expected": 1800,
+        "geometric": 1800,
+        "stored": 1800,
+        "pass": true
+      },
+      {
+        "handle": "6A5",
+        "expected": 1000,
+        "geometric": 1000,
+        "stored": 1000,
+        "pass": true
+      },
+      {
+        "handle": "6B4",
+        "expected": 1800,
+        "geometric": 1800,
+        "stored": 1800,
+        "pass": true
+      }
+    ],
+    "stats": {
+      "unknownEntityCount": 0
+    },
+    "geometryVerified": 1493,
+    "texts": 60,
+    "paths": 1506
+  },
+  {
+    "id": "A-102",
+    "title": "종단면도 A-A",
+    "name": "A-102_종단면도_A-A_R4.dwg",
+    "dxf": "A-102_종단면도_A-A_R4.dxf",
+    "sha256": "a12ae237facc40958ab07569f1152c0c9e168e37d77e9e76b8fddd67f24055a0",
+    "entities": 630,
+    "nativeDimensions": 12,
+    "dimensions": [
+      {
+        "handle": "285",
+        "a": [
+          2900,
+          5700
+        ],
+        "b": [
+          5300,
+          5700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 2400
+      },
+      {
+        "handle": "298",
+        "a": [
+          5300,
+          5700
+        ],
+        "b": [
+          7300,
+          5700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 2000
+      },
+      {
+        "handle": "2A7",
+        "a": [
+          7300,
+          5700
+        ],
+        "b": [
+          10900,
+          5700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 3600
+      },
+      {
+        "handle": "2B6",
+        "a": [
+          2900,
+          5700
+        ],
+        "b": [
+          10900,
+          5700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 8000
+      },
+      {
+        "handle": "2C5",
+        "a": [
+          3000,
+          4700
+        ],
+        "b": [
+          3000,
+          5700
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 1000
+      },
+      {
+        "handle": "2D4",
+        "a": [
+          3000,
+          6900
+        ],
+        "b": [
+          3000,
+          8100
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 1200
+      },
+      {
+        "handle": "2E3",
+        "a": [
+          10800,
+          6600
+        ],
+        "b": [
+          10800,
+          8100
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 1500
+      },
+      {
+        "handle": "304",
+        "a": [
+          4150,
+          5745
+        ],
+        "b": [
+          4150,
+          8145
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 2400
+      },
+      {
+        "handle": "313",
+        "a": [
+          6600,
+          5745
+        ],
+        "b": [
+          6600,
+          8245
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 2500
+      },
+      {
+        "handle": "322",
+        "a": [
+          9600,
+          5745
+        ],
+        "b": [
+          9600,
+          8245
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 2500
+      },
+      {
+        "handle": "331",
+        "a": [
+          2300,
+          5700
+        ],
+        "b": [
+          2300,
+          8900
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 3200
+      },
+      {
+        "handle": "340",
+        "a": [
+          10800,
+          8750
+        ],
+        "b": [
+          10800,
+          8900
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 150
+      }
+    ],
+    "bytes": 64769,
+    "checks": [
+      {
+        "handle": "285",
+        "expected": 2400,
+        "geometric": 2400,
+        "stored": 2400,
+        "pass": true
+      },
+      {
+        "handle": "298",
+        "expected": 2000,
+        "geometric": 2000,
+        "stored": 2000,
+        "pass": true
+      },
+      {
+        "handle": "2A7",
+        "expected": 3600,
+        "geometric": 3600,
+        "stored": 3600,
+        "pass": true
+      },
+      {
+        "handle": "2B6",
+        "expected": 8000,
+        "geometric": 8000,
+        "stored": 8000,
+        "pass": true
+      },
+      {
+        "handle": "2C5",
+        "expected": 1000,
+        "geometric": 1000,
+        "stored": 1000,
+        "pass": true
+      },
+      {
+        "handle": "2D4",
+        "expected": 1200,
+        "geometric": 1200,
+        "stored": 1200,
+        "pass": true
+      },
+      {
+        "handle": "2E3",
+        "expected": 1500,
+        "geometric": 1500,
+        "stored": 1500,
+        "pass": true
+      },
+      {
+        "handle": "304",
+        "expected": 2400,
+        "geometric": 2400,
+        "stored": 2400,
+        "pass": true
+      },
+      {
+        "handle": "313",
+        "expected": 2500,
+        "geometric": 2500,
+        "stored": 2500,
+        "pass": true
+      },
+      {
+        "handle": "322",
+        "expected": 2500,
+        "geometric": 2500,
+        "stored": 2500,
+        "pass": true
+      },
+      {
+        "handle": "331",
+        "expected": 3200,
+        "geometric": 3200,
+        "stored": 3200,
+        "pass": true
+      },
+      {
+        "handle": "340",
+        "expected": 150,
+        "geometric": 150,
+        "stored": 150,
+        "pass": true
+      }
+    ],
+    "stats": {
+      "unknownEntityCount": 0
+    },
+    "geometryVerified": 618,
+    "texts": 45,
+    "paths": 647
+  },
+  {
+    "id": "A-103",
+    "title": "배면도",
+    "name": "A-103_배면도_R4.dwg",
+    "dxf": "A-103_배면도_R4.dxf",
+    "sha256": "9d5fdcb34025c0b89709672d609bc1cee068558105afa695a6e7957dd830ff74",
+    "entities": 633,
+    "nativeDimensions": 2,
+    "dimensions": [
+      {
+        "handle": "28E",
+        "a": [
+          2900,
+          5700
+        ],
+        "b": [
+          10900,
+          5700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 8000
+      },
+      {
+        "handle": "2A1",
+        "a": [
+          2800,
+          5700
+        ],
+        "b": [
+          2800,
+          9600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 3900
+      }
+    ],
+    "bytes": 56332,
+    "checks": [
+      {
+        "handle": "28E",
+        "expected": 8000,
+        "geometric": 8000,
+        "stored": 8000,
+        "pass": true
+      },
+      {
+        "handle": "2A1",
+        "expected": 3900,
+        "geometric": 3900,
+        "stored": 3900,
+        "pass": true
+      }
+    ],
+    "stats": {
+      "unknownEntityCount": 0
+    },
+    "geometryVerified": 631,
+    "texts": 37,
+    "paths": 606
+  },
+  {
+    "id": "A-104",
+    "title": "우측면도",
+    "name": "A-104_우측면도_R4.dwg",
+    "dxf": "A-104_우측면도_R4.dxf",
+    "sha256": "adbee90882884ca4d9e6f5a1334f98d4268206e7515b0072d67d1e1e678c65c7",
+    "entities": 289,
+    "nativeDimensions": 2,
+    "dimensions": [
+      {
+        "handle": "136",
+        "a": [
+          4400,
+          5700
+        ],
+        "b": [
+          8200,
+          5700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 3800
+      },
+      {
+        "handle": "149",
+        "a": [
+          4300,
+          5700
+        ],
+        "b": [
+          4300,
+          9600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 3900
+      }
+    ],
+    "bytes": 30086,
+    "checks": [
+      {
+        "handle": "136",
+        "expected": 3800,
+        "geometric": 3800,
+        "stored": 3800,
+        "pass": true
+      },
+      {
+        "handle": "149",
+        "expected": 3900,
+        "geometric": 3900,
+        "stored": 3900,
+        "pass": true
+      }
+    ],
+    "stats": {
+      "unknownEntityCount": 0
+    },
+    "geometryVerified": 287,
+    "texts": 37,
+    "paths": 262
+  },
+  {
+    "id": "A-105",
+    "title": "정면도",
+    "name": "A-105_정면도_R4.dwg",
+    "dxf": "A-105_정면도_R4.dxf",
+    "sha256": "5f4812fdda07f04504d723dda6e1134977bc769c71a1d2953d53e6cbee5f6333",
+    "entities": 748,
+    "nativeDimensions": 2,
+    "dimensions": [
+      {
+        "handle": "301",
+        "a": [
+          2900,
+          5700
+        ],
+        "b": [
+          10900,
+          5700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 8000
+      },
+      {
+        "handle": "314",
+        "a": [
+          2800,
+          5700
+        ],
+        "b": [
+          2800,
+          9600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 3900
+      }
+    ],
+    "bytes": 65660,
+    "checks": [
+      {
+        "handle": "301",
+        "expected": 8000,
+        "geometric": 8000,
+        "stored": 8000,
+        "pass": true
+      },
+      {
+        "handle": "314",
+        "expected": 3900,
+        "geometric": 3900,
+        "stored": 3900,
+        "pass": true
+      }
+    ],
+    "stats": {
+      "unknownEntityCount": 0
+    },
+    "geometryVerified": 746,
+    "texts": 37,
+    "paths": 721
+  },
+  {
+    "id": "A-106",
+    "title": "좌측면도",
+    "name": "A-106_좌측면도_R4.dwg",
+    "dxf": "A-106_좌측면도_R4.dxf",
+    "sha256": "a9bb63e8ce9b381d15e95c6ff8ccdb34305b0df99b50fe81311277c38edb06f1",
+    "entities": 505,
+    "nativeDimensions": 2,
+    "dimensions": [
+      {
+        "handle": "20E",
+        "a": [
+          4400,
+          5700
+        ],
+        "b": [
+          8200,
+          5700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 3800
+      },
+      {
+        "handle": "221",
+        "a": [
+          4300,
+          5700
+        ],
+        "b": [
+          4300,
+          9600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 3900
+      }
+    ],
+    "bytes": 46704,
+    "checks": [
+      {
+        "handle": "20E",
+        "expected": 3800,
+        "geometric": 3800,
+        "stored": 3800,
+        "pass": true
+      },
+      {
+        "handle": "221",
+        "expected": 3900,
+        "geometric": 3900,
+        "stored": 3900,
+        "pass": true
+      }
+    ],
+    "stats": {
+      "unknownEntityCount": 0
+    },
+    "geometryVerified": 503,
+    "texts": 37,
+    "paths": 478
+  },
+  {
+    "id": "A-107",
+    "title": "지붕 평면도",
+    "name": "A-107_지붕_평면도_R4.dwg",
+    "dxf": "A-107_지붕_평면도_R4.dxf",
+    "sha256": "a2bf611b786c1ed2c39a5da8756d1be4b3022eb24f20adbdbe733ab2059607ad",
+    "entities": 132,
+    "nativeDimensions": 9,
+    "dimensions": [
+      {
+        "handle": "9A",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          5300,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 2400
+      },
+      {
+        "handle": "AD",
+        "a": [
+          5300,
+          5800
+        ],
+        "b": [
+          7300,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 2000
+      },
+      {
+        "handle": "BC",
+        "a": [
+          7300,
+          5800
+        ],
+        "b": [
+          10900,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 3600
+      },
+      {
+        "handle": "CB",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          10900,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 8000
+      },
+      {
+        "handle": "DA",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          2900,
+          7600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 1800
+      },
+      {
+        "handle": "E9",
+        "a": [
+          2900,
+          7600
+        ],
+        "b": [
+          2900,
+          9600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 2000
+      },
+      {
+        "handle": "F8",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          2900,
+          9600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 3800
+      },
+      {
+        "handle": "114",
+        "a": [
+          2950,
+          9400
+        ],
+        "b": [
+          10850,
+          9400
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 7900
+      },
+      {
+        "handle": "123",
+        "a": [
+          10850,
+          5850
+        ],
+        "b": [
+          10850,
+          9400
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 3550
+      }
+    ],
+    "bytes": 23426,
+    "checks": [
+      {
+        "handle": "9A",
+        "expected": 2400,
+        "geometric": 2400,
+        "stored": 2400,
+        "pass": true
+      },
+      {
+        "handle": "AD",
+        "expected": 2000,
+        "geometric": 2000,
+        "stored": 2000,
+        "pass": true
+      },
+      {
+        "handle": "BC",
+        "expected": 3600,
+        "geometric": 3600,
+        "stored": 3600,
+        "pass": true
+      },
+      {
+        "handle": "CB",
+        "expected": 8000,
+        "geometric": 8000,
+        "stored": 8000,
+        "pass": true
+      },
+      {
+        "handle": "DA",
+        "expected": 1800,
+        "geometric": 1800,
+        "stored": 1800,
+        "pass": true
+      },
+      {
+        "handle": "E9",
+        "expected": 2000,
+        "geometric": 2000,
+        "stored": 2000,
+        "pass": true
+      },
+      {
+        "handle": "F8",
+        "expected": 3800,
+        "geometric": 3800,
+        "stored": 3800,
+        "pass": true
+      },
+      {
+        "handle": "114",
+        "expected": 7900,
+        "geometric": 7900,
+        "stored": 7900,
+        "pass": true
+      },
+      {
+        "handle": "123",
+        "expected": 3550,
+        "geometric": 3550,
+        "stored": 3550,
+        "pass": true
+      }
+    ],
+    "stats": {
+      "unknownEntityCount": 0
+    },
+    "geometryVerified": 116,
+    "texts": 48,
+    "paths": 129
+  },
+  {
+    "id": "A-108",
+    "title": "기초 평면도",
+    "name": "A-108_기초_평면도_R4.dwg",
+    "dxf": "A-108_기초_평면도_R4.dxf",
+    "sha256": "85a367134f5af3d1e1287e8c7e28b9c7c08d3b7004dd3c73a27ad887ade588f8",
+    "entities": 176,
+    "nativeDimensions": 13,
+    "dimensions": [
+      {
+        "handle": "CB",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          5300,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 2400
+      },
+      {
+        "handle": "DE",
+        "a": [
+          5300,
+          5800
+        ],
+        "b": [
+          7300,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 2000
+      },
+      {
+        "handle": "ED",
+        "a": [
+          7300,
+          5800
+        ],
+        "b": [
+          10900,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 3600
+      },
+      {
+        "handle": "FC",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          10900,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 8000
+      },
+      {
+        "handle": "10B",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          2900,
+          7600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 1800
+      },
+      {
+        "handle": "11A",
+        "a": [
+          2900,
+          7600
+        ],
+        "b": [
+          2900,
+          9600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 2000
+      },
+      {
+        "handle": "129",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          2900,
+          9600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 3800
+      },
+      {
+        "handle": "13C",
+        "a": [
+          2800,
+          9700
+        ],
+        "b": [
+          7350,
+          9700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 4550
+      },
+      {
+        "handle": "14B",
+        "a": [
+          3000,
+          9700
+        ],
+        "b": [
+          7150,
+          9700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 4150
+      },
+      {
+        "handle": "15A",
+        "a": [
+          2500,
+          9700
+        ],
+        "b": [
+          7350,
+          9700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 4850
+      },
+      {
+        "handle": "169",
+        "a": [
+          2800,
+          7450
+        ],
+        "b": [
+          2800,
+          9700
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 2250
+      },
+      {
+        "handle": "178",
+        "a": [
+          10800,
+          5700
+        ],
+        "b": [
+          11000,
+          5700
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 200
+      },
+      {
+        "handle": "189",
+        "a": [
+          10500,
+          6200
+        ],
+        "b": [
+          11300,
+          6200
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 800
+      }
+    ],
+    "bytes": 29704,
+    "checks": [
+      {
+        "handle": "CB",
+        "expected": 2400,
+        "geometric": 2400,
+        "stored": 2400,
+        "pass": true
+      },
+      {
+        "handle": "DE",
+        "expected": 2000,
+        "geometric": 2000,
+        "stored": 2000,
+        "pass": true
+      },
+      {
+        "handle": "ED",
+        "expected": 3600,
+        "geometric": 3600,
+        "stored": 3600,
+        "pass": true
+      },
+      {
+        "handle": "FC",
+        "expected": 8000,
+        "geometric": 8000,
+        "stored": 8000,
+        "pass": true
+      },
+      {
+        "handle": "10B",
+        "expected": 1800,
+        "geometric": 1800,
+        "stored": 1800,
+        "pass": true
+      },
+      {
+        "handle": "11A",
+        "expected": 2000,
+        "geometric": 2000,
+        "stored": 2000,
+        "pass": true
+      },
+      {
+        "handle": "129",
+        "expected": 3800,
+        "geometric": 3800,
+        "stored": 3800,
+        "pass": true
+      },
+      {
+        "handle": "13C",
+        "expected": 4550,
+        "geometric": 4550,
+        "stored": 4550,
+        "pass": true
+      },
+      {
+        "handle": "14B",
+        "expected": 4150,
+        "geometric": 4150,
+        "stored": 4150,
+        "pass": true
+      },
+      {
+        "handle": "15A",
+        "expected": 4850,
+        "geometric": 4850,
+        "stored": 4850,
+        "pass": true
+      },
+      {
+        "handle": "169",
+        "expected": 2250,
+        "geometric": 2250,
+        "stored": 2250,
+        "pass": true
+      },
+      {
+        "handle": "178",
+        "expected": 200,
+        "geometric": 200,
+        "stored": 200,
+        "pass": true
+      },
+      {
+        "handle": "189",
+        "expected": 800,
+        "geometric": 800,
+        "stored": 800,
+        "pass": true
+      }
+    ],
+    "stats": {
+      "unknownEntityCount": 0
+    },
+    "geometryVerified": 156,
+    "texts": 51,
+    "paths": 192
+  },
+  {
+    "id": "A-109",
+    "title": "천장 평면도",
+    "name": "A-109_천장_평면도_R4.dwg",
+    "dxf": "A-109_천장_평면도_R4.dxf",
+    "sha256": "3aee2a1abfbed927458682d396d408570510b3ee41fd763180828cb9322717a0",
+    "entities": 195,
+    "nativeDimensions": 9,
+    "dimensions": [
+      {
+        "handle": "B7",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          5300,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 2400
+      },
+      {
+        "handle": "CA",
+        "a": [
+          5300,
+          5800
+        ],
+        "b": [
+          7300,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 2000
+      },
+      {
+        "handle": "D9",
+        "a": [
+          7300,
+          5800
+        ],
+        "b": [
+          10900,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 3600
+      },
+      {
+        "handle": "E8",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          10900,
+          5800
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 8000
+      },
+      {
+        "handle": "F7",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          2900,
+          7600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 1800
+      },
+      {
+        "handle": "106",
+        "a": [
+          2900,
+          7600
+        ],
+        "b": [
+          2900,
+          9600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 2000
+      },
+      {
+        "handle": "115",
+        "a": [
+          2900,
+          5800
+        ],
+        "b": [
+          2900,
+          9600
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 3800
+      },
+      {
+        "handle": "153",
+        "a": [
+          3215,
+          5915
+        ],
+        "b": [
+          4015,
+          5915
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 800
+      },
+      {
+        "handle": "162",
+        "a": [
+          3215,
+          6115
+        ],
+        "b": [
+          3215,
+          7315
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 1200
+      }
+    ],
+    "bytes": 28310,
+    "checks": [
+      {
+        "handle": "B7",
+        "expected": 2400,
+        "geometric": 2400,
+        "stored": 2400,
+        "pass": true
+      },
+      {
+        "handle": "CA",
+        "expected": 2000,
+        "geometric": 2000,
+        "stored": 2000,
+        "pass": true
+      },
+      {
+        "handle": "D9",
+        "expected": 3600,
+        "geometric": 3600,
+        "stored": 3600,
+        "pass": true
+      },
+      {
+        "handle": "E8",
+        "expected": 8000,
+        "geometric": 8000,
+        "stored": 8000,
+        "pass": true
+      },
+      {
+        "handle": "F7",
+        "expected": 1800,
+        "geometric": 1800,
+        "stored": 1800,
+        "pass": true
+      },
+      {
+        "handle": "106",
+        "expected": 2000,
+        "geometric": 2000,
+        "stored": 2000,
+        "pass": true
+      },
+      {
+        "handle": "115",
+        "expected": 3800,
+        "geometric": 3800,
+        "stored": 3800,
+        "pass": true
+      },
+      {
+        "handle": "153",
+        "expected": 800,
+        "geometric": 800,
+        "stored": 800,
+        "pass": true
+      },
+      {
+        "handle": "162",
+        "expected": 1200,
+        "geometric": 1200,
+        "stored": 1200,
+        "pass": true
+      }
+    ],
+    "stats": {
+      "unknownEntityCount": 0
+    },
+    "geometryVerified": 140,
+    "texts": 52,
+    "paths": 188
+  },
+  {
+    "id": "A-110",
+    "title": "창호·가구·배수 상세",
+    "name": "A-110_창호·가구·배수_상세_R4.dwg",
+    "dxf": "A-110_창호·가구·배수_상세_R4.dxf",
+    "sha256": "596a16bd3aceb76aaa11249178ca63a68487f8df932562ca34438774056019ad",
+    "entities": 113,
+    "nativeDimensions": 12,
+    "dimensions": [
+      {
+        "handle": "53",
+        "a": [
+          1500,
+          9000
+        ],
+        "b": [
+          3300,
+          9000
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 1800
+      },
+      {
+        "handle": "66",
+        "a": [
+          1500,
+          9000
+        ],
+        "b": [
+          1500,
+          10500
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 1500
+      },
+      {
+        "handle": "7D",
+        "a": [
+          4900,
+          9000
+        ],
+        "b": [
+          7300,
+          9000
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 2400
+      },
+      {
+        "handle": "8C",
+        "a": [
+          4900,
+          9000
+        ],
+        "b": [
+          4900,
+          10500
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 1500
+      },
+      {
+        "handle": "9F",
+        "a": [
+          8900,
+          9000
+        ],
+        "b": [
+          9800,
+          9000
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 900
+      },
+      {
+        "handle": "AE",
+        "a": [
+          8900,
+          9000
+        ],
+        "b": [
+          8900,
+          10200
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 1200
+      },
+      {
+        "handle": "C1",
+        "a": [
+          11500,
+          9000
+        ],
+        "b": [
+          12500,
+          9000
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 1000
+      },
+      {
+        "handle": "D0",
+        "a": [
+          11500,
+          9000
+        ],
+        "b": [
+          11500,
+          11500
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 2500
+      },
+      {
+        "handle": "E1",
+        "a": [
+          14500,
+          9000
+        ],
+        "b": [
+          15300,
+          9000
+        ],
+        "angle": 0,
+        "factor": 1,
+        "value": 800
+      },
+      {
+        "handle": "F0",
+        "a": [
+          15300,
+          9000
+        ],
+        "b": [
+          15300,
+          11100
+        ],
+        "angle": 90,
+        "factor": 1,
+        "value": 2100
+      },
+      {
+        "handle": "13B",
+        "a": [
+          14300,
+          4099.999999999998
+        ],
+        "b": [
+          14300,
+          5099.999999999999
+        ],
+        "angle": 90,
+        "factor": 0.1,
+        "value": 100
+      },
+      {
+        "handle": "14A",
+        "a": [
+          14300,
+          3800
+        ],
+        "b": [
+          16800,
+          3800
+        ],
+        "angle": 0,
+        "factor": 0.1,
+        "value": 250
+      }
+    ],
+    "bytes": 25962,
+    "checks": [
+      {
+        "handle": "53",
+        "expected": 1800,
+        "geometric": 1800,
+        "stored": 1800,
+        "pass": true
+      },
+      {
+        "handle": "66",
+        "expected": 1500,
+        "geometric": 1500,
+        "stored": 1500,
+        "pass": true
+      },
+      {
+        "handle": "7D",
+        "expected": 2400,
+        "geometric": 2400,
+        "stored": 2400,
+        "pass": true
+      },
+      {
+        "handle": "8C",
+        "expected": 1500,
+        "geometric": 1500,
+        "stored": 1500,
+        "pass": true
+      },
+      {
+        "handle": "9F",
+        "expected": 900,
+        "geometric": 900,
+        "stored": 900,
+        "pass": true
+      },
+      {
+        "handle": "AE",
+        "expected": 1200,
+        "geometric": 1200,
+        "stored": 1200,
+        "pass": true
+      },
+      {
+        "handle": "C1",
+        "expected": 1000,
+        "geometric": 1000,
+        "stored": 1000,
+        "pass": true
+      },
+      {
+        "handle": "D0",
+        "expected": 2500,
+        "geometric": 2500,
+        "stored": 2500,
+        "pass": true
+      },
+      {
+        "handle": "E1",
+        "expected": 800,
+        "geometric": 800,
+        "stored": 800,
+        "pass": true
+      },
+      {
+        "handle": "F0",
+        "expected": 2100,
+        "geometric": 2100,
+        "stored": 2100,
+        "pass": true
+      },
+      {
+        "handle": "13B",
+        "expected": 100,
+        "geometric": 100.0000000000001,
+        "stored": 100.0000000000001,
+        "pass": true
+      },
+      {
+        "handle": "14A",
+        "expected": 250,
+        "geometric": 250,
+        "stored": 250,
+        "pass": true
+      }
+    ],
+    "stats": {
+      "unknownEntityCount": 0
+    },
+    "geometryVerified": 101,
+    "texts": 79,
+    "paths": 94
+  }
+]

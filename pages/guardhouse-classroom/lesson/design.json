@@ -1,0 +1,258 @@
+{
+  "revision": 4,
+  "name": "경비실 교육용 수정설계",
+  "units": "m",
+  "datum": "1층 구조바닥 SFL ±0.000",
+  "grid": {
+    "x": [
+      0.1,
+      2.5,
+      4.5,
+      8.1
+    ],
+    "y": [
+      0.1,
+      1.9,
+      3.9
+    ]
+  },
+  "levels": {
+    "ground": -0.1,
+    "structure": 0,
+    "finish": 0.045,
+    "ceilingWet": 2.445,
+    "ceilingDry": 2.545,
+    "insulation": 2.915,
+    "roofBottom": 3.05,
+    "roofStructure": 3.2,
+    "roofDrain": 3.245,
+    "parapetLow": 3.5,
+    "parapetHigh": 3.9
+  },
+  "thickness": {
+    "wall": 0.2,
+    "partition": 0.1,
+    "externalFinish": 0.1,
+    "dryFinish": 0.015,
+    "wetFinish": 0.03,
+    "floorSlab": 0.15,
+    "floorFinish": 0.045,
+    "roofSlab": 0.15,
+    "insulation": 0.135,
+    "ceiling": 0.006,
+    "windowFrame": 0.1,
+    "glass": 0.006
+  },
+  "roof": {
+    "bounds": [
+      0.15,
+      0.15,
+      8.05,
+      3.85
+    ],
+    "drains": [
+      [
+        0.15,
+        3.7
+      ],
+      [
+        8.05,
+        3.7
+      ]
+    ],
+    "slope": 0.01,
+    "upstandTop": 3.47,
+    "scupper": 0.1,
+    "pipeDiameter": 0.075
+  },
+  "rooms": [
+    {
+      "id": "toilet",
+      "name": "화장실",
+      "bounds": [
+        0.23,
+        1.98,
+        2.42,
+        3.77
+      ],
+      "ch": 2.4
+    },
+    {
+      "id": "pantry",
+      "name": "탕비실",
+      "bounds": [
+        2.565,
+        1.965,
+        4.435,
+        3.785
+      ],
+      "ch": 2.5
+    },
+    {
+      "id": "guard",
+      "name": "경비실",
+      "bounds": [
+        4.565,
+        0.215,
+        7.985,
+        3.785
+      ],
+      "ch": 2.5
+    },
+    {
+      "id": "storage",
+      "name": "택배 보관소",
+      "bounds": [
+        0.215,
+        0.215,
+        4.435,
+        1.835
+      ],
+      "ch": 2.5
+    }
+  ],
+  "windows": [
+    {
+      "tag": "AW01",
+      "width": 1.8,
+      "height": 1.5,
+      "sill": 0.9,
+      "count": 2
+    },
+    {
+      "tag": "AW02",
+      "width": 2.4,
+      "height": 1.5,
+      "sill": 0.9,
+      "count": 1
+    },
+    {
+      "tag": "AW03",
+      "width": 0.9,
+      "height": 1.2,
+      "sill": 1.2,
+      "count": 3
+    }
+  ],
+  "doors": [
+    {
+      "tag": "D01",
+      "width": 1,
+      "height": 2.5,
+      "count": 1,
+      "description": "하부 문짝 2100 / 상부 채광창 400"
+    },
+    {
+      "tag": "D02",
+      "width": 0.8,
+      "height": 2.1,
+      "count": 1,
+      "description": "화장실 여닫이문"
+    }
+  ],
+  "furniture": [
+    {
+      "id": "parcel-cabinet",
+      "tag": "F01",
+      "name": "택배 보관장",
+      "width": 3.62,
+      "depth": 0.6,
+      "height": 1.8
+    },
+    {
+      "id": "parcel-cabinet-side",
+      "tag": "F02",
+      "name": "측면 보관장",
+      "width": 0.6,
+      "depth": 1.635,
+      "height": 1
+    },
+    {
+      "id": "pantry-counter",
+      "tag": "F03",
+      "name": "싱크대",
+      "width": 1.87,
+      "depth": 0.635,
+      "height": 0.85
+    },
+    {
+      "id": "basin-counter",
+      "tag": "F04",
+      "name": "세면대 상판",
+      "width": 0.975,
+      "depth": 0.595,
+      "height": 0.8
+    },
+    {
+      "id": "toilet-bowl",
+      "tag": "F05",
+      "name": "양변기",
+      "width": 0.4,
+      "depth": 0.68,
+      "height": 0.42
+    }
+  ],
+  "foundation": {
+    "stripWidth": 0.8,
+    "stripThickness": 0.3,
+    "stripBottom": -0.8,
+    "blinding": 0.06,
+    "pitMatBottom": -1.2,
+    "pitMatThickness": 0.2,
+    "pitWall": 0.2,
+    "pitOuter": [
+      0,
+      1.75,
+      4.55,
+      4
+    ],
+    "access": [
+      0.23,
+      1.98,
+      0.83,
+      2.58
+    ]
+  },
+  "sheets": [
+    [
+      "A-101",
+      "1층 평면도"
+    ],
+    [
+      "A-102",
+      "종단면도 A-A"
+    ],
+    [
+      "A-103",
+      "배면도"
+    ],
+    [
+      "A-104",
+      "우측면도"
+    ],
+    [
+      "A-105",
+      "정면도"
+    ],
+    [
+      "A-106",
+      "좌측면도"
+    ],
+    [
+      "A-107",
+      "지붕 평면도"
+    ],
+    [
+      "A-108",
+      "기초 평면도"
+    ],
+    [
+      "A-109",
+      "천장 평면도"
+    ],
+    [
+      "A-110",
+      "창호·가구·배수 상세"
+    ]
+  ]
+}

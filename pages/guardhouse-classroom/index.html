@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
- <title>경비실 — 처음 만나는 건축과 전기</title>
+ <title>공간과 전기 · 교육용 샘플 1</title>
  <link rel="stylesheet" href="/pages/guardhouse-classroom/classroom.css">
  <script type="importmap">{"imports":{"three":"/pages/guardhouse-classroom/vendor/three/build/three.module.min.js","three/addons/":"/pages/guardhouse-classroom/vendor/three/examples/jsm/"}}</script>
  <script type="module" src="/pages/guardhouse-classroom/classroom.mjs"></script>
@@ -15,8 +15,8 @@
 <body>
  <div class="site-top" id="site-top">
  <header class="app-header">
-  <a class="brand" href="#home" aria-label="경비실 학습 시작 화면"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 14 20 5l15 9v16l-15 8-15-8Z M5 14l15 8 15-8 M20 22v16 M12 10l15 8v16"/pages/guardhouse-classroom/></svg><span><small>공간과 전기</small><strong>경비실 학습실</strong></span></a>
-  <span class="sample-chip">교육용 샘플 1</span>
+  <a class="brand" href="#home" aria-label="공간과 전기 시작 화면"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 14 20 5l15 9v16l-15 8-15-8Z M5 14l15 8 15-8 M20 22v16 M12 10l15 8v16"/pages/guardhouse-classroom/></svg><span><strong>공간과 전기</strong></span></a>
+  <button class="sample-chip" id="sample-lesson" title="레슨 01 · 경비실 학습 시작">교육용 샘플 1</button>
   <div class="header-actions"><span id="save-state">이 브라우저에 실습 저장</span><button id="reset-exercise">실습 초기화</button></div>
   <button id="menu-toggle" class="menu-toggle" aria-controls="learning-nav" aria-expanded="false" aria-label="학습 메뉴 열기"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="menu-open-icon" d="M4 6h16M4 12h16M4 18h16"/pages/guardhouse-classroom/><path class="menu-close-icon" d="m5 5 14 14M19 5 5 19"/pages/guardhouse-classroom/></svg><span>메뉴</span></button>
  </header>
@@ -26,7 +26,7 @@
  </div>
  <main id="app" data-page="home">
   <section id="page-heading"><div><p class="eyebrow" id="page-step">LESSON 01 · GUARDHOUSE</p><h1 id="page-title">작은 건물에서 전기를 배웁니다.</h1><p id="page-description">도면이 처음이어도 괜찮습니다. 건물을 살펴보고, 직접 불을 켜보세요.</p></div><div id="page-actions"></div></section>
-  <section id="home-intro" class="home-intro"><div><span class="tag">건축·CAD를 처음 배우는 학생을 위해</span><h2>이 경비실이 첫 번째 교재입니다.</h2><p>방의 위치를 찾고, 벽 속을 보고, 조명에 전기를 연결합니다. 도면과 실제 공간을 한 단계씩 연결해 보세요.</p><div class="button-row"><button id="start-lesson" class="primary">첫 수업 시작</button><button id="quick-experience">먼저 불 켜보기</button></div><p class="small" id="progress-label">6단계 학습 과정</p></div><div class="home-facts"><div><strong>4개</strong><span>공간</span></div><div><strong>18장</strong><span>연결 도면</span></div><div><strong>4개</strong><span>전기 회로</span></div></div></section>
+  <section id="home-intro" class="home-intro"><div><span class="tag">건축에서 전기·소방·안전점검까지, 하나의 공간으로 배우다.</span><h2>이 경비실이 첫 번째 교재입니다.</h2><p>방의 위치를 찾고, 벽 속을 보고, 조명에 전기를 연결합니다. 도면과 실제 공간을 한 단계씩 연결해 보세요.</p><div class="button-row"><button id="start-lesson" class="primary">첫 수업 시작</button><button id="quick-experience">먼저 불 켜보기</button></div><p class="small" id="progress-label">6단계 학습 과정</p></div><div class="home-facts"><div><strong>4개</strong><span>공간</span></div><div><strong>18장</strong><span>연결 도면</span></div><div><strong>4개</strong><span>전기 회로</span></div></div></section>
   <section id="loading-state" class="loading-state" role="status" aria-live="polite" hidden><strong id="loading-title">학습을 준비합니다.</strong><p id="loading-message">선택한 내용을 준비하고 있습니다.</p><progress id="loading-progress" aria-label="학습 준비 중"></progress><div id="loading-recovery" class="button-row" hidden><button id="retry-loading">다시 시도</button><button data-menu="home">시작 화면으로</button></div></section>
   <section id="home-preview" class="home-preview"><img src="/pages/guardhouse-classroom/preview.webp" width="1280" height="376" alt="경비실 학습 모델의 외관"><div><strong>어디부터 살펴볼까요?</strong><p>위 메뉴에서 학습을 고르세요. 공간을 살펴볼 때 3D를 열고, 철근과 실감 표현은 해당 단계에서 준비합니다.</p><button data-menu="building" class="primary">도면과 3D 열기</button></div></section>
   <section id="workspace" class="workspace" hidden>
@@ -48,7 +48,7 @@
   <section id="page-content"></section>
   <section id="lesson-path" class="lesson-path" aria-label="학습 순서"></section>
  </main>
- <footer><span>공간과 전기 · 경비실 교육용 샘플 1</span><div><a href="/pages/guardhouse-classroom/lesson/sheets.html" target="_blank" rel="noopener">건축 도면집</a><a href="/pages/guardhouse-classroom/lesson/files/guardhouse-R4.zip" download>건축 DWG 묶음</a><a href="/pages/guardhouse-classroom/education/downloads.html" target="_blank" rel="noopener">구조·전기·소방 교재 저장</a></div><p class="drawing-credit">원본 도면 추정 출처: <a href="https://www.youtube.com/@BIM_Ch1" target="_blank" rel="noopener">BIM_Ch1 유튜브 채널</a> — 과거 다운로드 자료로, 정확한 배포 경로는 미확인입니다. 이 학습실에서는 전기 CAD·BIM 교육에 맞게 도면을 수정·보완했습니다.</p></footer>
+ <footer><div class="footer-identity"><span>공간과 전기 · 교육용 샘플 1</span><p class="creator-credit">제작자 : 김준호 교수 (동서울대학교 전기공학과)</p></div><div><a href="/pages/guardhouse-classroom/lesson/sheets.html" target="_blank" rel="noopener">건축 도면집</a><a href="/pages/guardhouse-classroom/lesson/files/guardhouse-R4.zip" download>건축 DWG 묶음</a><a href="/pages/guardhouse-classroom/education/downloads.html" target="_blank" rel="noopener">구조·전기·소방 교재 저장</a></div><p class="drawing-credit">원본 도면 추정 출처: <a href="https://www.youtube.com/@BIM_Ch1" target="_blank" rel="noopener">BIM_Ch1 유튜브 채널</a> — 과거 다운로드 자료로, 정확한 배포 경로는 미확인입니다. 이 학습실에서는 전기 CAD·BIM 교육에 맞게 도면을 수정·보완했습니다.</p></footer>
  <dialog id="reset-dialog"><h2>실습을 처음으로 돌릴까요?</h2><p>이 브라우저에 저장된 기구 위치·소비전력·스위치·소방 시험·외관·점검 기록·학습 표시를 기본 예제로 되돌립니다.</p><div class="button-row"><button id="cancel-reset">취소</button><button id="confirm-reset" class="primary">기본 예제로 초기화</button></div></dialog>
  <dialog id="term-dialog"><div id="term-dialog-content"></div><button id="close-term">닫기</button></dialog>
  <dialog id="render-dialog" class="render-dialog"><h2>현재 장면</h2><p>지금 보이는 시점과 조명 상태를 이미지로 담았습니다.</p><img id="render-preview" alt="현재 경비실 렌더링 장면"><div class="button-row"><button id="close-render">돌아가기</button></div></dialog>

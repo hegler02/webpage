@@ -1,0 +1,30 @@
+@charset "UTF-8";
+:root{--sim-gap:.75rem;--sim-pad:1.1rem;--sim-border:#c7d9d8;--sim-soft:#edf5f2;--sim-accent:#167d76;}
+.fire-sim,.sim-record{font-family:var(--sys-font-family);font-size:var(--sys-size-small);line-height:var(--sys-leading-body);letter-spacing:var(--sys-tracking-body);word-break:keep-all;overflow-wrap:normal;min-width:0;}
+.fire-sim{padding:var(--sim-pad);background:var(--sim-soft);border-block:1px solid var(--sim-border);display:grid;gap:var(--sim-gap);}
+.fire-sim[hidden]{display:none;}
+.fire-sim h3{font-size:var(--sys-size-title-small);line-height:var(--sys-leading-heading);margin:0;}
+.fire-sim p,.fire-sim ol{margin:0;}.fire-sim button,.fire-sim select{font-size:var(--sys-size-small);line-height:var(--sys-leading-control);min-height:44px;white-space:normal;}
+.fire-sim select{max-width:100%;}.fire-sim label{min-width:0;}.fire-sim button[data-sim="start"],.fire-sim button[data-sim="escape"],.fire-sim button[data-sim="spray"]{background:var(--sim-accent);color:white;}
+.sim-notice{padding:.75rem;background:white;border-left:4px solid var(--sim-accent);border-radius:.5rem;}
+.sim-actions,.sim-links{display:flex;flex-wrap:wrap;gap:.5rem;}.sim-links{padding-top:.75rem;border-top:1px solid var(--sim-border);}
+.sim-steps{list-style:none;display:flex;flex-wrap:wrap;gap:.35rem;padding:0;font-size:var(--sys-size-caption);}.sim-steps li{padding:.3rem .5rem;background:#fff;border-radius:.3rem;color:#526566;}.sim-steps .current{background:var(--sim-accent);color:white;}
+.sim-caption{font-size:var(--sys-size-caption);color:#576b6c;line-height:var(--sys-leading-compact);}.sim-sources a{display:block;}.sim-aim{display:grid;gap:.4rem;}.sim-aim input{width:100%;accent-color:var(--sim-accent);min-height:30px;}.fire-sim meter{width:8rem;vertical-align:middle;}.sim-extinguisher[open]{display:grid;gap:.65rem;}.fire-sim summary{cursor:pointer;font-weight:var(--sys-weight-control);}
+.sim-record{padding:1.5rem;background:white;border:1px solid var(--sim-border);border-radius:1rem;margin-block:1.5rem;}
+[data-page="fire-test"] .model-panel,[data-page="fire-test"] .apt-canvases>section:last-child{display:grid;grid-template-columns:minmax(250px,320px) minmax(0,1fr);align-items:start;}
+[data-page="fire-test"] :is(.model-panel,.apt-canvases>section:last-child)>.canvas-heading{grid-column:1/-1;grid-row:1;}
+[data-page="fire-test"] :is(.model-panel,.apt-canvases>section:last-child)>.fire-guide-dock,[data-page="fire-test"] :is(.model-panel,.apt-canvases>section:last-child)>.apt-guide-dock{grid-column:1/-1;grid-row:2;}
+[data-page="fire-test"] .fire-sim{grid-column:1;grid-row:4;}
+[data-page="fire-test"] :is(.model-panel,.apt-canvases>section:last-child)>#three-host,[data-page="fire-test"] :is(.model-panel,.apt-canvases>section:last-child)>#apt-three{grid-column:2;grid-row:4;position:sticky;top:140px;min-height:480px;height:65vh;max-height:760px;}
+[data-page="fire-test"] :is(.model-panel,.apt-canvases>section:last-child)>.canvas-footer{grid-column:1/-1;grid-row:5;}
+@media(max-width:900px){[data-page="fire-test"] .model-panel,[data-page="fire-test"] .apt-canvases>section:last-child{grid-template-columns:minmax(0,1fr);}[data-page="fire-test"] .fire-sim{grid-column:1;grid-row:5;}[data-page="fire-test"] :is(.model-panel,.apt-canvases>section:last-child)>#three-host,[data-page="fire-test"] :is(.model-panel,.apt-canvases>section:last-child)>#apt-three{grid-column:1;grid-row:4;top:76px;min-height:240px;height:36vh;max-height:380px;z-index:2;}[data-page="fire-test"] :is(.model-panel,.apt-canvases>section:last-child)>.canvas-footer{grid-row:6;}.fire-sim{--sim-pad:.9rem;}.sim-actions button{flex:1 1 auto;}.fire-sim .sim-caption{font-size:var(--sys-size-caption);}}
+@media(prefers-reduced-motion:reduce){.fire-sim *{scroll-behavior:auto;}}
+
+#three-host,#apt-three,.fire-sim{scroll-margin-top:145px;}
+
+.fire-pages{display:none;gap:.5rem;padding:.8rem 1rem;border-bottom:1px solid var(--sim-border)}
+[data-page^="fire"] .fire-pages{display:flex;flex-wrap:wrap}
+[data-page="fire"] .fire-pages button:first-child,[data-page="fire-test"] .fire-pages button:last-child,[data-page="fire-signal"] .fire-pages button:last-child{background:var(--sim-accent);color:white}
+[data-page="fire-test"] :is(.workspace-toolbar,.workspace-status,#context-tools,#apt-tools,#inspector,#apt-inspector,#plan-panel,.canvas-footer,.apt-canvases>section:first-child){display:none}
+[data-page="fire-test"] :is(#canvas-row,.apt-canvases){display:block}
+.prop-attribution{font-size:var(--sys-size-caption)}

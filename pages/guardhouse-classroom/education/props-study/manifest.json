@@ -1,0 +1,253 @@
+{
+  "title": "생활 소품 세 개 · 품질과 용량 비교",
+  "creator": "김준호 교수 (동서울대학교 전기공학과)",
+  "source": "Google Scanned Objects, Copyright 2020 Google LLC",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "conversion": "codepawl/scanned-objects-glb",
+  "sourceRevision": "fdb214f6ea18996f2d45e05df74c5d9696c3f7a2",
+  "modifications": "Meshopt geometry decoded offline to avoid runtime WASM; original-shape 2K WebP preserved; supplied LOD1/LOD2 geometry combined with 1024/512 WebP resized from original albedo at quality 82. No mass or electrical properties imported.",
+  "props": [
+    {
+      "slug": "mug",
+      "label": "머그컵",
+      "id": "ACE_Coffee_Mug_Kristen_16_oz_cup",
+      "note": "손잡이의 곡선과 컵 표면의 작은 점무늬를 비교하세요.",
+      "sourceMetadata": {
+        "id": "ACE_Coffee_Mug_Kristen_16_oz_cup",
+        "name": "ACE Coffee Mug, Kristen, 16 oz cup",
+        "category": "kitchen",
+        "category_source": "name rule",
+        "source_categories": [
+          "Consumer Goods"
+        ],
+        "brand": "ACE",
+        "mpn": null,
+        "sku": "00033805062065",
+        "license": "CC-BY-4.0",
+        "file": "objects/ACE_Coffee_Mug_Kristen_16_oz_cup/ACE_Coffee_Mug_Kristen_16_oz_cup.glb",
+        "thumb": "thumbs/ACE_Coffee_Mug_Kristen_16_oz_cup.webp",
+        "size_metres": [
+          0.1263,
+          0.1349,
+          0.0906
+        ],
+        "mass_estimate_kg": 0.5664,
+        "triangles": 11224,
+        "vertices": 5807,
+        "source_texture_px": 4096,
+        "pack_texture_px": 2048,
+        "source_bytes": 10755866,
+        "pack_bytes": 234288,
+        "source": "https://fuel.gazebosim.org/1.0/GoogleResearch/models/ACE_Coffee_Mug_Kristen_16_oz_cup"
+      },
+      "variants": [
+        {
+          "level": 0,
+          "file": "mug-0.glb",
+          "bytes": 325244,
+          "gzipBytes": 292863,
+          "brotliBytes": 256798,
+          "sourceBytes": 234288,
+          "sourceSha256": "6fb8b1fdc65e3ec30dcc4176a3dbdfa76cb15f59087910265cf23a50cda3ba10",
+          "sha256": "9c76aceb6fc8074b94ded5ecf963d671f035a921c6a6d0de00f1eb670d56bd93",
+          "triangles": 11224,
+          "vertices": 5807,
+          "texturePixels": 2048,
+          "textureBytes": 162970,
+          "geometryBytes": 160256
+        },
+        {
+          "level": 1,
+          "file": "mug-1.glb",
+          "bytes": 134780,
+          "gzipBytes": 119004,
+          "brotliBytes": 102574,
+          "sourceBytes": 112368,
+          "sourceSha256": "073308ce06ba628dcfae1e5ec1a1f589f52c0a678860e9dbb1360e79e19abee9",
+          "sha256": "a55cb64965f867f9a1394ffcfc4e9dd3c807fe5c54ccbb5e206268328d142f37",
+          "triangles": 5612,
+          "vertices": 2989,
+          "texturePixels": 1024,
+          "textureBytes": 51270,
+          "geometryBytes": 81496
+        },
+        {
+          "level": 2,
+          "file": "mug-2.glb",
+          "bytes": 56584,
+          "gzipBytes": 49979,
+          "brotliBytes": 43563,
+          "sourceBytes": 50216,
+          "sourceSha256": "c01ebb1acf2bad358530015e91b820b0660c43374c8bfcb1630198ef7c1685a6",
+          "sha256": "1f4c99cda637ef4957761097c05e6cefe642166da55beede198afb69282dcc4e",
+          "triangles": 2244,
+          "vertices": 1255,
+          "texturePixels": 512,
+          "textureBytes": 21030,
+          "geometryBytes": 33544
+        }
+      ]
+    },
+    {
+      "slug": "clock",
+      "label": "탁상시계",
+      "id": "Crosley_Alarm_Clock_Vintage_Metal",
+      "note": "시계 숫자와 바늘, 금속 테두리의 모양을 비교하세요.",
+      "sourceMetadata": {
+        "id": "Crosley_Alarm_Clock_Vintage_Metal",
+        "name": "Crosley Alarm Clock, Vintage Metal",
+        "category": "household",
+        "category_source": "name rule",
+        "source_categories": [
+          "Consumer Goods"
+        ],
+        "brand": "Crosley",
+        "mpn": null,
+        "sku": "04897017373496",
+        "license": "CC-BY-4.0",
+        "file": "objects/Crosley_Alarm_Clock_Vintage_Metal/Crosley_Alarm_Clock_Vintage_Metal.glb",
+        "thumb": "thumbs/Crosley_Alarm_Clock_Vintage_Metal.webp",
+        "size_metres": [
+          0.1095,
+          0.1623,
+          0.054
+        ],
+        "mass_estimate_kg": 0.1562,
+        "triangles": 10248,
+        "vertices": 5650,
+        "source_texture_px": 4096,
+        "pack_texture_px": 2048,
+        "source_bytes": 11027894,
+        "pack_bytes": 215280,
+        "source": "https://fuel.gazebosim.org/1.0/GoogleResearch/models/Crosley_Alarm_Clock_Vintage_Metal"
+      },
+      "variants": [
+        {
+          "level": 0,
+          "file": "clock-0.glb",
+          "bytes": 301096,
+          "gzipBytes": 268269,
+          "brotliBytes": 231317,
+          "sourceBytes": 215280,
+          "sourceSha256": "4ce633f812322af1fe9b328c2732c27c1edcff9905789460ac930b5e92b9c812",
+          "sha256": "c36805e463b0f24604f44e6169a5bdafdafa2050e9508e4f5112fa86d59eddb3",
+          "triangles": 10248,
+          "vertices": 5650,
+          "texturePixels": 2048,
+          "textureBytes": 147186,
+          "geometryBytes": 151888
+        },
+        {
+          "level": 1,
+          "file": "clock-1.glb",
+          "bytes": 123868,
+          "gzipBytes": 107124,
+          "brotliBytes": 92014,
+          "sourceBytes": 130752,
+          "sourceSha256": "28967c9b2bd9126c94272b7fc76d4082ca9cbf9cb718d10ac1114edab126b90d",
+          "sha256": "025438deed704a38725c20d6c66ffaf940721546a960eccfad2aa6145bfd36e9",
+          "triangles": 5124,
+          "vertices": 3035,
+          "texturePixels": 1024,
+          "textureBytes": 42546,
+          "geometryBytes": 79304
+        },
+        {
+          "level": 2,
+          "file": "clock-2.glb",
+          "bytes": 52784,
+          "gzipBytes": 45075,
+          "brotliBytes": 39028,
+          "sourceBytes": 55504,
+          "sourceSha256": "814f2434efbd6dded225245936eecdc170147a4323e3ac932f22867e97c8e60e",
+          "sha256": "f12efb1ada7ac7485fcb1d3c824862fa9ac96d1984d1fba0c94ac856b4361cd8",
+          "triangles": 2048,
+          "vertices": 1331,
+          "texturePixels": 512,
+          "textureBytes": 17192,
+          "geometryBytes": 33584
+        }
+      ]
+    },
+    {
+      "slug": "coffee",
+      "label": "커피메이커",
+      "id": "Black_Decker_CM2035B_12Cup_Thermal_Coffeemaker",
+      "note": "제품 글자와 버튼, 주전자의 손잡이를 비교하세요.",
+      "sourceMetadata": {
+        "id": "Black_Decker_CM2035B_12Cup_Thermal_Coffeemaker",
+        "name": "Black & Decker CM2035B 12-Cup Thermal Coffeemaker",
+        "category": "kitchen",
+        "category_source": "name rule",
+        "source_categories": [],
+        "brand": "Black",
+        "mpn": null,
+        "sku": "00050875812123",
+        "license": "CC-BY-4.0",
+        "file": "objects/Black_Decker_CM2035B_12Cup_Thermal_Coffeemaker/Black_Decker_CM2035B_12Cup_Thermal_Coffeemaker.glb",
+        "thumb": "thumbs/Black_Decker_CM2035B_12Cup_Thermal_Coffeemaker.webp",
+        "size_metres": [
+          0.2269,
+          0.3369,
+          0.3236
+        ],
+        "mass_estimate_kg": 10.9603,
+        "triangles": 30034,
+        "vertices": 16635,
+        "source_texture_px": 4096,
+        "pack_texture_px": 2048,
+        "source_bytes": 13117226,
+        "pack_bytes": 324664,
+        "source": "https://fuel.gazebosim.org/1.0/GoogleResearch/models/Black_Decker_CM2035B_12Cup_Thermal_Coffeemaker"
+      },
+      "variants": [
+        {
+          "level": 0,
+          "file": "coffee-0.glb",
+          "bytes": 583016,
+          "gzipBytes": 488310,
+          "brotliBytes": 382858,
+          "sourceBytes": 324664,
+          "sourceSha256": "ab225ef6cbabc2f8a42dc6ee4b286937e7a63e51e0ac3d7662cce1799af76d0c",
+          "sha256": "c331e358a95849bfe65706d6e89598f801b1d34894012c8ab237dbe405f4c344",
+          "triangles": 30034,
+          "vertices": 16635,
+          "texturePixels": 2048,
+          "textureBytes": 134592,
+          "geometryBytes": 446364
+        },
+        {
+          "level": 1,
+          "file": "coffee-1.glb",
+          "bytes": 270704,
+          "gzipBytes": 222266,
+          "brotliBytes": 170986,
+          "sourceBytes": 182036,
+          "sourceSha256": "4067e48cd00ef2d048a7be2b1cb22a88dd2e28698118c1a375178b5168a9f027",
+          "sha256": "6b12afc3cf60ca2f5d3b35ca7f1adb1b7daefb7d5e8a768b00a3004ff0053ab0",
+          "triangles": 15016,
+          "vertices": 8782,
+          "texturePixels": 1024,
+          "textureBytes": 38042,
+          "geometryBytes": 230608
+        },
+        {
+          "level": 2,
+          "file": "coffee-2.glb",
+          "bytes": 116152,
+          "gzipBytes": 93871,
+          "brotliBytes": 74417,
+          "sourceBytes": 82224,
+          "sourceSha256": "1827b142f01bae5ddf1cf43868b3af24051ff71efc9316fc1e7b6875bb1447b6",
+          "sha256": "4e65295ddfdd6f63e3cc44d6d3025ee9f51df714b048b3bd679051e354edc1d6",
+          "triangles": 6006,
+          "vertices": 3955,
+          "texturePixels": 512,
+          "textureBytes": 14786,
+          "geometryBytes": 99316
+        }
+      ]
+    }
+  ]
+}

@@ -67,7 +67,7 @@ export class ApartmentDetails{
   for(const x of [5.6,7.25]){const p=this.box('sofa',[x,.53,.86],[.35,.17,.36],'plaster',x<6?0x8d9b8b:0xc2ab8e,'fabric',.075);p.rotation.z=x<6?.22:-.22;}
   this.box('coffee-table',[6.3,1.57,.135],[2.7,2.15,.014],'plaster',0xd0cabd,'fabric',.003);
   this.replace('coffee-table');this.box('coffee-table',[6.3,1.57,.49],[1.05,.6,.05],'wood',0xb8a28a,'wood',.05);for(const x of [5.9,6.7])for(const y of [1.4,1.77])this.cylinder('coffee-table',[x,y,.30],.022,.35);
-  this.box('coffee-table',[6.1,1.6,.535],[.23,.3,.025],'plaster',0x748b89);this.cylinder('coffee-table',[6.5,1.55,.56],.055,.08,'plaster',0xe9e5d9);
+  this.box('coffee-table',[6.1,1.6,.535],[.23,.3,.025],'plaster',0x748b89);
   for(const x of [5.86,6.34,6.82,7.30]){this.box('kitchen',[x,3.63,.58],[.45,.035,.68],'plaster',0xc8cfc6,'cabinet',.008);this.line('kitchen',[[x-.13,3.6,.83],[x+.13,3.6,.83]],.009);this.box('kitchen',[x,4.07,1.97],[.45,.32,.73],'plaster',0xe3e0d6,'cabinet',.008);this.line('kitchen',[[x-.13,3.89,1.68],[x+.13,3.89,1.68]],.007);}
   this.box('kitchen',[6.6,4.25,1.3],[2.1,.018,.61],'tile',0xd8d8cd);this.host('counter').material=this.material('marble',0xe0ddd2);
   this.replace('sink');this.box('sink',[6.125,3.9,.96],[.56,.41,.018],'metal',0x6e7d80,'metal',.055);this.box('sink',[6.125,3.9,.967],[.43,.29,.008],'metal',0x37494b,null,.05);this.line('sink',[[6.12,4.14,.98],[6.12,4.14,1.23],[6.12,4.02,1.28],[6.12,3.98,1.19]],.014);

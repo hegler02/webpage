@@ -1,0 +1,4 @@
+Google Scanned Objects, Copyright 2020 Google LLC
+CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+GLB conversion and LODs: https://huggingface.co/datasets/codepawl/scanned-objects-glb
+Modifications: Meshopt geometry decoded offline to avoid runtime WASM; original-shape 2K WebP preserved; supplied LOD1/LOD2 geometry combined with 1024/512 WebP resized from original albedo at quality 82. No mass or electrical properties imported.

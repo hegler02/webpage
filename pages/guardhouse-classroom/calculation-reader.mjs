@@ -3,7 +3,7 @@ const $=id=>document.getElementById(id),esc=v=>String(v).replaceAll('&','&amp;')
 const main=document.querySelector('.calculation-book');
 const lessons=[...main.querySelectorAll('.calc-lesson')].map(node=>({id:node.dataset.lesson,node,title:node.querySelector('h2').textContent,kind:node.dataset.kind,steps:[...node.querySelectorAll('.calc-formula')].map(node=>({id:node.dataset.formula,node,title:node.querySelector('h3').textContent,search:node.textContent.toLowerCase()}))}));
 const entries=lessons.flatMap(lesson=>lesson.steps.map(step=>({lesson,step})));
-const stored=readerState(readStored(localStorage,readerKey)),explicit=readerFromHash(location.hash);
+const stored=readerState(readStored(()=>localStorage,readerKey)),explicit=readerFromHash(location.hash);
 let state=explicit??stored,restoring=false,scrollTimer,menuOpen=false;
 if(explicit&&explicit.lesson===stored.lesson&&explicit.step===stored.step&&explicit.view===stored.view)state.scroll=stored.scroll;
 function current(){const lesson=lessons.find(l=>l.id===state.lesson)??lessons[0];const step=lesson.steps.find(s=>s.id===state.step)??lesson.steps[0];state.lesson=lesson.id;state.step=step.id;return {lesson,step};}
@@ -18,7 +18,7 @@ const intro=main.querySelector('.calc-book-intro');intro.insertAdjacentHTML('bef
 main.querySelector(':scope > p').hidden=true;intro.hidden=true;
 for(const l of lessons){l.node.querySelectorAll('details').forEach(d=>d.open=false);l.node.querySelector('.calc-target').insertAdjacentHTML('beforeend','<div class="button-row book-target-actions"><a class="button" data-book-target="model">도면·3D 위치 보기</a><a class="button" data-book-target="drawing">연결 도면 보기</a></div>');}
 main.insertAdjacentHTML('beforeend','<nav class="book-pager" aria-label="공식 이동"><button data-book-direction="-1">이전 공식</button><span id="book-page-number"></span><button data-book-direction="1">다음 공식</button></nav>');
-function persist(){const s=readerState({...state,scroll:window.scrollY});state=s;const ok=writeStored(localStorage,readerKey,s);if(!ok)$('book-save-status').textContent='이 브라우저에 위치를 저장할 수 없습니다. 주소를 복사하면 같은 공식으로 돌아올 수 있습니다.';history.replaceState({...history.state,bookReading:s},'',readerHash(s));}
+function persist(){const s=readerState({...state,scroll:window.scrollY});state=s;const ok=writeStored(()=>localStorage,readerKey,s);if(!ok)$('book-save-status').textContent='이 브라우저에 위치를 저장할 수 없습니다. 주소를 복사하면 같은 공식으로 돌아올 수 있습니다.';history.replaceState({...history.state,bookReading:s},'',readerHash(s));}
 function closeMenu(focus=false){menuOpen=false;document.body.classList.remove('book-menu-open');$('book-menu').setAttribute('aria-expanded','false');$('book-shade').hidden=true;if(focus)$('book-menu').focus();}
 function apply({focus=false,scroll=null}={}){
  const {lesson,step}=current(),all=state.view==='all',index=entries.findIndex(x=>x.lesson===lesson&&x.step===step);
@@ -54,5 +54,5 @@ $('book-search').oninput=e=>{const q=e.target.value.trim().toLowerCase();let cou
 window.addEventListener('scroll',()=>{if(restoring)return;clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>{if(state.view==='all'){const edge=document.querySelector('.book-topbar').getBoundingClientRect().bottom+80;const visible=entries.filter(x=>x.step.node.getBoundingClientRect().top<=edge);const item=visible.at(-1)??entries[0];state.lesson=item.lesson.id;state.step=item.step.id;const index=entries.indexOf(item);$('book-page-number').textContent=`${index+1} / ${entries.length} 공식 설명`;main.querySelector('[data-book-direction="-1"]').disabled=index===0;main.querySelector('[data-book-direction="1"]').disabled=index===entries.length-1;if(!$('book-search').value.trim())for(const d of document.querySelectorAll('[data-outline]'))d.open=d.dataset.outline===state.lesson;$('book-breadcrumb').textContent=`${item.lesson.title} · ${item.step.title}`;for(const a of document.querySelectorAll('[data-book-step]')){if(a.dataset.bookLesson===state.lesson&&a.dataset.bookStep===state.step)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');}}persist();},180);},{passive:true});
 window.addEventListener('pagehide',persist);
 window.addEventListener('popstate',()=>{state=readerState(history.state?.bookReading??readerFromHash(location.hash)??stored);apply({scroll:state.scroll});});
-window.addEventListener('pageshow',e=>{if(e.persisted){state=readerState(readStored(localStorage,readerKey));apply({scroll:state.scroll});}});
+window.addEventListener('pageshow',e=>{if(e.persisted){state=readerState(readStored(()=>localStorage,readerKey));apply({scroll:state.scroll});}});
 history.scrollRestoration='manual';document.body.classList.add('book-ready');apply({scroll:state.scroll});

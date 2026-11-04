@@ -26,7 +26,7 @@ function setLayout(value){layout=value;$('canvas-row').dataset.layout=value;docu
 let dataPending,viewerPending,navigationId=0,retryNavigation=null;
 let guide,guidePending,activeCalculation,calculationReturn=false;
 const calcState={mode:'electrical',circuit:'L1',member:'roof',step:null,live:1};
-const savedCalculation=readStored(sessionStorage,calculationKey);
+const savedCalculation=readStored(()=>sessionStorage,calculationKey);
 if(savedCalculation){
  if(['electrical','structure','trial'].includes(savedCalculation.mode))calcState.mode=savedCalculation.mode;
  if(['L1','R1','R2','AC1'].includes(savedCalculation.circuit))calcState.circuit=savedCalculation.circuit;
@@ -170,8 +170,8 @@ function electricalContent(){$('page-content').innerHTML=`<div class="content-gr
 function switchButtons(){return project.devices.filter(d=>d.kind==='switch').map(d=>`<button data-switch="${d.id}" aria-pressed="${exercise.switches[d.id]}">${d.name} ${exercise.switches[d.id]?'켜짐':'꺼짐'}</button>`).join('');}
 function circuitTable(){return `<article class="card" style="margin-top:18px"><h2>분전반 회로표</h2><div class="table-scroll"><table><thead><tr><th>회로</th><th>연결 부하</th><th>계산 전류</th><th>차단기</th><th>전선</th><th>최장 경로</th><th>전압강하 상한</th><th>수업 조건 확인</th></tr></thead><tbody>${electric.circuits.map(c=>`<tr><td><span class="circuit-color" style="background:${c.color}"></span>${c.id} ${c.name}</td><td class="number">${c.watts} W</td><td class="number">${f(c.current)} A</td><td><button data-breaker="${c.id}" aria-pressed="${exercise.breakers[c.id]}">${c.breaker} A · ${exercise.breakers[c.id]?'켜짐':'꺼짐'}</button></td><td>${c.area} mm²</td><td class="number">${f(c.length)} m</td><td class="number">${f(c.percent)} %</td><td class="${c.pass?'good':'needs-work'}">${c.pass?'조건 충족':!c.checks.current?'부하 과다 — 모의 차단':'설계 조건 확인'}</td></tr>`).join('')}</tbody></table></div><p>설계 부하 ${electric.watts} W · 현재 켜진 부하 ${electric.activeWatts} W. 전선관별 왕복 저항에 전체 회로 전류를 적용한 보수적인 전압강하 상한입니다.</p></article>`;}
 function calculationsContent(){
- const rendered=guide.renderGuide({electric,structure,state:calcState});activeCalculation=rendered.lesson;$('page-content').innerHTML=rendered.html;calcState.step=$('calc-step').value;writeStored(sessionStorage,calculationKey,calcState);
- $('open-calculation-book').onclick=()=>{writeStored(sessionStorage,calculationKey,calcState);};
+ const rendered=guide.renderGuide({electric,structure,state:calcState});activeCalculation=rendered.lesson;$('page-content').innerHTML=rendered.html;calcState.step=$('calc-step').value;writeStored(()=>sessionStorage,calculationKey,calcState);
+ $('open-calculation-book').onclick=()=>{writeStored(()=>sessionStorage,calculationKey,calcState);};
  $('calc-step').onchange=e=>{calcState.step=e.target.value;calculationsContent();$('calc-step').focus({preventScroll:true});};
  if($('calc-context'))$('calc-context').onchange=e=>{calcState[calcState.mode==='electrical'?'circuit':'member']=e.target.value;calcState.step=null;calculationsContent();$('calc-context').focus({preventScroll:true});};
  if($('trial-calculate'))$('trial-calculate').onclick=()=>{const input=$('load-trial'),live=Number(input.value);if(input.value.trim()===''||!Number.isFinite(live)||live<0||live>20){$('trial-error').textContent='0~20 범위의 활하중을 입력해 주세요.';input.focus();return;}calcState.live=live;calculationsContent();$('trial-calculate').focus({preventScroll:true});};

@@ -8,7 +8,7 @@ export function restoreExercise(raw){
  for(const id of Object.keys(s.switches))if(typeof raw.switches?.[id]==='boolean')s.switches[id]=raw.switches[id];
  for(const id of Object.keys(s.breakers))if(typeof raw.breakers?.[id]==='boolean')s.breakers[id]=raw.breakers[id];
  for(const d of project.devices){const w=raw.watts?.[d.id];if(d.watts&&Number.isFinite(w)&&w>=1&&w<=3000)s.watts[d.id]=w;const p=raw.positions?.[d.id];if(d.kind==='light'&&Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)&&validLightPosition(d,p))s.positions[d.id]=p;}
- s.completed=(raw.completed??[]).filter(id=>project.steps.some(t=>t.id===id));return s;
+ s.completed=[...new Set((Array.isArray(raw.completed)?raw.completed:[]).filter(id=>project.steps.some(t=>t.id===id)))];return s;
 }
 export function validLightPosition(d,p){const b=project.rooms.find(r=>r.id===d.room)?.bounds;return !!b&&p[0]>b[0]+d.size[0]/2&&p[0]<b[2]-d.size[0]/2&&p[1]>b[1]+d.size[1]/2&&p[1]<b[3]-d.size[1]/2;}
 export function devicesFor(s){return [project.panel,...project.devices].map(d=>({...d,pos:s.positions[d.id]?[...s.positions[d.id],d.pos[2]]:[...d.pos],watts:s.watts[d.id]??d.watts,...(d.kind==='light'?{lumens:(s.watts[d.id]??d.watts)*100}:{})}));}

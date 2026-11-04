@@ -101,8 +101,19 @@ export function apartmentElectrical(state){
  return {routes,circuits,devices:devices.map(d=>({...d,lumens:d.kind==='light'?d.watts*100:undefined,on:d.kind==='switch'?state.switches[d.id]!==false:!!d.watts&&state.power&&state.breakers[d.circuit]!==false&&circuits.find(c=>c.id===d.circuit).current<=circuits.find(c=>c.id===d.circuit).breaker&&state.switches[d.switch]!==false}))};
 }
 export function apartmentWalk(x,y,model){if(x<.14||x>8.26||y<.14||y>7.16)return false;return !model.elements.filter(e=>['wall','partition','furniture','fixture'].includes(e.kind)&&e.base<1.8&&e.base+e.height>.3).some(e=>[[x,y],[x-.13,y],[x+.13,y],[x,y-.13],[x,y+.13]].some(p=>insideElement(p,e)));}
-export function apartmentRebar(){const bars=[],id='apartment-floor',cover=.03,spacing=.15;for(const z of [-.145,-.035]){for(let x=cover;x<=8.4-cover;x+=spacing)bars.push({parent:id,a:[x,cover,z],b:[x,7.3-cover,z],diameter:10});for(let y=cover;y<=7.3-cover;y+=spacing)bars.push({parent:id,a:[cover,y,z+(z<-.1?.01:-.01)],b:[8.4-cover,y,z+(z<-.1?.01:-.01)],diameter:10});}return {bars,members:[{id,name:'세대 바닥판',diameter:10,spacing:150,cover:25,sheet:'S-201',count:bars.length}]};}
-export const apartmentSlab=()=>slabCalculation({span:2.6,thickness:180,cover:25,diameter:10,spacing:150,live:2,finish:1.5});
+export const apartmentSlabDesign=Object.freeze({span:2.6,thickness:180,cover:25,diameter:10,spacing:150,live:2,finish:1.5});
+export function apartmentRebar(){
+ const bars=[],id='apartment-floor',{cover,diameter,spacing,thickness}=apartmentSlabDesign;
+ const center=(cover+diameter/2)/1000,step=spacing/1000;
+ for(const z of [-thickness/1000+center,-center]){
+  // X-direction primary steel is the outer tension layer used by the 2.6 m strip calculation.
+  for(let y=center;y<=7.3-center;y+=step)bars.push({parent:id,a:[center,y,z],b:[8.4-center,y,z],diameter});
+  const crossZ=z+(z<-.1?diameter/1000:-diameter/1000);
+  for(let x=center;x<=8.4-center;x+=step)bars.push({parent:id,a:[x,center,crossZ],b:[x,7.3-center,crossZ],diameter});
+ }
+ return {bars,members:[{id,name:'세대 바닥판',diameter,spacing,cover,sheet:'S-201',count:bars.length}]};
+}
+export const apartmentSlab=()=>slabCalculation(apartmentSlabDesign);
 export function apartmentFire(s){
  const powered=s.power||s.battery,alarm=!!s.fireSignal&&powered;
  const devices=apartment.rooms.filter(r=>r.id!=='bath'&&r.id!=='entry').map((r,i)=>({id:'AD'+(i+1),name:r.name+' 연기감지기',room:r.id,kind:'smoke',pos:[(r.bounds[0]+r.bounds[2])/2,(r.bounds[1]+r.bounds[3])/2+.35,2.495],size:[.12,.12,.04],system:'fire',on:alarm&&s.fireSignal==='AD'+(i+1),term:'detector'}));

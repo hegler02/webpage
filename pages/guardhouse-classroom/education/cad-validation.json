@@ -1,9 +1,9 @@
 {
-  "verifiedAt": "2026-11-03T23:19:47.274Z",
+  "verifiedAt": "2026-11-04T19:13:33.989Z",
   "results": [
     {
       "id": "S-101",
-      "sha256": "c2d18259dfd5f59f39c9f8262c7c22fc910652a228332a3ecf1631543c4911b6",
+      "sha256": "aa1b501c2bb52a2b94d5fb03fcac8ab888b70df6e1206e720981e15a045026ac",
       "entities": 3565,
       "geometryAndTexts": 3563,
       "nativeDimensions": 2,
@@ -11,7 +11,7 @@
     },
     {
       "id": "S-102",
-      "sha256": "492a73dc0e11c10ad47fcb634ffe4f1ed60f9435f50d4b6edb9e105a8299d17b",
+      "sha256": "09ba9400533e5b18e7af61dac9c340147541c81e5ac6d9fa9ef505f3576c70c8",
       "entities": 616,
       "geometryAndTexts": 615,
       "nativeDimensions": 1,
@@ -19,23 +19,23 @@
     },
     {
       "id": "E-101",
-      "sha256": "b1c37f25eb00db87d040d804427fec6d1850671938861912628ef0d3901b7be6",
-      "entities": 1692,
-      "geometryAndTexts": 1691,
+      "sha256": "4d996efc463d5b91f80e690985364cabb60212a85d5b395dd4bc53ac93197438",
+      "entities": 1720,
+      "geometryAndTexts": 1719,
       "nativeDimensions": 1,
       "passed": true
     },
     {
       "id": "E-102",
-      "sha256": "feea37bcde7b44d41e1db8670d5f74b09b9279360775017b55ed65255cfc3d33",
-      "entities": 1642,
-      "geometryAndTexts": 1641,
+      "sha256": "fea91ed2ed077982d901cf3703329b6c1e73b5e699780243d3362024087c797d",
+      "entities": 1650,
+      "geometryAndTexts": 1649,
       "nativeDimensions": 1,
       "passed": true
     },
     {
       "id": "E-103",
-      "sha256": "3d10ef15999c58e6a1cf5d59562a6fc92f32bc07687f492379de19ec474f6893",
+      "sha256": "8628b59acb1df98c7f2577edc3db550c71af56c4464b114106d607c510b391ae",
       "entities": 107,
       "geometryAndTexts": 107,
       "nativeDimensions": 0,
@@ -43,7 +43,7 @@
     },
     {
       "id": "F-101",
-      "sha256": "34e0843f0687926ce69a19177235563f615bfcc3f12428bf7cd31e4aa4dabc5a",
+      "sha256": "42e7d724efb431c805c1dd9c59dc7bc0750cc6fe310b404fe0334d7c734fac92",
       "entities": 1656,
       "geometryAndTexts": 1656,
       "nativeDimensions": 0,
@@ -51,7 +51,7 @@
     },
     {
       "id": "F-102",
-      "sha256": "838bf2cf11fd1618f1af7e4eedac3b72177f75b5a3110d93cd0cd3cb553fb82d",
+      "sha256": "0f42fd836599c679704a7adc95b3679781a7d3b74bdbcec8e232b038034e0c48",
       "entities": 47,
       "geometryAndTexts": 47,
       "nativeDimensions": 0,
@@ -59,7 +59,7 @@
     },
     {
       "id": "M-101",
-      "sha256": "c5ed20bae4c5f70e5197f471f6b839c27e6de59154a5d0db10bcb2627ca0fece",
+      "sha256": "f0376a4ea570f6628f6cfc7a75654d7ae3fb291926d33f3a952050378bb0aad4",
       "entities": 30,
       "geometryAndTexts": 30,
       "nativeDimensions": 0,

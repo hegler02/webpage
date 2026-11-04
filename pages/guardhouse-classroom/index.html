@@ -17,6 +17,7 @@
  <header class="app-header">
   <a class="brand" href="#home" aria-label="공간과 전기 시작 화면"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 14 20 5l15 9v16l-15 8-15-8Z M5 14l15 8 15-8 M20 22v16 M12 10l15 8v16"/pages/guardhouse-classroom/></svg><span><strong>공간과 전기</strong></span></a>
   <button class="sample-chip" id="sample-lesson" title="레슨 01 · 경비실 학습 시작">교육용 샘플 1</button>
+  <a class="sample-next" href="/pages/guardhouse-classroom/apartment.html">샘플 2 · 아파트</a>
   <div class="header-actions"><span id="save-state">이 브라우저에 실습 저장</span><button id="reset-exercise">실습 초기화</button></div>
   <button id="menu-toggle" class="menu-toggle" aria-controls="learning-nav" aria-expanded="false" aria-label="학습 메뉴 열기"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="menu-open-icon" d="M4 6h16M4 12h16M4 18h16"/pages/guardhouse-classroom/><path class="menu-close-icon" d="m5 5 14 14M19 5 5 19"/pages/guardhouse-classroom/></svg><span>메뉴</span></button>
  </header>
@@ -36,6 +37,7 @@
     <button id="pit-view">기초·PIT 보기</button><button id="whole-view" class="whole-button">전체 건물로</button>
    </div>
    <div id="context-tools" class="context-tools"></div>
+   <section id="route-lesson" class="route-lesson" aria-label="전기 경로 안내" hidden></section>
    <div id="spatial-note" class="spatial-note" hidden></div>
    <div class="canvas-row" id="canvas-row" data-layout="split">
     <section id="plan-panel" class="drawing-panel"><div class="canvas-heading"><h2 id="sheet-name">학습 도면</h2><button id="plan-fit">도면 맞춤</button></div><div id="plan-host"></div><div class="canvas-footer"><span>대상 선택 · 휠 확대 · 빈 곳 드래그 이동</span><button id="save-svg">도면 저장</button></div></section>

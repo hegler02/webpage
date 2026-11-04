@@ -1,0 +1,21 @@
+{
+  "builtAt": "2026-11-04T19:19:15.785Z",
+  "sourceHashes": {
+    "src/apartment-project.mjs": "82a7350dde874c4be7b67249d729ca558099c6e21adf3006aa08e8c046e466c3",
+    "src/electrical-installation.mjs": "9914b5f697ca8d5b15a7466839498314e73babf4a6229724d10b16bb2dcbae17",
+    "public/apartment.mjs": "0cb9a3599a57161d99dec371ca74a2942a431cc6a777025c26fa77c4d76a1dea",
+    "public/apartment-plan.mjs": "2a8b5955488cb84ff9a3fe5a2246e5e065a04c1b05ad99344c32bc15b7ac8d52",
+    "public/apartment.html": "89af45bf0abbd42830c92b5b24f75a2249d8c8b8ee7d6ac1b143413a8ef397f0",
+    "public/apartment.css": "e6cb6efd2c1ae93ac849e3219c69a943ca6c30dedb160d074bc2948f4d56aed8",
+    "public/classroom-view.mjs": "589bccd855247aad339c916882e80f482a7604b1470de5610ca6db517c100b04",
+    "public/surface-materials.mjs": "d50a3659429a9c6c18c20d932bafb9f09d532b6d94401b2e6a6bea33cc23db22",
+    "public/electrical-tour.mjs": "547f6181699c3f3040f2aa8181acdf40782f17f6257300a841015f65225181f6",
+    "public/electrical-tour-ui.mjs": "0f0e514b8d4faaa72cc04bbecb40bb41d34b698c761f3a4b2e3c7839da73a6d9"
+  },
+  "apartment": {
+    "sheets": 7,
+    "rooms": 6,
+    "area": 58.7904,
+    "circuits": 5
+  }
+}

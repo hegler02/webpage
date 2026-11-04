@@ -2,7 +2,7 @@
  <article class="card calc-target"><p class="eyebrow">전기 회로 · 계산할 대상</p><h2>L1 · 실내 조명</h2><p>분전반 DB1 → 화장실 조명(L06)의 경로가 이 회로에서 가장 깁니다. 평면도와 3D에서 이 기구를 선택하고 회로 전체의 경로를 함께 표시합니다.</p>
  <p>연결 도면: E-101, E-103 · 대상: L06</p>
  <details class="calc-conditions" open><summary>이 계산의 조건과 범위</summary><p>단상 220 V · 60 Hz · 모든 부하 동시 사용. 기구의 W는 전기 입력전력입니다. 켜짐·꺼짐과 관계없이 설계 부하를 계산합니다. 아래는 20 °C 저항 모형이며 리액턴스·온도 상승·실제 분기별 전류는 생략합니다.</p></details>
- <p class="calc-outcome ">설계 전류 0.52 A · 전압강하 0.047% · 수업 비교 조건 충족</p>
+ <p class="calc-outcome ">설계 전류 0.52 A · 전압강하 0.049% · 수업 비교 조건 충족</p>
  <details open><summary>합산한 기구 6개 확인</summary><div class="calc-loads"><p>경비실 조명 1 24 W</p><p>경비실 조명 2 24 W</p><p>보관소 조명 1 18 W</p><p>보관소 조명 2 18 W</p><p>탕비실 조명 18 W</p><p>화장실 조명 12 W</p></div></details></article>
  <article class="calc-formula" id="formula-L1-power-sum" data-formula="power-sum">
  <h3>이 회로가 쓰는 전력 합하기</h3><p class="calc-why">여러 기구가 함께 켜졌을 때 전선에 필요한 전류를 구하기 위한 출발점입니다.</p>
@@ -19,25 +19,25 @@
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="current">전류 I · A</button><button class="term-link" data-reader-term="voltage">전압 V · V</button><button class="term-link" data-reader-term="power-factor">역률 pf</button></div></article><article class="calc-formula" id="formula-L1-route-length" data-formula="route-length">
  <h3>도면의 길이를 입체 경로로 읽기</h3><p class="calc-why">평면에서 보이지 않는 수직 배관까지 전선 길이에 포함하기 위해서입니다.</p>
  <div class="calc-equation" aria-label="공식">ℓ = Σ √(Δx² + Δy² + Δz²)</div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>최장 편도 경로: 8.63 m · L06</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>최장 편도 경로: 8.92 m · L06</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>ℓ</dt><dd>분전반에서 선택한 기구까지의 편도 길이<span>m</span></dd></div><div><dt>Δx, Δy, Δz</dt><dd>선분 양끝의 가로·세로·높이 차이<span>m</span></dd></div><div><dt>Σ, √</dt><dd>선분 합계, 제곱근<span>연산 기호</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>공간의 두 점 사이 거리인 피타고라스 정리를 각 선분에 적용하고 더합니다. 회로의 각 기구·스위치 경로 중 최장값을 선택합니다. 직선거리나 모든 가지 길이의 합이 아닙니다.</p><h4>단위를 따라가 보세요</h4><p>도면 좌표의 길이 단위는 m입니다. 다음 식에서 왕복을 고려하므로 여기서는 두 배 하지 않습니다.</p><p class="calc-source"><a href="https://ocw.mit.edu/courses/1-050-solid-mechanics-fall-2004/pages/lecture-notes/" target="_blank" rel="noopener">평형·응력·보의 휨 강의 · MIT</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="conduit">전선관</button><button class="term-link" data-reader-term="units">단위 변환·차원</button></div></article><article class="calc-formula" id="formula-L1-resistance" data-formula="resistance">
  <h3>왕복하는 전선의 저항 구하기</h3><p class="calc-why">같은 전류라도 전선이 길거나 가늘면 전압 손실이 커지는 이유를 수치로 봅니다.</p>
  <div class="calc-equation" aria-label="공식">R = 2 × ρ × ℓ / A<sub>w</sub></div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>2 × 0.0175 × 8.63 / 1.5 = 0.2014 Ω</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>2 × 0.0175 × 8.92 / 1.5 = 0.2081 Ω</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>R</dt><dd>왕복 도체 저항<span>Ω</span></dd></div><div><dt>ρ</dt><dd>채택한 구리 저항률<span>Ω·mm²/m</span></dd></div><div><dt>ℓ</dt><dd>편도 경로 길이<span>m</span></dd></div><div><dt>A<sub>w</sub></dt><dd>전선 한 가닥의 도체 단면적<span>mm²</span></dd></div><div><dt>2</dt><dd>가는 선과 돌아오는 선<span>단위 없음</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>균일한 전선의 저항 R=ρℓ/A_w에서 출발합니다. 단상 2선의 가는 선과 돌아오는 선을 같은 길이·단면으로 가정해 2를 곱합니다. 보호접지선 PE는 정상 전류의 귀로가 아닙니다.</p><h4>단위를 따라가 보세요</h4><p>(Ω·mm²/m) × m / mm² = Ω. 단위에 mm²를 썼으므로 단면적 1.5나 2.5를 그대로 넣습니다.</p><p class="calc-source"><a href="https://openstax.org/books/university-physics-volume-2/pages/9-3-resistivity-and-resistance" target="_blank" rel="noopener">비저항과 저항 · OpenStax</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="resistivity">저항률 ρ와 저항 R</button><button class="term-link" data-reader-term="ground">보호접지 PE</button></div></article><article class="calc-formula" id="formula-L1-voltage-drop" data-formula="voltage-drop">
  <h3>배선에서 줄어드는 전압 구하기</h3><p class="calc-why">멀리 있는 기구에 도착할 때 전압이 얼마나 줄어드는지 비교합니다.</p>
  <div class="calc-equation" aria-label="공식">ΔV = I × R</div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>0.5182 × 0.2014 ≈ 0.104 V</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>0.5182 × 0.2081 ≈ 0.108 V</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>ΔV</dt><dd>전선에서의 전압 감소량<span>V</span></dd></div><div><dt>I</dt><dd>회로 전체 전류<span>A</span></dd></div><div><dt>R</dt><dd>왕복 저항<span>Ω</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>옴의 법칙을 왕복 전선 저항에 적용합니다. 이 단순 저항 모형에서는 전체 회로 전류가 최장 경로 끝까지 흐른다고 가정합니다. 실제 교류 계산은 역률·리액턴스·운전 온도와 분기별 전류도 반영합니다. 이 값이 모든 실제 조건의 상한이라는 뜻은 아닙니다.</p><h4>단위를 따라가 보세요</h4><p>A × Ω = V. 표시값은 반올림하지만 내부 계산은 반올림 전 값으로 이어집니다.</p><p class="calc-source"><a href="https://www.electrical-installation.org/enwiki/Calculation_of_voltage_drop_in_steady_load_conditions" target="_blank" rel="noopener">실제 교류 전압강하식 · Schneider Electric</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="drop">전압강하</button><button class="term-link" data-reader-term="resistivity">저항률 ρ와 저항 R</button></div></article><article class="calc-formula" id="formula-L1-drop-percent" data-formula="drop-percent">
  <h3>전압강하를 백분율로 비교하기</h3><p class="calc-why">전압 감소량을 공급 전압에 대한 비율로 바꾸어 같은 기준으로 비교합니다.</p>
  <div class="calc-equation" aria-label="공식">ε = (ΔV / V) × 100</div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>(0.104 / 220) × 100 = 0.047%</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>(0.108 / 220) × 100 = 0.049%</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>ε</dt><dd>전압강하율<span>%</span></dd></div><div><dt>ΔV</dt><dd>줄어든 전압<span>V</span></dd></div><div><dt>V</dt><dd>공급 전압<span>V</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>부분을 전체로 나누는 비율입니다. 이 수업은 3% 이하를 비교 기준으로 정했습니다. 3%가 모든 설비에 동일하게 적용되는 법규라고 외우지 않습니다.</p><h4>단위를 따라가 보세요</h4><p>V / V는 단위가 없어지고, 100을 곱해 %로 표시합니다.</p><p class="calc-source"><a href="https://www.electrical-installation.org/enwiki/Calculation_of_voltage_drop_in_steady_load_conditions" target="_blank" rel="noopener">실제 교류 전압강하식 · Schneider Electric</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="drop">전압강하</button><button class="term-link" data-reader-term="voltage">전압 V · V</button></div></article><article class="calc-formula" id="formula-L1-protection" data-formula="protection">
@@ -51,7 +51,7 @@
  <article class="card calc-target"><p class="eyebrow">전기 회로 · 계산할 대상</p><h2>R1 · 업무·보관소 콘센트</h2><p>분전반 DB1 → 업무용 콘센트(R01)의 경로가 이 회로에서 가장 깁니다. 평면도와 3D에서 이 기구를 선택하고 회로 전체의 경로를 함께 표시합니다.</p>
  <p>연결 도면: E-102, E-103 · 대상: R01</p>
  <details class="calc-conditions" open><summary>이 계산의 조건과 범위</summary><p>단상 220 V · 60 Hz · 모든 부하 동시 사용. 기구의 W는 전기 입력전력입니다. 켜짐·꺼짐과 관계없이 설계 부하를 계산합니다. 아래는 20 °C 저항 모형이며 리액턴스·온도 상승·실제 분기별 전류는 생략합니다.</p></details>
- <p class="calc-outcome ">설계 전류 2.73 A · 전압강하 0.146% · 수업 비교 조건 충족</p>
+ <p class="calc-outcome ">설계 전류 2.73 A · 전압강하 0.151% · 수업 비교 조건 충족</p>
  <details open><summary>합산한 기구 2개 확인</summary><div class="calc-loads"><p>업무용 콘센트 300 W</p><p>보관소 콘센트 300 W</p></div></details></article>
  <article class="calc-formula" id="formula-R1-power-sum" data-formula="power-sum">
  <h3>이 회로가 쓰는 전력 합하기</h3><p class="calc-why">여러 기구가 함께 켜졌을 때 전선에 필요한 전류를 구하기 위한 출발점입니다.</p>
@@ -68,25 +68,25 @@
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="current">전류 I · A</button><button class="term-link" data-reader-term="voltage">전압 V · V</button><button class="term-link" data-reader-term="power-factor">역률 pf</button></div></article><article class="calc-formula" id="formula-R1-route-length" data-formula="route-length">
  <h3>도면의 길이를 입체 경로로 읽기</h3><p class="calc-why">평면에서 보이지 않는 수직 배관까지 전선 길이에 포함하기 위해서입니다.</p>
  <div class="calc-equation" aria-label="공식">ℓ = Σ √(Δx² + Δy² + Δz²)</div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>최장 편도 경로: 8.43 m · R01</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>최장 편도 경로: 8.72 m · R01</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>ℓ</dt><dd>분전반에서 선택한 기구까지의 편도 길이<span>m</span></dd></div><div><dt>Δx, Δy, Δz</dt><dd>선분 양끝의 가로·세로·높이 차이<span>m</span></dd></div><div><dt>Σ, √</dt><dd>선분 합계, 제곱근<span>연산 기호</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>공간의 두 점 사이 거리인 피타고라스 정리를 각 선분에 적용하고 더합니다. 회로의 각 기구·스위치 경로 중 최장값을 선택합니다. 직선거리나 모든 가지 길이의 합이 아닙니다.</p><h4>단위를 따라가 보세요</h4><p>도면 좌표의 길이 단위는 m입니다. 다음 식에서 왕복을 고려하므로 여기서는 두 배 하지 않습니다.</p><p class="calc-source"><a href="https://ocw.mit.edu/courses/1-050-solid-mechanics-fall-2004/pages/lecture-notes/" target="_blank" rel="noopener">평형·응력·보의 휨 강의 · MIT</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="conduit">전선관</button><button class="term-link" data-reader-term="units">단위 변환·차원</button></div></article><article class="calc-formula" id="formula-R1-resistance" data-formula="resistance">
  <h3>왕복하는 전선의 저항 구하기</h3><p class="calc-why">같은 전류라도 전선이 길거나 가늘면 전압 손실이 커지는 이유를 수치로 봅니다.</p>
  <div class="calc-equation" aria-label="공식">R = 2 × ρ × ℓ / A<sub>w</sub></div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>2 × 0.0175 × 8.43 / 2.5 = 0.1180 Ω</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>2 × 0.0175 × 8.72 / 2.5 = 0.1220 Ω</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>R</dt><dd>왕복 도체 저항<span>Ω</span></dd></div><div><dt>ρ</dt><dd>채택한 구리 저항률<span>Ω·mm²/m</span></dd></div><div><dt>ℓ</dt><dd>편도 경로 길이<span>m</span></dd></div><div><dt>A<sub>w</sub></dt><dd>전선 한 가닥의 도체 단면적<span>mm²</span></dd></div><div><dt>2</dt><dd>가는 선과 돌아오는 선<span>단위 없음</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>균일한 전선의 저항 R=ρℓ/A_w에서 출발합니다. 단상 2선의 가는 선과 돌아오는 선을 같은 길이·단면으로 가정해 2를 곱합니다. 보호접지선 PE는 정상 전류의 귀로가 아닙니다.</p><h4>단위를 따라가 보세요</h4><p>(Ω·mm²/m) × m / mm² = Ω. 단위에 mm²를 썼으므로 단면적 1.5나 2.5를 그대로 넣습니다.</p><p class="calc-source"><a href="https://openstax.org/books/university-physics-volume-2/pages/9-3-resistivity-and-resistance" target="_blank" rel="noopener">비저항과 저항 · OpenStax</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="resistivity">저항률 ρ와 저항 R</button><button class="term-link" data-reader-term="ground">보호접지 PE</button></div></article><article class="calc-formula" id="formula-R1-voltage-drop" data-formula="voltage-drop">
  <h3>배선에서 줄어드는 전압 구하기</h3><p class="calc-why">멀리 있는 기구에 도착할 때 전압이 얼마나 줄어드는지 비교합니다.</p>
  <div class="calc-equation" aria-label="공식">ΔV = I × R</div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>2.7273 × 0.1180 ≈ 0.322 V</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>2.7273 × 0.1220 ≈ 0.333 V</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>ΔV</dt><dd>전선에서의 전압 감소량<span>V</span></dd></div><div><dt>I</dt><dd>회로 전체 전류<span>A</span></dd></div><div><dt>R</dt><dd>왕복 저항<span>Ω</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>옴의 법칙을 왕복 전선 저항에 적용합니다. 이 단순 저항 모형에서는 전체 회로 전류가 최장 경로 끝까지 흐른다고 가정합니다. 실제 교류 계산은 역률·리액턴스·운전 온도와 분기별 전류도 반영합니다. 이 값이 모든 실제 조건의 상한이라는 뜻은 아닙니다.</p><h4>단위를 따라가 보세요</h4><p>A × Ω = V. 표시값은 반올림하지만 내부 계산은 반올림 전 값으로 이어집니다.</p><p class="calc-source"><a href="https://www.electrical-installation.org/enwiki/Calculation_of_voltage_drop_in_steady_load_conditions" target="_blank" rel="noopener">실제 교류 전압강하식 · Schneider Electric</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="drop">전압강하</button><button class="term-link" data-reader-term="resistivity">저항률 ρ와 저항 R</button></div></article><article class="calc-formula" id="formula-R1-drop-percent" data-formula="drop-percent">
  <h3>전압강하를 백분율로 비교하기</h3><p class="calc-why">전압 감소량을 공급 전압에 대한 비율로 바꾸어 같은 기준으로 비교합니다.</p>
  <div class="calc-equation" aria-label="공식">ε = (ΔV / V) × 100</div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>(0.322 / 220) × 100 = 0.146%</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>(0.333 / 220) × 100 = 0.151%</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>ε</dt><dd>전압강하율<span>%</span></dd></div><div><dt>ΔV</dt><dd>줄어든 전압<span>V</span></dd></div><div><dt>V</dt><dd>공급 전압<span>V</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>부분을 전체로 나누는 비율입니다. 이 수업은 3% 이하를 비교 기준으로 정했습니다. 3%가 모든 설비에 동일하게 적용되는 법규라고 외우지 않습니다.</p><h4>단위를 따라가 보세요</h4><p>V / V는 단위가 없어지고, 100을 곱해 %로 표시합니다.</p><p class="calc-source"><a href="https://www.electrical-installation.org/enwiki/Calculation_of_voltage_drop_in_steady_load_conditions" target="_blank" rel="noopener">실제 교류 전압강하식 · Schneider Electric</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="drop">전압강하</button><button class="term-link" data-reader-term="voltage">전압 V · V</button></div></article><article class="calc-formula" id="formula-R1-protection" data-formula="protection">
@@ -100,7 +100,7 @@
  <article class="card calc-target"><p class="eyebrow">전기 회로 · 계산할 대상</p><h2>R2 · 탕비실 콘센트</h2><p>분전반 DB1 → 탕비실 콘센트(R03)의 경로가 이 회로에서 가장 깁니다. 평면도와 3D에서 이 기구를 선택하고 회로 전체의 경로를 함께 표시합니다.</p>
  <p>연결 도면: E-102, E-103 · 대상: R03</p>
  <details class="calc-conditions" open><summary>이 계산의 조건과 범위</summary><p>단상 220 V · 60 Hz · 모든 부하 동시 사용. 기구의 W는 전기 입력전력입니다. 켜짐·꺼짐과 관계없이 설계 부하를 계산합니다. 아래는 20 °C 저항 모형이며 리액턴스·온도 상승·실제 분기별 전류는 생략합니다.</p></details>
- <p class="calc-outcome ">설계 전류 5.45 A · 전압강하 0.288% · 수업 비교 조건 충족</p>
+ <p class="calc-outcome ">설계 전류 5.45 A · 전압강하 0.298% · 수업 비교 조건 충족</p>
  <details open><summary>합산한 기구 1개 확인</summary><div class="calc-loads"><p>탕비실 콘센트 1200 W</p></div></details></article>
  <article class="calc-formula" id="formula-R2-power-sum" data-formula="power-sum">
  <h3>이 회로가 쓰는 전력 합하기</h3><p class="calc-why">여러 기구가 함께 켜졌을 때 전선에 필요한 전류를 구하기 위한 출발점입니다.</p>
@@ -117,25 +117,25 @@
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="current">전류 I · A</button><button class="term-link" data-reader-term="voltage">전압 V · V</button><button class="term-link" data-reader-term="power-factor">역률 pf</button></div></article><article class="calc-formula" id="formula-R2-route-length" data-formula="route-length">
  <h3>도면의 길이를 입체 경로로 읽기</h3><p class="calc-why">평면에서 보이지 않는 수직 배관까지 전선 길이에 포함하기 위해서입니다.</p>
  <div class="calc-equation" aria-label="공식">ℓ = Σ √(Δx² + Δy² + Δz²)</div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>최장 편도 경로: 8.29 m · R03</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>최장 편도 경로: 8.58 m · R03</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>ℓ</dt><dd>분전반에서 선택한 기구까지의 편도 길이<span>m</span></dd></div><div><dt>Δx, Δy, Δz</dt><dd>선분 양끝의 가로·세로·높이 차이<span>m</span></dd></div><div><dt>Σ, √</dt><dd>선분 합계, 제곱근<span>연산 기호</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>공간의 두 점 사이 거리인 피타고라스 정리를 각 선분에 적용하고 더합니다. 회로의 각 기구·스위치 경로 중 최장값을 선택합니다. 직선거리나 모든 가지 길이의 합이 아닙니다.</p><h4>단위를 따라가 보세요</h4><p>도면 좌표의 길이 단위는 m입니다. 다음 식에서 왕복을 고려하므로 여기서는 두 배 하지 않습니다.</p><p class="calc-source"><a href="https://ocw.mit.edu/courses/1-050-solid-mechanics-fall-2004/pages/lecture-notes/" target="_blank" rel="noopener">평형·응력·보의 휨 강의 · MIT</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="conduit">전선관</button><button class="term-link" data-reader-term="units">단위 변환·차원</button></div></article><article class="calc-formula" id="formula-R2-resistance" data-formula="resistance">
  <h3>왕복하는 전선의 저항 구하기</h3><p class="calc-why">같은 전류라도 전선이 길거나 가늘면 전압 손실이 커지는 이유를 수치로 봅니다.</p>
  <div class="calc-equation" aria-label="공식">R = 2 × ρ × ℓ / A<sub>w</sub></div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>2 × 0.0175 × 8.29 / 2.5 = 0.1161 Ω</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>2 × 0.0175 × 8.58 / 2.5 = 0.1201 Ω</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>R</dt><dd>왕복 도체 저항<span>Ω</span></dd></div><div><dt>ρ</dt><dd>채택한 구리 저항률<span>Ω·mm²/m</span></dd></div><div><dt>ℓ</dt><dd>편도 경로 길이<span>m</span></dd></div><div><dt>A<sub>w</sub></dt><dd>전선 한 가닥의 도체 단면적<span>mm²</span></dd></div><div><dt>2</dt><dd>가는 선과 돌아오는 선<span>단위 없음</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>균일한 전선의 저항 R=ρℓ/A_w에서 출발합니다. 단상 2선의 가는 선과 돌아오는 선을 같은 길이·단면으로 가정해 2를 곱합니다. 보호접지선 PE는 정상 전류의 귀로가 아닙니다.</p><h4>단위를 따라가 보세요</h4><p>(Ω·mm²/m) × m / mm² = Ω. 단위에 mm²를 썼으므로 단면적 1.5나 2.5를 그대로 넣습니다.</p><p class="calc-source"><a href="https://openstax.org/books/university-physics-volume-2/pages/9-3-resistivity-and-resistance" target="_blank" rel="noopener">비저항과 저항 · OpenStax</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="resistivity">저항률 ρ와 저항 R</button><button class="term-link" data-reader-term="ground">보호접지 PE</button></div></article><article class="calc-formula" id="formula-R2-voltage-drop" data-formula="voltage-drop">
  <h3>배선에서 줄어드는 전압 구하기</h3><p class="calc-why">멀리 있는 기구에 도착할 때 전압이 얼마나 줄어드는지 비교합니다.</p>
  <div class="calc-equation" aria-label="공식">ΔV = I × R</div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>5.4545 × 0.1161 ≈ 0.633 V</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>5.4545 × 0.1201 ≈ 0.655 V</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>ΔV</dt><dd>전선에서의 전압 감소량<span>V</span></dd></div><div><dt>I</dt><dd>회로 전체 전류<span>A</span></dd></div><div><dt>R</dt><dd>왕복 저항<span>Ω</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>옴의 법칙을 왕복 전선 저항에 적용합니다. 이 단순 저항 모형에서는 전체 회로 전류가 최장 경로 끝까지 흐른다고 가정합니다. 실제 교류 계산은 역률·리액턴스·운전 온도와 분기별 전류도 반영합니다. 이 값이 모든 실제 조건의 상한이라는 뜻은 아닙니다.</p><h4>단위를 따라가 보세요</h4><p>A × Ω = V. 표시값은 반올림하지만 내부 계산은 반올림 전 값으로 이어집니다.</p><p class="calc-source"><a href="https://www.electrical-installation.org/enwiki/Calculation_of_voltage_drop_in_steady_load_conditions" target="_blank" rel="noopener">실제 교류 전압강하식 · Schneider Electric</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="drop">전압강하</button><button class="term-link" data-reader-term="resistivity">저항률 ρ와 저항 R</button></div></article><article class="calc-formula" id="formula-R2-drop-percent" data-formula="drop-percent">
  <h3>전압강하를 백분율로 비교하기</h3><p class="calc-why">전압 감소량을 공급 전압에 대한 비율로 바꾸어 같은 기준으로 비교합니다.</p>
  <div class="calc-equation" aria-label="공식">ε = (ΔV / V) × 100</div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>(0.633 / 220) × 100 = 0.288%</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>(0.655 / 220) × 100 = 0.298%</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>ε</dt><dd>전압강하율<span>%</span></dd></div><div><dt>ΔV</dt><dd>줄어든 전압<span>V</span></dd></div><div><dt>V</dt><dd>공급 전압<span>V</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>부분을 전체로 나누는 비율입니다. 이 수업은 3% 이하를 비교 기준으로 정했습니다. 3%가 모든 설비에 동일하게 적용되는 법규라고 외우지 않습니다.</p><h4>단위를 따라가 보세요</h4><p>V / V는 단위가 없어지고, 100을 곱해 %로 표시합니다.</p><p class="calc-source"><a href="https://www.electrical-installation.org/enwiki/Calculation_of_voltage_drop_in_steady_load_conditions" target="_blank" rel="noopener">실제 교류 전압강하식 · Schneider Electric</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="drop">전압강하</button><button class="term-link" data-reader-term="voltage">전압 V · V</button></div></article><article class="calc-formula" id="formula-R2-protection" data-formula="protection">
@@ -149,7 +149,7 @@
  <article class="card calc-target"><p class="eyebrow">전기 회로 · 계산할 대상</p><h2>AC1 · 냉방기 전용</h2><p>분전반 DB1 → 벽걸이 냉방기(AC01)의 경로가 이 회로에서 가장 깁니다. 평면도와 3D에서 이 기구를 선택하고 회로 전체의 경로를 함께 표시합니다.</p>
  <p>연결 도면: E-102, E-103 · 대상: AC01</p>
  <details class="calc-conditions" open><summary>이 계산의 조건과 범위</summary><p>단상 220 V · 60 Hz · 모든 부하 동시 사용. 기구의 W는 전기 입력전력입니다. 켜짐·꺼짐과 관계없이 설계 부하를 계산합니다. 아래는 20 °C 저항 모형이며 리액턴스·온도 상승·실제 분기별 전류는 생략합니다.</p></details>
- <p class="calc-outcome ">설계 전류 4.55 A · 전압강하 0.186% · 수업 비교 조건 충족</p>
+ <p class="calc-outcome ">설계 전류 4.55 A · 전압강하 0.195% · 수업 비교 조건 충족</p>
  <details open><summary>합산한 기구 1개 확인</summary><div class="calc-loads"><p>벽걸이 냉방기 900 W</p></div></details></article>
  <article class="calc-formula" id="formula-AC1-power-sum" data-formula="power-sum">
  <h3>이 회로가 쓰는 전력 합하기</h3><p class="calc-why">여러 기구가 함께 켜졌을 때 전선에 필요한 전류를 구하기 위한 출발점입니다.</p>
@@ -166,25 +166,25 @@
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="current">전류 I · A</button><button class="term-link" data-reader-term="voltage">전압 V · V</button><button class="term-link" data-reader-term="power-factor">역률 pf</button></div></article><article class="calc-formula" id="formula-AC1-route-length" data-formula="route-length">
  <h3>도면의 길이를 입체 경로로 읽기</h3><p class="calc-why">평면에서 보이지 않는 수직 배관까지 전선 길이에 포함하기 위해서입니다.</p>
  <div class="calc-equation" aria-label="공식">ℓ = Σ √(Δx² + Δy² + Δz²)</div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>최장 편도 경로: 6.45 m · AC01</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>최장 편도 경로: 6.74 m · AC01</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>ℓ</dt><dd>분전반에서 선택한 기구까지의 편도 길이<span>m</span></dd></div><div><dt>Δx, Δy, Δz</dt><dd>선분 양끝의 가로·세로·높이 차이<span>m</span></dd></div><div><dt>Σ, √</dt><dd>선분 합계, 제곱근<span>연산 기호</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>공간의 두 점 사이 거리인 피타고라스 정리를 각 선분에 적용하고 더합니다. 회로의 각 기구·스위치 경로 중 최장값을 선택합니다. 직선거리나 모든 가지 길이의 합이 아닙니다.</p><h4>단위를 따라가 보세요</h4><p>도면 좌표의 길이 단위는 m입니다. 다음 식에서 왕복을 고려하므로 여기서는 두 배 하지 않습니다.</p><p class="calc-source"><a href="https://ocw.mit.edu/courses/1-050-solid-mechanics-fall-2004/pages/lecture-notes/" target="_blank" rel="noopener">평형·응력·보의 휨 강의 · MIT</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="conduit">전선관</button><button class="term-link" data-reader-term="units">단위 변환·차원</button></div></article><article class="calc-formula" id="formula-AC1-resistance" data-formula="resistance">
  <h3>왕복하는 전선의 저항 구하기</h3><p class="calc-why">같은 전류라도 전선이 길거나 가늘면 전압 손실이 커지는 이유를 수치로 봅니다.</p>
  <div class="calc-equation" aria-label="공식">R = 2 × ρ × ℓ / A<sub>w</sub></div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>2 × 0.0175 × 6.45 / 2.5 = 0.0902 Ω</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>2 × 0.0175 × 6.74 / 2.5 = 0.0943 Ω</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>R</dt><dd>왕복 도체 저항<span>Ω</span></dd></div><div><dt>ρ</dt><dd>채택한 구리 저항률<span>Ω·mm²/m</span></dd></div><div><dt>ℓ</dt><dd>편도 경로 길이<span>m</span></dd></div><div><dt>A<sub>w</sub></dt><dd>전선 한 가닥의 도체 단면적<span>mm²</span></dd></div><div><dt>2</dt><dd>가는 선과 돌아오는 선<span>단위 없음</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>균일한 전선의 저항 R=ρℓ/A_w에서 출발합니다. 단상 2선의 가는 선과 돌아오는 선을 같은 길이·단면으로 가정해 2를 곱합니다. 보호접지선 PE는 정상 전류의 귀로가 아닙니다.</p><h4>단위를 따라가 보세요</h4><p>(Ω·mm²/m) × m / mm² = Ω. 단위에 mm²를 썼으므로 단면적 1.5나 2.5를 그대로 넣습니다.</p><p class="calc-source"><a href="https://openstax.org/books/university-physics-volume-2/pages/9-3-resistivity-and-resistance" target="_blank" rel="noopener">비저항과 저항 · OpenStax</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="resistivity">저항률 ρ와 저항 R</button><button class="term-link" data-reader-term="ground">보호접지 PE</button></div></article><article class="calc-formula" id="formula-AC1-voltage-drop" data-formula="voltage-drop">
  <h3>배선에서 줄어드는 전압 구하기</h3><p class="calc-why">멀리 있는 기구에 도착할 때 전압이 얼마나 줄어드는지 비교합니다.</p>
  <div class="calc-equation" aria-label="공식">ΔV = I × R</div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>4.5455 × 0.0902 ≈ 0.410 V</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>4.5455 × 0.0943 ≈ 0.429 V</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>ΔV</dt><dd>전선에서의 전압 감소량<span>V</span></dd></div><div><dt>I</dt><dd>회로 전체 전류<span>A</span></dd></div><div><dt>R</dt><dd>왕복 저항<span>Ω</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>옴의 법칙을 왕복 전선 저항에 적용합니다. 이 단순 저항 모형에서는 전체 회로 전류가 최장 경로 끝까지 흐른다고 가정합니다. 실제 교류 계산은 역률·리액턴스·운전 온도와 분기별 전류도 반영합니다. 이 값이 모든 실제 조건의 상한이라는 뜻은 아닙니다.</p><h4>단위를 따라가 보세요</h4><p>A × Ω = V. 표시값은 반올림하지만 내부 계산은 반올림 전 값으로 이어집니다.</p><p class="calc-source"><a href="https://www.electrical-installation.org/enwiki/Calculation_of_voltage_drop_in_steady_load_conditions" target="_blank" rel="noopener">실제 교류 전압강하식 · Schneider Electric</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="drop">전압강하</button><button class="term-link" data-reader-term="resistivity">저항률 ρ와 저항 R</button></div></article><article class="calc-formula" id="formula-AC1-drop-percent" data-formula="drop-percent">
  <h3>전압강하를 백분율로 비교하기</h3><p class="calc-why">전압 감소량을 공급 전압에 대한 비율로 바꾸어 같은 기준으로 비교합니다.</p>
  <div class="calc-equation" aria-label="공식">ε = (ΔV / V) × 100</div>
- <div class="calc-substitution"><strong>현재 값 대입</strong><p>(0.410 / 220) × 100 = 0.186%</p></div>
+ <div class="calc-substitution"><strong>현재 값 대입</strong><p>(0.429 / 220) × 100 = 0.195%</p></div>
  <div class="calc-explain-grid"><section><h4>기호와 단위</h4><dl class="calc-symbols"><div><dt>ε</dt><dd>전압강하율<span>%</span></dd></div><div><dt>ΔV</dt><dd>줄어든 전압<span>V</span></dd></div><div><dt>V</dt><dd>공급 전압<span>V</span></dd></div></dl></section>
  <section><h4>어떤 원리인가요?</h4><p>부분을 전체로 나누는 비율입니다. 이 수업은 3% 이하를 비교 기준으로 정했습니다. 3%가 모든 설비에 동일하게 적용되는 법규라고 외우지 않습니다.</p><h4>단위를 따라가 보세요</h4><p>V / V는 단위가 없어지고, 100을 곱해 %로 표시합니다.</p><p class="calc-source"><a href="https://www.electrical-installation.org/enwiki/Calculation_of_voltage_drop_in_steady_load_conditions" target="_blank" rel="noopener">실제 교류 전압강하식 · Schneider Electric</a></p><p class="small">원리 참고 자료입니다. 화면의 수치와 단순화 조건은 이 샘플의 수업 모형입니다.</p></section></div>
  <div class="calc-terms book-enhanced-only" hidden><span>모르는 말 바로 보기</span><button class="term-link" data-reader-term="drop">전압강하</button><button class="term-link" data-reader-term="voltage">전압 V · V</button></div></article><article class="calc-formula" id="formula-AC1-protection" data-formula="protection">

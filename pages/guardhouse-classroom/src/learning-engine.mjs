@@ -1,3 +1,4 @@
+import {embeddedEntry} from './electrical-installation.mjs';
 import {project,boundsOf,insideElement} from './classroom-project.mjs';
 
 export const freshExercise=()=>({version:1,power:true,switches:{SW1:true,SW2:true,SW3:true,SW4:true},breakers:Object.fromEntries(project.circuits.map(c=>[c.id,true])),watts:{},positions:{},completed:[]});
@@ -14,13 +15,14 @@ export function devicesFor(s){return [project.panel,...project.devices].map(d=>(
 export const routeLength=points=>points.slice(1).reduce((sum,p,i)=>sum+Math.hypot(...p.map((v,j)=>v-points[i][j])),0);
 function clean(points){return points.filter((p,i)=>!i||Math.hypot(...p.map((v,j)=>v-points[i-1][j]))>1e-6);}
 export function routeTo(d){
- const a=project.panel.pos, [x,y,z]=d.pos, common=[a,[a[0],a[1],2.48],[a[0],1.3,2.48]];
+ const a=project.panel.pos, [x,y,z]=d.pos, common=[...embeddedEntry(project.panel,2.48),[a[0],1.3,2.48]];
  const via=d.room==='storage'?[[4.6,1.3,2.48],[4.2,1.3,2.48],[x,1.3,2.48]]:
  d.room==='pantry'?[[4.65,1.3,2.48],[4.65,2.35,2.48],[3.7,2.35,2.48],[x,2.35,2.48]]:
  d.room==='toilet'?[[4.65,1.3,2.48],[4.65,2.35,2.48],[3.7,2.35,2.48],[3.7,2.35,2.05],[2.3,2.35,2.05],[1.3,2.35,2.05],[1.3,2.35,2.38],[x,2.35,2.38]]:
  [[x,1.3,2.48]];
  const h=d.room==='toilet'?2.38:2.48;
- return clean([...common,...via,[x,y,h],[x,y,z]]);
+ const entry=embeddedEntry(d,h);
+ return clean([...common,...via,...(entry?[...entry].reverse():[[x,y,h],[x,y,z]])]);
 }
 export function electricalModel(s){
  const devices=devicesFor(s);

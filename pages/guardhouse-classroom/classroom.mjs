@@ -1,3 +1,4 @@
+import {readerKey,calculationKey,readStored,writeStored,readerContext,readerHash} from './reader-state.mjs';
 import {project as baseProject,glossary as baseGlossary,boundsOf,referencesFor as baseRefs,termFor as baseTerm,buildClassroomModel} from '/pages/guardhouse-classroom/src/classroom-project.mjs';
 import {extraSheets,extraGlossary,freshExpansion,restoreExpansion,fireModel,materialLayers,finishes,inspectionItems,inspectionSummary,pitInfo} from '/pages/guardhouse-classroom/src/lesson-expansion.mjs';
 import {fireContent,materialsContent,safetyContent} from './lesson-expansion-ui.mjs';
@@ -23,6 +24,17 @@ function setLayout(value){layout=value;$('canvas-row').dataset.layout=value;docu
 let dataPending,viewerPending,navigationId=0,retryNavigation=null;
 let guide,guidePending,activeCalculation,calculationReturn=false;
 const calcState={mode:'electrical',circuit:'L1',member:'roof',step:null,live:1};
+const savedCalculation=readStored(sessionStorage,calculationKey);
+if(savedCalculation){
+ if(['electrical','structure','trial'].includes(savedCalculation.mode))calcState.mode=savedCalculation.mode;
+ if(['L1','R1','R2','AC1'].includes(savedCalculation.circuit))calcState.circuit=savedCalculation.circuit;
+ if(['roof','floor','pit','canopy','wall','foundation'].includes(savedCalculation.member))calcState.member=savedCalculation.member;
+ if(typeof savedCalculation.step==='string'&&/^[a-z][a-z-]{0,60}$/.test(savedCalculation.step))calcState.step=savedCalculation.step;
+ if(Number.isFinite(savedCalculation.live)&&savedCalculation.live>=0&&savedCalculation.live<=20)calcState.live=savedCalculation.live;
+}
+const bookReading=readerContext(location.search);
+if(bookReading){document.body.classList.add('book-excursion');$('site-top').insertAdjacentHTML('beforeend',`<div class="reader-returnbar"><span>계산 해설서에서 살펴보는 중</span><a id="return-book" class="button" href="/pages/guardhouse-classroom/education/calculation-book.html${readerHash(bookReading)}">해설서 이어 읽기</a></div>`);}
+
 async function ensureGuide(){if(guide)return;if(!guidePending)guidePending=import('./calculation-guide.mjs').then(m=>{guide=m;glossary.push(...m.calculationGlossary);}).catch(error=>{guidePending=null;throw error;});return guidePending;}
 function offerCalculationReturn(showContext=false){
  $('calculation-context-note')?.remove();
@@ -139,7 +151,8 @@ function electricalContent(){$('page-content').innerHTML=`<div class="content-gr
 function switchButtons(){return project.devices.filter(d=>d.kind==='switch').map(d=>`<button data-switch="${d.id}" aria-pressed="${exercise.switches[d.id]}">${d.name} ${exercise.switches[d.id]?'켜짐':'꺼짐'}</button>`).join('');}
 function circuitTable(){return `<article class="card" style="margin-top:18px"><h2>분전반 회로표</h2><div class="table-scroll"><table><thead><tr><th>회로</th><th>연결 부하</th><th>계산 전류</th><th>차단기</th><th>전선</th><th>최장 경로</th><th>전압강하 상한</th><th>수업 조건 확인</th></tr></thead><tbody>${electric.circuits.map(c=>`<tr><td><span class="circuit-color" style="background:${c.color}"></span>${c.id} ${c.name}</td><td class="number">${c.watts} W</td><td class="number">${f(c.current)} A</td><td><button data-breaker="${c.id}" aria-pressed="${exercise.breakers[c.id]}">${c.breaker} A · ${exercise.breakers[c.id]?'켜짐':'꺼짐'}</button></td><td>${c.area} mm²</td><td class="number">${f(c.length)} m</td><td class="number">${f(c.percent)} %</td><td class="${c.pass?'good':'needs-work'}">${c.pass?'조건 충족':!c.checks.current?'부하 과다 — 모의 차단':'설계 조건 확인'}</td></tr>`).join('')}</tbody></table></div><p>설계 부하 ${electric.watts} W · 현재 켜진 부하 ${electric.activeWatts} W. 전선관별 왕복 저항에 전체 회로 전류를 적용한 보수적인 전압강하 상한입니다.</p></article>`;}
 function calculationsContent(){
- const rendered=guide.renderGuide({electric,structure,state:calcState});activeCalculation=rendered.lesson;$('page-content').innerHTML=rendered.html;calcState.step=$('calc-step').value;
+ const rendered=guide.renderGuide({electric,structure,state:calcState});activeCalculation=rendered.lesson;$('page-content').innerHTML=rendered.html;calcState.step=$('calc-step').value;writeStored(sessionStorage,calculationKey,calcState);
+ $('open-calculation-book').onclick=()=>{writeStored(sessionStorage,calculationKey,calcState);};
  $('calc-step').onchange=e=>{calcState.step=e.target.value;calculationsContent();$('calc-step').focus({preventScroll:true});};
  if($('calc-context'))$('calc-context').onchange=e=>{calcState[calcState.mode==='electrical'?'circuit':'member']=e.target.value;calcState.step=null;calculationsContent();$('calc-context').focus({preventScroll:true});};
  if($('trial-calculate'))$('trial-calculate').onclick=()=>{const input=$('load-trial'),live=Number(input.value);if(input.value.trim()===''||!Number.isFinite(live)||live<0||live>20){$('trial-error').textContent='0~20 범위의 활하중을 입력해 주세요.';input.focus();return;}calcState.live=live;calculationsContent();$('trial-calculate').focus({preventScroll:true});};
@@ -206,4 +219,11 @@ $('plan-host').addEventListener('keydown',e=>{if(['Enter',' '].includes(e.key)){
 $('plan-host').addEventListener('wheel',e=>{if(!$('learning-plan'))return;e.preventDefault();const factor=Math.exp(Math.max(-.3,Math.min(.3,e.deltaY*.001))),w=Math.max(150,Math.min(2500,planView[2]*factor)),h=w*.71;planView=[planView[0]+(planView[2]-w)/2,planView[1]+(planView[3]-h)/2,w,h];$('learning-plan').setAttribute('viewBox',planView.join(' '));},{passive:false});
 document.addEventListener('keyup',e=>{if(e.key==='Escape'&&!viewer?.fpv){$('walk-tools').hidden=true;$('walk-crosshair').hidden=true;}});
 $('retry-loading').onclick=()=>{if(retryNavigation)go(...retryNavigation);};
-await go(location.hash.slice(1)||'home');
+const entryParams=new URLSearchParams(location.search);
+const entrySheet=project.sheets.find(s=>s.id===entryParams.get('sheet'));
+const entryPage=entrySheet?.menu??(location.hash.slice(1)||'home');
+await go(entryPage,entrySheet?.id);
+if(bookReading){
+ if(entryPage==='glossary'){const term=glossary.find(t=>t.id===entryParams.get('term'));if(term){$('term-search').value=term.term;$('term-search').dispatchEvent(new Event('input'));}}
+ else if(entrySheet){const element=entryParams.get('element');if(element)select(element);const circuit=entryParams.get('circuit');if(electric?.circuits.some(c=>c.id===circuit))focusCircuit(circuit);$('workspace').scrollIntoView({block:'start'});}
+}

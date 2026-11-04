@@ -1084,7 +1084,7 @@
     },
     {
       "body_id": "guardhouse-classroom",
-      "title": "공간과 전기 — 경비실 학습실",
+      "title": "공간과 전기 — 교육용 샘플 1",
       "body_type": "KNOWLEDGEBODY",
       "source_kinds": [
         "dwg-drawings",
@@ -1109,7 +1109,7 @@
       "canonical_url": "https://mirinaeman.com/pages/guardhouse-classroom/",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-11-03T23:47:23.324184+00:00",
-      "latest_deployed_at": "2026-11-04T18:25:53.472574+00:00"
+      "latest_deployed_at": "2026-11-04T18:36:58.315929+00:00"
     },
     {
       "body_id": "hangeul-everyday",

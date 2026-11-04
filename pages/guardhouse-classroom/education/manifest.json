@@ -1,7 +1,7 @@
 {
   "sample": "guardhouse-01",
   "version": 1,
-  "generatedAt": "2026-11-04T22:51:46.656Z",
+  "generatedAt": "2026-11-04T23:00:39.054Z",
   "sourceHashes": {
     "public/immersive.css": "0bf2e21602ddd66cfd43ab8c05a71a4b535e59dc50c0643071635e5b2a19f9db",
     "src/interior-props.mjs": "f64c4e4964884ba48a57a88958c6d4681ca99acd01d3532b486f04567888d1c0",
@@ -31,7 +31,7 @@
     "src/lesson-expansion.mjs": "ef76c813652bb943fd06ff907f9ab6d710f6547174233a12a56d5a897f14775a",
     "public/lesson-expansion-plan.mjs": "812ea1beffc0585c2c0045c50346712d9a3ff8d3387702bfc62164217c44872b",
     "public/lesson-expansion-ui.mjs": "fee132284bf14212d89e57b0bf5828a0eac5bc5e1797e7fd7bfd86927ca12971",
-    "public/index.html": "f8ebf20a302fe5bdbfe077ddd4ed188003d2fcc191a349383f1c4e376b014f57",
+    "public/index.html": "4b599c2fa4490c4c0abde56f6fee0037dffb0489e9f9902ed1851a4921fcd990",
     "public/classroom.css": "9b7a77b249a4a8973a8e89d6fda7b31177d31904f7aa6b3b4abf831262d7341b",
     "public/classroom.mjs": "d59ef13c86b19fdb749295cf320c19fcd0d9f4a5df5aaf913b3ed63e7bc61bca",
     "public/classroom-view.mjs": "b1fbd3097c7824181c662f0fde492ad0ace21466f6ecea8620753ffcb8c71e7d",

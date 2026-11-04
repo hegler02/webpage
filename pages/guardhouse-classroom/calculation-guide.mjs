@@ -20,9 +20,9 @@ export function lessonHTML(lesson,state,{staticBook=false}={}){
  return `<section class="calc-lesson" data-lesson="${lesson.id}">
  <article class="card calc-target"><p class="eyebrow">${lesson.kind==='electrical'?'전기 회로':'구조 부재'} · 계산할 대상</p><h2>${esc(lesson.title)}</h2><p>${esc(lesson.where)}</p>
  ${staticBook?`<p>연결 도면: ${target.sheet}, ${target.drawing} · 대상: ${target.element}</p>`:`<div class="button-row"><button data-calc-target="model">${lesson.kind==='electrical'?'기구·배선':'부재·철근'} 2D·3D 보기</button><button data-calc-target="drawing">${lesson.kind==='electrical'?'분전반 회로도':'건축도면'} 보기</button></div>`}
- <details class="calc-conditions"><summary>이 계산의 조건과 범위</summary><p>${esc(lesson.conditions)}</p></details>
+ <details class="calc-conditions" ${staticBook?'open':''}><summary>이 계산의 조건과 범위</summary><p>${esc(lesson.conditions)}</p></details>
  <p class="calc-outcome ${lesson.pass===false?'needs-work':''}">${esc(lesson.result)}</p>
- ${lesson.loads?`<details><summary>합산한 기구 ${lesson.loads.length}개 확인${staticBook?'':'·수정'}</summary><div class="calc-loads">${lesson.loads.map(d=>staticBook?`<p>${esc(d.name)} ${d.watts} W</p>`:`<button data-calc-device="${d.id}">${esc(d.name)} · ${d.watts} W</button>`).join('')}</div></details>`:''}</article>
+ ${lesson.loads?`<details ${staticBook?'open':''}><summary>합산한 기구 ${lesson.loads.length}개 확인${staticBook?'':'·수정'}</summary><div class="calc-loads">${lesson.loads.map(d=>staticBook?`<p>${esc(d.name)} ${d.watts} W</p>`:`<button data-calc-device="${d.id}">${esc(d.name)} · ${d.watts} W</button>`).join('')}</div></details>`:''}</article>
  ${staticBook?lesson.steps.map(s=>formulaHTML(s,{staticBook:true,prefix:lesson.id+'-'})).join(''):`<div class="calc-reading"><label for="calc-step">계산 순서 <span>${index+1} / ${lesson.steps.length}</span></label><select id="calc-step">${lesson.steps.map((s,i)=>`<option value="${s.id}" ${i===index?'selected':''}>${i+1}. ${esc(s.title)}</option>`).join('')}</select></div>
  ${formulaHTML(step)}<div class="calc-pager"><button data-calc-index="${index-1}" ${index===0?'disabled':''}>이전 공식</button><span>${index+1} / ${lesson.steps.length}</span><button data-calc-index="${index+1}" ${index===lesson.steps.length-1?'disabled':''}>다음 공식</button></div>`}
  </section>`;
@@ -37,5 +37,5 @@ export function renderGuide({electric,structure,state}){
  ${lessonHTML(lesson,state)}</div>`};
 }
 export function calculationBook(electric,structure){
- return `<p class="eyebrow">SAMPLE 01 · 공식 해설서</p><h1>경비실 계산의 이유와 원리</h1><p>기본 예제의 회로·구조 계산을 순서대로 읽습니다. 앱에서 바꾼 값은 ‘현재 계산 데이터 저장’에 반영됩니다. 각 부재는 대표 1 m 띠이며 전체 구조·법규 판정과 구분합니다.</p>${electric.circuits.map(c=>lessonHTML(electricalLesson(electric,c.id),{},{staticBook:true})).join('')}${Object.keys(calculationTargets).map(k=>lessonHTML(structuralLesson(structure,k),{},{staticBook:true})).join('')}<h2>계산 용어사전</h2>${calculationGlossary.map(t=>`<article class="card"><h3>${t.term}</h3><p>${t.plain}</p><p>${t.definition}</p><p>${t.electrical}</p></article>`).join('')}`;
+ return `<header class="calc-book-intro"><p class="eyebrow">SAMPLE 01 · 공식 해설서</p><h1>경비실 계산의 이유와 원리</h1><p>기본 예제의 회로·구조 계산을 순서대로 읽습니다. 앱에서 바꾼 값은 ‘현재 계산 데이터 저장’에 반영됩니다. 각 부재는 대표 1 m 띠이며 전체 구조·법규 판정과 구분합니다.</p></header>${electric.circuits.map(c=>lessonHTML(electricalLesson(electric,c.id),{},{staticBook:true})).join('')}${Object.keys(calculationTargets).map(k=>lessonHTML(structuralLesson(structure,k),{},{staticBook:true})).join('')}<section class="calc-book-glossary"><h2>계산 용어사전</h2>${calculationGlossary.map(t=>`<article class="card"><h3>${t.term}</h3><p>${t.plain}</p><p>${t.definition}</p><p>${t.electrical}</p></article>`).join('')}</section>`;
 }

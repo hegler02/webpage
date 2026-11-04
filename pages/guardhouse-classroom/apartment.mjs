@@ -106,7 +106,7 @@ function renderElectricGuide(){renderGuideDock();const el=$('apt-route-lesson');
  $('tour-follow').onchange=e=>{view.tour.follow=e.target.checked;};
  $('tour-ghost').onchange=e=>{view.tour.ghost=e.target.checked;view.applyVisibility();view.tour.readout();};
  $('tour-close').onclick=()=>{view.tour.stop();view.applyVisibility();el.hidden=true;renderGuideDock();};
- $('tour-calculation').onclick=async()=>{calc.mode='electrical';calc.circuit=view.tour.data.light.circuit;calc.step='route-length';await go('calculations');$('apt-content .report-actions').insertAdjacentHTML('beforeend','<button data-tour="'+tourId+'">전기 길 이어보기</button>');};
+ $('tour-calculation').onclick=async()=>{calc.mode='electrical';calc.circuit=view.tour.data.light.circuit;calc.step='route-length';await go('calculations');if(page==='calculations')$('apt-content').querySelector('.report-actions')?.insertAdjacentHTML('beforeend','<button data-tour="'+tourId+'">전기 길 이어보기</button>');};
 }
 function stopGuides(){view.fireGuide.stop();view.tour.stop();$('apt-fire-lesson').hidden=true;$('apt-route-lesson').hidden=true;renderGuideDock();}
 function showGuideModel(){layout('model');$('apt-guide-dock').parentElement.scrollIntoView({block:'start'});}

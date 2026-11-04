@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-11-04T20:18:17.374Z",
+  "builtAt": "2026-11-04T20:25:13.278Z",
   "sourceHashes": {
     "public/dialogs.css": "08eb1bf66973515461fde7156839147324e1cebdf15c051ac080451bfd3b9fc5",
     "public/dialogs.mjs": "7817b2502d1238b4857debdf6cfe76de8eea38d64a07bced2935f5c399414e1d",
@@ -17,7 +17,7 @@
     "public/apartment-calculations.mjs": "2442fb9a6a7d7e918a4c9f162b72c45deac454382da7ed8b0ae6f5540567332d",
     "src/apartment-project.mjs": "6bd435f6fb50b308006557e638ef03873448e7ab53dcf24f7db71510daec7b24",
     "src/electrical-installation.mjs": "9914b5f697ca8d5b15a7466839498314e73babf4a6229724d10b16bb2dcbae17",
-    "public/apartment.mjs": "0928995d871d2d0e1db18a3be697ebde9f1c994375dd27d9b38a2321a890c703",
+    "public/apartment.mjs": "36ec171039f6f237e12a095467e64ecc957823eb41b9c493ab9d18b64cf733f2",
     "public/apartment-plan.mjs": "5865324ad11349c96326d4fa2b33fd49ae87aedb3c16e30f731c0b6c964770bd",
     "public/apartment.html": "6e8b8abb2e86cdbfc29ad0e0cf74d6b318ec659bcc6afa8cb44d882f27681aa9",
     "public/apartment.css": "9fd9f7b7db76e157546adbb47f532dae3453d2efc27ae0b984e8e14c89c0f40d",

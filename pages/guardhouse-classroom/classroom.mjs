@@ -1,4 +1,5 @@
-import {fireSimulationResult} from '/pages/guardhouse-classroom/src/fire-simulation.mjs';
+import {fireSimulationResult,FirePracticePower} from '/pages/guardhouse-classroom/src/fire-simulation.mjs';
+const practicePower=new FirePracticePower();
 import {guardhouseFireLesson} from '/pages/guardhouse-classroom/src/guardhouse-fire-lesson.mjs';
 import {tourControls} from './electrical-tour-ui.mjs';
 import {readerKey,calculationKey,readStored,writeStored,readerContext,readerHash} from './reader-state.mjs';
@@ -14,13 +15,13 @@ import {sheetSVG} from './classroom-plan.mjs';
 const $=id=>document.getElementById(id),esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 const mm=v=>Math.round(v*1000).toLocaleString('ko-KR'),f=(v,n=2)=>v.toLocaleString('ko-KR',{maximumFractionDigits:n,minimumFractionDigits:n});
 const storageKey='guardhouse-classroom-v1';let exercise=freshExercise();try{exercise=restoreExercise(JSON.parse(localStorage.getItem(storageKey)));}catch{$('save-state').textContent='새 실습으로 시작합니다';}
-const expansionKey='guardhouse-expansion-v1';let expansion=freshExpansion();try{expansion=restoreExpansion(JSON.parse(localStorage.getItem(expansionKey)));}catch{}let fire=fireModel(expansion,exercise.power);
-function saveExpansion(){try{localStorage.setItem(expansionKey,JSON.stringify(expansion));$('save-state').textContent='실습 저장됨';}catch{$('save-state').textContent='현재 화면에만 유지됩니다';}}
+const expansionKey='guardhouse-expansion-v1';let expansion=freshExpansion();try{expansion=restoreExpansion(JSON.parse(localStorage.getItem(expansionKey)));}catch{}expansion.signal=null;let fire=fireModel(expansion,exercise.power);
+function saveExpansion(){try{localStorage.setItem(expansionKey,JSON.stringify({...expansion,battery:practicePower.baseline?.battery??expansion.battery,signal:null}));$('save-state').textContent='실습 저장됨';}catch{$('save-state').textContent='현재 화면에만 유지됩니다';}}
 const load=async url=>{const r=await fetch(url,{signal:AbortSignal.timeout(20000)});if(!r.ok)throw new Error('교육 자료를 읽지 못했습니다: '+url);return r.json();};
 let model,projections={},reinforcement,electric,structure,viewer,page='home',sheet=project.sheets[0],selected=null,layout='split',planView=[0,0,1000,710],currentRoom='guard';
 const status=(text,error=false)=>{$('status').textContent=text;$('status').classList.toggle('error',error);};
 const download=(name,data,type)=>{const url=URL.createObjectURL(new Blob([data],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
-function save(){try{localStorage.setItem(storageKey,JSON.stringify(exercise));$('save-state').textContent='실습 저장됨';}catch{$('save-state').textContent='저장 공간을 사용할 수 없어 현재 화면에만 유지됩니다';}}
+function save(){try{localStorage.setItem(storageKey,JSON.stringify({...exercise,power:practicePower.baseline?.power??exercise.power}));$('save-state').textContent='실습 저장됨';}catch{$('save-state').textContent='저장 공간을 사용할 수 없어 현재 화면에만 유지됩니다';}}
 const navData={home:['LESSON 01 · GUARDHOUSE','작은 건물에서 전기를 배웁니다.','도면이 처음이어도 괜찮습니다. 건물을 살펴보고, 직접 불을 켜보세요.'],building:['01 · 공간 읽기','도면과 건물은 같은 공간입니다.','도면을 고르면 보는 방향이 바뀝니다. 벽이나 창문을 눌러 두 화면에서 확인하세요.'],structure:['02 · 구조 이해','콘크리트 속을 들여다봅니다.','무게는 지붕에서 벽으로, 벽에서 기초로 전달됩니다. 철근과 계산을 함께 확인하세요.'],electrical:['03 · 전기설계','기구에서 회로까지 연결합니다.','조명과 콘센트를 선택하고, 실제 경로와 회로도를 비교하세요.'],calculations:['04 · 계산과 확인','숫자가 설계를 설명합니다.','단위와 조건부터 살펴보고, 기구나 하중을 바꿔 결과를 비교하세요.'],glossary:['REFERENCE · 용어사전','처음 듣는 말, 공간에서 찾아보세요.','쉬운 뜻과 전기설계에서의 쓰임을 함께 정리했습니다.'],experience:['05 · 실감 체험','이제 경비실 안으로 들어갑니다.','눈높이로 걸어 보고 벽의 스위치를 눌러보세요. 밤에는 조명의 변화가 더 잘 보입니다.']};
 Object.assign(navData,{fire:['FIRE · 소방설계','위험을 감지하고, 알리고, 빠져나옵니다.','감지기·수신기·경보·유도등을 같은 도면과 건물에서 연결합니다.'],safety:['CHECK · 안전점검','어디를 왜 살펴봐야 할까요?','소방·피난·전기·PIT·구조·재료를 차례로 살펴보고 관찰한 내용을 기록합니다.'],materials:['MATERIAL · 재료와 외관','벽의 겉과 속을 함께 봅니다.','외관을 바꾸고, 단열재와 콘크리트가 맡은 역할을 한 층씩 확인하세요.']});
 navData["fire"]=["FIRE · 소방설계","소방기구는 어디에 있을까요?","도면과 건물에서 감지기·경보 장치·소화기의 위치를 찾아보세요."];
@@ -76,7 +77,7 @@ const tourState={id:'L01',step:0,playing:false,follow:!matchMedia('(prefers-redu
 function renderTour(){const el=$('route-lesson');el.innerHTML=tourControls(electric,tourState);el.hidden=false;$('tour-target').onchange=e=>openTour(e.target.value,0);$('tour-close').onclick=()=>{viewer.tour.stop();viewer.applyVisibility();el.hidden=true;};$('tour-play').onclick=()=>{viewer.tour.play();tourState.playing=viewer.tour.playing;$('tour-play').textContent=tourState.playing?'따라가기 일시정지':'배관 따라가기';};$('tour-follow').onchange=e=>{tourState.follow=viewer.tour.follow=e.target.checked;};$('tour-ghost').onchange=e=>{tourState.ghost=viewer.tour.ghost=e.target.checked;viewer.applyVisibility();viewer.tour.readout();};$('tour-calculation').onclick=async()=>{await ensureGuide();calcState.mode='electrical';calcState.circuit='L1';calcState.step='route-length';await go('calculations');$('page-actions').innerHTML='<button data-tour-return="true">전기 길 이어보기</button>';};}
 async function openTour(id=tourState.id,step=tourState.step){if(page!=='electrical'&&!await go('electrical','E-101'))return;viewer.view('electrical','iso');viewer.electricalSheet='E-101';viewer.setRealistic(true);Object.assign(tourState,{id,step,playing:false});viewer.tour.ghost=tourState.ghost;viewer.tour.follow=tourState.follow;viewer.tour.show(id,step);selected=viewer.tour.data.steps[step].element;renderSelection();renderPlan();renderTour();$('view-name').textContent='전기 길 · '+viewer.tour.data.light.name;$('scene-label').textContent=viewer.tour.data.steps[step].title;$('render-label').textContent='재질·조명 · 배관 안내';$('workspace').scrollIntoView({block:'start'});}
 async function go(menu,sheetId=null){
- closeMenu();viewer?.simulation?.leave();stopFireGuide();if(viewer)viewer.tour.stop();$('route-lesson').hidden=true;
+ closeMenu();viewer?.simulation?.leave();const restored=practicePower.transition(menu,{power:exercise.power,battery:expansion.battery});if(restored){exercise.power=restored.power;expansion.battery=restored.battery;expansion.signal=null;fire=fireModel(expansion,exercise.power);electric=electricalModel(exercise);viewer?.updateElectrical(electric);viewer?.updateFire(fire);}stopFireGuide();if(viewer)viewer.tour.stop();$('route-lesson').hidden=true;
  const request=++navigationId,start=performance.now(),target=navData[menu]?menu:'home';retryNavigation=[target,sheetId];$('loading-title').textContent='선택한 학습을 준비합니다.';
  try{if(['building','structure','electrical','experience','fire','fire-test','fire-signal','materials'].includes(target)){if(!viewer)loading('도면과 3D 공간을 준비하고 있습니다. 다른 메뉴도 이용할 수 있습니다.');await ensureViewer();}else if(target==='calculations'){if(!model)loading('건물의 치수와 회로 정보를 준비하고 있습니다.');await Promise.all([ensureData(),ensureGuide()]);}else if(target==='glossary'){await ensureGuide();}}catch(error){if(request!==navigationId)return false;loading('선택한 학습을 준비하는 중 오류가 발생했습니다. 다시 시도하거나 다른 학습 메뉴를 이용해 주세요.');$('loading-title').textContent='학습을 불러오지 못했습니다.';$('loading-recovery').hidden=false;$('loading-progress').hidden=true;$('app').dataset.loadError=error.message;return false;}
  if(request!==navigationId)return false;$('loading-state').hidden=true;delete $('app').dataset.loadError;
@@ -236,7 +237,7 @@ $('sheet-select').onchange=e=>setSheet(e.target.value);$('start-lesson').onclick
 $('whole-view').onclick=()=>{stopFireGuide();$('route-lesson').hidden=true;selected=null;viewer.whole();renderSelection();renderPlan();$('view-name').textContent='전체 건물';$('scene-label').textContent='경비실 · 전체 건물';$('selection-sync').textContent='전체 보기';$('walk-tools').hidden=true;$('walk-crosshair').hidden=true;$('spatial-note').hidden=true;status('부분 보기와 분해를 해제하고 전체 건물로 돌아왔습니다. 기초·PIT 보기에서 바닥 아래를 다시 볼 수 있습니다.');};
 $('orbit-view').onclick=()=>{stopFireGuide();if(sheet.id==='A-108'){showPit();return;}viewer.view(sheet.mode,'iso');$('walk-tools').hidden=true;$('walk-crosshair').hidden=true;$('view-name').textContent=sheet.plain+' · 입체 보기';$('scene-label').textContent=sheet.id+' · '+sheet.plain;$('view-help').textContent='드래그로 회전 · 휠로 확대 · 대상을 눌러 정보 확인';};$('plan-fit').onclick=resetPlan;
 $('save-svg').onclick=()=>download(`${sheet.id}-${sheet.title}.svg`,sheetSVG({sheet,model,projections,electric,rebar:reinforcement,selected:null,fire,finish:expansion.finish}),'image/svg+xml');
-$('reset-exercise').onclick=()=>$('reset-dialog').showModal();$('confirm-reset').onclick=()=>{exercise=freshExercise();expansion=freshExpansion();save();saveExpansion();viewer?.setFinish(expansion.finish);refreshElectrical();$('reset-dialog').close();go('home');status('기본 예제로 초기화했습니다.');};
+$('reset-exercise').onclick=()=>$('reset-dialog').showModal();$('confirm-reset').onclick=()=>{practicePower.baseline=null;exercise=freshExercise();expansion=freshExpansion();save();saveExpansion();viewer?.setFinish(expansion.finish);refreshElectrical();$('reset-dialog').close();go('home');status('기본 예제로 초기화했습니다.');};
 
 let drag=null;
 $('plan-host').addEventListener('pointerdown',e=>{if(!$('learning-plan'))return;drag={x:e.clientX,y:e.clientY,view:[...planView],target:e.target.closest('[data-element],[data-circuit]')};$('plan-host').setPointerCapture(e.pointerId);});
@@ -249,6 +250,7 @@ $('retry-loading').onclick=()=>{if(retryNavigation)go(...retryNavigation);};
 const entryParams=new URLSearchParams(location.search);
 const entrySheet=project.sheets.find(s=>s.id===entryParams.get('sheet'));
 const entryPage=entrySheet?.menu??(location.hash.slice(1)||'home');
+window.addEventListener('hashchange',()=>{const target=location.hash.slice(1)||'home';if(Object.hasOwn(navData,target)&&target!==page)void go(target);});
 await go(entryPage,entrySheet?.id);
 if(bookReading){
  if(entryPage==='glossary'){const term=glossary.find(t=>t.id===entryParams.get('term'));if(term){$('term-search').value=term.term;$('term-search').dispatchEvent(new Event('input'));}}

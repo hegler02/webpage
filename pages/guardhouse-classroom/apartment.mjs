@@ -1,4 +1,5 @@
-import {fireSimulationResult} from '/pages/guardhouse-classroom/src/fire-simulation.mjs';
+import {fireSimulationResult,FirePracticePower} from '/pages/guardhouse-classroom/src/fire-simulation.mjs';
+const practicePower=new FirePracticePower();
 import {apartmentGlossary,apartmentTermTarget} from '/pages/guardhouse-classroom/src/apartment-glossary.mjs';
 import {tourControls} from './electrical-tour-ui.mjs';
 import {apartmentFireLesson,fireDeviceLessons} from '/pages/guardhouse-classroom/src/apartment-fire-lesson.mjs';
@@ -17,7 +18,7 @@ let calc=restoreApartmentReader(readerSaved),assembly='exterior',fireId='AD1',fi
 let planBox=[0,0,1000,820],planDrag=null;
 function applyPlanBox(){const svg=$('apt-plan').querySelector('svg');if(svg)svg.setAttribute('viewBox',planBox.join(' '));$('apt-plan').dataset.zoom=(1000/planBox[2]).toFixed(2);}
 function zoomPlan(factor){const w=Math.min(1600,Math.max(250,planBox[2]*factor)),h=w*.82;planBox=[planBox[0]+(planBox[2]-w)/2,planBox[1]+(planBox[3]-h)/2,w,h];applyPlanBox();}
-let state=restoreApartment(saved),model=apartmentModel(),electric=apartmentElectrical(state),fire=apartmentFire(state),rebar=apartmentRebar(),view=null,pending=null,page='home',sheet='A-201',selected=null,room='living',circuit='AL',formula=0,tourStep=0,tourId='AL01',serial=0;
+let state=restoreApartment({...saved,fireSignal:null}),model=apartmentModel(),electric=apartmentElectrical(state),fire=apartmentFire(state),rebar=apartmentRebar(),view=null,pending=null,page='home',sheet='A-201',selected=null,room='living',circuit='AL',formula=0,tourStep=0,tourId='AL01',serial=0;
 const names={home:'우리 집에서 전기의 길을 찾습니다.',building:'평면의 방이 입체 공간이 됩니다.',structure:'바닥판이 힘을 받고, 철근이 함께 버팁니다.',electrical:'전기는 용도에 따라 길을 나눕니다.',fire:'발견하고, 알리고, 밖으로 이동합니다.',safety:'배운 연결을 하나씩 확인합니다.',calculations:'이 아파트의 값으로 계산합니다.',glossary:'낯선 용어를 우리 집에서 찾습니다.',experience:'우리 집 안으로 들어갑니다.'};
 const descriptions={home:'방 3개인 약 59㎡ 세대에서 건축·전기·소방을 함께 배웁니다.',building:'방과 문, 창문을 선택하고 2D와 3D의 같은 위치를 확인하세요.',structure:'대표 1 m 폭 바닥판의 수직하중과 휨을 배우는 모형입니다.',electrical:'조명·스위치·분전반의 연결과 용도별 회로를 살펴보세요.',fire:'세대 안의 감지·경보·예비전원·피난 경로를 배우는 수업입니다.',safety:'모델에서 확인한 내용을 이 브라우저에 기록합니다.',calculations:'전력과 길이가 전류·전압강하에 어떻게 연결되는지 살펴보세요.',glossary:'뜻을 읽은 뒤 같은 대상의 도면과 3D로 돌아갑니다.',experience:'낮과 밤을 비교하고, 방마다 스위치를 조작합니다.'};
 names.materials='겉에 보이는 마감, 그 안쪽의 재료.';
@@ -29,7 +30,7 @@ names["fire-test"]="연기 발생부터 대피까지 체험합니다.";descripti
 names["fire-signal"]="기구의 신호와 전원을 시험합니다.";descriptions["fire-signal"]="연기를 만들지 않고 감지 입력과 전원에 따른 장치의 반응만 비교합니다.";
 const allTerms=apartmentGlossary;
 function saveReader(){try{localStorage.setItem(key+'-reader',JSON.stringify(calc));}catch{}}
-function save(){try{localStorage.setItem(key,JSON.stringify(page==='fire-test'?{...state,fireSignal:null}:state));}catch{$('apt-status').textContent='이 브라우저에서 저장할 수 없습니다. 현재 실습은 계속할 수 있습니다.';}}
+function save(){try{localStorage.setItem(key,JSON.stringify({...state,...practicePower.baseline,fireSignal:null}));}catch{$('apt-status').textContent='이 브라우저에서 저장할 수 없습니다. 현재 실습은 계속할 수 있습니다.';}}
 function status(text){$('apt-status').textContent=text;}
 const paint=()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
 const loadTimings={};let retryRoute=null;
@@ -54,7 +55,7 @@ function refresh(persist=true){const guiding=view?.fireGuide.active;electric=apa
 function plan(){if(!$('apt-workspace').hidden){$('apt-plan').innerHTML=apartmentPlan({model,electric,rebar,fire,sheet,selected});$('apt-plan-title').textContent=sheet+' · '+apartment.sheets.find(s=>s.id===sheet).title;applyPlanBox();}}
 function closeMenu(){$('site-top').dataset.menuOpen='false';$('menu-toggle').setAttribute('aria-expanded','false');$('menu-toggle').setAttribute('aria-label','학습 메뉴 열기');}
 async function go(next,sheetId=null){
- const started=performance.now(),request=++serial;closeMenu();view?.simulation?.leave();view?.fireGuide?.stop();$('apt-route-lesson').hidden=true;$('apt-fire-lesson').hidden=true;
+ const started=performance.now(),request=++serial;closeMenu();view?.simulation?.leave();const restored=practicePower.transition(next,state);if(restored){Object.assign(state,restored,{fireSignal:null});electric=apartmentElectrical(state);fire=apartmentFire(state);view?.updateElectrical(electric);view?.updateFire(fire);}view?.fireGuide?.stop();$('apt-route-lesson').hidden=true;$('apt-fire-lesson').hidden=true;
  page=names[next]?next:'home';$('title').textContent=names[page];$('description').textContent=descriptions[page];view?.tour.stop();view?.exitWalk(false);
  const needsView=['building','materials','structure','electrical','fire','fire-test','fire-signal','experience'].includes(page);
  $('apt-workspace').hidden=!needsView;$('apt-workspace').inert=needsView;$('apt-content').replaceChildren();$('apartment-app').dataset.page=page;$('apartment-app').dataset.ready='false';$('apt-retry-actions').hidden=true;delete $('apartment-app').dataset.error;
@@ -200,9 +201,10 @@ $('apt-plan').addEventListener('keydown',e=>{if(['Enter',' '].includes(e.key)&&e
 document.addEventListener('change',e=>{if(e.target.dataset.complete){const id=e.target.dataset.complete;state.completed=state.completed.filter(v=>v!==id);if(e.target.checked)state.completed.push(id);save();homeContent();}if(e.target.dataset.check){state.checks[e.target.dataset.check]=e.target.checked;save();content();}});
 $('apt-sheet').onchange=e=>setSheet(e.target.value);$('apt-whole').onclick=()=>{stopGuides();view.apartmentDetails.setCutaway(false);$('apt-cutaway').setAttribute('aria-pressed','false');view.whole();view.site.visible=false;tools();$('apt-view-title').textContent='윗층 바닥판까지 전체 보기';};$('apt-open').onclick=()=>{stopGuides();view.view('interior','iso');view.site.visible=false;tools();$('apt-view-title').textContent='천장을 연 아파트';};$('apt-cutaway').onclick=()=>{stopGuides();const on=!view.apartmentDetails.cutaway;view.view('interior','iso');view.apartmentDetails.setCutaway(on);view.site.visible=false;$('apt-cutaway').setAttribute('aria-pressed',String(on));$('apt-view-title').textContent=on?'벽과 천장을 열어 공간 읽기':'천장을 연 아파트';};$('apt-plan-only').onclick=()=>layout('plan');$('apt-model-only').onclick=()=>layout('model');$('apt-split').onclick=()=>layout('split');$('apt-save').onclick=()=>download(sheet+'.svg',apartmentPlan({model,electric,rebar,fire,sheet,selected:null}),'image/svg+xml');
 $('menu-toggle').onclick=()=>{const open=$('menu-toggle').getAttribute('aria-expanded')!=='true';$('site-top').dataset.menuOpen=String(open);$('menu-toggle').setAttribute('aria-expanded',String(open));$('menu-toggle').setAttribute('aria-label',open?'학습 메뉴 닫기':'학습 메뉴 열기');};
-$('reset').onclick=()=>$('apt-reset').showModal();$('apt-reset-confirm').onclick=()=>{state=freshApartment();refresh();$('apt-reset').close();go('home');};$('apt-three').addEventListener('tour-ended',()=>{if(page==='electrical')renderElectricGuide();});$('apt-three').addEventListener('fire-guide-ended',renderFireGuide);
+$('reset').onclick=()=>$('apt-reset').showModal();$('apt-reset-confirm').onclick=()=>{practicePower.baseline=null;state=freshApartment();refresh();$('apt-reset').close();go('home');};$('apt-three').addEventListener('tour-ended',()=>{if(page==='electrical')renderElectricGuide();});$('apt-three').addEventListener('fire-guide-ended',renderFireGuide);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
 $('apt-retry').onclick=()=>{if(retryRoute)go(...retryRoute);};
+window.addEventListener('hashchange',()=>{const target=location.hash.slice(1)||'home';if(Object.hasOwn(names,target)&&target!==page)void go(target);});
 go(location.hash.slice(1)||'home');
 
 $('apt-zoom-in').onclick=()=>zoomPlan(.8);$('apt-zoom-out').onclick=()=>zoomPlan(1.25);$('apt-fit').onclick=()=>{planBox=[0,0,1000,820];applyPlanBox();};

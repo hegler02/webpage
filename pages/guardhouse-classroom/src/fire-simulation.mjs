@@ -26,7 +26,7 @@ export const simulationSources=[
  {title:'Washington State Patrol · 소화기 사용 전 확인',url:'https://wsp.wa.gov/2019/09/03/fire-extinguishers-and-you/'}
 ];
 
-export function fireSimulationResult(projectId){let r;try{r=JSON.parse(localStorage.getItem('fire-sim-result-'+projectId));}catch{}if(r?.version!==1||!['evacuated','extinguished'].includes(r.outcome))return '';return '<article class="sim-record"><h2>소방 체험에서 확인한 내용</h2><p>'+String(r.detector??'').replace(/[^A-Z0-9]/g,'')+' · '+(r.outcome==='evacuated'?'출입구까지 경로 이동':'안전핀·조준·분사로 모형 불꽃 감소')+'를 체험했습니다. 아래 체크 항목은 직접 살펴본 뒤 표시하세요.</p><p>체험 기록은 현장 점검의 합격 판정이 아닙니다.</p></article>';}
+export function fireSimulationResult(projectId){let r;try{r=JSON.parse(localStorage.getItem('fire-sim-result-'+projectId));}catch{}if(r?.version!==1||!['evacuated','extinguished'].includes(r.outcome))return '';return '<article class="sim-record"><h2>소방 체험에서 확인한 내용</h2><p>'+String(r.detector??'').replace(/[^A-Z0-9]/g,'')+' · '+(r.outcome==='evacuated'?'출입구까지의 피난 경로를 따라갔습니다.':'안전핀을 빼고 조준한 뒤 좌우로 분사해 모형의 불꽃을 껐습니다.')+' 아래 체크 항목은 직접 살펴본 뒤 표시하세요.</p><p>체험 기록은 현장 점검의 합격 판정이 아닙니다.</p></article>';}
 
 export class FirePracticePower {
  constructor(){this.baseline=null;}

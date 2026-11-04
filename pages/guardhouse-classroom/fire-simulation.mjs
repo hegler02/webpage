@@ -22,7 +22,7 @@ export class FireSimulation{
   else if(action==='power'||action==='battery')this.a.onPower(action);
   else if(action==='drawing'||action==='term'||action==='safety'){if(action==='term')this.pause();else this.leave();this.a.navigate(action,this.id);return;}
   else {this.state=fireAction(this.state,action);if(action==='pause'){if(this.state.paused)this.silence();else this.output.unlock();}if(action==='extinguisher'&&this.state.phase==='extinguish')this.extinguisherCamera();if(action==='escape')this.view.exitWalk(false);}
-  this.render();this.drawReadout();if(action==='start'||action==='resume')this.panel.scrollIntoView({block:'start'});
+  this.render();this.drawReadout();if(action==='start'||action==='resume')(window.matchMedia('(max-width:900px)').matches?this.view.host:this.panel).scrollIntoView({block:'start'});
  }
  build(){this.clear();const v=this.view;this.lesson=this.a.lesson(this.id);this.detector=this.lesson.detector;const room=v.project.rooms.find(r=>r.id===this.detector.room)||v.project.rooms.find(r=>this.detector.pos[0]>=r.bounds[0]&&this.detector.pos[0]<=r.bounds[2]&&this.detector.pos[1]>=r.bounds[1]&&this.detector.pos[1]<=r.bounds[3])||v.project.rooms[0];this.room=room;const [x,y,X,Y]=room.bounds;const clearPoints={guard:[6.65,2.05],storage:[2,1.3],pantry:[3.05,2.55],bed1:[1.55,4.95],bed2:[4.10,4.95],bed3:[6.7,4.95],living:[7.35,2.35],hall:[1.2,3.8]};const xy=clearPoints[room.id]??room.spawn;this.origin=V([...xy,v.project.finishLevel+.12]);
   v.view('interior','iso');v.setRealistic(true);v.setNight(false);v.site.visible=false;v.apartmentDetails?.setCutaway(false);this.group.visible=true;

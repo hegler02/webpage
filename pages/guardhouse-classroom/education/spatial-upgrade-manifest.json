@@ -1,12 +1,12 @@
 {
-  "builtAt": "2026-11-04T22:40:31.425Z",
+  "builtAt": "2026-11-04T22:51:46.811Z",
   "sourceHashes": {
     "src/apartment-glossary.mjs": "5c0a93878c6ec193fb5fb389eda4030de753a796e20b64f3d10b00946099ca78",
     "public/immersive.css": "0bf2e21602ddd66cfd43ab8c05a71a4b535e59dc50c0643071635e5b2a19f9db",
     "src/interior-props.mjs": "f64c4e4964884ba48a57a88958c6d4681ca99acd01d3532b486f04567888d1c0",
     "public/interior-props.mjs": "27e54b1a02f2ee22e84e1d44f2db22e685c2d64cdb501beb4f89fb417d5a1161",
-    "public/fire-simulation.mjs": "a595d69c90de2c59014bf64df379a9a70de1037b78cc5874a29ae7bb8c833d6c",
-    "src/fire-simulation.mjs": "8577b009f1cd2f614a46c66654a4880b8e6269fd8c8b981d47b6ea22604b896b",
+    "public/fire-simulation.mjs": "6a4ec3a139161b356ee7f5d49eb9a8cbc971303ec863d1e44ce90dda7ecc966f",
+    "src/fire-simulation.mjs": "e9720ffbbd31ed9168ca7a28adad21301bcbfae493fc9e723eba7e1ec070c41c",
     "public/fire-extinguisher.mjs": "6132db11935504810083f73acb21968069678107b5c5c8ab68007ba499e5837e",
     "public/alarm-output.mjs": "477fd911c8b5724750efe73bf88333cc0c55d158e65d55113a7b594c185da84e",
     "public/education/props-study/manifest.json": "c5a85497fc644fe10b7cb1f46e3fa0a0d6b5f4a58b15bbc3e643bce634c8d8a7",
@@ -32,7 +32,7 @@
     "public/apartment-plan.mjs": "5865324ad11349c96326d4fa2b33fd49ae87aedb3c16e30f731c0b6c964770bd",
     "public/apartment.html": "ed14c4f10420b3ef24a93640e6a215b5c0b29f1fb2c74e3d50127e92008ce04d",
     "public/apartment.css": "1fe3db3b1a0f3c9f79b2561199861243ce14ceafa93775125b7450a2abee2476",
-    "public/classroom-view.mjs": "d127207a5d889db1df65d214ff4d46b97a3c9355b361888b560d44b037b47780",
+    "public/classroom-view.mjs": "b1fbd3097c7824181c662f0fde492ad0ace21466f6ecea8620753ffcb8c71e7d",
     "public/surface-materials.mjs": "d50a3659429a9c6c18c20d932bafb9f09d532b6d94401b2e6a6bea33cc23db22",
     "public/electrical-tour.mjs": "547f6181699c3f3040f2aa8181acdf40782f17f6257300a841015f65225181f6",
     "public/electrical-tour-ui.mjs": "024c676694f5c02ee2af601bba1d7b9030d22a07bd678236aafd8a523fb8c85a"

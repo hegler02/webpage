@@ -4,11 +4,13 @@
  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
  <title>경비실 — 처음 만나는 건축과 전기</title>
  <link rel="stylesheet" href="/pages/guardhouse-classroom/classroom.css">
- <script type="importmap">{"imports":{"three":"/pages/guardhouse-classroom/vendor/three/build/three.module.js","three/addons/":"/pages/guardhouse-classroom/vendor/three/examples/jsm/"}}</script>
+ <script type="importmap">{"imports":{"three":"/pages/guardhouse-classroom/vendor/three/build/three.module.min.js","three/addons/":"/pages/guardhouse-classroom/vendor/three/examples/jsm/"}}</script>
  <script type="module" src="/pages/guardhouse-classroom/classroom.mjs"></script>
  <meta name="description" content="전기공학과 초보자를 위한 경비실 BIM 학습실. 2D 도면과 3D, 구조·철근, 전기·소방, 계산, 안전점검과 실내 체험을 연결합니다.">
  <link rel="canonical" href="https://mirinaeman.com/pages/guardhouse-classroom/">
  <meta property="og:title" content="공간과 전기 · 경비실 학습실"><meta property="og:description" content="2D 도면에서 3D 공간과 전기·소방·안전점검까지"><meta property="og:type" content="website"><meta property="og:url" content="https://mirinaeman.com/pages/guardhouse-classroom/"><meta property="og:image" content="https://mirinaeman.com/pages/guardhouse-classroom/og.webp"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
+ <meta property="og:image:alt" content="경비실 3D 외관과 공간과 전기 학습실 제목"><meta property="og:locale" content="ko_KR"><meta name="twitter:title" content="공간과 전기 · 경비실 학습실"><meta name="twitter:description" content="2D 도면에서 3D 공간과 전기·소방·안전점검까지"><meta name="twitter:image" content="https://mirinaeman.com/pages/guardhouse-classroom/og.webp"><meta name="twitter:image:alt" content="경비실 3D 외관과 공간과 전기 학습실 제목">
+ <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"공간과 전기 · 경비실 학습실","url":"https://mirinaeman.com/pages/guardhouse-classroom/","description":"초보 전기공학과 학생이 경비실의 2D 도면, 3D 공간, 구조와 철근, 전기와 소방, 계산과 안전점검을 연결해 배우는 교육용 웹앱.","applicationCategory":"EducationalApplication","operatingSystem":"Web browser","inLanguage":"ko","image":"https://mirinaeman.com/pages/guardhouse-classroom/og.webp"}</script>
 </head>
 <body>
  <header class="app-header">
@@ -22,7 +24,9 @@
  <main id="app" data-page="home">
   <section id="page-heading"><div><p class="eyebrow" id="page-step">LESSON 01 · GUARDHOUSE</p><h1 id="page-title">작은 건물에서 전기를 배웁니다.</h1><p id="page-description">도면이 처음이어도 괜찮습니다. 건물을 살펴보고, 직접 불을 켜보세요.</p></div><div id="page-actions"></div></section>
   <section id="home-intro" class="home-intro"><div><span class="tag">건축·CAD를 처음 배우는 학생을 위해</span><h2>이 경비실이 첫 번째 교재입니다.</h2><p>방의 위치를 찾고, 벽 속을 보고, 조명에 전기를 연결합니다. 도면과 실제 공간을 한 단계씩 연결해 보세요.</p><div class="button-row"><button id="start-lesson" class="primary">첫 수업 시작</button><button id="quick-experience">먼저 불 켜보기</button></div><p class="small" id="progress-label">6단계 학습 과정</p></div><div class="home-facts"><div><strong>4개</strong><span>공간</span></div><div><strong>18장</strong><span>연결 도면</span></div><div><strong>4개</strong><span>전기 회로</span></div></div></section>
-  <section id="workspace" class="workspace">
+  <section id="loading-state" class="loading-state" role="status" aria-live="polite" hidden><strong id="loading-title">학습을 준비합니다.</strong><p id="loading-message">선택한 내용을 준비하고 있습니다.</p><progress id="loading-progress" aria-label="학습 준비 중"></progress><div id="loading-recovery" class="button-row" hidden><button id="retry-loading">다시 시도</button><button data-menu="home">시작 화면으로</button></div></section>
+  <section id="home-preview" class="home-preview"><img src="/pages/guardhouse-classroom/preview.webp" width="1280" height="376" alt="경비실 학습 모델의 외관"><div><strong>어디부터 살펴볼까요?</strong><p>위 메뉴에서 학습을 고르세요. 공간을 살펴볼 때 3D를 열고, 철근과 실감 표현은 해당 단계에서 준비합니다.</p><button data-menu="building" class="primary">도면과 3D 열기</button></div></section>
+  <section id="workspace" class="workspace" hidden>
    <div class="workspace-toolbar">
     <div class="sheet-choice"><label for="sheet-select">학습 도면</label><select id="sheet-select"></select></div>
     <div class="button-row"><button data-layout="split" aria-pressed="true">2D·3D 함께</button><button data-layout="plan" aria-pressed="false">2D 도면</button><button data-layout="model" aria-pressed="false">3D 건물</button></div>

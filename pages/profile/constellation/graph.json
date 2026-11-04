@@ -9,6 +9,30 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:guardhouse-classroom",
+      "kind": "work",
+      "title": "공간과 전기 — 경비실 학습실",
+      "summary": "건축 도면이 처음인 전기공학과 학생이 경비실의 2D 도면과 3D 공간, 구조·철근, 전기·소방, 계산과 안전점검을 연결하고 실내에서 스위치를 조작하며 배우는 교육용 학습실입니다.",
+      "url": "https://mirinaeman.com/pages/guardhouse-classroom/",
+      "image": "/pages/profile/assets/thumbnails/guardhouse-classroom.webp",
+      "alt": "경비실 3D 외관과 공간과 전기 학습실 제목",
+      "year": "2026",
+      "tags": [
+        "bim",
+        "electrical",
+        "education",
+        "2d-3d",
+        "fire-safety"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "건축 도면이 처음인 전기공학과 학생이 경비실의 2D 도면과 3D 공간, 구조·철근, 전기·소방, 계산과 안전점검을 연결하고 실내에서 스위치를 조작하며 배우는 교육용 학습실입니다."
+        }
+      ]
+    },
+    {
       "id": "work:drone-fpv-100",
       "kind": "work",
       "title": "드론·FPV 촬영 사례 100선",
@@ -2653,6 +2677,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:guardhouse-classroom",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:drone-fpv-100",
       "target": "creator:joonho",

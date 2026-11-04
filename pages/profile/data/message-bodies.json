@@ -1083,6 +1083,35 @@
       "latest_deployed_at": "2026-08-29T02:23:22Z"
     },
     {
+      "body_id": "guardhouse-classroom",
+      "title": "공간과 전기 — 경비실 학습실",
+      "body_type": "KNOWLEDGEBODY",
+      "source_kinds": [
+        "dwg-drawings",
+        "educational-model",
+        "interactive-simulation"
+      ],
+      "tags": [
+        "bim",
+        "electrical",
+        "education",
+        "2d-3d",
+        "fire-safety"
+      ],
+      "message_sentence": "건축 도면이 처음인 전기공학과 학생이 경비실의 2D 도면과 3D 공간, 구조·철근, 전기·소방, 계산과 안전점검을 연결하고 실내에서 스위치를 조작하며 배우는 교육용 학습실입니다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/guardhouse-classroom.webp",
+        "alt": "경비실 3D 외관과 공간과 전기 학습실 제목",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/guardhouse-classroom/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-11-03T23:47:23.324184+00:00",
+      "latest_deployed_at": "2026-11-04T09:55:40.256424+00:00"
+    },
+    {
       "body_id": "hangeul-everyday",
       "title": "평소에 잘해 — 한글날에만 | 짜장면 밴드",
       "body_type": "SONGBODY",

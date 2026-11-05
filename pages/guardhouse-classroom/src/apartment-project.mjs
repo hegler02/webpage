@@ -128,6 +128,7 @@ export function apartmentRebar(){
   const crossZ=z+(z<-.1?diameter/1000:-diameter/1000);
   for(let x=center;x<=8.4-center;x+=step)bars.push({parent:id,a:[x,center,crossZ],b:[x,7.3-center,crossZ],diameter});
  }
+ bars.forEach((bar,i)=>{bar.id='rebar-apartment-floor-'+(i+1);bar.sheet='S-201';});
  return {bars,members:[{id,name:'세대 바닥판',diameter,spacing,cover,sheet:'S-201',count:bars.length}]};
 }
 export const apartmentSlab=()=>slabCalculation(apartmentSlabDesign);

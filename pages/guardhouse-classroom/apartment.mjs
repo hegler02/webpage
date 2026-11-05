@@ -1,3 +1,4 @@
+import {createQuantities} from './quantities-ui.mjs';
 import {mountExperienceTools,showScenePreview,selectionDimensions,lightingStatus,lightingSwitchButtons,lightingSummary} from './workspace-ui.mjs';
 import {mountSamples,mountGlossary} from './learning-shell.mjs';
 import {bindActions} from './action-events.mjs';
@@ -26,6 +27,7 @@ function zoomPlan(factor){const w=Math.min(1600,Math.max(250,planBox[2]*factor))
 let state=restoreApartment({...saved,fireSignal:null}),model=apartmentModel(),electric=apartmentElectrical(state),fire=apartmentFire(state),rebar=apartmentRebar(),view=null,pending=null,page='home',sheet='A-201',selected=null,room='living',circuit='AL',formula=0,tourStep=0,tourId='AL01',serial=0;
 const names={home:'우리 집에서 전기의 길을 찾습니다.',building:'평면의 방이 입체 공간이 됩니다.',structure:'바닥판이 힘을 받고, 철근이 함께 버팁니다.',electrical:'전기는 용도에 따라 길을 나눕니다.',fire:'발견하고, 알리고, 밖으로 이동합니다.',safety:'배운 연결을 하나씩 확인합니다.',calculations:'이 아파트의 값으로 계산합니다.',glossary:'낯선 용어를 우리 집에서 찾습니다.',experience:'우리 집 안으로 들어갑니다.'};
 const descriptions={home:'방 3개인 약 59㎡ 세대에서 건축·전기·소방을 함께 배웁니다.',building:'방과 문, 창문을 선택하고 2D와 3D의 같은 위치를 확인하세요.',structure:'대표 1 m 폭 바닥판의 수직하중과 휨을 배우는 모형입니다.',electrical:'조명·스위치·분전반의 연결과 용도별 회로를 살펴보세요.',fire:'세대 안의 감지·경보·예비전원·피난 경로를 배우는 수업입니다.',safety:'모델에서 확인한 내용을 이 브라우저에 기록합니다.',calculations:'전력과 길이가 전류·전압강하에 어떻게 연결되는지 살펴보세요.',glossary:'뜻을 읽은 뒤 같은 대상의 도면과 3D로 돌아갑니다.',experience:'낮과 밤을 비교하고, 방마다 스위치를 조작합니다.'};
+names.quantities='설계를 재료와 수량으로 읽습니다.';descriptions.quantities='같은 설계에서 기구·건축 구성체·철근을 집계하고 산출 위치를 확인하세요.';
 names.materials='겉에 보이는 마감, 그 안쪽의 재료.';
 descriptions.materials='외벽·내벽·욕실·바닥을 나누어 보고, 같은 집의 마감 분위기를 바꿔보세요.';
 names.calculations='숫자가 설계를 설명합니다.';
@@ -111,7 +113,8 @@ function setSheet(id){if(!apartment.sheets.some(s=>s.id===id)||!view)return;sele
  view.setRealistic(true);view.setNight(false);view.site.visible=false;view.orthoHeight=9.4;view.size();plan();tools();$('apt-view-title').textContent=apartment.sheets.find(s=>s.id===sheet).plain;}
 function select(id){const object=getObject(id);if(!object)return;if(page==='electrical'&&(object.circuit||object.kind==='panel')&&sheet!==apartment.circuitSheet){const target=electricalSheet(apartment,object);if(target&&target!==sheet)setSheet(target);}if(id?.startsWith('assembly-')){const a=apartmentAssemblies.find(a=>a.layers.some(l=>'assembly-'+a.id+'-'+l.id===id));if(a){assembly=a.id;view.apartmentDetails.showAssembly(assembly);tools();}}selected=id;if(sheet==='A-203'){for(const m of view.base.children)if(m.userData.kind==='ceiling')m.visible=m.userData.id===id;}view?.highlight(id);if(['A-205','A-206'].includes(sheet))view?.focusObject(id);plan();inspector();status((getObject(id)?.name??id)+' · 도면과 3D에서 같은 대상');}
 function getObject(id){if(id?.startsWith('assembly-'))return view?.materialGroup.children.find(m=>m.userData.id===id)?.userData; if(id?.startsWith('room-'))return apartment.rooms.find(r=>'room-'+r.id===id);return electric.devices.find(d=>d.id===id)??fire.devices.find(d=>d.id===id)??model.elements.find(d=>d.id===id);}
-function inspector(){const d=getObject(selected);if(!d){$('apt-inspector').innerHTML='<h2>방이나 기구를 선택하세요.</h2><p>같은 대상의 이름과 치수, 연결 회로가 나타납니다.</p>';return;}
+function inspector(){renderInspectorContent();quantities.inspector($('apt-inspector'),selected);}
+function renderInspectorContent(){const d=getObject(selected);if(!d){$('apt-inspector').innerHTML='<h2>방이나 기구를 선택하세요.</h2><p>같은 대상의 이름과 치수, 연결 회로가 나타납니다.</p>';return;}
  if(d.kind==='task-light'){workstationEditor($('apt-inspector'),d,state,electric,{apply:()=>{refresh();status('작업등 위치와 회로 부하를 적용했습니다.');},toggle:toggleSwitch,calc:async id=>{calc.circuit=id;calc.mode='electrical';calc.step='power-sum';await go('calculations');},term:()=>term('circuit')});return;}
  if(d.layer){$('apt-inspector').innerHTML=`<h2>${d.layer.name}</h2><p>${d.layer.mm} mm · ${d.assembly.name}</p><p>${d.layer.role}</p><div class="button-row"><button data-material-location="${d.assembly.id}">건물에서 위치 보기</button><button data-term="${d.assembly.id==='floor'?'slab':'partition'}">관련 용어</button></div>`;return;}
  const r=electric.routes.find(r=>r.target===d.id);
@@ -136,6 +139,7 @@ function materialsContent(){
  $('apt-content').innerHTML=`<div class="content-grid"><article class="card"><h2>마감 분위기를 바꿔보세요.</h2><p>같은 도면의 벽지·마루·수납장·패브릭 색을 바꿉니다. 외벽의 단열 구성과 방의 크기는 유지됩니다.</p><div class="button-row">${apartmentPalettes.map(p=>`<button data-palette="${p.id}" aria-pressed="${state.palette===p.id}">${p.name}</button>`).join('')}</div></article><article class="card"><h2>외벽과 내벽은 역할이 다릅니다.</h2><p>외벽은 바깥 날씨와 실내를 나누고, 내벽은 실내의 방을 나눕니다. 욕실에는 물을 막는 층이 필요하고, 마루 아래에는 난방·단열·완충층이 있습니다.</p><p class="small">아래 두께는 이 교육 모델의 채택값입니다. 다른 벽체 방식과 재료도 있을 수 있습니다.</p></article></div><div class="content-grid apt-assemblies">${apartmentAssemblies.map(a=>`<article class="card"><h2>${a.name}</h2><p>${a.plain}</p><ol>${a.layers.map(l=>`<li><strong>${l.name} · ${l.mm} mm</strong><p>${l.role}</p></li>`).join('')}</ol><div class="button-row"><button data-assembly="${a.id}">재료층 분해해서 보기</button><button data-material-location="${a.id}">건물에서 위치 보기</button></div></article>`).join('')}</div><article class="card"><h2>같은 재료라도 구성 전체를 봅니다.</h2><p>외장재·단열재·바탕·이음부가 함께 벽을 만듭니다. 마감 색만 바꾸어 화재나 단열 성능이 바뀌었다고 판단하지 않습니다.</p><div class="button-row"><button data-page="fire">소방설계 연결</button><button data-page="safety">안전점검 연결</button>${materialSources.map(([label,url])=>`<a href="${url}" target="_blank" rel="noopener">${label}</a>`).join('')}</div></article>`;
 }
 function content(){const el=$('apt-content');
+ quantities.setPage(page);if(page==='quantities'){quantities.render();return;}
  if(page==='home'){homeContent();return;}
  if(page==='materials'){materialsContent();return;}
  if(page==='building'){el.innerHTML='<article class="card"><h2>같은 집을 여러 방법으로 읽습니다.</h2><p>평면도는 위에서 본 방의 배치입니다. 단면도는 높이를 읽습니다. 천장 열기는 천장과 윗층 바닥판을 숨겨 실내를 보여줍니다.</p><div class="apt-room-list">'+apartment.rooms.map(r=>`<button data-select="room-${r.id}">${r.name}</button>`).join('')+'</div></article>';return;}
@@ -241,6 +245,7 @@ $('apt-retry').onclick=()=>{if(reloadRequired){location.reload();return;}if(retr
 window.addEventListener('hashchange',()=>{const target=location.hash.slice(1)||'home';if(Object.hasOwn(names,target)&&target!==page)void go(target);});
 window.addEventListener('pagehide',event=>{serial++;view?.simulation?.leave();view?.setActive(false);if(!event.persisted){view?.dispose();view=null;pending=null;}});
 window.addEventListener('pageshow',event=>{if(event.persisted)view?.setActive(!$('apt-workspace').hidden);});
+const quantities=createQuantities({host:$('apt-content'),nav:$('learning-nav'),workspace:$('apt-workspace'),go,read:()=>({sample:'apartment',model,electric,fire,rebar,resolveSheet:e=>e.kind==='ceiling'?'A-203':['door','window-glass','frame'].includes(e.kind)?'A-205':'A-201'}),locate:m=>destination(m.id,m.sheet)});
 mountSamples(2,()=>go('home'));
 go(location.hash.slice(1)||'home');
 

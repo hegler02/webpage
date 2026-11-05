@@ -1,3 +1,4 @@
+import {createQuantities} from './quantities-ui.mjs';
 import {mountExperienceTools,showScenePreview,selectionDimensions} from './workspace-ui.mjs';
 import {mountSamples,mountGlossary} from './learning-shell.mjs';
 import {bay,rooms,sheets,steps,circuits,bayModel,termTargets,panel,equipment,fireDevices,fireStages,glossary,safetyChecks,escapePath,signalPath,alarmPath,freshBay,bayElectrical} from './src/cleanroom-project.mjs';
@@ -23,6 +24,7 @@ let simPower={mains:true,battery:true,signal:null},returnPage='',readingView='on
 audio.enabled=false;
 const save=()=>{try{localStorage.setItem(key,JSON.stringify(state));}catch{$('bay-status').textContent='이 브라우저에서 학습 기록을 저장할 수 없습니다.';}};
 const pages={
+  quantities:['설계를 재료와 수량으로 읽습니다.','같은 설계에서 기구·건축 구성체·철근을 집계하고 산출 위치를 확인하세요.'],
   home:['반도체 클린룸의 전기설비','작업대 위에서 조명과 팬을 찾고 두 설비에 전기가 어떻게 공급되는지 살펴보세요.'],
   building:['두 개의 문을 지나 작업구역으로','전실의 분전반과 작업대 위 팬을 찾아보세요. 기구를 고르면 평면도와 3D에서 같은 위치가 표시됩니다.'],
   materials:['클린룸의 벽과 바닥 단면','벽 패널과 바닥을 골라 마감재 안쪽에 어떤 층이 있는지 살펴보세요.'],
@@ -104,7 +106,7 @@ function renderInspector(f){
  host.innerHTML='<h2>'+d.name+'</h2><div class="selection-id">'+d.id+'</div><p>'+(definition?.plain??d.description??'도면과 3D에서 같은 대상을 확인하세요.')+'</p>'+selectionDimensions(actual,{routeLength:length})+actions(btn('도면에서 같은 대상 보기','inspect-drawing')+(definition?btn('쉬운 용어 설명','term',term):'')+(d.circuit?btn('이 회로 계산','open-calc','electric'):d.id==='slab'?btn('이 부재 계산','open-calc','slab'):''));
 }
 function paint(){
-  const f=frame(),workspace=!['home','safety','glossary','calculations'].includes(tab),home=tab==='home';
+  const f=frame(),workspace=!['home','safety','glossary','calculations','quantities'].includes(tab),home=tab==='home';
   $('bay-app').dataset.page=tab;$('bay-walk').hidden=tab!=='experience'||experienceView!=='inside';if(tab==='experience')$('bay-walk').innerHTML='<div><p>눈높이 1.6 m</p><p>휠: 시야 확대·축소 · W A S D: 이동</p></div><div class="move-buttons">'+btn('전실로','walk','entry')+btn('작업대로','walk','station')+btn('앞으로','walk','forward')+btn('뒤로','walk','back')+btn('왼쪽 이동','walk','strafe-left')+btn('오른쪽 이동','walk','strafe-right')+btn('왼쪽 보기','walk','left')+btn('오른쪽 보기','walk','right')+'</div>';
   $('bay-title').textContent=pages[tab][0];$('bay-intro').textContent=pages[tab][1];
   $('bay-workspace').hidden=!workspace;$('drawing').hidden=home;
@@ -118,10 +120,12 @@ function paint(){
   if(tab==='structure')$('bay-tools').innerHTML=[['both','함께 보기'],['bars','철근만 보기'],['concrete','콘크리트만 보기']].map(([k,v])=>btn(v,'display',k,pressed(display===k))).join('');
   if(workspace){const menu=firePage()?'fire':tab==='experience'?'building':tab;const choices=sheets.filter(s=>s.menu===menu);$('bay-sheet').innerHTML=choices.map(s=>'<option value="'+s.id+'" '+(s.id===drawing?'selected':'')+'>'+s.id+' · '+s.title+'</option>').join('');$('bay-plan').innerHTML=bayPlan({...f,tab:tab==='experience'?'building':tab});}
   if(tab==='experience')mountExperienceTools($('bay-tools'),{night,render:()=>{scene?.realistic();$('bay-render-label').textContent='실감 렌더링 · 재질·그림자';},enter:()=>{experienceView='inside';layoutMode='model';paint();},outside:()=>{experienceView='outside';paint();},setNight:on=>{night=on;paint();$('bay-status').textContent=on?'밤 장면으로 전환했습니다.':'낮 장면으로 전환했습니다.';},route:()=>{returnPage='experience';go('electrical',electricalId);},preview:()=>showScenePreview(scene.image(),'현재 클린룸 렌더링 장면')});
-  renderInspector(f);
+  renderInspector(f);quantities.inspector($('bay-inspector'),selected);
   $('bay-render-label').textContent='실감 렌더링';$('bay-view-help').textContent=tab==='experience'&&experienceView==='inside'?'휠: 시야 확대·축소 · 드래그: 시선 · W A S D: 이동':'드래그로 회전 · 휠로 확대 · 대상을 눌러 정보 확인';
   $('bay-lesson').innerHTML=['glossary','building','fire'].includes(tab)?'':renderLesson(f);if(tab==='glossary')mountGlossary($('bay-lesson'),[...bayTerms.values()],{action:'related-term',detailsAction:'term'});
+  if(tab==='quantities')quantities.render();
   document.querySelectorAll('#learning-nav button').forEach(b=>{if(b.dataset.go===(firePage()?'fire':tab))b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+  quantities.setPage(tab);
   $('bay-return').hidden=!returnPage||returnPage===tab;$('bay-panes').dataset.layout=tab==='test'?'model':layoutMode;document.querySelectorAll('#bay-view-tools [data-layout]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.layout===layoutMode)));
   scene?.setActive(workspace);scene?.update(f);scene?.simulation?.setPage(tab==='test'?'fire-test':tab);
   audio.play(f.alarm&&!document.hidden);
@@ -238,6 +242,7 @@ $('bay-app').addEventListener('submit',e=>{if(e.target.id==='bay-live'){e.preven
   state.watts[electricalId]=w;save();paint();$('bay-status').textContent=electricalId+'의 입력전력을 '+w+' W로 적용했습니다.';
 });
 document.addEventListener('visibilitychange',()=>audio.play(!document.hidden&&tab==='fire-signal'&&stage>=2));
+const quantities=createQuantities({host:$('bay-lesson'),nav:$('learning-nav'),workspace:$('bay-workspace'),go,read:()=>({sample:'cleanroom',model:building,electric:bayElectrical(state),fire:bayFire(simPower),panel,rebar:{bars:stripBars().map(([a,b],i)=>({id:'strip-bar-'+i,parent:'slab',a,b,diameter:slabDesign.diameter,sheet:'S-301'}))},resolveSheet:e=>e.kind==='ceiling'?'A-303':['door','window-glass','frame'].includes(e.kind)?'A-305':'A-301'}),locate:async m=>{drawing=m.sheet;returnPage='quantities';focusOnOpen={menu:m.menu,id:m.id};if(m.menu==='building')buildingId=m.id;if(equipment.some(e=>e.id===m.id))electricalId=m.id;history.replaceState(null,'','#'+m.menu);await openPage();return !reloadRequired;}});
 mountSamples(3,()=>go('home'));
 window.addEventListener('hashchange',openPage);
 $('bay-view-tools').addEventListener('change',event=>{if(event.target.id!=='bay-sheet')return;const s=sheets.find(s=>s.id===event.target.value);if(!s)return;drawing=s.id;experienceView='sheet';selected=s.view==='openings'?building.openings[0].id:s.view==='ceiling'?building.elements.find(e=>e.kind==='ceiling'&&e.id!=='ceiling-deck').id:s.view==='elevation'?'south-wall':s.view==='section'?'slab':buildingId;if(s.menu==='materials'){assembly=s.view;layer=0;selected=assemblies[assembly].target;}paint();$('bay-status').textContent=s.title+'와 같은 방향으로 3D를 전환했습니다.';});

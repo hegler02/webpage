@@ -1,16 +1,16 @@
 {
-  "verifiedAt": "2026-11-04T19:13:34.609Z",
+  "verifiedAt": "2026-11-04T23:16:55.187Z",
   "results": [
     {
       "filename": "sample-1-full.glb",
-      "bytes": 4699008,
-      "meshes": 340,
+      "bytes": 4757980,
+      "meshes": 356,
       "roundtrip": true
     },
     {
       "filename": "sample-1-open.glb",
-      "bytes": 4081828,
-      "meshes": 256,
+      "bytes": 4140672,
+      "meshes": 272,
       "roundtrip": true
     }
   ]

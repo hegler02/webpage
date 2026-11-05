@@ -1,16 +1,18 @@
+import {circuitDemand, fitsSupport, attachCords, restoreOutletAllowance} from './teaching-equipment.mjs';
 import {embeddedEntry} from './electrical-installation.mjs';
 import {project,boundsOf,insideElement} from './classroom-project.mjs';
 
-export const freshExercise=()=>({version:1,power:true,switches:{SW1:true,SW2:true,SW3:true,SW4:true},breakers:Object.fromEntries(project.circuits.map(c=>[c.id,true])),watts:{},positions:{},completed:[]});
+export const freshExercise=()=>({version:1,equipmentVersion:1,power:true,switches:{SW1:true,SW2:true,SW3:true,SW4:true,TL1:true},breakers:Object.fromEntries(project.circuits.map(c=>[c.id,true])),watts:{},positions:{},completed:[]});
 export function restoreExercise(raw){
  const s=freshExercise();if(raw?.version!==1)return s;
  if(typeof raw.power==='boolean')s.power=raw.power;
  for(const id of Object.keys(s.switches))if(typeof raw.switches?.[id]==='boolean')s.switches[id]=raw.switches[id];
  for(const id of Object.keys(s.breakers))if(typeof raw.breakers?.[id]==='boolean')s.breakers[id]=raw.breakers[id];
- for(const d of project.devices){const w=raw.watts?.[d.id];if(d.watts&&Number.isFinite(w)&&w>=1&&w<=3000)s.watts[d.id]=w;const p=raw.positions?.[d.id];if(d.kind==='light'&&Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)&&validLightPosition(d,p))s.positions[d.id]=p;}
+ for(const d of project.devices){const w=raw.watts?.[d.id];if(d.watts&&Number.isFinite(w)&&w>=(d.id==='R01'?0:1)&&w<=3000)s.watts[d.id]=w;const p=raw.positions?.[d.id];if((d.kind==='light'||d.support)&&Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)&&validLightPosition(d,p))s.positions[d.id]=p;}
+ restoreOutletAllowance(s,raw,project.devices.find(d=>d.socket));
  s.completed=[...new Set((Array.isArray(raw.completed)?raw.completed:[]).filter(id=>project.steps.some(t=>t.id===id)))];return s;
 }
-export function validLightPosition(d,p){const b=project.rooms.find(r=>r.id===d.room)?.bounds;return !!b&&p[0]>b[0]+d.size[0]/2&&p[0]<b[2]-d.size[0]/2&&p[1]>b[1]+d.size[1]/2&&p[1]<b[3]-d.size[1]/2;}
+export function validLightPosition(d,p){if(d.support)return fitsSupport(d,p);const b=project.rooms.find(r=>r.id===d.room)?.bounds;return !!b&&p[0]>b[0]+d.size[0]/2&&p[0]<b[2]-d.size[0]/2&&p[1]>b[1]+d.size[1]/2&&p[1]<b[3]-d.size[1]/2;}
 export function devicesFor(s){return [project.panel,...project.devices].map(d=>({...d,pos:s.positions[d.id]?[...s.positions[d.id],d.pos[2]]:[...d.pos],watts:s.watts[d.id]??d.watts,...(d.kind==='light'?{lumens:(s.watts[d.id]??d.watts)*100}:{})}));}
 export const routeLength=points=>points.slice(1).reduce((sum,p,i)=>sum+Math.hypot(...p.map((v,j)=>v-points[i][j])),0);
 function clean(points){return points.filter((p,i)=>!i||Math.hypot(...p.map((v,j)=>v-points[i-1][j]))>1e-6);}
@@ -25,10 +27,10 @@ export function routeTo(d){
  return clean([...common,...via,...(entry?[...entry].reverse():[[x,y,h],[x,y,z]])]);
 }
 export function electricalModel(s){
- const devices=devicesFor(s);
- const routes=devices.filter(d=>d.circuit).map(d=>({id:'route-'+d.id,name:d.name+' 전선관',kind:'conduit',circuit:d.circuit,target:d.id,points:routeTo(d),conductors:d.kind==='switch'?['L','L′']:['L','N','PE'],diameter:.016}));
+ const devices=attachCords(devicesFor(s));
+ const routes=devices.filter(d=>d.circuit&&!d.socket).map(d=>({id:'route-'+d.id,name:d.name+' 전선관',kind:'conduit',circuit:d.circuit,target:d.id,points:routeTo(d),conductors:d.kind==='switch'?['L','L′']:['L','N','PE'],diameter:.016}));
  const circuits=project.circuits.map(c=>{
-  const loads=devices.filter(d=>d.circuit===c.id&&d.watts),watts=loads.reduce((n,d)=>n+d.watts,0),current=watts/(project.voltage*c.pf);
+  const {loads,watts,current}=circuitDemand(devices,c,project.voltage);
   const longest=Math.max(0,...routes.filter(r=>r.circuit===c.id).map(r=>routeLength(r.points)));
   // Conservative common-current bound: the total circuit current is applied to the longest route.
   // Resistive educational model, copper rho at 20 C, reactance omitted; not a cable-table compliance claim.

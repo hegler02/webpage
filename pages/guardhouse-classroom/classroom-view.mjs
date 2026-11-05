@@ -1,7 +1,9 @@
+import {observeScene} from './render-loop.mjs';
+import {buildDeskLamp,setLampPower} from '/pages/guardhouse-classroom/src/equipment-mesh.mjs';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
-import {createModelGroup} from '/pages/guardhouse-classroom/src/scene.mjs';
+import {createModelGroup,disposeModelResources} from '/pages/guardhouse-classroom/src/scene.mjs';
 import {project,boundsOf} from '/pages/guardhouse-classroom/src/classroom-project.mjs';
 import {visibleElement,canWalk} from '/pages/guardhouse-classroom/src/learning-engine.mjs';
 import {finishes,materialLayers,indoorFov} from '/pages/guardhouse-classroom/src/lesson-expansion.mjs';
@@ -16,7 +18,7 @@ export class ClassroomView {
   this.project=projectData;this.walkCheck=walkCheck;this.host=host;this.onSelect=onSelect;this.onSwitch=onSwitch;this.onMove=onMove;this.mode='exterior';this.filter='all';this.realistic=false;this.night=false;this.fpv=false;this.selected=null;this.keys=new Set();this.yaw=0;this.pitch=0;this.exploded=false;
   this.scene=new THREE.Scene();this.scene.background=new THREE.Color('#dee7e8');
   this.camera=new THREE.PerspectiveCamera(43,1,.025,150);this.ortho=new THREE.OrthographicCamera(-6,6,4,-4,.01,150);this.active=this.camera;
-  this.renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFSoftShadowMap;this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.1;host.append(this.renderer.domElement);this.renderer.domElement.tabIndex=0;this.renderer.domElement.setAttribute('aria-label','경비실 3D 작업 화면');
+  this.renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFSoftShadowMap;this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.1;host.append(this.renderer.domElement);this.renderer.domElement.tabIndex=0;this.renderer.domElement.setAttribute('aria-label',this.project.title+' 3D 작업 화면');
   this.controls=new OrbitControls(this.camera,this.renderer.domElement);this.controls.enableDamping=true;this.controls.maxPolarAngle=Math.PI*.49;this.controls.minDistance=1;this.controls.maxDistance=35;
 
   this.ambient=new THREE.HemisphereLight(0xdbefff,0x94836c,1.8);this.scene.add(this.ambient);
@@ -36,9 +38,10 @@ export class ClassroomView {
   this.renderer.domElement.addEventListener('wheel',e=>{if(!this.fpv)return;e.preventDefault();this.camera.fov=indoorFov(this.camera.fov,e.deltaY);this.camera.updateProjectionMatrix();this.updateReadout();this.host.dispatchEvent(new CustomEvent('walk-zoom',{detail:this.camera.fov}));},{passive:false});
   this.renderer.domElement.addEventListener('keydown',e=>{if(!this.fpv)return;if(['w','a','s','d','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','e','Escape'].includes(e.key)){e.preventDefault();if(e.key==='Escape')this.exitWalk();else if(e.key==='e')this.pick(null,null);else this.keys.add(e.key);}});
   this.renderer.domElement.addEventListener('keyup',e=>this.keys.delete(e.key));this.renderer.domElement.addEventListener('blur',()=>this.keys.clear());
-  this.last=performance.now();this.frame=()=>{this.raf=requestAnimationFrame(this.frame);const now=performance.now(),elapsed=(now-this.last)/1000,dt=Math.min(elapsed,.05);this.last=now;this.tour.update(dt);this.simulation?.update(elapsed);if(this.fpv)this.walkKeys(dt);else this.controls.update();if(!this.preparing&&this.host.offsetParent!==null)this.renderer.render(this.scene,this.active);};this.frame();
+  this.loop=observeScene(host,(dt,elapsed)=>{if(this.preparing)return;this.tour.update(dt);this.simulation?.update(elapsed);if(this.fpv)this.walkKeys(dt);else this.controls.update();this.renderer.render(this.scene,this.active);},host.parentElement);
  }
- dispose(){if(this.disposed)return;this.disposed=true;cancelAnimationFrame(this.raf);this.simulation?.dispose();this.props?.dispose();this.fireGuide?.stop();this.tour?.stop();this.resize?.disconnect();this.controls.dispose();this.clear(this.scene);this.environmentTarget?.dispose();this.surfaces.dispose();this.renderer.dispose();this.renderer.domElement.remove();this.deviceMeshes.clear();this.fireMeshes.clear();this.lightObjects.clear();}
+ setActive(active){this.loop.setActive(active);if(!active)this.keys.clear();}
+ dispose(){if(this.disposed)return;this.disposed=true;this.loop?.dispose();this.simulation?.dispose();this.props?.dispose();this.fireGuide?.stop();this.tour?.stop();this.resize?.disconnect();this.controls.dispose();this.clear(this.scene);this.environmentTarget?.dispose();this.surfaces.dispose();this.renderer.dispose();this.renderer.domElement.remove();this.deviceMeshes.clear();this.fireMeshes.clear();this.lightObjects.clear();}
  size(){const w=this.host.clientWidth,h=this.host.clientHeight;if(!w||!h)return;this.renderer.setSize(w,h);this.camera.aspect=w/h;this.camera.updateProjectionMatrix();const height=Math.max(this.orthoHeight??7.4,(['right','left'].includes(this.viewName)?5.4:9.2)/(w/h));this.ortho.left=-height*w/h/2;this.ortho.right=-this.ortho.left;this.ortho.top=height/2;this.ortho.bottom=-this.ortho.top;this.ortho.updateProjectionMatrix();}
  createSite(){
   const pbr=(color)=>new THREE.MeshStandardMaterial({color,roughness:.96});
@@ -88,13 +91,16 @@ this.host.dataset.barsBuilt='true';}
  syncFire(){for(const d of this.fire.devices){const g=this.fireMeshes.get(d.id);if(!g)continue;g.userData=d;const green=['exit-light','emergency'].includes(d.kind),mesh=g.children[0];mesh.material.emissive.set(d.on?(green?0x8bd5a0:0xff4920):0);mesh.material.emissiveIntensity=d.on?.9:0;g.traverse(o=>{if(o.userData?.id===d.id)o.userData={...o.userData,...d};if(o.isLight)o.intensity=d.on?3:0;});}this.applyVisibility();this.highlight(this.selected);}
  pitView(section=false){this.view(section?'pit-section':'pit','iso');this.camera.position.set(10,6,8);this.controls.target.set(3.5,-.25,-2.5);this.controls.update();this.applyVisibility();}
  resetFov(){this.camera.fov=68;this.camera.updateProjectionMatrix();this.updateReadout();this.host.dispatchEvent(new CustomEvent('walk-zoom',{detail:68}));}
- clear(group){for(const o of [...group.children]){group.remove(o);o.traverse(c=>{c.geometry?.dispose();c.shadow?.dispose();if(c.userData.fireLabel||c.userData.ownedTexture)c.material?.map?.dispose();if(c.material)Array.isArray(c.material)?c.material.forEach(m=>m.dispose()):c.material.dispose();});}}
+ clear(group){disposeModelResources(group);group.clear();}
  updateElectrical(electric){
   this.electric=electric;
   const topology=JSON.stringify([electric.devices.map(d=>[d.id,d.kind,d.pos,d.size]),electric.routes.map(r=>[r.id,r.circuit,r.points,r.diameter]),this.project.circuits.map(c=>c.id)]);
   if(this.electricalTopology===topology){this.syncElectrical();return;}
   this.electricalTopology=topology;this.electricalBuilds=(this.electricalBuilds??0)+1;this.clear(this.electrical);this.deviceMeshes.clear();this.lightObjects.clear();
   for(const d of electric.devices){const g=new THREE.Group();g.userData=d;g.name=d.id;g.position.copy(V(d.pos));
+   if(d.kind==='task-light'){
+    buildDeskLamp(g,d);this.electrical.add(g);this.deviceMeshes.set(d.id,g);continue;
+   }
    const mesh=new THREE.Mesh(new THREE.BoxGeometry(d.size[0],d.size[2],d.size[1]),new THREE.MeshStandardMaterial({color:colors[d.kind],roughness:.4,metalness:d.kind==='panel'?.45:.05}));mesh.userData=d;mesh.castShadow=true;mesh.receiveShadow=true;g.add(mesh);
    if(d.kind==='light'){mesh.castShadow=false;mesh.material.emissive.set(d.on?0xffedcb:0x151515);mesh.material.emissiveIntensity=d.on?1.8:0;
     const light=new THREE.SpotLight(0xfff0d6,d.on?d.lumens/(4*Math.PI)*.14:0,7,Math.PI*.39,.65,2);light.position.y=-.07;light.target.position.set(0,-2,0);light.castShadow=true;light.shadow.mapSize.set(512,512);light.shadow.bias=-.001;light.shadow.normalBias=.025;light.shadow.camera.near=.15;g.add(light,light.target);this.lightObjects.set(d.id,light);
@@ -112,6 +118,7 @@ this.host.dataset.barsBuilt='true';}
  syncElectrical(){
   for(const d of this.electric.devices){const g=this.deviceMeshes.get(d.id);if(!g)continue;g.userData=d;g.traverse(o=>{if(o.userData?.id===d.id)o.userData={...d,...(o.userData.breakerCircuit?{breakerCircuit:o.userData.breakerCircuit}:{})};});
    if(d.kind==='light'){for(const light of g.children.filter(c=>c.isLight))light.intensity=d.on?(light.isSpotLight?d.lumens/(4*Math.PI)*.14:1.4):0;}
+   if(d.kind==='task-light')setLampPower(g,d);
    if(d.kind==='switch'){const rocker=g.children[1];rocker.rotation.x=d.on?-.12:.12;rocker.material.color.set(d.on?0xc6e3cb:0xd4d4d0);}
   }
   for(const g of this.electrical.children){const route=this.electric.routes.find(r=>r.id===g.userData.id);if(route){g.userData=route;g.traverse(o=>{if(o.userData?.kind==='conduit')o.userData=route;});}}
@@ -159,15 +166,16 @@ this.host.dataset.barsBuilt='true';}
  explode(){this.view('exterior','iso');this.exploded=true;this.mode='section-exploded';this.applyVisibility();for(const g of this.base.children)if(g.userData.group==='foundation')g.visible=true;this.camera.position.set(17,15,16);this.controls.target.set(4.1,2.5,-2);this.controls.update();}
  setRealistic(on){if(on&&!this.environment){const pmrem=new THREE.PMREMGenerator(this.renderer),room=new RoomEnvironment();this.environmentTarget=pmrem.fromScene(room,.04);this.environment=this.environmentTarget.texture;this.scene.environment=this.environment;pmrem.dispose();room.dispose();this.createSite();this.host.dataset.realisticBuilt='true';}this.renderer.shadowMap.enabled=on;this.realistic=on;if(on&&!this.props&&!this.propsPending){this.propsPending=import('./interior-props.mjs').then(({InteriorProps})=>{if(!this.disposed){this.props=new InteriorProps(this);this.props.sync();}}).catch(()=>{this.propsPending=null;this.host.dataset.propsState='error';});}if(on&&this.props?.state==='error')this.props.load();this.setNight(this.night);this.applyVisibility();}
  setNight(on){this.night=on;this.scene.background.set(on?0x172638:this.realistic?0xb9ccd4:0xdfe8e9);this.ambient.intensity=on?.16:this.realistic?.75:1.8;this.sun.intensity=on?.10:this.realistic?(this.project.daylight??3.2):2.5;this.sun.color.set(on?0xaac9ff:0xfff0d9);this.scene.environmentIntensity=on?.10:this.realistic?.55:.6;this.renderer.toneMappingExposure=on?1.1:1.05;this.ground.material.color.set(this.realistic?0x919986:0xd5dfdd);if(this.project.id==='apartment-02')this.applyVisibility();}
- highlight(id){this.selected=id;const room=this.project.rooms.find(r=>'room-'+r.id===id);this.roomMarker.visible=!!room;if(room){const [x,y,X,Y]=room.bounds;this.roomMarker.scale.set(X-x,Y-y,1);this.roomMarker.position.set((x+X)/2,this.project.finishLevel+.012,-(y+Y)/2);this.roomMarker.userData={id};}for(const m of this.base?.children??[]){m.material.emissive.set(m.userData.id===id?0x73501e:0);m.material.emissiveIntensity=.5;}for(const m of this.bars.children)m.material.color.set(m.userData.id===id?0xa84421:0x6e3f2c);for(const g of this.deviceMeshes.values()){const d=g.userData;const m=g.children[0];m.material.emissive.set(d.id===id?0x73501e:d.kind==='light'&&d.on?0xffdda1:0);m.material.emissiveIntensity=d.kind==='light'&&d.on?1.8:d.id===id?.5:0;}this.updateReadout();}
- focusMember(id){this.rebarFocus=id;this.applyVisibility();const m=this.base.children.find(x=>x.userData.id===id);if(m){this.active=this.camera;this.controls.object=this.camera;this.controls.enableRotate=true;const box=new THREE.Box3().setFromObject(m),center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3()),span=Math.max(size.x,size.y,size.z),distance=span/(2*Math.tan(THREE.MathUtils.degToRad(this.camera.fov/2)))*1.35;this.controls.target.copy(center);this.camera.position.copy(center).add(new THREE.Vector3(.65,.7,1).normalize().multiplyScalar(distance/Math.min(1,this.camera.aspect)));this.controls.update();}this.highlight(id);}
+ highlight(id){this.selected=id;const room=this.project.rooms.find(r=>'room-'+r.id===id);this.roomMarker.visible=!!room;if(room){const [x,y,X,Y]=room.bounds;this.roomMarker.scale.set(X-x,Y-y,1);this.roomMarker.position.set((x+X)/2,this.project.finishLevel+.012,-(y+Y)/2);this.roomMarker.userData={id};}for(const m of this.base?.children??[]){m.material.emissive.set(m.userData.id===id?0x73501e:0);m.material.emissiveIntensity=.5;}for(const m of this.bars.children)m.material.color.set(m.userData.id===id?0xa84421:0x6e3f2c);for(const g of this.deviceMeshes.values()){const d=g.userData;const m=g.children[0];m.material.emissive.set(d.id===id?0x73501e:d.kind==='light'&&d.on?0xffdda1:0);m.material.emissiveIntensity=d.kind==='light'&&d.on?1.8:d.id===id?.5:0;if(d.kind==='task-light')setLampPower(g,d);}this.updateReadout();}
+ focusObject(id){const m=this.base.children.find(x=>x.userData.id===id);if(m){this.active=this.camera;this.controls.object=this.camera;this.controls.enableRotate=true;const box=new THREE.Box3().setFromObject(m),center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3()),span=Math.max(size.x,size.y,size.z),distance=span/(2*Math.tan(THREE.MathUtils.degToRad(this.camera.fov/2)))*1.35;this.controls.target.copy(center);this.camera.position.copy(center).add(new THREE.Vector3(.65,.7,1).normalize().multiplyScalar(distance/Math.min(1,this.camera.aspect)));this.controls.update();}this.highlight(id);}
+ focusMember(id){this.rebarFocus=id;this.applyVisibility();this.focusObject(id);}
  pick(x,y){const r=this.renderer.domElement.getBoundingClientRect(),mouse=x===null?new THREE.Vector2(0,0):new THREE.Vector2((x-r.left)/r.width*2-1,-(y-r.top)/r.height*2+1),ray=new THREE.Raycaster();ray.setFromCamera(mouse,this.active);const candidates=[];
   for(const g of [...this.base.children,...this.bars.children,...this.electrical.children,...this.fireGroup.children,...(this.materialGroup.visible?this.materialGroup.children:[])])if(g.visible){if(g.isMesh&&!g.userData.detailReplacement)candidates.push(g);if(g.userData.kind==='extinguisher')g.traverseVisible(c=>{if(c.isMesh)candidates.push(c);});else for(const c of g.children)if(c.isMesh&&c.visible&&!c.userData.edge)candidates.push(c);}
   const hits=ray.intersectObjects(candidates,false).filter(h=>![...this.renderer.clippingPlanes,...(h.object.material?.clippingPlanes??[])].some(p=>p.distanceToPoint(h.point)<0));let hit=hits[0];
   if(this.mode==='fire')hit=hits.find(h=>h.object.userData.system==='fire')??hit;
   if(['electrical','experience','interior'].includes(this.mode)){const dev=hits.find(h=>h.object.userData.circuit||h.object.userData.kind==='panel');if(dev&&(!this.fpv||dev.distance<2.5)&&(!hit||dev.distance<hit.distance+.15||this.mode==='electrical'))hit=dev;}
   if(!hit)return;let d=hit.object.userData;if(d.kind==='conduit')d=this.electric.devices.find(x=>x.id===d.target);
-  if(this.fpv&&d.kind==='switch'&&hit.distance<2.5)this.onSwitch(d.id);this.onSelect(d.id,'3d');
+  if(this.fpv&&(d.kind==='switch'||d.kind==='task-light')&&hit.distance<2.5)this.onSwitch(d.id);this.onSelect(d.id,'3d');
  }
  enterWalk(room='guard'){
   this.fpv=true;this.mode='experience';this.viewName='fpv';this.filter='all';this.exploded=false;this.realistic=true;this.active=this.camera;this.controls.enabled=false;this.camera.fov=68;this.camera.updateProjectionMatrix();this.teleport(room);this.applyVisibility();this.setRealistic(true);this.renderer.domElement.focus();

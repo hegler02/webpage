@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>공간과 전기 · 반도체 클린룸</title>
+<meta name="description" content="반도체 클린룸 한 구역을 도면과 3D로 살펴보고 조명·팬의 회로와 소방 신호, 피난 경로를 실습합니다.">
+<link rel="stylesheet" href="/pages/guardhouse-classroom/fonts/pretendard-1.3.9/pretendard-variable.css"><link rel="stylesheet" href="/pages/guardhouse-classroom/typography-tokens.css"><link rel="stylesheet" href="/pages/guardhouse-classroom/classroom.css"><link rel="stylesheet" href="/pages/guardhouse-classroom/cleanroom.css"><link rel="stylesheet" href="/pages/guardhouse-classroom/immersive.css"><link rel="stylesheet" href="/pages/guardhouse-classroom/dialogs.css"><script type="module" src="/pages/guardhouse-classroom/dialogs.mjs"></script>
+<script type="importmap">{"imports":{"three":"/pages/guardhouse-classroom/vendor/three/build/three.module.min.js","three/addons/":"/pages/guardhouse-classroom/vendor/three/examples/jsm/"}}</script>
+<script type="module" src="/pages/guardhouse-classroom/cleanroom.mjs"></script></head>
+<body><div class="site-top" id="site-top"><header class="app-header">
+<a class="brand" href="/pages/guardhouse-classroom/"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 14 20 5l15 9v16l-15 8-15-8Z M5 14l15 8 15-8 M20 22v16 M12 10l15 8v16"/pages/guardhouse-classroom/></svg><strong>공간과 전기</strong></a>
+<nav data-sample-navigation></nav><div class="header-actions"><span>이 브라우저에 실습 저장</span></div><button class="menu-toggle" id="menu-toggle" aria-label="학습 메뉴 열기" aria-expanded="false" aria-controls="learning-nav"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path class="menu-open-icon" d="M4 6h16M4 12h16M4 18h16"/pages/guardhouse-classroom/><path class="menu-close-icon" d="m5 5 14 14M19 5 5 19"/pages/guardhouse-classroom/></svg>메뉴</button>
+</header><div class="nav-band"><nav class="main-nav" id="learning-nav" aria-label="클린룸 학습 메뉴"><button data-go="home">시작하기</button><button data-go="building">도면과 건물</button><button data-go="materials">재료와 외관</button><button data-go="structure">구조와 철근</button><button data-go="electrical">전기설계</button><button data-go="fire">소방설계</button><button data-go="safety">안전점검</button><button data-go="calculations">계산과 확인</button><button data-go="glossary">용어사전</button><button data-go="experience" class="experience-tab">실감 체험</button></nav></div></div>
+<main id="bay-app"><section id="page-heading"><div><p class="eyebrow">LESSON 03 · CLEANROOM</p><h1 id="bay-title">반도체 클린룸의 전기설비</h1><p id="bay-intro">작업대 위에서 조명과 팬을 찾고 두 설비에 전기가 어떻게 공급되는지 살펴보세요.</p></div></section>
+<div id="bay-return" class="button-row" hidden><button data-back-reading>읽던 계산·수업으로 돌아가기</button></div>
+<div class="bay-workspace" id="bay-workspace">
+<div class="bay-toolbar" id="bay-tools"></div>
+<div id="bay-view-tools" class="bay-toolbar"><button data-layout="split">2D·3D 함께</button><button data-layout="plan">2D 도면</button><button data-layout="model">3D 건물</button><button data-zoom="in">도면 확대</button><button data-zoom="out">도면 축소</button><button data-zoom="fit">도면 맞춤</button><button data-save-drawing>도면 저장</button><button data-whole>전체 건물</button></div>
+<div class="bay-panes" id="bay-panes">
+<section id="drawing"><div class="bay-caption"><h2 id="drawing-title">설비 배치도</h2><span id="drawing-direction">위에서 본 모습</span></div><div id="bay-plan"></div></section>
+<section id="model"><div class="bay-caption"><h2 id="bay-model-title">클린룸 절개 모형</h2><button id="reframe">시점 맞춤</button></div><div id="bay-walk" class="bay-walk" hidden></div><div class="bay-canvas" id="bay-canvas"><p role="status">3D 모형을 준비하고 있습니다.</p></div></section>
+</div></div><section id="bay-lesson" aria-label="선택한 학습"></section><p id="bay-status" role="status"></p></main>
+<footer><div class="footer-identity"><span>공간과 전기 · 교육용 샘플 3</span><p class="creator-credit">제작자 : 김준호 교수 (동서울대학교 전기공학과)</p></div><div><a href="/pages/guardhouse-classroom/education/cleanroom-3.json" download>모델·도면·계산 교재 저장</a><a href="/pages/guardhouse-classroom/#home">샘플 1 · 경비실</a><a href="/pages/guardhouse-classroom/apartment.html#home">샘플 2 · 아파트</a></div></footer><dialog id="bay-term"><h2 id="bay-term-title"></h2><p id="bay-term-body"></p><div id="bay-term-actions" class="button-row"></div><button data-dialog-close data-dialog-footer>계속 학습하기</button></dialog></body></html>

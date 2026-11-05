@@ -1,13 +1,15 @@
+import {registerWorkstation, fitsSupport, circuitDemand, attachCords, restoreOutletAllowance} from './teaching-equipment.mjs';
 import {insideElement,boundsOf} from './classroom-project.mjs';
 import {routeLength,slabCalculation} from './learning-engine.mjs';
+import {registeredIds} from './lesson-catalog.mjs';
 
 // An authored educational dwelling, not a reconstruction of a supplied apartment DWG.
 export const apartment={
  id:'apartment-02',version:1,lightingCircuit:'AL',lightingSheet:'E-201',powerSheet:'E-202',circuitSheet:'E-203',title:'아파트 한 세대',voltage:220,frequency:60,finishLevel:.12,eyeHeight:1.6,center:[4.2,3.65],sectionY:1.2,camera:[10,10,6.2],daylight:2.1,
  rooms:[
-  {id:'bed1',name:'침실 1',bounds:[0,4.4,2.6,7.3],spawn:[1.9,4.95],yaw:.55},
-  {id:'bed2',name:'침실 2',bounds:[2.72,4.4,5.32,7.3],spawn:[4.65,4.95],yaw:.55},
-  {id:'bed3',name:'침실 3',bounds:[5.44,4.4,8.4,7.3],spawn:[7.8,4.95],yaw:.55},
+  {id:'bed1',use:'bedroom',name:'침실 1',bounds:[0,4.4,2.6,7.3],spawn:[1.9,4.95],yaw:.55},
+  {id:'bed2',use:'bedroom',name:'침실 2',bounds:[2.72,4.4,5.32,7.3],spawn:[4.65,4.95],yaw:.55},
+  {id:'bed3',use:'bedroom',name:'침실 3',bounds:[5.44,4.4,8.4,7.3],spawn:[7.8,4.95],yaw:.55},
   {id:'living',name:'거실·주방',bounds:[2.72,0,8.4,4.28],spawn:[4.1,1.6],yaw:-.7},
   {id:'bath',name:'욕실',bounds:[0,1.82,2.6,3.26],spawn:[1.8,2.1],yaw:1.2},
   {id:'hall',name:'침실 앞 통로',bounds:[0,3.38,2.6,4.28],spawn:[1.7,3.8],yaw:-1.5},
@@ -25,14 +27,26 @@ export const apartment={
  sheets:[
   {id:'A-201',title:'세대 평면도',menu:'building',plain:'방과 문을 읽기'},
   {id:'A-202',title:'거실 단면도',menu:'building',plain:'층고와 천장 속 공간'},
+  {id:'A-203',title:'반사 천장 평면도',menu:'building',view:'ceiling',plain:'방 천장과 같은 조명·감지기 위치'},
+  {id:'A-204',title:'거실 쪽 입면도',menu:'building',view:'elevation',plain:'벽·출입문·창문의 높이와 관계'},
+  {id:'A-205',title:'창호 치수표',menu:'building',view:'openings',plain:'모델에서 읽은 문·창 치수'},
+  {id:'A-206',title:'배관 관통부 상세도',menu:'building',view:'services',plain:'문 상부 벽의 계획 개구부와 배관'},
   {id:'M-201',title:'외벽 재료 구성도',menu:'materials',plain:'외벽의 안쪽과 바깥쪽'},
   {id:'M-202',title:'내벽·욕실 재료 구성도',menu:'materials',plain:'방 사이 벽과 물을 쓰는 벽'},
   {id:'M-203',title:'바닥 재료 구성도',menu:'materials',plain:'마루 아래의 층과 구조 바닥'},
   {id:'S-201',title:'바닥판 배근 학습도',menu:'structure',plain:'대표 바닥판과 철근'},
-  {id:'E-201',title:'조명·스위치 배치도',menu:'electrical',plain:'조명을 켜는 연결'},
-  {id:'E-202',title:'콘센트·전원 배치도',menu:'electrical',plain:'용도별 회로 나누기'},
-  {id:'E-203',title:'세대 분전반 회로도',menu:'electrical',plain:'기구와 차단기의 관계'},
+  {id:'E-201',title:'조명·스위치 배치도',menu:'electrical',view:'lighting',plain:'조명을 켜는 연결'},
+  {id:'E-202',title:'콘센트·전원 배치도',menu:'electrical',view:'power',plain:'용도별 회로 나누기'},
+  {id:'E-203',title:'세대 분전반 회로도',menu:'electrical',view:'circuit',plain:'기구와 차단기의 관계'},
   {id:'F-201',title:'소방·피난 학습 배치도',menu:'fire',plain:'감지·알림·피난의 연결'}
+ ],
+ steps:[
+  {id:'building',title:'건물과 친해지기',text:'먼저 집을 돌려보세요. 전체 모습과 방의 위치를 알아봅니다.',action:'집 둘러보기',menu:'building'},
+  {id:'section',title:'평면도와 단면도 읽기',text:'도면에서 고른 대상이 3D에서도 선택됩니다. 단면도에서는 바닥과 천장 사이 높이를 읽습니다.',action:'단면도 열기',menu:'building',sheet:'A-202'},
+  {id:'structure',title:'콘크리트 속 철근 보기',text:'바닥판의 콘크리트와 철근을 비교하고, 피복과 간격이 계산에 어떻게 쓰이는지 확인합니다.',action:'철근 살펴보기',menu:'structure'},
+  {id:'electrical',title:'전기기구와 회로 연결하기',text:'분전반에서 벽 속 배관과 스위치를 거쳐 조명까지 전기의 길을 따라갑니다.',action:'전기설계 열기',menu:'electrical'},
+  {id:'calculations',title:'조건을 바꿔 계산하기',text:'기구 전력과 하중을 바꾸고 같은 공식으로 결과를 비교합니다.',action:'계산 과정 보기',menu:'calculations'},
+  {id:'experience',title:'내가 설계한 집에 들어가기',text:'눈높이로 방에 들어가 불을 켜고, 소방과 안전점검 메뉴에서 배운 연결을 확인합니다.',action:'실내 체험 시작',menu:'experience'}
  ]
 };
 const lighting=[['bed1',1.3,5.8,30,[1.55,4.46]],['bed2',4,5.8,24,[4.3,4.46]],['bed3',6.9,5.8,24,[7.55,4.46]],['living',5.1,1.7,40,[2.78,.55]],['bath',1.3,2.5,12,[2.78,2.15]],['entry',1.3,.9,8,[2.56,.65]],['living',6.5,3.4,18,[2.78,3.18]],['hall',1.3,3.8,8,[1.9,4.22]]];
@@ -46,6 +60,7 @@ for(const [id,name,room,circuit,pos,watts]of [
  ['AR01','침실 1 콘센트','bed1','AR',[.05,5,.345],600],['AR02','침실 2 콘센트','bed2','AR',[2.77,5,.345],600],['AR03','침실 3 콘센트','bed3','AR',[8.35,5,.345],600],['AR04','거실 콘센트','living','AR',[8.35,1.6,.345],400],['AK01','주방 조리기구 콘센트','living','AK',[6.2,4.23,1.145],1200],['AF01','냉장고 콘센트','living','AF',[7.6,4.23,.345],150],['AA01','거실 냉방기','living','AA',[8.25,2.1,2.145],900]
  ])apartment.devices.push({id,name,room,circuit,pos,watts,kind:id==='AA01'?'ac':'socket',size:id==='AA01'?[.23,.7,.25]:[.04,.12,.09]});
 apartment.panel.pos[2]+=.075;for(const d of apartment.devices){d.pos[2]+=.075;if(d.embedded)d.embedded.center[2]+=.075;}
+const workstation = registerWorkstation(apartment, {cabinetId:'ASC1', lampId:'ATL1', bounds:[7.60,5.20,8.30,5.72], outletId:'AR03'});
 export const apartmentArea=()=>apartment.rooms.reduce((a,r)=>a+(r.bounds[2]-r.bounds[0])*(r.bounds[3]-r.bounds[1]),0);
 export function apartmentModel(){
  const elements=[],openings=[];
@@ -71,7 +86,7 @@ export function apartmentModel(){
  wall('partition-bed','x',4.28,0,8.4,.12,[{start:.5,end:1.4,base:0,height:2.22},{start:3.2,end:4.1,base:0,height:2.22},{start:6.4,end:7.3,base:0,height:2.22}],'partition');
  wall('partition-west','y',2.6,0,7.3,.12,[{start:.75,end:1.65,base:0,height:2.22},{start:2.25,end:3.05,base:0,height:2.22},{start:3.38,end:4.18,base:0,height:2.22}],'partition');
  wall('partition-bed23','y',5.32,4.4,7.3,.12,[],'partition');wall('partition-bath','x',1.7,0,2.6,.12,[],'partition');wall('partition-bath-north','x',3.26,0,2.6,.12,[],'partition');
- for(const [i,r]of apartment.rooms.slice(0,3).entries()){
+ for(const [i,r]of apartment.rooms.filter(r=>r.use==='bedroom').entries()){
   const x=r.bounds[0];box('bed-base-'+i,r.name+' 침대 프레임',[x+.25,5.25,x+1.5,7.15],.045,.25,'furniture');box('bed-mattress-'+i,r.name+' 매트리스',[x+.28,5.28,x+1.47,7.12],.295,.18,'fixture','fixtures',0xe5dfce);box('bed-pillow-'+i,'베개',[x+.42,6.72,x+1.3,7.04],.475,.10,'fixture','fixtures',0xf2ede4);box('wardrobe-'+i,r.name+' 옷장',[r.bounds[2]-.6,5.8,r.bounds[2]-.05,7.2],.045,2.2,'furniture');
  }
  box('sofa','거실 소파',[5.3,.25,7.6,1.05],.045,.4,'fixture','fixtures',0x788d87);box('sofa-back','소파 등받이',[5.3,.25,7.6,.45],.445,.42,'fixture','fixtures',0x788d87);
@@ -81,12 +96,13 @@ export function apartmentModel(){
  box('toilet','양변기',[.25,3.4,.8,4.1],.045,.42,'fixture','fixtures',0xebe9df);box('basin','세면대',[1.6,3.7,2.35,4.2],.7,.15,'fixture','fixtures',0xf1eee5);box('shower','샤워 공간',[.1,1.9,1.1,2.8],.046,.02,'floor','fixtures');box('shoe-cabinet','신발장',[.1,.1,.5,1.55],.045,2.2,'furniture');
  // Explicit sleeves through internal partition headers; these are authored openings, not ignored clashes.
  const ports=[['partition-west-head-2','y',3.8],['partition-west-head-1','y',2.65],['partition-west-head-0','y',1.2],['partition-bed-head-0','x',.95],['partition-bed-head-1','x',3.65],['partition-bed-head-2','x',6.85]];
- for(const [id,axis,u]of ports){const e=elements.find(e=>e.id===id),b=boundsOf(e),start=axis==='x'?b[0]:b[1],end=axis==='x'?b[2]:b[3];e.profile={axis,start:axis==='x'?b[1]:b[0],depth:.12,points:[[start,e.base],[end,e.base],[end,e.base+e.height],[start,e.base+e.height]]};e.profileHoles=[[[u-.04,2.51],[u+.04,2.51],[u+.04,2.59],[u-.04,2.59]]];e.serviceOpening={width:.08,height:.08,center:u,elevation:2.55,role:'전기 배관용 계획 관통부'};}
+ for(const [id,axis,u]of ports){const e=elements.find(e=>e.id===id),b=boundsOf(e),start=axis==='x'?b[0]:b[1],end=axis==='x'?b[2]:b[3];e.profile={axis,start:axis==='x'?b[1]:b[0],depth:.12,points:[[start,e.base],[end,e.base],[end,e.base+e.height],[start,e.base+e.height]]};e.profileHoles=[[[u-.04,2.51],[u+.04,2.51],[u+.04,2.59],[u-.04,2.59]]];e.serviceOpening={axis,width:.08,height:.08,center:u,elevation:2.55,role:'전기 배관용 계획 관통부'};}
  for(const e of elements){if(['kitchen','counter','sink','hob'].includes(e.id))e.footprint=e.footprint.map(p=>[p[0]-1.4,p[1]]);if(e.id==='dining-table'||e.id.startsWith('table-leg-'))e.footprint=e.footprint.map(p=>[p[0],p[1]-1.25]);if(['toilet','basin'].includes(e.id)){const dx=e.id==='toilet'?.75:0,dy=e.id==='toilet'?-.85:-1.05;e.footprint=e.footprint.map(p=>[p[0]+dx,p[1]+dy]);}if(e.id==='shower')e.footprint=[[.1,1.9],[1,1.9],[1,2.9],[.1,2.9]];if(e.group==='fixtures')e.base+=.075;if(e.kind==='door'){e.base=.12;e.height=2.1;}}
+ elements.push(structuredClone(workstation));
  return {name:'아파트 교육용 샘플 2',units:'metres',source:'자체 제작 교육용 평면',elements,openings};
 }
-export function freshApartment(){return {version:1,power:true,breakers:{},switches:{},watts:{},checks:{},completed:[],palette:'warm',fireSignal:null,battery:true};}
-export function restoreApartment(raw){const s=freshApartment();if(raw?.version!==1)return s;s.completed=Array.isArray(raw.completed)?raw.completed.filter(x=>['building','section','structure','electrical','calculations','experience'].includes(x)):[];s.palette=['warm','neutral','walnut'].includes(raw.palette)?raw.palette:'warm';if(typeof raw.power==='boolean')s.power=raw.power;if(typeof raw.battery==='boolean')s.battery=raw.battery;for(const c of apartment.circuits)if(typeof raw.breakers?.[c.id]==='boolean')s.breakers[c.id]=raw.breakers[c.id];for(const d of apartment.devices){if(d.kind==='switch'&&typeof raw.switches?.[d.id]==='boolean')s.switches[d.id]=raw.switches[d.id];if(d.watts&&Number.isFinite(raw.watts?.[d.id])&&raw.watts[d.id]>=1&&raw.watts[d.id]<=5000)s.watts[d.id]=raw.watts[d.id];}for(const id of ['exit','light','socket','fire','backup','structure'])if(typeof raw.checks?.[id]==='boolean')s.checks[id]=raw.checks[id];return s;}
+export function freshApartment(){return {version:1,equipmentVersion:1,power:true,breakers:{},switches:{},watts:{},positions:{},checks:{},completed:[],palette:'warm',fireSignal:null,battery:true};}
+export function restoreApartment(raw){const s=freshApartment();if(raw?.version!==1)return s;s.completed=Array.isArray(raw.completed)?registeredIds(apartment.steps,raw.completed):[];s.palette=['warm','neutral','walnut'].includes(raw.palette)?raw.palette:'warm';if(typeof raw.power==='boolean')s.power=raw.power;if(typeof raw.battery==='boolean')s.battery=raw.battery;for(const c of apartment.circuits)if(typeof raw.breakers?.[c.id]==='boolean')s.breakers[c.id]=raw.breakers[c.id];for(const d of apartment.devices){if(d.support&&fitsSupport(d,raw.positions?.[d.id]))s.positions[d.id]=raw.positions[d.id];if((d.kind==='switch'||d.support)&&typeof raw.switches?.[d.id]==='boolean')s.switches[d.id]=raw.switches[d.id];if(d.watts&&Number.isFinite(raw.watts?.[d.id])&&raw.watts[d.id]>=(d.id==='AR03'?0:1)&&raw.watts[d.id]<=5000)s.watts[d.id]=raw.watts[d.id];}restoreOutletAllowance(s,raw,apartment.devices.find(d=>d.socket));for(const {id} of apartmentChecks)if(typeof raw.checks?.[id]==='boolean')s.checks[id]=raw.checks[id];return s;}
 export function apartmentRoute(d){
  const a=apartment.panel.pos,[x,y,z]=d.pos,h=2.55,common=[a,[2.66,.35,a[2]],[2.66,.35,h],[3,.35,h],[3,3.8,h]];
  const door={bed1:.95,bed2:3.65,bed3:6.85}[d.room];
@@ -95,9 +111,10 @@ export function apartmentRoute(d){
  return [...common,...via,...end].filter((p,i,a)=>!i||routeLength([a[i-1],p])>1e-6);
 }
 export function apartmentElectrical(state){
- const devices=[apartment.panel,...apartment.devices].map(d=>({...d,watts:state.watts[d.id]??d.watts}));
- const routes=devices.filter(d=>d.circuit).map(d=>({id:'route-'+d.id,kind:'conduit',name:d.name+' 전선관',circuit:d.circuit,target:d.id,diameter:.016,points:apartmentRoute(d)}));
- const circuits=apartment.circuits.map(c=>{const loads=devices.filter(d=>d.circuit===c.id&&d.watts),watts=loads.reduce((s,d)=>s+d.watts,0),current=watts/(220*c.pf),length=Math.max(...routes.filter(r=>r.circuit===c.id).map(r=>routeLength(r.points))),drop=2*.0175*length*current/c.area;return {...c,watts,current,length,drop,percent:drop/220*100,loads:loads.map(d=>d.id),pass:current<=c.breaker&&c.breaker<=c.ampacity&&drop/220*100<=3};});
+ const devices=[apartment.panel,...apartment.devices].map(d=>({...d,pos:d.support&&fitsSupport(d,state.positions?.[d.id])?[...state.positions[d.id],d.pos[2]]:[...d.pos],watts:state.watts[d.id]??d.watts}));
+ attachCords(devices);
+ const routes=devices.filter(d=>d.circuit&&!d.socket).map(d=>({id:'route-'+d.id,kind:'conduit',name:d.name+' 전선관',circuit:d.circuit,target:d.id,diameter:.016,points:apartmentRoute(d)}));
+ const circuits=apartment.circuits.map(c=>{const {loads,watts,current}=circuitDemand(devices,c,apartment.voltage),length=Math.max(...routes.filter(r=>r.circuit===c.id).map(r=>routeLength(r.points))),drop=2*.0175*length*current/c.area;return {...c,watts,current,length,drop,percent:drop/apartment.voltage*100,loads:loads.map(d=>d.id),pass:current<=c.breaker&&c.breaker<=c.ampacity&&drop/apartment.voltage*100<=3};});
  return {routes,circuits,devices:devices.map(d=>({...d,lumens:d.kind==='light'?d.watts*100:undefined,on:d.kind==='switch'?state.switches[d.id]!==false:!!d.watts&&state.power&&state.breakers[d.circuit]!==false&&circuits.find(c=>c.id===d.circuit).current<=circuits.find(c=>c.id===d.circuit).breaker&&state.switches[d.switch]!==false}))};
 }
 export function apartmentWalk(x,y,model){if(x<.14||x>8.26||y<.14||y>7.16)return false;return !model.elements.filter(e=>['wall','partition','furniture','fixture'].includes(e.kind)&&e.base<1.8&&e.base+e.height>.3).some(e=>[[x,y],[x-.13,y],[x+.13,y],[x,y-.13],[x,y+.13]].some(p=>insideElement(p,e)));}

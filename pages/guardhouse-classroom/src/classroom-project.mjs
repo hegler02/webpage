@@ -1,6 +1,7 @@
+import {registerWorkstation} from './teaching-equipment.mjs';
 // Sample-owned teaching data. Coordinates: metres, CAD X/Y and elevation Z.
 export const project = {
- id:'guardhouse-01', version:1, title:'경비실', subtitle:'처음 만나는 건축과 전기',
+ id:'guardhouse-01', version:1, lightingCircuit:'L1', lightingSheet:'E-101', powerSheet:'E-102', circuitSheet:'E-103', title:'경비실', subtitle:'처음 만나는 건축과 전기',
  voltage:220, frequency:60, finishLevel:.045, eyeHeight:1.6,
  rooms:[
   {id:'guard',name:'경비실',bounds:[4.565,.215,7.985,3.785],spawn:[5.15,1.2],yaw:-.65,description:'근무자가 머무는 공간입니다. 조명·업무용 콘센트·냉방기 회로를 살펴봅니다.'},
@@ -57,6 +58,8 @@ export const project = {
   {id:'experience',title:'내가 설계한 공간에 들어가기',text:'눈높이로 실내를 걸으며 벽의 스위치를 눌러보세요. 해당 방의 조명만 켜지고 꺼집니다.',menu:'experience',action:'실내 체험 시작'}
  ]
 };
+
+const workstation = registerWorkstation(project, {cabinetId:'SC1', lampId:'TL1', bounds:[7.23,2.06,7.93,2.58], outletId:'R01'});
 
 export const glossary=[
  ['plan','평면도','위에서 잘라 내려다본 도면','방의 배치와 벽·문·창문의 위치를 표시합니다.','조명과 콘센트를 어디에 놓을지 정할 때 사용합니다.','A-101','floor'],
@@ -115,5 +118,6 @@ export function buildClassroomModel(source){
  add('chair-post','의자 지지대',[6.97,2.65,7.03,2.71],.08,.4,0x53646b,'fixture');
  add('chair-base-x','의자 받침',[6.75,2.65,7.25,2.7],.045,.035,0x53646b,'fixture');
  add('chair-base-y','의자 받침',[6.98,2.4,7.03,2.95],.045,.035,0x53646b,'fixture');
+ model.elements.push(structuredClone(workstation));
  return model;
 }

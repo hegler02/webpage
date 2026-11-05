@@ -1,3 +1,18 @@
+
+// Geometry, materials and shadow targets belong to the scene that created them.
+// Surface-library textures have a separate owner; only marked private textures are released here.
+export function disposeModelResources(root) {
+  const released=new Set();
+  const release=value=>{if(value?.dispose&&!released.has(value)){released.add(value);value.dispose();}};
+  root.traverse(object=>{
+    release(object.geometry);release(object.shadow);
+    for(const material of [object.material].flat().filter(Boolean)){
+      if(object.userData.fireLabel||object.userData.ownedTexture)release(material.map);
+      release(material);
+    }
+  });
+}
+import {addDrawerFronts} from './equipment-mesh.mjs';
 import * as THREE from 'three';
 export const palette={wall:0xe4d8c5,partition:0x9fb8b2,window:0x64b7cd,door:0xb8875b,floor:0xbbb6ac,roof:0xd2c6ae,parapet:0xd3c0a5,canopy:0xc9c6b5,foundation:0xa9aaa4,frame:0xe6ece7,stone:0xb8b4a3,waterproof:0xa8b5af,finish:0xd7ccbb,furniture:0xb6a183,fixture:0xecece4,pipe:0x91a5a3,insulation:0xd6c48b,'ceiling-frame':0x7f9399,hatch:0x8da09a};
 function makeShape(points,holes=[]){const vectors=pts=>pts.map(p=>new THREE.Vector2(...p.map(v=>Math.round(v*1e8)/1e8)));const s=new THREE.Shape(vectors(points));for(const hole of holes)s.holes.push(new THREE.Path(vectors(hole)));return s;}
@@ -26,6 +41,7 @@ export function createModelGroup(model) {
     const glazed=['window','window-glass'].includes(item.kind);
     const material=new THREE.MeshStandardMaterial({color:item.color??(glazed?palette.window:palette[item.kind])??palette.wall,roughness:0.78,metalness:item.kind==='frame'?.25:0,transparent:glazed,opacity:glazed?0.44:1,side:THREE.DoubleSide});
     const mesh=new THREE.Mesh(geometry,material);mesh.name=item.name;mesh.userData={...item};mesh.castShadow=true;mesh.receiveShadow=true;
+    if(item.drawerFronts)addDrawerFronts(mesh,item);
     group.add(mesh);
   }
   group.userData={source:model.source,sourceFiles:model.sourceFiles,notes:model.notes,issues:model.issues,parameters:model.parameters,revision:model.revision,origin:model.origin,design:model.design,units:'metres'};

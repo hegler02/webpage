@@ -1,0 +1,63 @@
+@charset "UTF-8";
+#bay-app{max-width:1800px}
+#bay-intro{color:var(--muted)}
+.bay-workspace,.bay-card{background:white;border:1px solid var(--line);border-radius:var(--radius)}
+.bay-workspace{overflow:hidden}
+.bay-panes{display:grid;grid-template-columns:minmax(0,.93fr) minmax(0,1.17fr)}
+.bay-panes>section{min-width:0}
+.bay-panes #model{border-left:1px solid var(--line)}
+.bay-panes.solo{grid-template-columns:1fr}
+.bay-panes.solo #model{border:0}
+.bay-caption,.bay-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:var(--space-2);padding:var(--space-3) var(--space-5);border-bottom:1px solid var(--line)}
+.bay-caption{justify-content:space-between;min-height:62px}
+.bay-caption button{padding:var(--space-1) var(--space-2)}
+.bay-toolbar{gap:var(--space-3)}
+.bay-toolbar label{display:flex;align-items:center;flex-wrap:wrap;gap:var(--space-3);margin-right:auto}
+.bay-toolbar select{max-width:100%;min-width:0}
+.bay-walk{display:flex;flex-wrap:wrap;gap:var(--space-2);padding:var(--space-3);background:#edf5f3;border-bottom:1px solid var(--line)}
+.bay-walk button{font-size:var(--sys-size-small);padding:var(--space-2) var(--space-3)}
+#model{scroll-margin-top:150px}
+#bay-app[data-page=home]{display:flex;flex-direction:column}
+#bay-app[data-page=home] #bay-lesson{order:1;margin-top:0}
+#bay-app[data-page=home] #bay-workspace{order:2;margin-top:var(--gap-section)}
+#bay-app[data-page=home] #bay-status{order:3}
+#bay-app[data-page=home] .home-preview,#bay-app[data-page=home] .lesson-path{margin:0}
+.bay-caption h2{font-size:var(--sys-size-body)}
+.bay-caption span,.bay-caption button{font-size:var(--sys-size-caption)}
+.bay-toolbar{background:#f9fbfa}
+.bay-toolbar:empty{display:none}
+.bay-canvas,#bay-plan{height:clamp(320px,36vw,495px);background:#e6eceb;position:relative}
+.bay-canvas canvas,#bay-plan svg{display:block;width:100%;height:100%}
+.bay-canvas canvas{touch-action:none}
+.bay-canvas p{padding:var(--space-6)}
+#bay-plan{background:#f8fbfa}
+#bay-plan [role=button]{cursor:pointer}
+#bay-plan [role=button]:focus{outline:2px solid #c16f1d}
+#bay-lesson{display:grid;gap:var(--gap-grid);margin-top:var(--gap-section)}
+.bay-card{padding:clamp(18px,2.5vw,32px);min-width:0}
+.bay-card .route-title{margin-top:var(--gap-actions)}
+.bay-card>p{max-width:72ch}
+.bay-card .button-row,.bay-card form,.bay-card details,.bay-card .equation{margin-top:var(--gap-actions)}
+.bay-card .equation{background:#ebf4f0;color:#194b49;padding:var(--space-4);border-radius:7px;line-height:var(--leading-reading);font-weight:var(--sys-weight-control)}
+.bay-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap-grid)}
+.bay-card input[type=number]{width:6em}
+.bay-card label{display:inline-flex;gap:var(--space-2);align-items:center;flex-wrap:wrap}
+.bay-card form{display:flex;align-items:end;flex-wrap:wrap;gap:var(--space-3)}
+.bay-card details p{line-height:var(--leading-reading)}
+.bay-card summary{cursor:pointer;font-weight:var(--sys-weight-control)}
+.bay-card .checklist{display:grid;gap:var(--space-4);margin-top:var(--gap-actions)}
+.checklist>div{display:flex;justify-content:space-between;align-items:center;gap:var(--space-2);border-top:1px solid var(--line);padding-top:var(--space-3)}
+#bay-status{color:var(--teal)}
+#bay-status:empty{display:none}
+@media(max-width:850px){.bay-panes{grid-template-columns:1fr}.bay-panes #model{border-left:0;border-top:1px solid var(--line)}.bay-two{grid-template-columns:1fr}.bay-canvas,#bay-plan{height:clamp(285px,53vw,410px)}}
+@media(max-width:500px){.bay-toolbar,.bay-caption{padding:var(--space-3)}.checklist>div{flex-wrap:wrap}.bay-card label{line-height:var(--leading-body)}}
+@media(max-width:1100px){#model{scroll-margin-top:90px}}
+.bay-panes[data-layout=plan],.bay-panes[data-layout=model]{grid-template-columns:1fr}
+.bay-panes[data-layout=plan] #model,.bay-panes[data-layout=model] #drawing{display:none}
+#bay-return{margin-bottom:var(--gap-actions)}
+#bay-lesson .calc-guide{width:100%;max-width:1200px;margin-inline:auto}
+#bay-app[data-page=test] #drawing,#bay-app[data-page=test] #bay-view-tools{display:none}
+#bay-app[data-page=test] .bay-panes{grid-template-columns:1fr}
+#bay-app[data-page=test] .fire-sim{border-bottom:1px solid var(--line)}
+#bay-app[data-page=glossary] .bay-card p+p{margin-top:var(--space-3)}
+#bay-plan{overflow:hidden;touch-action:pan-y}

@@ -246,7 +246,7 @@ window.addEventListener('hashchange',()=>{const target=location.hash.slice(1)||'
 window.addEventListener('pagehide',event=>{serial++;view?.simulation?.leave();view?.setActive(false);if(!event.persisted){view?.dispose();view=null;pending=null;}});
 window.addEventListener('pageshow',event=>{if(event.persisted)view?.setActive(!$('apt-workspace').hidden);});
 const quantities=createQuantities({host:$('apt-content'),nav:$('learning-nav'),workspace:$('apt-workspace'),go,read:()=>({sample:'apartment',model,electric,fire,rebar,resolveSheet:e=>e.kind==='ceiling'?'A-203':['door','window-glass','frame'].includes(e.kind)?'A-205':'A-201'}),locate:m=>destination(m.id,m.sheet)});
-mountSamples(2,()=>go('home'));
+mountSamples(2,()=>go('home'),()=>go('glossary'));
 go(location.hash.slice(1)||'home');
 
 $('apt-zoom-in').onclick=()=>zoomPlan(.8);$('apt-zoom-out').onclick=()=>zoomPlan(1.25);$('apt-fit').onclick=()=>{planBox=[0,0,1000,820];applyPlanBox();};

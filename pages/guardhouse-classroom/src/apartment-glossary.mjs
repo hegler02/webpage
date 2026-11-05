@@ -2,6 +2,7 @@ import {glossary} from './classroom-project.mjs';
 import {extraGlossary} from './lesson-expansion.mjs';
 import {calculationGlossary} from './calculation-lessons.mjs';
 import {apartment} from './apartment-project.mjs';
+import {withStudyConcepts} from './study-content.mjs';
 const targets={
  elevation:['A-204','south-0'],opening:['A-205','south-opening-1'],sleeve:['A-206','partition-bed-head-0'],
  plan:['A-201','floor-finish-living'],section:['A-202','ceiling-living'],partition:['A-201','partition-west-1'],
@@ -28,5 +29,5 @@ const context={
 };
 const missing={pit:'이 세대에 없는 공간 · 뜻 알아보기',foundation:'건물 전체의 기초는 이 세대 모형에 포함하지 않습니다.',parapet:'옥상 가장자리의 파라펫은 이 세대 모형에 포함하지 않습니다.',wall:'건물 전체의 내력벽 해석은 포함하지 않습니다.',stress:'응력의 일반적인 뜻을 알아봅니다.',reaction:'반력과 축력의 일반적인 뜻을 알아봅니다.',bearing:'지반과 기초는 이 세대 모형에 포함하지 않습니다.'};
 const rows=[{id:'opening',term:'창호',plain:'문과 창, 그 틀을 함께 부르는 말',definition:'창호표에서 폭·높이·창대 높이를 읽고 같은 문이나 창을 3D에서 찾습니다.'},{id:'sleeve',term:'설비 관통부',plain:'배관이 벽을 지나갈 수 있도록 계획한 구멍',definition:'이 세대 내벽의 문 위에 80 × 80 mm 관통부를 두었습니다. 중심 높이는 구조 바닥 기준 2,550 mm이며 실제 같은 벽의 3D 구멍과 연결됩니다.'},...glossary,...extraGlossary.filter(t=>['detector','fire-alarm','extinguisher','emergency'].includes(t.id)),...calculationGlossary.filter(t=>!glossary.some(g=>g.id===t.id))];
-export const apartmentGlossary=rows.map(t=>({...t,definition:definitions[t.id]??t.definition,electrical:context[t.id]??(missing[t.id]?'':t.electrical),sheet:targets[t.id]?.[0]??null,element:targets[t.id]?.[1]??null,locationNote:missing[t.id]??'',locationLabel:t.id==='section'?'단면도에서 보기':'도면·3D에서 찾기'}));
+export const apartmentGlossary=withStudyConcepts(rows.map(t=>({...t,definition:definitions[t.id]??t.definition,electrical:context[t.id]??(missing[t.id]?'':t.electrical),sheet:targets[t.id]?.[0]??null,element:targets[t.id]?.[1]??null,locationNote:missing[t.id]??'',locationLabel:t.id==='section'?'단면도에서 보기':'도면·3D에서 찾기'})));
 export const apartmentTermTarget=id=>{const t=apartmentGlossary.find(t=>t.id===id);return t?.sheet&&t.element?{sheet:t.sheet,element:t.element}:null;};

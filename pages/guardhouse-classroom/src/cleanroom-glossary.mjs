@@ -1,6 +1,7 @@
 import {glossary,termTargets} from './cleanroom-project.mjs';
 import {glossary as sharedGlossary} from './classroom-project.mjs';
 import {bayCalculationTerms} from './cleanroom-lessons.mjs';
+import {studyConcepts} from './study-content.mjs';
 const rows=[
  ['wall-panel','벽 패널','실내 공간을 나누고 둘러싸는 벽 부재입니다. 표면재와 안쪽 심재가 겹쳐 있으며, 전기를 나누는 분전반과는 다른 부재입니다.','materials','west-high','M-301'],
  ['plan','평면도','공간을 위에서 읽는 도면입니다. 전실·작업구역과 두 출입구의 관계를 찾습니다.','building','room-work','A-301'],
@@ -28,3 +29,4 @@ export const bayTerms=new Map(Object.entries(glossary).filter(([id])=>id!=='powe
 for(const t of bayCalculationTerms)bayTerms.set(t.id,{...t});
 for(const [id,term,plain,menu,target,sheet]of rows)bayTerms.set(id,{id,term,plain,definition:'',target:{menu,id:target,sheet}});
 bayTerms.set('rebar-drawing',{...sharedGlossary.find(t=>t.id==='rebar-drawing'),sheet:'S-301',element:'slab',target:{menu:'structure',id:'slab',sheet:'S-301'}});
+for(const t of studyConcepts)bayTerms.set(t.id,t);

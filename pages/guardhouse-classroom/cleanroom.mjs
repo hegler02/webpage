@@ -174,7 +174,7 @@ function go(target,id=null){if(!Object.hasOwn(pages,target))return;if(id)focusOn
 function moveTerm(id){
   const t=bayTerms.get(id);if(!t)return;
   $('bay-term-title').textContent=t.term;$('bay-term-body').textContent=[t.plain,t.definition,t.electrical].filter(Boolean).join(' ');
-  $('bay-term-actions').innerHTML=btn('도면·3D에서 찾기','related-term',id)+btn('용어사전에서 이어보기','glossary-term',id);
+  $('bay-term-actions').innerHTML=(t.target?btn('도면·3D에서 찾기','related-term',id):'')+btn('용어사전에서 이어보기','glossary-term',id);
   if(!$('bay-term').open)$('bay-term').showModal();
 }
 function destination(target){
@@ -225,7 +225,7 @@ const bayActions={
   sound:()=>{if(audio.enabled)audio.mute();else{audio.enabled=true;audio.unlock();audio.ctx?.resume().then(()=>audio.play(tab==='fire-signal'&&stage>=2&&!document.hidden)).catch(()=>{});}paint();},
   term:b=>moveTerm(b.dataset.term),
   relatedTerm:b=>{const target=bayTerms.get(b.dataset.relatedTerm)?.target;$('bay-term').close();destination(target);},
-  glossaryTerm:b=>{const id=b.dataset.glossaryTerm;termReturn=tab;$('bay-term').close();go('glossary');requestAnimationFrame(()=>$('term-'+id)?.scrollIntoView({block:'center'}));},
+  glossaryTerm:b=>{const id=b.dataset.glossaryTerm;termReturn=tab;$('bay-term').close();go('glossary');requestAnimationFrame(()=>{const input=$('term-search');if(input){input.value=bayTerms.get(id)?.term??'';input.dispatchEvent(new Event('input'));input.focus();}});},
   related:b=>{const row=safetyChecks.find(([id])=>id===b.dataset.related);if(!row)return;if(row[0]==='escape')fireId='EX3';if(row[0]==='path')electricalId='FFU1';go(row[2]);},
   retry:()=>{if(reloadRequired)location.reload();else ensureScene();},
   '#reframe':()=>{experienceView='outside';paint();scene?.whole();},
@@ -243,7 +243,7 @@ $('bay-app').addEventListener('submit',e=>{if(e.target.id==='bay-live'){e.preven
 });
 document.addEventListener('visibilitychange',()=>audio.play(!document.hidden&&tab==='fire-signal'&&stage>=2));
 const quantities=createQuantities({host:$('bay-lesson'),nav:$('learning-nav'),workspace:$('bay-workspace'),go,read:()=>({sample:'cleanroom',model:building,electric:bayElectrical(state),fire:bayFire(simPower),panel,rebar:{bars:stripBars().map(([a,b],i)=>({id:'strip-bar-'+i,parent:'slab',a,b,diameter:slabDesign.diameter,sheet:'S-301'}))},resolveSheet:e=>e.kind==='ceiling'?'A-303':['door','window-glass','frame'].includes(e.kind)?'A-305':'A-301'}),locate:async m=>{drawing=m.sheet;returnPage='quantities';focusOnOpen={menu:m.menu,id:m.id};if(m.menu==='building')buildingId=m.id;if(equipment.some(e=>e.id===m.id))electricalId=m.id;history.replaceState(null,'','#'+m.menu);await openPage();return !reloadRequired;}});
-mountSamples(3,()=>go('home'));
+mountSamples(3,()=>go('home'),()=>go('glossary'));
 window.addEventListener('hashchange',openPage);
 $('bay-view-tools').addEventListener('change',event=>{if(event.target.id!=='bay-sheet')return;const s=sheets.find(s=>s.id===event.target.value);if(!s)return;drawing=s.id;experienceView='sheet';selected=s.view==='openings'?building.openings[0].id:s.view==='ceiling'?building.elements.find(e=>e.kind==='ceiling'&&e.id!=='ceiling-deck').id:s.view==='elevation'?'south-wall':s.view==='section'?'slab':buildingId;if(s.menu==='materials'){assembly=s.view;layer=0;selected=assemblies[assembly].target;}paint();$('bay-status').textContent=s.title+'와 같은 방향으로 3D를 전환했습니다.';});
 window.addEventListener('pagehide',e=>{audio.play(false);scene?.setActive(false);if(!e.persisted){epoch++;scene?.dispose();audio.dispose();}});

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-11-05T06:03:01Z",
+  "bodies": [
+    {
+      "body_id": "image-cinema-review",
+      "title": "이미지 시네마 — 움직임에서 감정으로",
+      "body_type": "KNOWLEDGEBODY",
+      "source_kinds": [
+        "creative-research",
+        "code-animation",
+        "image-cinema"
+      ],
+      "tags": [
+        "image-cinema",
+        "causal-chain",
+        "creative-research"
+      ],
+      "canonical_url": "https://mirinaeman.com/pages/image-cinema-review/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-11-05T05:36:07.309000Z",
+      "latest_deployed_at": "2026-11-05T05:36:07.309000Z",
+      "evidence": "project-evidence/image-cinema-review.json"
+    }
+  ]
+}

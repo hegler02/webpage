@@ -1303,6 +1303,33 @@
       "latest_deployed_at": "2026-09-21T05:27:51.135141Z"
     },
     {
+      "body_id": "image-cinema-review",
+      "title": "이미지 시네마 — 움직임에서 감정으로",
+      "body_type": "KNOWLEDGEBODY",
+      "source_kinds": [
+        "creative-research",
+        "code-animation",
+        "image-cinema"
+      ],
+      "tags": [
+        "image-cinema",
+        "causal-chain",
+        "creative-research"
+      ],
+      "message_sentence": "단문 인과체인과 코드 애니메이션, 원화와 영상, 제주 새소리의 제작 실험을 따라 움직임과 감정의 연결을 살핀다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/image-cinema-review.webp",
+        "alt": "황금빛 숲의 바위에 앉아 나뭇가지를 바라보는 여성 — 이미지 시네마 제작 연구",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/image-cinema-review/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-11-05T05:36:07.309000Z",
+      "latest_deployed_at": "2026-11-05T05:36:07.309000Z"
+    },
+    {
       "body_id": "jeju-we",
       "title": "제주 WE — 당신과 나, 다시 우리",
       "body_type": "SONGBODY",

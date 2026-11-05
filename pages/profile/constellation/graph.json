@@ -9,6 +9,28 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:image-cinema-review",
+      "kind": "work",
+      "title": "이미지 시네마 — 움직임에서 감정으로",
+      "summary": "단문 인과체인과 코드 애니메이션, 원화와 영상, 제주 새소리의 제작 실험을 따라 움직임과 감정의 연결을 살핀다.",
+      "url": "https://mirinaeman.com/pages/image-cinema-review/",
+      "image": "/pages/profile/assets/thumbnails/image-cinema-review.webp",
+      "alt": "황금빛 숲의 바위에 앉아 나뭇가지를 바라보는 여성 — 이미지 시네마 제작 연구",
+      "year": "2026",
+      "tags": [
+        "image-cinema",
+        "causal-chain",
+        "creative-research"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "단문 인과체인과 코드 애니메이션, 원화와 영상, 제주 새소리의 제작 실험을 따라 움직임과 감정의 연결을 살핀다."
+        }
+      ]
+    },
+    {
       "id": "work:guardhouse-classroom",
       "kind": "work",
       "title": "공간과 전기 — 교육용 샘플 1·2",
@@ -2677,6 +2699,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:image-cinema-review",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:guardhouse-classroom",
       "target": "creator:joonho",

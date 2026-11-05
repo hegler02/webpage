@@ -1,3 +1,14 @@
+
+// Loading must continue even when the browser suspends animation frames.
+export function yieldForPaint() {
+  return new Promise(resolve => {
+    let frame=null, finished=false;
+    const finish=()=>{if(finished)return;finished=true;clearTimeout(timer);if(frame!==null)cancelAnimationFrame(frame);resolve();};
+    const timer=setTimeout(finish,100);
+    frame=requestAnimationFrame(()=>{frame=requestAnimationFrame(finish);});
+  });
+}
+
 export class FrameLoop {
   constructor(frame, {request, cancel, now} = {}) {
     this.request = request ?? (callback => requestAnimationFrame(callback));

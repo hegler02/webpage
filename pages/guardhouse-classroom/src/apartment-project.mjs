@@ -5,7 +5,7 @@ import {registeredIds} from './lesson-catalog.mjs';
 
 // An authored educational dwelling, not a reconstruction of a supplied apartment DWG.
 export const apartment={
- id:'apartment-02',version:1,lightingCircuit:'AL',lightingSheet:'E-201',powerSheet:'E-202',circuitSheet:'E-203',title:'아파트 한 세대',voltage:220,frequency:60,finishLevel:.12,eyeHeight:1.6,center:[4.2,3.65],sectionY:1.2,camera:[10,10,6.2],daylight:2.1,
+ id:'apartment-02',version:1,lightingCircuit:'AL',lightingSheet:'E-201',powerSheet:'E-202',circuitSheet:'E-203',title:'아파트 한 세대',voltage:220,frequency:60,finishLevel:.12,eyeHeight:1.6,center:[4.2,3.65],sectionY:1.2,camera:[10,10,6.2],daylight:2.1,siteContext:false,
  rooms:[
   {id:'bed1',use:'bedroom',name:'침실 1',bounds:[0,4.4,2.6,7.3],spawn:[1.9,4.95],yaw:.55},
   {id:'bed2',use:'bedroom',name:'침실 2',bounds:[2.72,4.4,5.32,7.3],spawn:[4.65,4.95],yaw:.55},

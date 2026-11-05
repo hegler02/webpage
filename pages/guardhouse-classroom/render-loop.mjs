@@ -9,6 +9,25 @@ export function yieldForPaint() {
   });
 }
 
+// A submitted WebGL frame followed by a paint opportunity, not a GPU timing claim.
+// A hidden/suspended tab must not leave navigation waiting forever or report painted.
+export async function presentScene(host, draw, {current=()=>true, request=callback=>requestAnimationFrame(callback), cancel=id=>cancelAnimationFrame(id), now=()=>performance.now(), timeout=250}={}) {
+  if(!current())return false;
+  host.dataset.presentation='pending';
+  const started=now();
+  draw();
+  host.dataset.renderSubmissionMs=(now()-started).toFixed(1);
+  const painted=await new Promise(resolve=>{
+    let frame,finished=false;
+    const finish=value=>{if(finished)return;finished=true;clearTimeout(timer);if(frame!==undefined)cancel(frame);resolve(value);};
+    const timer=setTimeout(()=>finish(false),timeout);
+    frame=request(()=>{frame=request(()=>finish(true));});
+  });
+  if(!current())return false;
+  host.dataset.presentation=painted?'ready':'deferred';
+  return painted;
+}
+
 export class FrameLoop {
   constructor(frame, {request, cancel, now} = {}) {
     this.request = request ?? (callback => requestAnimationFrame(callback));

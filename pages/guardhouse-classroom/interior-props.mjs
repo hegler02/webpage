@@ -12,9 +12,9 @@ export class InteriorProps{
   if(this.disposed||token!==this.token){results.forEach(r=>{if(r.status==='fulfilled')releaseProp(r.value.g);});return;}
   const failure=results.find(r=>r.status==='rejected');if(failure){results.forEach(r=>{if(r.status==='fulfilled')releaseProp(r.value.g);});this.state='error';this.readout();return;}
   this.models.forEach(releaseProp);this.models.clear();for(const r of results){const {p,g}=r.value,b=new THREE.Box3().setFromObject(g),size=b.getSize(new THREE.Vector3()),center=b.getCenter(new THREE.Vector3()),s=p.height/size.y;g.scale.multiplyScalar(s);g.position.set(-center.x*s,-b.min.y*s,-center.z*s);const anchor=new THREE.Group();anchor.position.copy(V(p.pos));anchor.rotation.y=p.rotation;anchor.add(g);anchor.userData={id:'prop-'+p.id,kind:'prop',name:p.name};g.traverse(m=>{if(m.isMesh){m.castShadow=true;m.receiveShadow=true;m.userData=anchor.userData;m.material.envMapIntensity=.6;if(m.material.map)m.material.map.anisotropy=Math.min(4,this.view.renderer.capabilities.getMaxAnisotropy());}});this.group.add(anchor);this.models.set(p.id,anchor);}
-  this.state='ready';this.sync();this.readout();
+  this.state='ready';this.view.renderer.shadowMap.needsUpdate=true;this.sync();this.readout();
  }
  readout(){this.view.host.dataset.propsState=this.state;this.view.host.dataset.propsCount=String(this.models.size);}
- sync(){const v=this.view;this.group.visible=v.realistic&&['experience','interior','exterior','fire'].includes(v.mode)&&v.filter==='all';}
+ sync(){const v=this.view;const visible=v.realistic&&['experience','interior','exterior','fire'].includes(v.mode)&&v.filter==='all';if(this.group.visible!==visible&&v.renderer.shadowMap)v.renderer.shadowMap.needsUpdate=true;this.group.visible=visible;}
  dispose(){if(this.disposed)return;this.disposed=true;this.token++;this.controller?.abort();this.models.forEach(releaseProp);this.models.clear();this.group.removeFromParent();}
 }

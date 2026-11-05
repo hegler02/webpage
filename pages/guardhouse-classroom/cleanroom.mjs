@@ -127,13 +127,17 @@ function paint(){
   audio.play(f.alarm&&!document.hidden);
 }
 async function ensureScene(){
-  if(scene||loading||$('bay-workspace').hidden)return;
+  if(scene)return scene;
+  if(loading)return loading;
+  if($('bay-workspace').hidden)return null;
   const turn=++epoch,host=$('bay-canvas');
   host.innerHTML='<p role="status">3D 모형을 준비하고 있습니다.</p>';
-  loading=import('./cleanroom-scene.mjs').catch(error=>{error.requiresReload=true;throw error;});
-  try{const {mountBay}=await loading;if(turn!==epoch||$('bay-workspace').hidden)return;scene=mountBay(host,pick,{readFire:()=>bayFire(simPower),onSignal:id=>{simPower.signal=id;scene?.update(frame());},onPower:kind=>{const k=kind==='power'?'mains':'battery';simPower[k]=!simPower[k];scene?.update(frame());},navigate:(kind,id)=>{if(kind==='term')moveTerm(scene.simulation.state.phase.startsWith('extinguish')?'extinguisher':'detector');else if(kind==='safety')go('safety');else{fireId=id;drawing='F-301';go('fire',id);}}});scene.update(frame());scene.simulation.setPage(tab==='test'?'fire-test':tab);}
+  loading=(async()=>{
+  try{const {mountBay,prepareBayMaterials}=await import('./cleanroom-scene.mjs').catch(error=>{error.requiresReload=true;throw error;});await prepareBayMaterials();if(turn!==epoch||$('bay-workspace').hidden)return;scene=mountBay(host,pick,{readFire:()=>bayFire(simPower),onSignal:id=>{simPower.signal=id;scene?.update(frame());},onPower:kind=>{const k=kind==='power'?'mains':'battery';simPower[k]=!simPower[k];scene?.update(frame());},navigate:(kind,id)=>{if(kind==='term')moveTerm(scene.simulation.state.phase.startsWith('extinguish')?'extinguisher':'detector');else if(kind==='safety')go('safety');else{fireId=id;drawing='F-301';go('fire',id);}}});scene.update(frame());scene.simulation.setPage(tab==='test'?'fire-test':tab);return scene;}
   catch(error){reloadRequired=Boolean(error.requiresReload);if(turn===epoch)host.innerHTML='<p role="status">3D를 준비하지 못했습니다. 도면과 회로 계산은 계속 사용할 수 있습니다. '+btn('3D 다시 열기','retry')+'</p>';}
   finally{if(turn===epoch)loading=null;}
+  })();
+  return loading;
 }
 let materialLocation=null;
 function pick(id){
@@ -146,16 +150,22 @@ function pick(id){
   if(tab==='home'){go('building');}
   selected=id;paint();
 }
-function openPage(){
+let navigationId=0;
+async function openPage(){
+  const started=performance.now(),request=++navigationId;delete $('bay-app').dataset.frameMs;delete $('bay-app').dataset.navigationMs;$('bay-app').dataset.sceneCache=scene?'reused':'initial';
   scene?.simulation?.leave();simPower={mains:true,battery:true,signal:null};
   tab=location.hash.slice(1);if(!Object.hasOwn(pages,tab))tab='home';experienceView='outside';layoutMode=tab==='experience'||tab==='test'?'model':'split';
   const focused=focusOnOpen?.menu===tab?focusOnOpen.id:null;selected=focused??(tab==='test'?'SD3':firePage()?fireId:tab==='structure'?'slab':tab==='materials'?assemblies[assembly].target:tab==='building'?buildingId:electricalId);focusOnOpen=null;stage=-1;step=focused&&tab==='electrical'&&['calculations','experience'].includes(returnPage)?3:0;
   const menu=firePage()?'fire':tab==='experience'?'building':tab;if(!sheets.some(s=>s.id===drawing&&s.menu===menu))drawing=sheets.find(s=>s.menu===menu)?.id??'A-301';
   if(tab!=='building')materialLocation=null;
   $('site-top').dataset.menuOpen='false';$('menu-toggle').setAttribute('aria-expanded','false');
-  $('bay-status').textContent='';paint();ensureScene();$('menu-toggle').setAttribute('aria-label','학습 메뉴 열기');
+  $('bay-status').textContent='';paint();const prepared=ensureScene();$('menu-toggle').setAttribute('aria-label','학습 메뉴 열기');
   requestAnimationFrame(()=>{if(focused&&!$('bay-workspace').hidden)$('bay-workspace').scrollIntoView({block:'start'});else window.scrollTo({top:0,behavior:'instant'});});
+  const ready=await prepared;if(request!==navigationId)return;
+  $('bay-app').dataset.navigationMs=(performance.now()-started).toFixed(1);
+  if(ready&&!$('bay-workspace').hidden){await ready.present(()=>request===navigationId);if(request!==navigationId)return;$('bay-app').dataset.frameMs=(performance.now()-started).toFixed(1);}
 }
+
 function go(target,id=null){if(!Object.hasOwn(pages,target))return;if(id)focusOnOpen={menu:target,id};if(tab===target){if(id){selected=id;focusOnOpen=null;}paint();return;}location.hash=target;}
 function moveTerm(id){
   const t=bayTerms.get(id);if(!t)return;

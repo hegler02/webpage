@@ -2,7 +2,7 @@ import {FireSimulation} from './fire-simulation.mjs';
 import {bayFireLesson,extinguisher} from './src/cleanroom-fire.mjs';
 import {createExtinguisher} from './fire-extinguisher.mjs';
 import {SurfaceLibrary,worldUV} from './surface-materials.mjs';
-import {observeScene} from './render-loop.mjs';
+import {observeScene,presentScene} from './render-loop.mjs';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
@@ -55,6 +55,8 @@ function pipe(points,material,radius){
     mesh.position.copy(a).lerp(b,.5);mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),axis.normalize());path.add(mesh);
   }return path;
 }
+
+export const prepareBayMaterials=()=>SurfaceLibrary.prepare();
 
 export function mountBay(host,select,fireAdapter){
   const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});
@@ -168,7 +170,8 @@ export function mountBay(host,select,fireAdapter){
   const fireMeshes=new Map([...objects].filter(([id])=>[...fireDevices,extinguisher].some(d=>d.id===id)));
   const view={host,scene,camera,controls,site,fireMeshes,project:{id:'cleanroom-03',finishLevel:0,rooms:rooms.map(r=>({...r,spawn:r.id==='room-work'?[4.55,2.45]:[.8,1.1]}))},clear:g=>{disposeTree(g);g.clear();},size:()=>{const {width,height}=host.getBoundingClientRect();if(width>0&&height>0){camera.aspect=width/height;camera.updateProjectionMatrix();renderer.setSize(width,height,false);}redraw();},exitWalk:()=>{controls.enabled=true;},setRealistic:()=>{renderer.toneMappingExposure=.9;},setNight:on=>{renderer.toneMappingExposure=on?.45:.9;},view:()=>{for(const m of enclosure)m.visible=false;controls.enabled=true;home();},highlight:id=>{const g=objects.get(id);if(g){highlight.visible=true;highlight.setFromObject(g);}redraw();}};
   if(fireAdapter)simulation=new FireSimulation(view,{...fireAdapter,lesson:bayFireLesson,before:()=>{controls.enabled=true;}});
-  return {simulation,image:()=>{renderer.render(scene,camera);return canvas.toDataURL('image/png');},realistic:()=>{renderer.shadowMap.enabled=true;redraw();},home:()=>{home();redraw();},whole:()=>{for(const m of enclosure)m.visible=true;home();redraw();},walk,setActive:active=>loop.setActive(active),update({electric,fire,id,tab,path,color,alarm,assembly,layer,display,sheet='A-301',experienceView='outside',night=false}){
+  host.dataset.cachedSurfaces=String(surfaces.cachedMaps);host.dataset.generatedSurfaces=String(surfaces.generatedMaps);
+  return {simulation,present:current=>presentScene(host,()=>{view.size();renderer.render(scene,camera);dirty=false;},{current}),image:()=>{renderer.render(scene,camera);return canvas.toDataURL('image/png');},realistic:()=>{renderer.shadowMap.enabled=true;redraw();},home:()=>{home();redraw();},whole:()=>{for(const m of enclosure)m.visible=true;home();redraw();},walk,setActive:active=>loop.setActive(active),update({electric,fire,id,tab,path,color,alarm,assembly,layer,display,sheet='A-301',experienceView='outside',night=false}){
     const nextWalking=tab==='experience'&&experienceView==='inside';
     const changed=physicalMode!==tab||drawingId!==sheet||walking!==nextWalking||tab==='materials'&&constructionKey!=='material-'+assembly;
     walking=nextWalking;host.dataset.walking=String(walking);host.dataset.night=String(night);

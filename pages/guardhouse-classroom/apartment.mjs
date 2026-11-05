@@ -45,7 +45,7 @@ async function ensureView(){
  if(!pending)pending=(async()=>{
   let v;
   try{
-   const [{ClassroomView},{ApartmentDetails},{ApartmentFireView},{FireSimulation}]=await loadPhase('3D 화면을 불러오고 있습니다.',()=>Promise.all([import('./classroom-view.mjs'),import('./apartment-details.mjs'),import('./apartment-fire-view.mjs'),import('./fire-simulation.mjs')]).catch(error=>{error.requiresReload=true;throw error;}));
+   const [{ClassroomView},{ApartmentDetails},{ApartmentFireView},{FireSimulation}]=await loadPhase('3D 화면을 불러오고 있습니다.',()=>Promise.all([import('./classroom-view.mjs').then(async module=>{await module.ClassroomView.prepare();return module;}),import('./apartment-details.mjs'),import('./apartment-fire-view.mjs'),import('./fire-simulation.mjs')]).catch(error=>{error.requiresReload=true;throw error;}));
    await loadPhase('건물과 재료를 준비합니다.',()=>{v=new ClassroomView($('apt-three'),{projectData:apartment,walkCheck:apartmentWalk,onSelect:select,onSwitch:toggleSwitch,onMove:n=>status(n+' · 눈높이 1,600 mm')});v.preparing=true;v.load(model,rebar);});
    await loadPhase('문·창문·가구의 상세를 준비합니다.',()=>{v.apartmentDetails=new ApartmentDetails(v);v.apartmentDetails.setPalette(state.palette);v.fireGuide=new ApartmentFireView(v);});
    await loadPhase('전기·소방 기구를 연결합니다.',()=>{v.updateElectrical(electric);v.updateFire(fire);});
@@ -60,14 +60,14 @@ function refresh(persist=true){const guiding=view?.fireGuide.active;electric=apa
 function plan(){if(!$('apt-workspace').hidden){$('apt-plan').innerHTML=apartmentPlan({model,electric,rebar,fire,sheet,selected});$('apt-plan-title').textContent=sheet+' · '+apartment.sheets.find(s=>s.id===sheet).title;applyPlanBox();}}
 function closeMenu(){$('site-top').dataset.menuOpen='false';$('menu-toggle').setAttribute('aria-expanded','false');$('menu-toggle').setAttribute('aria-label','학습 메뉴 열기');}
 async function go(next,sheetId=null){
- const started=performance.now(),request=++serial;closeMenu();view?.simulation?.leave();const restored=practicePower.transition(next,state);if(restored){Object.assign(state,restored,{fireSignal:null});electric=apartmentElectrical(state);fire=apartmentFire(state);view?.updateElectrical(electric);view?.updateFire(fire);}view?.fireGuide?.stop();$('apt-route-lesson').hidden=true;$('apt-fire-lesson').hidden=true;
+ const started=performance.now(),request=++serial;delete $('apartment-app').dataset.frameMs;delete $('apartment-app').dataset.navigationMs;$('apartment-app').dataset.sceneCache=view?'reused':'initial';closeMenu();view?.simulation?.leave();const restored=practicePower.transition(next,state);if(restored){Object.assign(state,restored,{fireSignal:null});electric=apartmentElectrical(state);fire=apartmentFire(state);view?.updateElectrical(electric);view?.updateFire(fire);}view?.fireGuide?.stop();$('apt-route-lesson').hidden=true;$('apt-fire-lesson').hidden=true;
  page=names[next]?next:'home';$('title').textContent=names[page];$('description').textContent=descriptions[page];view?.tour.stop();view?.exitWalk(false);
  const needsView=['building','materials','structure','electrical','fire','fire-test','fire-signal','experience'].includes(page);
  view?.setActive(needsView);$('apt-workspace').hidden=!needsView;$('apt-workspace').inert=needsView;$('apt-content').replaceChildren();$('apartment-app').dataset.page=page;$('apartment-app').dataset.ready='false';$('apt-retry-actions').hidden=true;delete $('apartment-app').dataset.error;
  history.replaceState(null,'','#'+page);
  document.querySelectorAll('[data-page]').forEach(b=>{if(b.dataset.page===(b.closest('.fire-pages')&&page==='fire-signal'?'fire-test':!b.closest('.fire-pages')&&page.startsWith('fire')?'fire':page))b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
  if(needsView){
-  $('loading').hidden=false;retryRoute=[page,sheetId];
+  $('loading').hidden=Boolean(view);retryRoute=[page,sheetId];
   try{
    const ready=await ensureView();if(request!==serial)return false;
    const group=page.startsWith('fire')?'fire':page==='experience'?'building':page;
@@ -87,7 +87,7 @@ async function go(next,sheetId=null){
   }
  }
  reloadRequired=false;$('loading').hidden=true;$('apt-workspace').inert=false;selected=null;view?.highlight(null);plan();inspector();tools();content();
- view?.simulation?.setPage(page);$('apartment-app').dataset.ready='true';$('apartment-app').dataset.navigationMs=String(Math.round(performance.now()-started));window.scrollTo({top:0,behavior:'instant'});return true;
+ view?.simulation?.setPage(page);$('apartment-app').dataset.ready='true';$('apartment-app').dataset.navigationMs=String(Math.round(performance.now()-started));window.scrollTo({top:0,behavior:'instant'});if(needsView){await view.present(()=>request===serial);if(request!==serial)return false;$('apartment-app').dataset.frameMs=(performance.now()-started).toFixed(1);}return true;
 }
 
 function layout(value){document.querySelector('.apt-canvases').dataset.layout=value;for(const [id,mode] of [['apt-split','split'],['apt-plan-only','plan'],['apt-model-only','model']])$(id).setAttribute('aria-pressed',String(value===mode));view?.size();}

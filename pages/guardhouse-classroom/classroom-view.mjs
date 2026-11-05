@@ -1,4 +1,4 @@
-import {observeScene} from './render-loop.mjs';
+import {observeScene,presentScene} from './render-loop.mjs';
 import {addLuminaireDetails,syncLuminaire} from './lighting-fixture.mjs';
 import {buildDeskLamp,setLampPower} from '/pages/guardhouse-classroom/src/equipment-mesh.mjs';
 import * as THREE from 'three';
@@ -15,11 +15,13 @@ const V=p=>new THREE.Vector3(p[0],p[2],-p[1]);
 const colors={light:0xfff5da,switch:0xece8df,socket:0xf4f0e6,panel:0x89969d,ac:0xf0eee9};
 
 export class ClassroomView {
+ static prepare(){return SurfaceLibrary.prepare();}
+ present(current){return presentScene(this.host,()=>{this.size();this.renderer.render(this.scene,this.active);},{current});}
  constructor(host,{onSelect,onSwitch,onMove,projectData=project,walkCheck=canWalk}){
   this.project=projectData;this.walkCheck=walkCheck;this.host=host;this.onSelect=onSelect;this.onSwitch=onSwitch;this.onMove=onMove;this.mode='exterior';this.filter='all';this.realistic=false;this.night=false;this.fpv=false;this.selected=null;this.keys=new Set();this.yaw=0;this.pitch=0;this.exploded=false;
   this.scene=new THREE.Scene();this.scene.background=new THREE.Color('#dee7e8');
   this.camera=new THREE.PerspectiveCamera(43,1,.025,150);this.ortho=new THREE.OrthographicCamera(-6,6,4,-4,.01,150);this.active=this.camera;
-  this.renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFSoftShadowMap;this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.1;host.append(this.renderer.domElement);this.renderer.domElement.tabIndex=0;this.renderer.domElement.setAttribute('aria-label',this.project.title+' 3D 작업 화면');
+  this.renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.autoUpdate=false;this.renderer.shadowMap.type=THREE.PCFSoftShadowMap;this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.1;host.append(this.renderer.domElement);this.renderer.domElement.tabIndex=0;this.renderer.domElement.setAttribute('aria-label',this.project.title+' 3D 작업 화면');
   this.controls=new OrbitControls(this.camera,this.renderer.domElement);this.controls.enableDamping=true;this.controls.maxPolarAngle=Math.PI*.49;this.controls.minDistance=1;this.controls.maxDistance=35;
 
   this.ambient=new THREE.HemisphereLight(0xdbefff,0x94836c,1.8);this.scene.add(this.ambient);
@@ -39,11 +41,11 @@ export class ClassroomView {
   this.renderer.domElement.addEventListener('wheel',e=>{if(!this.fpv)return;e.preventDefault();this.camera.fov=indoorFov(this.camera.fov,e.deltaY);this.camera.updateProjectionMatrix();this.updateReadout();this.host.dispatchEvent(new CustomEvent('walk-zoom',{detail:this.camera.fov}));},{passive:false});
   this.renderer.domElement.addEventListener('keydown',e=>{if(!this.fpv)return;if(['w','a','s','d','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','e','Escape'].includes(e.key)){e.preventDefault();if(e.key==='Escape')this.exitWalk();else if(e.key==='e')this.pick(null,null);else this.keys.add(e.key);}});
   this.renderer.domElement.addEventListener('keyup',e=>this.keys.delete(e.key));this.renderer.domElement.addEventListener('blur',()=>this.keys.clear());
-  this.loop=observeScene(host,(dt,elapsed)=>{if(this.preparing)return;this.tour.update(dt);this.simulation?.update(elapsed);if(this.fpv)this.walkKeys(dt);else this.controls.update();this.renderer.render(this.scene,this.active);},host.parentElement);
+  this.loop=observeScene(host,(dt,elapsed)=>{if(this.preparing)return;this.renderer.shadowMap.autoUpdate=Boolean(this.simulation?.active);this.tour.update(dt);this.simulation?.update(elapsed);if(this.fpv)this.walkKeys(dt);else this.controls.update();this.renderer.render(this.scene,this.active);},host.parentElement);
  }
  setActive(active){this.loop.setActive(active);if(!active)this.keys.clear();}
  dispose(){if(this.disposed)return;this.disposed=true;this.loop?.dispose();this.simulation?.dispose();this.props?.dispose();this.fireGuide?.stop();this.tour?.stop();this.resize?.disconnect();this.controls.dispose();this.clear(this.scene);this.environmentTarget?.dispose();this.surfaces.dispose();this.renderer.dispose();this.renderer.domElement.remove();this.deviceMeshes.clear();this.fireMeshes.clear();this.lightObjects.clear();}
- size(){const w=this.host.clientWidth,h=this.host.clientHeight;if(!w||!h)return;this.renderer.setSize(w,h);this.camera.aspect=w/h;this.camera.updateProjectionMatrix();const height=Math.max(this.orthoHeight??7.4,(['right','left'].includes(this.viewName)?5.4:9.2)/(w/h));this.ortho.left=-height*w/h/2;this.ortho.right=-this.ortho.left;this.ortho.top=height/2;this.ortho.bottom=-this.ortho.top;this.ortho.updateProjectionMatrix();}
+ size(){const w=this.host.clientWidth,h=this.host.clientHeight;if(!w||!h)return;if(this.viewportWidth!==w||this.viewportHeight!==h){this.renderer.setSize(w,h);this.viewportWidth=w;this.viewportHeight=h;}this.camera.aspect=w/h;this.camera.updateProjectionMatrix();const height=Math.max(this.orthoHeight??7.4,(['right','left'].includes(this.viewName)?5.4:9.2)/(w/h));this.ortho.left=-height*w/h/2;this.ortho.right=-this.ortho.left;this.ortho.top=height/2;this.ortho.bottom=-this.ortho.top;this.ortho.updateProjectionMatrix();}
  createSite(){
   const pbr=(color)=>new THREE.MeshStandardMaterial({color,roughness:.96});
   const lawn=new THREE.Mesh(new THREE.BoxGeometry(22,.12,15),pbr(0x77876b));lawn.position.set(4,-.29,-2);lawn.receiveShadow=true;this.site.add(lawn);
@@ -135,6 +137,7 @@ this.host.dataset.barsBuilt='true';}
   this.size();this.controls.update();this.updateReadout();
  }
  applyVisibility(){
+  if(this.renderer.shadowMap)this.renderer.shadowMap.needsUpdate=true;
   if(!this.base)return;
   this.renderer.clippingPlanes=this.mode==='section'?[new THREE.Plane(new THREE.Vector3(0,0,-1),-(this.project.sectionY??3))]:[];
   for(const mesh of this.base.children){const e=mesh.userData;mesh.visible=visibleElement(e,this.mode,this.filter);mesh.position.y=this.exploded?(e.group==='roof'?3.8:e.group==='ceiling'?2:e.kind==='floor'?0:e.group==='foundation'?-1.3:0):0;
@@ -155,7 +158,7 @@ this.host.dataset.barsBuilt='true';}
   for(const g of this.fireGroup.children){g.visible=['fire','experience','interior','exterior'].includes(this.mode)&&this.filter==='all';for(const label of g.children.filter(c=>c.userData.fireLabel))label.visible=this.mode==='fire'||g.userData.kind==='exit-light';}
   this.ground.visible=!['foundation','rebar','section','section-exploded','pit','pit-section'].includes(this.mode)&&!this.materialExpanded&&this.filter==='all';this.grid.visible=this.ground.visible&&!this.realistic;this.site.visible=this.realistic&&this.ground.visible&&this.project.siteContext!==false;
   if(this.facadeDetails)this.facadeDetails.visible=['exterior','experience'].includes(this.mode)&&this.filter==='all'&&!this.exploded;
-  this.props?.sync();this.updateReadout();
+  this.props?.sync();if(this.surfaces){this.host.dataset.cachedSurfaces=String(this.surfaces.cachedMaps);this.host.dataset.generatedSurfaces=String(this.surfaces.generatedMaps);}this.updateReadout();
  }
  updateReadout(){this.host.dataset.litLights=[...this.lightObjects].filter(([,light])=>{if(light.intensity<=0)return false;for(let o=light;o;o=o.parent)if(!o.visible)return false;return true;}).map(([id])=>id).join(',');this.host.dataset.electricalBuilds=String(this.electricalBuilds??0);this.host.dataset.fireBuilds=String(this.fireBuilds??0);this.host.dataset.electricalVisible=this.electrical.children.filter(g=>g.visible).map(g=>g.userData.id).join(',');this.host.dataset.breakerCount=String([...this.deviceMeshes.values()].flatMap(g=>g.children).filter(m=>m.userData.breakerCircuit).length);this.host.dataset.mode=this.mode;this.host.dataset.view=this.fpv?'fpv':this.viewName??'iso';this.host.dataset.filter=this.filter;this.host.dataset.visible=String(this.base?.children.filter(x=>x.visible).length??0);this.host.dataset.selected=this.selected??'';this.host.dataset.fov=String(this.camera.fov);this.host.dataset.rebarDisplay=this.rebarDisplay;this.host.dataset.rebarMembers=this.bars.children.filter(x=>x.visible).map(x=>x.userData.id).join(',');this.host.dataset.fireAlarm=String(this.fire?.alarm??false);this.host.dataset.foundationVisible=String(this.base?.children.filter(x=>x.visible&&x.userData.group==='foundation').length??0);const object=this.fireMeshes.get(this.selected)??this.materialGroup.children.find(x=>x.userData.id===this.selected)??this.deviceMeshes.get(this.selected)??this.base?.children.find(x=>x.userData.id===this.selected);this.selectionOutline.visible=!!object?.visible&&!this.fpv;if(this.selectionOutline.visible)this.selectionOutline.box.setFromObject(object).expandByScalar(.025);}
  part(filter){if(filter==='rebar')this.ensureBars();this.filter=filter;this.rebarFocus=null;this.rebarDisplay=filter==='rebar'?'bars':'both';this.applyVisibility();}

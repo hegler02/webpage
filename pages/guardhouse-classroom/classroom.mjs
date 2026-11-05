@@ -87,8 +87,14 @@ async function go(menu,sheetId=null){
  closeMenu();viewer?.simulation?.leave();const restored=practicePower.transition(menu,{power:exercise.power,battery:expansion.battery});if(restored){exercise.power=restored.power;expansion.battery=restored.battery;expansion.signal=null;fire=fireModel(expansion,exercise.power);electric=electricalModel(exercise);viewer?.updateElectrical(electric);viewer?.updateFire(fire);}stopFireGuide();if(viewer)viewer.tour.stop();$('route-lesson').hidden=true;
  delete $('app').dataset.frameMs;delete $('app').dataset.navigationMs;$('app').dataset.sceneCache=viewer?'reused':'initial';
  const request=++navigationId,start=performance.now(),target=navData[menu]?menu:'home';retryNavigation=[target,sheetId];$('loading-title').textContent='선택한 학습을 준비합니다.';
- try{if(['building','structure','electrical','experience','fire','fire-test','fire-signal','materials'].includes(target)){if(!viewer)loading('도면과 3D 공간을 준비하고 있습니다. 다른 메뉴도 이용할 수 있습니다.');await ensureViewer();}else if(target==='quantities'){await ensureData();}else if(target==='calculations'){if(!model)loading('건물의 치수와 회로 정보를 준비하고 있습니다.');await Promise.all([ensureData(),ensureGuide()]);}else if(target==='glossary'){await ensureGuide();}}catch(error){if(request!==navigationId)return false;reloadRequired=Boolean(error.requiresReload);loading('선택한 학습을 준비하는 중 오류가 발생했습니다. 다시 시도하거나 다른 학습 메뉴를 이용해 주세요.');$('loading-title').textContent=reloadRequired?'3D 파일을 다시 받아야 합니다.':'학습을 불러오지 못했습니다.';$('loading-recovery').hidden=false;$('loading-progress').hidden=true;$('app').dataset.loadError=error.message;return false;}
- if(request!==navigationId)return false;reloadRequired=false;$('loading-state').hidden=true;delete $('app').dataset.loadError;
+ try{
+ const scenePage=['building','structure','electrical','experience','fire','fire-test','fire-signal','materials'].includes(target);
+ if(scenePage&&(!viewer||target==='experience'&&!viewer.environment)){
+  loading(target==='experience'?'실감 체험의 재질·조명과 첫 화면을 준비하고 있습니다.':'도면과 3D 공간을 준비하고 있습니다. 다른 메뉴도 이용할 수 있습니다.');
+  $('loading-state').scrollIntoView({block:'center',behavior:'instant'});await yieldPaint();if(request!==navigationId)return false;
+ }
+ if(scenePage)await ensureViewer();else if(target==='quantities')await ensureData();else if(target==='calculations'){if(!model)loading('건물의 치수와 회로 정보를 준비하고 있습니다.');await Promise.all([ensureData(),ensureGuide()]);}else if(target==='glossary')await ensureGuide();
+ if(request!==navigationId)return false;reloadRequired=false;delete $('app').dataset.loadError;
 
  page=navData[menu]?menu:'home';$('app').dataset.page=page;
  document.querySelectorAll('.fire-pages button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.nav===(page==='fire-signal'?'fire-test':page))));const [step,title,description]=navData[page];$('page-step').textContent=step;$('page-title').textContent=title;$('page-description').textContent=description;
@@ -106,7 +112,8 @@ async function go(menu,sheetId=null){
  }
  if(page==='fire')$('page-content').innerHTML='<article class="card"><h2>기구의 위치 찾기</h2><div class="button-row">'+fire.devices.map(d=>'<button data-select="'+d.id+'">'+esc(d.name)+'</button>').join('')+'</div></article>';if(page==='fire-signal')$('page-content').innerHTML=fireContent(fire,expansion);if(page==='fire-test')$('page-content').innerHTML='<button data-nav="fire-signal">기구 신호만 따로 시험하기</button>';if(page==='materials'){$('page-content').innerHTML=materialsContent(expansion);viewer.setRealistic(true);}if(page==='safety'){renderSafety();}
  quantities.setPage(page);if(page==='quantities')quantities.render();if(page==='structure')structureContent();if(page==='electrical')electricalContent();if(page==='calculations')calculationsContent();if(page==='glossary')glossaryContent();if(page==='experience')experienceContent();if(page==='building')buildingContent();$('view-help').textContent='드래그로 회전 · 휠로 확대 · 대상을 눌러 정보 확인';
- viewer?.simulation?.setPage(page);if(page==='home')renderPath();offerCalculationReturn();history.replaceState(null,'','#'+page);viewer?.size();$('app').dataset.navigationMs=(performance.now()-start).toFixed(1);$('app').dataset.ready='true';if(viewer&&!$('workspace').hidden){await viewer.present(()=>request===navigationId);if(request!==navigationId)return false;$('app').dataset.frameMs=(performance.now()-start).toFixed(1);}return true;
+ viewer?.simulation?.setPage(page);if(page==='home')renderPath();offerCalculationReturn();history.replaceState(null,'','#'+page);viewer?.size();$('app').dataset.navigationMs=(performance.now()-start).toFixed(1);if(viewer&&!$('workspace').hidden){await viewer.present(()=>request===navigationId);if(request!==navigationId)return false;$('app').dataset.frameMs=(performance.now()-start).toFixed(1);}$('loading-state').hidden=true;$('app').dataset.ready='true';return true;
+ }catch(error){if(request!==navigationId)return false;reloadRequired=Boolean(error.requiresReload);loading('선택한 학습을 준비하는 중 오류가 발생했습니다. 다시 시도하거나 다른 학습 메뉴를 이용해 주세요.');$('loading-title').textContent=reloadRequired?'3D 파일을 다시 받아야 합니다.':'학습을 불러오지 못했습니다.';$('loading-recovery').hidden=false;$('loading-progress').hidden=true;delete $('app').dataset.ready;$('app').dataset.loadError=error.message;return false;}
 }
 function setSheet(id){
  stopFireGuide();

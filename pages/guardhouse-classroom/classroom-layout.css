@@ -16,7 +16,17 @@
   --layout-panel-inset:var(--space-4);
   --layout-panel-header-min:48px;
   --layout-sheet-width:280px;
+  --loading-spinner-size:36px;
+  --loading-spinner-duration:1s;
+  --loading-spinner-stroke:3px;
 }
+.loading-state{display:flex;align-items:center;gap:var(--space-5);padding:var(--space-5);margin-block:var(--gap-section)}
+.loading-state>div{min-width:0}
+:is(.loading-spinner,.apt-spinner){width:var(--loading-spinner-size);height:var(--loading-spinner-size);flex:none;fill:none;stroke-width:var(--loading-spinner-stroke);animation:learning-spin var(--loading-spinner-duration) linear infinite}
+:is(.loading-spinner,.apt-spinner) circle{stroke:var(--line)}
+:is(.loading-spinner,.apt-spinner) path{stroke:var(--teal)}
+@keyframes learning-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){:is(.loading-spinner,.apt-spinner){animation:none}}
 main[data-page]{max-width:var(--layout-content-max)}
 main[data-page=home] :is(.home-intro,.home-preview,.lesson-path){margin:0}
 main[data-page=home] :is(#home-preview,#lesson-path){margin-top:var(--gap-section)}

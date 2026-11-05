@@ -1,4 +1,4 @@
-const closeIcon='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/pages/guardhouse-classroom/></svg>';
+const closeIcon='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>';
 function prepare(dialog){if(dialog.dataset.sharedDialog)return;dialog.dataset.sharedDialog='true';const button=document.createElement('button');button.type='button';button.className='dialog-close-icon';button.dataset.dialogClose='';button.setAttribute('aria-label','팝업 닫기');button.innerHTML=closeIcon;dialog.prepend(button);const bottom=dialog.querySelector('[data-dialog-footer]');if(bottom&&!bottom.parentElement.classList.contains('dialog-actions')){const row=document.createElement('div');row.className='dialog-actions';bottom.before(row);row.append(bottom);}dialog.querySelectorAll(':scope > .button-row').forEach(row=>row.classList.add('dialog-actions'));}
 function label(dialog){const heading=dialog.querySelector('h2');if(heading){heading.id ||= dialog.id+'-title';dialog.setAttribute('aria-labelledby',heading.id);}}
 document.querySelectorAll('dialog').forEach(prepare);

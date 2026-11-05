@@ -5,7 +5,7 @@ import {apartment} from './apartment-project.mjs';
 const targets={
  elevation:['A-204','south-0'],opening:['A-205','south-opening-1'],sleeve:['A-206','partition-bed-head-0'],
  plan:['A-201','floor-finish-living'],section:['A-202','ceiling-living'],partition:['A-201','partition-west-1'],
- slab:['S-201','apartment-floor'],rebar:['S-201','apartment-floor'],cover:['S-201','apartment-floor'],spacing:['S-201','apartment-floor'],
+ slab:['S-201','apartment-floor'],rebar:['S-201','apartment-floor'],'rebar-drawing':['S-201','apartment-floor'],cover:['S-201','apartment-floor'],spacing:['S-201','apartment-floor'],
  ceiling:['A-202','ceiling-living'],ffl:['A-202','floor-finish-living'],sfl:['A-202','apartment-floor'],ch:['A-202','ceiling-living'],
  panel:['E-203','ADB'],breaker:['E-203','ADB'],circuit:['E-203','AL01'],ground:['E-203','ADB'],drop:['E-203','ADB'],
  conduit:['E-201','AL01'],load:['E-202','AA01'],bim:['E-201','AL01'],power:['E-201','AL01'],current:['E-203','ADB'],

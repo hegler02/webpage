@@ -7,7 +7,7 @@ const pageSize=12;
 export function createQuantities({host,nav,read,go,locate,workspace}){
  let report,query='',group='',scope='',page=0,target=null,openKey=null;
  const button=document.createElement('button');button.type='button';button.textContent='재료·수량';button.dataset.quantityMenu='true';
- button.onclick=()=>{target=null;go('quantities');};nav.insertBefore(button,nav.querySelector('.experience-tab'));
+ button.onclick=()=>{target=null;go('quantities');};nav.insertBefore(button,nav.querySelector('[data-menu="glossary"],[data-page="glossary"],[data-go="glossary"]'));
  const controller={
   setPage(current){button.toggleAttribute('aria-current',current==='quantities');if(current==='quantities')button.setAttribute('aria-current','page');},
   inspector(container,id){

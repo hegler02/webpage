@@ -1,10 +1,10 @@
 import {fireModel,finishes,materialLayers,pitInfo} from './src/lesson-expansion.mjs';
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 const text=(x,y,s,size=16,color='#294654')=>`<text x="${x}" y="${y}" font-family="Malgun Gothic, sans-serif" font-size="${size}" fill="${color}">${esc(s)}</text>`;
-const line=(a,b,color='#c56451',width=2)=>`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${color}" stroke-width="${width}"/pages/guardhouse-classroom/>`;
+const line=(a,b,color='#c56451',width=2)=>`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${color}" stroke-width="${width}"/>`;
 const attrs=d=>`data-element="${d.id}" role="button" tabindex="0" aria-label="${d.name} 도면에서 선택"`;
 const box=(d,x,y,w,h,selected,color='#fff')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="5" fill="${color}" stroke="${selected===d.id?'#ec861d':'#718b95'}" stroke-width="${selected===d.id?4:1.5}" ${attrs(d)}/>`;
-const frame=(sheet,body)=>`<svg xmlns="http://www.w3.org/2000/svg" id="learning-plan" viewBox="0 0 1000 710" role="group" aria-label="${sheet.id} ${sheet.title} 연결 도면"><rect width="1000" height="710" fill="#f8fafb"/pages/guardhouse-classroom/>${body}<line x1="40" y1="675" x2="960" y2="675" stroke="#c8d7de"/pages/guardhouse-classroom/>${text(45,699,sheet.id+' · '+sheet.title+' · 경비실 교육용 샘플 1',13)}</svg>`;
+const frame=(sheet,body)=>`<svg xmlns="http://www.w3.org/2000/svg" id="learning-plan" viewBox="0 0 1000 710" role="group" aria-label="${sheet.id} ${sheet.title} 연결 도면"><rect width="1000" height="710" fill="#f8fafb"/>${body}<line x1="40" y1="675" x2="960" y2="675" stroke="#c8d7de"/>${text(45,699,sheet.id+' · '+sheet.title+' · 경비실 교육용 샘플 1',13)}</svg>`;
 export function expansionSVG({sheet,selected,fire=fireModel(),finish='plaster',basePlan}){
  let out='';
  if(sheet.view==='fire-plan'){
@@ -42,4 +42,4 @@ export function expansionSVG({sheet,selected,fire=fireModel(),finish='plaster',b
  }
  return frame(sheet,out);
 }
-export function pitAnnotations(model){const p=pitInfo(model),x=100+.2*94,y=485-3.8*94,w=p.width*94,h=p.depth*94;return `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#4cafa926" stroke="#218f86" stroke-width="2" stroke-dasharray="7 4" data-element="pit-base"/pages/guardhouse-classroom/>${text(x+20,y+55,'PIT · 바닥 아래 빈 공간',20,'#197d75')}${text(x+20,y+83,Math.round(p.width*1000)+' × '+Math.round(p.depth*1000)+' mm · 내부 높이 '+Math.round(p.clearHeight*1000)+' mm',15)}<rect x="${100+.23*94}" y="${485-2.58*94}" width="56.4" height="56.4" fill="#e7b35b55" stroke="#bd842a" stroke-width="2" data-element="pit-access-cover" role="button" tabindex="0" aria-label="PIT 점검구 도면에서 선택"/pages/guardhouse-classroom/>${text(200,340,'점검구 600 × 600 mm',14,'#9d681f')}${text(100,595,'기초는 건물을 받치는 구조 · PIT는 그 안의 빈 공간입니다.',16)}${text(100,625,'화장실·탕비실 아래 · 3D에서 기초·PIT 또는 PIT 단면을 눌러보세요.',14)}`;}
+export function pitAnnotations(model){const p=pitInfo(model),x=100+.2*94,y=485-3.8*94,w=p.width*94,h=p.depth*94;return `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#4cafa926" stroke="#218f86" stroke-width="2" stroke-dasharray="7 4" data-element="pit-base"/>${text(x+20,y+55,'PIT · 바닥 아래 빈 공간',20,'#197d75')}${text(x+20,y+83,Math.round(p.width*1000)+' × '+Math.round(p.depth*1000)+' mm · 내부 높이 '+Math.round(p.clearHeight*1000)+' mm',15)}<rect x="${100+.23*94}" y="${485-2.58*94}" width="56.4" height="56.4" fill="#e7b35b55" stroke="#bd842a" stroke-width="2" data-element="pit-access-cover" role="button" tabindex="0" aria-label="PIT 점검구 도면에서 선택"/>${text(200,340,'점검구 600 × 600 mm',14,'#9d681f')}${text(100,595,'기초는 건물을 받치는 구조 · PIT는 그 안의 빈 공간입니다.',16)}${text(100,625,'화장실·탕비실 아래 · 3D에서 기초·PIT 또는 PIT 단면을 눌러보세요.',14)}`;}

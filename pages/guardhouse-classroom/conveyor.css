@@ -25,6 +25,14 @@
 #cv-original-tools button,#cv-original-tools select{font-size:var(--sys-size-caption)}
 #cv-original-tools p{margin:0}
 #cv-original-tools label{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap}
+:root{--cv-original-outline:var(--teal);--cv-original-selected:#b66c0d;--cv-original-tint:#167e7910;--cv-original-selected-tint:#c47a1520;--cv-original-stroke:1.25px;--cv-original-focus-stroke:2.5px}
+.cv-original-symbol{cursor:pointer;outline:none}
+.cv-original-symbol rect{fill:var(--cv-original-tint);stroke:var(--cv-original-outline);stroke-width:var(--cv-original-stroke);vector-effect:non-scaling-stroke}
+.cv-original-symbol[data-same-device=true] rect{stroke:var(--cv-original-selected)}
+.cv-original-symbol:is(:hover,:focus,[aria-pressed=true]) rect{stroke:var(--cv-original-selected);stroke-width:var(--cv-original-focus-stroke);fill:var(--cv-original-selected-tint)}
+.cv-original-context{display:grid;gap:var(--gap-copy);padding:var(--space-4);margin-block:var(--gap-copy);border-left:var(--cv-rule-width) solid var(--teal);background:var(--paper);border-radius:var(--space-2)}
+.cv-original-context :is(h3,p){margin:0}
+#cv-original-list .button-row,.cv-original-context details .button-row{margin-top:var(--gap-copy)}
 #plan-host svg{display:block;width:100%;height:100%;font-family:inherit;color:var(--ink)}
 .cv-plan-node{cursor:pointer;outline:none}
 .cv-plan-node .node-body{fill:#fff;stroke:#8ba2ab;stroke-width:2}

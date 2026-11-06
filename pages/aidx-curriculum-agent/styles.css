@@ -468,3 +468,16 @@ html, body { margin: 0; height: 100%; background: var(--room); color: var(--on-d
 .s-part .rounds li { display: flex; flex-direction: column; justify-content: center; padding: 40px 36px; }
 .s-part .rounds span { font-size: 24px; }
 .s-part .rounds b { font-size: 46px; margin-top: 20px; }
+
+/* 쓸데없는 줄바꿈 없이 (2026-11-06, 운영자): 좌담회 편의 제목 · 맺음 · 표지 제목은 한 줄 */
+.part-title { font-size: 76px; white-space: nowrap; }
+.s-round .principle, .s-faq .take { white-space: nowrap; text-wrap: nowrap; max-width: none; font-size: 40px; }
+.s-round .title { white-space: nowrap; }
+
+/* 상자 제목도 한 줄 (2026-11-06): 제목은 꺾지 않는다, 넘치면 말을 줄인다 */
+.viz-flow b, .tile-card b, .spread b, .rounds b, .ba-box .lab, .role-steps li { white-space: nowrap; }
+.s-part .rounds { grid-template-columns: repeat(2, 1fr); grid-template-rows: 1fr 1fr; gap: 26px 32px; }
+.s-part .rounds li { flex-direction: row; align-items: center; justify-content: flex-start; gap: 34px; padding: 24px 40px; }
+.s-part .rounds b { margin-top: 0; font-size: 48px; }
+.s-part .rounds span { font-size: 26px; flex: none; }
+.spread span, .viz-flow span, .tile-card span { white-space: nowrap; }

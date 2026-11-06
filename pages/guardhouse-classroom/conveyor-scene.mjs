@@ -6,7 +6,7 @@ import {observeScene} from './render-loop.mjs';
 import {createEquipment} from './conveyor-equipment.mjs';
 import {routeOn} from './src/conveyor-investigation.mjs';
 
-export function createConveyorScene(host,{select,onFrame,getState}){
+export function createConveyorScene(host,{select,onFrame,getState,onContext}){
  const scene=new T.Scene();scene.background=new T.Color('#dfe8e7');scene.fog=new T.Fog('#dfe8e7',15,45);
  const camera=new T.PerspectiveCamera(40,1,.025,80);const renderer=new T.WebGLRenderer({antialias:true,alpha:false,preserveDrawingBuffer:true});
  renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=.94;host.replaceChildren(renderer.domElement);
@@ -16,7 +16,7 @@ export function createConveyorScene(host,{select,onFrame,getState}){
  const fill=new T.DirectionalLight('#d6eaff',1.1);fill.position.set(-5,4,-3);scene.add(fill);
  const mat=(color,metalness=0,roughness=.65)=>new T.MeshStandardMaterial({color,metalness,roughness});
  const m={steel:mat('#a8b5ba',.8,.3),dark:mat('#263c43',.35,.48),belt:mat('#253b39',.05,.88),cream:mat('#e2e5df',.15,.4),blue:mat('#25576f',.45,.42),black:mat('#222829',.1,.6),copper:mat('#b66b36',.8,.25),wood:mat('#bd955b',0,.85),yellow:mat('#e8b630',.1,.45),red:mat('#b52d24',.1,.38),green:mat('#167e5e',.15,.4),glass:new T.MeshPhysicalMaterial({color:'#c9e7ef',transparent:true,opacity:.22,roughness:.14,metalness:.05,depthWrite:false})};
- const groups=new Map(),pickables=[],rotors=[],beltSeams=[],lights=new Map();let selection,highlight,walk=false,inside=false,night=false,yaw=0,pitch=0,drag=null,disposed=false,routeVisible=false,activeWanted=true,contextLost=false;
+ const groups=new Map(),pickables=[],rotors=[],beltSeams=[],lights=new Map();let selection,highlight,walk=false,inside=false,night=false,yaw=0,pitch=0,drag=null,disposed=false,routeVisible=false,activeWanted=true,contextLost=false,teaching=null;
  const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.09;controls.maxPolarAngle=Math.PI*.485;controls.minDistance=.4;controls.maxDistance=21;
  function mesh(geometry,material,parent,pos=[0,0,0]){const o=new T.Mesh(geometry,material);o.position.set(...pos);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o;}
  const box=(p,size,pos,material)=>mesh(new T.BoxGeometry(...size),material,p,pos);
@@ -59,7 +59,7 @@ export function createConveyorScene(host,{select,onFrame,getState}){
   }else if(d.kind==='terminal'){
    for(let i=0;i<d.quantity;i++)terminal(g,(i-(d.quantity-1)/2)*.078,0,0,i===3?m.green:m.cream);label(g,d.id,[0,-.095,.05],.25,.045);
   }else if(d.kind==='sensor'){
-   cyl(g,.034,.15,[0,0,0],m.steel,'z',16);cyl(g,.03,.006,[0,0,.08],m.black,'z');box(g,[.05,.16,.045],[0,-.06,-.04],m.dark);const led=cyl(g,.009,.005,[0,.025,.05],mat('#66441b'),'z',8);lights.set(d.id,led);label(g,d.id,[0,.09,.08],.22,.045);
+   cyl(g,.034,.15,[0,0,0],m.steel,'z',16);cyl(g,.03,.006,[0,0,.08],m.black,'z');box(g,[.05,.16,.045],[0,-.06,-.04],m.dark);const led=cyl(g,.012,.008,[0,.019,-.08],mat('#66441b'),'z',12);lights.set(d.id,led);label(g,d.id,[0,.09,.08],.22,.045);const rearTag=label(g,d.id,[0,.09,-.085],.22,.045);rearTag.rotation.y=Math.PI;
   }else if(d.kind==='connector'){
    box(g,d.size,[0,0,0],m.steel);box(g,[.13,.11,.045],[0,0,.1],m.dark);for(const x of [-.03,.03])for(const y of [-.025,.025])cyl(g,.009,.012,[x,y,.13],m.copper,'z',10);label(g,'U V W PE',[0,-.1,.11],.27,.04);
   }else if(d.kind==='isolator'){
@@ -74,7 +74,10 @@ export function createConveyorScene(host,{select,onFrame,getState}){
  }
  // A separate enlarged cross-section uses the same K1 state, never a second device.
  const detail=new T.Group();detail.position.set(-.4,1.3,-2);detail.visible=false;scene.add(detail);box(detail,[.8,.12,.5],[0,-.35,0],m.dark);
- const core=box(detail,[.12,.44,.2],[0,-.08,0],m.steel);for(let i=0;i<19;i++){const ring=mesh(new T.TorusGeometry(.16,.018,8,24),m.copper,detail,[0,-.25+i*.018,0]);ring.rotation.x=Math.PI/2;}
+ const core=box(detail,[.12,.44,.2],[0,-.08,0],m.steel.clone());for(let i=0;i<19;i++){const ring=mesh(new T.TorusGeometry(.16,.018,8,24),m.copper,detail,[0,-.25+i*.018,0]);ring.rotation.x=Math.PI/2;}
+ const magnetic=new T.Group();detail.add(magnetic);const fieldMaterial=new T.MeshBasicMaterial({color:'#217fb3',transparent:true,opacity:.65});
+ for(const z of [-.13,0,.13]){const pts=Array.from({length:49},(_,i)=>{const a=i/48*Math.PI*2;return [.29*Math.cos(a),.015+.3*Math.sin(a),z];});tube(magnetic,pts,.004,fieldMaterial);}
+ magnetic.visible=false;
  const armature=new T.Group();detail.add(armature);box(armature,[.66,.08,.24],[0,.27,0],m.steel);for(const x of [-.26,0,.26]){box(detail,[.08,.045,.15],[x,.49,.18],m.copper);box(detail,[.04,.04,.2],[x,.49,.03],m.dark);box(armature,[.035,.3,.035],[x,.445,.26],m.dark);box(armature,[.08,.04,.15],[x,.62,.18],m.copper);}label(detail,'K1 · A1 / A2',[0,-.5,.27],.85,.11);
  const pallet=new T.Group();scene.add(pallet);for(const z of [-.36,0,.36])box(pallet,[.75,.06,.12],[0,0,z],m.wood);for(const x of [-.28,0,.28])box(pallet,[.12,.08,.82],[x,.07,0],m.wood);box(pallet,[.65,.28,.61],[0,.25,0],m.cream);box(pallet,[.5,.02,.08],[0,-.035,-.49],m.steel);label(pallet,'METAL TARGET',[0,.2,.31],.48,.08);
  const cables=new T.Group();scene.add(cables);
@@ -84,19 +87,22 @@ export function createConveyorScene(host,{select,onFrame,getState}){
  function highlightDevice(id){selection=id;if(highlight){scene.remove(highlight);highlight.geometry.dispose();highlight.material.dispose();highlight=null;}const g=groups.get(id);if(g){highlight=new T.BoxHelper(g,'#d48a26');scene.add(highlight);}}
  function frame(id='whole'){
   id=({CV1:'whole',CAB1:'cabinet',OP1:'operator'})[id]??id;
-  walk=false;controls.enabled=true;detail.visible=id==='coil';inside=id==='coil';
+  const cutaway=['coil','contacts'].includes(id);walk=false;controls.enabled=true;detail.visible=cutaway;inside=cutaway;
   if(id==='cabinet'||(byId.get(id)?.pos[2]<-1.5&&id!=='CAB1'))equipment.setDoor(true);
   const cabinetOnly=id==='cabinet'||(byId.get(id)?.pos[2]<-1.5&&id!=='CAB1');
-  for(const [key,g]of groups)g.visible=id!=='coil'&&(!cabinetOnly||byId.get(key).pos[2]<-1.5);
-  pallet.visible=id!=='coil'&&!cabinetOnly&&getState().state.loaded;ground.visible=!cabinetOnly&&id!=='coil';
-  for(const o of cables.children)o.visible=id!=='coil'&&(!cabinetOnly||byId.get(o.userData.wire.to).pos[2]<-1.5&&byId.get(o.userData.wire.from).pos[2]<-1.5);
-  for(const [key,o]of routesMap){const w=wires.find(w=>w.id===key);o.visible=id!=='coil'&&(!cabinetOnly||byId.get(w.to).pos[2]<-1.5&&byId.get(w.from).pos[2]<-1.5);}
+  const sensorOnly=id==='sensor';
+  for(const [key,g]of groups)g.visible=!cutaway&&(!cabinetOnly||byId.get(key).pos[2]<-1.5)&&(!sensorOnly||key==='CV1'||key==='-09B1');
+  pallet.visible=!cutaway&&!cabinetOnly&&getState().state.loaded;ground.visible=!cabinetOnly&&!cutaway;
+  for(const o of cables.children)o.visible=!cutaway&&(!cabinetOnly||byId.get(o.userData.wire.to).pos[2]<-1.5&&byId.get(o.userData.wire.from).pos[2]<-1.5)&&(!sensorOnly||o.userData.wire.from==='-09B1');
+  for(const [key,o]of routesMap){const w=wires.find(w=>w.id===key);o.visible=!cutaway&&(!cabinetOnly||byId.get(w.to).pos[2]<-1.5&&byId.get(w.from).pos[2]<-1.5);}
   camera.fov=id==='cabinet'?46:40;camera.updateProjectionMatrix();
-  let pos,target;if(id==='whole'){pos=[7,5.7,8];target=[-.1,.9,0];}else if(id==='cabinet'){pos=[-2.4,2.9,.2];target=[-2,1.15,-2];}else if(id==='operator'){pos=[.8,2,3.75];target=[0,1.32,1.9];}else if(id==='coil'){pos=[.6,1.8,-.5];target=[-.4,1.35,-2];}else{const d=byId.get(id);if(!d)return;target=d.pos;pos=[d.pos[0]+.8,d.pos[1]+.45,d.pos[2]+1.6];}
+  let pos,target;if(id==='whole'){pos=[7,5.7,8];target=[-.1,.9,0];}else if(id==='cabinet'){pos=[-2.4,2.9,.2];target=[-2,1.15,-2];}else if(id==='operator'){pos=[.8,2,3.75];target=[0,1.32,1.9];}else if(cutaway){pos=[.6,1.8,-.5];target=[-.4,1.35,-2];}else if(id==='sensor'){target=[1.7,.98,-.49];pos=[2.4,1.3,-1.8];}else{const d=byId.get(id);if(!d)return;target=d.pos;pos=[d.pos[0]+.8,d.pos[1]+.45,d.pos[2]+1.6];}
   if(id==='whole'){const direction=new T.Vector3(1,.62,1.1).normalize(),distance=Math.max(6.8,10.5/camera.aspect);pos=direction.multiplyScalar(distance).add(new T.Vector3(...target)).toArray();}
-  const focused=id==='coil'?detail:groups.get(({cabinet:'CAB1',operator:'OP1'})[id]??id);
+  const focused=cutaway?detail:groups.get(({cabinet:'CAB1',operator:'OP1'})[id]??id);
   if(focused){const bounds=equipment.framingBounds(focused),size=bounds.getSize(new T.Vector3()),center=bounds.getCenter(new T.Vector3());const distance=Math.max(.45,Math.max(size.y,size.x/camera.aspect)*.7/Math.tan(T.MathUtils.degToRad(camera.fov/2))+size.z*.5);target=center.toArray();pos=new T.Vector3(.25,.16,1).normalize().multiplyScalar(distance).add(center).toArray();}
-  camera.position.set(...pos);controls.target.set(...target);camera.lookAt(controls.target);controls.update();badge.textContent=id==='coil'?'접촉기 내부 · 코일과 접점':id==='whole'?'컨베이어 · 제어반 · 조작반':'같은 기기의 형상과 연결을 확인하세요.';
+  if(id==='contacts'){target=[-.4,1.84,-1.82];const distance=Math.max(1.3,1.25/camera.aspect);pos=[target[0]+.3,target[1]+.12,target[2]+distance];}
+  if(id==='sensor'&&camera.aspect<1){pos=new T.Vector3(...pos).sub(new T.Vector3(...target)).multiplyScalar(1/camera.aspect).add(new T.Vector3(...target)).toArray();}
+  camera.position.set(...pos);controls.target.set(...target);camera.lookAt(controls.target);controls.update();host.dataset.view=id;badge.textContent=cutaway?'접촉기 내부 · 코일과 접점':id==='sensor'?'원통형 감지기 · 팔레트 아래 금속 표적':id==='whole'?'컨베이어 · 제어반 · 조작반':'같은 기기의 형상과 연결을 확인하세요.';
  }
  function enter(place='whole'){
   frame('whole');
@@ -114,15 +120,16 @@ export function createConveyorScene(host,{select,onFrame,getState}){
   equipment.animate(state,status,0);
   pallet.visible=groups.get('CV1').visible&&state.loaded;pallet.position.set(state.pallet,.94,0);
   if(detail.visible)badge.textContent=status.coil?'코일 ON · 철심이 가동부를 끌어당김 → 접점 닫힘':'코일 OFF · 가동부 복귀 → 접점 열림';
+  magnetic.visible=detail.visible&&status.coil&&teaching!=='contacts';core.material.emissive.set(status.coil?'#16415a':'#000000');core.material.emissiveIntensity=status.coil?.5:0;
   for(const [id,o] of lights){const on=id.startsWith('input')?Object.values(status.inputs)[Number(id.slice(5))]:status.active[id];o.material.emissive.set(on?(id==='-06S2'?'#ec3926':'#5bee87'):'#000000');o.material.emissiveIntensity=on?1.25:0;if(id==='-07K1')o.position.z=on?.125:.14;}
   for(const [id,o] of routesMap){const on=routeOn(id,state,status),focused=!tracedRoutes||tracedRoutes.has(id);o.material.transparent=!focused;o.material.opacity=focused?1:.12;o.material.depthWrite=focused;o.material.emissive.copy(o.material.color).multiplyScalar(on?(focused?.8:.08):0);}
   host.dataset.motor=String(status.motor);host.dataset.coil=String(status.coil);host.dataset.pallet=state.pallet.toFixed(3);host.dataset.input00=String(status.inputs['I:001/00']);host.dataset.input01=String(status.inputs['I:001/01']);
  }
  function draw(){controls.update();renderer.render(scene,camera);}
  const resize=()=>{const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();draw();};const observer=new ResizeObserver(resize);observer.observe(host);
- const loop=observeScene(host,dt=>{const {state,status}=onFrame(dt);update(state,status);equipment.animate(state,status,dt);armature.position.y=T.MathUtils.damp(armature.position.y,status.coil?-.09:0,18,dt);if(highlight){highlight.visible=groups.get(selection)?.visible??false;highlight.update();}host.dataset.doorOpen=String(equipment.isDoorOpen());if(status.motor&&!state.paused){rotors.forEach(o=>o.rotation.x+=dt*8);beltSeams.forEach(o=>{o.position.x-=dt*state.speed;if(o.position.x< -2.4)o.position.x+=4.8;});}for(const dir of keys)move(dir,dt*1.1);draw();},host.closest('#cv-app')??host);
- const loss=e=>{e.preventDefault();contextLost=true;loop.setActive(false);host.dataset.context='lost';badge.textContent='3D 연결이 중단되었습니다. ';const retry=document.createElement('button');retry.dataset.action='retry';retry.textContent='3D 다시 불러오기';badge.append(retry);};const recovered=()=>{contextLost=false;host.dataset.context='ready';badge.textContent='3D 연결을 복구했습니다.';loop.setActive(activeWanted);draw();};renderer.domElement.addEventListener('webglcontextlost',loss);renderer.domElement.addEventListener('webglcontextrestored',recovered);
+ const loop=observeScene(host,dt=>{const {state,status}=onFrame(dt);update(state,status);equipment.animate(state,status,dt);armature.position.y=T.MathUtils.damp(armature.position.y,status.coil?-.09:0,teaching?3:18,dt);host.dataset.contactTravel=String(-armature.position.y/.09);host.dataset.magnetic=String(magnetic.visible);if(highlight){highlight.visible=groups.get(selection)?.visible??false;highlight.update();}host.dataset.doorOpen=String(equipment.isDoorOpen());if(status.motor&&!state.paused){rotors.forEach(o=>o.rotation.x+=dt*8);beltSeams.forEach(o=>{o.position.x-=dt*state.speed;if(o.position.x< -2.4)o.position.x+=4.8;});}for(const dir of keys)move(dir,dt*1.1);draw();},host.closest('#cv-app')??host);
+ const loss=e=>{e.preventDefault();contextLost=true;loop.setActive(false);host.dataset.context='lost';onContext?.(false);badge.textContent='3D 연결이 중단되었습니다. ';const retry=document.createElement('button');retry.dataset.action='retry';retry.textContent='3D 다시 불러오기';badge.append(retry);};const recovered=()=>{contextLost=false;host.dataset.context='ready';onContext?.(true);badge.textContent='3D 연결을 복구했습니다.';loop.setActive(activeWanted);draw();};host.dataset.context='ready';renderer.domElement.addEventListener('webglcontextlost',loss);renderer.domElement.addEventListener('webglcontextrestored',recovered);
  frame();resize();const initial=getState();update(initial.state,initial.status);draw();
- return {frame,enter,move,draw,select:highlightDevice,update,setActive:v=>{activeWanted=v;keys.clear();loop.setActive(v&&!contextLost);if(v&&!contextLost)resize();},traceRoutes(ids){tracedRoutes=ids?new Set(ids):null;},routes(v){routeVisible=v;routes.visible=v;},setDoor(v){equipment.setDoor(v);},isDoorOpen:equipment.isDoorOpen,night(v){night=v;sun.intensity=v?.18:2.7;fill.intensity=v?.4:1.1;ambient.intensity=v?.2:.75;scene.background.set(v?'#26383d':'#dfe8e7');},capture(){draw();return renderer.domElement.toDataURL('image/png');},isWalking:()=>walk,
+ return {frame,enter,move,draw,select:highlightDevice,update,teaching(id){teaching=id;},setActive:v=>{activeWanted=v;keys.clear();loop.setActive(v&&!contextLost);if(v&&!contextLost)resize();},traceRoutes(ids){tracedRoutes=ids?new Set(ids):null;},routes(v){routeVisible=v;routes.visible=v;},setDoor(v){equipment.setDoor(v);},isDoorOpen:equipment.isDoorOpen,night(v){night=v;sun.intensity=v?.18:2.7;fill.intensity=v?.4:1.1;ambient.intensity=v?.2:.75;scene.background.set(v?'#26383d':'#dfe8e7');},capture(){draw();return renderer.domElement.toDataURL('image/png');},isWalking:()=>walk,
  dispose(){if(disposed)return;disposed=true;loop.dispose();observer.disconnect();controls.dispose();window.removeEventListener('keydown',keydown);window.removeEventListener('keyup',keyup);window.removeEventListener('blur',keyup);window.removeEventListener('pointermove',pointermove);window.removeEventListener('pointerup',up);renderer.domElement.removeEventListener('pointerdown',down);renderer.domElement.removeEventListener('wheel',wheel);renderer.domElement.removeEventListener('webglcontextlost',loss);renderer.domElement.removeEventListener('webglcontextrestored',recovered);const geometries=new Set(),materials=new Set(),textures=new Set();scene.traverse(o=>{if(o.geometry)geometries.add(o.geometry);if(o.material)for(const m of Array.isArray(o.material)?o.material:[o.material]){materials.add(m);for(const v of Object.values(m))if(v?.isTexture)textures.add(v);}});geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());equipment.dispose();env.dispose();renderer.dispose();host.replaceChildren();}};
 }

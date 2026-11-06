@@ -1,0 +1,66 @@
+:root{
+ --cv-intro-column:23rem;
+ --cv-intro-stage:32rem;
+ --cv-intro-stage-small:24rem;
+ --cv-intro-border:1px solid var(--line);
+ --cv-intro-surface:var(--paper);
+ --cv-intro-active:var(--teal);
+ --cv-intro-active-text:var(--white,#fff);
+ --cv-intro-leading:var(--sys-leading-body);
+ --cv-intro-gap:var(--gap-copy);
+ --cv-intro-padding:var(--space-5);
+ --cv-intro-note-size:var(--sys-size-caption);
+}
+#cv-workspace[data-intro]:not([data-intro=""]){display:grid;grid-template-columns:minmax(0,var(--cv-intro-column)) minmax(0,1fr);align-items:start}
+#cv-workspace[data-intro]:not([data-intro=""])>:is(.workspace-toolbar,#cv-tools,#cv-original-tools,#cv-investigation,.cv-study-return){display:none}
+#cv-intro-navigation{grid-column:1 / -1;padding:var(--space-4);border-bottom:var(--cv-intro-border);scroll-margin-top:var(--app-header-height,10rem)}
+.cv-intro-nav{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:var(--space-2)}
+.cv-intro-picker{display:none}
+.cv-intro-nav button{display:grid;gap:var(--space-1);text-align:left;min-width:0}
+.cv-intro-nav small{font-size:var(--cv-intro-note-size);font-weight:var(--sys-weight-body)}
+.cv-intro-nav [aria-current=step]{background:var(--cv-intro-active);color:var(--cv-intro-active-text);border-color:var(--cv-intro-active)}
+.cv-intro-nav [aria-current=step] small{color:inherit}
+#cv-first-lesson{display:grid;gap:var(--cv-intro-gap);padding:var(--cv-intro-padding);min-width:0;line-height:var(--cv-intro-leading)}
+#cv-first-lesson :is(p,h2){margin:0;word-break:keep-all;overflow-wrap:normal}
+#cv-first-lesson h2{font-size:var(--sys-size-title-small);line-height:var(--sys-leading-heading)}
+.cv-intro-copy{display:grid;gap:var(--cv-intro-gap)}
+.cv-intro-look{color:var(--muted)}
+.cv-intro-actions,.cv-intro-bottom{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-2)}
+.cv-intro-actions [aria-pressed=true]{background:var(--cv-live-surface);border-color:var(--cv-live);color:var(--cv-live)}
+.cv-intro-result{padding:var(--space-3);border-left:var(--cv-rule-width) solid var(--cv-live);background:var(--cv-intro-surface)}
+.cv-intro-bottom{padding-top:var(--gap-actions);border-top:var(--cv-intro-border)}
+.cv-intro-bottom>button:last-child{grid-column:1 / -1}
+.cv-intro-observations ul{padding-left:var(--space-5);margin-block:var(--space-2)}
+.cv-intro-observations li span{color:var(--teal);margin-left:var(--space-2)}
+.cv-intro-io{display:grid;gap:var(--space-2)}
+.cv-intro-io>div{display:grid;gap:var(--space-1);padding:var(--space-2);border:var(--cv-intro-border);border-radius:var(--radius)}
+.cv-intro-io span{font-size:var(--sys-size-small)}
+#cv-workspace[data-intro]:not([data-intro=""]) #cv-panes{width:100%;min-width:0;grid-template-columns:minmax(0,1fr);border-left:var(--cv-intro-border)}
+#cv-workspace[data-intro]:not([data-intro=""]) .inspector{display:none}
+#cv-workspace[data-intro]:not([data-intro=""]) #three-host{height:var(--cv-intro-stage);min-height:0;max-height:none}
+#cv-workspace[data-intro]:not([data-intro=""]) .model-panel .canvas-footer button{display:none}
+#cv-workspace[data-intro="symbols"]:not([data-intro=""]){grid-template-columns:minmax(0,1fr)}
+#cv-workspace[data-intro="symbols"]:not([data-intro=""]) #cv-panes{grid-template-columns:repeat(2,minmax(0,1fr))}
+#cv-workspace[data-intro="symbols"] #cv-first-lesson{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+#cv-workspace[data-intro="symbols"] .cv-intro-copy{grid-row:span 3}
+#cv-workspace[data-intro="symbols"] #plan-host{height:var(--cv-intro-stage);min-height:0;max-height:none}
+@media(max-width:1000px){
+ .cv-intro-nav{display:none}
+ .cv-intro-picker{display:flex;align-items:center;gap:var(--space-3)}
+ .cv-intro-picker select{flex:1;min-width:0}
+ #cv-workspace[data-intro]:not([data-intro=""]){grid-template-columns:minmax(0,1fr)}
+ #cv-workspace[data-intro]:not([data-intro=""]) #cv-first-lesson{display:contents}
+ #cv-intro-navigation{order:0}
+ #cv-first-lesson>*{order:5;margin:var(--space-3) var(--cv-intro-padding)}
+ #cv-first-lesson>p:not(.cv-intro-result){margin-inline:var(--cv-intro-padding)}
+ #cv-first-lesson .cv-intro-copy{order:1;padding-top:var(--space-3)}
+ #cv-first-lesson .cv-intro-actions{order:2;scroll-margin-top:var(--app-header-height,10rem)}
+ #cv-workspace[data-intro]:not([data-intro=""]) #cv-panes{order:3;border-left:0}
+ #cv-first-lesson .cv-intro-result{order:4}
+ #cv-workspace[data-intro="symbols"] .cv-intro-copy{grid-row:auto}
+}
+@media(max-width:600px){
+ #cv-workspace[data-intro]:not([data-intro=""]) #three-host,#cv-workspace[data-intro="symbols"] #plan-host{height:var(--cv-intro-stage-small)}
+ #cv-workspace[data-intro="symbols"]:not([data-intro=""]) #cv-panes{grid-template-columns:minmax(0,1fr)}
+ .cv-intro-nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+}

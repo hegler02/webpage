@@ -10,9 +10,10 @@ export function createQuantities({host,nav,read,go,locate,workspace}){
  button.onclick=()=>{target=null;go('quantities');};nav.insertBefore(button,nav.querySelector('[data-menu="glossary"],[data-page="glossary"],[data-go="glossary"]'));
  const controller={
   setPage(current){button.toggleAttribute('aria-current',current==='quantities');if(current==='quantities')button.setAttribute('aria-current','page');},
+  showTarget(id){target=id;query='';group='';scope='';page=0;return go('quantities');},
   inspector(container,id){
    container.querySelector('[data-quantity-inspect]')?.remove();if(!id)return;
-   const b=document.createElement('button');b.type='button';b.dataset.quantityInspect=id;b.textContent='이 대상의 재료·수량';b.onclick=()=>{target=id;query='';group='';scope='';page=0;go('quantities');};container.append(b);
+   const b=document.createElement('button');b.type='button';b.dataset.quantityInspect=id;b.textContent='이 대상의 재료·수량';b.onclick=()=>controller.showTarget(id);container.append(b);
   },
   render(){
    report=buildQuantityReport(read());

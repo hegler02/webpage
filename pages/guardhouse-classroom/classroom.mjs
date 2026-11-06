@@ -1,4 +1,7 @@
 import {createQuantities} from './quantities-ui.mjs';
+import {createPowerExplanation} from './power-explanation.mjs';
+let powerExplanation;
+function updatePowerExplanation(){powerExplanation?.update({electric,page,selected});}
 import {mountExperienceTools,showScenePreview,lightingSwitchButtons,lightingSummary} from './workspace-ui.mjs';
 import {mountSamples,mountGlossary} from './learning-shell.mjs';
 import {withStudyConcepts} from './src/study-content.mjs';
@@ -97,7 +100,7 @@ async function go(menu,sheetId=null){
  if(scenePage)await ensureViewer();else if(target==='quantities')await ensureData();else if(target==='calculations'){if(!model)loading('건물의 치수와 회로 정보를 준비하고 있습니다.');await Promise.all([ensureData(),ensureGuide()]);}else if(target==='glossary')await ensureGuide();
  if(request!==navigationId)return false;reloadRequired=false;delete $('app').dataset.loadError;
 
- page=navData[menu]?menu:'home';$('app').dataset.page=page;
+ page=navData[menu]?menu:'home';$('app').dataset.page=page;updatePowerExplanation();
  document.querySelectorAll('.fire-pages button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.nav===(page==='fire-signal'?'fire-test':page))));const [step,title,description]=navData[page];$('page-step').textContent=step;$('page-title').textContent=title;$('page-description').textContent=description;
  document.querySelectorAll('[data-menu]').forEach(b=>{if(b.dataset.menu===(page.startsWith('fire')?'fire':page))b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
  $('home-intro').hidden=page!=='home';$('lesson-path').hidden=page!=='home';$('workspace').hidden=['home','calculations','glossary','safety','quantities'].includes(page);$('home-preview').hidden=page!=='home';$('page-content').replaceChildren();$('page-actions').replaceChildren();
@@ -152,7 +155,7 @@ function select(id,source='list'){
  if(page==='structure'&&reinforcement.members.some(m=>m.id===id)){const member=reinforcement.members.find(m=>m.id===id);viewer.rebarSheet=member.sheet;viewer.mode='rebar';viewer.focusMember(id);if($('member-select'))$('member-select').value=id;$('view-name').textContent=found.name+' · 철근 '+member.count+'개';status(`${found.name}을 확대했습니다. 콘크리트·철근·겹쳐 보기를 비교하세요.`);}
  if(source==='3d'&&!viewer.fpv&&!sheet.view.startsWith('rebar')&&!referencesFor(found).includes(sheet.id)){const ref=referencesFor(found).find(r=>project.sheets.some(s=>s.id===r));if(ref&&project.sheets.find(s=>s.id===ref).menu===page){sheet=project.sheets.find(s=>s.id===ref);$('sheet-select').value=ref;$('sheet-name').textContent=ref+' · '+sheet.title;renderPlan();}}
 }
-function renderSelection(){renderSelectionContent();quantities.inspector($('selection-body'),selected);}
+function renderSelection(){renderSelectionContent();quantities.inspector($('selection-body'),selected);updatePowerExplanation();}
 function renderSelectionContent(){
  const e=selectedElement();if(!e){$('selection-body').innerHTML='<h2>하나를 눌러보세요.</h2><p>도면이나 건물의 벽·창문·기구를 선택하면 설명과 치수가 나타납니다.</p>';return;}
  if(e.kind==='task-light'){workstationEditor($('selection-body'),e,exercise,electric,{apply:()=>{save();refreshElectrical();status('작업등 위치와 회로 부하를 적용했습니다.');},toggle:toggleSwitch,calc:async id=>{await ensureGuide();calcState.mode='electrical';calcState.circuit=id;calcState.step='power-sum';await go('calculations');},term:()=>showTerm('circuit')});return;}
@@ -283,6 +286,14 @@ const entryPage=entrySheet?.menu??(location.hash.slice(1)||'home');
 window.addEventListener('hashchange',()=>{const target=location.hash.slice(1)||'home';if(Object.hasOwn(navData,target)&&target!==page)void go(target);});
 window.addEventListener('pagehide',event=>{navigationId++;viewer?.simulation?.leave();viewer?.setActive(false);if(!event.persisted){viewer?.dispose();viewer=null;viewerPending=null;}});
 window.addEventListener('pageshow',event=>{if(event.persisted)viewer?.setActive(!$('workspace').hidden);});
+ powerExplanation=createPowerExplanation({before:$('page-content'),
+ change:(kind,id,on)=>{if(kind==='main')exercise.power=!on;else if(kind==='breaker')exercise.breakers[id]=!on;else exercise.switches[id]=!on;save();refreshElectrical();},
+ navigate:async(kind,d,origin)=>{
+  if(kind==='term'){showTerm('circuit');return;}
+  if(kind==='calculation'){await ensureGuide();calcState.mode='electrical';calcState.circuit=d.circuit;calcState.step='current';await go('calculations');return;}
+  if(kind==='quantities'){await quantities.showTarget(d.id);return;}
+  if(await go(kind==='return'?origin:'electrical',kind==='return'&&origin==='experience'?null:electricalSheet(project,d))){select(d.id);if(kind==='drawing')$('workspace').scrollIntoView({block:'start'});}
+ },onError:error=>status('이유 연결을 열지 못했습니다: '+error.message,true)});
 await go(entryPage,entrySheet?.id);
 if(bookReading){
  if(entryPage==='glossary'){const term=glossary.find(t=>t.id===entryParams.get('term'));if(term){$('term-search').value=term.term;$('term-search').dispatchEvent(new Event('input'));}}

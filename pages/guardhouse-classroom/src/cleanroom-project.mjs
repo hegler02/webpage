@@ -86,13 +86,15 @@ export function freshBay(raw={}) {
   for(const [id] of safetyChecks)state.checks[id]=raw?.checks?.[id]===true;
   return state;
 }
+import {applyPowerState} from './power-reasoning.mjs';
 export function bayElectrical(state) {
-  const devices=equipment.map(d=>({...d,watts:state.watts[d.id]??d.watts,on:state.breakers[d.circuit]}));
+  const devices=equipment.map(d=>({...d,watts:state.watts[d.id]??d.watts}));
   const routes=devices.map(d=>{
     const [x,y]=d.pos, h=3.10+(d.circuit==='CL'?0:.075);
     return {id:'route-'+d.id,target:d.id,circuit:d.circuit,points:[panel.pos,[panel.pos[0],panel.pos[1],h],[x,panel.pos[1],h],[x,y,h],d.pos]};
   });
-  return {devices,routes,circuits:circuits.map(c=>{const demand=circuitDemand(devices,c,220),length=Math.max(...routes.filter(r=>r.circuit===c.id).map(r=>routeLength(r.points))),drop=2*.0175*length*demand.current/c.area,percent=drop/220*100;return {...c,...demand,length,drop,percent,pass:demand.current<=c.breaker&&c.breaker<=c.ampacity&&percent<=3};})};
+  const calculated=circuits.map(c=>{const demand=circuitDemand(devices,c,220),length=Math.max(...routes.filter(r=>r.circuit===c.id).map(r=>routeLength(r.points))),drop=2*.0175*length*demand.current/c.area,percent=drop/220*100;return {...c,...demand,length,drop,percent,pass:demand.current<=c.breaker&&c.breaker<=c.ampacity&&percent<=3};});
+  return {devices:applyPowerState(devices,{circuits:calculated,state,panel,hasMain:false,overloadCutsPower:false}),routes,circuits:calculated};
 }
 export function bayModel(){
   const elements=[],openings=[];

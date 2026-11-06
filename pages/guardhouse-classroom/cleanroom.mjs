@@ -1,4 +1,6 @@
 import {createQuantities} from './quantities-ui.mjs';
+import {createPowerExplanation} from './power-explanation.mjs';
+let powerExplanation;
 import {mountExperienceTools,showScenePreview,selectionDimensions} from './workspace-ui.mjs';
 import {mountSamples,mountGlossary} from './learning-shell.mjs';
 import {bay,rooms,sheets,steps,circuits,bayModel,termTargets,panel,equipment,fireDevices,fireStages,glossary,safetyChecks,escapePath,signalPath,alarmPath,freshBay,bayElectrical} from './src/cleanroom-project.mjs';
@@ -120,7 +122,7 @@ function paint(){
   if(tab==='structure')$('bay-tools').innerHTML=[['both','함께 보기'],['bars','철근만 보기'],['concrete','콘크리트만 보기']].map(([k,v])=>btn(v,'display',k,pressed(display===k))).join('');
   if(workspace){const menu=firePage()?'fire':tab==='experience'?'building':tab;const choices=sheets.filter(s=>s.menu===menu);$('bay-sheet').innerHTML=choices.map(s=>'<option value="'+s.id+'" '+(s.id===drawing?'selected':'')+'>'+s.id+' · '+s.title+'</option>').join('');$('bay-plan').innerHTML=bayPlan({...f,tab:tab==='experience'?'building':tab});}
   if(tab==='experience')mountExperienceTools($('bay-tools'),{night,render:()=>{scene?.realistic();$('bay-render-label').textContent='실감 렌더링 · 재질·그림자';},enter:()=>{experienceView='inside';layoutMode='model';paint();},outside:()=>{experienceView='outside';paint();},setNight:on=>{night=on;paint();$('bay-status').textContent=on?'밤 장면으로 전환했습니다.':'낮 장면으로 전환했습니다.';},route:()=>{returnPage='experience';go('electrical',electricalId);},preview:()=>showScenePreview(scene.image(),'현재 클린룸 렌더링 장면')});
-  renderInspector(f);quantities.inspector($('bay-inspector'),selected);
+  renderInspector(f);quantities.inspector($('bay-inspector'),selected);powerExplanation?.update({electric:f.electric,page:tab,selected});
   $('bay-render-label').textContent='실감 렌더링';$('bay-view-help').textContent=tab==='experience'&&experienceView==='inside'?'휠: 시야 확대·축소 · 드래그: 시선 · W A S D: 이동':'드래그로 회전 · 휠로 확대 · 대상을 눌러 정보 확인';
   $('bay-lesson').innerHTML=['glossary','building','fire'].includes(tab)?'':renderLesson(f);if(tab==='glossary')mountGlossary($('bay-lesson'),[...bayTerms.values()],{action:'related-term',detailsAction:'term'});
   if(tab==='quantities')quantities.render();
@@ -248,4 +250,13 @@ window.addEventListener('hashchange',openPage);
 $('bay-view-tools').addEventListener('change',event=>{if(event.target.id!=='bay-sheet')return;const s=sheets.find(s=>s.id===event.target.value);if(!s)return;drawing=s.id;experienceView='sheet';selected=s.view==='openings'?building.openings[0].id:s.view==='ceiling'?building.elements.find(e=>e.kind==='ceiling'&&e.id!=='ceiling-deck').id:s.view==='elevation'?'south-wall':s.view==='section'?'slab':buildingId;if(s.menu==='materials'){assembly=s.view;layer=0;selected=assemblies[assembly].target;}paint();$('bay-status').textContent=s.title+'와 같은 방향으로 3D를 전환했습니다.';});
 window.addEventListener('pagehide',e=>{audio.play(false);scene?.setActive(false);if(!e.persisted){epoch++;scene?.dispose();audio.dispose();}});
 window.addEventListener('pageshow',e=>{if(e.persisted)scene?.setActive(!$('bay-workspace').hidden);});
+powerExplanation=createPowerExplanation({before:$('bay-lesson'),
+ change:(kind,id,on)=>{if(kind==='breaker'){state.breakers[id]=!on;save();paint();}},
+ navigate:async(kind,d,origin)=>{
+  if(kind==='term'){moveTerm('circuit');return;}
+  electricalId=d.id;
+  if(kind==='calculation'){calcMode='electric';readingView='one';formula=bayLesson(state,calcMode,electricalId).steps.findIndex(s=>s.id==='current');if(formula<0)formula=0;go('calculations');return;}
+  if(kind==='quantities'){await quantities.showTarget(d.id);return;}
+  const target=kind==='return'?origin:'electrical';focusOnOpen={menu:target,id:d.id};drawing=target==='experience'?'A-301':'E-301';history.replaceState(null,'','#'+target);await openPage();if(kind==='drawing')$('bay-workspace').scrollIntoView({block:'start'});
+ },onError:error=>$('bay-status').textContent='이유 연결을 열지 못했습니다: '+error.message});
 openPage();

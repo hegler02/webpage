@@ -1,4 +1,6 @@
 import {createQuantities} from './quantities-ui.mjs';
+import {createPowerExplanation} from './power-explanation.mjs';
+let powerExplanation;
 import {mountExperienceTools,showScenePreview,selectionDimensions,lightingStatus,lightingSwitchButtons,lightingSummary} from './workspace-ui.mjs';
 import {mountSamples,mountGlossary} from './learning-shell.mjs';
 import {bindActions} from './action-events.mjs';
@@ -113,7 +115,7 @@ function setSheet(id){if(!apartment.sheets.some(s=>s.id===id)||!view)return;sele
  view.setRealistic(true);view.setNight(false);view.site.visible=false;view.orthoHeight=9.4;view.size();plan();tools();$('apt-view-title').textContent=apartment.sheets.find(s=>s.id===sheet).plain;}
 function select(id){const object=getObject(id);if(!object)return;if(page==='electrical'&&(object.circuit||object.kind==='panel')&&sheet!==apartment.circuitSheet){const target=electricalSheet(apartment,object);if(target&&target!==sheet)setSheet(target);}if(id?.startsWith('assembly-')){const a=apartmentAssemblies.find(a=>a.layers.some(l=>'assembly-'+a.id+'-'+l.id===id));if(a){assembly=a.id;view.apartmentDetails.showAssembly(assembly);tools();}}selected=id;if(sheet==='A-203'){for(const m of view.base.children)if(m.userData.kind==='ceiling')m.visible=m.userData.id===id;}view?.highlight(id);if(['A-205','A-206'].includes(sheet))view?.focusObject(id);plan();inspector();status((getObject(id)?.name??id)+' · 도면과 3D에서 같은 대상');}
 function getObject(id){if(id?.startsWith('assembly-'))return view?.materialGroup.children.find(m=>m.userData.id===id)?.userData; if(id?.startsWith('room-'))return apartment.rooms.find(r=>'room-'+r.id===id);return electric.devices.find(d=>d.id===id)??fire.devices.find(d=>d.id===id)??model.elements.find(d=>d.id===id);}
-function inspector(){renderInspectorContent();quantities.inspector($('apt-inspector'),selected);}
+function inspector(){powerExplanation?.update({electric,page,selected});renderInspectorContent();quantities.inspector($('apt-inspector'),selected);}
 function renderInspectorContent(){const d=getObject(selected);if(!d){$('apt-inspector').innerHTML='<h2>방이나 기구를 선택하세요.</h2><p>같은 대상의 이름과 치수, 연결 회로가 나타납니다.</p>';return;}
  if(d.kind==='task-light'){workstationEditor($('apt-inspector'),d,state,electric,{apply:()=>{refresh();status('작업등 위치와 회로 부하를 적용했습니다.');},toggle:toggleSwitch,calc:async id=>{calc.circuit=id;calc.mode='electrical';calc.step='power-sum';await go('calculations');},term:()=>term('circuit')});return;}
  if(d.layer){$('apt-inspector').innerHTML=`<h2>${d.layer.name}</h2><p>${d.layer.mm} mm · ${d.assembly.name}</p><p>${d.layer.role}</p><div class="button-row"><button data-material-location="${d.assembly.id}">건물에서 위치 보기</button><button data-term="${d.assembly.id==='floor'?'slab':'partition'}">관련 용어</button></div>`;return;}
@@ -247,6 +249,14 @@ window.addEventListener('pagehide',event=>{serial++;view?.simulation?.leave();vi
 window.addEventListener('pageshow',event=>{if(event.persisted)view?.setActive(!$('apt-workspace').hidden);});
 const quantities=createQuantities({host:$('apt-content'),nav:$('learning-nav'),workspace:$('apt-workspace'),go,read:()=>({sample:'apartment',model,electric,fire,rebar,resolveSheet:e=>e.kind==='ceiling'?'A-203':['door','window-glass','frame'].includes(e.kind)?'A-205':'A-201'}),locate:m=>destination(m.id,m.sheet)});
 mountSamples(2,()=>go('home'),()=>go('glossary'));
+powerExplanation=createPowerExplanation({before:$('apt-content'),
+ change:(kind,id,on)=>{if(kind==='main')state.power=!on;else if(kind==='breaker')state.breakers[id]=!on;else state.switches[id]=!on;refresh();},
+ navigate:async(kind,d,origin)=>{
+  if(kind==='term'){term('circuit');return;}
+  if(kind==='calculation'){calc.mode='electrical';calc.circuit=d.circuit;calc.step='current';await go('calculations');return;}
+  if(kind==='quantities'){await quantities.showTarget(d.id);return;}
+  if(await go(kind==='return'?origin:'electrical')){select(d.id);if(kind==='drawing')$('apt-workspace').scrollIntoView({block:'start'});}
+ },onError:error=>status('이유 연결을 열지 못했습니다: '+error.message)});
 go(location.hash.slice(1)||'home');
 
 $('apt-zoom-in').onclick=()=>zoomPlan(.8);$('apt-zoom-out').onclick=()=>zoomPlan(1.25);$('apt-fit').onclick=()=>{planBox=[0,0,1000,820];applyPlanBox();};

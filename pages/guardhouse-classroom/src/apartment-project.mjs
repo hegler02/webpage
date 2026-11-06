@@ -110,12 +110,13 @@ export function apartmentRoute(d){
  const end=d.embedded?[[x,y,h],[d.embedded.center[0],d.embedded.center[1],h],d.embedded.center,d.pos]:[[x,y,h],d.pos];
  return [...common,...via,...end].filter((p,i,a)=>!i||routeLength([a[i-1],p])>1e-6);
 }
+import {applyPowerState} from './power-reasoning.mjs';
 export function apartmentElectrical(state){
  const devices=[apartment.panel,...apartment.devices].map(d=>({...d,pos:d.support&&fitsSupport(d,state.positions?.[d.id])?[...state.positions[d.id],d.pos[2]]:[...d.pos],watts:state.watts[d.id]??d.watts}));
  attachCords(devices);
  const routes=devices.filter(d=>d.circuit&&!d.socket).map(d=>({id:'route-'+d.id,kind:'conduit',name:d.name+' 전선관',circuit:d.circuit,target:d.id,diameter:.016,points:apartmentRoute(d)}));
  const circuits=apartment.circuits.map(c=>{const {loads,watts,current}=circuitDemand(devices,c,apartment.voltage),length=Math.max(...routes.filter(r=>r.circuit===c.id).map(r=>routeLength(r.points))),drop=2*.0175*length*current/c.area;return {...c,watts,current,length,drop,percent:drop/apartment.voltage*100,loads:loads.map(d=>d.id),pass:current<=c.breaker&&c.breaker<=c.ampacity&&drop/apartment.voltage*100<=3};});
- return {routes,circuits,devices:devices.map(d=>({...d,lumens:d.kind==='light'?d.watts*100:undefined,on:d.kind==='switch'?state.switches[d.id]!==false:!!d.watts&&state.power&&state.breakers[d.circuit]!==false&&circuits.find(c=>c.id===d.circuit).current<=circuits.find(c=>c.id===d.circuit).breaker&&state.switches[d.switch]!==false}))};
+ return {routes,circuits,devices:applyPowerState(devices,{circuits,state,panel:apartment.panel}).map(d=>({...d,lumens:d.kind==='light'?d.watts*100:undefined}))};
 }
 export function apartmentWalk(x,y,model){if(x<.14||x>8.26||y<.14||y>7.16)return false;return !model.elements.filter(e=>['wall','partition','furniture','fixture'].includes(e.kind)&&e.base<1.8&&e.base+e.height>.3).some(e=>[[x,y],[x-.13,y],[x+.13,y],[x,y-.13],[x,y+.13]].some(p=>insideElement(p,e)));}
 export const apartmentSlabDesign=Object.freeze({span:2.6,thickness:180,cover:25,diameter:10,spacing:150,live:2,finish:1.5});

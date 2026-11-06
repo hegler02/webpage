@@ -10,9 +10,9 @@ export function lightingStatus(electric,state,id){
   const device=electric.devices.find(d=>d.id===id);
   const lights=electric.devices.filter(d=>d.kind==='light'&&d.switch===id);
   const enabled=device?.on??state.switches[id]!==false;
-  const blocked=lights.map(d=>electric.circuits.find(c=>c.id===d.circuit)).find(c=>c&&(state.breakers[c.id]===false||c.current>c.breaker));
   const lit=lights.filter(d=>d.on).length;
-  const reason=!state.power?'주전원 꺼짐':blocked?(state.breakers[blocked.id]===false?blocked.id+' 차단기 꺼짐':blocked.id+' 회로 과부하'):!enabled?'스위치 꺼짐':lit?'조명 점등':'조명 소등';
+  const blockers=[...new Set(lights.flatMap(d=>d.power?.blockers.map(c=>c.ok===null?c.label+' 확인 필요':c.key==='capacity'?d.circuit+' 회로 과부하':(c.key==='switch'?'스위치':c.label)+' 꺼짐')??[]))];
+  const reason=blockers.length?blockers.join(' · '):lit?'조명 점등':'조명 소등';
   return {lights,enabled,lit,reason};
 }
 export function lightingSwitchButtons(electric,state){

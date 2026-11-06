@@ -26,6 +26,7 @@ export function routeTo(d){
  const entry=embeddedEntry(d,h);
  return clean([...common,...via,...(entry?[...entry].reverse():[[x,y,h],[x,y,z]])]);
 }
+import {applyPowerState} from './power-reasoning.mjs';
 export function electricalModel(s){
  const devices=attachCords(devicesFor(s));
  const routes=devices.filter(d=>d.circuit&&!d.socket).map(d=>({id:'route-'+d.id,name:d.name+' 전선관',kind:'conduit',circuit:d.circuit,target:d.id,points:routeTo(d),conductors:d.kind==='switch'?['L','L′']:['L','N','PE'],diameter:.016}));
@@ -37,8 +38,8 @@ export function electricalModel(s){
   const drop=2*.0175*longest*current/c.area,checks={current:current<=c.breaker,coordination:c.breaker<=c.ampacity,drop:drop/project.voltage*100<=3};
   return {...c,watts,current,length:longest,drop,percent:drop/project.voltage*100,checks,pass:Object.values(checks).every(Boolean),loads:loads.map(d=>d.id)};
  });
- const active=d=>s.power&&s.breakers[d.circuit]!==false&&circuits.find(c=>c.id===d.circuit)?.checks.current&&(!d.switch||s.switches[d.switch]!==false);
- return {devices:devices.map(d=>({...d,on:d.watts?active(d):d.kind==='switch'?s.switches[d.id]:false})),routes,circuits,watts:circuits.reduce((n,c)=>n+c.watts,0),activeWatts:devices.filter(d=>d.watts&&active(d)).reduce((n,d)=>n+d.watts,0)};
+ const powered=applyPowerState(devices,{circuits,state:s,panel:project.panel});
+ return {devices:powered,routes,circuits,watts:circuits.reduce((n,c)=>n+c.watts,0),activeWatts:powered.filter(d=>d.on&&d.watts).reduce((n,d)=>n+d.watts,0)};
 }
 
 // Educational gravity-load model: 1 m strip, simply supported slab; no global frame analysis.

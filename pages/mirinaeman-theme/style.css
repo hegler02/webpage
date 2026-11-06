@@ -27,7 +27,7 @@ ol{list-style:none;padding:0}
 .hero{height:var(--hero-length)}
 .hero-copy,.scene-copy{position:sticky;top:0;min-height:var(--view);padding:var(--gutter);display:flex;flex-direction:column;justify-content:flex-end;gap:var(--space-m);opacity:var(--show,1);transform:translateY(calc((1 - var(--show,1))*var(--lift)));will-change:opacity,transform}
 .hero-copy::before,.scene-copy::before{content:"";position:absolute;inset:auto 0 0 0;height:70%;z-index:-1;background:linear-gradient(to top,var(--ink-veil),var(--ink-clear));pointer-events:none}
-.title{font-family:var(--font-display);font-weight:var(--weight-regular);font-size:var(--type-title);line-height:var(--line-tight)}
+.title{text-shadow:var(--title-shadow);font-family:var(--font-display);font-weight:var(--weight-regular);font-size:var(--type-title);line-height:var(--line-tight)}
 .title span{display:block;overflow:hidden}
 .title b{display:block;font-weight:var(--weight-regular);animation:rise var(--time-iris) var(--ease-out) both}
 .title span+span b{color:var(--gold);animation-delay:var(--time-fast)}

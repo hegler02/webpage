@@ -2607,6 +2607,38 @@
       "latest_deployed_at": "2026-09-20T07:51:34.974501+00:00"
     },
     {
+      "body_id": "winter-dragon-war",
+      "title": "겨울아, 덤벼라 — 용의 전사들",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-provided-audio",
+        "generated-image-cinema",
+        "code-rendered-video",
+        "stem-driven-motion"
+      ],
+      "tags": [
+        "audio",
+        "image-cinema",
+        "webgl",
+        "motion",
+        "metal",
+        "youtube",
+        "making-of"
+      ],
+      "message_sentence": "노래가 용이 되고, 목소리가 겨울을 밀어낸다. 겨울은 그림이, 불은 음악이 그리는 4분 12초 메탈 뮤직비디오와 그 제작 과정.",
+      "thumbnail": {
+        "path": "assets/thumbnails/winter-dragon-war.webp",
+        "alt": "성문 앞에 선 보컬 곁으로 금빛으로 부서지는 용이 음표의 강이 되어 흐르는 장면",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 45%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/winter-dragon-war/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-11-06T15:16:52+00:00",
+      "latest_deployed_at": "2026-11-06T15:16:52+00:00"
+    },
+    {
       "body_id": "wuxia-causal-prompt-study",
       "title": "상상은 어떻게 액션이 되는가 — 단문인과체인 연구",
       "body_type": "KNOWLEDGEBODY",

@@ -9,6 +9,32 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:winter-dragon-war",
+      "kind": "work",
+      "title": "겨울아, 덤벼라 — 용의 전사들",
+      "summary": "노래가 용이 되고, 목소리가 겨울을 밀어낸다. 겨울은 그림이, 불은 음악이 그리는 4분 12초 메탈 뮤직비디오와 그 제작 과정.",
+      "url": "https://mirinaeman.com/pages/winter-dragon-war/",
+      "image": "/pages/profile/assets/thumbnails/winter-dragon-war.webp",
+      "alt": "성문 앞에 선 보컬 곁으로 금빛으로 부서지는 용이 음표의 강이 되어 흐르는 장면",
+      "year": "2026",
+      "tags": [
+        "audio",
+        "image-cinema",
+        "webgl",
+        "motion",
+        "metal",
+        "youtube",
+        "making-of"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "노래가 용이 되고, 목소리가 겨울을 밀어낸다. 겨울은 그림이, 불은 음악이 그리는 4분 12초 메탈 뮤직비디오와 그 제작 과정."
+        }
+      ]
+    },
+    {
       "id": "work:image-cinema-review",
       "kind": "work",
       "title": "이미지 시네마 — 움직임에서 감정으로",
@@ -2699,6 +2725,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:winter-dragon-war",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:image-cinema-review",
       "target": "creator:joonho",

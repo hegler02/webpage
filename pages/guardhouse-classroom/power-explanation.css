@@ -27,5 +27,9 @@
 .power-explanation p { margin:0; line-height:var(--sys-leading-body); font-size:var(--sys-size-small); }
 .power-verdict p,.power-design p { margin-top:var(--gap-copy); }
 .power-links { display:flex; flex-wrap:wrap; gap:var(--cmp-power-gap); }
+.power-route { display:grid; gap:var(--gap-copy); }
+.power-route ol { display:flex; flex-wrap:wrap; gap:var(--space-2); padding:0; margin:0; list-style:none; }
+.power-route li { min-width:0; max-width:100%; }
+.power-route button { max-width:100%; white-space:normal; text-align:start; }
 .power-design { border-top:var(--cmp-power-border) solid var(--line); padding-top:var(--gap-section); }
 .power-design summary { cursor:pointer; font-weight:var(--sys-weight-control); line-height:var(--sys-leading-body); }

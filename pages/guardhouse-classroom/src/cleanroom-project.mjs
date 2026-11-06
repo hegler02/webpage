@@ -94,7 +94,7 @@ export function bayElectrical(state) {
     return {id:'route-'+d.id,target:d.id,circuit:d.circuit,points:[panel.pos,[panel.pos[0],panel.pos[1],h],[x,panel.pos[1],h],[x,y,h],d.pos]};
   });
   const calculated=circuits.map(c=>{const demand=circuitDemand(devices,c,220),length=Math.max(...routes.filter(r=>r.circuit===c.id).map(r=>routeLength(r.points))),drop=2*.0175*length*demand.current/c.area,percent=drop/220*100;return {...c,...demand,length,drop,percent,pass:demand.current<=c.breaker&&c.breaker<=c.ampacity&&percent<=3};});
-  return {devices:applyPowerState(devices,{circuits:calculated,state,panel,hasMain:false,overloadCutsPower:false}),routes,circuits:calculated};
+  return {panel,devices:applyPowerState(devices,{circuits:calculated,state,panel,hasMain:false,overloadCutsPower:false}),routes,circuits:calculated};
 }
 export function bayModel(){
   const elements=[],openings=[];

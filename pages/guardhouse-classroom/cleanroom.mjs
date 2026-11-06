@@ -1,6 +1,6 @@
 import {createQuantities} from './quantities-ui.mjs';
 import {createPowerExplanation} from './power-explanation.mjs';
-let powerExplanation;
+let powerExplanation,glossaryTermOnOpen=null;
 import {mountExperienceTools,showScenePreview,selectionDimensions} from './workspace-ui.mjs';
 import {mountSamples,mountGlossary} from './learning-shell.mjs';
 import {bay,rooms,sheets,steps,circuits,bayModel,termTargets,panel,equipment,fireDevices,fireStages,glossary,safetyChecks,escapePath,signalPath,alarmPath,freshBay,bayElectrical} from './src/cleanroom-project.mjs';
@@ -124,7 +124,11 @@ function paint(){
   if(tab==='experience')mountExperienceTools($('bay-tools'),{night,render:()=>{scene?.realistic();$('bay-render-label').textContent='실감 렌더링 · 재질·그림자';},enter:()=>{experienceView='inside';layoutMode='model';paint();},outside:()=>{experienceView='outside';paint();},setNight:on=>{night=on;paint();$('bay-status').textContent=on?'밤 장면으로 전환했습니다.':'낮 장면으로 전환했습니다.';},route:()=>{returnPage='experience';go('electrical',electricalId);},preview:()=>showScenePreview(scene.image(),'현재 클린룸 렌더링 장면')});
   renderInspector(f);quantities.inspector($('bay-inspector'),selected);powerExplanation?.update({electric:f.electric,page:tab,selected});
   $('bay-render-label').textContent='실감 렌더링';$('bay-view-help').textContent=tab==='experience'&&experienceView==='inside'?'휠: 시야 확대·축소 · 드래그: 시선 · W A S D: 이동':'드래그로 회전 · 휠로 확대 · 대상을 눌러 정보 확인';
-  $('bay-lesson').innerHTML=['glossary','building','fire'].includes(tab)?'':renderLesson(f);if(tab==='glossary')mountGlossary($('bay-lesson'),[...bayTerms.values()],{action:'related-term',detailsAction:'term'});
+  $('bay-lesson').innerHTML=['glossary','building','fire'].includes(tab)?'':renderLesson(f);
+  if(tab==='glossary'){
+    const dictionary=mountGlossary($('bay-lesson'),[...bayTerms.values()],{action:'related-term',detailsAction:'term'});
+    if(glossaryTermOnOpen){dictionary.input.value=bayTerms.get(glossaryTermOnOpen)?.term??'';glossaryTermOnOpen=null;dictionary.update();dictionary.input.focus();}
+  }
   if(tab==='quantities')quantities.render();
   document.querySelectorAll('#learning-nav button').forEach(b=>{if(b.dataset.go===(firePage()?'fire':tab))b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
   quantities.setPage(tab);
@@ -227,7 +231,7 @@ const bayActions={
   sound:()=>{if(audio.enabled)audio.mute();else{audio.enabled=true;audio.unlock();audio.ctx?.resume().then(()=>audio.play(tab==='fire-signal'&&stage>=2&&!document.hidden)).catch(()=>{});}paint();},
   term:b=>moveTerm(b.dataset.term),
   relatedTerm:b=>{const target=bayTerms.get(b.dataset.relatedTerm)?.target;$('bay-term').close();destination(target);},
-  glossaryTerm:b=>{const id=b.dataset.glossaryTerm;termReturn=tab;$('bay-term').close();go('glossary');requestAnimationFrame(()=>{const input=$('term-search');if(input){input.value=bayTerms.get(id)?.term??'';input.dispatchEvent(new Event('input'));input.focus();}});},
+  glossaryTerm:b=>{glossaryTermOnOpen=b.dataset.glossaryTerm;termReturn=tab;$('bay-term').close();go('glossary');},
   related:b=>{const row=safetyChecks.find(([id])=>id===b.dataset.related);if(!row)return;if(row[0]==='escape')fireId='EX3';if(row[0]==='path')electricalId='FFU1';go(row[2]);},
   retry:()=>{if(reloadRequired)location.reload();else ensureScene();},
   '#reframe':()=>{experienceView='outside';paint();scene?.whole();},
@@ -252,7 +256,8 @@ window.addEventListener('pagehide',e=>{audio.play(false);scene?.setActive(false)
 window.addEventListener('pageshow',e=>{if(e.persisted)scene?.setActive(!$('bay-workspace').hidden);});
 powerExplanation=createPowerExplanation({before:$('bay-lesson'),
  change:(kind,id,on)=>{if(kind==='breaker'){state.breakers[id]=!on;save();paint();}},
- navigate:async(kind,d,origin)=>{
+ navigate:async(kind,d,origin,termId)=>{
+  if(kind==='tag'){moveTerm(termId);return;}
   if(kind==='term'){moveTerm('circuit');return;}
   electricalId=d.id;
   if(kind==='calculation'){calcMode='electric';readingView='one';formula=bayLesson(state,calcMode,electricalId).steps.findIndex(s=>s.id==='current');if(formula<0)formula=0;go('calculations');return;}

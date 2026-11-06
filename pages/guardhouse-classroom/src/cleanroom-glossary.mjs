@@ -1,4 +1,5 @@
-import {glossary,termTargets} from './cleanroom-project.mjs';
+import {glossary,termTargets,panel,circuits,equipment} from './cleanroom-project.mjs';
+import {electricalTagTerms} from './electrical-tags.mjs';
 import {glossary as sharedGlossary} from './classroom-project.mjs';
 import {bayCalculationTerms} from './cleanroom-lessons.mjs';
 import {studyConcepts} from './study-content.mjs';
@@ -30,3 +31,4 @@ for(const t of bayCalculationTerms)bayTerms.set(t.id,{...t});
 for(const [id,term,plain,menu,target,sheet]of rows)bayTerms.set(id,{id,term,plain,definition:'',target:{menu,id:target,sheet}});
 bayTerms.set('rebar-drawing',{...sharedGlossary.find(t=>t.id==='rebar-drawing'),sheet:'S-301',element:'slab',target:{menu:'structure',id:'slab',sheet:'S-301'}});
 for(const t of studyConcepts)bayTerms.set(t.id,t);
+for(const t of electricalTagTerms({panel,circuits,devices:equipment},{circuitSheet:'E-302',lightingSheet:'E-301',powerSheet:'E-301'}))bayTerms.set(t.id,t);

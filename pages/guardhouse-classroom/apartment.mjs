@@ -160,7 +160,7 @@ function calculationContent(){
  if($('apt-trial-calculate')){$('apt-trial-calculate').onclick=()=>{const value=Number($('apt-live').value);if(!Number.isFinite(value)||value<0||value>20){$('apt-trial-error').textContent='0부터 20 사이 값을 입력하세요.';return;}calc.live=value;calculationContent();};$('apt-trial-restore').onclick=()=>{calc.live=2;calculationContent();};}
  $('apt-save-calculation').onclick=()=>download('아파트-현재-계산.json',JSON.stringify({sample:apartment.id,lesson:apartmentLesson(electric,calc),state:calc},null,2),'application/json');
 }
-function term(id){const t=allTerms.find(t=>t.id===id);$('apt-term-title').textContent=t?.term??'소방설비';$('apt-term-body').textContent=t?t.plain+'. '+t.definition:'화재의 발생을 알아채고 알리거나 피난과 초기 대응을 돕는 설비입니다. 이 예제에서는 감지기·경보 장치·예비전원·소화기·비상조명을 연결해 봅니다.';$('apt-term-location').innerHTML=t?.element?'<button data-term-target="'+t.id+'">'+t.locationLabel+'</button>':(t?.locationNote??'');$('apt-term').showModal();}
+function term(id){const t=allTerms.find(t=>t.id===id);$('apt-term-title').textContent=t?.term??'소방설비';$('apt-term-body').textContent=t?[t.plain,t.definition,t.electrical].filter(Boolean).join(' '):'화재의 발생을 알아채고 알리거나 피난과 초기 대응을 돕는 설비입니다. 이 예제에서는 감지기·경보 장치·예비전원·소화기·비상조명을 연결해 봅니다.';$('apt-term-location').innerHTML=(t?.element?'<button data-term-target="'+t.id+'">'+t.locationLabel+'</button>':(t?.locationNote??''))+(t?'<button data-dictionary-term="'+t.id+'">용어사전에서 이어 보기</button>':'');$('apt-term').showModal();}
 function toggleSwitch(id){state.switches[id]=state.switches[id]===false;refresh();const result=lightingStatus(electric,state,id);if(result.lights[0]){selected=result.lights[0].id;view.highlight(selected);plan();inspector();}status((getObject(id)?.name??'스위치')+' · '+result.reason);}
 function startTour(id){tourId=id;view.view('electrical','iso');view.electricalSheet=null;view.tour.show(id,tourStep);view.site.visible=false;select(view.tour.data.steps[tourStep].element);tools();$('apt-view-title').textContent='전기 길 · '+view.tour.data.light.name;renderGuideDock();showGuideModel();}
 function renderElectricGuide(){renderGuideDock();const el=$('apt-route-lesson');el.hidden=!view.tour.active;if(el.hidden)return;
@@ -218,6 +218,7 @@ const lessonActions={
   "materialLocation": async (b) => { const a=apartmentAssemblies.find(a=>a.id===b.dataset.materialLocation);view.view('interior','iso');view.site.visible=false;select(a.target);$('apt-inspector').insertAdjacentHTML('beforeend','<div class="button-row"><button data-assembly="'+a.id+'">재료층 다시 보기</button></div>'); },
   "term": async (b) => { term(b.dataset.term); },
   "termTarget": async (b) => { const target=apartmentTermTarget(b.dataset.termTarget);if(target){$('apt-term').close();await destination(target.element,target.sheet);} },
+  "dictionaryTerm": async (b) => { const t=allTerms.find(t=>t.id===b.dataset.dictionaryTerm);if(!t)return;$('apt-term').close();if(await go('glossary')){const input=$('term-search');input.value=t.term;input.dispatchEvent(new Event('input'));input.focus();} },
   "tour": async (b) => { const resume=page==='calculations';if(page!=='electrical'&&!await go('electrical'))return;if(!resume)tourStep=0;startTour(b.dataset.tour); },
   "tourStep": async (b) => { tourStep=Number(b.dataset.tourStep);startTour(tourId); },
   "ref": async (b) => { setSheet(b.dataset.ref); },
@@ -251,7 +252,8 @@ const quantities=createQuantities({host:$('apt-content'),nav:$('learning-nav'),w
 mountSamples(2,()=>go('home'),()=>go('glossary'));
 powerExplanation=createPowerExplanation({before:$('apt-content'),
  change:(kind,id,on)=>{if(kind==='main')state.power=!on;else if(kind==='breaker')state.breakers[id]=!on;else state.switches[id]=!on;refresh();},
- navigate:async(kind,d,origin)=>{
+ navigate:async(kind,d,origin,termId)=>{
+  if(kind==='tag'){term(termId);return;}
   if(kind==='term'){term('circuit');return;}
   if(kind==='calculation'){calc.mode='electrical';calc.circuit=d.circuit;calc.step='current';await go('calculations');return;}
   if(kind==='quantities'){await quantities.showTarget(d.id);return;}

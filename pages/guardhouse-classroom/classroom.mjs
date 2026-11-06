@@ -1,5 +1,6 @@
 import {createQuantities} from './quantities-ui.mjs';
 import {createPowerExplanation} from './power-explanation.mjs';
+import {electricalTagTerms} from './src/electrical-tags.mjs';
 let powerExplanation;
 function updatePowerExplanation(){powerExplanation?.update({electric,page,selected});}
 import {mountExperienceTools,showScenePreview,lightingSwitchButtons,lightingSummary} from './workspace-ui.mjs';
@@ -16,7 +17,7 @@ import {readerKey,calculationKey,readStored,writeStored,readerContext,readerHash
 import {project as baseProject,glossary as baseGlossary,boundsOf,referencesFor as baseRefs,termFor as baseTerm,buildClassroomModel} from '/pages/guardhouse-classroom/src/classroom-project.mjs';
 import {extraSheets,extraGlossary,freshExpansion,restoreExpansion,fireModel,materialLayers,finishes,inspectionItems,inspectionSummary,pitInfo} from '/pages/guardhouse-classroom/src/lesson-expansion.mjs';
 import {fireContent,materialsContent,safetyContent} from './lesson-expansion-ui.mjs';
-const project={...baseProject,sheets:[...baseProject.sheets,...extraSheets]},glossary=withStudyConcepts([...baseGlossary,...extraGlossary]);
+const project={...baseProject,sheets:[...baseProject.sheets,...extraSheets]},glossary=withStudyConcepts([...baseGlossary,...extraGlossary,...electricalTagTerms(baseProject)]);
 const referencesFor=e=>e.system==='fire'?['F-101','F-102']:e.system==='materials'?['M-101']:baseRefs(e);
 const termFor=e=>e.system==='fire'?({smoke:'detector',heat:'detector',alarm:'fire-alarm'})[e.kind]??e.kind:e.system==='materials'?e.id==='material-insulation'?'insulation':'finish':baseTerm(e);
 import {freshExercise,restoreExercise,electricalModel,reinforcementFor,structuralCalculation,slabCalculation,validLightPosition,routeLength} from '/pages/guardhouse-classroom/src/learning-engine.mjs';
@@ -288,7 +289,8 @@ window.addEventListener('pagehide',event=>{navigationId++;viewer?.simulation?.le
 window.addEventListener('pageshow',event=>{if(event.persisted)viewer?.setActive(!$('workspace').hidden);});
  powerExplanation=createPowerExplanation({before:$('page-content'),
  change:(kind,id,on)=>{if(kind==='main')exercise.power=!on;else if(kind==='breaker')exercise.breakers[id]=!on;else exercise.switches[id]=!on;save();refreshElectrical();},
- navigate:async(kind,d,origin)=>{
+ navigate:async(kind,d,origin,termId)=>{
+  if(kind==='tag'){showTerm(termId);return;}
   if(kind==='term'){showTerm('circuit');return;}
   if(kind==='calculation'){await ensureGuide();calcState.mode='electrical';calcState.circuit=d.circuit;calcState.step='current';await go('calculations');return;}
   if(kind==='quantities'){await quantities.showTarget(d.id);return;}

@@ -9,6 +9,32 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:mirinaeman-theme",
+      "kind": "work",
+      "title": "미리내맨 — 미리내맨 주제곡",
+      "summary": "돈을 미리 내고 떠난 자리마다 별이 뜬다. 낸 금화가 별이 되어 은하수를 이루는 미리내맨 주제곡 뮤직비디오와 그 제작 과정.",
+      "url": "https://mirinaeman.com/pages/mirinaeman-theme/",
+      "image": "/pages/profile/assets/thumbnails/mirinaeman-theme.webp",
+      "alt": "파란 망토의 미리내맨이 은하수 앞에서 두 주먹을 허리에 얹고 윙크하는 장면",
+      "year": "2026",
+      "tags": [
+        "audio",
+        "image-cinema",
+        "webgl",
+        "motion",
+        "theme-song",
+        "youtube",
+        "making-of"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "돈을 미리 내고 떠난 자리마다 별이 뜬다. 낸 금화가 별이 되어 은하수를 이루는 미리내맨 주제곡 뮤직비디오와 그 제작 과정."
+        }
+      ]
+    },
+    {
       "id": "work:winter-dragon-war",
       "kind": "work",
       "title": "겨울아, 덤벼라 — 용의 전사들",
@@ -2725,6 +2751,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:mirinaeman-theme",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:winter-dragon-war",
       "target": "creator:joonho",

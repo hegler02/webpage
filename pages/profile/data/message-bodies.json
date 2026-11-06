@@ -1691,6 +1691,38 @@
       "latest_deployed_at": "2026-09-30T07:41:08.108000+00:00"
     },
     {
+      "body_id": "mirinaeman-theme",
+      "title": "미리내맨 — 미리내맨 주제곡",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-provided-audio",
+        "generated-image-cinema",
+        "code-rendered-video",
+        "stem-driven-motion"
+      ],
+      "tags": [
+        "audio",
+        "image-cinema",
+        "webgl",
+        "motion",
+        "theme-song",
+        "youtube",
+        "making-of"
+      ],
+      "message_sentence": "돈을 미리 내고 떠난 자리마다 별이 뜬다. 낸 금화가 별이 되어 은하수를 이루는 미리내맨 주제곡 뮤직비디오와 그 제작 과정.",
+      "thumbnail": {
+        "path": "assets/thumbnails/mirinaeman-theme.webp",
+        "alt": "파란 망토의 미리내맨이 은하수 앞에서 두 주먹을 허리에 얹고 윙크하는 장면",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 40%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/mirinaeman-theme/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-11-06T22:11:00+00:00",
+      "latest_deployed_at": "2026-11-06T22:11:00+00:00"
+    },
+    {
       "body_id": "modern-myeongsimbogam",
       "title": "시간이 흘러도 변하지 않는 현대판 명심보감 15가지",
       "body_type": "KNOWLEDGEBODY",

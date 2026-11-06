@@ -314,3 +314,45 @@ html, body { margin: 0; height: 100%; background: var(--room); color: var(--on-d
 .above-row { display: flex; align-items: flex-end; gap: 48px; }
 .outputs ol { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, auto); gap: 10px 14px; }
 .outputs li { padding: 12px 20px; border-radius: 10px; border: 1px solid rgba(240, 211, 140, .55); background: rgba(240, 211, 140, .08); font-size: 23px; font-weight: 700; white-space: nowrap; }
+
+/* ===== 2부 · 좌담회 (2026-11-06): 라운드 화면 카드와 질문별 FAQ - 1부와 같은 몸(색 변수 · 명조 제목 · 금빛 표지)을 쓴다 ===== */
+.part-title { font-size: 92px; line-height: 1.2; }
+.rounds { list-style: none; margin: 80px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.rounds li { padding: 30px 30px 34px; border-top: 3px solid var(--kohvea-gold); background: rgba(255, 255, 255, .04); border-radius: 0 0 14px 14px; }
+.rounds span { display: block; font-size: 20px; font-weight: 900; letter-spacing: .14em; color: var(--gold); }
+.rounds b { display: block; margin-top: 14px; font-family: var(--serif); font-size: 36px; line-height: 1.35; font-weight: 700; color: var(--on-dark); }
+.panel-line { position: absolute; left: 120px; right: 120px; bottom: 80px; font-size: 22px; color: var(--on-dark-soft); }
+.stamp { position: absolute; left: 120px; right: 120px; bottom: 70px; }
+.round-stats { margin-top: 56px; max-width: 1500px; }
+.round-stats li { grid-template-columns: 220px 1fr; }
+.split { margin-top: 52px; display: grid; grid-template-columns: 560px 1fr; gap: 64px; align-items: start; }
+.split-list { margin: 22px 0 0; padding: 0 0 0 1.2em; display: grid; gap: 18px; font-family: var(--serif); font-size: 40px; font-weight: 700; line-height: 1.3; color: var(--ink); }
+.split-side { display: grid; gap: 22px; }
+.split-side .lab { margin-bottom: 4px; }
+.principle-grid { margin-top: 52px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px 56px; }
+.principle-grid .rule i { display: block; margin-top: 8px; font-style: normal; font-size: 20px; color: var(--on-dark-faint); }
+.verify { margin-top: 52px; display: grid; grid-template-columns: 1fr 90px 1fr; gap: 24px; align-items: center; }
+.verify-col { display: grid; gap: 26px; padding: 34px 38px; border-radius: 18px; background: rgba(255, 255, 255, .05); border: 1px solid var(--line-dark); }
+.verify-col.after { background: var(--paper); color: var(--ink); border-color: transparent; box-shadow: 0 24px 60px rgba(0, 0, 0, .4); }
+.verify-col.after .lab { color: var(--gold-ink); }
+.verify .stat { display: grid; gap: 6px; }
+.verify .stat b { font-family: var(--serif); font-weight: 900; font-size: 72px; line-height: 1; color: var(--gold); font-variant-numeric: tabular-nums; }
+.verify .stat b small { font-size: 36px; font-weight: 700; margin-left: 4px; }
+.verify-col.after .stat b { color: var(--band-from); }
+.verify .stat span { font-size: 24px; line-height: 1.45; color: var(--on-dark-soft); }
+.verify-col.after .stat span { color: var(--soft); }
+.verify-arrow { height: 4px; background: linear-gradient(90deg, var(--band-from), var(--band-to)); position: relative; }
+.verify-arrow::after { content: ""; position: absolute; right: -4px; top: -10px; border: 12px solid transparent; border-left: 16px solid var(--band-to); border-right: 0; }
+.spread { list-style: none; margin: 72px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; counter-reset: step; }
+.spread li { position: relative; padding: 34px 30px; border-radius: 18px; background: rgba(255, 255, 255, .05); border: 1px solid var(--line-dark); }
+.spread li::before { counter-increment: step; content: counter(step, decimal-leading-zero); display: block; font-size: 20px; font-weight: 900; letter-spacing: .14em; color: var(--gold); }
+.spread b { display: block; margin-top: 14px; font-family: var(--serif); font-size: 38px; line-height: 1.3; color: var(--on-dark); }
+.spread span { display: block; margin-top: 12px; font-size: 23px; line-height: 1.5; color: var(--on-dark-soft); }
+.s-round .principle { text-wrap: balance; max-width: 1560px; }
+.s-faq { padding-top: 110px; }
+.s-faq .q { margin: 22px 0 0; font-family: var(--serif); font-weight: 900; font-size: 68px; line-height: 1.28; letter-spacing: -.01em; text-wrap: balance; }
+.s-faq .q::before { content: "Q."; margin-right: .3em; color: var(--gold); }
+.s-faq .a { list-style: none; margin: 56px 0 0; padding: 0; display: grid; gap: 22px; max-width: 1560px; }
+.s-faq .a li { position: relative; padding-left: 46px; font-size: 32px; line-height: 1.5; color: var(--on-dark); }
+.s-faq .a li::before { content: ""; position: absolute; left: 0; top: .62em; width: 22px; height: 3px; background: var(--kohvea-gold); }
+.s-faq .src { position: absolute; left: 120px; right: 120px; bottom: 70px; margin: 0; font-size: 21px; color: var(--on-dark-faint); }

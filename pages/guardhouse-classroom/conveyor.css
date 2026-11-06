@@ -30,7 +30,7 @@
 .cv-plan-node .node-body{fill:#fff;stroke:#8ba2ab;stroke-width:2}
 .cv-plan-node[data-active=true] .node-body{fill:#e4f3ea;stroke:#167e79}
 .cv-plan-node[data-device="-06S2"][data-active=true] .node-body{fill:#fff0e9;stroke:#b94330}
-.cv-plan-node[aria-selected=true] .node-body,.cv-plan-node:focus .node-body{stroke:#c47a15;stroke-width:4}
+.cv-plan-node[aria-pressed=true] .node-body,.cv-plan-node:focus .node-body{stroke:#c47a15;stroke-width:4}
 .cv-plan-node text{fill:#183540;font-size:17px;pointer-events:none}
 .cv-plan-node .tag{font-size:15px;fill:#657b86}
 .cv-wire{fill:none;stroke:#8ba2ab;stroke-width:3}

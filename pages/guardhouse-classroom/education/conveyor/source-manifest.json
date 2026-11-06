@@ -1,0 +1,71 @@
+{
+  "source": "IEC-Training-2027.zip",
+  "sha256": "b98dab1b8d5379c58f806aa631d6cc1ba075e4ef83b50c99607f5e11fc06eb08",
+  "renderNote": "DWG에서 추출한 선과 문자 미리보기. 일부 해치·겹친 속성문자·타원·숨김 표현은 원본 CAD와 다를 수 있습니다.",
+  "files": [
+    {
+      "sheet": "01",
+      "width": 2100,
+      "height": 1450,
+      "bytes": 66342,
+      "derivedFrom": "IEC-Training-01.dwg",
+      "renderHash": "4ef4dbe791efaaa1e26ee57185c14c6809b56e0ca5f020d6baef28612aa8932e"
+    },
+    {
+      "sheet": "02",
+      "width": 2100,
+      "height": 1450,
+      "bytes": 140140,
+      "derivedFrom": "IEC-Training-02.dwg",
+      "renderHash": "361b1a069e58fe9d2434f8137d43f069606e62b115aaec21a89642c2e24d9820"
+    },
+    {
+      "sheet": "03",
+      "width": 2100,
+      "height": 1450,
+      "bytes": 128906,
+      "derivedFrom": "IEC-Training-03.dwg",
+      "renderHash": "057a313874f93d2cd01d266f3e4120af2eb6a3aeeda94200a3efd17229704b17"
+    },
+    {
+      "sheet": "06",
+      "width": 2100,
+      "height": 1450,
+      "bytes": 99596,
+      "derivedFrom": "IEC-Training-06.dwg",
+      "renderHash": "a52ec8b5a47f2edc94f388d6abe0b4958e814f621c12a8b06b76167bea706d27"
+    },
+    {
+      "sheet": "07",
+      "width": 2100,
+      "height": 1450,
+      "bytes": 109978,
+      "derivedFrom": "IEC-Training-07.dwg",
+      "renderHash": "f6240b4b87470071aa4aef8c77507357471ab33926ce30b8612469768f9c482e"
+    },
+    {
+      "sheet": "09",
+      "width": 2100,
+      "height": 1450,
+      "bytes": 93312,
+      "derivedFrom": "IEC-Training-09.dwg",
+      "renderHash": "2e8d2d9c9281f1cb5d0d6df15c11648641a8aa24ed5f4df008d32efcf0dabe19"
+    },
+    {
+      "sheet": "21",
+      "width": 2100,
+      "height": 1450,
+      "bytes": 106304,
+      "derivedFrom": "IEC-Training-21.dwg",
+      "renderHash": "a92d76b08bd0d87fb7a41965ad42a62589d59e7da624fb7772bc91470eb62e21"
+    },
+    {
+      "sheet": "22",
+      "width": 2100,
+      "height": 1450,
+      "bytes": 182000,
+      "derivedFrom": "IEC-Training-22.dwg",
+      "renderHash": "137686556508172abc3e0142c748be9ed7906e8b5f573ae7b9050be5d6722ed3"
+    }
+  ]
+}

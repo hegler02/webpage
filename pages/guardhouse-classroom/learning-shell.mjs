@@ -3,7 +3,8 @@ export {mountGlossary} from './glossary-study.mjs';
 export const samples=Object.freeze([
  {id:1,name:'경비실',path:'index.html'},
  {id:2,name:'아파트',path:'apartment.html'},
- {id:3,name:'클린룸',path:'cleanroom.html'}
+ {id:3,name:'클린룸',path:'cleanroom.html'},
+ {id:4,name:'컨베이어',path:'conveyor.html'}
 ]);
 export function mountSamples(current,onCurrent,onStudyReturn){
  if(onStudyReturn)mountStudyReturn(current,onStudyReturn);

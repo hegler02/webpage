@@ -13,11 +13,13 @@ export function mountStudyReturn(sample,onReturn){
  try{show(JSON.parse(browserStorage()?.getItem(studyKey(sample))??'null')?.returnMode);}catch{show(null);}
  window.addEventListener('classroom-study-return',event=>{if(event.detail.sample===sample)show(event.detail.mode);});
 }
-export function mountGlossary(host,inputTerms,{sample,action,detailsAction}={}){
+export function mountGlossary(host,inputTerms,{sample,action,detailsAction,concepts=true,questions:extraQuestions=[]}={}){
  ensureStyle();sample??=location.pathname.includes('apartment')?2:location.pathname.includes('cleanroom')?3:1;
- const terms=withStudyConcepts(inputTerms),questions=questionsFor(terms),options={action,detailsAction},storage=browserStorage();
+ const terms=concepts?withStudyConcepts(inputTerms):inputTerms,questions=[...questionsFor(terms),...extraQuestions.filter(q=>terms.some(t=>t.id===q.term)).map(q=>({...q,category:terms.find(t=>t.id===q.term).category}))],options={action,detailsAction},storage=browserStorage();
  const loaded=loadStudy(storage,sample,terms,questions,studyCategories);let s=loaded.state,persistent=loaded.persistent;
  if(!persistent&&volatileStates.has(sample))s=volatileStates.get(sample);
+ const availableCategories=Object.fromEntries(Object.entries(studyCategories).filter(([id])=>terms.some(t=>t.category===id)));
+ if(s.category!=='all'&&!Object.hasOwn(availableCategories,s.category))s.category='all';
  if(s.returnMode){s.mode=s.returnMode;s.returnMode=null;s.query='';}
  const notify=mode=>window.dispatchEvent(new CustomEvent('classroom-study-return',{detail:{sample,mode}}));
  notify(null);
@@ -31,7 +33,7 @@ export function mountGlossary(host,inputTerms,{sample,action,detailsAction}={}){
   const position=window.scrollY;
   $('.study-tabs').innerHTML=[['dictionary','사전 보기'],['cards','학습카드'],['quiz','OX 퀴즈']].map(([id,label])=>`<button type="button" data-study-mode="${id}" aria-pressed="${s.mode===id}" ${s.mode===id?'class="primary"':''}>${label}</button>`).join('');
   $('[data-study-storage]').textContent=persistent?'카드 표시와 퀴즈 진행은 이 브라우저에 저장됩니다.':'저장 공간을 사용할 수 없어 현재 페이지를 여는 동안만 기록됩니다.';
-  $('[data-study-controls]').innerHTML=(s.mode!=='dictionary'?filtersView(s):'')+(s.mode==='dictionary'&&s.returnMode?`<div class="study-return"><span>뜻을 확인한 뒤 읽던 곳으로 돌아가세요.</span><button data-study-resume>${s.returnMode==='quiz'?'OX 퀴즈 이어풀기':'학습카드 이어보기'}</button></div>`:'');
+  $('[data-study-controls]').innerHTML=(s.mode!=='dictionary'?filtersView(s,availableCategories):'')+(s.mode==='dictionary'&&s.returnMode?`<div class="study-return"><span>뜻을 확인한 뒤 읽던 곳으로 돌아가세요.</span><button data-study-resume>${s.returnMode==='quiz'?'OX 퀴즈 이어풀기':'학습카드 이어보기'}</button></div>`:'');
   $('[data-study-dictionary]').hidden=s.mode!=='dictionary';
   $('[data-study-stage]').hidden=s.mode==='dictionary';
   if(s.mode==='dictionary'){input.value=s.query;const result=dictionaryView(terms,s.query,options);$('#term-list').innerHTML=result.html;$('#term-count').textContent=result.count+'개 용어';}

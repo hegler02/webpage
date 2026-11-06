@@ -112,7 +112,7 @@ const LINKS = {
   },
   // 2→3 두 막대 사이의 틈이 격차가 된다
   "2>3": (from, to) => { play(from, [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "scaleY(.6)" }], { duration: 500, fill: "forwards" }); enter(to, 200); return true; },
-  // 3→4 느린 흐름과 빠른 흐름의 상자가 출처 18곳의 줄로 펼쳐진다: 빠른 흐름은 다섯 축의 줄, 느린 흐름은 학교·학과 줄
+  // 3→4 느린 흐름과 빠른 흐름의 상자가 출처 19곳의 줄로 펼쳐진다: 빠른 흐름은 다섯 축의 줄, 느린 흐름은 학교·학과 줄
   "3>4": (from, to) => {
     const pairs = [[".stream.fast", "#axis-rows", "var(--fast)"], [".stream.slow", "#axis-rows li.school", "var(--slow)"]];
     for (const [a, b, color] of pairs) { const r0 = rectIn(from.querySelector(a)); const r1 = rectIn(to.querySelector(b)); const g = ghost(r0, { borderRadius: "18px", border: `3px solid ${color}`, background: "rgba(255, 255, 255, .04)" });

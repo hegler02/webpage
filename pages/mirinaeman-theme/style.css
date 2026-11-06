@@ -1,0 +1,89 @@
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--ink)}
+body{margin:0;color:var(--bone);font-family:var(--font-body);font-size:var(--type-body);line-height:var(--line-body);word-break:keep-all;overflow-wrap:break-word}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:var(--focus) solid var(--gold-hot);outline-offset:var(--focus)}
+h1,h2,p,ol{margin:0}
+ol{list-style:none;padding:0}
+
+/* One surface behind everything. Without WebGL each scene carries its own still. */
+#film{position:fixed;inset:0;width:100%;height:100%;display:block}
+.still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.has-film .still{display:none}
+.scene,.hero,.colophon{position:relative}
+.scene:not(.has-film *) .still,.hero .still{z-index:-1}
+
+.action{display:inline-flex;align-items:center;min-height:var(--hit);font-weight:var(--weight-strong);text-decoration:none;background:linear-gradient(currentColor,currentColor) left calc(100% - var(--space-s))/100% var(--underline) no-repeat;transition:color var(--time-fast) var(--ease-out)}
+.action:hover{color:var(--gold-hot)}
+.label{font-size:var(--type-label);letter-spacing:var(--track-label);color:var(--bone-dim)}
+
+.mast{position:fixed;z-index:3;inset:0 0 auto 0;display:flex;justify-content:space-between;align-items:center;gap:var(--space-m);padding:var(--space-s) var(--gutter);pointer-events:none}
+.mast>*{pointer-events:auto}
+.status{font-size:var(--type-small);color:var(--bone-dim)}
+
+/* Hero: the title stands in the burning film. */
+.hero{height:var(--hero-length)}
+.hero-copy,.scene-copy{position:sticky;top:0;min-height:var(--view);padding:var(--gutter);display:flex;flex-direction:column;justify-content:flex-end;gap:var(--space-m);opacity:var(--show,1);transform:translateY(calc((1 - var(--show,1))*var(--lift)));will-change:opacity,transform}
+.hero-copy::before,.scene-copy::before{content:"";position:absolute;inset:auto 0 0 0;height:70%;z-index:-1;background:linear-gradient(to top,var(--ink-veil),var(--ink-clear));pointer-events:none}
+.title{font-family:var(--font-display);font-weight:var(--weight-regular);font-size:var(--type-title);line-height:var(--line-tight)}
+.title span{display:block;overflow:hidden}
+.title b{display:block;font-weight:var(--weight-regular);animation:rise var(--time-iris) var(--ease-out) both}
+.title span+span b{color:var(--gold);animation-delay:var(--time-fast)}
+@keyframes rise{from{transform:translateY(100%)}to{transform:none}}
+.hero-foot{display:flex;flex-wrap:wrap;gap:var(--space-s) var(--space-l);align-items:center;justify-content:space-between;font-size:var(--type-lyric)}
+
+/* Scenes: long enough to stay with each painting, then let the transition carry you on. */
+.scene{height:var(--scene-length)}
+.scene-copy>*{max-width:var(--copy-width)}
+.scene-time{font-variant-numeric:tabular-nums}
+.scene-title{font-family:var(--font-display);font-weight:var(--weight-regular);font-size:var(--type-scene);line-height:var(--line-tight)}
+.lyrics{width:min(100%,var(--lyric-width));font-size:var(--type-lyric);line-height:var(--line-lyric);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,var(--lyric-column)),1fr));column-gap:var(--space-m)}
+.lyrics li{opacity:0;transform:translateY(var(--space-s));transition:opacity var(--time-line) var(--ease-out),transform var(--time-line) var(--ease-out);transition-delay:calc(var(--n)*var(--time-stagger))}
+.scene.on .lyrics li{opacity:1;transform:none}
+.lyric:disabled{cursor:default}
+.lyric:not(:disabled):hover{color:var(--gold-hot)}
+.scene-play{font-size:var(--type-small);align-self:flex-start}
+
+/* The song as a rail: where you are in four minutes twelve. */
+.rail{position:fixed;z-index:3;right:var(--rail-gutter);top:50%;transform:translateY(-50%);display:grid;justify-items:end}
+.tick{display:flex;align-items:center;justify-content:flex-end;gap:var(--space-s);min-height:var(--hit);min-width:var(--hit);color:var(--bone-dim)}
+.tick i{display:block;height:var(--rule);width:var(--tick);background:currentColor;transition:width var(--time-line) var(--ease-out)}
+.tick span{font-size:var(--type-label);letter-spacing:var(--track-label);opacity:0;transition:opacity var(--time-fast) var(--ease-out);font-variant-numeric:tabular-nums}
+.tick:hover span,.tick:focus-visible span,.tick[aria-current=true] span{opacity:1}
+.tick:hover{color:var(--bone)}
+.tick[aria-current=true]{color:var(--gold-hot)}
+.tick[aria-current=true] i{width:var(--tick-now)}
+
+.colophon{min-height:var(--colophon);padding:var(--gutter);display:flex;flex-direction:column;justify-content:flex-end;gap:var(--space-m);background:linear-gradient(to top,var(--ink),var(--ink-clear))}
+.credits{display:flex;flex-wrap:wrap;gap:var(--space-s) var(--space-l);margin:0}
+.credits div{display:flex;gap:var(--space-s);align-items:baseline}
+.credits dd{margin:0;font-size:var(--type-small)}
+.links{display:flex;flex-wrap:wrap;gap:var(--space-m);margin:0}
+.note{font-size:var(--type-small);color:var(--bone-dim);max-width:46ch}
+
+/* Theatre: the film opens out of the point you pressed. */
+.theatre{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:var(--ink);color:var(--bone);clip-path:circle(var(--iris-closed) at var(--ox,50%) var(--oy,50%));transition:clip-path var(--time-iris) var(--ease-out);overflow:hidden}
+.theatre[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+.theatre.open{clip-path:circle(var(--iris-open) at var(--ox,50%) var(--oy,50%))}
+.theatre::backdrop{background:var(--ink-clear)}
+.theatre-head{display:flex;justify-content:space-between;align-items:center;gap:var(--space-m);padding:var(--space-xs) var(--gutter)}
+.theatre-frame{position:relative;min-height:0;display:grid;place-items:center}
+.theatre-frame>*{width:100%;height:100%;border:0}
+.theatre-foot{padding:var(--space-s) var(--gutter) var(--space-m);display:grid;gap:var(--space-s)}
+.time-rail{display:flex;gap:var(--rule);height:var(--hit);align-items:center}
+.time-band{flex:var(--span) 1 0;height:100%;position:relative;display:flex;align-items:center}
+.time-band::before{content:"";width:100%;height:var(--rule);background:var(--hairline)}
+.time-band::after{content:"";position:absolute;left:0;height:var(--underline);width:calc(var(--done,0)*100%);background:var(--gold-hot)}
+.time-band:hover::before{background:var(--bone)}
+.theatre-note{font-size:var(--type-small);color:var(--bone-dim)}
+
+@media (max-width:42rem){
+ .rail{display:none}
+ .lyrics{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;transition:none!important}
+ .lyrics li{opacity:1;transform:none}
+}

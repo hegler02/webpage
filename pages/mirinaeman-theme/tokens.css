@@ -1,0 +1,69 @@
+/* The only file allowed to hold raw design values. tools/lint-tokens.mjs enforces this. */
+@font-face{font-family:"Han Display";src:url("assets/display.woff2") format("woff2");font-display:swap}
+:root{
+ color-scheme:dark;
+ --ink:#040818;
+ --ink-veil:#040818c4;
+ --ink-clear:#04081800;
+ --bone:#f1ece0;
+ --bone-dim:#b9b5a9;
+ --gold:#e6a03c;
+ --gold-hot:#ffd98f;
+ --hairline:#f1ece02e;
+
+ --font-display:"Han Display","Malgun Gothic",sans-serif;
+ --font-body:Pretendard,"Noto Sans KR","Malgun Gothic",sans-serif;
+ --type-title:clamp(4rem,17vw,19rem);
+ --type-scene:clamp(2.6rem,8.4vw,9rem);
+ --type-lyric:clamp(1.05rem,1.9vw,1.75rem);
+ --type-section:clamp(1.8rem,4vw,3.4rem);
+ --type-mark:clamp(1.25rem,2.4vw,2rem);
+ --type-body:1rem;
+ --type-small:.8125rem;
+ --type-label:.6875rem;
+ --line-tight:.98;
+ --line-lyric:1.62;
+ --line-body:1.7;
+ --track-label:.16em;
+ --weight-regular:400;
+ --weight-strong:700;
+
+ --gutter:clamp(18px,4.4vw,72px);
+ --rail-gutter:clamp(18px,3vw,44px);
+ --space-xs:6px;
+ --space-s:12px;
+ --space-m:24px;
+ --space-l:48px;
+ --space-xl:clamp(72px,10vw,144px);
+ --scene-length:230svh;
+ --hero-length:200svh;
+ --rule:1px;
+ --tick:18px;
+ --tick-now:44px;
+ --hit:44px;
+ --underline:2px;
+ --focus:2px;
+ --lift:28px;
+ --view:100svh;
+ --colophon:60svh;
+ --lyric-width:34rem;
+ --lyric-column:14rem;
+ --copy-width:64rem;
+ --headline-width:18ch;
+ --read-width:44rem;
+ --pair-min:18rem;
+ --stem-label:3.2rem;
+ --stem-height:clamp(44px,7vw,84px);
+ --stem-fill:.82;
+ --axis-height:32px;
+ --used-label:6.5rem;
+
+ --time-fast:180ms;
+ --time-line:620ms;
+ --time-stagger:70ms;
+ --time-iris:760ms;
+ --ease-out:cubic-bezier(.16,1,.3,1);
+ --iris-closed:0%;
+ --iris-open:150%;
+ --shade-strength:.72;
+}

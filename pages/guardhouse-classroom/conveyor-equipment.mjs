@@ -148,7 +148,16 @@ export function createEquipment({materials:m,label}) {
   if(motion.stop)motion.stop.position.z=state.estop?.031:.055;
   for(const o of motion.breaker)o.position.y=state.power?.03:-.03;
  }
- return {build(d,g){if(d.kind==='cabinet'){cabinet(g,d);return true;}if(d.kind==='motor'){motor(g);return true;}return false;},detail,finish,animate,
+ function framingBounds(g){
+  const bounds=new T.Box3().setFromObject(g),door=motion.door;
+  if(door?.parent===g&&doorOpen){
+   const angle=door.rotation.y;
+   door.rotation.y=-2.8;bounds.union(new T.Box3().setFromObject(g));
+   door.rotation.y=angle;g.updateMatrixWorld(true);
+  }
+  return bounds;
+ }
+ return {build(d,g){if(d.kind==='cabinet'){cabinet(g,d);return true;}if(d.kind==='motor'){motor(g);return true;}return false;},detail,finish,animate,framingBounds,
   setDoor(value){doorOpen=Boolean(value);},isDoorOpen:()=>doorOpen,
   dispose(){unitBox.dispose();unitCylinder.dispose();},motion};
 }

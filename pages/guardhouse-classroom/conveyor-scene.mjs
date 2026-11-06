@@ -94,7 +94,7 @@ export function createConveyorScene(host,{select,onFrame,getState}){
   let pos,target;if(id==='whole'){pos=[7,5.7,8];target=[-.1,.9,0];}else if(id==='cabinet'){pos=[-2.4,2.9,.2];target=[-2,1.15,-2];}else if(id==='operator'){pos=[.8,2,3.75];target=[0,1.32,1.9];}else if(id==='coil'){pos=[.6,1.8,-.5];target=[-.4,1.35,-2];}else{const d=byId.get(id);if(!d)return;target=d.pos;pos=[d.pos[0]+.8,d.pos[1]+.45,d.pos[2]+1.6];}
   if(id==='whole'){const direction=new T.Vector3(1,.62,1.1).normalize(),distance=Math.max(6.8,10.5/camera.aspect);pos=direction.multiplyScalar(distance).add(new T.Vector3(...target)).toArray();}
   const focused=id==='coil'?detail:groups.get(({cabinet:'CAB1',operator:'OP1'})[id]??id);
-  if(focused){const bounds=new T.Box3().setFromObject(focused),size=bounds.getSize(new T.Vector3()),center=bounds.getCenter(new T.Vector3());const distance=Math.max(.45,Math.max(size.y,size.x/camera.aspect)*.7/Math.tan(T.MathUtils.degToRad(camera.fov/2))+size.z*.5);target=center.toArray();pos=new T.Vector3(.25,.16,1).normalize().multiplyScalar(distance).add(center).toArray();}
+  if(focused){const bounds=equipment.framingBounds(focused),size=bounds.getSize(new T.Vector3()),center=bounds.getCenter(new T.Vector3());const distance=Math.max(.45,Math.max(size.y,size.x/camera.aspect)*.7/Math.tan(T.MathUtils.degToRad(camera.fov/2))+size.z*.5);target=center.toArray();pos=new T.Vector3(.25,.16,1).normalize().multiplyScalar(distance).add(center).toArray();}
   camera.position.set(...pos);controls.target.set(...target);camera.lookAt(controls.target);controls.update();badge.textContent=id==='coil'?'접촉기 내부 · 코일과 접점':id==='whole'?'컨베이어 · 제어반 · 조작반':'같은 기기의 형상과 연결을 확인하세요.';
  }
  function enter(place='whole'){

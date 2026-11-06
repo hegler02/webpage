@@ -1,4 +1,5 @@
 import {createQuantities} from './quantities-ui.mjs';
+import {mountWorkbench,standardPages} from './workbench.mjs';
 import {createPowerExplanation} from './power-explanation.mjs';
 import {createDomainExplanation} from './domain-explanation.mjs';
 import {fireExplanation,structureExplanation,materialExplanation} from './src/domain-explanations.mjs';
@@ -23,6 +24,7 @@ import {fireSimulationResult} from './src/fire-simulation.mjs';
 const $=id=>document.getElementById(id);
 const key='space-electricity-cleanroom-03-v1';
 const homePreview=new URL('./cleanroom-preview.png',import.meta.url).href;
+mountWorkbench({root:$('bay-app'),workspace:$('bay-workspace'),heading:$('page-heading'),canvases:$('bay-panes'),plan:$('bay-plan'),three:$('bay-canvas'),inspector:$('bay-inspector'),content:'#bay-lesson',status:$('bay-status'),extraMove:['#bay-return'],idleTitle:'하나를 눌러보세요.',pages:standardPages('#bay-lesson')});
 let saved;
 try{saved=JSON.parse(localStorage.getItem(key));}catch{}
 const state=freshBay(saved),audio=new AlarmOutput();

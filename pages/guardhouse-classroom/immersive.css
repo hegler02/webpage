@@ -11,20 +11,20 @@
 .sim-steps{list-style:none;display:flex;flex-wrap:wrap;gap:.35rem;padding:0;font-size:var(--sys-size-caption);}.sim-steps li{padding:.3rem .5rem;background:#fff;border-radius:.3rem;color:#526566;}.sim-steps .current{background:var(--sim-accent);color:white;}
 .sim-caption{font-size:var(--sys-size-caption);color:#576b6c;line-height:var(--sys-leading-compact);}.sim-sources a{display:block;}.sim-aim{display:grid;gap:.4rem;}.sim-aim input{width:100%;accent-color:var(--sim-accent);min-height:30px;}.fire-sim meter{width:8rem;vertical-align:middle;}.sim-extinguisher[open]{display:grid;gap:.65rem;}.fire-sim summary{cursor:pointer;font-weight:var(--sys-weight-control);}
 .sim-record{padding:1.5rem;background:white;border:1px solid var(--sim-border);border-radius:1rem;margin-block:1.5rem;}
-[data-page="fire-test"] .model-panel,[data-page="fire-test"] .apt-canvases>.model-panel{display:grid;grid-template-columns:minmax(250px,320px) minmax(0,1fr);align-items:start;}
-[data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>.canvas-heading{grid-column:1/-1;grid-row:1;}
-[data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>.fire-guide-dock,[data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>.apt-guide-dock{grid-column:1/-1;grid-row:2;}
-[data-page="fire-test"] .fire-sim{grid-column:1;grid-row:4;}
-[data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>#three-host,[data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>#apt-three{grid-column:2;grid-row:4;position:sticky;top:140px;min-height:480px;height:65vh;max-height:760px;}
-[data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>.canvas-footer{grid-column:1/-1;grid-row:5;}
-@media(max-width:900px){[data-page="fire-test"] .model-panel,[data-page="fire-test"] .apt-canvases>.model-panel{grid-template-columns:minmax(0,1fr);}[data-page="fire-test"] .fire-sim{grid-column:1;grid-row:5;}[data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>#three-host,[data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>#apt-three{grid-column:1;grid-row:4;top:76px;min-height:240px;height:36vh;max-height:380px;z-index:2;}[data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>.canvas-footer{grid-row:6;}.fire-sim{--sim-pad:.9rem;}.sim-actions button{flex:1 1 auto;}.fire-sim .sim-caption{font-size:var(--sys-size-caption);}}
+body:not(.wb-on) [data-page="fire-test"] .model-panel,body:not(.wb-on) [data-page="fire-test"] .apt-canvases>.model-panel{display:grid;grid-template-columns:minmax(250px,320px) minmax(0,1fr);align-items:start;}
+body:not(.wb-on) [data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>.canvas-heading{grid-column:1/-1;grid-row:1;}
+body:not(.wb-on) [data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>.fire-guide-dock,body:not(.wb-on) [data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>.apt-guide-dock{grid-column:1/-1;grid-row:2;}
+body:not(.wb-on) [data-page="fire-test"] .fire-sim{grid-column:1;grid-row:4;}
+body:not(.wb-on) [data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>#three-host,body:not(.wb-on) [data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>#apt-three{grid-column:2;grid-row:4;position:sticky;top:140px;min-height:480px;height:65vh;max-height:760px;}
+body:not(.wb-on) [data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>.canvas-footer{grid-column:1/-1;grid-row:5;}
+@media(max-width:900px){body:not(.wb-on) [data-page="fire-test"] .model-panel,body:not(.wb-on) [data-page="fire-test"] .apt-canvases>.model-panel{grid-template-columns:minmax(0,1fr);}body:not(.wb-on) [data-page="fire-test"] .fire-sim{grid-column:1;grid-row:5;}body:not(.wb-on) [data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>#three-host,body:not(.wb-on) [data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>#apt-three{grid-column:1;grid-row:4;top:76px;min-height:240px;height:36vh;max-height:380px;z-index:2;}body:not(.wb-on) [data-page="fire-test"] :is(.model-panel,.apt-canvases>.model-panel)>.canvas-footer{grid-row:6;}.fire-sim{--sim-pad:.9rem;}.sim-actions button{flex:1 1 auto;}.fire-sim .sim-caption{font-size:var(--sys-size-caption);}}
 @media(prefers-reduced-motion:reduce){.fire-sim *{scroll-behavior:auto;}}
 
 #three-host,#apt-three,.fire-sim{scroll-margin-top:145px;}
 
 .fire-pages{display:none;gap:.5rem;padding:.8rem 1rem;border-bottom:1px solid var(--sim-border)}
 [data-page^="fire"] .fire-pages{display:flex;flex-wrap:wrap}
-[data-page="fire"] .fire-pages button:first-child,[data-page="fire-test"] .fire-pages button:last-child,[data-page="fire-signal"] .fire-pages button:last-child{background:var(--sim-accent);color:white}
-[data-page="fire-test"] :is(.workspace-toolbar,.workspace-status,#context-tools,#apt-tools,#inspector,#apt-inspector,#plan-panel,.canvas-footer,.apt-canvases>section:first-child){display:none}
-[data-page="fire-test"] :is(#canvas-row,.apt-canvases){display:block}
+[data-page="fire"] .fire-pages button:first-child,body:not(.wb-on) [data-page="fire-test"] .fire-pages button:last-child,[data-page="fire-signal"] .fire-pages button:last-child{background:var(--sim-accent);color:white}
+body:not(.wb-on) [data-page="fire-test"] :is(.workspace-toolbar,.workspace-status,#context-tools,#apt-tools,#inspector,#apt-inspector,#plan-panel,.canvas-footer,.apt-canvases>section:first-child){display:none}
+body:not(.wb-on) [data-page="fire-test"] :is(#canvas-row,.apt-canvases){display:block}
 .prop-attribution{font-size:var(--sys-size-caption)}

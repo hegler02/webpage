@@ -1,4 +1,5 @@
 import {createQuantities} from './quantities-ui.mjs';
+import {mountWorkbench,standardPages} from './workbench.mjs';
 import {createPowerExplanation} from './power-explanation.mjs';
 import {createDomainExplanation} from './domain-explanation.mjs';
 import {fireExplanation,structureExplanation,materialExplanation} from './src/domain-explanations.mjs';
@@ -24,6 +25,7 @@ import {apartmentAssemblies,apartmentPalettes,materialSources} from '/pages/guar
 import {apartmentLesson,restoreApartmentReader} from '/pages/guardhouse-classroom/src/apartment-lessons.mjs';
 import {lessonHTML,formulaHTML} from './calculation-guide.mjs';
 const $=id=>document.getElementById(id),key='space-electricity-apartment-02-v1',f=(n,d=2)=>Number(n).toFixed(d);
+mountWorkbench({root:$('apartment-app'),workspace:$('apt-workspace'),heading:$('page-heading'),canvases:document.querySelector('.apt-canvases'),plan:$('apt-plan'),three:$('apt-three'),inspector:$('apt-inspector'),content:'#apt-content',status:$('apt-status'),idleTitle:'방이나 기구를 선택하세요.',pages:standardPages('#apt-content')});
 let saved;try{saved=JSON.parse(localStorage.getItem(key));}catch{}
 let readerSaved;try{readerSaved=JSON.parse(localStorage.getItem(key+'-reader'));}catch{}
 let calc=restoreApartmentReader(readerSaved),assembly='exterior',fireId='AD1',fireStep=0;
@@ -81,6 +83,7 @@ async function go(next,sheetId=null){
    const group=page.startsWith('fire')?'fire':page==='experience'?'building':page;
    $('apt-sheet').innerHTML=apartment.sheets.filter(s=>s.menu===group).map(s=>'<option value="'+s.id+'">'+s.id+' · '+s.title+'</option>').join('');
    setSheet(sheetId??({electrical:'E-201',structure:'S-201',fire:'F-201','fire-test':'F-201','fire-signal':'F-201',materials:'M-201'}[page]??'A-201'));
+   ready.setStudio(page!=='experience');ready.setNight(false);
    if(page==='experience'){ready.whole();ready.site.visible=false;ready.setNight(false);$('apt-view-title').textContent='아파트 · 전체 건물';layout('model');}else layout(['fire-test','fire-signal'].includes(page)?'model':'split');
    ready.setActive(true);
    if(!ready.compilation){ready.preparing=true;ready.compilation=ready.renderer.compileAsync(ready.scene,ready.active).finally(()=>{ready.preparing=false;});}
@@ -116,7 +119,7 @@ function setSheet(id){if(!apartment.sheets.some(s=>s.id===id)||!view)return;sele
  else if(id==='A-203'){view.view('interior','plan');view.electrical.visible=true;view.fireGroup.visible=true;}
  else if(id==='A-204'){view.view('exterior','front');}
  else view.view(id.startsWith('E')?'electrical':id.startsWith('F')?'fire':'interior','iso');
-  view.setRealistic(true);view.setNight(false);view.site.visible=false;view.orthoHeight=9.4;view.size();plan();tools();updateDomainExplanation();$('apt-view-title').textContent=apartment.sheets.find(s=>s.id===sheet).plain;}
+  view.setRealistic(true);view.setStudio(page!=='experience');view.setNight(false);view.site.visible=false;view.orthoHeight=9.4;view.size();plan();tools();updateDomainExplanation();$('apt-view-title').textContent=apartment.sheets.find(s=>s.id===sheet).plain;}
 function select(id){const object=getObject(id);if(!object)return;if(page==='electrical'&&(object.circuit||object.kind==='panel')&&sheet!==apartment.circuitSheet){const target=electricalSheet(apartment,object);if(target&&target!==sheet)setSheet(target);}if(id?.startsWith('assembly-')){const a=apartmentAssemblies.find(a=>a.layers.some(l=>'assembly-'+a.id+'-'+l.id===id));if(a){assembly=a.id;view.apartmentDetails.showAssembly(assembly);tools();}}selected=id;if(sheet==='A-203'){for(const m of view.base.children)if(m.userData.kind==='ceiling')m.visible=m.userData.id===id;}view?.highlight(id);if(['A-205','A-206'].includes(sheet))view?.focusObject(id);plan();inspector();status((getObject(id)?.name??id)+' · 도면과 3D에서 같은 대상');}
 function getObject(id){if(id?.startsWith('assembly-'))return view?.materialGroup.children.find(m=>m.userData.id===id)?.userData; if(id?.startsWith('room-'))return apartment.rooms.find(r=>'room-'+r.id===id);return electric.devices.find(d=>d.id===id)??fire.devices.find(d=>d.id===id)??model.elements.find(d=>d.id===id);}
 function inspector(){powerExplanation?.update({electric,page,selected});updateDomainExplanation();renderInspectorContent();quantities.inspector($('apt-inspector'),selected);}

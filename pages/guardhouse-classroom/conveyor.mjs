@@ -1,3 +1,4 @@
+import {mountWorkbench,standardTabs} from './workbench.mjs';
 import {project,devices,byId,sheets,wires,quantities,safetyItems,lessons,deviceSpecification} from './src/conveyor-project.mjs';
 import {defaults,restore,evaluate,act,tick,calculations,csv} from './src/conveyor-engine.mjs';
 import {terms,questions} from './src/conveyor-learning.mjs';
@@ -18,21 +19,30 @@ let originalOccurrence='',restoreReading=null;
 const introKey='space-electricity-conveyor-intro-v1';let introProgress;try{introProgress=restoreIntro(JSON.parse(localStorage.getItem(introKey)));}catch{introProgress=restoreIntro();}
 let introSession=null,introBefore=null,introRuntime=null;
 const content=$('#cv-content'),host=$('#three-host');
+const cvTabs=standardTabs('#cv-content'),cvStudyTab={id:'study',label:'추적',optional:true,show:['#cv-investigation:not([hidden])','#cv-study-back']},cvDrawingTab={id:'drawing',label:'도면',optional:true,show:['#cv-original-tools:not([hidden])']};
 const introNav=document.createElement('div'),introPanel=document.createElement('section');introNav.id='cv-intro-navigation';introPanel.id='cv-first-lesson';introPanel.setAttribute('aria-label','처음 만나는 설비');$('#cv-panes').before(introNav,introPanel);
 function saveIntro(){try{localStorage.setItem(introKey,JSON.stringify(introProgress));}catch{$('#cv-status').textContent='진도를 저장할 수 없습니다. 이번 화면에서는 계속 학습할 수 있습니다.';}}
 function introSceneReady(){return !!scene&&host.dataset.context!=='lost';}
-function renderIntro(){const active=page==='intro';introNav.hidden=introPanel.hidden=!active;$('#cv-workspace').dataset.intro=active?introProgress.step:'';if(!active)return;introNav.innerHTML=introNavigation(introProgress);introPanel.innerHTML=introView(introProgress,introSession);refreshIntro(introPanel,introSession,state,introSceneReady());}
+function renderIntro(){const active=page==='intro';introNav.hidden=introPanel.hidden=!active;$('#cv-workspace').dataset.intro=active?introProgress.step:'';if(!active)return;introNav.innerHTML=introNavigation(introProgress);requestAnimationFrame(()=>introNav.querySelector('[aria-current=step]')?.scrollIntoView({block:'nearest',inline:'center'}));introPanel.innerHTML=introView(introProgress,introSession);refreshIntro(introPanel,introSession,state,introSceneReady());}
 function frameIntro(){if(page!=='intro'||!introSceneReady())return;const step=introSteps.find(x=>x.id===introProgress.step);scene.teaching(step.id);if(step.id==='symbols'){selectOriginal(introSession.region);const r=findOriginalRegion(introSession.region),v=regionViewport(r);zoom=Math.max(1,Math.min(10,Math.min(650/v.width,440/v.height)));pan=[v.cx-500,v.cy-380];renderDrawing();}else{selected=introSession.focus;frameScene(step.id==='wiring'?introSession.focus:step.camera);scene.select(selected);}scene.routes(step.id==='wiring'||step.id==='plc');scene.traceRoutes(step.id==='wiring'?wiringStops[introSession.focus].routes:step.id==='plc'?['W09','W11']:null);scene.update(state,evaluate(state));refreshIntro(introPanel,introSession,state,true);}
 function chooseIntro(id){if(!introSteps.some(x=>x.id===id))return;introProgress.step=id;introRuntime=null;introSession=prepareIntro(state,id);originalMode=id==='symbols';originalOccurrence='';sheet=id==='symbols'?'E-402':'A-401';zoom=1;pan=[0,0];$('#cv-status').textContent='';setLayout(id==='symbols'?'split':'model',false);renderDrawing();renderIntro();frameIntro();saveIntro();$('#cv-intro-step-title').focus({preventScroll:true});introNav.scrollIntoView({block:'start',behavior:'instant'});}
 const study=document.createElement('section');study.id='cv-investigation';study.setAttribute('aria-label','동작 추적과 진단');$('#cv-original-tools').before(study);
-const studyReturn=document.createElement('div');studyReturn.className='cv-study-return';studyReturn.hidden=true;studyReturn.innerHTML='<button data-study="back">설명·관찰 기록으로 돌아가기</button><span class="small">같은 장치의 기호와 실물 상태를 비교하세요.</span>';$('#cv-panes').before(studyReturn);
+const studyReturn=document.createElement('div');studyReturn.id='cv-study-back';studyReturn.className='cv-study-return';studyReturn.hidden=true;studyReturn.innerHTML='<button data-study="back">설명·관찰 기록으로 돌아가기</button><span class="small">같은 장치의 기호와 실물 상태를 비교하세요.</span>';$('#cv-panes').before(studyReturn);
+const workbench=mountWorkbench({root:$('#cv-app'),workspace:$('#cv-workspace'),heading:$('#page-heading'),canvases:$('#cv-panes'),plan:$('#plan-host'),three:host,inspector:$('#cv-inspector'),content:'#cv-content',status:$('#cv-status'),extraMove:['#cv-return','#cv-investigation','#cv-study-back','#cv-original-tools'],keepTabOn:'[data-control],#cv-investigation,#cv-original-tools,.cv-controls',idleTitle:'',pages:{
+ building:{tabs:[cvTabs.guide('안내'),cvTabs.select,cvDrawingTab]},
+ components:{tabs:[cvTabs.guide('장치'),cvTabs.select,cvDrawingTab]},
+ electrical:{tabs:[cvTabs.guide('운전'),cvTabs.select,cvStudyTab,cvDrawingTab]},
+ signals:{tabs:[cvTabs.guide('신호'),cvTabs.select,cvStudyTab,cvDrawingTab]},
+ experience:{tabs:[cvTabs.guide('체험'),cvTabs.select]},
+ intro:{move:['#cv-first-lesson','#cv-return'],selectTab:null,tabs:[{id:'lesson',label:'수업',show:['#cv-first-lesson']}]}
+}});
 let studyMode='',studyIndex=0,trial=null,pendingStudy=false;
 function renderStudy(){study.hidden=!['electrical','signals'].includes(page);study.innerHTML=investigationView(studyMode,studyIndex,trial,state);refreshStudy();}
 function refreshStudy(){refreshInvestigation(study,studyMode,studyIndex,trial,state);studyReturn.hidden=study.hidden||!studyMode;const r=findOriginalRegion(originalOccurrence),v=r&&originalState(r,state,evaluate(state)),n=$('[data-original-live]');if(n)n.textContent=v?v.text+' · 현재 수업 모형 상태':'';if(page!=='intro')scene?.traceRoutes(!study.hidden&&studyMode==='trace'?traceSteps[studyIndex].routes:null);}
 function studyLocation(region,showEquipment=false){selectOriginal(region,true);setLayout('split');(showEquipment?studyReturn:study).scrollIntoView({block:'start',behavior:'instant'});refreshStudy();}
 function studyAction(action){
- if(action==='trace'){studyMode='trace';renderStudy();studyLocation(traceSteps[studyIndex].region);}
- if(action==='diagnosis'){studyMode='diagnosis';renderStudy();}
+ if(action==='trace'){studyMode='trace';renderStudy();workbench.show('study');studyLocation(traceSteps[studyIndex].region);}
+ if(action==='diagnosis'){studyMode='diagnosis';renderStudy();workbench.show('study');}
  if(action==='close'){studyMode='';renderStudy();}
  if(action==='locate')studyLocation(traceSteps[studyIndex].region,true);
  if(action==='back')study.scrollIntoView({block:'start',behavior:'instant'});
@@ -141,7 +151,7 @@ async function navigate(){
   const s=await ensureScene();if(v!==navVersion){s?.setActive(visualPages.includes(page)&&layout!=='plan');return;}
   if(s){s.teaching(page==='intro'?introProgress.step:null);s.routes(showRoutes||page==='electrical'||page==='signals');s.night(page==='intro'?false:night);s.select(selected);frameScene(pendingTarget??(page==='components'?'cabinet':page==='electrical'?'operator':'whole'));pendingTarget=null;s.setActive(true);refreshStudy();frameIntro();}
  }
- if(pendingStudy&&page==='electrical'&&v===navVersion){pendingStudy=false;if(studyMode==='trace')studyLocation(traceSteps[0].region);else study.scrollIntoView({block:'start',behavior:'instant'});}
+ if(pendingStudy&&page==='electrical'&&v===navVersion){pendingStudy=false;workbench.show('study');if(studyMode==='trace')studyLocation(traceSteps[0].region);else study.scrollIntoView({block:'start',behavior:'instant'});}
  if(reading&&v===navVersion)requestAnimationFrame(()=>scrollTo({top:reading.scroll,behavior:'instant'}));
 }
 function setLayout(value,load=true){layout=value;$('#cv-panes').dataset.layout=value;$('#cv-original-tools').hidden=value==='model';document.querySelectorAll('[data-layout]').forEach(b=>{if(b.tagName==='BUTTON')b.setAttribute('aria-pressed',String(b.dataset.layout===value));});scene?.setActive(value!=='plan');if(load&&value!=='plan')resumeScene();}

@@ -22,11 +22,13 @@ import {fireContent,materialsContent,safetyContent} from './lesson-expansion-ui.
 const project={...baseProject,sheets:[...baseProject.sheets,...extraSheets]},glossary=withStudyConcepts([...baseGlossary,...extraGlossary,...electricalTagTerms(baseProject)]);
 const referencesFor=e=>e.system==='fire'?['F-101','F-102']:e.system==='materials'?['M-101']:baseRefs(e);
 const termFor=e=>e.system==='fire'?({smoke:'detector',heat:'detector',alarm:'fire-alarm'})[e.kind]??e.kind:e.system==='materials'?e.id==='material-insulation'?'insulation':'finish':baseTerm(e);
+import {mountWorkbench,standardPages} from './workbench.mjs';
 import {freshExercise,restoreExercise,electricalModel,reinforcementFor,structuralCalculation,slabCalculation,validLightPosition,routeLength} from '/pages/guardhouse-classroom/src/learning-engine.mjs';
 
 import {sheetSVG} from './classroom-plan.mjs';
 const $=id=>document.getElementById(id),esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 const mm=v=>Math.round(v*1000).toLocaleString('ko-KR'),f=(v,n=2)=>v.toLocaleString('ko-KR',{maximumFractionDigits:n,minimumFractionDigits:n});
+const workbench=mountWorkbench({root:$('app'),workspace:$('workspace'),heading:$('page-heading'),canvases:$('canvas-row'),plan:$('plan-host'),three:$('three-host'),inspector:$('inspector'),content:'#page-content',idleTitle:'하나를 눌러보세요.',pages:standardPages('#page-content')});
 const storageKey='guardhouse-classroom-v1';let exercise=freshExercise();try{exercise=restoreExercise(JSON.parse(localStorage.getItem(storageKey)));}catch{$('save-state').textContent='새 실습으로 시작합니다';}
 const expansionKey='guardhouse-expansion-v1';let expansion=freshExpansion();try{expansion=restoreExpansion(JSON.parse(localStorage.getItem(expansionKey)));}catch{}expansion.signal=null;let fire=fireModel(expansion,exercise.power);
 function saveExpansion(){try{localStorage.setItem(expansionKey,JSON.stringify({...expansion,battery:practicePower.baseline?.battery??expansion.battery,signal:null}));$('save-state').textContent='실습 저장됨';}catch{$('save-state').textContent='현재 화면에만 유지됩니다';}}
@@ -114,6 +116,7 @@ async function go(menu,sheetId=null){
   $('sheet-select').innerHTML=project.sheets.filter(s=>s.menu===group).map(s=>`<option value="${s.id}">${s.id} · ${s.title}</option>`).join('');
   const next=sheetId??({structure:'S-101',electrical:'E-101',fire:'F-101','fire-test':'F-101','fire-signal':'F-101',materials:'M-101'}[page]??'A-101');setSheet(next);
   setLayout(['experience','fire-test','fire-signal'].includes(page)?'model':'split');
+  viewer.setStudio(page!=='experience');
   if(page==='experience'){viewer.whole();viewer.setRealistic(true);viewer.setNight(true);$('view-name').textContent='경비실 · 전체 건물';$('scene-label').textContent='경비실 · 야간 외관';$('render-label').textContent='실감 렌더링';}
   else {viewer.setRealistic(false);viewer.setNight(false);$('render-label').textContent='학습 보기';}
   contextTools();

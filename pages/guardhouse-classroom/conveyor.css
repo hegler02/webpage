@@ -67,7 +67,7 @@
 .cv-wire[data-on=true]{stroke:#167e79;stroke-width:4}
 .cv-wire[data-role=control]{stroke-dasharray:7 4}
 .cv-plan-note{font-size:16px;fill:#657b86}
-#three-host{background:#dfe8e7;touch-action:none}
+#three-host{background:var(--wb-bg);touch-action:none}
 #three-host canvas{display:block;width:100%;height:100%}
 .cv-scene-badge{position:absolute;top:var(--space-3);left:var(--space-3);background:#ffffffed;padding:var(--space-2) var(--space-3);border-radius:var(--space-2);font-size:var(--sys-size-caption);pointer-events:none;max-width:calc(100% - var(--space-6))}
 .cv-empty-preview{min-height:var(--cv-stage-min);background:var(--paper);display:grid;place-content:center;padding:var(--space-6)}
@@ -82,3 +82,40 @@
 .cv-original-notes{display:grid;gap:var(--gap-copy);margin-block:var(--gap-section)}
 @media(max-width:800px){.cv-safety-list{grid-template-columns:1fr}.cv-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.cv-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){#cv-app *{scroll-behavior:auto}}
+
+/* Conveyor colours follow the shared workbench tokens. */
+body.wb-theme .cv-controls button[aria-pressed=true],body.wb-theme .cv-states [data-on=true]{background:var(--wb-accent-soft);border-color:var(--wb-accent);color:var(--wb-accent)}
+body.wb-theme .cv-controls button[data-action=estop][aria-pressed=true]{background:var(--wb-danger-soft);border-color:var(--wb-danger);color:var(--wb-danger)}
+body.wb-theme .cv-states span{background:var(--wb-raised);border-color:var(--wb-line);color:var(--wb-text)}
+body.wb-theme :is(.cv-formula,.cv-status-line,.cv-empty-preview){background:var(--wb-raised);color:var(--wb-text)}
+body.wb-theme main :is(.cv-steps,.cv-trace-steps,.cv-intro-nav) [aria-current=step]{background:var(--wb-accent);border-color:var(--wb-accent);color:var(--wb-on-accent)}
+body.wb-theme main :is(.cv-steps,.cv-trace-steps,.cv-intro-nav) [aria-current=step] *{color:inherit}
+body.wb-theme .cv-study-state{color:var(--wb-ok)}
+body.wb-theme .cv-study-feedback{border-left-color:var(--wb-ok);background:var(--wb-raised);color:var(--wb-text)}
+body.wb-theme .cv-scene-badge{background:var(--wb-label-bg);color:var(--wb-text)}
+
+/* Inside the workbench the study, drawing tools and first lesson sit in the panel. */
+body.wb-on :is(#cv-investigation,#cv-original-tools,#cv-first-lesson){padding:0;border:0;background:none}
+body.wb-on #cv-study-back{padding:0;border:0;margin-top:var(--wb-gap-action)}
+body.wb-on .cv-trace-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.wb-on .cv-controls{grid-template-columns:repeat(2,minmax(0,1fr));margin-block:var(--wb-gap-action)}
+body.wb-on .cv-controls button{min-height:0;padding:var(--wb-gap-text) var(--wb-inset-card);gap:var(--wb-gap-tool)}
+body.wb-on .cv-observations{grid-template-columns:minmax(0,1fr)}
+body.wb-on .cv-reading{max-width:none}
+body.wb-on main[data-page=intro] .workspace>:is(.workspace-toolbar,#cv-tools,#cv-original-tools,#cv-investigation,.cv-study-return){display:none}
+body.wb-on main[data-page=intro] .model-panel .canvas-footer button{display:none}
+body.wb-on #cv-intro-navigation{flex:none;padding:var(--wb-inset-tool-y) var(--wb-inset-bar-x);background:var(--wb-surface);border-bottom:var(--wb-border) solid var(--wb-line)}
+body.wb-on .cv-intro-nav{gap:var(--wb-gap-tool)}
+body.wb-on .cv-intro-nav button{padding:var(--wb-gap-tool) var(--wb-gap-text);font-size:var(--sys-size-caption);line-height:var(--wb-lh-control)}
+body.wb-on .cv-intro-nav small{font-size:var(--sys-size-eyebrow)}
+@media(max-width:1199px){
+ body.wb-on .cv-intro-nav{display:flex;overflow-x:auto;scrollbar-width:none}
+ body.wb-on .cv-intro-nav button{flex:none;white-space:nowrap}
+ body.wb-on .cv-intro-picker{display:none}
+}
+/* Step 7 compares the drawing with the real part, so a phone stacks both. */
+@media(max-width:599px){
+ body.wb-on main[data-page=intro] .canvas-row[data-layout=split]{grid-template-rows:repeat(2,minmax(0,1fr))}
+ body.wb-on main[data-page=intro] .canvas-row[data-layout=split]>.drawing-panel{display:flex}
+ body.wb-on main[data-page=intro] .canvas-row .canvas-footer{display:none}
+}

@@ -179,7 +179,7 @@ export function mountBay(host,select,fireAdapter){
     const nextWalking=tab==='experience'&&experienceView==='inside';
     const changed=physicalMode!==tab||drawingId!==sheet||walking!==nextWalking||tab==='materials'&&constructionKey!=='material-'+assembly;
     walking=nextWalking;host.dataset.walking=String(walking);host.dataset.night=String(night);
-    scene.background.set(night?0x172638:0xe6eceb);ambient.intensity=night?.12:1.2;sun.intensity=night?.08:2.1;scene.environmentIntensity=night?.10:.7;
+    const studio=tab!=='experience';scene.background.set(night?0x172638:studio?0x12171c:0xe6eceb);ground.material.color.set(studio?0x12171c:0xc8d0cc);ambient.intensity=night?.12:1.2;sun.intensity=night?.08:2.1;scene.environmentIntensity=night?.10:.7;
     drawingId=sheet;
     prepareConstruction(tab,assembly,layer,display);
     const cut=tab==='building'&&sheets.find(s=>s.id===sheet)?.view==='section';

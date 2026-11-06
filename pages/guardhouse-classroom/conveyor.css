@@ -1,4 +1,26 @@
 :root{--cv-live:#167e79;--cv-stop:#8a4c24;--cv-power:#b65b0c;--cv-control:#3677aa;--cv-signal:#73529a;--cv-rule-width:4px;--cv-plan-ratio:1000 / 760;--cv-stage-min:12rem}
+:root{--cv-live-surface:#e1f1ec;--cv-live-overlay:#167e7933;--cv-off-overlay:#75818a15;--cv-study-column:16rem}
+#cv-investigation{display:grid;gap:var(--gap-copy);padding:var(--space-4);border-bottom:1px solid var(--line);background:var(--paper);scroll-margin-top:var(--app-header-height,10rem)}
+.cv-study-return{display:flex;align-items:center;flex-wrap:wrap;gap:var(--gap-controls,var(--space-3));padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--line);scroll-margin-top:var(--app-header-height,10rem)}
+#cv-investigation :is(h2,h3,p){margin:0}
+#cv-investigation h2{font-size:var(--sys-size-body);line-height:var(--sys-leading-heading)}
+.cv-trace-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--space-2)}
+.cv-trace-steps button{text-align:left}
+.cv-trace-steps [aria-current=step]{background:var(--teal);color:var(--white,#fff);border-color:var(--teal)}
+.cv-study-reading{display:grid;gap:var(--gap-copy)}
+.cv-study-state{font-weight:var(--sys-weight-strong);color:var(--cv-live)}
+.cv-study-feedback{padding:var(--space-3);border-left:var(--cv-rule-width) solid var(--cv-live);background:var(--cv-live-surface)}
+.cv-diagnosis-choice{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3)}
+.cv-diagnosis-choice select{max-width:100%;min-width:0}
+.cv-observations{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,var(--cv-study-column)),1fr));gap:var(--gap-grid)}
+.cv-observations>div{display:grid;align-content:start;gap:var(--space-2)}
+.cv-diagnosis-answers{margin:0;padding:var(--space-3);border:1px solid var(--line);border-radius:var(--radius);display:flex;flex-wrap:wrap;gap:var(--space-4)}
+.cv-diagnosis-answers label{display:flex;align-items:center;gap:var(--space-2)}
+.cv-diagnosis-answers input{flex-shrink:0}
+[data-recovery]{display:grid;gap:var(--gap-copy)}
+.cv-original-symbol[data-on=true] rect{fill:var(--cv-live-overlay)}
+.cv-original-symbol[data-on=false] rect{fill:var(--cv-off-overlay);stroke-dasharray:3 2}
+@media(max-width:800px){.cv-trace-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.cv-diagnosis-answers{display:grid}.cv-diagnosis-choice select{width:100%}}
 #cv-content{display:grid;gap:var(--gap-section);margin-top:var(--gap-section)}
 #cv-content:empty{display:none}
 #cv-content .card{margin:0}

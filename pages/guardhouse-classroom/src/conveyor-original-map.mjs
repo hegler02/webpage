@@ -65,3 +65,17 @@ export const originalRegions={
 export function findOriginalRegion(key){for(const [number,regions] of Object.entries(originalRegions)){const r=regions.find(x=>x.key===key);if(r)return {...r,number};}return null;}
 export function originalOccurrences(device){return Object.entries(originalRegions).sort(([a],[b])=>Number(a)-Number(b)).flatMap(([number,regions])=>regions.filter(r=>r.device===device).map(r=>({...r,number})));}
 export function regionViewport(region){const [x,y,w,h]=region.rect,scale=1000/420,offset=(760-290*scale)/2;return {cx:(x+w/2)*scale,cy:offset+(290-y-h/2)*scale,width:w*scale,height:h*scale};}
+export function originalState(r,s,p){
+ if(!s||!p)return null;
+ const key=r.key;
+ let on,label='상태';
+ if(['input-plc-00','input-terminal-11','cabinet-input-00'].includes(key)){on=p.inputs['I:001/00'];label='진입 입력';}
+ else if(['input-plc-01','input-terminal-12','cabinet-input-01'].includes(key)){on=p.inputs['I:001/01'];label='정위치 입력';}
+ else if(['input-plc-07','input-terminal-17','cabinet-input-07','input-feedback-reference','power-aux'].includes(key)){on=p.feedback;label='접촉기 피드백';}
+ else if(key==='power-main'){on=p.coil;return {on,text:'동력 접점 '+(on?'닫힘':'열림')};}
+ else if(key==='permit-estop'){on=!s.estop;return {on,text:'비상정지 접점 '+(on?'닫힘':'열림')};}
+ else if(r.device==='-02Q2'){on=s.isolator;return {on,text:'현장 개폐기 '+(on?'닫힘':'열림')};}
+ else if(p.active[r.device]!==undefined){on=p.active[r.device];label=r.device==='-07K1'?'코일':r.device==='-02M1'?'모터':'동작';}
+ if(on===undefined)return null;
+ return {on,text:label+' '+(on?'ON':'OFF')};
+}

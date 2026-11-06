@@ -5,13 +5,32 @@ import {mountSamples,mountGlossary} from './learning-shell.mjs';
 import {yieldForPaint} from './render-loop.mjs';
 import {drawing} from './conveyor-plan.mjs';
 import {originals,originalDrawing} from './conveyor-originals.mjs';
-import {originalRegions,findOriginalRegion,originalOccurrences,regionViewport} from './src/conveyor-original-map.mjs';
+import {originalRegions,findOriginalRegion,originalOccurrences,regionViewport,originalState} from './src/conveyor-original-map.mjs';
+import {traceSteps,diagnosisCases,startDiagnosis,observeDiagnosis,answerDiagnosis,trackRecovery,recoveryReady,confirmRecovery} from './src/conveyor-investigation.mjs';
+import {investigationView,refreshInvestigation} from './conveyor-investigation.mjs';
 const $=s=>document.querySelector(s),e=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const menu=[['home','시작하기','도면 속 설비가 움직입니다.','부품을 만나고, 연결을 읽고, 움직이는 이유를 확인하세요.'],['building','도면과 설비','같은 기기를 여러 도면에서 만납니다.','기기 번호를 누르면 실제 설치 위치와 연결을 함께 볼 수 있습니다.'],['components','장치와 원리','코일 하나가 다른 회로를 움직입니다.','제어반을 열고 코일·주접점·보조접점을 구분하세요.'],['electrical','전기설계','운전 명령이 모터에 도착하기까지','전원·허가·스위치·코일·동력 연결을 순서대로 확인합니다.'],['signals','신호와 제어','센서는 알고, PLC 입력은 읽습니다.','팔레트 위치와 두 감지기의 입력을 비교하세요.'],['safety','안전점검','멈췄다는 것과 안전하다는 것은 다릅니다.','비상정지·복구·동력 분리와 신호 고장을 학습 모형에서 비교합니다.'],['calculations','계산과 확인','정격과 경로에서 숫자가 나옵니다.','기호·단위·이론과 같은 기기의 위치를 함께 읽습니다.'],['quantities','재료·수량','같은 부품을 한 번만 셉니다.','여러 장에 나타나는 기호를 고유 기기와 배선 경로로 모읍니다.'],['glossary','용어사전','이름을 알고, 동작을 떠올립니다.','릴레이·코일·단자·PLC를 카드와 OX 퀴즈로 익혀보세요.'],['experience','실감 체험','컨베이어 옆에 서 봅니다.','눈높이에서 제어반과 조작반을 살펴보고 실제 위치에서 조작합니다.']];
 const key='space-electricity-conveyor-v1';let state;try{state=restore(JSON.parse(localStorage.getItem(key)));}catch{state=defaults();}
 let page='home',selected='-07K1',sheet='A-401',layout='split',scene=null,sceneLoading=null,sceneAttempt=0,navVersion=0,returnContext=null,calcIndex=0,zoom=1,pan=[0,0],showRoutes=false,night=false,lastSignal='',frameElapsed=0,glossary=null,originalMode=false,originalNumber='01',pendingTarget=null;
 let originalOccurrence='',restoreReading=null;
 const content=$('#cv-content'),host=$('#three-host');
+const study=document.createElement('section');study.id='cv-investigation';study.setAttribute('aria-label','동작 추적과 진단');$('#cv-original-tools').before(study);
+const studyReturn=document.createElement('div');studyReturn.className='cv-study-return';studyReturn.hidden=true;studyReturn.innerHTML='<button data-study="back">설명·관찰 기록으로 돌아가기</button><span class="small">같은 장치의 기호와 실물 상태를 비교하세요.</span>';$('#cv-panes').before(studyReturn);
+let studyMode='',studyIndex=0,trial=null;
+function renderStudy(){study.hidden=!['electrical','signals'].includes(page);study.innerHTML=investigationView(studyMode,studyIndex,trial,state);refreshStudy();}
+function refreshStudy(){refreshInvestigation(study,studyMode,studyIndex,trial,state);studyReturn.hidden=study.hidden||!studyMode;const r=findOriginalRegion(originalOccurrence),v=r&&originalState(r,state,evaluate(state)),n=$('[data-original-live]');if(n)n.textContent=v?v.text+' · 현재 수업 모형 상태':'';scene?.traceRoutes(!study.hidden&&studyMode==='trace'?traceSteps[studyIndex].routes:null);}
+function studyLocation(region,showEquipment=false){selectOriginal(region,true);setLayout('split');(showEquipment?studyReturn:study).scrollIntoView({block:'start',behavior:'instant'});refreshStudy();}
+function studyAction(action){
+ if(action==='trace'){studyMode='trace';renderStudy();studyLocation(traceSteps[studyIndex].region);}
+ if(action==='diagnosis'){studyMode='diagnosis';renderStudy();}
+ if(action==='close'){studyMode='';renderStudy();}
+ if(action==='locate')studyLocation(traceSteps[studyIndex].region,true);
+ if(action==='back')study.scrollIntoView({block:'start',behavior:'instant'});
+ if(action==='start'){trial=startDiagnosis(state,$('#cv-case').value);save();renderStudy();studyLocation(diagnosisCases.find(x=>x.id===trial.id).checks[0][2]);renderDrawing();refreshLive();}
+ if(action==='answer'){const answer=study.querySelector('input[name=cv-answer]:checked')?.value;if(answer)answerDiagnosis(trial,state,answer);else if(trial)trial.feedback='관찰한 증거를 보고 원인을 하나 선택하세요.';refreshStudy();}
+ if(action==='repair'&&trial?.correct)change('fault','none');
+ if(action==='confirm'&&trial){confirmRecovery(trial,state);refreshStudy();}
+}
 function save(){try{localStorage.setItem(key,JSON.stringify(state));}catch{$('#cv-status').textContent='저장 공간을 사용할 수 없어 이번 화면에서만 실습을 유지합니다.';}}
 function button(action,label,value='',cls=''){return `<button data-action="${action}" ${value?`data-value="${e(value)}"`:''} class="${cls}">${label}</button>`;}
 function target(id,label='도면·3D에서 보기'){return `<button data-target="${e(id)}">${label}</button>`;}
@@ -38,7 +57,7 @@ function renderContent(){
  if($('#cv-fault'))$('#cv-fault').value=state.fault;refreshLive();
 }
 function refreshLive(){const s=evaluate(state);document.querySelectorAll('[data-live-reason]').forEach(n=>n.textContent=s.reason);for(const [k,label]of [['coil','접촉기 코일'],['motor','모터'],['feedback','PLC 접촉기 피드백']])document.querySelectorAll(`[data-state-label="${k}"]`).forEach(n=>{n.textContent=label+' · '+(s[k]?'ON':'OFF');n.dataset.on=s[k];});document.querySelectorAll('[data-input]').forEach(n=>{n.dataset.on=s.inputs[n.dataset.input];n.textContent=n.dataset.input+' · '+(s.inputs[n.dataset.input]?'ON':'OFF');});const p=$('[data-physical]');if(p)p.textContent='실제 금속 표적: '+(s.physical?'진입 감지기 앞':'진입 감지기 밖')+' · PLC 진입 입력: '+(s.inputs['I:001/00']?'ON':'OFF');
- document.querySelectorAll('[data-control]').forEach(b=>{const a=b.dataset.control,v=a==='reset'?state.permit:state[a];b.setAttribute('aria-pressed',String(v));const l=b.querySelector('small');if(l)l.textContent=a==='estop'?(v?'눌림 · 운전 허가 해제':'해제 상태'):a==='reset'?(v?'허가 유지 중':'운전 OFF 후 누르기'):(v?'켜짐':'꺼짐');});const ps=$('[data-selected-status]');if(ps)ps.textContent=s.active[selected]===undefined?'설치됨':s.active[selected]?'동작 / 연결':'정지 / 해제';scene?.update(state,s);
+  document.querySelectorAll('[data-control]').forEach(b=>{const a=b.dataset.control,v=a==='reset'?state.permit:state[a];b.setAttribute('aria-pressed',String(v));const l=b.querySelector('small');if(l)l.textContent=a==='estop'?(v?'눌림 · 운전 허가 해제':'해제 상태'):a==='reset'?(v?'허가 유지 중':'운전 OFF 후 누르기'):(v?'켜짐':'꺼짐');});const ps=$('[data-selected-status]');if(ps)ps.textContent=s.active[selected]===undefined?'설치됨':s.active[selected]?'동작 / 연결':'정지 / 해제';scene?.update(state,s);refreshStudy();
 }
 function applyPlanViewport(){const svg=$('#plan-host svg');if(svg)svg.setAttribute('viewBox',`${500-500/zoom+pan[0]} ${380-380/zoom+pan[1]} ${1000/zoom} ${760/zoom}`);}
 function renderDrawing(){
@@ -46,13 +65,13 @@ function renderDrawing(){
  const sh=sheets.find(x=>x.id===sheet),numbers=sh.originals??[sh.source];if(!numbers.includes(originalNumber))originalNumber=numbers[0];
  if(findOriginalRegion(originalOccurrence)?.number!==originalNumber)originalOccurrence='';
  $('#cv-drawing-title').textContent=originalMode?'원본 '+originalNumber+' · '+originals[originalNumber].name:sh.id+' · '+sh.name;
- $('#plan-host').innerHTML=originalMode?originalDrawing(originalNumber,selected,originalOccurrence):drawing(sheet,evaluate(state),selected,state);
+  $('#plan-host').innerHTML=originalMode?originalDrawing(originalNumber,selected,originalOccurrence,state,evaluate(state)):drawing(sheet,evaluate(state),selected,state);
  applyPlanViewport();$('#cv-sheet').value=sheet;
  if(focused>=0)(focusedRegion?$('#plan-host').querySelector(`[data-original-region="${focusedRegion}"]`):$('#plan-host').querySelectorAll('[data-device]')[focused])?.focus({preventScroll:true});
  const listOpen=$('#cv-original-list')?.open;
  $('#cv-original-tools').innerHTML=`<div class="button-row"><button data-original="false" aria-pressed="${!originalMode}">쉬운 연결도</button><button data-original="true" aria-pressed="${originalMode}">원본 도면 읽기</button>${originalMode?`<label>원본 장 <select id="cv-original-number">${numbers.map(n=>`<option value="${n}" ${n===originalNumber?'selected':''}>${n} · ${originals[n].name}</option>`).join('')}</select></label>`:''}</div>${originalMode?`<p class="small">테두리 안 기호를 누르면 같은 실물과 역할을 봅니다. 작은 기호는 아래 목록에서 확대할 수 있습니다. 빈 곳을 드래그해 이동하세요.</p><details id="cv-original-list" ${listOpen?'open':''}><summary>연결된 기호 ${originalRegions[originalNumber].length}곳 · 찾아서 확대</summary><div class="button-row">${originalRegions[originalNumber].map(r=>`<button data-original-region="${r.key}" data-reveal="true">${e(r.label)}</button>`).join('')}</div></details><p class="small" id="cv-original-status" role="status">${e(findOriginalRegion(originalOccurrence)?.label??'테두리는 현재 컨베이어 수업에 연결된 기호입니다. 나머지 원본 기호는 열람할 수 있습니다.')}</p>`:''}`;
 }
-function originalContext(){const r=findOriginalRegion(originalOccurrence);if(!originalMode||!r||r.device!==selected)return '';return `<section class="cv-original-context"><p class="eyebrow">원본 ${r.number}번 · 선택한 기호</p><h3>${e(r.label)}</h3><p>${e(r.description)}</p>${termLink(r.term,'이 기호의 쉬운 설명')}<details><summary>같은 기기를 다른 원본에서 찾기</summary><div class="button-row">${originalOccurrences(r.device).filter(x=>x.key!==r.key).map(x=>`<button data-original-region="${x.key}" data-reveal="true">${x.number}번 · ${e(x.label)}</button>`).join('')}</div></details></section>`;}
+function originalContext(){const r=findOriginalRegion(originalOccurrence);if(!originalMode||!r||r.device!==selected)return '';return `<section class="cv-original-context"><p class="eyebrow">원본 ${r.number}번 · 선택한 기호</p><h3>${e(r.label)}</h3><p data-original-live class="cv-study-state"></p><p>${e(r.description)}</p>${termLink(r.term,'이 기호의 쉬운 설명')}<details><summary>같은 기기를 다른 원본에서 찾기</summary><div class="button-row">${originalOccurrences(r.device).filter(x=>x.key!==r.key).map(x=>`<button data-original-region="${x.key}" data-reveal="true">${x.number}번 · ${e(x.label)}</button>`).join('')}</div></details></section>`;}
 function selectOriginal(key,reveal=false){
  const r=findOriginalRegion(key);if(!r)return;
  const nextSheet=sheets.find(s=>(s.originals??[s.source]).includes(r.number));
@@ -74,15 +93,18 @@ async function navigate(){const v=++navVersion;page=location.hash.slice(1).split
  const reading=restoreReading;restoreReading=null;
  if(reading){({sheet,layout,selected,originalMode,originalNumber,originalOccurrence,zoom,pan,calcIndex}=reading);pendingTarget=findOriginalRegion(originalOccurrence)?.camera??selected;}
  if(visual){if(!reading){sheet=page==='electrical'?'E-402':page==='signals'?'E-403':page==='components'?'P-401':sheet;layout=page==='experience'?'model':'split';}setLayout(layout,false);tools();renderDrawing();inspector();}
- renderContent();if(visual&&layout!=='plan'){const s=await ensureScene();if(v!==navVersion){s?.setActive(['building','components','electrical','signals','experience'].includes(page)&&layout!=='plan');return;}if(s){s.routes(showRoutes||page==='electrical'||page==='signals');s.night(night);s.select(selected);frameScene(pendingTarget??(page==='components'?'cabinet':page==='electrical'?'operator':'whole'));pendingTarget=null;s.setActive(true);}}
+  renderContent();renderStudy();if(visual&&layout!=='plan'){const s=await ensureScene();if(v!==navVersion){s?.setActive(['building','components','electrical','signals','experience'].includes(page)&&layout!=='plan');return;}if(s){s.routes(showRoutes||page==='electrical'||page==='signals');s.night(night);s.select(selected);frameScene(pendingTarget??(page==='components'?'cabinet':page==='electrical'?'operator':'whole'));pendingTarget=null;s.setActive(true);refreshStudy();}}
  if(reading&&v===navVersion)requestAnimationFrame(()=>scrollTo({top:reading.scroll,behavior:'instant'}));
 }
 function setLayout(value,load=true){layout=value;$('#cv-panes').dataset.layout=value;$('#cv-original-tools').hidden=value==='model';document.querySelectorAll('[data-layout]').forEach(b=>{if(b.tagName==='BUTTON')b.setAttribute('aria-pressed',String(b.dataset.layout===value));});scene?.setActive(value!=='plan');if(load&&value!=='plan')resumeScene();}
-async function resumeScene(){const version=navVersion,s=await ensureScene();if(!s)return;const active=['building','components','electrical','signals','experience'].includes(page)&&layout!=='plan';s.setActive(active);if(!active||version!==navVersion)return;s.routes(showRoutes||page==='electrical'||page==='signals');s.night(night);s.select(selected);frameScene(pendingTarget??findOriginalRegion(originalOccurrence)?.camera??selected);pendingTarget=null;}
+async function resumeScene(){const version=navVersion,s=await ensureScene();if(!s)return;const active=['building','components','electrical','signals','experience'].includes(page)&&layout!=='plan';s.setActive(active);if(!active||version!==navVersion)return;s.routes(showRoutes||page==='electrical'||page==='signals');s.night(night);s.select(selected);frameScene(pendingTarget??findOriginalRegion(originalOccurrence)?.camera??selected);pendingTarget=null;refreshStudy();}
 function focusTarget(id){if(!byId.has(id))return;remembered();selected=id;sheet=byId.get(id).sheets[0];originalMode=false;zoom=1;pan=[0,0];if(page==='building'){setLayout('split');select(id,{focus:true});}else{pendingTarget=id;go('building');}}
 function showTerm(id){const t=terms.find(t=>t.id===id);if(!t)return;modal(t.term,`<p class="tag">${t.plain}</p><p>${t.definition}</p><p>${t.electrical}</p><div class="button-row">${target(t.target,'설비에서 보기')}<button data-dictionary="${t.id}">용어사전에서 이어 보기</button></div>`);}
-function change(type,value){act(state,type,value);save();renderDrawing();refreshLive();if(type==='pause'){document.querySelectorAll('[data-action=pause]').forEach(b=>b.textContent=state.paused?'시간 이어가기':'시간 일시정지');}$('#cv-status').textContent=type==='reset'?(state.permit?'운전 허가가 준비됐습니다. 운전을 켜세요.':'복구 조건을 확인하세요: 주전원 ON, 운전 OFF, 비상정지 해제, 제어 배선 정상.'):evaluate(state).reason;}
+function change(type,value){act(state,type,value);trackRecovery(trial,state,type);if(trial?.complete&&!recoveryReady(trial,state)){trial.complete=false;trial.feedback='설비 상태가 바뀌었습니다. 복구 결과를 다시 확인하세요.';}save();renderDrawing();refreshLive();if($('#cv-fault'))$('#cv-fault').value=state.fault;if(type==='pause'){document.querySelectorAll('[data-action=pause]').forEach(b=>b.textContent=state.paused?'시간 이어가기':'시간 일시정지');}$('#cv-status').textContent=type==='reset'?(state.permit?'운전 허가가 준비됐습니다. 운전을 켜세요.':'복구 조건을 확인하세요: 주전원 ON, 운전 OFF, 비상정지 해제, 제어 배선 정상.'):evaluate(state).reason;}
 document.addEventListener('click',async event=>{const b=event.target.closest('button,a[data-go],g[data-device]');if(!b||b.disabled)return;const d=b.dataset;
+  if(d.study){studyAction(d.study);return;}
+  if(d.studyStep!==undefined){const index=Number(d.studyStep);if(index>=0&&index<traceSteps.length){studyIndex=index;renderStudy();studyLocation(traceSteps[index].region);}return;}
+  if(d.studyObserve&&trial){const c=diagnosisCases.find(x=>x.id===trial.id),check=c.checks.find(x=>x[0]===d.studyObserve);if(check){observeDiagnosis(trial,state,check[0]);studyLocation(check[2],true);}return;}
  if(d.originalRegion){selectOriginal(d.originalRegion,d.reveal==='true');return;}
  if(d.calculation!==undefined){remembered();calcIndex=Number(d.calculation);go('calculations');return;}
  if(d.go){if(originalMode&&['calculations','glossary','quantities'].includes(d.go))remembered();go(d.go);return;}if(d.device){select(d.device,{focus:true});return;}if(d.layout){setLayout(d.layout);return;}if(d.sheet){sheet=d.sheet;originalMode=false;originalOccurrence='';zoom=1;pan=[0,0];setLayout('split');renderDrawing();inspector();frameScene(selected);return;}
@@ -106,7 +128,7 @@ document.addEventListener('click',async event=>{const b=event.target.closest('bu
  if(a==='bom-help'){modal('수량을 읽는 기준','<p>제어반·조작반은 빈 외함과 지지 구조를, 내부 장치는 각각의 부품을 집계합니다. X1은 단자대 한 덩어리가 아닌 개별 단자 4개입니다.</p><p>배선 경로 m와 도체 m를 구분합니다. 동력 배선 W04의 4가닥은 U·V·W·PE입니다. 이 명세서는 수업 모형의 구성 수량이며 구매용 제조사 품번표가 아닙니다.</p>');return;}
  if(a==='checks-download'){download('conveyor-learning-record.json',JSON.stringify({sample:4,checked:state.checks,operationEvidence:state.evidence},null,2),'application/json');return;}
  if(a==='reset-dialog'){modal('컨베이어 실습을 처음으로 되돌릴까요?',`<p>이 샘플의 정격·운전 상태·점검과 학습 표시를 초기화합니다.</p>${button('reset-confirm','컨베이어 실습 초기화','','primary')}`);return;}
- if(a==='reset-confirm'){state=defaults();save();$('#cv-dialog').close();renderContent();renderDrawing();inspector();return;}
+ if(a==='reset-confirm'){state=defaults();trial=null;studyMode='';studyIndex=0;save();$('#cv-dialog').close();renderContent();renderStudy();renderDrawing();inspector();refreshLive();return;}
  if(a==='source'){modal('교재와 모형의 범위',`<div class="cv-original-notes"><p>교수님이 제공한 ${project.source}의 컨베이어 동력·제어·PLC 입력·판넬 도면을 연결했습니다. 원본 파일은 보존합니다.</p><p>현재 수업은 컨베이어 이송과 두 팔레트 감지 입력, 접촉기 피드백까지입니다. 원본의 별도 유압·인덱싱·버너 회로를 이송 기능에 임의로 연결하지 않았습니다.</p><p>${project.modelNote}</p><p>배치 치수·모터 1.5 kW·주 차단기 16 A·변압기 100 VA는 이 수업 모형의 선정값입니다. 원본의 접촉기 항목 100-FA40은 보조접점 블록이어서 코일·주접점·보조접점의 구성으로 구분했습니다.</p><p>기존 하드와이어 회로의 핵심 연결을 읽고, 운전 OFF 후 별도 복구가 필요한 수업용 재시작 절차를 적용했습니다. 실시간 장비 연결이나 제조사 PLC 프로그램 실행은 포함하지 않습니다.</p></div>`);return;}
  if(a==='return'&&returnContext){restoreReading=returnContext;const route=returnContext.page;returnContext=null;$('#cv-return').hidden=true;go(route);}
 });

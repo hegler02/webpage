@@ -78,7 +78,7 @@ function renderLesson(f){
   }
   if(tab==='structure'){
     const d=slabDesign;
-    return card('작업구역 대표 바닥판','<p>바닥의 폭 1 m, 길이 '+d.span+' m를 잘라 본 예제입니다. 두께 '+d.thickness+' mm 바닥판 아랫부분에 지름 '+d.diameter+' mm 철근을 '+d.spacing+' mm 간격으로 놓았습니다. 긴 방향 '+stripBars().filter(([a,b])=>a[0]===b[0]).length+'개가 이 띠의 휨 계산에 쓰입니다.</p>'+actions(btn('바닥판 계산 열기','open-calc','slab')+termLink('rebar')));
+    return card('작업구역 대표 바닥판','<p>바닥의 폭 1 m, 길이 '+d.span+' m를 잘라 본 예제입니다. 두께 '+d.thickness+' mm 바닥판 아랫부분에 D'+d.diameter+' 철근을 '+d.spacing+' mm 간격으로 놓았습니다. 긴 방향 '+stripBars().filter(([a,b])=>a[0]===b[0]).length+'개가 이 띠의 휨 계산에 쓰입니다.</p>'+actions(btn('바닥판 계산 열기','open-calc','slab')+termLink('rebar')));
   }
   if(tab==='calculations'){
     const result=bayCalculationHTML(state,calcMode,electricalId,formula,readingView),slab=calcMode==='slab';

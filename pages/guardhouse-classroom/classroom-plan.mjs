@@ -9,7 +9,7 @@ export function sheetSVG({sheet,model,projections,electric,rebar,selected=null,f
  const text=(x,y,s,size=13,color='#294654',anchor='start')=>out.push(`<text x="${n(x)}" y="${n(y)}" font-family="Malgun Gothic, sans-serif" font-size="${size}" fill="${color}" text-anchor="${anchor}">${esc(s)}</text>`);
  const deviceAttrs=d=>`data-element="${d.id}" role="button" tabindex="0" aria-label="${esc(d.name)} 도면에서 선택"`;
  if(view==='circuit'){
-  text(54,60,'단상 220 V · 60 Hz',20);text(54,88,'L 전원선 · N 중성선 · PE 보호접지',13);
+  text(54,60,'단상 220 V · 60 Hz',20);text(54,88,'L 전원선 · N 중성선 · PE 보호접지 · 선 색은 회로 구분 표시이며 실제 전선 색상이 아닙니다',13);
   out.push(`<rect x="50" y="115" width="140" height="480" rx="12" fill="#e7edf2" stroke="#33566a" ${deviceAttrs(project.panel)}/>`);
   text(120,580,'DB1',17,'#24404f','middle');line([80,130],[80,510],'#ba8741',3);line([160,130],[160,570],'#3f8eab',3);text(80,125,'L',13);text(160,125,'N',13);
   project.circuits.forEach((c,i)=>{
@@ -51,7 +51,7 @@ export function sheetSVG({sheet,model,projections,electric,rebar,selected=null,f
   if(view.startsWith('rebar')){
    const slab=view==='rebar-slab',parents=slab?[['roof','floor','entrance-canopy'].includes(selected)?selected:'roof']:rebar.members.filter(m=>m.type==='wall'||m.id.startsWith('footing')||m.id==='pit-base').map(m=>m.id);
    for(const b of rebar.bars.filter(b=>parents.includes(b.parent))){line(projectPoint(b.a),projectPoint(b.b),b.parent===selected?'#ed8d35':'#bc6b52',1,b.parent);}
-   text(100,595,slab?`${parents[0]==='floor'?'바닥판':parents[0]==='entrance-canopy'?'출입구 차양':'지붕판'} · D10 @150 · 상·하부 양방향 · 피복 25 mm`:'벽 D10 @200 양면 · 기초 D13 @200 상·하부 · 피복 벽 30 / 기초 50 mm',15);
+   text(100,595,slab?`${parents[0]==='floor'?'바닥판':parents[0]==='entrance-canopy'?'출입구 차양':'지붕판'} · D10 @${rebar.members.find(m=>m.id===parents[0]).spacing} · 상·하부 양방향 · 피복 25 mm`:'벽 D10 @200 양면 · 기초 D13 @200 상·하부 · 피복 벽 40 / 기초 50 mm',15);
    text(100,623,'철근을 누르면 부재 정보·배근 수량·계산서를 함께 확인합니다.',14);
   }
   if(['lighting','power'].includes(view)){

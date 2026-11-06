@@ -8,6 +8,7 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {layerModel,strip,stripBars,slabDesign,walkable} from './src/cleanroom-construction.mjs';
+import {rebarSize} from './src/rebar-sizes.mjs';
 import {createModelGroup,disposeModelResources as disposeTree} from './src/scene.mjs';
 import {bayModel,panel,equipment,fireDevices,rooms,sheets} from './src/cleanroom-project.mjs';
 
@@ -102,7 +103,7 @@ export function mountBay(host,select,fireAdapter){
         const [x,y,r,b]=strip.bounds,depth=slabDesign.thickness/1000;
         concrete=cuboid(construction,[r-x,depth,b-y],0x8e9d9c,[(r+x)/2,strip.top-depth/2,-(b+y)/2]);
         steel=new THREE.Group();const mat=new THREE.MeshStandardMaterial({color:0x904522,roughness:.6});
-        for(const line of stripBars())steel.add(pipe(line,mat,slabDesign.diameter/2000));construction.add(steel);
+        for(const line of stripBars())steel.add(pipe(line,mat,rebarSize(slabDesign.diameter).nominal/2000));construction.add(steel);
       }
     }
     activeLayer=layer||0;

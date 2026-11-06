@@ -27,13 +27,14 @@ export function routeTo(d){
  return clean([...common,...via,...(entry?[...entry].reverse():[[x,y,h],[x,y,z]])]);
 }
 import {applyPowerState} from './power-reasoning.mjs';
+import {rebarSize} from './rebar-sizes.mjs';
 export function electricalModel(s){
  const devices=attachCords(devicesFor(s));
  const routes=devices.filter(d=>d.circuit&&!d.socket).map(d=>({id:'route-'+d.id,name:d.name+' 전선관',kind:'conduit',circuit:d.circuit,target:d.id,points:routeTo(d),conductors:d.kind==='switch'?['L','L′']:['L','N','PE'],diameter:.016}));
  const circuits=project.circuits.map(c=>{
   const {loads,watts,current}=circuitDemand(devices,c,project.voltage);
   const longest=Math.max(0,...routes.filter(r=>r.circuit===c.id).map(r=>routeLength(r.points)));
-  // Conservative common-current bound: the total circuit current is applied to the longest route.
+  // Teaching value, not an upper bound: the total circuit current is applied to the longest route.
   // Resistive educational model, copper rho at 20 C, reactance omitted; not a cable-table compliance claim.
   const drop=2*.0175*longest*current/c.area,checks={current:current<=c.breaker,coordination:c.breaker<=c.ampacity,drop:drop/project.voltage*100<=3};
   return {...c,watts,current,length:longest,drop,percent:drop/project.voltage*100,checks,pass:Object.values(checks).every(Boolean),loads:loads.map(d=>d.id)};
@@ -43,18 +44,20 @@ export function electricalModel(s){
 }
 
 // Educational gravity-load model: 1 m strip, simply supported slab; no global frame analysis.
-// Reinforcement section is circular nominal diameter. Constants are explicit lesson conditions.
-export const structuralConditions={fc:24,fy:400,steelDesign:400/1.15,concreteWeight:24,coverSlab:25,coverWall:30,coverFoundation:50,soilPressure:100,deadFactor:1.35,liveFactor:1.5,liveRoof:1,liveFloor:3,finishRoof:1.5,finishFloor:1,elasticModulus:27000};
-export function slabCalculation({span=3.8,thickness=150,cover=25,diameter=10,spacing=150,live=1,finish=1.5,cantilever=false}={}){
+// Rebar sections use KS D 3504 nominal values through rebarSize(). Constants are explicit lesson conditions.
+export const slabSpacing=Object.freeze({roof:150,floor:125});
+export const structuralConditions={fc:24,fy:400,steelDesign:400/1.15,concreteWeight:24,coverSlab:25,coverWall:40,coverFoundation:50,soilPressure:100,deadFactor:1.35,liveFactor:1.5,liveRoof:1,liveFloor:3,finishRoof:1.5,finishFloor:1,elasticModulus:27000};
+export function slabCalculation({span=3.8,thickness=150,cover=25,diameter=10,spacing=slabSpacing.roof,live=1,finish=1.5,cantilever=false}={}){
  for(const n of [span,thickness,cover,diameter,spacing,live,finish])if(!Number.isFinite(n)||n<0)throw new Error('계산 조건은 유효한 양수여야 합니다.');
- if(spacing===0||span===0||thickness<=cover+diameter/2)throw new Error('철근 간격과 유효 깊이를 확인해 주세요.');
+ const bar=rebarSize(diameter);
+ if(spacing===0||span===0||thickness<=cover+bar.nominal/2)throw new Error('철근 간격과 유효 깊이를 확인해 주세요.');
  const c=structuralConditions,dead=thickness/1000*c.concreteWeight+finish,w=c.deadFactor*dead+c.liveFactor*live,M=w*span**2/(cantilever?2:8),V=w*span/(cantilever?1:2);
- const d=thickness-cover-diameter/2,z=.9*d,As=Math.PI*diameter**2/4*1000/spacing,required=M*1e6/(c.steelDesign*z),resistance=As*c.steelDesign*z/1e6;
+ const d=thickness-cover-bar.nominal/2,z=.9*d,As=bar.area*1000/spacing,required=M*1e6/(c.steelDesign*z),resistance=As*c.steelDesign*z/1e6;
  const deflection=(cantilever?1/8:5/384)*(dead+live)*(span*1000)**4/(c.elasticModulus*(1000*thickness**3/12));
- return {span,thickness,cover,diameter,spacing,live,finish,dead,w,M,V,d,z,As,required,resistance,deflection,utilization:M/resistance,pass:resistance>=M,model:cantilever?'한쪽 고정 캔틸레버':'양 끝 지지 1 m 폭 띠'};
+ return {span,thickness,cover,diameter,nominal:bar.nominal,barArea:bar.area,spacing,live,finish,dead,w,M,V,d,z,As,required,resistance,deflection,utilization:M/resistance,pass:resistance>=M,model:cantilever?'한쪽 고정 캔틸레버':'양 끝 지지 1 m 폭 띠'};
 }
 export function structuralCalculation(model){
- const roof=slabCalculation(),floor=slabCalculation({live:3,finish:1}),pit=slabCalculation({span:2.05,thickness:200,cover:50,diameter:13,spacing:200,live:1,finish:0}),canopy=slabCalculation({span:.8,thickness:120,cover:25,diameter:10,spacing:150,live:1,finish:.5,cantilever:true});
+ const roof=slabCalculation(),floor=slabCalculation({live:3,finish:1,spacing:slabSpacing.floor}),pit=slabCalculation({span:2.05,thickness:200,cover:50,diameter:13,spacing:200,live:1,finish:0}),canopy=slabCalculation({span:.8,thickness:120,cover:25,diameter:10,spacing:150,live:1,finish:.5,cantilever:true});
  const roofService=(roof.dead+roof.live)*3.8/2,wallWeight=.2*3.05*24,parapet=.25*.7*24,floorReaction=(floor.dead+floor.live)*3.8/2;
  const axial=roofService+wallWeight+parapet,wallStress=axial/200,footingLoad=axial+floorReaction+.8*.3*24+.2*.35*24,pressure=footingLoad/.8;
  return {roof,floor,pit,canopy,wall:{axial,stress:wallStress,area:.2,model:'개구부가 없는 외벽 1 m 폭의 평균 압축 응력'},foundation:{load:footingLoad,pressure,allowable:100,pass:pressure<=100,cantilever:.3,moment:pressure*.3**2/2},conditions:structuralConditions,
@@ -63,24 +66,24 @@ export function structuralCalculation(model){
 
 export function reinforcementFor(model){
  const bars=[],members=[];let index=0;
- function bar(parent,a,b,diameter,sheet,role){if(routeLength([a,b])<.06)return;bars.push({id:`RB-${++index}`,parent,name:parent+' '+role,kind:'rebar',a,b,diameter,sheet,role});}
+ function bar(parent,a,b,diameter,sheet,role){if(routeLength([a,b])<.06)return;bars.push({id:`RB-${++index}`,parent,name:parent+' '+role,kind:'rebar',a,b,diameter,nominal:rebarSize(diameter).nominal,sheet,role});}
  function mesh(e,diameter,spacing,cover,sheet,top=true){
-  const [x,y,X,Y]=boundsOf(e),r=diameter/2000,off=cover/1000+r,s=spacing/1000;
+  const [x,y,X,Y]=boundsOf(e),nominal=rebarSize(diameter).nominal,r=nominal/2000,off=cover/1000+r,s=spacing/1000;
   const layers=top?[e.base+off,e.base+e.height-off]:[e.base+off];
   // Split bars at floor openings; midpoint segments stay inside the actual parent footprint.
   function clipped(a,b,role){let start=null;const length=routeLength([a,b]),n=Math.ceil(length/.025);for(let i=0;i<=n;i++){const t=Math.min(i/n,1),p=a.map((v,k)=>v+(b[k]-v)*t),ok=insideElement(p,e)&&!(e.holes??[]).some(h=>{const q={footprint:h};const B=boundsOf(q);return p[0]>B[0]-off&&p[0]<B[2]+off&&p[1]>B[1]-off&&p[1]<B[3]+off;});if(ok&&start===null)start=p;if(start&&(!ok||i===n)){const end=ok?p:a.map((v,k)=>v+(b[k]-v)*(i-1)/n);bar(e.id,start,end,diameter,sheet,role);start=null;}}}
   for(const [li,z]of layers.entries()){
    for(let a=x+off;a<=X-off+1e-8;a+=s)clipped([a,y+off,z],[a,Y-off,z],`${li?'상부':'하부'} 주근`);
-   for(let b=y+off;b<=Y-off+1e-8;b+=s)clipped([x+off,b,z+(li?-1:1)*diameter/1000],[X-off,b,z+(li?-1:1)*diameter/1000],`${li?'상부':'하부'} 배력근`);
+   for(let b=y+off;b<=Y-off+1e-8;b+=s)clipped([x+off,b,z+(li?-1:1)*nominal/1000],[X-off,b,z+(li?-1:1)*nominal/1000],`${li?'상부':'하부'} 배력근`);
   }
   members.push({id:e.id,name:e.name,diameter,spacing,cover,sheet,type:'mesh',layers:layers.length});
  }
  for(const e of model.elements){
-  if(['floor','roof'].includes(e.id))mesh(e,10,150,25,'S-101');
+  if(['floor','roof'].includes(e.id))mesh(e,10,slabSpacing[e.id],25,'S-101');
   else if(e.id==='entrance-canopy')mesh(e,10,150,25,'S-101');
   else if(e.id==='pit-base'||e.id.startsWith('footing-'))mesh(e,13,200,50,'S-102');
   else if(e.kind==='wall'||e.id.match(/^(pit-(west|east|south|north)|stem-)/)){
-   const [x,y,X,Y]=boundsOf(e),alongX=X-x>Y-y,diameter=10,cover=30,off=.035,spacing=.2;
+   const [x,y,X,Y]=boundsOf(e),alongX=X-x>Y-y,diameter=10,cover=structuralConditions.coverWall,off=cover/1000+rebarSize(diameter).nominal/2000,spacing=.2;
    const a=alongX?x:y,A=alongX?X:Y,b=alongX?y:x,B=alongX?Y:X;
    if(A-a<2*off||e.height<2*off)continue;
    for(const v of [b+off,B-off]){
@@ -90,7 +93,7 @@ export function reinforcementFor(model){
    }members.push({id:e.id,name:e.name,diameter,spacing:200,cover,sheet:'S-102',type:'wall',layers:2});
   }
  }
- for(const m of members){const own=bars.filter(b=>b.parent===m.id);m.count=own.length;m.length=own.reduce((n,b)=>n+routeLength([b.a,b.b]),0);m.weight=m.length*Math.PI*(m.diameter/1000)**2/4*7850;}
+ for(const m of members){const own=bars.filter(b=>b.parent===m.id);m.count=own.length;m.length=own.reduce((n,b)=>n+routeLength([b.a,b.b]),0);m.nominal=rebarSize(m.diameter).nominal;m.weight=m.length*rebarSize(m.diameter).massPerMeter;}
  return {bars,members};
 }
 

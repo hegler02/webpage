@@ -29,8 +29,8 @@ export const steps = [
   {id:'calculations',title:'조건을 바꾸어 계산하기',text:'입력전력과 바닥 하중이 같은 대상의 계산에 반영되는지 확인합니다.',menu:'calculations'}
 ];
 export const circuits = [
-  {id:'CL',name:'작업 조명',pf:1,color:'#d19129',breaker:10,area:1.5,ampacity:15},
-  {id:'CF',name:'공기순환 팬',pf:.9,color:'#167b8d',breaker:16,area:2.5,ampacity:20}
+  {id:'CL',name:'작업 조명',pf:1,color:'#d19129',breaker:10,area:2.5,ampacity:20,rcd:30},
+  {id:'CF',name:'공기순환 팬',pf:.9,color:'#167b8d',breaker:16,area:2.5,ampacity:20,rcd:30}
 ];
 export const panel = {id:'DB3', name:'전실 분전반',kind:'panel',pos:[.22,3.45,1.45], size:[.24,.52,.64]};
 export const equipment = [
@@ -62,7 +62,7 @@ export const safetyChecks=[
   ['escape','작업구역에서 두 개의 문을 지나 출구까지 따라갔어요.','fire']
 ];
 export const glossary={
-  rebar:['배근','콘크리트가 힘을 받을 때 필요한 위치에 철근을 놓는 작업입니다. D13 @200은 지름 13 mm 철근의 중심 간격을 200 mm로 정했다는 뜻입니다.'],
+  rebar:['배근','콘크리트가 힘을 받을 때 필요한 위치에 철근을 놓는 작업입니다. D13 @200은 호칭 D13(공칭지름 12.7 mm) 철근의 중심 간격을 200 mm로 정했다는 뜻입니다.'],
   ffu:['팬 필터 유닛(FFU)','팬으로 공기를 움직이고 필터를 거쳐 작업구역에 공급하는 장치입니다. 이 수업에서는 팬 전원을 끄고 날개의 상태를 비교합니다.'],
   circuit:['분기회로','분전반에서 한 차단기를 지나 정해진 기구들에 전력을 보내는 길입니다. CL은 조명, CF는 팬에 연결됩니다.'],
   power:['역률(pf)','교류에서 전압과 전류의 곱 중 실제로 소비하는 전력이 차지하는 비율입니다. 이 수업은 조명에 1, 팬에 0.9를 사용합니다.'],

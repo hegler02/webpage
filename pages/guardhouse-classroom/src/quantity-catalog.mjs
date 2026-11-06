@@ -1,4 +1,5 @@
 import {measureElement,lengthOf,unionRouteLength,groupQuantities} from './quantity-engine.mjs';
+import {rebarSize} from './rebar-sizes.mjs';
 
 const names={panel:'분전반',light:'천장 조명',switch:'조명 스위치',socket:'콘센트',ac:'냉방기',ffu:'팬 필터 유닛', 'task-light':'작업등',smoke:'연기감지기',heat:'열감지기','fire-panel':'수신기',receiver:'수신기',callpoint:'발신기',alarm:'경보장치',bell:'경보장치','exit-light':'유도등',exit:'유도등',emergency:'비상조명',extinguisher:'소화기'};
 const sheets={guardhouse:{building:'A-101',structure:'S-101',fire:'F-101',light:'E-101',power:'E-102',circuit:'E-103'},apartment:{building:'A-201',structure:'S-201',fire:'F-201',light:'E-201',power:'E-202',circuit:'E-203'},cleanroom:{building:'A-301',structure:'S-301',fire:'F-301',light:'E-301',power:'E-301',circuit:'E-302'}};
@@ -57,8 +58,8 @@ export function buildQuantityReport({sample,model,electric,fire,rebar,panel=null
   add({group:'건축·마감',name:binding.name,spec:binding.measure==='count'?`${mm(longestEdge(e.footprint))} × ${mm(e.height)} mm`:binding.measure==='volume'?'형상 부피':`두께 ${mm(thickness)} mm`,unit:binding.unit,quantity,target:e.id,elementName:e.name,sheet:ref,menu:'building',formula:binding.measure==='volume'?`${e.profile?'단면 순면적 × 깊이':e.surfaceMesh?'삼각면별 바닥 기준 평균 높이 × 투영 면적':'평면 순면적 × 높이'} = ${round(quantity)} m³`:binding.measure==='count'?'고유 설계 ID 1개':`${{plan:'평면 면적 − 개구부',face:'입면 면적 − 개구부',surface:'삼각면 실제 면적 합계',length:'형상 장축 길이'}[binding.measure]} = ${round(quantity)} ${binding.unit}`,note:binding.note||(binding.measure==='volume'?'모형에 있는 개구부를 공제한 부재별 부피 합계. 부재 간 접합 중첩과 발주 여유는 별도입니다.':'모형 형상 기준. 절단·시공 손실 여유는 가산하지 않았습니다.')});
  }
  const bars=unique(rebar?.bars??[],'rebar');
- for(const bar of bars){const length=lengthOf([bar.a,bar.b]),mass=length*Math.PI*(bar.diameter/1000)**2/4*7850;
-  add({group:'철근',name:`철근 D${bar.diameter}`,spec:sample==='cleanroom'?'폭 1 m 대표 띠':'직선 배근 모형',unit:'kg',quantity:mass,status:sample==='cleanroom'?'reference':'model',target:bar.parent,elementName:bar.id,locationName:model.elements.find(e=>e.id===bar.parent)?.name??bar.parent,sheet:bar.sheet??refs.structure,menu:'structure',formula:`${round(length)} m × π × (${bar.diameter}/1000)² / 4 × 7850 kg/m³ = ${round(mass)} kg`,note:'모형 직선 길이로 계산한 이론 중량. 정착·이음·갈고리·보강근 제외.'+(sample==='cleanroom'?' 건물 전체로 확대하지 않습니다.':'')});
+ for(const bar of bars){const length=lengthOf([bar.a,bar.b]),unitMass=rebarSize(bar.diameter).massPerMeter,mass=length*unitMass;
+  add({group:'철근',name:`철근 D${bar.diameter}`,spec:sample==='cleanroom'?'폭 1 m 대표 띠':'직선 배근 모형',unit:'kg',quantity:mass,status:sample==='cleanroom'?'reference':'model',target:bar.parent,elementName:bar.id,locationName:model.elements.find(e=>e.id===bar.parent)?.name??bar.parent,sheet:bar.sheet??refs.structure,menu:'structure',formula:`${round(length)} m × ${unitMass} kg/m (D${bar.diameter} 단위 무게) = ${round(mass)} kg`,note:'모형 직선 길이로 계산한 이론 중량. 정착·이음·갈고리·보강근 제외.'+(sample==='cleanroom'?' 건물 전체로 확대하지 않습니다.':'')});
  }
  for(const c of electric.circuits){const routes=electric.routes.filter(r=>r.circuit===c.id),sum=routes.reduce((s,r)=>s+lengthOf(r.points),0),union=unionRouteLength(routes),target=routes[0]?.target;
   if(!target)continue;

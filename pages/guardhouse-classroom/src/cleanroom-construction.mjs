@@ -11,15 +11,16 @@ export const assemblies={
     ['바닥 패널',38,'#bcc7c7','마감층과 구조 바닥 사이의 패널입니다.'],
     ['철근콘크리트 바닥판',210,'#95a5aa','바닥에 작용하는 힘을 지지부로 전달합니다.']]}
 };
+import {rebarSize} from './rebar-sizes.mjs';
 export const slabDesign={span:2.4,thickness:210,cover:30,diameter:13,spacing:200,live:3,finish:1};
 export const strip={bounds:[3.1,0,4.1,2.4],top:-.04};
 export function baySlab(live=slabDesign.live){return slabCalculation({...slabDesign,live});}
 export function stripBars(){
   const {diameter,cover,spacing,thickness}=slabDesign;
-  const [x,y,right,back]=strip.bounds,edge=(cover+diameter/2)/1000;
+  const nominal=rebarSize(diameter).nominal,[x,y,right,back]=strip.bounds,edge=(cover+nominal/2)/1000;
   const z=strip.top-thickness/1000+edge, bars=[];
   for(let xx=x+spacing/2000;xx<right;xx+=spacing/1000)bars.push([[xx,y+edge,z],[xx,back-edge,z]]);
-  for(let yy=y+spacing/2000;yy<back;yy+=spacing/1000)bars.push([[x+edge,yy,z+diameter/1000],[right-edge,yy,z+diameter/1000]]);
+  for(let yy=y+spacing/2000;yy<back;yy+=spacing/1000)bars.push([[x+edge,yy,z+nominal/1000],[right-edge,yy,z+nominal/1000]]);
   return bars;
 }
 export function layerModel(key){

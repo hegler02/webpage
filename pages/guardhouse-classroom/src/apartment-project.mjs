@@ -17,11 +17,11 @@ export const apartment={
   {id:'entry',name:'현관',bounds:[0,0,2.6,1.7],spawn:[1.3,.8],yaw:-1.4}
  ],
  circuits:[
-  {id:'AL',name:'세대 조명',color:'#dea43c',breaker:10,area:1.5,ampacity:15,pf:1},
-  {id:'AR',name:'방·거실 콘센트',color:'#4a95c2',breaker:16,area:2.5,ampacity:20,pf:1},
-  {id:'AK',name:'주방 전용',color:'#ac7fb9',breaker:16,area:2.5,ampacity:20,pf:1},
-  {id:'AF',name:'냉장고 전용',color:'#668bba',breaker:10,area:2.5,ampacity:20,pf:.9},
-  {id:'AA',name:'냉방기 전용',color:'#439c85',breaker:16,area:2.5,ampacity:20,pf:.9}
+  {id:'AL',name:'세대 조명',color:'#dea43c',breaker:10,area:2.5,ampacity:20,pf:1,rcd:30},
+  {id:'AR',name:'방·거실 콘센트',color:'#4a95c2',breaker:16,area:2.5,ampacity:20,pf:1,rcd:30},
+  {id:'AK',name:'주방 전용',color:'#ac7fb9',breaker:16,area:2.5,ampacity:20,pf:1,rcd:30},
+  {id:'AF',name:'냉장고 전용',color:'#668bba',breaker:10,area:2.5,ampacity:20,pf:.9,rcd:30},
+  {id:'AA',name:'냉방기 전용',color:'#439c85',breaker:16,area:2.5,ampacity:20,pf:.9,rcd:30}
  ],
  panel:{id:'ADB',name:'세대 분전반',kind:'panel',pos:[2.56,.35,1.545],size:[.12,.44,.5],term:'panel'},
  devices:[],
@@ -79,7 +79,7 @@ export function apartmentModel(){
   }
  };
  box('apartment-floor','세대 구조 바닥판',[-.2,-.2,8.6,7.5],-.18,.18,'floor','structure');
- box('apartment-upper','윗층 구조 바닥판',[-.2,-.2,8.6,7.5],2.7,.18,'roof','roof');
+ box('apartment-upper','위층 구조 바닥판',[-.2,-.2,8.6,7.5],2.7,.18,'roof','roof');
  for(const r of apartment.rooms){box('floor-impact-'+r.id,r.name+' 바닥 완충층',r.bounds,0,.02,'floor','floor-finish');box('floor-insulation-'+r.id,r.name+' 바닥 단열층',r.bounds,.02,.04,'floor','floor-finish');box('floor-screed-'+r.id,r.name+' 난방 모르타르',r.bounds,.06,.052,'floor','floor-finish');box('floor-finish-'+r.id,r.name+' 바닥 마감',r.bounds,.112,.008,'floor','floor-finish');box('ceiling-'+r.id,r.name+' 천장',r.bounds,2.52,.012,'ceiling','ceiling');}
  wall('south','x',-.2,-.2,8.6,.2,[{start:.8,end:1.8,base:0,height:2.22},{start:3.3,end:7.8,base:.35,height:2}]);
  wall('north','x',7.3,-.2,8.6,.2,[{start:.4,end:2.2,base:.95,height:1.4},{start:3.1,end:4.9,base:.95,height:1.4},{start:5.9,end:7.9,base:.95,height:1.4}]);
@@ -120,22 +120,23 @@ export function apartmentElectrical(state){
  return {routes,circuits,devices:applyPowerState(devices,{circuits,state,panel:apartment.panel}).map(d=>({...d,lumens:d.kind==='light'?d.watts*100:undefined}))};
 }
 export function apartmentWalk(x,y,model){if(x<.14||x>8.26||y<.14||y>7.16)return false;return !model.elements.filter(e=>['wall','partition','furniture','fixture'].includes(e.kind)&&e.base<1.8&&e.base+e.height>.3).some(e=>[[x,y],[x-.13,y],[x+.13,y],[x,y-.13],[x,y+.13]].some(p=>insideElement(p,e)));}
+import {rebarSize} from './rebar-sizes.mjs';
 export const apartmentSlabDesign=Object.freeze({span:2.6,thickness:180,cover:25,diameter:10,spacing:150,live:2,finish:1.5});
 export function apartmentRebar(){
  const bars=[],id='apartment-floor',{cover,diameter,spacing,thickness}=apartmentSlabDesign;
- const center=(cover+diameter/2)/1000,step=spacing/1000;
+ const nominal=rebarSize(diameter).nominal,center=(cover+nominal/2)/1000,step=spacing/1000;
  for(const z of [-thickness/1000+center,-center]){
   // X-direction primary steel is the outer tension layer used by the 2.6 m strip calculation.
-  for(let y=center;y<=7.3-center;y+=step)bars.push({parent:id,a:[center,y,z],b:[8.4-center,y,z],diameter});
-  const crossZ=z+(z<-.1?diameter/1000:-diameter/1000);
-  for(let x=center;x<=8.4-center;x+=step)bars.push({parent:id,a:[x,center,crossZ],b:[x,7.3-center,crossZ],diameter});
+  for(let y=center;y<=7.3-center;y+=step)bars.push({parent:id,a:[center,y,z],b:[8.4-center,y,z],diameter,nominal});
+  const crossZ=z+(z<-.1?nominal/1000:-nominal/1000);
+  for(let x=center;x<=8.4-center;x+=step)bars.push({parent:id,a:[x,center,crossZ],b:[x,7.3-center,crossZ],diameter,nominal});
  }
  bars.forEach((bar,i)=>{bar.id='rebar-apartment-floor-'+(i+1);bar.sheet='S-201';});
- return {bars,members:[{id,name:'세대 바닥판',diameter,spacing,cover,sheet:'S-201',count:bars.length}]};
+ return {bars,members:[{id,name:'세대 바닥판',diameter,nominal,spacing,cover,sheet:'S-201',count:bars.length}]};
 }
 export const apartmentSlab=()=>slabCalculation(apartmentSlabDesign);
 export function apartmentFire(s){
- const devices=apartment.rooms.filter(r=>r.id!=='bath'&&r.id!=='entry').map((r,i)=>({id:'AD'+(i+1),name:r.name+' 연기감지기',room:r.id,kind:'smoke',pos:[(r.bounds[0]+r.bounds[2])/2,(r.bounds[1]+r.bounds[3])/2+.35,2.495],size:[.12,.12,.04],system:'fire',term:'detector'}));
+ const devices=apartment.rooms.filter(r=>r.id!=='bath'&&r.id!=='entry').map((r,i)=>({id:'AD'+(i+1),name:r.name+' 연기감지기',room:r.id,kind:'smoke',pos:r.bounds[3]-r.bounds[1]<1.5?[(r.bounds[0]+r.bounds[2])/2+.6,(r.bounds[1]+r.bounds[3])/2,2.495]:[(r.bounds[0]+r.bounds[2])/2,(r.bounds[1]+r.bounds[3])/2+.35,2.495],size:[.12,.12,.04],system:'fire',term:'detector'}));
  devices.push({id:'AH1',name:'주방 열감지기',room:'living',kind:'heat',pos:[6.7,3.2,2.495],size:[.12,.12,.04]}, {id:'AX1',name:'현관 소화기',kind:'extinguisher',pos:[2.2,.3,.375],size:[.18,.18,.5]}, {id:'AE1',name:'피난용 휴대 비상조명',kind:'emergency',pos:[2.56,.55,1.575],size:[.07,.12,.18]}, {id:'AB1',name:'세대 경보 장치',kind:'bell',pos:[2.56,.35,2.175],size:[.08,.18,.18]});
   return resolveFire(devices.map(d=>({...d,system:'fire',term:d.term??'fire'})),{mains:s.power,battery:s.battery,signal:s.fireSignal});
 }

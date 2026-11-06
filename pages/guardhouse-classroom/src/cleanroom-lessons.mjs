@@ -16,7 +16,7 @@ export function bayLesson(state,mode='electric',device='FFU1'){
 }
 export const bayCalculationTerms=calculationGlossary.filter(t=>!['bearing','reaction'].includes(t.id)).map(t=>{
   const structural=['dead-load','live-load','line-load','moment','support','effective-depth','steel-area','design-strength','stress','deflection','stiffness','units'].includes(t.id);
-  return {...t,definition:t.id==='steel-area'?t.definition.replace('D10','D13').replace('10 mm','13 mm'):t.definition,electrical:structural?'이 작업구역의 대표 바닥 띠와 같은 하중·철근 값을 연결합니다.':'DB3 분전반의 조명 CL과 팬 CF 회로에 연결합니다.',target:{menu:structural?'structure':'electrical',id:structural?'slab':t.id==='power-factor'?'FFU1':'DB3',sheet:structural?'S-301':'E-302'}};
+  return {...t,definition:t.id==='steel-area'?t.definition.replace('D10은 지름 10 mm','D13은 지름 13 mm').replace('9.53 mm','12.7 mm').replace('71.33 mm²','126.7 mm²'):t.definition,electrical:structural?'이 작업구역의 대표 바닥 띠와 같은 하중·철근 값을 연결합니다.':'DB3 분전반의 조명 CL과 팬 CF 회로에 연결합니다.',target:{menu:structural?'structure':'electrical',id:structural?'slab':t.id==='power-factor'?'FFU1':'DB3',sheet:structural?'S-301':'E-302'}};
 });
 export function restoreBayReading(raw){
   const mode=raw?.mode==='slab'?'slab':'electric',device=equipment.find(d=>d.id===raw?.device)?.id??'FFU1';

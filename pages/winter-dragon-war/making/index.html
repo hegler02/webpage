@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>겨울아, 덤벼라 제작 과정</title>
+<meta name="description" content="코드만으로 재생되던 영상이 왜 실패했고, 곡을 악기별로 나눠 다시 만들기까지의 과정과 감독 메모, 아직 못 한 것을 기록했습니다.">
+<meta name="theme-color" content="#05070a">
+<link rel="canonical" href="https://mirinaeman.com/pages/winter-dragon-war/making/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mirinaeman.com/pages/winter-dragon-war/making/">
+<meta property="og:title" content="겨울아, 덤벼라 제작 과정">
+<meta property="og:description" content="코드만으로 재생되던 영상을 곡의 악기에 맞춰 다시 만든 기록입니다.">
+<meta property="og:image" content="https://mirinaeman.com/pages/winter-dragon-war/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:,">
+<link rel="preload" as="font" href="../assets/display.woff2" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="making.css">
+</head>
+<body>
+<header class="top"><a class="back" href="../">← 뮤직비디오로 돌아가기</a></header>
+<main>
+ <section class="open">
+  <p class="label">겨울아, 덤벼라 · 제작 과정</p>
+  <h1>처음 만든 영상은 곡을 듣지 않았다</h1>
+  <p class="lead">파일은 재생됐고 검사도 모두 통과했습니다. 그런데 보고 있으면 재미가 없었습니다. 숫자를 재 보니 이유가 나왔습니다. 화면의 움직임과 곡의 크기 사이 상관이 0.002였습니다. 소리를 꺼도 같은 영상이었던 셈입니다.</p>
+ </section>
+
+ <figure class="pair">
+  <div><img src="img/first-a.webp" alt="첫 버전의 같은 후렴 장면. 색이 고르고 자막이 하단에 있다." width="960" height="540" loading="lazy"><figcaption>첫 버전 · 0:57</figcaption></div>
+  <div><img src="img/first-b.webp" alt="새 버전의 같은 후렴 장면. 겨울은 무채색으로 눌리고 용과 가사만 금빛이다." width="960" height="540" loading="lazy"><figcaption>완성본 · 0:57</figcaption></div>
+ </figure>
+
+ <section class="chapter">
+  <h2>왜 재미없었나</h2>
+  <div class="measures">
+   <p><b>초당 0.93장</b>원화 234개 자세를 4분 12초에 나눴습니다. 분당 약 164박인 곡에서 연기는 1초에 한 번 바뀌었습니다.</p>
+   <p><b>무작위와 같은 컷</b>컷 위치의 타격음 세기가 2.60이었습니다. 시각을 무작위로 골라도 2.90이 나옵니다.</p>
+   <p><b>거꾸로 된 길이</b>곡의 절정인 "덤벼라" 얼굴은 0.74초, 주먹이 땅을 짚는 장면은 10.2초였습니다.</p>
+  </div>
+  <p>원인은 시간표였습니다. 모든 동작이 곡의 시각이 아니라 쇼트 길이의 비율로 계산되어 있었으니, 음악에 맞을 이유가 없었습니다. 효과를 더해서 풀릴 문제가 아니었습니다.</p>
+ </section>
+
+ <section class="chapter">
+  <h2>겨울은 그림이, 불은 음악이</h2>
+  <p>정지화를 코드로 움직이면 오려 붙인 티가 납니다. 코드가 잘하는 것은 선과 빛, 입자, 글자, 그리고 시간입니다. 그래서 역할을 나눴습니다. 겨울 세계는 원화가 맡고, 노래와 불은 음악이 직접 그리는 금빛 선이 맡습니다. 피크에서 튄 선이 척추가 되고 용이 되고, 묶였다가 불씨로 줄고, 솔로에서 세 갈래로 갈라져 결박을 끊습니다.</p>
+  <p>이 방식이 통하는지 먼저 첫 후렴 26초만 새 원화 없이 만들어 비교했고, 그 결과를 보고 곡 전체로 넓혔습니다.</p>
+ </section>
+
+ <section class="chapter wide">
+  <h2>곡을 악기별로 나누다</h2>
+  <p class="narrow">분리한 드럼, 베이스, 기타, 보컬의 세기입니다. 카메라, 빛, 구름, 눈, 금빛 선, 연주 장면의 충격파가 각각 이 신호를 따라 움직입니다. 2:28에 베이스와 기타가 빠지는 자리, 3:12에 기타가 물러나고 보컬이 올라서는 자리가 그대로 보입니다.</p>
+  <figure class="stems" id="stems">
+   <figcaption class="readout" id="readout" aria-live="off">곡 위에 포인터를 올리면 그 시각의 세기를 보여 줍니다.</figcaption>
+   <div id="stem-rows"></div>
+   <div class="axis" id="axis" aria-hidden="true"></div>
+  </figure>
+  <details class="table-view"><summary>구간별 평균을 표로 보기</summary><div class="table-wrap"><table id="stem-table"></table></div></details>
+ </section>
+
+ <section class="chapter wide">
+  <h2>감독 메모가 만든 것</h2>
+  <p class="narrow">측정은 어디가 어긋났는지 알려 줄 뿐입니다. 어색한 건 사람 눈이 찾았습니다. 아래는 실제 메모와 그 전후입니다.</p>
+  <ol class="notes">
+   <li>
+    <blockquote>흑룡이 나올 때 좌에서 우로 나오는데, 우측에서 좌측으로 나와야 될 것 같다.</blockquote>
+    <p>바람으로 된 용이 머리를 뒤로 한 채 움직이고 있었습니다. 머리부터 오른쪽에서 왼쪽으로, 지붕 뒤를 지나가게 고쳤습니다.</p>
+    <figure class="pair"><div><img src="img/dragon-a.webp" alt="수정 전 바람 용" width="960" height="540" loading="lazy"><figcaption>전</figcaption></div><div><img src="img/dragon-b.webp" alt="수정 후 지붕 뒤를 지나는 바람 용" width="960" height="540" loading="lazy"><figcaption>후</figcaption></div></figure>
+   </li>
+   <li>
+    <blockquote>용이 얼음을 깨는 장면에서 부자연스러운 면이 있다.</blockquote>
+    <p>벽이 서서히 나타나고 용은 그냥 옆에 있었습니다. 벽을 땅에서 솟게 하고, 용이 날아와 불을 뿜고, 닿은 지점부터 금이 퍼지도록 순서를 다시 짰습니다.</p>
+    <figure class="pair"><div><img src="img/ice-a.webp" alt="수정 전 얼음 방벽 장면" width="960" height="540" loading="lazy"><figcaption>전</figcaption></div><div><img src="img/ice-b.webp" alt="수정 후 접촉 지점에서 금이 퍼지는 얼음 방벽" width="960" height="540" loading="lazy"><figcaption>후</figcaption></div></figure>
+   </li>
+   <li>
+    <blockquote>드럼을 치거나 기타를 칠 때 강력한 뭔가가 필요하다.</blockquote>
+    <p>분리한 드럼의 타격 시각마다 북 위에서 충격파와 얼음 파편이 터지고, 기타 줄은 곡의 기타 세기에 맞춰 빛나며 떱니다.</p>
+    <figure class="pair"><div><img src="img/drum-a.webp" alt="수정 전 북 장면" width="960" height="540" loading="lazy"><figcaption>전</figcaption></div><div><img src="img/drum-b.webp" alt="수정 후 타격 순간 빛과 충격파가 터지는 북" width="960" height="540" loading="lazy"><figcaption>후</figcaption></div></figure>
+   </li>
+   <li>
+    <blockquote>마지막에 드래곤이 음악으로 변하는 장면이 물 흐르듯이 트랜지션 되어야 한다.</blockquote>
+    <p>꼬리부터 머리까지 비늘이 빛 알갱이로 부서지고, 오선과 음표의 강이 되어 보컬을 지나 펼친 손에 닿습니다.</p>
+    <figure class="pair"><div><img src="img/note-a.webp" alt="수정 전 음표로 풀리는 용" width="960" height="540" loading="lazy"><figcaption>전</figcaption></div><div><img src="img/note-b.webp" alt="수정 후 음표의 강이 되어 흐르는 용" width="960" height="540" loading="lazy"><figcaption>후</figcaption></div></figure>
+   </li>
+   <li>
+    <blockquote>사람이 전환할 때 뭉개지는 치명적인 단점이 있다.</blockquote>
+    <p>부드럽게 잇겠다고 두 그림 사이의 픽셀을 구부린 것이 원인이었습니다. 얼굴은 각도가 달라지면 그 사이 형태가 없습니다. 사람 쇼트에서는 변형을 없애고 빠르게 교체합니다. 그 대신 동작은 더 또렷하게 끊어집니다.</p>
+    <figure class="pair"><div><img src="img/melt-a.webp" alt="수정 전 전환 도중 얼굴이 뭉개진 기타리스트" width="960" height="540" loading="lazy"><figcaption>전</figcaption></div><div><img src="img/melt-b.webp" alt="수정 후 얼굴이 온전한 기타리스트" width="960" height="540" loading="lazy"><figcaption>후</figcaption></div></figure>
+   </li>
+   <li>
+    <blockquote>목이 잘렸다.</blockquote>
+    <p>용을 음표로 부수는 효과가 같은 층의 보컬까지 지웠습니다. 자동 검사는 이것을 잡지 못했고, 이미 유튜브에 올린 뒤 감독이 찾아냈습니다. 보컬을 다른 층으로 분리하고 영상을 다시 올렸습니다.</p>
+    <figure class="pair"><div><img src="img/neck-a.webp" alt="수정 전 머리가 성벽으로 지워진 보컬" width="960" height="960" loading="lazy"><figcaption>전</figcaption></div><div><img src="img/neck-b.webp" alt="수정 후 머리가 온전한 보컬" width="960" height="960" loading="lazy"><figcaption>후</figcaption></div></figure>
+   </li>
+  </ol>
+ </section>
+
+ <section class="chapter">
+  <h2>달라진 숫자</h2>
+  <div class="table-wrap"><table>
+   <thead><tr><th scope="col">항목</th><th scope="col">처음</th><th scope="col">완성본</th></tr></thead>
+   <tbody>
+    <tr><th scope="row">컷 위치의 타격음 세기 (무작위 2.90)</th><td>2.60</td><td>5.81</td></tr>
+    <tr><th scope="row">움직임과 음악의 상관</th><td>0.002</td><td>0.302</td></tr>
+    <tr><th scope="row">영상</th><td>1672×941</td><td>3840×2160, 30fps</td></tr>
+   </tbody>
+  </table></div>
+  <p class="fine">상관의 처음 값은 곡 전체 음량, 완성본은 분리한 드럼·베이스·기타의 합산과 비교했습니다. 움직임은 이웃한 프레임의 밝기 차이이며, 그레인과 눈이 포함됩니다.</p>
+ </section>
+
+ <section class="chapter">
+  <h2>아직 못 한 것</h2>
+  <ul class="gaps">
+   <li>움직임과 음악의 상관 0.302는 아직 약합니다. 프레임 단위로 타격에 맞물린다는 것은 측정으로 입증하지 못했습니다.</li>
+   <li>사람의 동작은 원화 자세 수만큼만 움직입니다. 자연스럽게 이으려면 중간 자세를 더 그려야 합니다.</li>
+   <li>박자와 가사 시각은 기계가 추정한 값입니다.</li>
+   <li>제작에 쓴 모션 도감은 기법의 원리를 옮겨 왔을 뿐, 모듈을 그대로 실행하지는 않았습니다.</li>
+  </ul>
+ </section>
+
+ <section class="chapter">
+  <h2>쓴 것</h2>
+  <dl class="used">
+   <div><dt>음악</dt><dd>미리내맨 · Suno</dd></div>
+   <div><dt>원화</dt><dd>AI 이미지 생성, Codex로 제작 · 자세와 분리 레이어 포함 현행 324장</dd></div>
+   <div><dt>연출·판단</dt><dd>미리내맨</dd></div>
+   <div><dt>재구성·코드</dt><dd>Claude Code · WebGL2, Canvas, SVG 경로</dd></div>
+   <div><dt>곡 분석</dt><dd>Demucs 악기 분리, pYIN 기타 음정</dd></div>
+   <div><dt>그림 처리</dt><dd>Depth Anything V2 깊이 맵, Real-ESRGAN 2배 확대</dd></div>
+  </dl>
+  <p><a class="back strong" href="../">뮤직비디오 보러 가기 →</a></p>
+ </section>
+</main>
+<script type="module" src="stems.mjs"></script>
+</body>
+</html>

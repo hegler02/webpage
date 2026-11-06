@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>겨울아, 덤벼라 — 용의 전사들</title>
+<meta name="description" content="노래가 용이 되고, 목소리가 겨울을 밀어낸다. 네오 클래시컬 바로크 메탈 뮤직비디오.">
+<meta name="theme-color" content="#05070a">
+<link rel="canonical" href="https://mirinaeman.com/pages/winter-dragon-war/">
+<meta property="og:url" content="https://mirinaeman.com/pages/winter-dragon-war/">
+<meta property="og:type" content="video.other">
+<meta property="og:title" content="겨울아, 덤벼라 — 용의 전사들">
+<meta property="og:description" content="노래가 용이 되고, 목소리가 겨울을 밀어낸다.">
+<meta property="og:image" content="https://mirinaeman.com/pages/winter-dragon-war/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"겨울아, 덤벼라 — 용의 전사들","description":"노래가 용이 되고, 목소리가 겨울을 밀어낸다. 네오 클래시컬 바로크 메탈 뮤직비디오.","thumbnailUrl":"https://mirinaeman.com/pages/winter-dragon-war/assets/og.jpg","uploadDate":"2026-11-06","duration":"PT4M12S","embedUrl":"https://www.youtube-nocookie.com/embed/hLvEiGoB7Ck"}</script>
+<link rel="icon" href="data:,">
+<link rel="preload" as="image" href="assets/hero.webp">
+<link rel="preload" as="font" href="assets/display.woff2" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="film" aria-hidden="true"></canvas>
+<header class="mast">
+ <p class="label">용의 전사들</p>
+ <button class="action" id="play" type="button" hidden>재생 →</button>
+ <p class="status" id="status" hidden>곧 공개합니다</p>
+</header>
+<nav class="rail" id="rail" aria-label="곡의 구간"></nav>
+<main>
+ <section class="hero" id="hero" aria-labelledby="title">
+  <img class="still" src="assets/hero.webp" alt="금빛으로 부서지는 용이 음표가 되어 흘러가는 장면" width="2560" height="1440" fetchpriority="high">
+  <div class="hero-copy">
+   <p class="label">네오 클래시컬 바로크 메탈 · 4분 12초</p>
+   <h1 class="title" id="title"><span><b>겨울아,</b></span><span><b>덤벼라</b></span></h1>
+   <div class="hero-foot"><p>노래가 용이 되고, 목소리가 겨울을 밀어낸다.</p><p class="label">아래로 내려 곡을 따라가세요 ↓</p></div>
+  </div>
+ </section>
+ <div id="scenes"></div>
+ <footer class="colophon">
+  <dl class="credits" id="credits"></dl>
+  <p class="note">겨울은 그림이 맡고, 불은 음악이 그립니다. 빛과 선, 눈보라의 움직임은 코드가 곡을 따라 계산했습니다.</p>
+  <p class="links"><a class="action" href="making/">제작 과정 보기 →</a> <a class="action" id="watch" hidden rel="noopener" target="_blank">유튜브에서 보기 →</a></p>
+ </footer>
+</main>
+<dialog class="theatre" id="theatre" aria-label="겨울아, 덤벼라 뮤직비디오">
+ <div class="theatre-head"><p class="label" id="theatre-chapter"></p><button class="action" id="close" type="button">닫기 ×</button></div>
+ <div class="theatre-frame" id="frame"></div>
+ <div class="theatre-foot">
+  <div class="time-rail" id="time-rail"></div>
+  <p class="theatre-note" id="theatre-note" hidden></p>
+ </div>
+</dialog>
+<noscript><p>이 페이지는 자바스크립트가 필요합니다.</p></noscript>
+<script type="module" src="app.mjs"></script>
+</body>
+</html>

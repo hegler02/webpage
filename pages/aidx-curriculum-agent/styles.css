@@ -356,3 +356,115 @@ html, body { margin: 0; height: 100%; background: var(--room); color: var(--on-d
 .s-faq .a li { position: relative; padding-left: 46px; font-size: 32px; line-height: 1.5; color: var(--on-dark); }
 .s-faq .a li::before { content: ""; position: absolute; left: 0; top: .62em; width: 22px; height: 3px; background: var(--kohvea-gold); }
 .s-faq .src { position: absolute; left: 120px; right: 120px; bottom: 70px; margin: 0; font-size: 21px; color: var(--on-dark-faint); }
+
+/* FAQ 그림 (2026-11-06): 질문 한 줄 · 그림 하나 · 맺음 한 줄 - 설명은 패널이 말로 한다 */
+.s-faq .take { margin: 56px 0 0; font-family: var(--serif); font-size: 42px; font-weight: 700; color: var(--gold); text-wrap: balance; }
+.viz-flow { list-style: none; margin: 72px 0 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 56px; }
+.viz-flow li { position: relative; padding: 34px 30px; border-radius: 18px; background: rgba(255, 255, 255, .06); border: 1px solid var(--line-dark); }
+.viz-flow li + li::before { content: ""; position: absolute; left: -46px; top: 50%; width: 36px; height: 3px; background: linear-gradient(90deg, var(--band-from), var(--band-to)); }
+.viz-flow li + li::after { content: ""; position: absolute; left: -16px; top: calc(50% - 8px); border: 9px solid transparent; border-left: 12px solid var(--band-to); border-right: 0; }
+.viz-flow b { display: block; font-family: var(--serif); font-size: 38px; line-height: 1.3; color: var(--on-dark); }
+.viz-flow span { display: block; margin-top: 12px; font-size: 24px; line-height: 1.45; color: var(--on-dark-soft); }
+.viz-flow li:last-child { background: var(--paper); border-color: transparent; }
+.viz-flow li:last-child b { color: var(--band-from); }
+.viz-flow li:last-child span { color: var(--soft); }
+.viz-flow.compact { margin-top: 18px; gap: 40px; }
+.viz-flow.compact li { padding: 24px 20px; }
+.viz-flow.compact li + li::before { left: -34px; width: 26px; }
+.viz-flow.compact li + li::after { left: -12px; }
+.viz-flow.compact b { font-size: 30px; }
+.viz-flow.compact span { font-size: 20px; }
+.viz-duo-role { margin-top: 64px; display: grid; grid-template-columns: 430px 1fr; gap: 56px; align-items: start; }
+.role-card { padding: 30px 34px; border-radius: 18px; background: var(--paper); color: var(--ink); box-shadow: 0 24px 60px rgba(0, 0, 0, .4); }
+.role-card .lab { color: var(--gold-ink); }
+.role-steps { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 18px; }
+.role-steps li { display: flex; align-items: center; gap: 18px; font-family: var(--serif); font-size: 36px; font-weight: 700; }
+.role-steps svg, .tile-card svg { width: 46px; height: 46px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.role-steps svg { color: var(--band-from); }
+.viz-ba { margin-top: 64px; display: grid; grid-template-columns: 380px 1fr 420px; gap: 44px; align-items: center; }
+.viz-ba .viz-flow.stack { margin: 0; grid-auto-flow: row; grid-auto-rows: auto; gap: 14px; }
+.viz-ba .viz-flow.stack li { padding: 16px 24px; display: flex; align-items: baseline; gap: 18px; background: rgba(255, 255, 255, .06); border: 1px solid var(--line-dark); }
+.viz-ba .viz-flow.stack li::before, .viz-ba .viz-flow.stack li::after { display: none; }
+.viz-ba .viz-flow.stack b { font-size: 30px; color: var(--on-dark); }
+.viz-ba .viz-flow.stack span { margin: 0; font-size: 21px; color: var(--on-dark-soft); }
+.ba-box { padding: 34px 36px; border-radius: 18px; background: rgba(255, 255, 255, .06); border: 1px solid var(--line-dark); }
+.ba-box b { display: block; margin-top: 12px; font-family: var(--serif); font-weight: 900; font-size: 88px; line-height: 1; color: var(--gold); font-variant-numeric: tabular-nums; }
+.ba-box b small { font-size: 40px; margin-left: 4px; }
+.ba-box span { display: block; margin-top: 14px; font-size: 24px; line-height: 1.45; color: var(--on-dark-soft); }
+.ba-box.after { background: var(--paper); border-color: transparent; box-shadow: 0 24px 60px rgba(0, 0, 0, .4); }
+.ba-box.after .lab { color: var(--gold-ink); }
+.ba-box.after b { color: var(--band-from); }
+.ba-box.after span { color: var(--soft); }
+.viz-tiles { margin-top: 72px; display: grid; gap: 30px; }
+.viz-tiles.four { grid-template-columns: repeat(4, 1fr); }
+.viz-tiles.three { grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.tile-card { padding: 36px 32px; border-radius: 18px; background: rgba(255, 255, 255, .06); border: 1px solid var(--line-dark); border-top: 3px solid var(--kohvea-gold); }
+.tile-card b { display: block; font-family: var(--serif); font-size: 38px; line-height: 1.3; color: var(--on-dark); }
+.tile-card span { display: block; margin-top: 14px; font-size: 25px; line-height: 1.45; color: var(--on-dark-soft); }
+.tile-card.icon svg { display: block; margin-bottom: 20px; width: 56px; height: 56px; color: var(--gold); }
+.viz-bars { margin-top: 84px; display: grid; gap: 34px; max-width: 1560px; }
+.bar-row { display: grid; grid-template-columns: 300px 1fr 200px; gap: 30px; align-items: center; }
+.bar-name { font-family: var(--serif); font-size: 36px; font-weight: 700; }
+.bar { height: 64px; border-radius: 10px; background: rgba(255, 255, 255, .06); overflow: hidden; }
+.bar i { display: block; height: 100%; width: calc(var(--w) * 100%); min-width: 8px; background: linear-gradient(90deg, var(--band-from), var(--band-to)); border-radius: 10px; }
+.bar-row.thin .bar i { background: var(--gold); }
+.bar-row b { font-family: var(--serif); font-weight: 900; font-size: 64px; color: var(--gold); font-variant-numeric: tabular-nums; text-align: right; }
+.s-faq .badge { margin: 56px 0 0; display: inline-flex; align-items: baseline; gap: 22px; padding: 22px 34px; border-radius: 16px; background: var(--paper); color: var(--soft); font-size: 26px; box-shadow: 0 24px 60px rgba(0, 0, 0, .4); }
+.s-faq .badge b { font-family: var(--serif); font-weight: 900; font-size: 46px; color: var(--band-from); }
+
+/* 빈칸 없이 (2026-11-06, 운영자: "빈칸이 있으면 짜증이 난다"): 좌담회 장은 세로로 쌓고, 그림이 질문과 맺음 사이의 남은 높이를 모두 쓴다 */
+.s-faq, .s-round { display: flex; flex-direction: column; padding-bottom: 140px; }
+.s-faq > :is(.viz-flow, .viz-tiles, .viz-ba, .viz-bars, .viz-duo-role), .s-round > :is(.round-stats, .split, .principle-grid, .verify, .spread) { flex: 1 1 auto; margin-top: 52px; min-height: 0; }
+.s-faq .take, .s-round .principle { margin-top: 44px; }
+.viz-flow { align-items: stretch; }
+.viz-flow li, .tile-card, .spread li, .ba-box, .verify-col { display: flex; flex-direction: column; justify-content: center; }
+.viz-flow b { font-size: 50px; }
+.viz-flow span { margin-top: 18px; font-size: 30px; }
+.viz-flow.compact b { font-size: 38px; }
+.viz-flow.compact span { font-size: 24px; }
+.tile-card b { font-size: 48px; }
+.tile-card span { margin-top: 18px; font-size: 30px; }
+.tile-card.icon svg { width: 76px; height: 76px; margin-bottom: 26px; }
+.viz-bars { display: flex; flex-direction: column; justify-content: center; gap: 56px; }
+.bar { height: 110px; }
+.bar-name { font-size: 44px; }
+.bar-row { grid-template-columns: 360px 1fr 240px; }
+.bar-row b { font-size: 84px; }
+.viz-ba { align-items: stretch; }
+.ba-box b { font-size: 110px; }
+.viz-ba .viz-flow.stack { align-content: stretch; }
+.viz-ba .viz-flow.stack li { flex-direction: row; align-items: center; }
+.viz-ba .viz-flow.stack b { font-size: 36px; }
+.viz-ba .viz-flow.stack span { font-size: 24px; }
+.viz-duo-role { align-items: stretch; }
+.role-card { display: flex; flex-direction: column; justify-content: center; }
+.role-steps { gap: 34px; }
+.role-steps li { font-size: 44px; }
+.role-side { display: flex; flex-direction: column; }
+.role-side .viz-flow { flex: 1 1 auto; }
+.spread b { font-size: 46px; }
+.spread span { font-size: 27px; }
+.round-stats li { padding-bottom: 0; }
+.round-stats b { font-size: 92px; }
+.round-stats div { font-size: 27px; }
+.round-stats strong { font-size: 36px; }
+.split { align-items: stretch; }
+.split .cite { display: flex; flex-direction: column; justify-content: center; }
+.split-list { font-size: 48px; gap: 30px; }
+.split-side { align-content: space-between; }
+.split-side .rule { font-size: 28px; }
+.split-side .rule b { font-size: 34px; }
+.principle-grid { align-content: stretch; }
+.principle-grid .rule { display: flex; flex-direction: column; justify-content: center; font-size: 29px; }
+.principle-grid .rule b { font-size: 36px; }
+.verify { align-items: stretch; }
+.verify .stat b { font-size: 86px; }
+.verify .stat span { font-size: 26px; }
+.verify-arrow { align-self: center; }
+.s-faq .badge { align-self: flex-start; }
+
+.s-part { display: flex; flex-direction: column; padding-bottom: 150px; }
+.s-part .rounds { flex: 1 1 auto; margin-top: 64px; }
+.s-part .rounds li { display: flex; flex-direction: column; justify-content: center; padding: 40px 36px; }
+.s-part .rounds span { font-size: 24px; }
+.s-part .rounds b { font-size: 46px; margin-top: 20px; }

@@ -11,10 +11,12 @@ import {finishes,materialLayers,indoorFov} from '/pages/guardhouse-classroom/src
 import {SurfaceLibrary,worldUV} from './surface-materials.mjs';
 import {createExtinguisher} from './fire-extinguisher.mjs';
 import {ElectricalTour} from './electrical-tour.mjs';
+import {StructuralLoadView} from './structural-load-view.mjs';
 const V=p=>new THREE.Vector3(p[0],p[2],-p[1]);
 const colors={light:0xfff5da,switch:0xece8df,socket:0xf4f0e6,panel:0x89969d,ac:0xf0eee9};
 
 export class ClassroomView {
+ showStructuralLoad(id,live,base,span){if(!this.loadDiagram&&!id)return;this.loadDiagram??=new StructuralLoadView(this.scene,this.host);this.loadDiagram.update(this.base?.children.find(m=>m.userData.id===id),live,base,span);}
  static prepare(){return SurfaceLibrary.prepare();}
  present(current){return presentScene(this.host,()=>{this.size();this.renderer.render(this.scene,this.active);},{current});}
  constructor(host,{onSelect,onSwitch,onMove,projectData=project,walkCheck=canWalk}){

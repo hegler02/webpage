@@ -1,4 +1,5 @@
 import {project,boundsOf} from './classroom-project.mjs';
+import {resolveFire} from './fire-reasoning.mjs';
 
 export const extraSheets=[
  {id:'F-101',title:'소방기구·피난 배치도',plain:'감지기에서 출구까지',view:'fire-plan',mode:'fire',menu:'fire'},
@@ -63,9 +64,7 @@ export const inspectionItems=[
 export const freshExpansion=()=>({version:1,finish:'plaster',battery:true,signal:null,checks:{}});
 export function restoreExpansion(raw){const s=freshExpansion();if(raw?.version!==1)return s;if(finishes.some(f=>f.id===raw.finish))s.finish=raw.finish;if(typeof raw.battery==='boolean')s.battery=raw.battery;if(fireDevices.some(d=>d.id===raw.signal&&['smoke','heat','callpoint'].includes(d.kind)))s.signal=raw.signal;for(const item of inspectionItems){const c=raw.checks?.[item.id];if(c&&['unreviewed','observed','action','na'].includes(c.state))s.checks[item.id]={state:c.state,note:String(c.note??'').slice(0,500)};}return s;}
 export function fireModel(state=freshExpansion(),mains=true){
- const supplied=mains||state.battery,alarm=!!state.signal&&supplied;
- const devices=fireDevices.map(d=>({...d,on:d.kind==='exit-light'?supplied:d.kind==='emergency'?!mains&&state.battery:d.kind==='alarm'?alarm:d.kind==='fire-panel'?supplied:d.id===state.signal&&supplied,alarm,source:mains?'상용 전원':state.battery?'예비전원':'전원 없음'}));
- return {devices,alarm,supplied,mains,battery:state.battery,signal:state.signal,voltage:24,scope:'화재신호와 전원 전환을 배우는 기능 모형. 배터리 용량·배선 규격·법정 설치 대상을 판정하지 않습니다.'};
+ return {...resolveFire(fireDevices,{mains,battery:state.battery,signal:state.signal}),voltage:24,scope:'화재신호와 전원 전환을 배우는 기능 모형. 배터리 용량·배선 규격·법정 설치 대상을 판정하지 않습니다.'};
 }
 export function pitInfo(model){const get=id=>model.elements.find(e=>e.id===id),b=get('pit-base'),w=get('pit-west'),east=get('pit-east'),south=get('pit-south'),north=get('pit-north'),floor=get('floor'),hatch=get('pit-access-cover');return {width:boundsOf(east)[0]-boundsOf(w)[2],depth:boundsOf(north)[1]-boundsOf(south)[3],clearHeight:floor.base-(b.base+b.height),bottom:b.base+b.height,top:floor.base,hatch:boundsOf(hatch),baseThickness:b.height};}
 export const indoorFov=(fov,delta)=>Math.max(40,Math.min(90,fov+Math.max(-12,Math.min(12,delta*.035))));

@@ -101,4 +101,8 @@ function transferLesson(st,key){
  );
  return {id:key,title:t.name,kind:'structure',target:t,where:t.where,conditions:'지붕 → 벽 → 바닥 반력을 합한 기초 → 땅의 순서로 내려갑니다. 개구부 없는 대표 1 m 구간, 고른 하중, 중앙 압축이라는 수업 모형입니다.',steps,result:key==='wall'?`평균 압축 응력 ${n(st.wall.stress,3)} MPa · 값의 의미 살펴보기`:`평균 지지압 ${n(st.foundation.pressure)} / 100 kPa · 수업 비교 조건 ${st.foundation.pass?'충족':'부족'}`,pass:key==='wall'?null:st.foundation.pass};
 }
-export const trialLesson=(structure,live)=>structuralLesson(structure,'roof',slabCalculation({live}));
+export function structureTrial(structure,key,live){
+ if(!['roof','floor','pit','canopy'].includes(key))throw new Error('휨 비교가 가능한 판 부재를 선택하세요.');
+ return slabCalculation({...structure[key],live,cantilever:key==='canopy'});
+}
+export const trialLesson=(structure,live,key='roof')=>structuralLesson(structure,key,structureTrial(structure,key,live));

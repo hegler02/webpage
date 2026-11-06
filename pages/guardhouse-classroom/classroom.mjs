@@ -1,8 +1,10 @@
 import {createQuantities} from './quantities-ui.mjs';
 import {createPowerExplanation} from './power-explanation.mjs';
+import {createDomainExplanation} from './domain-explanation.mjs';
+import {fireExplanation,structureExplanation,materialExplanation} from './src/domain-explanations.mjs';
 import {electricalTagTerms} from './src/electrical-tags.mjs';
-let powerExplanation;
-function updatePowerExplanation(){powerExplanation?.update({electric,page,selected});}
+let powerExplanation,domainExplanation;
+function updatePowerExplanation(){powerExplanation?.update({electric,page,selected});updateDomainExplanation();}
 import {mountExperienceTools,showScenePreview,lightingSwitchButtons,lightingSummary} from './workspace-ui.mjs';
 import {mountSamples,mountGlossary} from './learning-shell.mjs';
 import {withStudyConcepts} from './src/study-content.mjs';
@@ -99,7 +101,8 @@ async function go(menu,sheetId=null){
   $('loading-state').scrollIntoView({block:'center',behavior:'instant'});await yieldPaint();if(request!==navigationId)return false;
  }
  if(scenePage)await ensureViewer();else if(target==='quantities')await ensureData();else if(target==='calculations'){if(!model)loading('건물의 치수와 회로 정보를 준비하고 있습니다.');await Promise.all([ensureData(),ensureGuide()]);}else if(target==='glossary')await ensureGuide();
- if(request!==navigationId)return false;reloadRequired=false;delete $('app').dataset.loadError;
+  if(target==='structure')await ensureGuide();
+  if(request!==navigationId)return false;reloadRequired=false;delete $('app').dataset.loadError;
 
  page=navData[menu]?menu:'home';$('app').dataset.page=page;updatePowerExplanation();
  document.querySelectorAll('.fire-pages button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.nav===(page==='fire-signal'?'fire-test':page))));const [step,title,description]=navData[page];$('page-step').textContent=step;$('page-title').textContent=title;$('page-description').textContent=description;
@@ -161,7 +164,7 @@ function renderSelectionContent(){
  const e=selectedElement();if(!e){$('selection-body').innerHTML='<h2>하나를 눌러보세요.</h2><p>도면이나 건물의 벽·창문·기구를 선택하면 설명과 치수가 나타납니다.</p>';return;}
  if(e.kind==='task-light'){workstationEditor($('selection-body'),e,exercise,electric,{apply:()=>{save();refreshElectrical();status('작업등 위치와 회로 부하를 적용했습니다.');},toggle:toggleSwitch,calc:async id=>{await ensureGuide();calcState.mode='electrical';calcState.circuit=id;calcState.step='power-sum';await go('calculations');},term:()=>showTerm('circuit')});return;}
  if(e.kind==='room'){const devices=electric.devices.filter(d=>d.room===e.id&&d.watts);$('selection-body').innerHTML=`<h2>${e.name}</h2><p>노란 영역은 이 방의 바닥 범위입니다.</p><p>${e.description}</p><dl><dt>안쪽 가로</dt><dd>${mm(e.bounds[2]-e.bounds[0])} mm</dd><dt>안쪽 세로</dt><dd>${mm(e.bounds[3]-e.bounds[1])} mm</dd></dl><p>이 방의 전기기구: ${devices.map(d=>d.name).join(' · ')}</p><div class="button-row"><button data-room-electric="${e.id}">이 방의 전기기구 보기</button><button data-room-enter="${e.id}">이 방 안으로 들어가기</button></div>`;return;}
- if(e.system){$('selection-body').innerHTML=`<h2>${esc(e.name)}</h2><div class="selection-id">${e.id}</div><p>${esc(e.plain)}</p><dl>${e.system==='materials'?`<dt>재료층 두께</dt><dd>${e.thickness} mm</dd><dt>조각 높이</dt><dd>2,000 mm</dd>`:`<dt>중심 높이</dt><dd>${mm(e.pos[2]-project.finishLevel)} mm</dd><dt>기구 폭</dt><dd>${mm(e.size[0])} mm</dd><dt>상태</dt><dd>${e.kind==='extinguisher'?'위치 확인':e.on?'작동·점등':'대기·소등'}</dd>`}</dl><div class="button-row">${referencesFor(e).map(r=>`<button data-ref="${r}">${r} 도면</button>`).join('')}<button data-term="${termFor(e)}">쉬운 용어 설명</button></div>${page==='fire-signal'&&['smoke','heat','callpoint'].includes(e.kind)?`<div class="button-row"><button data-fire-trigger="${e.id}">이 기구 신호 시험</button><button data-fire-action="reset">복구</button></div>`:''}`;return;}
+ if(e.system){$('selection-body').innerHTML=`<h2>${esc(e.name)}</h2><div class="selection-id">${e.id}</div><p>${esc(e.plain)}</p><dl>${e.system==='materials'?`<dt>재료층 두께</dt><dd>${e.thickness} mm</dd><dt>조각 높이</dt><dd>2,000 mm</dd>`:`<dt>중심 높이</dt><dd>${mm(e.pos[2]-project.finishLevel)} mm</dd><dt>기구 폭</dt><dd>${mm(e.size[0])} mm</dd><dt>작동 상태</dt><dd>${esc(e.stateLabel??(e.on?'작동·점등':'대기·소등'))}</dd>`}</dl><div class="button-row">${referencesFor(e).map(r=>`<button data-ref="${r}">${r} 도면</button>`).join('')}<button data-term="${termFor(e)}">쉬운 용어 설명</button></div>${page==='fire-signal'&&['smoke','heat','callpoint'].includes(e.kind)?`<div class="button-row"><button data-fire-trigger="${e.id}">이 기구 신호 시험</button><button data-fire-action="reset">복구</button></div>`:''}`;return;}
  const definition=glossary.find(t=>t.id===termFor(e)),term={...definition,plain:({'pit-base':'PIT의 아래를 받치는 콘크리트판입니다. 판의 크기는 안쪽 빈 공간보다 큽니다.','pit-access-cover':'바닥의 점검구를 닫는 덮개입니다. PIT 보기에서는 위치를 보여주기 위해 들어 올렸습니다.'})[e.id]??({light:'천장에 설치해 실내를 밝히는 조명',switch:'연결된 조명의 전기를 켜고 끄는 장치',socket:'전기기구의 플러그를 연결하는 곳',ac:'별도 전원 회로로 연결한 냉방기',window:'채광과 환기를 위한 창문',frame:'문이나 유리를 지지하는 틀',furniture:'실내에서 사용하는 가구',fixture:'공간에 설치된 기구와 부속품'})[e.kind]??definition?.plain},member=reinforcement.members.find(m=>m.id===e.id),opening=model.openings.find(o=>o.id===e.id||e.id===o.id+'-frame');
  const b=e.pos?[e.pos[0]-e.size[0]/2,e.pos[1]-e.size[1]/2,e.pos[0]+e.size[0]/2,e.pos[1]+e.size[1]/2]:boundsOf(e);
  const dims=opening?[["개구부 폭",mm(opening.end-opening.start)+' mm'],['개구부 높이',mm(opening.height)+' mm'],['창·문 하단',mm(opening.sill-project.finishLevel)+' mm']]:[['가로',mm(b[2]-b[0])+' mm'],['깊이',mm(b[3]-b[1])+' mm'],['높이',mm(e.size?.[2]??e.height)+' mm']];
@@ -208,7 +211,7 @@ function calculationsContent(){
  $('calc-step').onchange=e=>{calcState.step=e.target.value;calculationsContent();$('calc-step').focus({preventScroll:true});};
  if($('calc-context'))$('calc-context').onchange=e=>{calcState[calcState.mode==='electrical'?'circuit':'member']=e.target.value;calcState.step=null;calculationsContent();$('calc-context').focus({preventScroll:true});};
  if($('trial-calculate'))$('trial-calculate').onclick=()=>{const input=$('load-trial'),live=Number(input.value);if(input.value.trim()===''||!Number.isFinite(live)||live<0||live>20){$('trial-error').textContent='0~20 범위의 활하중을 입력해 주세요.';input.focus();return;}calcState.live=live;calculationsContent();$('trial-calculate').focus({preventScroll:true});};
- if($('trial-restore'))$('trial-restore').onclick=()=>{calcState.live=1;calculationsContent();$('trial-restore').focus({preventScroll:true});};
+  if($('trial-restore'))$('trial-restore').onclick=()=>{calcState.live=structure[activeCalculation.id].live;calculationsContent();$('trial-restore').focus({preventScroll:true});};
  $('save-report').onclick=()=>download('경비실-교육용-계산서.json',JSON.stringify({project:project.id,exercise,electrical:electric.circuits,structural:structure,reinforcement:reinforcement.members,reading:{...calcState},explanation:activeCalculation},null,2),'application/json');
 }
 function glossaryContent(){mountGlossary($('page-content'),glossary,{action:'term-location'});}
@@ -295,6 +298,40 @@ window.addEventListener('pageshow',event=>{if(event.persisted)viewer?.setActive(
   if(kind==='calculation'){await ensureGuide();calcState.mode='electrical';calcState.circuit=d.circuit;calcState.step='current';await go('calculations');return;}
   if(kind==='quantities'){await quantities.showTarget(d.id);return;}
   if(await go(kind==='return'?origin:'electrical',kind==='return'&&origin==='experience'?null:electricalSheet(project,d))){select(d.id);if(kind==='drawing')$('workspace').scrollIntoView({block:'start'});}
+ },onError:error=>status('이유 연결을 열지 못했습니다: '+error.message,true)});
+function updateDomainExplanation(){
+ let data=null;
+ if(page==='fire-signal')data=fireExplanation(fire,selected??fireGuideId);
+ if(page==='structure'&&guide&&structure){
+  const targets=guide.calculationTargets,key=Object.keys(targets).find(k=>targets[k].element===selected)??Object.keys(targets).find(k=>targets[k].element===viewer?.rebarFocus)??(sheet.id==='S-102'?'pit':'roof');
+  if(calcState.member!==key){calcState.member=key;calcState.live=structure[key]?.live??1;}
+  const base=structure[key],bending=Number.isFinite(base?.M),current=bending?slabCalculation({...base,live:calcState.live,cantilever:key==='canopy'}):base;
+  data=structureExplanation(guide.structuralLesson(structure,key,bending?current:null),base,current);
+  data.options=Object.values(targets).map(t=>({id:t.element,name:t.name}));
+  viewer?.showStructuralLoad(bending?targets[key].element:null,current?.live,base?.live,base?.span);
+ }else viewer?.showStructuralLoad(null);
+ if(page==='materials')data=materialExplanation({id:'exterior',name:'경비실 외벽',target:'south-pier-0',layers:materialLayers.map(l=>({...l,mm:l.thickness}))},Math.max(0,materialLayers.findIndex(l=>l.id===selected)));
+ domainExplanation?.update(data?{data,page,sheet:sheet.id,member:calcState.member,live:calcState.live,power:{power:exercise.power,battery:expansion.battery,signal:expansion.signal}}:null);
+}
+domainExplanation=createDomainExplanation({before:$('page-content'),
+ change:async(kind,value,c)=>{
+  if(c.data.domain==='fire'){if(kind==='choose'){select(value);return;}if(kind==='signal'){viewer?.simulation?.leave();expansion.signal=value;fireGuideId=value;selected=value;}if(kind==='reset')expansion.signal=null;if(kind==='mains')exercise.power=!exercise.power;if(kind==='battery')expansion.battery=!expansion.battery;refreshElectrical();}
+  if(c.data.domain==='structure'){
+   if(kind==='choose'){const key=guide.memberLesson(value),target=guide.calculationTargets[key];if(sheet.id!==target.sheet)setSheet(target.sheet);viewer.focusMember(value);select(value);}
+   else {calcState.live=kind==='restore'?structure[c.member].live:value;updateDomainExplanation();}
+  }
+  if(c.data.domain==='materials'){viewer.materialView(true);select(value);}
+ },navigate:async(kind,value,c)=>{
+  if(kind==='term'){await ensureGuide();showTerm(value);return;}
+  if(kind==='quantities'){await quantities.showTarget(c.data.quantityTarget??c.data.target);return;}
+  if(kind==='calculation'){calcState.member=c.member;calcState.live=c.live;calcState.mode=c.data.live?'trial':'structure';calcState.step=c.data.live?'design-load':null;await go('calculations');return;}
+  if(kind==='safety'){await go('safety');return;}
+   if(kind==='return'){const live=calcState.member===c.member?calcState.live:c.live;await go(c.page,c.sheet);calcState.member=c.member;if(c.data.domain==='fire'){exercise.power=c.power.power;expansion.battery=c.power.battery;expansion.signal=c.power.signal;refreshElectrical();}select(c.data.target);calcState.member=c.member;calcState.live=live;updateDomainExplanation();return;}
+  if(c.data.domain==='fire'){await followRef('F-101',c.data.target);setLayout('split');}
+  else if(c.data.domain==='structure'){const t=guide.calculationTargets[c.member];if(sheet.id!==t.sheet)setSheet(t.sheet);select(t.element);setLayout('split');}
+  else if(kind==='location'){await followRef('A-105',c.data.quantityTarget);}
+  else {viewer.materialView(true);select(c.data.target);setLayout('split');}
+  $('workspace').scrollIntoView({block:'start'});
  },onError:error=>status('이유 연결을 열지 못했습니다: '+error.message,true)});
 await go(entryPage,entrySheet?.id);
 if(bookReading){

@@ -33,3 +33,10 @@
 .power-route button { max-width:100%; white-space:normal; text-align:start; }
 .power-design { border-top:var(--cmp-power-border) solid var(--line); padding-top:var(--gap-section); }
 .power-design summary { cursor:pointer; font-weight:var(--sys-weight-control); line-height:var(--sys-leading-body); }
+.reason-load { display:flex; flex-wrap:wrap; align-items:end; gap:var(--cmp-power-gap); }
+.reason-load label { display:grid; gap:var(--space-2); }
+.reason-load input { width:100%; max-width:var(--cmp-power-min-column); }
+.reason-load p { flex-basis:100%; }
+.reason-equation { font-weight:var(--sys-weight-control); }
+.reason-note { border-top:var(--cmp-power-border) solid var(--line); padding-top:var(--cmp-power-gap); }
+.domain-explanation strong,.domain-explanation select { max-width:100%; word-break:keep-all; overflow-wrap:normal; }

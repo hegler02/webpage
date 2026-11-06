@@ -5,6 +5,7 @@ import {bayCalculationTerms} from './cleanroom-lessons.mjs';
 import {studyConcepts} from './study-content.mjs';
 const rows=[
  ['wall-panel','벽 패널','실내 공간을 나누고 둘러싸는 벽 부재입니다. 표면재와 안쪽 심재가 겹쳐 있으며, 전기를 나누는 분전반과는 다른 부재입니다.','materials','west-high','M-301'],
+ ['insulation','단열재와 패널 심재','단열층은 열의 이동을 줄이는 재료층입니다. 이 벽 패널의 심재는 표면 강판 사이를 채웁니다. 재료명만으로 단열 성능이나 화재 등급을 단정하지 않고 제품 자료와 전체 구성 조건을 확인합니다.','materials','west-high','M-301'],
  ['plan','평면도','공간을 위에서 읽는 도면입니다. 전실·작업구역과 두 출입구의 관계를 찾습니다.','building','room-work','A-301'],
  ['section','단면도','정한 선으로 건물을 잘라 높이를 읽습니다. 진한 면은 잘린 부재, 옅은 면은 그 뒤의 부재입니다.','building','slab','A-302'],
  ['elevation','입면도','건물을 한쪽에서 바라본 모습입니다. 전면 패널의 폭과 높이를 실제 입체 부재와 비교합니다.','building','south-wall','A-304'],

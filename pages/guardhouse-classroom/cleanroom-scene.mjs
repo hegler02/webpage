@@ -1,4 +1,5 @@
 import {FireSimulation} from './fire-simulation.mjs';
+import {StructuralLoadView} from './structural-load-view.mjs';
 import {bayFireLesson,extinguisher} from './src/cleanroom-fire.mjs';
 import {createExtinguisher} from './fire-extinguisher.mjs';
 import {SurfaceLibrary,worldUV} from './surface-materials.mjs';
@@ -41,6 +42,7 @@ function deviceMesh(d){
   }else if(d.kind==='panel'||d.kind==='receiver'){
     cuboid(g,[.012,h*.72,depth*.8],0xe0e8e7,[w/2+.004,0,0]);
     for(let i=0;i<(d.kind==='panel'?2:1);i++)cuboid(g,[.025,.063,.10],i===1?0x118392:0x28444c,[w/2+.02,.05,-.08+i*.15]);
+     if(d.kind==='receiver')g.userData.indicator=cuboid(g,[.015,.035,.035],0x66b78c,[w/2+.03,h*.3,0]);
   }else if(d.kind==='smoke'){
     shell.visible=false;g.userData.indicator=part(g,new THREE.CylinderGeometry(.1,.076,.065,32),0xf4f1e8,[0,0,0]);
   }else g.userData.indicator=shell;
@@ -61,6 +63,7 @@ export const prepareBayMaterials=()=>SurfaceLibrary.prepare();
 export function mountBay(host,select,fireAdapter){
   const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});
   const camera=new THREE.PerspectiveCamera(37,1,.04,60), scene=new THREE.Scene();
+  const loadDiagram=new StructuralLoadView(scene,host);
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.55));
   renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.90;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   scene.background=new THREE.Color(0xe6eceb);
@@ -171,7 +174,7 @@ export function mountBay(host,select,fireAdapter){
   const view={host,scene,camera,controls,site,fireMeshes,project:{id:'cleanroom-03',finishLevel:0,rooms:rooms.map(r=>({...r,spawn:r.id==='room-work'?[4.55,2.45]:[.8,1.1]}))},clear:g=>{disposeTree(g);g.clear();},size:()=>{const {width,height}=host.getBoundingClientRect();if(width>0&&height>0){camera.aspect=width/height;camera.updateProjectionMatrix();renderer.setSize(width,height,false);}redraw();},exitWalk:()=>{controls.enabled=true;},setRealistic:()=>{renderer.toneMappingExposure=.9;},setNight:on=>{renderer.toneMappingExposure=on?.45:.9;},view:()=>{for(const m of enclosure)m.visible=false;controls.enabled=true;home();},highlight:id=>{const g=objects.get(id);if(g){highlight.visible=true;highlight.setFromObject(g);}redraw();}};
   if(fireAdapter)simulation=new FireSimulation(view,{...fireAdapter,lesson:bayFireLesson,before:()=>{controls.enabled=true;}});
   host.dataset.cachedSurfaces=String(surfaces.cachedMaps);host.dataset.generatedSurfaces=String(surfaces.generatedMaps);
-  return {simulation,present:current=>presentScene(host,()=>{view.size();renderer.render(scene,camera);dirty=false;},{current}),image:()=>{renderer.render(scene,camera);return canvas.toDataURL('image/png');},realistic:()=>{renderer.shadowMap.enabled=true;redraw();},home:()=>{home();redraw();},whole:()=>{for(const m of enclosure)m.visible=true;home();redraw();},walk,setActive:active=>loop.setActive(active),update({electric,fire,id,tab,path,color,alarm,assembly,layer,display,sheet='A-301',experienceView='outside',night=false}){
+  return {simulation,present:current=>presentScene(host,()=>{view.size();renderer.render(scene,camera);dirty=false;},{current}),image:()=>{renderer.render(scene,camera);return canvas.toDataURL('image/png');},realistic:()=>{renderer.shadowMap.enabled=true;redraw();},home:()=>{home();redraw();},whole:()=>{for(const m of enclosure)m.visible=true;home();redraw();},walk,setActive:active=>loop.setActive(active),update({electric,fire,id,tab,path,color,assembly,layer,display,live=slabDesign.live,sheet='A-301',experienceView='outside',night=false}){
     const nextWalking=tab==='experience'&&experienceView==='inside';
     const changed=physicalMode!==tab||drawingId!==sheet||walking!==nextWalking||tab==='materials'&&constructionKey!=='material-'+assembly;
     walking=nextWalking;host.dataset.walking=String(walking);host.dataset.night=String(night);
@@ -195,7 +198,7 @@ export function mountBay(host,select,fireAdapter){
       if(d?.on&&g.visible&&g.userData.rotor)litFans.push(g.userData.rotor);
       const fd=fire?.devices.find(d=>d.id===key);g.userData={...g.userData,...(fd??{})};
       const lens=g.userData.indicator;
-      if(lens){const on=d?.on||fd?.on||(alarm&&key==='ALM3');lens.material.emissive.setHex(on?(key==='EX3'?0x22b168:key==='ALM3'?0xff421f:0xffe5bd):0);lens.material.emissiveIntensity=on?1.3:0;}
+      if(lens){const on=d?.on||fd?.on;lens.material.emissive.setHex(on?(key==='EX3'||key==='RP3'?0x22b168:key==='ALM3'?0xff421f:0xffe5bd):0);lens.material.emissiveIntensity=on?1.3:0;}
     }
     const room=rooms.find(r=>r.id===id);roomMarker.visible=tab==='building'&&!!room&&!cut;if(roomMarker.visible){const [x,y,r,b]=room.bounds;roomMarker.position.copy(point([(x+r)/2,(y+b)/2,.012]));roomMarker.scale.set(r-x,b-y,1);}
     const target=objects.get(id)??base.children.find(m=>m.userData.id===id);
@@ -203,7 +206,8 @@ export function mountBay(host,select,fireAdapter){
     if(tab==='building'&&sheet==='A-305'&&target&&(changed||host.dataset.selection!==id))focusObject(target);
     highlight.visible=Boolean(!constructionKey&&target?.visible);if(highlight.visible)highlight.setFromObject(target);
     const nextRoute=JSON.stringify([path,color]);if(nextRoute!==routeKey){scene.remove(routeGroup);disposeTree(routeGroup);routeGroup=path.length>1?pipe(path,new THREE.MeshBasicMaterial({color}),.024):new THREE.Group();scene.add(routeGroup);routeKey=nextRoute;}
-    host.dataset.selection=id;host.dataset.pathPoints=String(path.length);host.dataset.fansRunning=String(litFans.length);
+    loadDiagram.update(tab==='structure'?concrete:null,live,slabDesign.live,slabDesign.span);
+    host.dataset.fireAlarm=String(fire?.alarm===true);host.dataset.selection=id;host.dataset.pathPoints=String(path.length);host.dataset.fansRunning=String(litFans.length);
     redraw();
   },dispose(){
     if(disposed)return;disposed=true;simulation?.dispose();loop.dispose();resize.disconnect();controls.dispose();env.dispose();disposeTree(scene);surfaces.dispose();renderer.dispose();canvas.remove();

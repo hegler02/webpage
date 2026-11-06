@@ -1,6 +1,7 @@
 import {registerWorkstation, fitsSupport, circuitDemand, attachCords, restoreOutletAllowance} from './teaching-equipment.mjs';
 import {insideElement,boundsOf} from './classroom-project.mjs';
 import {routeLength,slabCalculation} from './learning-engine.mjs';
+import {resolveFire} from './fire-reasoning.mjs';
 import {registeredIds} from './lesson-catalog.mjs';
 
 // An authored educational dwelling, not a reconstruction of a supplied apartment DWG.
@@ -134,10 +135,9 @@ export function apartmentRebar(){
 }
 export const apartmentSlab=()=>slabCalculation(apartmentSlabDesign);
 export function apartmentFire(s){
- const powered=s.power||s.battery,alarm=!!s.fireSignal&&powered;
- const devices=apartment.rooms.filter(r=>r.id!=='bath'&&r.id!=='entry').map((r,i)=>({id:'AD'+(i+1),name:r.name+' 연기감지기',room:r.id,kind:'smoke',pos:[(r.bounds[0]+r.bounds[2])/2,(r.bounds[1]+r.bounds[3])/2+.35,2.495],size:[.12,.12,.04],system:'fire',on:alarm&&s.fireSignal==='AD'+(i+1),term:'detector'}));
- devices.push({id:'AH1',name:'주방 열감지기',room:'living',kind:'heat',pos:[6.7,3.2,2.495],size:[.12,.12,.04],on:alarm&&s.fireSignal==='AH1'}, {id:'AX1',name:'현관 소화기',kind:'extinguisher',pos:[2.2,.3,.375],size:[.18,.18,.5]}, {id:'AE1',name:'피난용 휴대 비상조명',kind:'emergency',pos:[2.56,.55,1.575],size:[.07,.12,.18],on:!s.power&&s.battery}, {id:'AB1',name:'세대 경보 장치',kind:'bell',pos:[2.56,.35,2.175],size:[.08,.18,.18],on:alarm});
- return {devices:devices.map(d=>({...d,system:'fire',term:d.term??'fire',on:d.on??false})),alarm,powered,signalId:s.fireSignal};
+ const devices=apartment.rooms.filter(r=>r.id!=='bath'&&r.id!=='entry').map((r,i)=>({id:'AD'+(i+1),name:r.name+' 연기감지기',room:r.id,kind:'smoke',pos:[(r.bounds[0]+r.bounds[2])/2,(r.bounds[1]+r.bounds[3])/2+.35,2.495],size:[.12,.12,.04],system:'fire',term:'detector'}));
+ devices.push({id:'AH1',name:'주방 열감지기',room:'living',kind:'heat',pos:[6.7,3.2,2.495],size:[.12,.12,.04]}, {id:'AX1',name:'현관 소화기',kind:'extinguisher',pos:[2.2,.3,.375],size:[.18,.18,.5]}, {id:'AE1',name:'피난용 휴대 비상조명',kind:'emergency',pos:[2.56,.55,1.575],size:[.07,.12,.18]}, {id:'AB1',name:'세대 경보 장치',kind:'bell',pos:[2.56,.35,2.175],size:[.08,.18,.18]});
+  return resolveFire(devices.map(d=>({...d,system:'fire',term:d.term??'fire'})),{mains:s.power,battery:s.battery,signal:s.fireSignal});
 }
 export const apartmentChecks=[
  {id:'exit',name:'출입구까지 통로가 이어지는가?',target:'room-entry',detail:'침실 문에서 거실·현관으로 이어지는 통로를 도면과 3D에서 확인합니다.'},

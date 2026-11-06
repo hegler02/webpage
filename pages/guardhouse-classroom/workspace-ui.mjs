@@ -44,7 +44,8 @@ export function selectionDimensions(d,{finishLevel=0,routeLength=null}={}){
   if(d.circuit)rows.push(['연결 회로',d.circuit]);
   if(d.switch)rows.push(['연결 스위치',d.switch]);
   if(Number.isFinite(d.watts))rows.push(['입력전력',d.watts+' W']);
-  if(typeof d.on==='boolean')rows.push(['전원 상태',d.on?'켜짐':'꺼짐']);
+  if(d.stateLabel)rows.push(['작동 상태',d.stateLabel]);
+  else if(typeof d.on==='boolean')rows.push(['전원 상태',d.on?'켜짐':'꺼짐']);
   if(Number.isFinite(routeLength))rows.push(['전선관 경로 길이',routeLength.toFixed(2)+' m']);
   if(d.serviceOpening)rows.push(['관통부 폭',mm(d.serviceOpening.width)],['관통부 높이',mm(d.serviceOpening.height)],['관통부 중심',mm(d.serviceOpening.elevation)]);
   return '<dl>'+rows.map(([name,value])=>'<dt>'+name+'</dt><dd>'+value+'</dd>').join('')+'</dl>';

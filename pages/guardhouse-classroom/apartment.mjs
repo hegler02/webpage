@@ -1,5 +1,9 @@
 import {createQuantities} from './quantities-ui.mjs';
 import {createPowerExplanation} from './power-explanation.mjs';
+import {createDomainExplanation} from './domain-explanation.mjs';
+import {fireExplanation,structureExplanation,materialExplanation} from './src/domain-explanations.mjs';
+import {slabCalculation} from './src/learning-engine.mjs';
+let domainExplanation;
 let powerExplanation;
 import {mountExperienceTools,showScenePreview,selectionDimensions,lightingStatus,lightingSwitchButtons,lightingSummary} from './workspace-ui.mjs';
 import {mountSamples,mountGlossary} from './learning-shell.mjs';
@@ -112,10 +116,10 @@ function setSheet(id){if(!apartment.sheets.some(s=>s.id===id)||!view)return;sele
  else if(id==='A-203'){view.view('interior','plan');view.electrical.visible=true;view.fireGroup.visible=true;}
  else if(id==='A-204'){view.view('exterior','front');}
  else view.view(id.startsWith('E')?'electrical':id.startsWith('F')?'fire':'interior','iso');
- view.setRealistic(true);view.setNight(false);view.site.visible=false;view.orthoHeight=9.4;view.size();plan();tools();$('apt-view-title').textContent=apartment.sheets.find(s=>s.id===sheet).plain;}
+  view.setRealistic(true);view.setNight(false);view.site.visible=false;view.orthoHeight=9.4;view.size();plan();tools();updateDomainExplanation();$('apt-view-title').textContent=apartment.sheets.find(s=>s.id===sheet).plain;}
 function select(id){const object=getObject(id);if(!object)return;if(page==='electrical'&&(object.circuit||object.kind==='panel')&&sheet!==apartment.circuitSheet){const target=electricalSheet(apartment,object);if(target&&target!==sheet)setSheet(target);}if(id?.startsWith('assembly-')){const a=apartmentAssemblies.find(a=>a.layers.some(l=>'assembly-'+a.id+'-'+l.id===id));if(a){assembly=a.id;view.apartmentDetails.showAssembly(assembly);tools();}}selected=id;if(sheet==='A-203'){for(const m of view.base.children)if(m.userData.kind==='ceiling')m.visible=m.userData.id===id;}view?.highlight(id);if(['A-205','A-206'].includes(sheet))view?.focusObject(id);plan();inspector();status((getObject(id)?.name??id)+' · 도면과 3D에서 같은 대상');}
 function getObject(id){if(id?.startsWith('assembly-'))return view?.materialGroup.children.find(m=>m.userData.id===id)?.userData; if(id?.startsWith('room-'))return apartment.rooms.find(r=>'room-'+r.id===id);return electric.devices.find(d=>d.id===id)??fire.devices.find(d=>d.id===id)??model.elements.find(d=>d.id===id);}
-function inspector(){powerExplanation?.update({electric,page,selected});renderInspectorContent();quantities.inspector($('apt-inspector'),selected);}
+function inspector(){powerExplanation?.update({electric,page,selected});updateDomainExplanation();renderInspectorContent();quantities.inspector($('apt-inspector'),selected);}
 function renderInspectorContent(){const d=getObject(selected);if(!d){$('apt-inspector').innerHTML='<h2>방이나 기구를 선택하세요.</h2><p>같은 대상의 이름과 치수, 연결 회로가 나타납니다.</p>';return;}
  if(d.kind==='task-light'){workstationEditor($('apt-inspector'),d,state,electric,{apply:()=>{refresh();status('작업등 위치와 회로 부하를 적용했습니다.');},toggle:toggleSwitch,calc:async id=>{calc.circuit=id;calc.mode='electrical';calc.step='power-sum';await go('calculations');},term:()=>term('circuit')});return;}
  if(d.layer){$('apt-inspector').innerHTML=`<h2>${d.layer.name}</h2><p>${d.layer.mm} mm · ${d.assembly.name}</p><p>${d.layer.role}</p><div class="button-row"><button data-material-location="${d.assembly.id}">건물에서 위치 보기</button><button data-term="${d.assembly.id==='floor'?'slab':'partition'}">관련 용어</button></div>`;return;}
@@ -258,6 +262,31 @@ powerExplanation=createPowerExplanation({before:$('apt-content'),
   if(kind==='calculation'){calc.mode='electrical';calc.circuit=d.circuit;calc.step='current';await go('calculations');return;}
   if(kind==='quantities'){await quantities.showTarget(d.id);return;}
   if(await go(kind==='return'?origin:'electrical')){select(d.id);if(kind==='drawing')$('apt-workspace').scrollIntoView({block:'start'});}
+ },onError:error=>status('이유 연결을 열지 못했습니다: '+error.message)});
+function updateDomainExplanation(){
+ let data=null;
+ if(page==='fire-signal')data=fireExplanation(fire,fire.devices.some(d=>d.id===selected&&['smoke','heat'].includes(d.kind))?selected:fireId);
+ if(page==='structure'){const base=apartmentSlab(),current=slabCalculation({...base,live:calc.live});data=structureExplanation(apartmentLesson(electric,{...calc,mode:'trial'}),base,current);view?.showStructuralLoad('apartment-floor',calc.live,base.live,base.span);}
+ else view?.showStructuralLoad(null);
+ if(page==='materials'){const a=apartmentAssemblies.find(a=>a.id===assembly),layers=a.layers.map(l=>({...l,id:'assembly-'+a.id+'-'+l.id}));data=materialExplanation({...a,layers,terms:a.id==='floor'?[['slab','바닥판'],['insulation','단열재']]:[['partition','벽의 역할'],['insulation','단열재']]},Math.max(0,layers.findIndex(l=>l.id===selected)));}
+ domainExplanation?.update(data?{data,page,assembly,live:calc.live,fireId:data.domain==='fire'?data.target:fireId,power:{power:state.power,battery:state.battery,fireSignal:state.fireSignal}}:null);
+}
+domainExplanation=createDomainExplanation({before:$('apt-content'),
+ change:(kind,value,c)=>{
+  if(c.data.domain==='fire'){if(kind==='choose'){fireId=value;select(value);}if(kind==='signal'){view?.simulation?.leave();fireId=value;state.fireSignal=value;selected=value;}if(kind==='reset')state.fireSignal=null;if(kind==='mains')state.power=!state.power;if(kind==='battery')state.battery=!state.battery;refresh();}
+  if(c.data.domain==='structure'){calc.live=kind==='restore'?apartmentSlab().live:value;saveReader();updateDomainExplanation();}
+  if(c.data.domain==='materials')select(value);
+ },navigate:async(kind,value,c)=>{
+  if(kind==='term'){term(value);return;}
+  if(kind==='quantities'){await quantities.showTarget(c.data.quantityTarget??c.data.target);return;}
+  if(kind==='calculation'){calc.mode='trial';calc.step='design-load';await go('calculations');return;}
+  if(kind==='safety'){await go('safety');return;}
+  if(kind==='return'){assembly=c.assembly;fireId=c.fireId;await go(c.page,c.page==='materials'?apartmentAssemblies.find(a=>a.id===assembly).sheet:null);if(c.data.domain==='fire'){Object.assign(state,c.power);refresh(false);}select(c.data.target);return;}
+  if(c.data.domain==='fire'){await go('fire','F-201');select(c.data.target);layout('split');}
+  else if(c.data.domain==='structure'){setSheet('S-201');select('apartment-floor');layout('split');}
+  else if(kind==='location'){await destination(c.data.quantityTarget,'A-201');}
+  else {select(c.data.target);layout('split');}
+  $('apt-workspace').scrollIntoView({block:'start'});
  },onError:error=>status('이유 연결을 열지 못했습니다: '+error.message)});
 go(location.hash.slice(1)||'home');
 

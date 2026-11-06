@@ -1,5 +1,9 @@
 import {createQuantities} from './quantities-ui.mjs';
 import {createPowerExplanation} from './power-explanation.mjs';
+import {createDomainExplanation} from './domain-explanation.mjs';
+import {fireExplanation,structureExplanation,materialExplanation} from './src/domain-explanations.mjs';
+import {baySlab} from './src/cleanroom-construction.mjs';
+let domainExplanation;
 let powerExplanation,glossaryTermOnOpen=null;
 import {mountExperienceTools,showScenePreview,selectionDimensions} from './workspace-ui.mjs';
 import {mountSamples,mountGlossary} from './learning-shell.mjs';
@@ -59,7 +63,8 @@ function frame(){
   if(tab==='fire'&&selected==='EX3'||tab==='fire-signal'&&stage===3){path=escapePath;color='#198366';}
   else if(tab==='fire-signal'&&stage===1||tab==='fire'&&selected==='RP3'){path=signalPath;color='#ba623c';}
   else if(tab==='fire-signal'&&stage===2||tab==='fire'&&selected==='ALM3'){path=alarmPath;color='#ba623c';}
-  return {electric,fire:bayFire(simPower),tab:tab==='experience'&&experienceView==='sheet'?'building':tab,experienceView,night,sheet:drawing,id:tab==='building'&&materialLocation?assemblies[materialLocation].target:selected,path,color,assembly,layer,display,alarm:tab==='fire-signal'&&stage>=2};
+  const fire=bayFire(simPower);
+  return {electric,fire,tab:tab==='experience'&&experienceView==='sheet'?'building':tab,experienceView,night,sheet:drawing,id:tab==='building'&&materialLocation?assemblies[materialLocation].target:selected,path,color,assembly,layer,display,live:state.live,alarm:tab==='fire-signal'&&fire.alarm};
 }
 function deviceButtons(list){return list.map(d=>btn((d.bounds?'':d.id+' · ')+d.name,'pick',d.id,pressed(selected===d.id))).join('');}
 const termLink=id=>btn((bayTerms.get(id)?.term??id)+' 뜻','term',id);
@@ -92,7 +97,7 @@ function renderLesson(f){
   if(tab==='fire')return card(data.id+' · '+data.name,'<p>'+({smoke:'작업구역에서 연기를 감지해 수신기로 신호를 보내는 위치입니다.',receiver:'주황색 선을 따라 감지기와 전실 수신기의 연결을 확인하세요.',alarm:'수신기에서 경보장치까지 이어지는 주황색 신호선을 확인하세요.',exit:'초록색은 작업대 앞에서 전실을 거쳐 바깥으로 나가는 동선입니다.',extinguisher:'전실 통로에서 접근하는 소화기입니다. 작동 체험에서 안전핀·조준·분사 순서를 연습합니다.'}[data.kind])+'</p>'+actions(btn('작동 시험 열기','go','test','class="primary"')+termLink('receiver')));
   if(tab==='test')return '';
   if(tab==='fire-signal'){
-    const info=fireStages[stage];
+    const stepInfo=fireStages[stage],info=stepInfo&&stage<3&&!f.fire.alarm?{...stepInfo,title:'신호·전원 확인',text:f.fire.proof.reason}:stepInfo;
     return card(info?(stage+1)+'. '+info.title:'감지기 시험 준비','<p role="status">'+(info?info.text:'시험을 시작하면 작업구역 감지기에 모의 신호를 넣습니다. 도면과 모형에서 같은 장치를 찾아보세요.')+'</p>'+actions((stage<3?btn(stage===-1?'감지기 시험 시작':'다음 · '+fireStages[stage+1].title,'advance','','class="primary"'):btn('안전점검 기록','go','safety','class="primary"'))+(stage>=0?btn('시험 초기화','reset-test'):'')+btn(audio.enabled?'경보음 끄기':'경보음 켜기','sound','',pressed(audio.enabled)))+'<p class="small">기구 간 신호 전달과 피난 경로를 배우는 교육용 시험입니다. 청정도, 연기 확산 속도, 대피 가능 시간은 계산 범위에서 제외했습니다.</p>');
   }
   if(tab==='safety')return fireSimulationResult('cleanroom-03')+card('학습 기록 '+safetyChecks.filter(([id])=>state.checks[id]).length+' / '+safetyChecks.length,'<div class="checklist">'+safetyChecks.map(([id,label,target])=>'<div><label><input type="checkbox" data-check="'+id+'" '+(state.checks[id]?'checked':'')+'>'+label+'</label>'+btn('관련 수업','related',id)+'</div>').join('')+'</div>');
@@ -123,6 +128,7 @@ function paint(){
   if(workspace){const menu=firePage()?'fire':tab==='experience'?'building':tab;const choices=sheets.filter(s=>s.menu===menu);$('bay-sheet').innerHTML=choices.map(s=>'<option value="'+s.id+'" '+(s.id===drawing?'selected':'')+'>'+s.id+' · '+s.title+'</option>').join('');$('bay-plan').innerHTML=bayPlan({...f,tab:tab==='experience'?'building':tab});}
   if(tab==='experience')mountExperienceTools($('bay-tools'),{night,render:()=>{scene?.realistic();$('bay-render-label').textContent='실감 렌더링 · 재질·그림자';},enter:()=>{experienceView='inside';layoutMode='model';paint();},outside:()=>{experienceView='outside';paint();},setNight:on=>{night=on;paint();$('bay-status').textContent=on?'밤 장면으로 전환했습니다.':'낮 장면으로 전환했습니다.';},route:()=>{returnPage='experience';go('electrical',electricalId);},preview:()=>showScenePreview(scene.image(),'현재 클린룸 렌더링 장면')});
   renderInspector(f);quantities.inspector($('bay-inspector'),selected);powerExplanation?.update({electric:f.electric,page:tab,selected});
+  updateDomainExplanation();
   $('bay-render-label').textContent='실감 렌더링';$('bay-view-help').textContent=tab==='experience'&&experienceView==='inside'?'휠: 시야 확대·축소 · 드래그: 시선 · W A S D: 이동':'드래그로 회전 · 휠로 확대 · 대상을 눌러 정보 확인';
   $('bay-lesson').innerHTML=['glossary','building','fire'].includes(tab)?'':renderLesson(f);
   if(tab==='glossary'){
@@ -226,9 +232,9 @@ const bayActions={
   whole:()=>{experienceView='outside';paint();scene?.whole();$('bay-model-title').textContent='클린룸 · 전체 건물';},
   breaker:b=>{const id=b.dataset.breaker;if(!circuits.some(c=>c.id===id))return;state.breakers[id]=!state.breakers[id];save();paint();$('bay-status').textContent=id+' 차단기를 '+(state.breakers[id]?'켰습니다.':'껐습니다.');},
   step:b=>{step=Number(b.dataset.step);selected=step===1?panel.id:electricalId;paint();},
-  advance:()=>{if(stage<3){stage++;selected=fireStages[stage].id;paint();}},
-  resetTest:()=>{stage=-1;selected='SD3';paint();},
-  sound:()=>{if(audio.enabled)audio.mute();else{audio.enabled=true;audio.unlock();audio.ctx?.resume().then(()=>audio.play(tab==='fire-signal'&&stage>=2&&!document.hidden)).catch(()=>{});}paint();},
+   advance:()=>{if(stage<3){stage++;if(stage===0)simPower.signal='SD3';selected=fireStages[stage].id;paint();}},
+   resetTest:()=>{stage=-1;simPower.signal=null;selected='SD3';paint();},
+   sound:()=>{if(audio.enabled)audio.mute();else{audio.enabled=true;audio.unlock();audio.ctx?.resume().then(()=>audio.play(frame().alarm&&!document.hidden)).catch(()=>{});}paint();},
   term:b=>moveTerm(b.dataset.term),
   relatedTerm:b=>{const target=bayTerms.get(b.dataset.relatedTerm)?.target;$('bay-term').close();destination(target);},
   glossaryTerm:b=>{glossaryTermOnOpen=b.dataset.glossaryTerm;termReturn=tab;$('bay-term').close();go('glossary');},
@@ -247,7 +253,7 @@ $('bay-app').addEventListener('submit',e=>{if(e.target.id==='bay-live'){e.preven
   if(!e.target.reportValidity()||!Number.isInteger(w))return;
   state.watts[electricalId]=w;save();paint();$('bay-status').textContent=electricalId+'의 입력전력을 '+w+' W로 적용했습니다.';
 });
-document.addEventListener('visibilitychange',()=>audio.play(!document.hidden&&tab==='fire-signal'&&stage>=2));
+document.addEventListener('visibilitychange',()=>audio.play(!document.hidden&&frame().alarm));
 const quantities=createQuantities({host:$('bay-lesson'),nav:$('learning-nav'),workspace:$('bay-workspace'),go,read:()=>({sample:'cleanroom',model:building,electric:bayElectrical(state),fire:bayFire(simPower),panel,rebar:{bars:stripBars().map(([a,b],i)=>({id:'strip-bar-'+i,parent:'slab',a,b,diameter:slabDesign.diameter,sheet:'S-301'}))},resolveSheet:e=>e.kind==='ceiling'?'A-303':['door','window-glass','frame'].includes(e.kind)?'A-305':'A-301'}),locate:async m=>{drawing=m.sheet;returnPage='quantities';focusOnOpen={menu:m.menu,id:m.id};if(m.menu==='building')buildingId=m.id;if(equipment.some(e=>e.id===m.id))electricalId=m.id;history.replaceState(null,'','#'+m.menu);await openPage();return !reloadRequired;}});
 mountSamples(3,()=>go('home'),()=>go('glossary'));
 window.addEventListener('hashchange',openPage);
@@ -263,5 +269,33 @@ powerExplanation=createPowerExplanation({before:$('bay-lesson'),
   if(kind==='calculation'){calcMode='electric';readingView='one';formula=bayLesson(state,calcMode,electricalId).steps.findIndex(s=>s.id==='current');if(formula<0)formula=0;go('calculations');return;}
   if(kind==='quantities'){await quantities.showTarget(d.id);return;}
   const target=kind==='return'?origin:'electrical';focusOnOpen={menu:target,id:d.id};drawing=target==='experience'?'A-301':'E-301';history.replaceState(null,'','#'+target);await openPage();if(kind==='drawing')$('bay-workspace').scrollIntoView({block:'start'});
+ },onError:error=>$('bay-status').textContent='이유 연결을 열지 못했습니다: '+error.message});
+function updateDomainExplanation(){
+ let data=null;
+ if(tab==='fire-signal')data=fireExplanation(bayFire(simPower),fireId);
+ if(tab==='structure'){data=structureExplanation(bayLesson(state,'slab'),baySlab(),baySlab(state.live));data.live.max=10;}
+ if(tab==='materials'){const a=assemblies[assembly];data=materialExplanation({...a,id:assembly,layers:a.layers.map(([name,mm,color,role],i)=>({id:'layer-'+i,name,mm,role})),terms:assembly==='wall'?[['wall-panel','벽 패널'],['insulation','단열재']]:[['esd','정전기 분산'],['slab','바닥판']]},layer);}
+ domainExplanation?.update(data?{data,page:tab,assembly,layer,live:state.live,fireId,stage,power:{...simPower}}:null);
+}
+domainExplanation=createDomainExplanation({before:$('bay-lesson'),
+ change:(kind,value,c)=>{
+  if(c.data.domain==='fire'){if(kind==='choose'){fireId=value;selected=value;}if(kind==='signal'){simPower.signal=value;fireId=value;selected=value;stage=0;}if(kind==='reset'){simPower.signal=null;stage=-1;}if(kind==='mains'||kind==='battery')simPower[kind]=!simPower[kind];}
+  if(c.data.domain==='structure'){state.live=kind==='restore'?slabDesign.live:value;save();}
+  if(c.data.domain==='materials'){layer=Number(value.slice(6));}
+  paint();
+ },navigate:async(kind,value,c)=>{
+  if(kind==='term'){moveTerm(value);return;}
+  if(kind==='quantities'){await quantities.showTarget(c.data.quantityTarget??c.data.target);return;}
+  if(kind==='calculation'){calcMode='slab';formula=1;go('calculations');return;}
+  if(kind==='safety'){go('safety');return;}
+  if(kind==='return'){
+   assembly=c.assembly;layer=c.layer;fireId=c.fireId;
+   history.replaceState(null,'','#'+c.page);await openPage();simPower={...c.power};stage=c.stage;paint();return;
+  }
+  if(c.data.domain==='fire'){fireId=c.data.target;drawing='F-301';history.replaceState(null,'','#fire');await openPage();}
+  else if(c.data.domain==='structure'){drawing='S-301';selected='slab';paint();}
+  else if(kind==='location'){materialLocation=assembly;buildingId=assemblies[assembly].target;drawing='A-301';history.replaceState(null,'','#building');await openPage();}
+  else {layer=Number(c.data.target.slice(6));paint();}
+  $('bay-workspace').scrollIntoView({block:'start'});
  },onError:error=>$('bay-status').textContent='이유 연결을 열지 못했습니다: '+error.message});
 openPage();

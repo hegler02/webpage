@@ -12,12 +12,12 @@ export function expansionSVG({sheet,selected,fire=fireModel(),finish='plaster',b
   // This line is a teaching evacuation route, never a cable or pipe claim.
   const path=[[3.2,3],[4,2.35],[4.65,2.35],[5.05,1.3],[5.05,-.5]].map(p);
   for(let i=1;i<path.length;i++)out+=line(path[i-1],path[i],'#2b9a81',4);
-  out+=text(585,545,'피난 동선 예시 · 녹색',14,'#258675');
+  out+=text(660,545,'피난 동선 예시 · 녹색',14,'#258675');
   for(const d of fire.devices){const [x,y]=p(d.pos);out+='<g>';
    if(['smoke','heat'].includes(d.kind))out+=`<circle cx="${x}" cy="${y}" r="10" fill="${d.on?'#f7a384':'#fff'}" stroke="${selected===d.id?'#ef861d':'#a44d3d'}" stroke-width="${selected===d.id?4:2}" ${attrs(d)}/>`;
    else out+=box(d,x-9,y-9,18,18,selected,['exit-light','emergency'].includes(d.kind)?'#b7e4cd':d.on?'#f3a28f':'#eed8d1');
    // Stagger labels at the doorway to keep closely spaced devices legible.
-   const offsets={FA01:[18,-28],MC01:[-95,95],AL01:[48,46],EX01:[-100,64],FE01:[55,9],EM01:[-75,35]};const [dx,dy]=offsets[d.id]??[15,-12];out+=line([x,y],[x+dx,y+dy-5],'#9aaeb4',.8)+text(x+dx,y+dy,d.id,13);out+='</g>';
+   const offsets={FA01:[-52,-28],MC01:[-95,95],AL01:[48,46],EX01:[-62,28],FE01:[55,9],EM01:[26,-22]};const [dx,dy]=offsets[d.id]??[15,-12];out+=line([x,y],[x+dx,y+dy-5],'#9aaeb4',.8)+text(x+dx,y+dy,d.id,13);out+='</g>';
   }
   out+=text(100,590,'SD 연기감지 · HD 열감지 · MC 발신기 · FA 수신기 · AL 경보',14);
   out+=text(100,617,'EX 유도등 · EM 비상조명 · FE 소화기',14);

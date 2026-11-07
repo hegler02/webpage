@@ -78,8 +78,8 @@ export function apartmentModel(){
    }x=c.end;
   }
  };
- box('apartment-floor','세대 구조 바닥판',[-.2,-.2,8.6,7.5],-.18,.18,'floor','structure');
- box('apartment-upper','위층 구조 바닥판',[-.2,-.2,8.6,7.5],2.7,.18,'roof','roof');
+ box('apartment-floor','세대 구조 바닥판',[-.2,-.2,8.6,7.5],-.21,.21,'floor','structure');
+ box('apartment-upper','위층 구조 바닥판',[-.2,-.2,8.6,7.5],2.7,.21,'roof','roof');
  for(const r of apartment.rooms){box('floor-impact-'+r.id,r.name+' 바닥 완충층',r.bounds,0,.02,'floor','floor-finish');box('floor-insulation-'+r.id,r.name+' 바닥 단열층',r.bounds,.02,.04,'floor','floor-finish');box('floor-screed-'+r.id,r.name+' 난방 모르타르',r.bounds,.06,.052,'floor','floor-finish');box('floor-finish-'+r.id,r.name+' 바닥 마감',r.bounds,.112,.008,'floor','floor-finish');box('ceiling-'+r.id,r.name+' 천장',r.bounds,2.52,.012,'ceiling','ceiling');}
  wall('south','x',-.2,-.2,8.6,.2,[{start:.8,end:1.8,base:0,height:2.22},{start:3.3,end:7.8,base:.35,height:2}]);
  wall('north','x',7.3,-.2,8.6,.2,[{start:.4,end:2.2,base:.95,height:1.4},{start:3.1,end:4.9,base:.95,height:1.4},{start:5.9,end:7.9,base:.95,height:1.4}]);
@@ -121,7 +121,7 @@ export function apartmentElectrical(state){
 }
 export function apartmentWalk(x,y,model){if(x<.14||x>8.26||y<.14||y>7.16)return false;return !model.elements.filter(e=>['wall','partition','furniture','fixture'].includes(e.kind)&&e.base<1.8&&e.base+e.height>.3).some(e=>[[x,y],[x-.13,y],[x+.13,y],[x,y-.13],[x,y+.13]].some(p=>insideElement(p,e)));}
 import {rebarSize} from './rebar-sizes.mjs';
-export const apartmentSlabDesign=Object.freeze({span:2.6,thickness:180,cover:25,diameter:10,spacing:150,live:2,finish:1.5});
+export const apartmentSlabDesign=Object.freeze({span:2.6,thickness:210,cover:25,diameter:10,spacing:150,live:2,finish:1.5});
 export function apartmentRebar(){
  const bars=[],id='apartment-floor',{cover,diameter,spacing,thickness}=apartmentSlabDesign;
  const nominal=rebarSize(diameter).nominal,center=(cover+nominal/2)/1000,step=spacing/1000;
@@ -137,7 +137,7 @@ export function apartmentRebar(){
 export const apartmentSlab=()=>slabCalculation(apartmentSlabDesign);
 export function apartmentFire(s){
  const devices=apartment.rooms.filter(r=>r.id!=='bath'&&r.id!=='entry').map((r,i)=>({id:'AD'+(i+1),name:r.name+' 연기감지기',room:r.id,kind:'smoke',pos:r.bounds[3]-r.bounds[1]<1.5?[(r.bounds[0]+r.bounds[2])/2+.6,(r.bounds[1]+r.bounds[3])/2,2.495]:[(r.bounds[0]+r.bounds[2])/2,(r.bounds[1]+r.bounds[3])/2+.35,2.495],size:[.12,.12,.04],system:'fire',term:'detector'}));
- devices.push({id:'AH1',name:'주방 열감지기',room:'living',kind:'heat',pos:[6.7,3.2,2.495],size:[.12,.12,.04]}, {id:'AX1',name:'현관 소화기',kind:'extinguisher',pos:[2.2,.3,.375],size:[.18,.18,.5]}, {id:'AE1',name:'피난용 휴대 비상조명',kind:'emergency',pos:[2.56,.55,1.575],size:[.07,.12,.18]}, {id:'AB1',name:'세대 경보 장치',kind:'bell',pos:[2.56,.35,2.175],size:[.08,.18,.18]});
+ devices.push({id:'AH1',name:'주방 열감지기',room:'living',kind:'heat',pos:[6.7,3.2,2.495],size:[.12,.12,.04]}, {id:'AX1',name:'현관 소화기',kind:'extinguisher',pos:[2.2,.3,.375],size:[.18,.18,.5]}, {id:'AE1',name:'휴대용비상조명등',kind:'emergency',pos:[2.56,.55,1.575],size:[.07,.12,.18]}, {id:'AB1',name:'세대 경보 장치',kind:'bell',pos:[2.56,.35,2.175],size:[.08,.18,.18]});
   return resolveFire(devices.map(d=>({...d,system:'fire',term:d.term??'fire'})),{mains:s.power,battery:s.battery,signal:s.fireSignal});
 }
 export const apartmentChecks=[

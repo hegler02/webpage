@@ -1,5 +1,6 @@
 import {createQuantities} from './quantities-ui.mjs';
 import {mountWorkbench,standardPages} from './workbench.mjs';
+import {clearLearningRecords} from './study-state.mjs';
 import {createPowerExplanation} from './power-explanation.mjs';
 import {createDomainExplanation} from './domain-explanation.mjs';
 import {fireExplanation,structureExplanation,materialExplanation} from './src/domain-explanations.mjs';
@@ -24,7 +25,7 @@ import {fireSimulationResult} from './src/fire-simulation.mjs';
 const $=id=>document.getElementById(id);
 const key='space-electricity-cleanroom-03-v1';
 const homePreview=new URL('./cleanroom-preview.png',import.meta.url).href;
-mountWorkbench({root:$('bay-app'),workspace:$('bay-workspace'),heading:$('page-heading'),canvases:$('bay-panes'),plan:$('bay-plan'),three:$('bay-canvas'),inspector:$('bay-inspector'),content:'#bay-lesson',status:$('bay-status'),extraMove:['#bay-return'],idleTitle:'하나를 눌러보세요.',pages:standardPages('#bay-lesson')});
+mountWorkbench({root:$('bay-app'),workspace:$('bay-workspace'),heading:$('page-heading'),canvases:$('bay-panes'),plan:$('bay-plan'),three:$('bay-canvas'),inspector:$('bay-inspector'),content:'#bay-lesson',status:$('bay-status'),extraMove:['#bay-return'],idleTitle:'하나를 눌러보세요.',zoomIn:document.querySelector('#drawing [data-zoom=in]'),zoomOut:document.querySelector('#drawing [data-zoom=out]'),pages:standardPages('#bay-lesson')});
 let saved;
 try{saved=JSON.parse(localStorage.getItem(key));}catch{}
 const state=freshBay(saved),audio=new AlarmOutput();
@@ -80,7 +81,7 @@ function renderLesson(f){
   }
   if(tab==='structure'){
     const d=slabDesign;
-    return card('작업구역 대표 바닥판','<p>바닥의 폭 1 m, 길이 '+d.span+' m를 잘라 본 예제입니다. 두께 '+d.thickness+' mm 바닥판 아랫부분에 D'+d.diameter+' 철근을 '+d.spacing+' mm 간격으로 놓았습니다. 긴 방향 '+stripBars().filter(([a,b])=>a[0]===b[0]).length+'개가 이 띠의 휨 계산에 쓰입니다.</p>'+actions(btn('바닥판 계산 열기','open-calc','slab')+termLink('rebar')));
+    return card('작업구역 대표 바닥판','<p>바닥의 폭 1 m, 길이 '+d.span+' m를 잘라 본 예제입니다. 두께 '+d.thickness+' mm 바닥판 아랫부분에 D'+d.diameter+' 철근을 '+d.spacing+' mm 간격으로 놓았습니다. 긴 방향 '+stripBars().filter(([a,b])=>a[0]===b[0]).length+'개가 이 띠의 휨 계산에 쓰입니다. 사용하중 '+d.live+' kN/m²는 수업값이며, 실제 클린룸은 장비 하중을 따로 검토합니다.</p>'+actions(btn('바닥판 계산 열기','open-calc','slab')+termLink('rebar')));
   }
   if(tab==='calculations'){
     const result=bayCalculationHTML(state,calcMode,electricalId,formula,readingView),slab=calcMode==='slab';
@@ -244,7 +245,7 @@ const bayActions={
   retry:()=>{if(reloadRequired)location.reload();else ensureScene();},
   '#reframe':()=>{experienceView='outside';paint();scene?.whole();},
   '#bay-reset':()=>$('bay-reset-dialog').showModal(),
-  '#bay-reset-confirm':()=>{Object.assign(state,freshBay());simPower={mains:true,battery:true,signal:null};save();$('bay-reset-dialog').close();go('home');},
+  '#bay-reset-confirm':()=>{clearLearningRecords(3,'cleanroom-03');Object.assign(state,freshBay());simPower={mains:true,battery:true,signal:null};save();$('bay-reset-dialog').close();go('home');},
   '#menu-toggle':b=>{const active=$('site-top').dataset.menuOpen!=='true';$('site-top').dataset.menuOpen=String(active);b.setAttribute('aria-expanded',String(active));b.setAttribute('aria-label',active?'학습 메뉴 닫기':'학습 메뉴 열기');}
 };
 bindActions([$('site-top'),$('bay-app'),$('bay-term'),$('bay-reset-dialog')],bayActions,error=>{$('bay-status').textContent='작업을 마치지 못했습니다: '+error.message;});

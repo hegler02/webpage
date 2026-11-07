@@ -21,7 +21,7 @@ export const apartmentAssemblies=[
   {id:'screed',name:'난방 배관을 감싸는 모르타르',mm:52,color:'#c1bab0',role:'배관의 열을 바닥으로 전달하는 층입니다. 바닥에 고정물을 설치할 때 배관 위치를 확인해야 하는 이유를 살핍니다.'},
   {id:'floor-insulation',name:'바닥 단열층',mm:40,color:'#d8c89d',role:'열이 아래쪽으로 빠져나가는 것을 줄입니다.'},
   {id:'impact',name:'바닥 완충층',mm:20,color:'#8fa6a0',role:'충격 전달을 줄이는 층입니다. 층간소음 성능은 전체 바닥 구성과 시험 조건으로 판단합니다.'},
-  {id:'slab',name:'철근콘크리트 구조 바닥판',mm:180,color:'#929c98',role:'사람과 가구의 무게를 받습니다. 구조·철근 메뉴의 같은 바닥판으로 연결됩니다.'}
+  {id:'slab',name:'철근콘크리트 구조 바닥판',mm:210,color:'#929c98',role:'사람과 가구의 무게를 받습니다. 구조·철근 메뉴의 같은 바닥판으로 연결됩니다.'}
  ]}
 ];
 export const apartmentPalettes=[

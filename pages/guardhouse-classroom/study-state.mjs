@@ -1,5 +1,9 @@
 // Pure learning state. A flip is not a learning rating; an answer is counted once.
 export const studyKey=sample=>'space-electric-study-v1:'+sample;
+// Full reset also removes card, quiz and fire-drill records, so a shared PC starts clean.
+export function clearLearningRecords(sample,projectId=null){
+ try{localStorage.removeItem(studyKey(sample));if(projectId)localStorage.removeItem('fire-sim-result-'+projectId);}catch{}
+}
 export const questionSignature=q=>JSON.stringify([q.statement,q.answer,q.explanation]);
 export function freshStudy(){return {version:1,mode:'dictionary',category:'bim',query:'',deck:[],index:0,flipped:false,ratings:{},quiz:[],answers:{},quizIndex:0,result:false,returnMode:null,term:null};}
 export function restoreStudy(raw,terms,questions,categories){

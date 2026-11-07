@@ -98,7 +98,13 @@ body.wb-theme .cv-scene-badge{background:var(--wb-label-bg);color:var(--wb-text)
 body.wb-on :is(#cv-investigation,#cv-original-tools,#cv-first-lesson){padding:0;border:0;background:none}
 body.wb-on #cv-study-back{padding:0;border:0;margin-top:var(--wb-gap-action)}
 body.wb-on .cv-trace-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
-body.wb-on .cv-controls{grid-template-columns:repeat(2,minmax(0,1fr));margin-block:var(--wb-gap-action)}
+body.wb-on .wb-body .cv-study-return{padding:0;border:0;gap:var(--wb-gap-text)}
+body.wb-on .wb-body .cv-instruction{display:block}
+body.wb-on .wb-body .cv-instruction ol{margin-top:var(--wb-gap-text)}
+body.wb-on .wb-body .cv-instruction ol,body.wb-on .wb-body .cv-intro-observations ul{padding-inline-start:var(--wb-gap-section)}
+body.wb-on .wb-body .cv-states{margin:var(--wb-gap-action) 0 0;gap:var(--wb-gap-control)}
+body.wb-on .wb-body .cv-controls{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--wb-gap-control);margin:var(--wb-gap-action) 0 0}
+body.wb-on .wb-body .cv-controls+.button-row{margin-top:var(--wb-gap-action)}
 body.wb-on .cv-controls button{min-height:0;padding:var(--wb-gap-text) var(--wb-inset-card);gap:var(--wb-gap-tool)}
 body.wb-on .cv-observations{grid-template-columns:minmax(0,1fr)}
 body.wb-on .cv-reading{max-width:none}
@@ -119,3 +125,10 @@ body.wb-on .cv-intro-nav small{font-size:var(--sys-size-eyebrow)}
  body.wb-on main[data-page=intro] .canvas-row[data-layout=split]>.drawing-panel{display:flex}
  body.wb-on main[data-page=intro] .canvas-row .canvas-footer{display:none}
 }
+body.wb-theme main .cv-calc-fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--wb-sheet-select-phone),1fr));gap:var(--wb-gap-action)}
+body.wb-theme main .cv-calc-fields label{align-content:start}
+body.wb-on .wb-body :is(#cv-first-lesson,.cv-intro-copy)>*{margin:0}
+body.wb-on .wb-body .cv-intro-bottom{margin:0;padding-top:var(--wb-gap-action)}
+body.wb-on .wb-body .cv-intro-bottom>*{margin:0}
+body.wb-on #cv-first-lesson>p:empty{display:none}
+body.wb-on .wb-body .cv-study-state{margin:var(--wb-gap-text) 0 0}

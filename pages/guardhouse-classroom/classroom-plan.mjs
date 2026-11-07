@@ -51,7 +51,9 @@ export function sheetSVG({sheet,model,projections,electric,rebar,selected=null,f
   if(view.startsWith('rebar')){
    const slab=view==='rebar-slab',parents=slab?[['roof','floor','entrance-canopy'].includes(selected)?selected:'roof']:rebar.members.filter(m=>m.type==='wall'||m.id.startsWith('footing')||m.id==='pit-base').map(m=>m.id);
    for(const b of rebar.bars.filter(b=>parents.includes(b.parent))){line(projectPoint(b.a),projectPoint(b.b),b.parent===selected?'#ed8d35':'#bc6b52',1,b.parent);}
-   text(100,595,slab?`${parents[0]==='floor'?'바닥판':parents[0]==='entrance-canopy'?'출입구 차양':'지붕판'} · D10 @${rebar.members.find(m=>m.id===parents[0]).spacing} · 상·하부 양방향 · 피복 25 mm`:'벽 D10 @200 양면 · 기초 D13 @200 상·하부 · 피복 벽 40 / 기초 50 mm',15);
+   const spacingOf=id=>rebar.members.find(m=>m.id===id).spacing;
+   const slabLabel=parents[0]==='floor'?`바닥판 D10 @${spacingOf('floor')}`:parents[0]==='entrance-canopy'?`출입구 차양 D10 @${spacingOf(parents[0])}`:selected==='roof'?`지붕판 D10 @${spacingOf('roof')}`:`그림은 지붕판 D10 @${spacingOf('roof')} · 바닥판 D10 @${spacingOf('floor')}`;
+   text(100,595,slab?`${slabLabel} · 상·하부 양방향 · 피복 ${parents[0]==='entrance-canopy'?40:25} mm`:'벽 D10 @200 양면 · 기초 D13 @200 상·하부 · 피복 벽 40 / 기초 75 mm',15);
    text(100,623,'철근을 누르면 부재 정보·배근 수량·계산서를 함께 확인합니다.',14);
   }
   if(['lighting','power'].includes(view)){

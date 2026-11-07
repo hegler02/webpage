@@ -3,6 +3,7 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {devices,byId,wires} from './src/conveyor-project.mjs';
 import {observeScene} from './render-loop.mjs';
+import {keyboardOrbit,lightenOnSlowFrames} from './scene-access.mjs';
 import {createEquipment} from './conveyor-equipment.mjs';
 import {routeOn} from './src/conveyor-investigation.mjs';
 
@@ -17,7 +18,7 @@ export function createConveyorScene(host,{select,onFrame,getState,onContext}){
  const mat=(color,metalness=0,roughness=.65)=>new T.MeshStandardMaterial({color,metalness,roughness});
  const m={steel:mat('#a8b5ba',.8,.3),dark:mat('#263c43',.35,.48),belt:mat('#253b39',.05,.88),cream:mat('#e2e5df',.15,.4),blue:mat('#25576f',.45,.42),black:mat('#222829',.1,.6),copper:mat('#b66b36',.8,.25),wood:mat('#bd955b',0,.85),yellow:mat('#e8b630',.1,.45),red:mat('#b52d24',.1,.38),green:mat('#167e5e',.15,.4),glass:new T.MeshPhysicalMaterial({color:'#c9e7ef',transparent:true,opacity:.22,roughness:.14,metalness:.05,depthWrite:false})};
  const groups=new Map(),pickables=[],rotors=[],beltSeams=[],lights=new Map();let selection,highlight,walk=false,inside=false,night=false,yaw=0,pitch=0,drag=null,disposed=false,routeVisible=false,activeWanted=true,contextLost=false,teaching=null;
- const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.09;controls.maxPolarAngle=Math.PI*.485;controls.minDistance=.4;controls.maxDistance=21;
+ const controls=new OrbitControls(camera,renderer.domElement);keyboardOrbit(controls,host);lightenOnSlowFrames(renderer);controls.enableDamping=true;controls.dampingFactor=.09;controls.maxPolarAngle=Math.PI*.485;controls.minDistance=.4;controls.maxDistance=21;
  function mesh(geometry,material,parent,pos=[0,0,0]){const o=new T.Mesh(geometry,material);o.position.set(...pos);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o;}
  const box=(p,size,pos,material)=>mesh(new T.BoxGeometry(...size),material,p,pos);
  const cyl=(p,r,h,pos,material,axis='y',segments=24)=>{const o=mesh(new T.CylinderGeometry(r,r,h,segments),material,p,pos);if(axis==='x')o.rotation.z=Math.PI/2;if(axis==='z')o.rotation.x=Math.PI/2;return o;};

@@ -32,6 +32,9 @@
  --wb-field-placeholder:#a9b4be;
  /* Colour: drawing sheet before it is inverted to CAD model space */
  --wb-sheet:#f8fafb;
+ --wb-sheet-ink:#183540;
+ --wb-sheet-muted:#566b75;
+ --wb-sheet-line:#d5e1e4;
 
  /* Line height */
  --wb-lh-heading:var(--sys-leading-heading);
@@ -75,6 +78,7 @@
  --wb-nav-pad:clamp(6px,.7vw,12px);
  --wb-doc-max:1280px;
  --wb-panel-narrow:320px;
+ --wb-strip-fade:32px;
  --wb-stack-viewer:52dvh;
  --wb-ctl-h-touch:40px;
  --wb-tab-h-touch:44px;
@@ -92,7 +96,7 @@ body.wb-theme{background:var(--wb-bg);color:var(--wb-text);color-scheme:dark}
  --gap-copy:var(--wb-gap-para);--gap-actions:var(--wb-gap-action);
  --quantity-surface-soft:var(--wb-raised);
  --layout-content-max:var(--wb-doc-max);
- --cv-live:var(--wb-ok);--cv-stop:var(--wb-off);--cv-live-surface:var(--wb-raised);--cv-intro-active:var(--wb-accent);--cv-intro-active-text:var(--wb-on-accent);--white:var(--wb-on-accent);
+ --cv-intro-gap:var(--wb-gap-action);--cv-live:var(--wb-ok);--cv-stop:var(--wb-off);--cv-live-surface:var(--wb-raised);--cv-intro-active:var(--wb-accent);--cv-intro-active-text:var(--wb-on-accent);--white:var(--wb-on-accent);
  --quantity-content-max:none;
 }
 body.wb-theme :is(.site-top,main,footer,dialog){color:var(--wb-text)}
@@ -132,20 +136,48 @@ body.wb-theme main :is(p,small,dt,.small){color:var(--wb-muted)}
 body.wb-theme main :is(h1,h2,h3,h4,strong,dd,th,td,summary,label,li){color:var(--wb-text)}
 body.wb-theme main .eyebrow{color:var(--wb-accent)}
 body.wb-theme main .tag{background:none;color:var(--wb-accent)}
+body.wb-theme main :is(.step-number,.tag):not(text){display:block;margin:0 0 var(--wb-gap-tool);line-height:var(--wb-lh-control)}
 body.wb-theme footer{background:var(--wb-surface);border-top:var(--wb-border) solid var(--wb-line);color:var(--wb-muted)}
 body.wb-theme footer :is(span,p){color:var(--wb-muted)}
 body.wb-theme dialog{background:var(--wb-surface);border:var(--wb-border) solid var(--wb-line)}
 body.wb-theme dialog::backdrop{background:var(--wb-scrim)}
 
+/* Keyboard shortcut to the lesson; visible only while focused. */
+body.wb-theme .wb-skip{position:fixed;left:var(--wb-inset-panel);top:var(--wb-inset-panel);z-index:60;padding:var(--wb-gap-text) var(--wb-ctl-pad-x);border-radius:var(--wb-radius);background:var(--wb-accent);color:var(--wb-on-accent);transform:translateY(calc(-100% - var(--wb-inset-panel)*2))}
+body.wb-theme .wb-skip:focus{transform:none}
+.wb-plan .wb-hit{cursor:pointer}
+
+/* Text pages: the same rhythm as the panel, with room for longer reading. */
+body.wb-theme main #page-heading{margin:0 0 var(--wb-gap-section)}
+body.wb-theme main :is(#page-heading,.card,.bay-card,.home-intro,.calc-formula,.lesson-card) .eyebrow{margin:0 0 var(--wb-gap-text)}
+body.wb-theme main #page-heading h1{margin:0 0 var(--wb-gap-text)}
+body.wb-theme main #page-heading>div>p:not(.eyebrow){margin:0}
+body.wb-theme main :is(.card,.bay-card,.home-intro,.calc-formula,.lesson-card) :is(h2,h3){margin-block:0 var(--wb-gap-text)}
+body.wb-theme main :is(.card,.bay-card,.home-intro,.calc-formula,.lesson-card) :is(p,dl,ul,ol,details)+:is(.button-row,.check-summary,.calc-pager,.calc-source){margin-top:var(--wb-gap-action)}
+body.wb-theme main :is(.report-actions,.study-actions)+*{margin-top:var(--wb-gap-section)}
+body.wb-theme main :is(.button-row)+details{margin-top:var(--wb-gap-action)}
+body.wb-theme main details>summary+*{margin-top:var(--wb-gap-para)}
+body.wb-theme main .calc-context{gap:var(--wb-gap-para)}
+body.wb-theme main .calc-context>*{margin:0}
+body.wb-theme main .calc-context{margin:0 0 var(--wb-gap-para)}
+body.wb-theme main .calc-instruction{margin:0 0 var(--wb-gap-action)}
+body.wb-theme main .calc-pager{margin-block:var(--wb-gap-action)}
+body.wb-theme main strong:has(+p){display:block;line-height:var(--wb-lh-control)}
+body.wb-theme main strong+p{margin-top:var(--wb-gap-text)}
+body.wb-theme main .calc-source+.small{margin-top:var(--wb-gap-text)}
+body.wb-theme main .check-summary+.button-row,body.wb-theme main .card>p+.button-row{margin-top:var(--wb-gap-action)}
 /* Text pages share one left edge. */
 body.wb-theme main .calc-guide{max-width:none;margin-inline:0}
 
 /* Drawings keep their authored colours and read like a CAD model space. */
-body.wb-theme .wb-plan{background:var(--wb-sheet);filter:invert(1) hue-rotate(180deg) brightness(1.05) contrast(.95)}
+/* Inside a drawing the legacy tokens mean ink on paper again; the filter does the inversion. */
+body.wb-theme .wb-plan{--ink:var(--wb-sheet-ink);--muted:var(--wb-sheet-muted);--line:var(--wb-sheet-line);--paper:var(--wb-sheet);color:var(--wb-sheet-ink);background:var(--wb-sheet);filter:invert(1) hue-rotate(180deg) brightness(1.05) contrast(.95)}
 
 /* Shared surfaces */
 body.wb-theme main :is(.card,.bay-card,.lesson-card,.term-card,.calc-formula,.workspace,.bay-workspace,.loading-state,.apt-loading,.apt-calculation-toc,.home-intro,.home-preview,.lesson-path>*,.drawing-panel,.model-panel,.inspector,.power-explanation,.sim-record){background:var(--wb-surface);border-color:var(--wb-line);box-shadow:none}
-body.wb-theme :is(.site-top,main) :is(.equation,.apt-guide-dock,.calc-equation,.calc-linked-note,.calc-note,.calc-trial-note,.formula,.check-summary,.term-card .electrical-note,.spatial-note,.fire-state,.fire-guide-dock,.tour-power,.reader-returnbar,.sim-notice,.sim-steps li,.sample-chip){background:var(--wb-raised);border-color:var(--wb-line);color:var(--wb-text)}
+body.wb-theme :is(.site-top,main) :is(.equation,.apt-guide-dock,.calc-equation,.calc-linked-note,.calc-note,.calc-trial-note,.formula,.check-summary,.spatial-note,.fire-state,.fire-guide-dock,.tour-power,.reader-returnbar,.sim-notice,.sim-steps li,.sample-chip){background:var(--wb-raised);border-color:var(--wb-line);color:var(--wb-text)}
+body.wb-theme main .term-card .electrical-note{background:var(--wb-raised);border-color:var(--wb-line);color:var(--wb-text)}
+body.wb-theme main .sim-steps .current{background:var(--wb-accent);color:var(--wb-on-accent)}
 body.wb-theme main .tour-power.is-on,body.wb-theme main .switch-bank button[data-lit=true]{background:var(--wb-accent-soft);border-color:var(--wb-accent);color:var(--wb-accent)}
 body.wb-theme main .fire-state.is-alarm{background:var(--wb-danger-soft);border-color:var(--wb-danger);color:var(--wb-danger)}
 body.wb-theme main :is(.term-link,.good){color:var(--wb-ok)}
@@ -209,7 +241,10 @@ body.wb-on .canvas-heading{flex:none;min-height:0;padding:var(--wb-inset-bar-y) 
 body.wb-on .canvas-heading h2{font-size:var(--sys-size-caption);font-weight:var(--sys-weight-medium)}
 body.wb-on .canvas-heading :is(button,span){height:var(--wb-ctl-h-sm);padding-block:0;font-size:var(--sys-size-caption);color:var(--wb-muted)}
 body.wb-on :is(.wb-plan,.wb-three){flex:1;height:auto;min-height:0;min-width:0}
-body.wb-on .wb-three{background:var(--wb-bg)}
+body.wb-on .wb-three{position:relative;background:var(--wb-bg)}
+body.wb-theme .wb-lost{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--wb-gap-para);background:var(--wb-bg);color:var(--wb-text)}
+body.wb-theme .wb-lost p{margin:0}
+body.wb-theme .wb-three canvas:focus-visible,body.wb-theme .wb-three:focus-visible{outline:var(--wb-marker) solid var(--wb-accent);outline-offset:calc(var(--wb-marker) * -1)}
 body.wb-on .workspace>[role=status]{flex:none;margin:0;padding:var(--wb-inset-bar-y) var(--wb-inset-bar-x);font-size:var(--sys-size-eyebrow);color:var(--wb-muted);background:var(--wb-surface);border-top:var(--wb-border) solid var(--wb-line)}
 body.wb-on .workspace>[role=status]:empty{display:none}
 body.wb-on .canvas-footer{flex:none;gap:var(--wb-gap-text);padding:var(--wb-inset-bar-y) var(--wb-inset-bar-x);font-size:var(--sys-size-eyebrow);color:var(--wb-muted);border-top:var(--wb-border) solid var(--wb-line)}
@@ -223,7 +258,9 @@ body.wb-on .wb-panel-head{flex:none;padding:var(--wb-gap-para) var(--wb-inset-pa
 body.wb-on .wb-panel-head #page-heading{display:block;margin:0}
 body.wb-on .wb-panel-head .eyebrow{margin:0 0 var(--wb-gap-tool);font-size:var(--sys-size-eyebrow)}
 body.wb-on .wb-panel-head h1{margin:0;font-size:var(--sys-size-title-small);line-height:var(--wb-lh-heading)}
-body.wb-on .wb-panel-head #page-heading>div>p:not(.eyebrow),body.wb-on .wb-panel-head #page-actions{display:none}
+body.wb-on .wb-panel-head #page-heading>div>p:not(.eyebrow){display:none}
+body.wb-on .wb-body #page-actions{display:flex;flex-wrap:wrap;gap:var(--wb-gap-control);margin:0 0 var(--wb-gap-section)}
+body.wb-on .wb-body #page-actions:empty{display:none}
 body.wb-on .wb-tabs{flex:none;display:flex;gap:var(--wb-gap-tool);padding-inline:var(--wb-inset-bar-x);border-bottom:var(--wb-border) solid var(--wb-line)}
 body.wb-on .wb-tabs button{flex:1;height:var(--wb-tab-h);padding:0;background:none;border:0;border-bottom:var(--wb-marker) solid transparent;border-radius:0;color:var(--wb-muted);font-size:var(--sys-size-caption)}
 body.wb-on .wb-tabs button:hover{background:var(--wb-hover);border-color:transparent;color:var(--wb-text)}
@@ -239,8 +276,27 @@ body.wb-on .wb-body p+p{margin-top:var(--wb-gap-para)}
 body.wb-on .wb-body .content-grid{display:flex;flex-direction:column;gap:var(--wb-gap-section)}
 body.wb-on .wb-body :is(.card,.bay-card){padding:0;margin:0!important;background:none;border:0;border-radius:0}
 body.wb-on .wb-body .bay-two{display:flex;flex-direction:column;gap:var(--wb-gap-section)}
-body.wb-on .wb-body :is(#page-content,#apt-content,#bay-lesson){margin:0}
-body.wb-on .wb-body :is(#page-content,#apt-content,#bay-lesson)>*+*{margin-top:var(--wb-gap-section)!important}
+/* Gap instead of sibling margins: a block hidden by the current tab leaves no space behind. */
+body.wb-on .wb-body :is(#page-content,#apt-content,#bay-lesson,#cv-content){display:flex;flex-direction:column;gap:var(--wb-gap-section);margin:0}
+body.wb-on .wb-body :is(ol,ul){margin:0}
+body.wb-on .wb-body :is(#page-content,#apt-content,#bay-lesson,#cv-content)>*{margin:0!important}
+body.wb-on .wb-body .selection-id{margin:var(--wb-gap-tool) 0 0}
+body.wb-on .wb-body .apt-room-list{margin-top:var(--wb-gap-action)}
+body.wb-on .wb-body .fire-sim{gap:var(--wb-gap-action)}
+body.wb-on .wb-body .fire-sim>*{margin:0!important}
+body.wb-on .wb-body .fire-sim .eyebrow{display:block;margin:0 0 var(--wb-gap-tool);line-height:var(--wb-lh-control)}
+body.wb-on .wb-body .fire-sim .button-row{align-items:stretch}
+body.wb-on .wb-body .sim-sources a{display:block;margin:var(--wb-gap-text) 0 0;padding:0}
+body.wb-on .wb-body .sim-sources br{display:none}
+body.wb-on .wb-body .fire-state{margin-block:var(--wb-gap-action) 0}
+body.wb-on .wb-body .fire-state strong{display:block;margin:0 0 var(--wb-gap-tool);line-height:var(--wb-lh-control)}
+body.wb-on .wb-body .fire-state p{margin:0}
+body.wb-on .wb-body li{line-height:var(--wb-lh-body)}
+body.wb-on .wb-body summary{line-height:var(--wb-lh-control)}
+body.wb-on .wb-body details{margin:0}
+body.wb-on .wb-body details[open]>summary{margin-bottom:var(--wb-gap-text)}
+body.wb-on .wb-body input:not([type=checkbox],[type=radio],[type=range]){padding:var(--wb-gap-text) var(--wb-ctl-pad-x)}
+body.wb-on .wb-body p+label{display:block;margin-top:var(--wb-gap-para)}
 body.wb-on .wb-body .button-row{display:flex;flex-wrap:wrap;gap:var(--wb-gap-control);margin:0}
 body.wb-on .wb-body :is(p,h2,h3,dl,.lighting-summary,.switch-bank,small)+.button-row{margin-top:var(--wb-gap-action)}
 body.wb-on .wb-body button{min-height:var(--wb-ctl-h);padding:0 var(--wb-ctl-pad-x);font-size:var(--sys-size-caption)}
@@ -256,6 +312,7 @@ body.wb-on .wb-body .material-layer-list+p{margin-top:var(--wb-gap-action)}
 
 /* Why panel */
 body.wb-on .wb-body .power-explanation{margin:0;padding:0;border:0;background:none;gap:var(--wb-gap-action)}
+body.wb-on .wb-body .power-explanation>*{margin:0}
 body.wb-on .wb-body .power-heading{gap:var(--wb-gap-text)}
 body.wb-on .wb-body .power-heading :is(label,select){width:100%}
 body.wb-on .wb-body .power-heading label{gap:var(--wb-gap-tool)}
@@ -289,6 +346,10 @@ body.wb-on .wb-body .fire-sim{padding:0;background:none;border:0}
  :root{--wb-panel:var(--wb-panel-narrow)}
  body.wb-on :is(.workspace-toolbar,.context-tools,.fire-pages){flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
  body.wb-on :is(.workspace-toolbar,.context-tools,.fire-pages)>*{flex:none}
+ body.wb-on :is(.workspace-toolbar,.context-tools,.fire-pages,.cv-intro-nav){overscroll-behavior-x:contain}
+ body.wb-on [data-more=right]{mask-image:linear-gradient(to right,black calc(100% - var(--wb-strip-fade)),transparent)}
+ body.wb-on [data-more=left]{mask-image:linear-gradient(to left,black calc(100% - var(--wb-strip-fade)),transparent)}
+ body.wb-on [data-more=both]{mask-image:linear-gradient(to right,transparent,black var(--wb-strip-fade),black calc(100% - var(--wb-strip-fade)),transparent)}
  body.wb-on :is(.workspace-toolbar,.context-tools) .button-row{flex-wrap:nowrap}
  body.wb-on :is(.workspace-toolbar,.context-tools) :is(button,select){white-space:nowrap}
  body.wb-on .sheet-choice{margin-right:0;width:auto;flex:none}
@@ -302,7 +363,8 @@ body.wb-on .wb-body .fire-sim{padding:0;background:none;border:0}
  body.wb-on main.wb-main{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,var(--wb-stack-viewer)) minmax(0,1fr)}
  body.wb-on main>.workspace{grid-area:1/1}
  body.wb-on main>.wb-panel{grid-area:2/1;border-left:0;border-top:var(--wb-border) solid var(--wb-line)}
- body.wb-on .wb-panel-head{display:none}
+ /* Out of sight but still focusable and read aloud after a menu change. */
+ body.wb-on .wb-panel-head{position:absolute;width:var(--wb-border);height:var(--wb-border);padding:0;overflow:hidden;clip-path:inset(50%)}
 }
 /* A phone is too narrow for two panes: the toggle chooses the drawing or the model. */
 @media(max-width:599px){
@@ -311,4 +373,8 @@ body.wb-on .wb-body .fire-sim{padding:0;background:none;border:0}
  body.wb-on .canvas-row[data-layout=split]>.model-panel{border-left:0}
  body.wb-on .sheet-choice select{width:var(--wb-sheet-select-phone)}
  body.wb-on :is(button[data-layout=split],#apt-split){display:none}
+}
+
+@media(prefers-reduced-motion:reduce){
+ body.wb-theme *{transition-duration:0s!important;animation-duration:0s!important;scroll-behavior:auto!important}
 }

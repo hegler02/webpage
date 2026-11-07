@@ -23,12 +23,13 @@ const project={...baseProject,sheets:[...baseProject.sheets,...extraSheets]},glo
 const referencesFor=e=>e.system==='fire'?['F-101','F-102']:e.system==='materials'?['M-101']:baseRefs(e);
 const termFor=e=>e.system==='fire'?({smoke:'detector',heat:'detector',alarm:'fire-alarm'})[e.kind]??e.kind:e.system==='materials'?e.id==='material-insulation'?'insulation':'finish':baseTerm(e);
 import {mountWorkbench,standardPages} from './workbench.mjs';
+import {clearLearningRecords} from './study-state.mjs';
 import {freshExercise,restoreExercise,electricalModel,reinforcementFor,structuralCalculation,slabCalculation,validLightPosition,routeLength} from '/pages/guardhouse-classroom/src/learning-engine.mjs';
 
 import {sheetSVG} from './classroom-plan.mjs';
 const $=id=>document.getElementById(id),esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 const mm=v=>Math.round(v*1000).toLocaleString('ko-KR'),f=(v,n=2)=>v.toLocaleString('ko-KR',{maximumFractionDigits:n,minimumFractionDigits:n});
-const workbench=mountWorkbench({root:$('app'),workspace:$('workspace'),heading:$('page-heading'),canvases:$('canvas-row'),plan:$('plan-host'),three:$('three-host'),inspector:$('inspector'),content:'#page-content',idleTitle:'하나를 눌러보세요.',pages:standardPages('#page-content')});
+const workbench=mountWorkbench({root:$('app'),workspace:$('workspace'),heading:$('page-heading'),canvases:$('canvas-row'),plan:$('plan-host'),three:$('three-host'),inspector:$('inspector'),content:'#page-content',idleTitle:'하나를 눌러보세요.',zoomIn:$('plan-zoom-in'),zoomOut:$('plan-zoom-out'),pages:standardPages('#page-content')});
 const storageKey='guardhouse-classroom-v1';let exercise=freshExercise();try{exercise=restoreExercise(JSON.parse(localStorage.getItem(storageKey)));}catch{$('save-state').textContent='새 실습으로 시작합니다';}
 const expansionKey='guardhouse-expansion-v1';let expansion=freshExpansion();try{expansion=restoreExpansion(JSON.parse(localStorage.getItem(expansionKey)));}catch{}expansion.signal=null;let fire=fireModel(expansion,exercise.power);
 function saveExpansion(){try{localStorage.setItem(expansionKey,JSON.stringify({...expansion,battery:practicePower.baseline?.battery??expansion.battery,signal:null}));$('save-state').textContent='실습 저장됨';}catch{$('save-state').textContent='현재 화면에만 유지됩니다';}}
@@ -152,7 +153,7 @@ function selectRoom(id){
  document.querySelectorAll('[data-room-info]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.roomInfo===id)));
  $('room-description').textContent=room.name+'을 두 화면의 노란 영역으로 표시했습니다. '+room.description;
  $('room-next').hidden=false;$('room-next').innerHTML='<button data-room-electric="'+id+'">'+room.name+' 전기기구 보기</button><button data-room-enter="'+id+'">'+room.name+' 안으로 들어가기</button>';
- $('view-name').textContent=room.name+' · 방 위치';$('scene-label').textContent=room.name+' · 노란 영역';$('selection-sync').textContent=room.name+' · 2D·3D 같은 공간';status(room.name+' 위치를 표시했습니다. 전기기구 또는 실내 체험으로 이어가세요.');$('workspace').scrollIntoView({behavior:'smooth',block:'start'});
+ $('view-name').textContent=room.name+' · 방 위치';$('scene-label').textContent=room.name+' · 노란 영역';$('selection-sync').textContent=room.name+' · 2D·3D 같은 공간';status(room.name+' 위치를 표시했습니다. 전기기구 또는 실내 체험으로 이어가세요.');$('workspace').scrollIntoView({block:'start'});
 }
 function select(id,source='list'){
  const found=fire.devices.find(d=>d.id===id)??materialLayers.find(d=>d.id===id)??electric.devices.find(e=>e.id===id)??model.elements.find(e=>e.id===id);if(!found)return;
@@ -256,8 +257,8 @@ const lessonActions={
   "step": async (b) => { const s=project.steps.find(s=>s.id===b.dataset.step);await go(s.menu,s.sheet); },
   "member": async (b) => { const member=reinforcement.members.find(m=>m.id===b.dataset.member);if(member.sheet!==sheet.id)setSheet(member.sheet);viewer.view('rebar','iso');viewer.focusMember(b.dataset.member);select(b.dataset.member);if($('member-select'))$('member-select').value=b.dataset.member; },
   "roomInfo": async (b) => { selectRoom(b.dataset.roomInfo); },
-  "roomElectric": async (b) => { const id=b.dataset.roomElectric;currentRoom=id;const device=electric.devices.find(d=>d.room===id&&d.kind==='light');if(!await go('electrical','E-101'))return;select(device.id);$('workspace').scrollIntoView({behavior:'smooth',block:'start'}); },
-  "roomEnter": async (b) => { currentRoom=b.dataset.roomEnter;if(!await go('experience'))return;$('walk-enter').click();$('workspace').scrollIntoView({behavior:'smooth',block:'start'}); },
+  "roomElectric": async (b) => { const id=b.dataset.roomElectric;currentRoom=id;const device=electric.devices.find(d=>d.room===id&&d.kind==='light');if(!await go('electrical','E-101'))return;select(device.id);$('workspace').scrollIntoView({block:'start'}); },
+  "roomEnter": async (b) => { currentRoom=b.dataset.roomEnter;if(!await go('experience'))return;$('walk-enter').click();$('workspace').scrollIntoView({block:'start'}); },
   "walkRoom": async (b) => { currentRoom=b.dataset.walkRoom;viewer.enterWalk(currentRoom);walkTools();$('view-name').textContent=project.rooms.find(r=>r.id===currentRoom).name+' · 실내 체험';$('scene-label').textContent='실내 체험 · 눈높이 1,600 mm';$('view-help').textContent='휠: 시야 확대·축소 · 드래그: 시선 · W A S D: 이동';$('render-label').textContent='실감 렌더링'; },
   "move": async (b) => { const m={forward:[1,0],back:[-1,0],left:[0,-1],right:[0,1]}[b.dataset.move];viewer.move(...m); },
   "turn": async (b) => { viewer.turn(b.dataset.turn==='left'?.3:-.3); },
@@ -277,14 +278,16 @@ $('sheet-select').onchange=e=>setSheet(e.target.value);$('start-lesson').onclick
 $('whole-view').onclick=()=>{stopFireGuide();$('route-lesson').hidden=true;selected=null;viewer.whole();renderSelection();renderPlan();$('view-name').textContent='전체 건물';$('scene-label').textContent='경비실 · 전체 건물';$('selection-sync').textContent='전체 보기';$('walk-tools').hidden=true;$('walk-crosshair').hidden=true;$('spatial-note').hidden=true;status('부분 보기와 분해를 해제하고 전체 건물로 돌아왔습니다. 기초·PIT 보기에서 바닥 아래를 다시 볼 수 있습니다.');};
 $('orbit-view').onclick=()=>{stopFireGuide();if(sheet.id==='A-108'){showPit();return;}viewer.view(sheet.mode,'iso');$('walk-tools').hidden=true;$('walk-crosshair').hidden=true;$('view-name').textContent=sheet.plain+' · 입체 보기';$('scene-label').textContent=sheet.id+' · '+sheet.plain;$('view-help').textContent='드래그로 회전 · 휠로 확대 · 대상을 눌러 정보 확인';};$('plan-fit').onclick=resetPlan;
 $('save-svg').onclick=()=>download(`${sheet.id}-${sheet.title}.svg`,sheetSVG({sheet,model,projections,electric,rebar:reinforcement,selected:null,fire,finish:expansion.finish}),'image/svg+xml');
-$('reset-exercise').onclick=()=>$('reset-dialog').showModal();$('confirm-reset').onclick=()=>{practicePower.baseline=null;exercise=freshExercise();expansion=freshExpansion();save();saveExpansion();viewer?.setFinish(expansion.finish);refreshElectrical();$('reset-dialog').close();go('home');status('기본 예제로 초기화했습니다.');};
+$('reset-exercise').onclick=()=>$('reset-dialog').showModal();$('confirm-reset').onclick=()=>{clearLearningRecords(1,baseProject.id);practicePower.baseline=null;exercise=freshExercise();expansion=freshExpansion();save();saveExpansion();viewer?.setFinish(expansion.finish);refreshElectrical();$('reset-dialog').close();go('home');status('기본 예제로 초기화했습니다.');};
 
 let drag=null;
 $('plan-host').addEventListener('pointerdown',e=>{if(!$('learning-plan'))return;drag={x:e.clientX,y:e.clientY,view:[...planView],target:e.target.closest('[data-element],[data-circuit]')};$('plan-host').setPointerCapture(e.pointerId);});
 $('plan-host').addEventListener('pointermove',e=>{if(!$('learning-plan')||!drag||Math.hypot(e.clientX-drag.x,e.clientY-drag.y)<4)return;const r=$('plan-host').getBoundingClientRect(),scale=Math.min(r.width/drag.view[2],r.height/drag.view[3]);planView=[drag.view[0]-(e.clientX-drag.x)/scale,drag.view[1]-(e.clientY-drag.y)/scale,...drag.view.slice(2)];$('learning-plan').setAttribute('viewBox',planView.join(' '));});
 $('plan-host').addEventListener('pointerup',e=>{if(drag&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)<5){const t=drag.target;if(t?.dataset.element)select(t.dataset.element,'2d');if(t?.dataset.circuit)focusCircuit(t.dataset.circuit);}drag=null;});$('plan-host').addEventListener('pointercancel',()=>drag=null);
 $('plan-host').addEventListener('keydown',e=>{if(['Enter',' '].includes(e.key)){const t=e.target.closest('[data-element],[data-circuit]');if(t){e.preventDefault();if(t.dataset.element)select(t.dataset.element,'2d');else focusCircuit(t.dataset.circuit);}}});
-$('plan-host').addEventListener('wheel',e=>{if(!$('learning-plan'))return;e.preventDefault();const factor=Math.exp(Math.max(-.3,Math.min(.3,e.deltaY*.001))),w=Math.max(150,Math.min(2500,planView[2]*factor)),h=w*.71;planView=[planView[0]+(planView[2]-w)/2,planView[1]+(planView[3]-h)/2,w,h];$('learning-plan').setAttribute('viewBox',planView.join(' '));},{passive:false});
+function zoomPlan(factor){if(!$('learning-plan'))return;const w=Math.max(150,Math.min(2500,planView[2]*factor)),h=w*.71;planView=[planView[0]+(planView[2]-w)/2,planView[1]+(planView[3]-h)/2,w,h];$('learning-plan').setAttribute('viewBox',planView.join(' '));}
+$('plan-host').addEventListener('wheel',e=>{if(!$('learning-plan'))return;e.preventDefault();zoomPlan(Math.exp(Math.max(-.3,Math.min(.3,e.deltaY*.001))));},{passive:false});
+$('plan-zoom-in').onclick=()=>zoomPlan(.8);$('plan-zoom-out').onclick=()=>zoomPlan(1.25);
 document.addEventListener('keyup',e=>{if(e.key==='Escape'&&!viewer?.fpv){$('walk-tools').hidden=true;$('walk-crosshair').hidden=true;}});
 $('retry-loading').onclick=()=>{if(reloadRequired){history.replaceState(null,'','#'+(retryNavigation?.[0]??'home'));location.reload();return;}if(retryNavigation)go(...retryNavigation);};
 const entryParams=new URLSearchParams(location.search);

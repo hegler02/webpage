@@ -79,7 +79,8 @@ export const termTargets = {
 };
 export function freshBay(raw={}) {
   const state={live:3,breakers:{CL:true,CF:true},watts:{},checks:{},completed:[]};
-  state.completed=steps.filter(s=>raw?.completed?.includes(s.id)).map(s=>s.id);
+  const saved=Array.isArray(raw?.completed)?raw.completed:[];
+  state.completed=steps.filter(s=>saved.includes(s.id)).map(s=>s.id);
   if(Number.isFinite(raw?.live)&&raw.live>=0&&raw.live<=10)state.live=raw.live;
   for(const c of circuits)if(typeof raw?.breakers?.[c.id]==='boolean')state.breakers[c.id]=raw.breakers[c.id];
   for(const d of equipment){const w=raw?.watts?.[d.id];if(Number.isInteger(w)&&w>=1&&w<=1000)state.watts[d.id]=w;}

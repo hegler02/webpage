@@ -46,7 +46,7 @@ export function electricalModel(s){
 // Educational gravity-load model: 1 m strip, simply supported slab; no global frame analysis.
 // Rebar sections use KS D 3504 nominal values through rebarSize(). Constants are explicit lesson conditions.
 export const slabSpacing=Object.freeze({roof:150,floor:125});
-export const structuralConditions={fc:24,fy:400,steelDesign:400/1.15,concreteWeight:24,coverSlab:25,coverWall:40,coverFoundation:50,soilPressure:100,deadFactor:1.35,liveFactor:1.5,liveRoof:1,liveFloor:3,finishRoof:1.5,finishFloor:1,elasticModulus:27000};
+export const structuralConditions={fc:24,fy:400,steelDesign:400/1.15,concreteWeight:24,coverSlab:25,coverWall:40,coverFoundation:75,soilPressure:100,deadFactor:1.35,liveFactor:1.5,liveRoof:1,liveFloor:3,finishRoof:1.5,finishFloor:1,elasticModulus:27000};
 export function slabCalculation({span=3.8,thickness=150,cover=25,diameter=10,spacing=slabSpacing.roof,live=1,finish=1.5,cantilever=false}={}){
  for(const n of [span,thickness,cover,diameter,spacing,live,finish])if(!Number.isFinite(n)||n<0)throw new Error('계산 조건은 유효한 양수여야 합니다.');
  const bar=rebarSize(diameter);
@@ -57,7 +57,7 @@ export function slabCalculation({span=3.8,thickness=150,cover=25,diameter=10,spa
  return {span,thickness,cover,diameter,nominal:bar.nominal,barArea:bar.area,spacing,live,finish,dead,w,M,V,d,z,As,required,resistance,deflection,utilization:M/resistance,pass:resistance>=M,model:cantilever?'한쪽 고정 캔틸레버':'양 끝 지지 1 m 폭 띠'};
 }
 export function structuralCalculation(model){
- const roof=slabCalculation(),floor=slabCalculation({live:3,finish:1,spacing:slabSpacing.floor}),pit=slabCalculation({span:2.05,thickness:200,cover:50,diameter:13,spacing:200,live:1,finish:0}),canopy=slabCalculation({span:.8,thickness:120,cover:25,diameter:10,spacing:150,live:1,finish:.5,cantilever:true});
+ const roof=slabCalculation(),floor=slabCalculation({live:3,finish:1,spacing:slabSpacing.floor}),pit=slabCalculation({span:2.05,thickness:200,cover:75,diameter:13,spacing:200,live:1,finish:0}),canopy=slabCalculation({span:.8,thickness:120,cover:40,diameter:10,spacing:150,live:1,finish:.5,cantilever:true});
  const roofService=(roof.dead+roof.live)*3.8/2,wallWeight=.2*3.05*24,parapet=.25*.7*24,floorReaction=(floor.dead+floor.live)*3.8/2;
  const axial=roofService+wallWeight+parapet,wallStress=axial/200,footingLoad=axial+floorReaction+.8*.3*24+.2*.35*24,pressure=footingLoad/.8;
  return {roof,floor,pit,canopy,wall:{axial,stress:wallStress,area:.2,model:'개구부가 없는 외벽 1 m 폭의 평균 압축 응력'},foundation:{load:footingLoad,pressure,allowable:100,pass:pressure<=100,cantilever:.3,moment:pressure*.3**2/2},conditions:structuralConditions,
@@ -80,8 +80,8 @@ export function reinforcementFor(model){
  }
  for(const e of model.elements){
   if(['floor','roof'].includes(e.id))mesh(e,10,slabSpacing[e.id],25,'S-101');
-  else if(e.id==='entrance-canopy')mesh(e,10,150,25,'S-101');
-  else if(e.id==='pit-base'||e.id.startsWith('footing-'))mesh(e,13,200,50,'S-102');
+  else if(e.id==='entrance-canopy')mesh(e,10,150,40,'S-101');
+  else if(e.id==='pit-base'||e.id.startsWith('footing-'))mesh(e,13,200,75,'S-102');
   else if(e.kind==='wall'||e.id.match(/^(pit-(west|east|south|north)|stem-)/)){
    const [x,y,X,Y]=boundsOf(e),alongX=X-x>Y-y,diameter=10,cover=structuralConditions.coverWall,off=cover/1000+rebarSize(diameter).nominal/2000,spacing=.2;
    const a=alongX?x:y,A=alongX?X:Y,b=alongX?y:x,B=alongX?Y:X;

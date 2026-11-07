@@ -4,6 +4,7 @@ import {bayFireLesson,extinguisher} from './src/cleanroom-fire.mjs';
 import {createExtinguisher} from './fire-extinguisher.mjs';
 import {SurfaceLibrary,worldUV} from './surface-materials.mjs';
 import {observeScene,presentScene} from './render-loop.mjs';
+import {keyboardOrbit,lightenOnSlowFrames} from './scene-access.mjs';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
@@ -115,6 +116,7 @@ export function mountBay(host,select,fireAdapter){
   for(const g of objects.values())scene.add(g);
   const controls=new OrbitControls(camera,renderer.domElement);
   controls.minDistance=2.2;controls.maxDistance=20;controls.maxPolarAngle=Math.PI*.48;
+  keyboardOrbit(controls,renderer.domElement);lightenOnSlowFrames(renderer);
   let yaw=0,pitch=0,walkX=4.4,walkY=1.15,drag=null;
   const look=()=>{camera.position.copy(point([walkX,walkY,1.60]));camera.rotation.set(pitch,yaw,0,'YXZ');host.dataset.walk=[walkX.toFixed(2),walkY.toFixed(2)].join(',');};
   function walk(action){

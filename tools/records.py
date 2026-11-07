@@ -107,7 +107,7 @@ def main():
     if found:
         sys.exit('\n'.join(found))
     save(data)
-    print(f"추가했습니다: {record['id']}. 이제 python3 tools/constellation_links.py todo 를 실행하세요.")
+    print(f"추가했습니다: {record['id']}. 이제 python3 tools/render_archive.py 와 python3 tools/constellation_links.py todo 를 차례로 실행하세요.")
     return 0
 
 

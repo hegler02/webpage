@@ -147,8 +147,8 @@ def main():
 
     # 4. Research keeps its order: doctoral thesis, master's thesis, then articles.
     theses = re.search(r'data-research-list="theses">(.*?)</div><h3', research, re.S)
-    if not theses or theses.group(1).count('<a href=') != 2 or theses.group(1).find('박사학위논문') > theses.group(1).find('석사학위논문'):
-        errors.append('research: two theses, doctoral first')
+    if not theses or theses.group(1).find('박사학위논문') > theses.group(1).find('석사학위논문'):
+        errors.append('research: degree theses come first, doctoral before master')
 
     # 5. Style comes from the one token source.
     errors += token_problems()

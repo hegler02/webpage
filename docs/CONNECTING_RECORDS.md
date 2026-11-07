@@ -16,6 +16,10 @@ mirinaeman.com은 하나의 그래프입니다. 기록 하나를 원본에 넣�
 
 생성된 HTML, `galaxy/graph.json`, `sitemap.xml`은 직접 고치지 않습니다.
 
+기록의 이름은 명령마다 같은 형식으로 씁니다. 작품은 `songbirds`처럼 이름만, 다른 기록은 `paper:my-paper-2027`처럼 `종류:이름`으로 씁니다. 아래 예시의 `기록`, `기록A` 자리에 이 이름을 넣습니다.
+
+Windows에서 `python3`가 없으면 `python`으로 실행하고, 한글이 깨지면 `PYTHONUTF8=1`을 붙입니다.
+
 ## 자동으로 되는 것과 사람이 정하는 것
 
 | 일 | 누가 |
@@ -49,7 +53,7 @@ python3 tools/constellation_links.py todo
 python3 tools/constellation_links.py list
 ```
 
-`todo`에 나온 기록마다 소개 문장과 실제 페이지를 읽고 아래 중 하나를 고릅니다. 위에서부터 먼저 생각합니다. 페이지가 열리지 않으면 소개 문장만 근거로 제안하고, 페이지가 열리지 않는다고 보고합니다. 배포 상태나 주소를 임의로 고치지 않습니다.
+`todo`에 나온 기록마다 소개 문장과 실제 페이지를 읽고 아래 중 하나를 고릅니다. 논문·과제·특허처럼 페이지가 서지뿐이면 제목과 서지 문장이 근거입니다. 위에서부터 먼저 생각합니다. 페이지가 열리지 않으면 소개 문장만 근거로 제안하고, 페이지가 열리지 않는다고 보고합니다. 배포 상태나 주소를 임의로 고치지 않습니다.
 
 **같은 작품의 다른 형태이거나 직접 이어지는 기록이 있다**
 
@@ -63,7 +67,7 @@ python3 tools/constellation_links.py pair 기록A 기록B --label "같은 이야
 python3 tools/constellation_links.py add 기록 --to causal-chain --reason "감독의 상상을 짧은 인과 문장으로 연결한 결투 연구입니다."
 ```
 
-이미 승인된 별자리에 넣어도 그 기록은 승인 전까지 공개되지 않습니다.
+아직 승인을 기다리는 별자리(`list`에서 `proposed`)에 넣어도 됩니다. 이미 승인된 별자리에 넣어도 그 기록은 승인 전까지 공개되지 않습니다.
 
 **맞는 별자리가 없고 같은 주제의 기록이 둘 이상 있다**
 
@@ -89,6 +93,8 @@ python3 tools/constellation_links.py solo 기록 --why "묶을 근거를 찾지 
 python3 tools/render_archive.py
 python3 tools/release_gate.py
 ```
+
+다시 만들면 새 기록과 태그가 겹치는 기존 기록의 "함께 볼 기록"도 함께 바뀝니다. 그 변경은 정상이니 함께 올립니다.
 
 연결을 정하지 않은 기록이 남아 있거나, 기록이 페이지·목록·사이트맵·은하수 중 한 곳이라도 빠지면 `release_gate.py`가 실패하고 배포가 멈춥니다. 제안만 해도 통과합니다.
 

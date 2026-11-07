@@ -50,7 +50,8 @@ class ConstellationTests(unittest.TestCase):
         self.assertNotIn('SECRET-INTERNAL',json.dumps(build_graph(self.catalog)))
     def test_research_is_bibliography_and_title_grouping(self):
         papers=[n for n in self.g['nodes'] if n['kind']=='paper']
-        self.assertEqual(len(papers),16)
+        records=json.loads((PROFILE/'data/records.json').read_text(encoding='utf-8'))['records']
+        self.assertEqual(len(papers),sum(r['kind']=='paper' for r in records))
         for p in papers:self.assertEqual(p['sourceLabel'],'논문')
         for e in self.g['edges']:
             if e['target'].startswith('topic:'):self.assertEqual(e['label'],'제목 기반 주제')

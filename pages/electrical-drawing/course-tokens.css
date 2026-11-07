@@ -8,8 +8,9 @@
  --copy-max:640px;
  --reading:68ch;
  --lesson-mark:40px;
- --page-title:clamp(var(--sys-size-page),3.4vw,var(--space-10));
- --cta-h:44px;
+ --copy-share:52%;
+ --pager-prev:64px;
+ --pager-next:104px;
  --term-figure:420px;
  --figure-dock:34dvh;
  --figure-dock-phone:28dvh;

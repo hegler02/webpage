@@ -1,16 +1,16 @@
 /* The drawing-reading room, wiring board and wire-number bench. Same tokens and parts as the lessons. */
 html{scroll-padding-top:calc(var(--wb-top) + var(--space-3));scroll-behavior:smooth}
-body>header{position:sticky;top:0;z-index:6;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--wb-gap-tool) var(--wb-gap-action);min-height:var(--wb-top);padding-inline:var(--wb-inset-panel);background:var(--wb-surface);border-bottom:var(--wb-border) solid var(--wb-line);font-size:var(--sys-size-small)}
+body>header{position:sticky;top:0;z-index:6;display:flex;flex-wrap:wrap;align-items:center;gap:var(--wb-gap-tool) var(--wb-gap-section);min-height:var(--wb-top);padding-inline:var(--wb-inset-panel);background:var(--wb-surface);border-bottom:var(--wb-border) solid var(--wb-line);font-size:var(--sys-size-small)}
 body>header a{color:var(--wb-muted);text-decoration:none}
 body>header a:hover{color:var(--wb-text)}
 body>header :is(strong,b){font-weight:var(--sys-weight-strong)}
-main{max-width:var(--tool-max);margin-inline:auto;padding:var(--wb-gap-section) var(--wb-inset-panel) var(--space-10)}
+main{max-width:var(--tool-max);padding:var(--wb-gap-section) var(--wb-inset-panel) var(--space-10)}
 body:is([data-tool=wiring],[data-tool=bench]) main{max-width:var(--tool-read)}
 main a:not(.button,.chip,.action){color:var(--wb-accent)}
 .skip{position:absolute;left:var(--space-2);top:calc(var(--space-10) * -2);z-index:10;padding:var(--space-2);background:var(--wb-accent);color:var(--wb-on-accent)}
 .skip:focus{top:var(--space-1)}
 .kicker,.small,.over{color:var(--wb-accent);font-size:var(--sys-size-caption);font-weight:var(--sys-weight-strong)}
-h1{margin-top:var(--wb-gap-tool);font-size:var(--page-title)}
+h1{margin-top:var(--wb-gap-tool);font-size:var(--sys-size-title)}
 h2{font-size:var(--sys-size-title-medium)}
 h3{font-size:var(--sys-size-title-small)}
 .intro p,.heading p{max-width:var(--reading);margin-top:var(--wb-gap-para);color:var(--wb-muted)}
@@ -18,22 +18,21 @@ h3{font-size:var(--sys-size-title-small)}
 .chip,.action{display:inline-flex;align-items:center;justify-content:center;min-height:var(--wb-ctl-h);padding:var(--wb-inset-bar-y) var(--wb-ctl-pad-x);border:var(--wb-border) solid var(--wb-line-strong);border-radius:var(--wb-radius);background:var(--wb-raised);color:var(--wb-text);font-size:var(--sys-size-small);font-weight:var(--sys-weight-control);line-height:var(--wb-lh-control);text-decoration:none}
 .chip:hover,.action:hover{background:var(--wb-hover)}
 [hidden]{display:none!important}
-footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--wb-gap-control);margin-top:var(--wb-gap-section);padding-top:var(--wb-gap-para);border-top:var(--wb-border) solid var(--wb-line)}
+footer{display:flex;flex-wrap:wrap;gap:var(--wb-gap-control) var(--wb-gap-section);margin-top:var(--wb-gap-section);padding-top:var(--wb-gap-para);border-top:var(--wb-border) solid var(--wb-line)}
 footer a{font-size:var(--sys-size-small);font-weight:var(--sys-weight-control);text-decoration:none}
 
 /* Drawing-reading room */
 .sheetnav,.nav-controls,.tools,.tools span,.help,.answers{display:flex;flex-wrap:wrap;align-items:center;gap:var(--wb-gap-control)}
 .sheetnav{padding:var(--wb-inset-card);border:var(--wb-border) solid var(--wb-line);border-radius:var(--wb-radius-card);background:var(--wb-surface)}
 .sheetnav label,.sheetnav #progress{font-size:var(--sys-size-small);font-weight:var(--sys-weight-label)}
-.sheetnav #progress{margin-left:auto;color:var(--wb-muted)}
+.sheetnav #progress{color:var(--wb-muted)}
 .brief{margin-block:var(--wb-gap-section) var(--wb-gap-para)}
 .brief h2{margin-block:var(--wb-gap-tool);font-size:var(--sys-size-title)}
 .workspace{display:grid;grid-template-columns:minmax(0,1.72fr) minmax(var(--tool-task-min),.85fr);gap:var(--wb-gap-section);align-items:start}
 .drawing,.task{min-width:0;border:var(--wb-border) solid var(--wb-line);border-radius:var(--wb-radius-card);background:var(--wb-surface);overflow:hidden}
 .drawing .tools{padding:var(--wb-gap-tool) var(--wb-inset-card);border-bottom:var(--wb-border) solid var(--wb-line);font-size:var(--sys-size-small)}
-.drawing .tools span{margin-left:auto}
 .drawing .tools a{color:var(--wb-accent)}
-.drawing .tools output{min-width:var(--space-10);text-align:center;font-variant-numeric:tabular-nums}
+.drawing .tools output{min-width:var(--space-10);font-variant-numeric:tabular-nums}
 #viewport{position:relative;max-height:var(--drawing-max);overflow:auto;background:var(--wb-sheet);overscroll-behavior-inline:contain}
 #paper{position:relative;width:100%}
 #svg{display:block;width:100%;height:auto}
@@ -73,7 +72,7 @@ footer a{font-size:var(--sys-size-small);font-weight:var(--sys-weight-control);t
 .status[data-tone=retry]{padding-left:var(--wb-gap-control);border-left:var(--wb-marker) solid var(--wb-off);color:var(--wb-off)}
 .pane figure{padding:var(--wb-gap-control);border-radius:var(--wb-radius-card);background:var(--wb-sheet);color:var(--wb-sheet-muted)}
 .pane figure>svg{display:block;width:100%;height:auto;max-height:var(--sheet-figure)}
-.pane figcaption{padding-top:var(--wb-gap-control);font-size:var(--sys-size-caption);text-align:center}
+.pane figcaption{padding-top:var(--wb-gap-control);font-size:var(--sys-size-caption)}
 .pane figcaption a{margin-left:var(--wb-gap-tool);color:var(--wb-sheet-ink)}
 .cad-steps{padding-left:var(--wb-gap-section)}
 .cad-steps li+li{margin-top:var(--wb-gap-control)}
@@ -81,7 +80,7 @@ footer a{font-size:var(--sys-size-small);font-weight:var(--sys-weight-control);t
 #leads{position:absolute;inset:0;z-index:-1;width:100%;height:100%;overflow:visible;pointer-events:none}
 #leads path{fill:none;stroke:var(--wb-ok);stroke-width:var(--lead-width);stroke-linecap:round;stroke-linejoin:round}
 .bank{display:grid;align-content:start;gap:var(--wb-gap-control)}
-.bank h3{font-size:var(--sys-size-small);color:var(--wb-muted);text-align:center}
+.bank h3{font-size:var(--sys-size-small);color:var(--wb-muted)}
 .terminal{position:relative;flex-direction:column;gap:0;width:100%;min-height:var(--terminal-h);font-family:var(--code-font)}
 .terminal:before,.terminal:after{content:"";position:absolute;top:50%;width:var(--terminal-dot);height:var(--terminal-dot);border-radius:50%;background:var(--wb-ok);transform:translateY(-50%)}
 .terminal:before{left:var(--wb-gap-tool)}
@@ -89,7 +88,7 @@ footer a{font-size:var(--sys-size-small);font-weight:var(--sys-weight-control);t
 .bank:first-of-type .terminal:before,.bank:last-of-type .terminal:after{display:none}
 .term-small{display:block;color:var(--wb-muted);font-family:var(--sys-font-family);font-size:var(--sys-size-eyebrow);font-weight:var(--sys-weight-body)}
 #nets{margin:0;padding:0;list-style:none}
-#nets li{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--wb-gap-control);padding-block:var(--wb-gap-tool);border-bottom:var(--wb-border) solid var(--wb-line)}
+#nets li{display:flex;flex-wrap:wrap;align-items:center;gap:var(--wb-gap-control);padding-block:var(--wb-gap-tool);border-bottom:var(--wb-border) solid var(--wb-line)}
 .footlinks{display:flex;flex-wrap:wrap;gap:var(--wb-gap-control) var(--wb-gap-action);font-size:var(--sys-size-small)}
 
 /* Wire-number bench */
@@ -110,11 +109,11 @@ footer a{font-size:var(--sys-size-small);font-weight:var(--sys-weight-control);t
 input[type=number]{width:var(--number-input)}
 .scroll{overflow:auto}
 [data-tool=bench] table{min-width:var(--table-min)}
-[data-tool=bench] :is(th,td){border:var(--wb-border) solid var(--wb-line);text-align:center}
+[data-tool=bench] :is(th,td){border:var(--wb-border) solid var(--wb-line)}
 [data-tool=bench] thead{background:var(--wb-raised)}
 td b{display:block;font-family:var(--code-font)}
 td small{display:block;color:var(--wb-muted)}
-td .lines{display:block;width:80%;height:var(--wb-border);margin:var(--wb-gap-tool) auto;border-top:var(--line-gauge) solid currentColor}
+td .lines{display:block;width:80%;height:var(--wb-border);margin-block:var(--wb-gap-tool);border-top:var(--line-gauge) solid currentColor}
 .watch{border-top:var(--wb-marker) solid var(--wb-accent)}
 [data-tool=bench] .action{border-color:var(--wb-accent);background:var(--wb-accent);color:var(--wb-on-accent)}
 [data-tool=bench] #apply{border-color:var(--wb-accent);background:var(--wb-accent);color:var(--wb-on-accent)}
@@ -124,7 +123,6 @@ td .lines{display:block;width:80%;height:var(--wb-border);margin:var(--wb-gap-to
  .workspace{grid-template-columns:minmax(0,1fr);gap:var(--wb-gap-para)}
  .task{order:-1}
  .sheetnav select{width:100%}
- .sheetnav #progress{margin-left:0}
  #viewport{max-height:var(--drawing-max-phone)}
  main{padding-inline:var(--wb-inset-card)}
 }

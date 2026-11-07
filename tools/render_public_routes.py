@@ -51,7 +51,10 @@ def outputs():
     if '/constellation/:path*' not in redirects:
         config['redirects'].append({'source': '/constellation/:path*', 'destination': '/galaxy/:path*', 'permanent': True})
 
-    editorial = [{'source': path, 'destination': data['physical_root'].rstrip('/') + path} for path in data.get('editorial_pages', [])]
+    # The host does not open a folder's index.html through a wildcard rewrite, so every page gets its own.
+    record_pages = sorted('/' + p.parent.relative_to(PROFILE).as_posix() + '/' for folder in ('work', 'research') for p in (PROFILE / folder).glob('*/index.html'))
+    pages = list(dict.fromkeys([*data.get('editorial_pages', []), *record_pages]))
+    editorial = [{'source': path, 'destination': data['physical_root'].rstrip('/') + path} for path in pages]
     editorial_sources = {entry['source'] for entry in editorial}
     config['rewrites'] = editorial + [entry for entry in config['rewrites'] if entry['source'] not in editorial_sources]
     result[config_path] = json.dumps(config, ensure_ascii=False, indent=2) + '\n'

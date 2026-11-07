@@ -73,6 +73,610 @@
       "destination": "/pages/profile/notes/cheongnyeon-wangmandu/"
     },
     {
+      "source": "/research/ai-agent/",
+      "destination": "/pages/profile/research/ai-agent/"
+    },
+    {
+      "source": "/research/android-digital-signage-2016/",
+      "destination": "/pages/profile/research/android-digital-signage-2016/"
+    },
+    {
+      "source": "/research/bee-counter/",
+      "destination": "/pages/profile/research/bee-counter/"
+    },
+    {
+      "source": "/research/bee-counting-system-2021/",
+      "destination": "/pages/profile/research/bee-counting-system-2021/"
+    },
+    {
+      "source": "/research/beehive-door-hornet-2022/",
+      "destination": "/pages/profile/research/beehive-door-hornet-2022/"
+    },
+    {
+      "source": "/research/beekeeping-loading-box-2022/",
+      "destination": "/pages/profile/research/beekeeping-loading-box-2022/"
+    },
+    {
+      "source": "/research/coco/",
+      "destination": "/pages/profile/research/coco/"
+    },
+    {
+      "source": "/research/content-guide/",
+      "destination": "/pages/profile/research/content-guide/"
+    },
+    {
+      "source": "/research/convergence-game/",
+      "destination": "/pages/profile/research/convergence-game/"
+    },
+    {
+      "source": "/research/deep-learning-home-training-2021/",
+      "destination": "/pages/profile/research/deep-learning-home-training-2021/"
+    },
+    {
+      "source": "/research/did-operation/",
+      "destination": "/pages/profile/research/did-operation/"
+    },
+    {
+      "source": "/research/digital-radio/",
+      "destination": "/pages/profile/research/digital-radio/"
+    },
+    {
+      "source": "/research/document-security/",
+      "destination": "/pages/profile/research/document-security/"
+    },
+    {
+      "source": "/research/education-metaverse-platform-2023/",
+      "destination": "/pages/profile/research/education-metaverse-platform-2023/"
+    },
+    {
+      "source": "/research/fitness-5g-mr/",
+      "destination": "/pages/profile/research/fitness-5g-mr/"
+    },
+    {
+      "source": "/research/forklift-safety/",
+      "destination": "/pages/profile/research/forklift-safety/"
+    },
+    {
+      "source": "/research/honeybee-activity-2022/",
+      "destination": "/pages/profile/research/honeybee-activity-2022/"
+    },
+    {
+      "source": "/research/hornet-door/",
+      "destination": "/pages/profile/research/hornet-door/"
+    },
+    {
+      "source": "/research/judgment-en/",
+      "destination": "/pages/profile/research/judgment-en/"
+    },
+    {
+      "source": "/research/judgment-ko/",
+      "destination": "/pages/profile/research/judgment-ko/"
+    },
+    {
+      "source": "/research/keris-metaverse-report/",
+      "destination": "/pages/profile/research/keris-metaverse-report/"
+    },
+    {
+      "source": "/research/media-convergence/",
+      "destination": "/pages/profile/research/media-convergence/"
+    },
+    {
+      "source": "/research/metaverse-360-lighting-2022/",
+      "destination": "/pages/profile/research/metaverse-360-lighting-2022/"
+    },
+    {
+      "source": "/research/metaversity-doctoral-2022/",
+      "destination": "/pages/profile/research/metaversity-doctoral-2022/"
+    },
+    {
+      "source": "/research/metaversity/",
+      "destination": "/pages/profile/research/metaversity/"
+    },
+    {
+      "source": "/research/mobile-ar-digital-design-2011/",
+      "destination": "/pages/profile/research/mobile-ar-digital-design-2011/"
+    },
+    {
+      "source": "/research/mobile-stethoscope/",
+      "destination": "/pages/profile/research/mobile-stethoscope/"
+    },
+    {
+      "source": "/research/mobile-vr/",
+      "destination": "/pages/profile/research/mobile-vr/"
+    },
+    {
+      "source": "/research/music-video-guide/",
+      "destination": "/pages/profile/research/music-video-guide/"
+    },
+    {
+      "source": "/research/open-api-mashup/",
+      "destination": "/pages/profile/research/open-api-mashup/"
+    },
+    {
+      "source": "/research/panorama-360-2020/",
+      "destination": "/pages/profile/research/panorama-360-2020/"
+    },
+    {
+      "source": "/research/pinky/",
+      "destination": "/pages/profile/research/pinky/"
+    },
+    {
+      "source": "/research/prompt-to-production-2025/",
+      "destination": "/pages/profile/research/prompt-to-production-2025/"
+    },
+    {
+      "source": "/research/queen-bee-sound-2023/",
+      "destination": "/pages/profile/research/queen-bee-sound-2023/"
+    },
+    {
+      "source": "/research/remote-education-metaverse-2022/",
+      "destination": "/pages/profile/research/remote-education-metaverse-2022/"
+    },
+    {
+      "source": "/research/sharon/",
+      "destination": "/pages/profile/research/sharon/"
+    },
+    {
+      "source": "/research/smart-beekeeping/",
+      "destination": "/pages/profile/research/smart-beekeeping/"
+    },
+    {
+      "source": "/research/smart-welfare/",
+      "destination": "/pages/profile/research/smart-welfare/"
+    },
+    {
+      "source": "/research/social-network-cyworld-facebook-2011/",
+      "destination": "/pages/profile/research/social-network-cyworld-facebook-2011/"
+    },
+    {
+      "source": "/research/ucc-guideline-masters-2009/",
+      "destination": "/pages/profile/research/ucc-guideline-masters-2009/"
+    },
+    {
+      "source": "/research/underwater-360-vr/",
+      "destination": "/pages/profile/research/underwater-360-vr/"
+    },
+    {
+      "source": "/research/underwater-360/",
+      "destination": "/pages/profile/research/underwater-360/"
+    },
+    {
+      "source": "/research/vr-content-support/",
+      "destination": "/pages/profile/research/vr-content-support/"
+    },
+    {
+      "source": "/research/vr-frontier/",
+      "destination": "/pages/profile/research/vr-frontier/"
+    },
+    {
+      "source": "/research/wearable-diagnosis/",
+      "destination": "/pages/profile/research/wearable-diagnosis/"
+    },
+    {
+      "source": "/research/wearable/",
+      "destination": "/pages/profile/research/wearable/"
+    },
+    {
+      "source": "/research/xr-remote-education/",
+      "destination": "/pages/profile/research/xr-remote-education/"
+    },
+    {
+      "source": "/work/able-canvas/",
+      "destination": "/pages/profile/work/able-canvas/"
+    },
+    {
+      "source": "/work/agu-girls/",
+      "destination": "/pages/profile/work/agu-girls/"
+    },
+    {
+      "source": "/work/ai-judgment-lecture/",
+      "destination": "/pages/profile/work/ai-judgment-lecture/"
+    },
+    {
+      "source": "/work/ai-music-archive/",
+      "destination": "/pages/profile/work/ai-music-archive/"
+    },
+    {
+      "source": "/work/ai-slave-slide/",
+      "destination": "/pages/profile/work/ai-slave-slide/"
+    },
+    {
+      "source": "/work/ai-slave/",
+      "destination": "/pages/profile/work/ai-slave/"
+    },
+    {
+      "source": "/work/ai-ti-judgment/",
+      "destination": "/pages/profile/work/ai-ti-judgment/"
+    },
+    {
+      "source": "/work/aidx-curriculum-agent/",
+      "destination": "/pages/profile/work/aidx-curriculum-agent/"
+    },
+    {
+      "source": "/work/already-autumn/",
+      "destination": "/pages/profile/work/already-autumn/"
+    },
+    {
+      "source": "/work/astra-motion-study/",
+      "destination": "/pages/profile/work/astra-motion-study/"
+    },
+    {
+      "source": "/work/baekje-renaissance/",
+      "destination": "/pages/profile/work/baekje-renaissance/"
+    },
+    {
+      "source": "/work/baekun-five-strike-action-cinema/",
+      "destination": "/pages/profile/work/baekun-five-strike-action-cinema/"
+    },
+    {
+      "source": "/work/bindaetteok-gentleman/",
+      "destination": "/pages/profile/work/bindaetteok-gentleman/"
+    },
+    {
+      "source": "/work/bq2-read-with-me/",
+      "destination": "/pages/profile/work/bq2-read-with-me/"
+    },
+    {
+      "source": "/work/chamgyoyuk/",
+      "destination": "/pages/profile/work/chamgyoyuk/"
+    },
+    {
+      "source": "/work/cheongnyeon-wangmandu/",
+      "destination": "/pages/profile/work/cheongnyeon-wangmandu/"
+    },
+    {
+      "source": "/work/coding-body-message/",
+      "destination": "/pages/profile/work/coding-body-message/"
+    },
+    {
+      "source": "/work/coffee-confession-comic/",
+      "destination": "/pages/profile/work/coffee-confession-comic/"
+    },
+    {
+      "source": "/work/creatoroo/",
+      "destination": "/pages/profile/work/creatoroo/"
+    },
+    {
+      "source": "/work/daughter-twice-carousel/",
+      "destination": "/pages/profile/work/daughter-twice-carousel/"
+    },
+    {
+      "source": "/work/dji-drone-prep/",
+      "destination": "/pages/profile/work/dji-drone-prep/"
+    },
+    {
+      "source": "/work/dji-fly-classroom/",
+      "destination": "/pages/profile/work/dji-fly-classroom/"
+    },
+    {
+      "source": "/work/dont-you-want-my-money/",
+      "destination": "/pages/profile/work/dont-you-want-my-money/"
+    },
+    {
+      "source": "/work/dragon-toad/",
+      "destination": "/pages/profile/work/dragon-toad/"
+    },
+    {
+      "source": "/work/drone-cinema-2026/",
+      "destination": "/pages/profile/work/drone-cinema-2026/"
+    },
+    {
+      "source": "/work/drone-fpv-100/",
+      "destination": "/pages/profile/work/drone-fpv-100/"
+    },
+    {
+      "source": "/work/drone-matchup-cinema/",
+      "destination": "/pages/profile/work/drone-matchup-cinema/"
+    },
+    {
+      "source": "/work/eagle-five-love/",
+      "destination": "/pages/profile/work/eagle-five-love/"
+    },
+    {
+      "source": "/work/editorial-magazine-deck/",
+      "destination": "/pages/profile/work/editorial-magazine-deck/"
+    },
+    {
+      "source": "/work/electrical-drawing/",
+      "destination": "/pages/profile/work/electrical-drawing/"
+    },
+    {
+      "source": "/work/fan-cinema-comparison/",
+      "destination": "/pages/profile/work/fan-cinema-comparison/"
+    },
+    {
+      "source": "/work/farewell-sarang/",
+      "destination": "/pages/profile/work/farewell-sarang/"
+    },
+    {
+      "source": "/work/first-fire-hackathon/",
+      "destination": "/pages/profile/work/first-fire-hackathon/"
+    },
+    {
+      "source": "/work/first-night-exorcist/",
+      "destination": "/pages/profile/work/first-night-exorcist/"
+    },
+    {
+      "source": "/work/first-pitch-200/",
+      "destination": "/pages/profile/work/first-pitch-200/"
+    },
+    {
+      "source": "/work/for-tomorrow/",
+      "destination": "/pages/profile/work/for-tomorrow/"
+    },
+    {
+      "source": "/work/gangneung-sound/",
+      "destination": "/pages/profile/work/gangneung-sound/"
+    },
+    {
+      "source": "/work/gileodo-geudaero-astra/",
+      "destination": "/pages/profile/work/gileodo-geudaero-astra/"
+    },
+    {
+      "source": "/work/git-github-deployment-guide/",
+      "destination": "/pages/profile/work/git-github-deployment-guide/"
+    },
+    {
+      "source": "/work/github-vercel-guide/",
+      "destination": "/pages/profile/work/github-vercel-guide/"
+    },
+    {
+      "source": "/work/gongnyangi-era/",
+      "destination": "/pages/profile/work/gongnyangi-era/"
+    },
+    {
+      "source": "/work/guardhouse-classroom/",
+      "destination": "/pages/profile/work/guardhouse-classroom/"
+    },
+    {
+      "source": "/work/hangeul-everyday/",
+      "destination": "/pages/profile/work/hangeul-everyday/"
+    },
+    {
+      "source": "/work/harugyeol-ai-health/",
+      "destination": "/pages/profile/work/harugyeol-ai-health/"
+    },
+    {
+      "source": "/work/hell-gate/",
+      "destination": "/pages/profile/work/hell-gate/"
+    },
+    {
+      "source": "/work/home-was-inside/",
+      "destination": "/pages/profile/work/home-was-inside/"
+    },
+    {
+      "source": "/work/hwasan-insu/",
+      "destination": "/pages/profile/work/hwasan-insu/"
+    },
+    {
+      "source": "/work/ilseon/",
+      "destination": "/pages/profile/work/ilseon/"
+    },
+    {
+      "source": "/work/image-agent/",
+      "destination": "/pages/profile/work/image-agent/"
+    },
+    {
+      "source": "/work/image-cinema-review/",
+      "destination": "/pages/profile/work/image-cinema-review/"
+    },
+    {
+      "source": "/work/jeju-we/",
+      "destination": "/pages/profile/work/jeju-we/"
+    },
+    {
+      "source": "/work/jotdagado/",
+      "destination": "/pages/profile/work/jotdagado/"
+    },
+    {
+      "source": "/work/kimbujang-unsealed/",
+      "destination": "/pages/profile/work/kimbujang-unsealed/"
+    },
+    {
+      "source": "/work/last-resonance/",
+      "destination": "/pages/profile/work/last-resonance/"
+    },
+    {
+      "source": "/work/listen-before-photo/",
+      "destination": "/pages/profile/work/listen-before-photo/"
+    },
+    {
+      "source": "/work/lotus-of-steel/",
+      "destination": "/pages/profile/work/lotus-of-steel/"
+    },
+    {
+      "source": "/work/love-is-pain/",
+      "destination": "/pages/profile/work/love-is-pain/"
+    },
+    {
+      "source": "/work/magicsrt/",
+      "destination": "/pages/profile/work/magicsrt/"
+    },
+    {
+      "source": "/work/media-body-video/",
+      "destination": "/pages/profile/work/media-body-video/"
+    },
+    {
+      "source": "/work/media-message-body-deck/",
+      "destination": "/pages/profile/work/media-message-body-deck/"
+    },
+    {
+      "source": "/work/medium-body-lecture/",
+      "destination": "/pages/profile/work/medium-body-lecture/"
+    },
+    {
+      "source": "/work/message-body-plugins/",
+      "destination": "/pages/profile/work/message-body-plugins/"
+    },
+    {
+      "source": "/work/message-body-slide/",
+      "destination": "/pages/profile/work/message-body-slide/"
+    },
+    {
+      "source": "/work/mirinae-motion-atelier/",
+      "destination": "/pages/profile/work/mirinae-motion-atelier/"
+    },
+    {
+      "source": "/work/mirinaeman-coding-lab/",
+      "destination": "/pages/profile/work/mirinaeman-coding-lab/"
+    },
+    {
+      "source": "/work/mirinaeman-theme/",
+      "destination": "/pages/profile/work/mirinaeman-theme/"
+    },
+    {
+      "source": "/work/modern-myeongsimbogam/",
+      "destination": "/pages/profile/work/modern-myeongsimbogam/"
+    },
+    {
+      "source": "/work/my-son/",
+      "destination": "/pages/profile/work/my-son/"
+    },
+    {
+      "source": "/work/noreut-galchi-album/",
+      "destination": "/pages/profile/work/noreut-galchi-album/"
+    },
+    {
+      "source": "/work/on-stage/",
+      "destination": "/pages/profile/work/on-stage/"
+    },
+    {
+      "source": "/work/one-more-guest-album/",
+      "destination": "/pages/profile/work/one-more-guest-album/"
+    },
+    {
+      "source": "/work/one-more-guest-single/",
+      "destination": "/pages/profile/work/one-more-guest-single/"
+    },
+    {
+      "source": "/work/physical-ai-field-lab-ulsan-jeju/",
+      "destination": "/pages/profile/work/physical-ai-field-lab-ulsan-jeju/"
+    },
+    {
+      "source": "/work/prompt-atelier/",
+      "destination": "/pages/profile/work/prompt-atelier/"
+    },
+    {
+      "source": "/work/rain-has-stopped/",
+      "destination": "/pages/profile/work/rain-has-stopped/"
+    },
+    {
+      "source": "/work/red-light-run/",
+      "destination": "/pages/profile/work/red-light-run/"
+    },
+    {
+      "source": "/work/report-full-after/",
+      "destination": "/pages/profile/work/report-full-after/"
+    },
+    {
+      "source": "/work/sai/",
+      "destination": "/pages/profile/work/sai/"
+    },
+    {
+      "source": "/work/sara-vs-natasha/",
+      "destination": "/pages/profile/work/sara-vs-natasha/"
+    },
+    {
+      "source": "/work/school-rule-knowledge-bot/",
+      "destination": "/pages/profile/work/school-rule-knowledge-bot/"
+    },
+    {
+      "source": "/work/show-me-one-page/",
+      "destination": "/pages/profile/work/show-me-one-page/"
+    },
+    {
+      "source": "/work/sibang-sibang/",
+      "destination": "/pages/profile/work/sibang-sibang/"
+    },
+    {
+      "source": "/work/snail-time-jeju/",
+      "destination": "/pages/profile/work/snail-time-jeju/"
+    },
+    {
+      "source": "/work/songbirds-image-cinema/",
+      "destination": "/pages/profile/work/songbirds-image-cinema/"
+    },
+    {
+      "source": "/work/songbirds/",
+      "destination": "/pages/profile/work/songbirds/"
+    },
+    {
+      "source": "/work/sound-design-lab/",
+      "destination": "/pages/profile/work/sound-design-lab/"
+    },
+    {
+      "source": "/work/ssulwha-world/",
+      "destination": "/pages/profile/work/ssulwha-world/"
+    },
+    {
+      "source": "/work/suno-song-guide/",
+      "destination": "/pages/profile/work/suno-song-guide/"
+    },
+    {
+      "source": "/work/taste-expiration/",
+      "destination": "/pages/profile/work/taste-expiration/"
+    },
+    {
+      "source": "/work/today-i-believe/",
+      "destination": "/pages/profile/work/today-i-believe/"
+    },
+    {
+      "source": "/work/too-many-screws-left/",
+      "destination": "/pages/profile/work/too-many-screws-left/"
+    },
+    {
+      "source": "/work/ttak-joa/",
+      "destination": "/pages/profile/work/ttak-joa/"
+    },
+    {
+      "source": "/work/ttaro-coffee-image-cinema/",
+      "destination": "/pages/profile/work/ttaro-coffee-image-cinema/"
+    },
+    {
+      "source": "/work/ttaro-coffee/",
+      "destination": "/pages/profile/work/ttaro-coffee/"
+    },
+    {
+      "source": "/work/tuna-man/",
+      "destination": "/pages/profile/work/tuna-man/"
+    },
+    {
+      "source": "/work/unfold-your-turn/",
+      "destination": "/pages/profile/work/unfold-your-turn/"
+    },
+    {
+      "source": "/work/walk-with-you-ep01/",
+      "destination": "/pages/profile/work/walk-with-you-ep01/"
+    },
+    {
+      "source": "/work/walk-with-you-ep02/",
+      "destination": "/pages/profile/work/walk-with-you-ep02/"
+    },
+    {
+      "source": "/work/we-fixed-it/",
+      "destination": "/pages/profile/work/we-fixed-it/"
+    },
+    {
+      "source": "/work/wind-of-longing/",
+      "destination": "/pages/profile/work/wind-of-longing/"
+    },
+    {
+      "source": "/work/winter-dragon-war/",
+      "destination": "/pages/profile/work/winter-dragon-war/"
+    },
+    {
+      "source": "/work/worldview-theme-song/",
+      "destination": "/pages/profile/work/worldview-theme-song/"
+    },
+    {
+      "source": "/work/wuxia-causal-prompt-study/",
+      "destination": "/pages/profile/work/wuxia-causal-prompt-study/"
+    },
+    {
+      "source": "/work/yawil/",
+      "destination": "/pages/profile/work/yawil/"
+    },
+    {
       "source": "/",
       "destination": "/pages/profile/"
     },

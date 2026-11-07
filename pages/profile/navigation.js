@@ -35,4 +35,18 @@
       if (block) document.querySelector('main')?.insertAdjacentHTML('beforeend', block);
     }).catch(() => {});
   }
+
+  // On a preview or local copy, links written with the public address stay on this copy.
+  if (location.protocol !== 'file:' && location.hostname !== 'mirinaeman.com') {
+    const PUBLIC = 'https://mirinaeman.com/';
+    const keepHere = (root) => root.querySelectorAll?.(`a[href^="${PUBLIC}"]`).forEach((a) => {
+      a.href = location.origin + '/' + a.getAttribute('href').slice(PUBLIC.length);
+    });
+    keepHere(document);
+    new MutationObserver((changes) => changes.forEach((c) => c.addedNodes.forEach((n) => {
+      if (n.nodeType !== 1) return;
+      if (n.matches?.(`a[href^="${PUBLIC}"]`)) keepHere(n.parentNode);
+      else keepHere(n);
+    }))).observe(document.body, { childList: true, subtree: true });
+  }
 })();

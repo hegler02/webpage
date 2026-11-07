@@ -52,6 +52,9 @@ def resolve(path, config):
             target = r['destination']
         elif source.endswith(':path*') and path.startswith(source[:-6]):
             target = r['destination'].replace(':path*', path[len(source) - 6:])
+            # The host does not open a folder's index.html through a wildcard rewrite.
+            if target.endswith('/') or (ROOT / target.lstrip('/')).is_dir():
+                return None
         else:
             continue
         file = ROOT / target.lstrip('/')

@@ -54,6 +54,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 m = rule.match(path)
                 if m:
                     path = fill(destination, m)
+                    # Like the host: a wildcard rewrite reaches files, never a folder's index.html.
+                    if destination.endswith(':path*') and (path.endswith('/') or (ROOT / path.lstrip('/')).is_dir()):
+                        return self.send_error(404)
                     break
         self.path = path + (('?' + url.query) if url.query else '')
         return super().do_GET()

@@ -15,7 +15,7 @@ from site_graph import RECORD_KINDS, read_json, site_graph
 from work_note_thumbnails import load as load_covers
 
 ORIGIN = 'https://mirinaeman.com'
-HOME_LATEST = 6
+HOME_LATEST = 8
 HUB_NOTE = '/archive/image-cinema/'
 KIND_LABEL = {
     'song': ('노래', 'Song'), 'slide': ('슬라이드', 'Slide'), 'screen': ('영상', 'Screen'), 'story': ('이야기', 'Story'), 'knowledge': ('배움', 'Learning'),
@@ -175,6 +175,9 @@ class Site:
         summary = t(text['ko'], text['en']) if text else e(n['s'])
         return f'<a class="card" href="{e(n["page"])}"{marks} data-kind="{group}" data-stars="{e(" ".join(self.stars_of(n)))}" data-text="{e(words)}">{pic or ""}<div class="tx"><em>{label(KIND_LABEL[n["k"]])}</em><b>{e(n["t"])}</b><span class="sum">{summary}</span></div></a>'
 
+    def row(self, n):
+        return f'<li><a class="row" href="{e(n["page"])}"><span class="why">{label(KIND_LABEL[n["k"]])}</span><span class="to">{e(n["t"])}</span><span class="note">{e(n["s"])}</span></a></li>'
+
     def latest(self):
         return sorted(self.records, key=lambda n: (n.get('added', ''), n['id']), reverse=True)[:HOME_LATEST]
 
@@ -258,7 +261,7 @@ class Site:
             schema['sameAs'] = n['u']
         return page(n['page'], menu, f'{n["t"]} | 김준호', n['s'], main, image=n.get('img') or SHARE, image_alt=n.get('alt', ''), schema=schema, og='article')
 
-    def context(self, n):
+    def context(self, n, compact=False):
         """What surrounds a record: where it belongs, what it links to, and what resembles it."""
         relations = [(edge, self.by_id[o]) for edge, o in self.near[n['id']] if not edge['hub']]
         groups = [(edge, o) for edge, o in relations if o['k'] == 'constellation']
@@ -272,12 +275,24 @@ class Site:
                 rows += f'<li class="row"><a class="to" href="/galaxy/?node={quote(star["id"], safe="")}">{e(star["t"])}</a><span class="note">{e(edge["r"])}</span><span class="mates">{row_mates}</span></li>'
             parts.append(f'<section class="sec"><h2>{t("속한 별자리", "Constellations")}</h2><ul class="rows">{rows}</ul></section>')
         if others:
-            rows = ''.join(f'<li><a class="row" href="{e(self.link_of(o))}"><span class="why">{e(edge["l"])}</span><span class="to">{e(o["t"])}</span><span class="note">{e(edge["r"])}</span></a></li>' for edge, o in others)
+            # Links that share a label and a reason are one statement; say it once.
+            same = {}
+            for edge, o in others:
+                same.setdefault((edge['l'], edge['r']), []).append(o)
+            rows = ''
+            for (name, reason), targets in same.items():
+                if len(targets) == 1:
+                    rows += f'<li><a class="row" href="{e(self.link_of(targets[0]))}"><span class="why">{e(name)}</span><span class="to">{e(targets[0]["t"])}</span><span class="note">{e(reason)}</span></a></li>'
+                else:
+                    links = ''.join(f'<a href="{e(self.link_of(o))}">{e(o["t"])}</a>' for o in targets)
+                    rows += f'<li class="row"><span class="why">{e(name)}</span><span class="mates to">{links}</span><span class="note">{e(reason)}</span></li>'
             parts.append(f'<section class="sec"><h2>{t("이어지는 맥락", "Connected context")}</h2><ul class="rows">{rows}</ul></section>')
         taken = {o['id'] for _, o in relations}
         kin = [self.by_id[i] for i in n['kin'] if i not in taken and self.by_id[i]['k'] in RECORD_KINDS][:4]
         if kin:
-            parts.append(f'<section class="sec"><h2>{t("함께 볼 기록", "See also")}</h2><div class="grid">{"".join(self.card(o) for o in kin)}</div></section>')
+            # Hand-written pages keep their own card styles, so the context added under them uses rows.
+            body = f'<ul class="rows">{"".join(self.row(o) for o in kin)}</ul>' if compact else f'<div class="grid">{"".join(self.card(o) for o in kin)}</div>'
+            parts.append(f'<section class="sec"><h2>{t("함께 볼 기록", "See also")}</h2>{body}</section>')
         note = self.note_of.get(n['id'].removeprefix('work:'))
         if note:
             parts.insert(0, f'<section class="sec"><h2>{t("작품해설", "Work note")}</h2><div class="grid notes-grid">{self.note_card(note)}</div></section>')
@@ -375,7 +390,7 @@ class Site:
     def context_without_note(self, n):
         keep_notes, self.note_of = self.note_of, {}
         try:
-            return self.context(n)
+            return self.context(n, compact=True)
         finally:
             self.note_of = keep_notes
 

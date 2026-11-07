@@ -77,3 +77,5 @@ a.row:hover{background:var(--raised)}
  html{scroll-behavior:auto}
  *,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;animation-duration:0s!important}
 }
+.row .mates.to{margin-top:0}
+.row .mates.to a{color:var(--text);font-size:var(--size-body);font-weight:var(--weight-control)}

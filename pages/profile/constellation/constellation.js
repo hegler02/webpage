@@ -61,7 +61,7 @@ root.addEventListener('click',e=>{const button=e.target.closest('[data-node]');i
 for(const view of ['map','list'])$(view+'-view').addEventListener('click',()=>{if(state.view===view)return;state.view=view;setURL();render();});
 $('scope').addEventListener('change',()=>{state.scope=$('scope').value;state.page=0;state.overview=true;setURL();render();});
 $('search').addEventListener('input',()=>{clearTimeout(searchTimer);if(!state||dead)return;state.query=$('search').value;state.page=0;searchTimer=setTimeout(()=>{if(dead)return;setURL(true);render();},120);});
-$('reset').addEventListener('click',()=>{state={...state,scope:'context',query:'',overview:true,page:0};adapter?.reset();setURL();render();});
+$('reset').addEventListener('click',()=>{state={...state,scope:'context',query:'',overview:true,page:0,selected:graph.defaultNode,missing:false};trail=[];adapter?.reset();setURL();render();});
 for(const [id,delta] of [['previous',-1],['next',1]])$(id).addEventListener('click',()=>{state.page+=delta;setURL();render();$(delta<0?'previous':'next').disabled&&$(delta<0?'next':'previous').focus();});
 $('share').addEventListener('click',async()=>{
   const url=db.toURL(state,'https://mirinaeman.com/constellation/').href;

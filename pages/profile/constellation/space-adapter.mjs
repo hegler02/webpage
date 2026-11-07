@@ -88,7 +88,7 @@ export async function mount(host,labels,status,{onFailure,onSelect=()=>{}}){
  function draw(){if(dead||paused)return;if(motion.matches){if(raf)cancelAnimationFrame(raf);raf=0;render();}else if(!raf)raf=requestAnimationFrame(render);}
  function resize(){width=Math.max(1,host.clientWidth);height=Math.max(1,host.clientHeight);renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio||1,1.7,Math.sqrt(2000000/(width*height))));renderer.setSize(width,height);camera.aspect=width/height;camera.updateProjectionMatrix();draw();}
  const observer=new ResizeObserver(resize);observer.observe(host);resize();
- function reset(){targetYaw=0;targetPitch=.57;targetFocus.set(0,0,0);targetRadius=width<600?46:34;draw();}
+ function reset(){const turn=Math.PI*2;targetYaw=Math.round(yaw/turn)*turn;targetPitch=.57;targetFocus.set(0,0,0);targetRadius=width<600?46:34;if(!motion.matches&&Math.abs(radius-targetRadius)<1)radius=targetRadius*1.08;draw();}
  const pointers=new Map();let pinch=0;
  canvas.addEventListener('pointerdown',e=>{if(e.button!==0)return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});canvas.setPointerCapture(e.pointerId);drag={x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY,moved:false};if(pointers.size===2){const [a,b]=[...pointers.values()];pinch=Math.hypot(a.x-b.x,a.y-b.y);}},opts);
  canvas.addEventListener('pointermove',e=>{

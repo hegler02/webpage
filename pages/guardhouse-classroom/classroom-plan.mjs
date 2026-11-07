@@ -2,8 +2,10 @@ import {project,boundsOf} from './src/classroom-project.mjs';
 import {expansionSVG,pitAnnotations} from './lesson-expansion-plan.mjs';
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 const n=v=>Number(v.toFixed(2));
-export function sheetSVG({sheet,model,projections,electric,rebar,selected=null,fire,finish}){
- if(['fire-plan','fire-signal','materials'].includes(sheet.view))return expansionSVG({sheet,selected,fire,finish,basePlan:sheet.view==='fire-plan'?sheetSVG({sheet:{...sheet,view:'plan'},model,projections,electric,rebar,selected}):null});
+// On the fire plan these room names would sit under a detector or the evacuation route.
+const fireRoomLabelShift={guard:[0,30],storage:[0,12],pantry:[-28,0]};
+export function sheetSVG({sheet,model,projections,electric,rebar,selected=null,fire,finish,roomLabelShift={}}){
+ if(['fire-plan','fire-signal','materials'].includes(sheet.view))return expansionSVG({sheet,selected,fire,finish,basePlan:sheet.view==='fire-plan'?sheetSVG({sheet:{...sheet,view:'plan'},model,projections,electric,rebar,selected,roomLabelShift:fireRoomLabelShift}):null});
  const view=sheet.view;let out=[];
  const line=(a,b,color='#66828b',width=1,id='',dash='')=>out.push(`<line x1="${n(a[0])}" y1="${n(a[1])}" x2="${n(b[0])}" y2="${n(b[1])}" stroke="${color}" stroke-width="${width}" ${dash?`stroke-dasharray="${dash}"`:''} ${id?`data-element="${esc(id)}"`:''}/>`);
  const text=(x,y,s,size=13,color='#294654',anchor='start')=>out.push(`<text x="${n(x)}" y="${n(y)}" font-family="Malgun Gothic, sans-serif" font-size="${size}" fill="${color}" text-anchor="${anchor}">${esc(s)}</text>`);
@@ -44,7 +46,7 @@ export function sheetSVG({sheet,model,projections,electric,rebar,selected=null,f
     const p=footprint.map(([x,y])=>projectPoint([x,y,0]).map(n).join(',')).join(' ');
     out.push(`<polygon points="${p}" fill="${e.id===selected?'#edaa482c':'transparent'}" stroke="${e.id===selected?'#ef9438':e.educationAdded?'#6e8b98':'none'}" stroke-width="${e.id===selected?3:1}" data-element="${esc(e.id)}" role="button" tabindex="0" aria-label="${esc(e.name)} ${esc(e.id)} 도면에서 선택"/>`);
    }
-   if(['plan','lighting','power'].includes(view))for(const r of project.rooms){const p=projectPoint([(r.bounds[0]+r.bounds[2])/2,(r.bounds[1]+r.bounds[3])/2,0]);text(p[0],p[1]+38,r.name,14,'#5a727e','middle');}
+   if(['plan','lighting','power'].includes(view))for(const r of project.rooms){const p=projectPoint([(r.bounds[0]+r.bounds[2])/2,(r.bounds[1]+r.bounds[3])/2,0]);const [dx,dy]=roomLabelShift[r.id]??[0,0];text(p[0]+dx,p[1]+38+dy,r.name,14,'#5a727e','middle');}
    const a=projectPoint([0,-.65,0]),b=projectPoint([8.2,-.65,0]);line(a,b,'#587d8c');line([a[0],a[1]-7],[a[0],a[1]+7]);line([b[0],b[1]-7],[b[0],b[1]+7]);text((a[0]+b[0])/2,a[1]-9,'8,200 mm',14,'#315568','middle');
    const c=projectPoint([-.65,0,0]),d=projectPoint([-.65,4,0]);line(c,d);text(c[0]-3,(c[1]+d[1])/2,'4,000',12,'#315568','middle');
   }else{ text(100,530,view==='section'?'절단 위치: 평면 Y = 3,000 mm · 마감 바닥 +45 · 지붕 구조 상단 +3,200':'도면 방향과 3D 카메라가 함께 바뀝니다.',14); }

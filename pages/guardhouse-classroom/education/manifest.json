@@ -1,7 +1,7 @@
 {
   "sample": "guardhouse-01",
   "version": 1,
-  "generatedAt": "2026-11-07T00:26:32.688Z",
+  "generatedAt": "2026-11-07T00:36:09.508Z",
   "sourceHashes": {
     "src/quantity-engine.mjs": "a837ef2ac0d9996d04ddbe1db6079da21c4d1be6300a5cdd4e261486799594de",
     "src/quantity-catalog.mjs": "3c32fb383eb2ea3b4f3a64b9b9ab331cabaa10d3ead805115e61e6000b61bb6d",
@@ -42,7 +42,7 @@
     "public/classroom.css": "2e2e5e060cd36b7fa9ebe62023c87e1e9f21fc2e70106161ad5b692516edfa0a",
     "public/classroom.mjs": "66f9781077f165c67c6cb0e5cf71e63b9206462d26348ebfafd433f69298f418",
     "public/classroom-view.mjs": "5085e06f736c753454ea8376b77dd5a1eac6b91cba7be1c9997283377166b0f9",
-    "public/classroom-plan.mjs": "f43b2ab9acb5e921c1d794b9994ca1fcd8069bc5ada3373199a308e573c15379",
+    "public/classroom-plan.mjs": "434d469f4f5ba6fa5c2a2a1aa9fddba2446eab7323d70df61ec369e319cefd73",
     "scripts/build-classroom.mjs": "f812989ffca67d0d27eab9026ded21958e62b5fc061382de5967bcceb7305df1",
     "scripts/export-classroom.mjs": "a1f5c7625607e33e8636bbab44ef74504504d1b2e5ab1a845a698ea60bd193f8",
     "scripts/write-classroom-cad.py": "c9e622b5757b64ffc09670fec07cc561565bdfee0b68a3726bb6348e160a6792",

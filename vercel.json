@@ -759,6 +759,18 @@
     {
       "source": "/site/:path*",
       "destination": "/pages/profile/site/:path*"
+    },
+    {
+      "source": "/favicon.ico",
+      "destination": "/pages/profile/favicon.ico"
+    },
+    {
+      "source": "/apple-touch-icon.png",
+      "destination": "/pages/profile/apple-touch-icon.png"
+    },
+    {
+      "source": "/icon-512.png",
+      "destination": "/pages/profile/icon-512.png"
     }
   ],
   "redirects": [

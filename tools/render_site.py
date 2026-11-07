@@ -52,14 +52,22 @@ def out_attrs(url):
     return ' target="_blank" rel="noopener noreferrer"'
 
 
-def page(path, key, title, description, main, image='/assets/images/profile-hero.webp', image_alt='', schema=None, og='website', dark=False, image_size=None):
+SHARE = '/assets/images/og-home.jpg'
+SHARE_ALT = '김준호의 이름과 작품들이 별로 이어진 미리내맨 은하수'
+
+
+def page(path, key, title, description, main, image=SHARE, image_alt='', schema=None, og='website', dark=False, image_size=None):
     url = ORIGIN + path
+    if image == SHARE:
+        image_alt, image_size = image_alt or SHARE_ALT, image_size or ('image/jpeg', 1200, 630)
     head = [
         f'<title>{e(title)}</title>',
         f'<meta name="description" content="{e(description)}">',
         f'<meta name="site-home" content="{ORIGIN}/">',
         f'<link rel="canonical" href="{e(url)}">',
+        '<link rel="icon" href="/favicon.ico" sizes="32x32">',
         '<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
+        '<link rel="apple-touch-icon" href="/apple-touch-icon.png">',
         f'<meta property="og:type" content="{og}">',
         '<meta property="og:locale" content="ko_KR">',
         f'<meta property="og:title" content="{e(title)}">',
@@ -248,7 +256,7 @@ class Site:
         schema = {'@context': 'https://schema.org', '@type': kind, 'name': n['t'], 'description': n['s'], 'url': ORIGIN + n['page'], 'author': {'@type': 'Person', 'name': '김준호', 'url': ORIGIN + '/about/'}}
         if n['u'] and urlsplit(n['u']).path not in ('/work/', '/research/'):
             schema['sameAs'] = n['u']
-        return page(n['page'], menu, f'{n["t"]} | 김준호', n['s'], main, image=n.get('img') or '/assets/images/profile-hero.webp', image_alt=n.get('alt', ''), schema=schema, og='article')
+        return page(n['page'], menu, f'{n["t"]} | 김준호', n['s'], main, image=n.get('img') or SHARE, image_alt=n.get('alt', ''), schema=schema, og='article')
 
     def context(self, n):
         """What surrounds a record: where it belongs, what it links to, and what resembles it."""

@@ -45,6 +45,9 @@ def outputs():
     for source in ('/site/:path*',):
         if source not in present:
             config['rewrites'].append({'source': source, 'destination': data['physical_root'] + 'site/:path*'})
+    for name in ('favicon.ico', 'apple-touch-icon.png', 'icon-512.png'):
+        if '/' + name not in present:
+            config['rewrites'].append({'source': '/' + name, 'destination': data['physical_root'] + name})
     # Rewrites into folders that no longer exist would only hide a 404.
     config['rewrites'] = [r for r in config['rewrites'] if r['source'] != '/archive.js' and (ROOT / r['destination'].lstrip('/').split(':')[0]).exists()]
     redirects = {r['source'] for r in config['redirects']}

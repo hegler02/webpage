@@ -25,5 +25,6 @@ python3 tools/release_gate.py
 1. 작품을 배포하고 공개 URL을 검증합니다.
 2. 매클루언 스킬 CQI 원장에 작품·배포 증거·대표 썸네일 원본과 해시를 등록합니다.
 3. 공개 카탈로그를 `pages/profile/data/message-bodies.json`으로 내보냅니다.
-4. 렌더러와 릴리스 게이트를 실행합니다.
-5. 검증된 변경만 `main`에 반영합니다.
+4. `docs/CONNECTING_RECORDS.md`를 따라 은하수 연결을 제안합니다.
+5. 렌더러와 릴리스 게이트를 실행합니다.
+6. 검증된 변경만 `main`에 반영합니다.

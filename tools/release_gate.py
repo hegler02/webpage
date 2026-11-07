@@ -178,6 +178,8 @@ def main() -> int:
         (["node", str(ROOT / "tools" / "test_constellation_state.mjs")], "Constellation state gate"),
         ([sys.executable, str(ROOT / "tools" / "check_unfold_intro.py")], "Unfold editorial discovery gate"),
         ([sys.executable, str(ROOT / "tools" / "test_constellation.py")], "Constellation source and registration gate"),
+        ([sys.executable, str(ROOT / "tools" / "constellation_links.py"), "--check"], "Constellation links gate"),
+        ([sys.executable, str(ROOT / "tools" / "test_constellation_links.py")], "Constellation links test"),
         ([sys.executable, str(ROOT / "tools" / "render_we_intro.py"), "--check"], "WE introduction gate"),
         ([sys.executable, str(ROOT / "tools" / "probe_we_discovery.py")], "WE discovery gate"),
         ([sys.executable, str(ROOT / "tools" / "probe_galchi_discovery.py")], "Galchi discovery gate"),

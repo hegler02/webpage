@@ -26,7 +26,7 @@ class Papers(HTMLParser):
         if tag=='li' and self.current is not None:
             self.records.append(self.current); self.current=None
 
-def build_graph(catalog=None, editorial=None):
+def build_graph(catalog=None, editorial=None, links=None):
     catalog = catalog or json.loads((PROFILE/'data/message-bodies.json').read_text())
     context=json.loads((PROFILE/'data/context-graph.json').read_text())
     editorial=editorial if editorial is not None else json.loads((PROFILE/'data/constellation-editorial.json').read_text())
@@ -82,6 +82,22 @@ def build_graph(catalog=None, editorial=None):
         node(item['id'],item['kind'],item['title'],item['summary'],item['url'],**{k:item[k] for k in ('sections','sourceLabel','image','alt','year') if k in item})
     for item in editorial.get('edges',[]):
         edge(item['source'],item['target'],item['label'],item['reason'],item['evidence'])
+    # Constellations and links the creator approved. Proposals stay out of the public graph.
+    links=links if links is not None else json.loads((PROFILE/'data/constellation-links.json').read_text())
+    work_url={n['id']:n['url'] for n in nodes}
+    public_work=lambda record:record if ':' in record else 'work:'+record
+    for c in links['constellations']:
+        if c.get('status')!='approved': continue
+        members=[m for m in c['members'] if public_work(m['id']) in work_url]
+        if not members: continue
+        node('constellation:'+c['id'],'constellation',c['title'],c['text'],ORIGIN+'/constellation/',sourceLabel='별자리')
+        for m in members:
+            edge(public_work(m['id']),'constellation:'+c['id'],c['title'],m['reason'],work_url[public_work(m['id'])])
+    for pair in links['pairs']:
+        if pair.get('status')!='approved': continue
+        a,b=public_work(pair['a']),public_work(pair['b'])
+        if a in work_url and b in work_url:
+            edge(a,b,pair['label'],pair['reason'],work_url[a])
     # A title-based grouping is a browsing aid, never a claim of citation or influence.
     topics=[('metaverse','메타버스와 교육',['메타버스']),('bees','스마트 양봉',['꿀벌','여왕벌','honeybee','beehive','beekeeping']),('moving-image','영상과 창작',['영상','동영상','panorama','디지털 디자인'])]
     papers=Papers(); papers.feed((PROFILE/'books/index.html').read_text())

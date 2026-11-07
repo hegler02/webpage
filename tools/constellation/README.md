@@ -4,6 +4,8 @@ The constellation is a view of accumulated public records, not a second artwork 
 
 ## Update the graph
 
+New records follow `docs/CONNECTING_RECORDS.md`: `pages/profile/data/constellation-links.json` holds proposed and approved constellations, and only approved ones reach the public graph.
+
 - `pages/profile/data/message-bodies.json`: sanitized McLuhan catalog export; DEPLOYED/GOLDEN works automatically become nodes and receive a factual creator edge. Never copy a second works list into JavaScript.
 - `pages/profile/data/context-graph.json`: explicitly recorded concept relationships, with reasons. Shared vocabulary alone is not evidence of influence.
 - `pages/profile/data/constellation-editorial.json`: existing full autumn essay; optional `nodes` and `edges` arrays accept future approved public essays and judgments. Each edge requires source, target, label, reason and HTTPS evidence. No unsupported links, dangling IDs or duplicates.

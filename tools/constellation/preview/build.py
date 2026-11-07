@@ -133,7 +133,7 @@ def thumb(path):
 records = []
 for i, n in enumerate(nodes):
     kin = sorted(((pairs.get((min(i, j), max(i, j)), 0), j) for j in range(N) if j != i), reverse=True)
-    key_member = any(m.get('key') and 'work:' + m['id'] == n['id'] for c in links['constellations'] for m in c['members'])
+    key_member = any(m.get('key') and 'work:' + m['id'] == n['id'] for c in links['constellations'] for m in c['members']) or any(x.get('key') and x['id'] == n['id'] for x in links['solo'])
     records.append({
         'id': n['id'], 'k': kind_of[i], 't': n['title'], 's': re.sub(r'\s+', ' ', n.get('summary') or ''), 'u': n.get('url') or '', 'y': n.get('year') or '',
         'img': thumb(n.get('image')) if n['kind'] == 'work' else '', 'alt': n.get('alt') or '', 'p': out[i], 'd': degree[n['id']], 'key': key_member, 'kin': [nodes[j]['id'] for w, j in kin[:6] if w > 0],

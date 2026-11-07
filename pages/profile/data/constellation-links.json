@@ -6,7 +6,7 @@
       "id": "absurd",
       "title": "황당한 하루",
       "text": "일상에서 겪은 어이없는 순간이 노래가 된 자리.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "dont-you-want-my-money",
@@ -34,7 +34,7 @@
       "id": "ai-days",
       "title": "AI와 일하는 날들",
       "text": "AI와 함께 일하며 겪은 일이 노래가 된 자리.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "sibang-sibang",
@@ -58,7 +58,7 @@
       "id": "body",
       "title": "미디어는 메시지의 몸",
       "text": "같은 메시지도 어떤 매체를 입느냐에 따라 다르게 살아난다는 관점.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "baekje-renaissance",
@@ -103,7 +103,7 @@
       "id": "build",
       "title": "생각을 앱으로",
       "text": "자기 판단을 작동하는 도구로 만드는 배움.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "mirinaeman-coding-lab",
@@ -139,7 +139,7 @@
       "id": "causal-chain",
       "title": "단문 인과체인",
       "text": "한 문장에 하나의 판단을 담고 앞 문장을 다음 문장의 기준으로 잇는 제작법.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "image-agent",
@@ -175,7 +175,7 @@
       "id": "code-film",
       "title": "코드로 그린 영상",
       "text": "장면을 코드로 움직인 뮤직비디오.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "mirinaeman-theme",
@@ -199,7 +199,7 @@
       "id": "comfort",
       "title": "건네는 노래",
       "text": "누군가에게 직접 건네는 다짐과 위로.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "ttak-joa",
@@ -223,7 +223,7 @@
       "id": "drone",
       "title": "드론의 시선",
       "text": "높이보다 시선을 바꾸는 촬영을 배우는 자리.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "drone-cinema-2026",
@@ -251,7 +251,7 @@
       "id": "family",
       "title": "가족의 기억",
       "text": "곁에 있던 사람과 떠난 자리를 부르는 노래.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "daughter-twice-carousel",
@@ -279,7 +279,7 @@
       "id": "groupchat",
       "title": "단톡방에서 온 소식",
       "text": "카카오톡 단톡방 소식을 노래와 이미지로 만든 자리.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "last-resonance",
@@ -295,7 +295,7 @@
       "id": "heavy",
       "title": "거친 소리의 몸",
       "text": "분노와 각성을 강한 음악의 몸으로 옮긴 자리.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "chamgyoyuk",
@@ -327,7 +327,7 @@
       "id": "hwasan",
       "title": "화산인수의 세계",
       "text": "망해가는 화산파를 인수한 전문가의 산업 무협.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "hwasan-insu",
@@ -347,7 +347,7 @@
       "id": "jeju",
       "title": "제주에서 들은 것",
       "text": "제주의 소리와 길에서 시작한 기록들.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "songbirds",
@@ -375,7 +375,7 @@
       "id": "judgment",
       "title": "AI와 판단권",
       "text": "노동은 맡겨도 판단은 넘기지 않는다는 물음.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "ai-judgment-lecture",
@@ -411,7 +411,7 @@
       "id": "meal",
       "title": "한 끼에서 시작",
       "text": "먹고 마신 경험이 노래와 장면이 된 자리.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "agu-girls",
@@ -439,7 +439,7 @@
       "id": "teach",
       "title": "수업을 다시 짜다",
       "text": "가르치는 일의 구조를 새로 설계한 기록.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "electrical-drawing",
@@ -467,7 +467,7 @@
       "id": "wuxia",
       "title": "먹과 결투",
       "text": "무협의 움직임을 어떻게 화면에 세우는가.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "dragon-toad",
@@ -490,77 +490,77 @@
       "b": "guardhouse-classroom",
       "label": "같은 컨베이어 도면",
       "reason": "공간과 전기의 컨베이어와 같은 도면을 씁니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "one-more-guest-album",
       "b": "one-more-guest-single",
       "label": "같은 이야기, 다른 장르",
       "reason": "생일 한턱 이야기를 포크와 힙합으로 만들었습니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "too-many-screws-left",
       "b": "fan-cinema-comparison",
       "label": "같은 나사",
       "reason": "선풍기에 남은 나사에서 시작한 노래와 영상입니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "ttaro-coffee",
       "b": "ttaro-coffee-image-cinema",
       "label": "같은 노래의 다른 몸",
       "reason": "따로 커피를 노래와 이미지 시네마로 만듭니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "songbirds",
       "b": "songbirds-image-cinema",
       "label": "같은 새소리",
       "reason": "같은 안부를 앨범과 영상으로 만듭니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "ai-slave",
       "b": "ai-slave-slide",
       "label": "같은 질문",
       "reason": "AI 노예라는 질문을 음악과 슬라이드로 합니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "medium-body-lecture",
       "b": "media-body-video",
       "label": "같은 제목의 두 매체",
       "reason": "같은 주제를 강의와 영상으로 설명합니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "git-github-deployment-guide",
       "b": "github-vercel-guide",
       "label": "이어 읽는 안내",
       "reason": "배포의 전체 흐름과 실전 안내입니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "coffee-confession-comic",
       "b": "ttaro-coffee",
       "label": "커피에서 시작",
       "reason": "커피 한 잔에서 시작한 이야기입니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "suno-song-guide",
       "b": "sound-design-lab",
       "label": "소리를 설계하는 배움",
       "reason": "원하는 소리를 요청하는 법을 배웁니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "editorial-magazine-deck",
       "b": "mirinae-motion-atelier",
       "label": "화면을 설계하는 배움",
       "reason": "편집과 모션을 다룹니다.",
-      "status": "proposed"
+      "status": "approved"
     }
   ],
   "solo": [
@@ -574,7 +574,8 @@
     },
     {
       "id": "paper:72c303e92542ebdd",
-      "why": "싸이월드와 페이스북의 네트워크 구조를 비교한 논문으로, 아직 이어질 곳을 정하지 않았습니다."
+      "why": "싸이월드와 페이스북의 네트워크 구조를 비교한 논문으로, 아직 이어질 곳을 정하지 않았습니다.",
+      "key": true
     }
   ]
 }

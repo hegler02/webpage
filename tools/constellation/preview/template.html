@@ -329,7 +329,7 @@ function start(){
   boxes.length=0;
   const open=!reader.hidden,rightLimit=open&&width>820?width-Math.min(372,width-32)-24:width;
   const bottomLimit=open&&width<=820?height*.48:height;const topLimit=width<=820?108:4;
-  const rank=n=>n===selected?0:n===hover?1:(sel&&sel.has(n.id))?2:(lit&&lit.has(n.id))?3:(passes(n)&&filtered)?3.5:n.k==='creator'?4:n.k==='concept'?5:n.k==='topic'?6:n.k==='proposal'?6.5:(n.k==='judgment'||n.k==='essay')?8:7+(10-Math.min(n.d,10))*.1;
+  const rank=n=>n===selected?0:n===hover?1:(sel&&sel.has(n.id))?(n.key?1.5:2):(lit&&lit.has(n.id))?3:(passes(n)&&filtered)?3.5:n.k==='creator'?4:n.k==='concept'?5:n.k==='topic'?6:n.k==='proposal'?6.5:(n.k==='judgment'||n.k==='essay')?8:7+(10-Math.min(n.d,10))*.1;
   const order=[...nodes].sort((a,b)=>rank(a)-rank(b));
   const budget=selected?26:width<820?12:hover?20:28;let shown=0;
   order.forEach(n=>{

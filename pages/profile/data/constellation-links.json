@@ -136,13 +136,18 @@
         {
           "id": "coding-body-message",
           "reason": "코딩을 메시지의 몸으로 봅니다."
+        },
+        {
+          "id": "paper:ucc-guideline-masters-2009",
+          "reason": "유튜브 같은 동영상 플랫폼을 만드는 가이드라인을 다룬 석사학위논문입니다.",
+          "status": "proposed"
         }
       ]
     },
     {
       "id": "body-sensing",
-      "title": "몸을 재는 기술",
-      "text": "생체 신호와 운동을 재는 기기와 앱.",
+      "title": "몸과 삶을 돌보는 기술",
+      "text": "생체 신호와 운동을 재고 노인의 삶을 돕는 기기와 연구.",
       "status": "proposed",
       "members": [
         {
@@ -164,6 +169,10 @@
         {
           "id": "paper:deep-learning-home-training-2021",
           "reason": "딥러닝 영상처리로 비대면 홈트레이닝을 돕는 앱 논문입니다."
+        },
+        {
+          "id": "project:smart-welfare",
+          "reason": "AI를 활용해 노인의 생활과 복지를 돕는 연구입니다."
         }
       ]
     },
@@ -265,6 +274,22 @@
         {
           "id": "image-cinema-review",
           "reason": "코드 애니메이션과 원화·영상을 비교합니다."
+        }
+      ]
+    },
+    {
+      "id": "code-systems",
+      "title": "코드로 짠 시스템",
+      "text": "보안과 API를 직접 코딩해 만든 시스템과 연구.",
+      "status": "proposed",
+      "members": [
+        {
+          "id": "project:document-security",
+          "reason": "문서보안 시스템을 코딩으로 개발한 과제입니다."
+        },
+        {
+          "id": "project:open-api-mashup",
+          "reason": "Open API를 활용한 코딩과 매시업 활성화 연구입니다."
         }
       ]
     },
@@ -453,6 +478,22 @@
         {
           "id": "baekun-five-strike-action-cinema",
           "reason": "백운의 움직임을 관객이 완성합니다."
+        }
+      ]
+    },
+    {
+      "id": "iot",
+      "title": "사물인터넷으로 잇다",
+      "text": "센서와 통신으로 현장의 기계와 생명을 재는 시스템.",
+      "status": "proposed",
+      "members": [
+        {
+          "id": "project:forklift-safety",
+          "reason": "사물인터넷으로 지게차의 무게, 거리, 자세를 재는 안전 시스템입니다."
+        },
+        {
+          "id": "project:smart-beekeeping",
+          "reason": "사물인터넷과 AI로 벌통을 관리하는 스마트 양봉 시스템입니다."
         }
       ]
     },
@@ -654,7 +695,7 @@
     {
       "id": "vr",
       "title": "360도로 본다",
-      "text": "360 영상과 VR을 찍고 만드는 기술.",
+      "text": "360 영상, VR과 AR, 메타버스를 찍고 만드는 기술.",
       "status": "proposed",
       "members": [
         {
@@ -680,6 +721,14 @@
         {
           "id": "project:vr-content-support",
           "reason": "창조경제혁신센터 연계 VR 콘텐츠 제작지원 사업입니다."
+        },
+        {
+          "id": "project:convergence-game",
+          "reason": "메타버스와 VR로 만든 융복합 게임 콘텐츠 지원사업입니다."
+        },
+        {
+          "id": "paper:mobile-ar-digital-design-2011",
+          "reason": "모바일 증강현실 기술과 디지털 디자인 활용을 다룬 논문입니다."
         }
       ]
     },
@@ -858,6 +907,13 @@
       "label": "디지털 사이니지",
       "reason": "안드로이드 디지털 사이니지 논문과 DID 운용시스템 개발 과제입니다.",
       "status": "proposed"
+    },
+    {
+      "a": "collection:gangneung-sound",
+      "b": "collection:ai-music-archive",
+      "label": "같은 AI 음악 작업",
+      "reason": "강릉 가게들의 로고송도 AI 음악으로 만들어 앨범으로 냈습니다.",
+      "status": "proposed"
     }
   ],
   "solo": [
@@ -873,38 +929,6 @@
       "id": "paper:social-network-cyworld-facebook-2011",
       "why": "싸이월드와 페이스북의 네트워크 구조를 비교한 논문으로, 아직 이어질 곳을 정하지 않았습니다.",
       "key": true
-    },
-    {
-      "id": "collection:gangneung-sound",
-      "why": "지역 소상공인의 이야기를 노래로 만든 프로젝트로, 아직 이어질 곳을 정하지 않았습니다."
-    },
-    {
-      "id": "project:smart-welfare",
-      "why": "AI 생활과 스마트 복지 과제로, 묶을 기록을 찾지 못했습니다."
-    },
-    {
-      "id": "project:forklift-safety",
-      "why": "지게차 안전 센서 과제로, 묶을 기록을 찾지 못했습니다."
-    },
-    {
-      "id": "project:document-security",
-      "why": "문서보안 시스템 과제로, 묶을 기록을 찾지 못했습니다."
-    },
-    {
-      "id": "project:open-api-mashup",
-      "why": "Open API와 Mash Up 활성화 연구로, 묶을 기록을 찾지 못했습니다."
-    },
-    {
-      "id": "project:convergence-game",
-      "why": "첨단융복합 게임 콘텐츠 과제로, 묶을 근거를 찾지 못했습니다."
-    },
-    {
-      "id": "paper:ucc-guideline-masters-2009",
-      "why": "동영상 UCC 서비스 가이드라인 석사학위논문으로, 묶을 기록을 찾지 못했습니다."
-    },
-    {
-      "id": "paper:mobile-ar-digital-design-2011",
-      "why": "모바일 증강현실과 디지털 디자인 논문으로, 묶을 기록을 찾지 못했습니다."
     }
   ]
 }

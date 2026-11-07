@@ -52,7 +52,8 @@
       "added": "2009-01-01",
       "tags": [
         "video",
-        "media"
+        "media",
+        "message-body"
       ],
       "degree": "석사학위논문",
       "degree_en": "MASTER'S THESIS"
@@ -248,6 +249,7 @@
       "added": "2011-01-01",
       "tags": [
         "ar",
+        "vr",
         "design"
       ]
     },
@@ -442,7 +444,8 @@
       "added": "2025-01-01",
       "tags": [
         "ai-literacy",
-        "welfare"
+        "welfare",
+        "elderly-care"
       ]
     },
     {
@@ -487,7 +490,8 @@
       "added": "2021-01-01",
       "tags": [
         "beekeeping",
-        "sensor"
+        "sensor",
+        "iot"
       ]
     },
     {
@@ -545,8 +549,9 @@
       "url": "",
       "added": "2018-01-01",
       "tags": [
-        "vr",
-        "game"
+        "game",
+        "metaverse",
+        "vr"
       ]
     },
     {
@@ -575,6 +580,7 @@
       "url": "",
       "added": "2017-01-01",
       "tags": [
+        "iot",
         "sensor"
       ]
     },
@@ -660,6 +666,7 @@
       "url": "",
       "added": "2013-01-01",
       "tags": [
+        "coding",
         "security"
       ]
     },
@@ -674,7 +681,8 @@
       "url": "",
       "added": "2012-01-01",
       "tags": [
-        "media"
+        "coding",
+        "api"
       ]
     },
     {
@@ -828,7 +836,7 @@
       "id": "collection:gangneung-sound",
       "kind": "collection",
       "title": "강릉의 소리",
-      "summary": "소상공인의 이야기를 AI 음악으로 바꾸는 지역 기반 프로젝트입니다.",
+      "summary": "강릉 소상공인 가게들의 로고송을 AI 음악으로 만들어 앨범까지 발매한 지역 프로젝트입니다.",
       "summary_en": "A local project that turns small-business stories into AI-assisted songs.",
       "label": "Social Project",
       "url": "https://www.youtube.com/watch?v=d31D5wZThXA",
@@ -840,7 +848,9 @@
       "added": "2000-01-01",
       "tags": [
         "music",
-        "local"
+        "local",
+        "logo-song",
+        "album"
       ]
     },
     {

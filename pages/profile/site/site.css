@@ -35,7 +35,7 @@ main.enter{animation:page-in var(--dur-slow) var(--curve) both}
 .sec>h2+p{margin-top:var(--gap-text)}
 .sec>p+*{margin-top:var(--gap-para)}
 .sec>.state+p{margin-top:var(--gap-para)}
-.foot{display:grid;gap:var(--gap-tiny);padding:var(--space-6) var(--edge-right) var(--space-10) var(--edge);border-top:var(--border) solid var(--rule);color:var(--faint);font-size:var(--size-caption)}
+.foot{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--gap-tiny) var(--space-6);padding:var(--space-6) var(--edge-right) var(--space-10) var(--edge);border-top:var(--border) solid var(--rule);color:var(--faint);font-size:var(--size-caption)}
 .foot a{color:var(--muted)}
 
 /* Galaxy stage: moved between the home opening and its own page */

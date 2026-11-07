@@ -63,6 +63,8 @@ export const inspectionItems=[
 ];
 export const freshExpansion=()=>({version:1,finish:'plaster',battery:true,signal:null,checks:{}});
 export function restoreExpansion(raw){const s=freshExpansion();if(raw?.version!==1)return s;if(finishes.some(f=>f.id===raw.finish))s.finish=raw.finish;if(typeof raw.battery==='boolean')s.battery=raw.battery;if(fireDevices.some(d=>d.id===raw.signal&&['smoke','heat','callpoint'].includes(d.kind)))s.signal=raw.signal;for(const item of inspectionItems){const c=raw.checks?.[item.id];if(c&&['unreviewed','observed','action','na'].includes(c.state))s.checks[item.id]={state:c.state,note:String(c.note??'').slice(0,500)};}return s;}
+// A teaching evacuation route in plan metres, never a cable or pipe claim.
+export const evacuationRoute=[[3.2,3],[4,2.35],[4.65,2.35],[5.05,1.3],[5.05,-.5]];
 export function fireModel(state=freshExpansion(),mains=true){
  return {...resolveFire(fireDevices,{mains,battery:state.battery,signal:state.signal}),voltage:24,scope:'화재신호와 전원 전환을 배우는 기능 모형. 배터리 용량·배선 규격·법정 설치 대상을 판정하지 않습니다.'};
 }

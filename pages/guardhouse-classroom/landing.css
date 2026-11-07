@@ -1,0 +1,55 @@
+/* Landing story: same tokens as the workbench, larger type, one pinned model. */
+:root{
+ --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px;
+ --ld-display:clamp(36px,5.4vw,76px);
+ --ld-heading:clamp(30px,4.2vw,60px);
+ --ld-lead:1.18;
+ --ld-gutter:clamp(20px,6vw,96px);
+ --ld-copy:min(42vw,620px);
+ --ld-beat-hero:120dvh;
+ --ld-beat-long:150dvh;
+ --ld-enter-h:36px;
+ --ld-card-ratio:16 / 9;
+ --ld-card-min:220px;
+ --ld-fade-side:linear-gradient(90deg,var(--wb-bg) 0%,var(--wb-bg) 20%,transparent 50%);
+ --ld-fade-bottom:linear-gradient(0deg,var(--wb-bg) 0%,var(--wb-bg) 26%,transparent 56%);
+}
+html{background:var(--wb-bg)}
+body.landing{margin:0;background:var(--wb-bg);color:var(--wb-text);font-family:var(--sys-font-family);word-break:keep-all;color-scheme:dark}
+.ld-top{position:fixed;inset:0 0 auto;z-index:3;display:flex;align-items:center;justify-content:space-between;height:var(--wb-top);padding-inline:var(--ld-gutter)}
+.ld-brand{display:flex;align-items:center;gap:var(--wb-gap-control);color:var(--wb-text);text-decoration:none}
+.ld-brand strong{font-size:var(--sys-size-body);font-weight:var(--sys-weight-strong)}
+.ld-enter{display:inline-flex;align-items:center;height:var(--ld-enter-h);padding-inline:var(--space-4);border:var(--wb-border) solid var(--wb-line-strong);border-radius:var(--wb-radius);background:var(--wb-surface);color:var(--wb-text);font-size:var(--sys-size-caption);font-weight:var(--sys-weight-strong);text-decoration:none}
+.ld-enter:hover{background:var(--wb-hover)}
+.ld-story{position:relative}
+.ld-stage{position:sticky;top:0;height:100dvh;overflow:hidden;background:var(--wb-bg)}
+.ld-stage canvas{display:block;width:100%;height:100%}
+.ld-stage::after{content:"";position:absolute;inset:0;background:var(--ld-fade-side);pointer-events:none}
+.ld-stage[data-static]{background:var(--wb-bg) url("/pages/guardhouse-classroom/preview.webp") center/cover no-repeat}
+.ld-dim{position:absolute;inset:0;z-index:1;background:var(--wb-bg);opacity:0;pointer-events:none}
+.ld-beats{position:relative;z-index:2;margin-top:-100dvh}
+.ld-beat{display:flex;align-items:flex-start;min-height:var(--ld-beat-long);padding-inline:var(--ld-gutter);box-sizing:border-box}
+.ld-beat-hero{min-height:var(--ld-beat-hero)}
+.ld-beat-end{min-height:100dvh;align-items:center;padding-block:calc(var(--wb-top) + var(--wb-gap-section)) var(--space-10)}
+.ld-beat>div{position:sticky;top:calc(50dvh - var(--ld-display));max-width:var(--ld-copy)}
+.ld-beat-end>div{position:static;width:100%;max-width:none}
+.ld-beat h1,.ld-beat h2{margin:0;font-weight:var(--sys-weight-strong);line-height:var(--ld-lead);letter-spacing:-.02em}
+.ld-beat h1{font-size:var(--ld-display)}
+.ld-beat h2{font-size:var(--ld-heading)}
+.ld-hint{display:block;margin-top:var(--wb-gap-section);color:var(--wb-muted);font-size:var(--sys-size-caption)}
+.ld-data{margin:var(--wb-gap-section) 0 0;color:var(--wb-accent);font-size:var(--sys-size-body);font-variant-numeric:tabular-nums}
+.ld-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(var(--ld-card-min),1fr));gap:var(--wb-gap-card);margin-top:var(--space-8)}
+.ld-card{display:flex;flex-direction:column;overflow:hidden;border:var(--wb-border) solid var(--wb-line);border-radius:var(--wb-radius-card);background:var(--wb-surface);color:var(--wb-text);text-decoration:none}
+.ld-card:hover{border-color:var(--wb-accent)}
+.ld-card img{display:block;width:100%;aspect-ratio:var(--ld-card-ratio);object-fit:cover}
+.ld-card strong{margin:var(--wb-inset-card) var(--wb-inset-card) var(--wb-gap-tool);font-size:var(--sys-size-body-large);font-weight:var(--sys-weight-strong)}
+.ld-card span{margin:0 var(--wb-inset-card) var(--wb-inset-card);color:var(--wb-muted);font-size:var(--sys-size-caption);line-height:var(--wb-lh-body)}
+:is(.ld-brand,.ld-enter,.ld-card):focus-visible{outline:var(--wb-marker) solid var(--wb-accent);outline-offset:var(--wb-marker)}
+@media(max-width:759px){
+ :root{--ld-copy:100%;--ld-gutter:20px;--ld-card-min:150px}
+ .ld-stage::after{background:var(--ld-fade-bottom)}
+ .ld-beat{align-items:flex-end}
+ .ld-beat>div{position:sticky;top:auto;bottom:var(--space-10);padding-bottom:var(--space-10)}
+ .ld-beat-end{align-items:center}
+ .ld-beat-end>div{position:static;padding-bottom:0}
+}

@@ -1,4 +1,4 @@
-import {fireModel,finishes,materialLayers,pitInfo} from './src/lesson-expansion.mjs';
+import {evacuationRoute,fireModel,finishes,materialLayers,pitInfo} from './src/lesson-expansion.mjs';
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 const text=(x,y,s,size=16,color='#294654')=>`<text x="${x}" y="${y}" font-family="Malgun Gothic, sans-serif" font-size="${size}" fill="${color}">${esc(s)}</text>`;
 const line=(a,b,color='#c56451',width=2)=>`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${color}" stroke-width="${width}"/>`;
@@ -10,7 +10,7 @@ export function expansionSVG({sheet,selected,fire=fireModel(),finish='plaster',b
  if(sheet.view==='fire-plan'){
   const p=a=>[100+a[0]*94,485-a[1]*94];
   // This line is a teaching evacuation route, never a cable or pipe claim.
-  const path=[[3.2,3],[4,2.35],[4.65,2.35],[5.05,1.3],[5.05,-.5]].map(p);
+  const path=evacuationRoute.map(p);
   for(let i=1;i<path.length;i++)out+=line(path[i-1],path[i],'#2b9a81',4);
   out+=text(660,545,'피난 동선 예시 · 녹색',14,'#258675');
   for(const d of fire.devices){const [x,y]=p(d.pos);out+='<g>';

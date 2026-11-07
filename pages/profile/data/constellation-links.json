@@ -55,6 +55,46 @@
       ]
     },
     {
+      "id": "bees",
+      "title": "벌통을 듣다",
+      "text": "꿀벌의 소리와 움직임을 재는 연구, 특허와 과제.",
+      "status": "proposed",
+      "members": [
+        {
+          "id": "project:smart-beekeeping",
+          "reason": "농촌진흥청 과제로 IoT와 AI 기반 스마트 양봉 관리 시스템을 개발했습니다."
+        },
+        {
+          "id": "paper:queen-bee-sound-2023",
+          "reason": "여왕벌 소리의 패턴을 분석한 논문입니다."
+        },
+        {
+          "id": "paper:beehive-door-hornet-2022",
+          "reason": "말벌 소리를 분석해 벌집 문을 여닫는 시스템 논문입니다."
+        },
+        {
+          "id": "patent:hornet-door",
+          "reason": "말벌 소리 분석으로 벌집 문을 여닫는 시스템 특허입니다."
+        },
+        {
+          "id": "paper:honeybee-activity-2022",
+          "reason": "벌통 안팎의 꿀벌 활동량을 재는 시스템 논문입니다."
+        },
+        {
+          "id": "paper:bee-counting-system-2021",
+          "reason": "벌집 입·출입을 세어 꿀벌 이동량을 재는 논문입니다."
+        },
+        {
+          "id": "patent:bee-counter",
+          "reason": "벌통 내부 꿀벌 이동량 측정 시스템 특허입니다."
+        },
+        {
+          "id": "paper:beekeeping-loading-box-2022",
+          "reason": "전동 궤도 운반차 기반 다기능 양봉 적재함 논문입니다."
+        }
+      ]
+    },
+    {
       "id": "body",
       "title": "미디어는 메시지의 몸",
       "text": "같은 메시지도 어떤 매체를 입느냐에 따라 다르게 살아난다는 관점.",
@@ -100,6 +140,34 @@
       ]
     },
     {
+      "id": "body-sensing",
+      "title": "몸을 재는 기술",
+      "text": "생체 신호와 운동을 재는 기기와 앱.",
+      "status": "proposed",
+      "members": [
+        {
+          "id": "project:wearable-diagnosis",
+          "reason": "웨어러블 생체진단장치 개발 과제입니다."
+        },
+        {
+          "id": "patent:wearable",
+          "reason": "웨어러블 생체 진단 장치 특허입니다."
+        },
+        {
+          "id": "project:mobile-stethoscope",
+          "reason": "모바일 청진 시스템 개발 과제입니다."
+        },
+        {
+          "id": "project:fitness-5g-mr",
+          "reason": "5G/MR 기반 비대면 휘트니스 플랫폼과 센싱 기술 과제입니다."
+        },
+        {
+          "id": "paper:deep-learning-home-training-2021",
+          "reason": "딥러닝 영상처리로 비대면 홈트레이닝을 돕는 앱 논문입니다."
+        }
+      ]
+    },
+    {
       "id": "build",
       "title": "생각을 앱으로",
       "text": "자기 판단을 작동하는 도구로 만드는 배움.",
@@ -132,6 +200,11 @@
         {
           "id": "bq2-read-with-me",
           "reason": "결과를 함께 읽는 앱입니다."
+        },
+        {
+          "id": "book:ai-agent",
+          "reason": "자기만의 AI 에이전트를 직접 만드는 방법을 다룬 책입니다.",
+          "status": "proposed"
         }
       ]
     },
@@ -220,6 +293,26 @@
       ]
     },
     {
+      "id": "directed",
+      "title": "연출한 뮤직비디오",
+      "text": "다른 음악가의 공식 뮤직비디오를 연출한 기록.",
+      "status": "proposed",
+      "members": [
+        {
+          "id": "film:hell-gate",
+          "reason": "Monster League 공식 뮤직비디오를 연출했습니다."
+        },
+        {
+          "id": "film:love-is-pain",
+          "reason": "Monster League 공식 뮤직비디오를 연출했습니다."
+        },
+        {
+          "id": "film:yawil",
+          "reason": "Werockenstein 공식 뮤직비디오를 연출했습니다."
+        }
+      ]
+    },
+    {
       "id": "drone",
       "title": "드론의 시선",
       "text": "높이보다 시선을 바꾸는 촬영을 배우는 자리.",
@@ -244,6 +337,26 @@
         {
           "id": "drone-matchup-cinema",
           "reason": "드론 매치업 강의에서 나온 영상입니다."
+        }
+      ]
+    },
+    {
+      "id": "fairy-tales",
+      "title": "함께 쓴 동화",
+      "text": "사랑라임맘과 AI로 함께 만든 동화책.",
+      "status": "proposed",
+      "members": [
+        {
+          "id": "book:sharon",
+          "reason": "사랑라임맘과 함께 쓴 AI 동화입니다."
+        },
+        {
+          "id": "book:pinky",
+          "reason": "사랑라임맘과 함께 쓴 AI 동화입니다."
+        },
+        {
+          "id": "book:coco",
+          "reason": "사랑라임맘과 함께 쓴 AI 동화입니다."
         }
       ]
     },
@@ -404,6 +517,16 @@
         {
           "id": "mirinaeman-coding-lab",
           "reason": "초보가 자신의 판단을 개발과 배포까지 잇습니다."
+        },
+        {
+          "id": "book:judgment-ko",
+          "reason": "제목 그대로 AI가 사람의 판단을 빌려가는 방식을 다룬 책입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "book:judgment-en",
+          "reason": "같은 책의 영문판입니다.",
+          "status": "proposed"
         }
       ]
     },
@@ -436,6 +559,66 @@
       ]
     },
     {
+      "id": "metaversity",
+      "title": "메타버시티",
+      "text": "대학의 수업과 교육을 메타버스로 옮긴 연구와 개발.",
+      "status": "proposed",
+      "members": [
+        {
+          "id": "project:metaversity",
+          "reason": "한국고등직업교육학회 메타버시티 구축 프로젝트의 개발 총괄입니다."
+        },
+        {
+          "id": "paper:metaversity-doctoral-2022",
+          "reason": "Metaversity 개발 사례를 중심으로 쓴 박사학위논문입니다."
+        },
+        {
+          "id": "paper:education-metaverse-platform-2023",
+          "reason": "교육용 메타버스 플랫폼 개발 논문입니다."
+        },
+        {
+          "id": "paper:remote-education-metaverse-2022",
+          "reason": "비대면 교육을 위한 메타버스 구축과 활용 사례 논문입니다."
+        },
+        {
+          "id": "paper:metaverse-360-lighting-2022",
+          "reason": "메타버스 360° 영상 품질을 높이는 조명 투사각 논문입니다."
+        },
+        {
+          "id": "project:keris-metaverse-report",
+          "reason": "KERIS 이슈리포트 「대학의 메타버스 활용」입니다."
+        },
+        {
+          "id": "project:xr-remote-education",
+          "reason": "5G 기반 비대면 XR 원격교육 플랫폼 개발 과제입니다."
+        }
+      ]
+    },
+    {
+      "id": "products",
+      "title": "판단을 돕는 도구",
+      "text": "복잡한 과정을 이해 가능한 선택으로 바꾸는 제품.",
+      "status": "proposed",
+      "members": [
+        {
+          "id": "product:able-canvas",
+          "reason": "인쇄 주문을 소재, 규격과 결과를 이해하며 고르는 흐름으로 다시 설계했습니다."
+        },
+        {
+          "id": "product:ssulwha-world",
+          "reason": "창작자가 이야기와 이미지를 더 빠르게 펼치게 돕는 플랫폼입니다."
+        },
+        {
+          "id": "product:magicsrt",
+          "reason": "동영상의 맥락을 읽고 60개국어로 번역하는 자막 서비스입니다."
+        },
+        {
+          "id": "product:creatoroo",
+          "reason": "크리에이터와 브랜드를 캠페인으로 잇는 플랫폼입니다."
+        }
+      ]
+    },
+    {
       "id": "teach",
       "title": "수업을 다시 짜다",
       "text": "가르치는 일의 구조를 새로 설계한 기록.",
@@ -460,6 +643,43 @@
         {
           "id": "physical-ai-field-lab-ulsan-jeju",
           "reason": "현장 사례로 설계하는 수업입니다."
+        },
+        {
+          "id": "book:content-guide",
+          "reason": "생성형 AI로 콘텐츠를 만드는 법을 가르치는 교재입니다.",
+          "status": "proposed"
+        }
+      ]
+    },
+    {
+      "id": "vr",
+      "title": "360도로 본다",
+      "text": "360 영상과 VR을 찍고 만드는 기술.",
+      "status": "proposed",
+      "members": [
+        {
+          "id": "paper:panorama-360-2020",
+          "reason": "저비용 다중 카메라로 360° 파노라마를 자동 생성하는 논문입니다."
+        },
+        {
+          "id": "project:underwater-360-vr",
+          "reason": "수중 360 VR 촬영 시스템 개발 과제입니다."
+        },
+        {
+          "id": "patent:underwater-360",
+          "reason": "수중 360 VR 영상 촬영 시스템 특허입니다."
+        },
+        {
+          "id": "project:mobile-vr",
+          "reason": "ITRC 융합과제로 모바일 VR 기술을 개발했습니다."
+        },
+        {
+          "id": "project:vr-frontier",
+          "reason": "가상현실 콘텐츠 프론티어 프로젝트 사업입니다."
+        },
+        {
+          "id": "project:vr-content-support",
+          "reason": "창조경제혁신센터 연계 VR 콘텐츠 제작지원 사업입니다."
         }
       ]
     },
@@ -561,6 +781,83 @@
       "label": "화면을 설계하는 배움",
       "reason": "편집과 모션을 다룹니다.",
       "status": "approved"
+    },
+    {
+      "a": "patent:hornet-door",
+      "b": "paper:beehive-door-hornet-2022",
+      "label": "논문과 특허",
+      "reason": "같은 말벌 소리 벌집문 시스템을 다룬 논문과 특허입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "patent:bee-counter",
+      "b": "paper:bee-counting-system-2021",
+      "label": "논문과 특허",
+      "reason": "같은 벌통 내부 꿀벌 이동량 측정을 다룬 논문과 특허입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "project:metaversity",
+      "b": "paper:metaversity-doctoral-2022",
+      "label": "개발과 학위논문",
+      "reason": "메타버시티 구축 과제와 그 개발 사례를 다룬 박사학위논문입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "project:underwater-360-vr",
+      "b": "patent:underwater-360",
+      "label": "과제와 특허",
+      "reason": "같은 수중 360 VR 촬영 시스템의 개발 과제와 특허입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "project:wearable-diagnosis",
+      "b": "patent:wearable",
+      "label": "과제와 특허",
+      "reason": "같은 웨어러블 생체진단장치의 개발 과제와 특허입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "project:fitness-5g-mr",
+      "b": "paper:deep-learning-home-training-2021",
+      "label": "비대면 운동",
+      "reason": "비대면 휘트니스 플랫폼 과제와 비대면 홈트레이닝 앱 논문입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "book:judgment-ko",
+      "b": "book:judgment-en",
+      "label": "같은 책, 두 언어",
+      "reason": "『AI는 어떻게 내 판단을 빌려가는가』의 한국어판과 영문판입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "book:music-video-guide",
+      "b": "paper:prompt-to-production-2025",
+      "label": "생성형 AI 영상 제작",
+      "reason": "생성형 AI로 영상을 만드는 과정을 다룬 책과 논문입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "book:media-convergence",
+      "b": "project:digital-radio",
+      "label": "방송의 미래",
+      "reason": "방송 매체의 미래를 다룬 공저와 디지털 라디오 활성화 연구입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "collection:ai-music-archive",
+      "b": "collection:worldview-theme-song",
+      "label": "같은 음악 아카이브",
+      "reason": "주제곡과 1,189곡의 기록이 같은 공개 음악 아카이브에 있습니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "paper:android-digital-signage-2016",
+      "b": "project:did-operation",
+      "label": "디지털 사이니지",
+      "reason": "안드로이드 디지털 사이니지 논문과 DID 운용시스템 개발 과제입니다.",
+      "status": "proposed"
     }
   ],
   "solo": [
@@ -569,13 +866,45 @@
       "why": "인터넷에 떠도는 명언을 구성해 본 기록으로, 아직 이어질 곳을 정하지 않았습니다."
     },
     {
-      "id": "paper:92367165c1d8d071",
+      "id": "paper:android-digital-signage-2016",
       "why": "소상공인용 저비용 디지털 사이니지 논문으로, 아직 이어질 곳을 정하지 않았습니다."
     },
     {
-      "id": "paper:72c303e92542ebdd",
+      "id": "paper:social-network-cyworld-facebook-2011",
       "why": "싸이월드와 페이스북의 네트워크 구조를 비교한 논문으로, 아직 이어질 곳을 정하지 않았습니다.",
       "key": true
+    },
+    {
+      "id": "collection:gangneung-sound",
+      "why": "지역 소상공인의 이야기를 노래로 만든 프로젝트로, 아직 이어질 곳을 정하지 않았습니다."
+    },
+    {
+      "id": "project:smart-welfare",
+      "why": "AI 생활과 스마트 복지 과제로, 묶을 기록을 찾지 못했습니다."
+    },
+    {
+      "id": "project:forklift-safety",
+      "why": "지게차 안전 센서 과제로, 묶을 기록을 찾지 못했습니다."
+    },
+    {
+      "id": "project:document-security",
+      "why": "문서보안 시스템 과제로, 묶을 기록을 찾지 못했습니다."
+    },
+    {
+      "id": "project:open-api-mashup",
+      "why": "Open API와 Mash Up 활성화 연구로, 묶을 기록을 찾지 못했습니다."
+    },
+    {
+      "id": "project:convergence-game",
+      "why": "첨단융복합 게임 콘텐츠 과제로, 묶을 근거를 찾지 못했습니다."
+    },
+    {
+      "id": "paper:ucc-guideline-masters-2009",
+      "why": "동영상 UCC 서비스 가이드라인 석사학위논문으로, 묶을 기록을 찾지 못했습니다."
+    },
+    {
+      "id": "paper:mobile-ar-digital-design-2011",
+      "why": "모바일 증강현실과 디지털 디자인 논문으로, 묶을 기록을 찾지 못했습니다."
     }
   ]
 }

@@ -1,0 +1,942 @@
+{
+  "schema_version": 1,
+  "featured": [
+    {
+      "id": "work:baekje-renaissance",
+      "text": {
+        "ko": "검소하되 누추하지 않고, 화려하되 사치스럽지 않다. 하나의 메시지를 이미지, 음악, 공간과 웹페이지라는 다양한 몸에 투영한 프로젝트이며, 웹페이지 자체도 메시지의 몸입니다.",
+        "en": "Simple without being shabby, splendid without being extravagant. One message is projected into image, music, space, and web page—the web page itself becoming a body of the message."
+      }
+    },
+    {
+      "id": "work:songbirds",
+      "text": {
+        "ko": "제주 호텔 정원에서 스마트폰으로 녹음한 새소리로 시작된 노래와 웹페이지입니다. 오래 만나지 못한 마음이 다시 들리는 경험을 음악, 이미지와 상호작용의 몸으로 만들었습니다.",
+        "en": "A song and web experience born from birds recorded on a smartphone in a Jeju hotel garden, giving returning memory a body through music, image, and interaction."
+      }
+    },
+    {
+      "id": "work:birthday-your-day"
+    },
+    {
+      "id": "work:hwasan-pan-v6"
+    }
+  ],
+  "records": [
+    {
+      "id": "paper:metaversity-doctoral-2022",
+      "kind": "paper",
+      "group": "thesis",
+      "title": "온라인 몰입형 교육을 위한 메타버스 플랫폼 개발에 관한 연구: Metaversity 개발 사례를 중심으로",
+      "summary": "서울과학기술대학교 · 박사학위논문",
+      "year": "2022",
+      "url": "https://itpolicy.seoultech.ac.kr/info/broad/board1?bidx=889111&bnum=58572&cate=7&do=view&nowpage=1&profboardidx=0&searchtext=&searchtype=",
+      "source_label": "공식 기록",
+      "added": "2022-01-01",
+      "tags": [
+        "metaverse",
+        "education"
+      ],
+      "degree": "박사학위논문",
+      "degree_en": "DOCTORAL DISSERTATION"
+    },
+    {
+      "id": "paper:ucc-guideline-masters-2009",
+      "kind": "paper",
+      "group": "thesis",
+      "title": "동영상 UCC서비스를 위한 가이드라인 개발에 대한 연구",
+      "summary": "서울과학기술대학교 · 석사학위논문",
+      "year": "2009",
+      "url": "",
+      "source_label": "본인 제공 프로필",
+      "added": "2009-01-01",
+      "tags": [
+        "video",
+        "media"
+      ],
+      "degree": "석사학위논문",
+      "degree_en": "MASTER'S THESIS"
+    },
+    {
+      "id": "paper:prompt-to-production-2025",
+      "kind": "paper",
+      "group": "article",
+      "title": "프롬프트에서 프로덕션까지 – 생성형 AI로 완성한 1인 창작자의 영상 융합 예술 사례 분석",
+      "summary": "문화기술의 융합 · 11(4) · 505–518 · DOI 10.17703/JCCT.2025.11.4.505",
+      "year": "2025",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003229269",
+      "source_label": "공식 서지",
+      "added": "2025-01-01",
+      "tags": [
+        "generative-ai",
+        "image-cinema",
+        "case-study"
+      ]
+    },
+    {
+      "id": "paper:education-metaverse-platform-2023",
+      "kind": "paper",
+      "group": "article",
+      "title": "교육용 메타버스 플랫폼 개발에 관한 연구",
+      "summary": "방송공학회 논문지 · 28(5) · 505–517 · DOI 10.5909/JBE.2023.28.5.505",
+      "year": "2023",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003003488",
+      "source_label": "공식 서지",
+      "added": "2023-01-01",
+      "tags": [
+        "metaverse",
+        "education"
+      ]
+    },
+    {
+      "id": "paper:queen-bee-sound-2023",
+      "kind": "paper",
+      "group": "article",
+      "title": "여왕벌 사운드 패턴 분석에 대한 연구",
+      "summary": "문화기술의 융합 · 9(5) · 867–874 · DOI 10.17703/JCCT.2023.9.5.867",
+      "year": "2023",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003002106",
+      "source_label": "공식 서지",
+      "added": "2023-01-01",
+      "tags": [
+        "beekeeping",
+        "sound"
+      ]
+    },
+    {
+      "id": "paper:honeybee-activity-2022",
+      "kind": "paper",
+      "group": "article",
+      "title": "A Study on the System for Measuring the Activity of Honeybees Inside and Outside the Beehive",
+      "summary": "International Journal of Advanced Culture Technology · 10(4) · 511–517 · DOI 10.17703/IJACT.2022.10.4.511",
+      "year": "2022",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002916330",
+      "source_label": "공식 서지",
+      "added": "2022-01-01",
+      "tags": [
+        "beekeeping",
+        "sensor"
+      ]
+    },
+    {
+      "id": "paper:beehive-door-hornet-2022",
+      "kind": "paper",
+      "group": "article",
+      "title": "A Study on the Beehive Door Opening and Closing System Using a Hornet Sound Analysis",
+      "summary": "International Journal of Advanced Culture Technology · 10(3) · 393–396 · DOI 10.17703/IJACT.2022.10.3.393",
+      "year": "2022",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002879877",
+      "source_label": "공식 서지",
+      "added": "2022-01-01",
+      "tags": [
+        "beekeeping",
+        "sound"
+      ]
+    },
+    {
+      "id": "paper:beekeeping-loading-box-2022",
+      "kind": "paper",
+      "group": "article",
+      "title": "Development and Analysis of Multi-functional Beekeeping Loading Box Based on Electric Tracked Transport Vehicle",
+      "summary": "Journal of Biosystems Engineering · 47 · 13–27 · DOI 10.1007/s42853-021-00125-7",
+      "year": "2022",
+      "url": "https://link.springer.com/article/10.1007/s42853-021-00125-7",
+      "source_label": "공식 서지",
+      "added": "2022-01-01",
+      "tags": [
+        "beekeeping"
+      ]
+    },
+    {
+      "id": "paper:remote-education-metaverse-2022",
+      "kind": "paper",
+      "group": "article",
+      "title": "비대면 교육을 위한 메타버스 구축 및 활용 사례에 대한 연구",
+      "summary": "문화기술의 융합 · 8(1) · 483–497 · DOI 10.17703/JCCT.2022.8.1.483",
+      "year": "2022",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002808510",
+      "source_label": "공식 서지",
+      "added": "2022-01-01",
+      "tags": [
+        "metaverse",
+        "education"
+      ]
+    },
+    {
+      "id": "paper:metaverse-360-lighting-2022",
+      "kind": "paper",
+      "group": "article",
+      "title": "메타버스에서 360° 영상 품질향상을 위한 조명기 투사각 연구",
+      "summary": "문화기술의 융합 · 8(1) · 499–505 · DOI 10.17703/JCCT.2022.8.1.499",
+      "year": "2022",
+      "url": "https://koreascience.kr/article/JAKO202208148778845.page?lang=ko",
+      "source_label": "공식 서지",
+      "added": "2022-01-01",
+      "tags": [
+        "metaverse",
+        "360"
+      ]
+    },
+    {
+      "id": "paper:bee-counting-system-2021",
+      "kind": "paper",
+      "group": "article",
+      "title": "벌통 내부 꿀벌 이동량 측정을 위한 벌집 입·출입 계수 시스템 연구",
+      "summary": "문화기술의 융합 · 7(4) · 857–862 · DOI 10.17703/JCCT.2021.7.4.857",
+      "year": "2021",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002778664",
+      "source_label": "공식 서지",
+      "added": "2021-01-01",
+      "tags": [
+        "beekeeping",
+        "sensor"
+      ]
+    },
+    {
+      "id": "paper:deep-learning-home-training-2021",
+      "kind": "paper",
+      "group": "article",
+      "title": "딥러닝 기반 영상처리 기법 및 표준 운동 프로그램을 활용한 비대면 온라인 홈트레이닝 어플리케이션 연구",
+      "summary": "문화기술의 융합 · 7(3) · 577–582 · DOI 10.17703/JCCT.2021.7.3.577",
+      "year": "2021",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002747924",
+      "source_label": "공식 서지",
+      "added": "2021-01-01",
+      "tags": [
+        "deep-learning",
+        "fitness"
+      ]
+    },
+    {
+      "id": "paper:panorama-360-2020",
+      "kind": "paper",
+      "group": "article",
+      "title": "Automatic 360° Mono-Stereo Panorama Generation Using a Cost-Effective Multi-Camera System",
+      "summary": "Sensors · 20(11) · 3097 · DOI 10.3390/s20113097",
+      "year": "2020",
+      "url": "https://www.mdpi.com/1424-8220/20/11/3097",
+      "source_label": "공식 서지",
+      "added": "2020-01-01",
+      "tags": [
+        "360",
+        "vr"
+      ]
+    },
+    {
+      "id": "paper:android-digital-signage-2016",
+      "kind": "paper",
+      "group": "article",
+      "title": "안드로이드 기반 디지털 사이니지 시스템 개발",
+      "summary": "전기학회 논문지 P권 · 65(4) · 321–325",
+      "year": "2016",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002169405",
+      "source_label": "공식 서지",
+      "added": "2016-01-01",
+      "tags": [
+        "signage"
+      ]
+    },
+    {
+      "id": "paper:mobile-ar-digital-design-2011",
+      "kind": "paper",
+      "group": "article",
+      "title": "모바일 환경에서의 증강현실(AR)기술발전과 디지털 디자인의 능동적 활용 방안",
+      "summary": "디지털디자인학연구 · 11(2) · 343–357 · DOI 10.17280/jdd.2011.11.2.033",
+      "year": "2011",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001545786",
+      "source_label": "공식 서지",
+      "added": "2011-01-01",
+      "tags": [
+        "ar",
+        "design"
+      ]
+    },
+    {
+      "id": "paper:social-network-cyworld-facebook-2011",
+      "kind": "paper",
+      "group": "article",
+      "title": "인맥연결 형 네트워크 유형에 대한 사례분석: 싸이월드와 페이스북을 중심으로",
+      "summary": "사이버커뮤니케이션학보 · 28(4) · 5–47 · UCI G704-001789.2011.28.4.005",
+      "year": "2011",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001612184",
+      "source_label": "공식 서지",
+      "added": "2011-01-01",
+      "tags": [
+        "social-network",
+        "media"
+      ]
+    },
+    {
+      "id": "book:judgment-ko",
+      "kind": "book",
+      "title": "AI는 어떻게 내 판단을 빌려가는가",
+      "summary": "김준호 · 복두출판사 · 2026 · ISBN 979-11-6675-811-9",
+      "year": "2026",
+      "url": "http://www.bogdoo.com/b/shop/item.php?it_id=1787645898",
+      "label": "한국어판",
+      "image": {
+        "path": "assets/images/existing/book-judgment-ko.jpg",
+        "alt": "AI는 어떻게 내 판단을 빌려가는가 한국어판 표지"
+      },
+      "added": "2026-01-01",
+      "tags": [
+        "ai-literacy",
+        "judgment",
+        "media-literacy"
+      ]
+    },
+    {
+      "id": "book:judgment-en",
+      "kind": "book",
+      "title": "How AI Borrows Your Judgment",
+      "summary": "Kim Joonho · 2026",
+      "year": "2026",
+      "url": "https://a.co/d/02NZNM7h",
+      "label": "영문판 · Amazon",
+      "image": {
+        "path": "assets/images/existing/book-judgment.jpg",
+        "alt": "How AI Borrows Your Judgment 영문판 표지"
+      },
+      "added": "2026-01-01",
+      "tags": [
+        "ai-literacy",
+        "judgment",
+        "media-literacy"
+      ]
+    },
+    {
+      "id": "book:media-convergence",
+      "kind": "book",
+      "title": "미디어융합과 방송의 미래",
+      "summary": "김광호, 김준호 외 공저 · 2012",
+      "year": "2012",
+      "url": "",
+      "label": "Media",
+      "image": {
+        "path": "assets/images/existing/book-media.jpg",
+        "alt": "미디어융합과 방송의 미래 표지"
+      },
+      "added": "2012-01-01",
+      "tags": [
+        "media",
+        "broadcast"
+      ]
+    },
+    {
+      "id": "book:sharon",
+      "kind": "book",
+      "title": "빨간 고양이 샤론",
+      "summary": "김준호, 사랑라임맘 공저 · 2024",
+      "year": "2024",
+      "url": "",
+      "label": "AI Fairy Tale",
+      "image": {
+        "path": "assets/images/existing/book-sharon.jpg",
+        "alt": "빨간 고양이 샤론 표지"
+      },
+      "added": "2024-01-01",
+      "tags": [
+        "ai-fairy-tale"
+      ]
+    },
+    {
+      "id": "book:pinky",
+      "kind": "book",
+      "title": "핑키의 무지개 마음",
+      "summary": "김준호, 사랑라임맘 공저 · 2024",
+      "year": "2024",
+      "url": "",
+      "label": "AI Fairy Tale",
+      "image": {
+        "path": "assets/images/existing/book-pinky.jpg",
+        "alt": "핑키의 무지개 마음 표지"
+      },
+      "added": "2024-01-01",
+      "tags": [
+        "ai-fairy-tale"
+      ]
+    },
+    {
+      "id": "book:coco",
+      "kind": "book",
+      "title": "코코의 그린어드벤처",
+      "summary": "김준호, 사랑라임맘 공저 · 2024",
+      "year": "2024",
+      "url": "",
+      "label": "AI Fairy Tale",
+      "image": {
+        "path": "assets/images/existing/book-coco.jpg",
+        "alt": "코코의 그린어드벤처 표지"
+      },
+      "added": "2024-01-01",
+      "tags": [
+        "ai-fairy-tale"
+      ]
+    },
+    {
+      "id": "book:content-guide",
+      "kind": "book",
+      "title": "AID 역량 강화를 위한 생성형 AI 활용 콘텐츠 제작 가이드",
+      "summary": "김준호, 김영희 공저 · 2025",
+      "year": "2025",
+      "url": "",
+      "label": "Generative AI",
+      "image": {
+        "path": "assets/images/existing/book-content-guide.jpg",
+        "alt": "AID 역량 강화를 위한 생성형 AI 활용 콘텐츠 제작 가이드 표지"
+      },
+      "added": "2025-01-01",
+      "tags": [
+        "generative-ai",
+        "education",
+        "aidx"
+      ]
+    },
+    {
+      "id": "book:music-video-guide",
+      "kind": "book",
+      "title": "생성형 AI를 활용한 뮤직비디오 제작 가이드",
+      "summary": "김준호 · 2025",
+      "year": "2025",
+      "url": "",
+      "label": "AI Music Video",
+      "image": {
+        "path": "assets/images/existing/book-video-guide.jpg",
+        "alt": "생성형 AI를 활용한 뮤직비디오 제작 가이드 표지"
+      },
+      "added": "2025-01-01",
+      "tags": [
+        "generative-ai",
+        "image-cinema",
+        "guide"
+      ]
+    },
+    {
+      "id": "book:ai-agent",
+      "kind": "book",
+      "title": "나만의 AI Agent 만들기",
+      "summary": "김준호 · 2025",
+      "year": "2025",
+      "url": "",
+      "label": "AI Agent",
+      "image": {
+        "path": "assets/images/existing/book-agent.jpg",
+        "alt": "나만의 AI Agent 만들기 표지"
+      },
+      "added": "2025-01-01",
+      "tags": [
+        "ai-agent",
+        "coding",
+        "guide"
+      ]
+    },
+    {
+      "id": "project:smart-welfare",
+      "kind": "project",
+      "title": "기술이 아닌 삶을 바꾸는 AI 생활과의 접근 및 스마트 복지",
+      "summary": "한국고등직업교육학회 · 동아보건대학교 · RISE사업 시군 동반성장프로젝트",
+      "year": "2025",
+      "when": "2025.12",
+      "org": "한국고등직업교육학회 · 동아보건대학교",
+      "url": "",
+      "added": "2025-01-01",
+      "tags": [
+        "ai-literacy",
+        "welfare"
+      ]
+    },
+    {
+      "id": "project:keris-metaverse-report",
+      "kind": "project",
+      "title": "2022 KERIS 이슈리포트 「대학의 메타버스 활용」",
+      "summary": "한국교육학술정보원",
+      "year": "2022",
+      "when": "2022.12",
+      "org": "한국교육학술정보원",
+      "url": "",
+      "added": "2022-01-01",
+      "tags": [
+        "metaverse",
+        "education"
+      ]
+    },
+    {
+      "id": "project:metaversity",
+      "kind": "project",
+      "title": "메타버시티 구축 프로젝트 개발 총괄",
+      "summary": "한국고등직업교육학회",
+      "year": "2021",
+      "when": "2021.10–현재",
+      "org": "한국고등직업교육학회",
+      "url": "",
+      "added": "2021-01-01",
+      "tags": [
+        "metaverse",
+        "education"
+      ]
+    },
+    {
+      "id": "project:smart-beekeeping",
+      "kind": "project",
+      "title": "IoT 및 AI 기반 스마트 양봉 관리 시스템 확립 및 사용자 기반기술 개발",
+      "summary": "농촌진흥청 · 농업과학기술 연구개발사업",
+      "year": "2021",
+      "when": "2021.01–2023.12",
+      "org": "농촌진흥청",
+      "url": "",
+      "added": "2021-01-01",
+      "tags": [
+        "beekeeping",
+        "sensor"
+      ]
+    },
+    {
+      "id": "project:fitness-5g-mr",
+      "kind": "project",
+      "title": "비대면 휘트니스 에듀테인먼트 서비스를 위한 5G/MR 기반 플랫폼 및 센싱기술 개발",
+      "summary": "한국콘텐츠진흥원",
+      "year": "2021",
+      "when": "2021.02–2021.06",
+      "org": "한국콘텐츠진흥원",
+      "url": "",
+      "added": "2021-01-01",
+      "tags": [
+        "fitness",
+        "xr"
+      ]
+    },
+    {
+      "id": "project:xr-remote-education",
+      "kind": "project",
+      "title": "5G 기반 비대면 XR 원격교육 플랫폼 서비스 개발",
+      "summary": "한국전파진흥협회",
+      "year": "2020",
+      "when": "2020.05–2020.12",
+      "org": "한국전파진흥협회",
+      "url": "",
+      "added": "2020-01-01",
+      "tags": [
+        "xr",
+        "education"
+      ]
+    },
+    {
+      "id": "project:vr-frontier",
+      "kind": "project",
+      "title": "가상현실 콘텐츠 프론티어 프로젝트 사업",
+      "summary": "한국콘텐츠진흥원",
+      "year": "2018",
+      "when": "2018.06–2019.01",
+      "org": "한국콘텐츠진흥원",
+      "url": "",
+      "added": "2018-01-01",
+      "tags": [
+        "vr"
+      ]
+    },
+    {
+      "id": "project:convergence-game",
+      "kind": "project",
+      "title": "첨단융복합 게임 콘텐츠 제작지원사업",
+      "summary": "한국콘텐츠진흥원",
+      "year": "2018",
+      "when": "2018.06–2019.02",
+      "org": "한국콘텐츠진흥원",
+      "url": "",
+      "added": "2018-01-01",
+      "tags": [
+        "vr",
+        "game"
+      ]
+    },
+    {
+      "id": "project:underwater-360-vr",
+      "kind": "project",
+      "title": "수중 360 VR 촬영 시스템 개발",
+      "summary": "중소벤처기업부 · 산학연도약개발과제",
+      "year": "2017",
+      "when": "2017.12–2018.11",
+      "org": "중소벤처기업부",
+      "url": "",
+      "added": "2017-01-01",
+      "tags": [
+        "360",
+        "vr"
+      ]
+    },
+    {
+      "id": "project:forklift-safety",
+      "kind": "project",
+      "title": "IoT 기반 지게차 안전 보조장치 측정 및 제어시스템 개발",
+      "summary": "중소벤처기업부 · 창업성장과제 바우처 기술지원 사업 · 포크무게, 후방거리, 자세제어, 마스트 위치 측정",
+      "year": "2017",
+      "when": "2017.10–2018.09",
+      "org": "중소벤처기업부",
+      "url": "",
+      "added": "2017-01-01",
+      "tags": [
+        "sensor"
+      ]
+    },
+    {
+      "id": "project:wearable-diagnosis",
+      "kind": "project",
+      "title": "웨어러블 생체진단장치 개발",
+      "summary": "중소벤처기업부 · 창업성장과제 바우처 기술지원 사업",
+      "year": "2016",
+      "when": "2016.09–2017.08",
+      "org": "중소벤처기업부",
+      "url": "",
+      "added": "2016-01-01",
+      "tags": [
+        "wearable",
+        "sensor"
+      ]
+    },
+    {
+      "id": "project:vr-content-support",
+      "kind": "project",
+      "title": "창조경제혁신센터 연계 융복합콘텐츠 제작지원사업",
+      "summary": "미래창조부 · VR 콘텐츠",
+      "year": "2016",
+      "when": "2016.04–2016.12",
+      "org": "미래창조부",
+      "url": "",
+      "added": "2016-01-01",
+      "tags": [
+        "vr"
+      ]
+    },
+    {
+      "id": "project:mobile-vr",
+      "kind": "project",
+      "title": "ITRC 융합과제 – 모바일 VR 기술개발",
+      "summary": "미래창조부",
+      "year": "2016",
+      "when": "2016.03–2018.12",
+      "org": "미래창조부",
+      "url": "",
+      "added": "2016-01-01",
+      "tags": [
+        "vr"
+      ]
+    },
+    {
+      "id": "project:mobile-stethoscope",
+      "kind": "project",
+      "title": "모바일 청진 시스템 개발",
+      "summary": "중기청",
+      "year": "2014",
+      "when": "2014",
+      "org": "중기청",
+      "url": "",
+      "added": "2014-01-01",
+      "tags": [
+        "wearable"
+      ]
+    },
+    {
+      "id": "project:did-operation",
+      "kind": "project",
+      "title": "DID 운용시스템 개발",
+      "summary": "중기청",
+      "year": "2013",
+      "when": "2013",
+      "org": "중기청",
+      "url": "",
+      "added": "2013-01-01",
+      "tags": [
+        "signage"
+      ]
+    },
+    {
+      "id": "project:document-security",
+      "kind": "project",
+      "title": "문서보안 시스템 개발",
+      "summary": "에스에프보고플랜트",
+      "year": "2013",
+      "when": "2013",
+      "org": "에스에프보고플랜트",
+      "url": "",
+      "added": "2013-01-01",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "project:open-api-mashup",
+      "kind": "project",
+      "title": "Open API와 Mash Up 활성화 방안 연구",
+      "summary": "소상공인진흥원",
+      "year": "2012",
+      "when": "2012",
+      "org": "소상공인진흥원",
+      "url": "",
+      "added": "2012-01-01",
+      "tags": [
+        "media"
+      ]
+    },
+    {
+      "id": "project:digital-radio",
+      "kind": "project",
+      "title": "디지털 라디오 활성화 방안 연구",
+      "summary": "EBS",
+      "year": "2011",
+      "when": "2011",
+      "org": "EBS",
+      "url": "",
+      "added": "2011-01-01",
+      "tags": [
+        "media",
+        "broadcast"
+      ]
+    },
+    {
+      "id": "patent:hornet-door",
+      "kind": "patent",
+      "title": "말벌소리분석을 이용한 벌집문 개폐 시스템",
+      "summary": "특허 10-2847014",
+      "number": "10-2847014",
+      "year": "",
+      "url": "",
+      "added": "2000-01-01",
+      "tags": [
+        "beekeeping",
+        "sound"
+      ]
+    },
+    {
+      "id": "patent:bee-counter",
+      "kind": "patent",
+      "title": "벌통 내부 꿀벌 이동량 측정 시스템",
+      "summary": "특허 10-2710001",
+      "number": "10-2710001",
+      "year": "",
+      "url": "",
+      "added": "2000-01-01",
+      "tags": [
+        "beekeeping",
+        "sensor"
+      ]
+    },
+    {
+      "id": "patent:wearable",
+      "kind": "patent",
+      "title": "웨어러블 생체 진단 장치",
+      "summary": "특허 10-1849857",
+      "number": "10-1849857",
+      "year": "",
+      "url": "",
+      "added": "2000-01-01",
+      "tags": [
+        "wearable",
+        "sensor"
+      ]
+    },
+    {
+      "id": "patent:underwater-360",
+      "kind": "patent",
+      "title": "수중 360 VR 영상 촬영 시스템",
+      "summary": "특허",
+      "number": "",
+      "year": "",
+      "url": "",
+      "added": "2000-01-01",
+      "tags": [
+        "360",
+        "vr"
+      ]
+    },
+    {
+      "id": "film:hell-gate",
+      "kind": "film",
+      "title": "결혼지옥 · Hell Gate",
+      "summary": "Monster League 공식 뮤직비디오 Director.",
+      "summary_en": "Official music video directed for Monster League.",
+      "video_id": "dl0PwJRzM4o",
+      "url": "https://www.youtube.com/watch?v=dl0PwJRzM4o",
+      "image": {
+        "path": "assets/images/existing/video-hellgate.webp",
+        "alt": "결혼지옥 · Hell Gate 뮤직비디오 스틸"
+      },
+      "year": "",
+      "added": "2000-01-01",
+      "tags": [
+        "music-video",
+        "director"
+      ]
+    },
+    {
+      "id": "film:love-is-pain",
+      "kind": "film",
+      "title": "LOVE IS PAIN",
+      "summary": "Monster League 공식 뮤직비디오 Director.",
+      "summary_en": "Official music video directed for Monster League.",
+      "video_id": "hxWcomuOvbw",
+      "url": "https://www.youtube.com/watch?v=hxWcomuOvbw",
+      "image": {
+        "path": "assets/images/existing/video-love.webp",
+        "alt": "LOVE IS PAIN 뮤직비디오 스틸"
+      },
+      "year": "",
+      "added": "2000-01-01",
+      "tags": [
+        "music-video",
+        "director"
+      ]
+    },
+    {
+      "id": "film:yawil",
+      "kind": "film",
+      "title": "야윌 수가 없어",
+      "summary": "Werockenstein 공식 뮤직비디오 Director.",
+      "summary_en": "Official music video directed for Werockenstein.",
+      "video_id": "tp0f81ZYew0",
+      "url": "https://www.youtube.com/watch?v=tp0f81ZYew0",
+      "image": {
+        "path": "assets/images/existing/video-yawil.webp",
+        "alt": "야윌 수가 없어 뮤직비디오 스틸"
+      },
+      "year": "",
+      "added": "2000-01-01",
+      "tags": [
+        "music-video",
+        "director"
+      ]
+    },
+    {
+      "id": "collection:ai-music-archive",
+      "kind": "collection",
+      "title": "1,189곡의 AI 음악 창작 기록",
+      "summary": "단발성 실험이 아니라 지속적인 제작과 축적으로 만든 AI 음악 아카이브입니다.",
+      "summary_en": "An AI music archive built through sustained creation rather than a one-off experiment.",
+      "label": "AI Music Archive",
+      "url": "https://www.youtube.com/channel/UCOtuxTyT2s4UNc-zcOyA6aA",
+      "image": {
+        "path": "assets/images/existing/archive.jpeg",
+        "alt": "1,189곡의 AI 음악 창작 기록"
+      },
+      "year": "",
+      "added": "2000-01-01",
+      "tags": [
+        "music",
+        "audio"
+      ]
+    },
+    {
+      "id": "collection:gangneung-sound",
+      "kind": "collection",
+      "title": "강릉의 소리",
+      "summary": "소상공인의 이야기를 AI 음악으로 바꾸는 지역 기반 프로젝트입니다.",
+      "summary_en": "A local project that turns small-business stories into AI-assisted songs.",
+      "label": "Social Project",
+      "url": "https://www.youtube.com/watch?v=d31D5wZThXA",
+      "image": {
+        "path": "assets/images/existing/gangneung.jpg",
+        "alt": "강릉의 소리"
+      },
+      "year": "",
+      "added": "2000-01-01",
+      "tags": [
+        "music",
+        "local"
+      ]
+    },
+    {
+      "id": "collection:worldview-theme-song",
+      "kind": "collection",
+      "title": "AI 창작 세계관 주제곡",
+      "summary": "창작 세계관을 음악으로 압축한 주제곡과 1,189곡의 기록을 공개 음악 아카이브에서 만날 수 있습니다.",
+      "summary_en": "The theme song and 1,189 creative records are available in the public music archive.",
+      "label": "AUDIO",
+      "url": "https://www.youtube.com/channel/UCOtuxTyT2s4UNc-zcOyA6aA",
+      "image": {
+        "path": "assets/images/existing/archive.jpeg",
+        "alt": "AI 음악 아카이브"
+      },
+      "year": "",
+      "added": "2000-01-01",
+      "tags": [
+        "music",
+        "theme-song"
+      ]
+    },
+    {
+      "id": "product:able-canvas",
+      "kind": "product",
+      "title": "ABLE CANVAS",
+      "summary": "새로운 가치를 만드는 사용자 중심 인쇄 쇼핑몰입니다. 복잡하고 공급자 중심이던 인쇄 주문을 사용자가 소재, 규격과 결과를 이해하며 선택할 수 있는 흐름으로 다시 설계했습니다.",
+      "summary_en": "A user-centered print shop that creates new value by redesigning provider-centered ordering around understandable choices of material, format, and result.",
+      "label": "PRODUCT",
+      "url": "https://ablecanvas.web.app/",
+      "image": {
+        "path": "assets/images/able-canvas-project-v2.webp",
+        "alt": "ABLE CANVAS 화면"
+      },
+      "year": "",
+      "added": "2000-01-01",
+      "tags": [
+        "webapp",
+        "design"
+      ]
+    },
+    {
+      "id": "product:ssulwha-world",
+      "kind": "product",
+      "title": "썰화월드 · Ssulwha World",
+      "summary": "창작자가 이야기와 이미지를 더 빠르게 펼칠 수 있도록 설계한 웹 기반 스토리 플랫폼입니다.",
+      "summary_en": "A web storytelling platform designed to help creators publish stories and visuals faster.",
+      "label": "PRODUCT",
+      "url": "http://ssulwha.world",
+      "image": {
+        "path": "assets/images/existing/product-ssulwha.png",
+        "alt": "썰화월드 · Ssulwha World 화면"
+      },
+      "year": "",
+      "added": "2000-01-01",
+      "tags": [
+        "webapp",
+        "webtoon"
+      ]
+    },
+    {
+      "id": "product:magicsrt",
+      "kind": "product",
+      "title": "MagicSRT",
+      "summary": "동영상의 맥락을 읽고 60개국어로 번역하는 자막 번역 서비스입니다.",
+      "summary_en": "A context-aware subtitle translation service for global video distribution in 60 languages.",
+      "label": "PRODUCT",
+      "url": "https://magicsrt.net",
+      "image": {
+        "path": "assets/images/existing/product-magicsrt.png",
+        "alt": "MagicSRT 화면"
+      },
+      "year": "",
+      "added": "2000-01-01",
+      "tags": [
+        "webapp",
+        "translation"
+      ]
+    },
+    {
+      "id": "product:creatoroo",
+      "kind": "product",
+      "title": "CREATOROO",
+      "summary": "크리에이터와 브랜드를 캠페인으로 연결하는 플랫폼입니다. 캠페인 탐색과 콘텐츠 참여를 통해 콘텐츠의 영향력이 새로운 협업 기회로 이어지도록 설계했습니다.",
+      "summary_en": "A platform connecting creators and brands through campaigns, turning content participation and influence into new collaboration opportunities.",
+      "label": "PRODUCT",
+      "url": "https://creatoroo.com/",
+      "image": {
+        "path": "assets/images/creatoroo-project.webp",
+        "alt": "CREATOROO 크리에이터와 브랜드 캠페인 플랫폼 화면"
+      },
+      "year": "",
+      "added": "2000-01-01",
+      "tags": [
+        "webapp",
+        "creator"
+      ]
+    }
+  ]
+}

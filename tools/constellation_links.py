@@ -3,6 +3,7 @@
 
   python3 tools/constellation_links.py todo                 records still waiting, with what to read
   python3 tools/constellation_links.py list                 constellations and how many records each holds
+  python3 tools/constellation_links.py review               what is waiting for the creator's approval
   python3 tools/constellation_links.py add ID --to NAME --reason "..."
   python3 tools/constellation_links.py new NAME --title "..." --text "..."
   python3 tools/constellation_links.py pair A B --label "..." --reason "..."
@@ -18,6 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'pages/profile/data/constellation-links.json'
 CATALOG = ROOT / 'pages/profile/data/message-bodies.json'
+RECORDS = ROOT / 'pages/profile/data/records.json'
 STATUSES = ('proposed', 'approved')
 PUBLIC = ('DEPLOYED', 'GOLDEN')
 MAX_REASON = 90
@@ -48,9 +50,10 @@ def placed(links):
     return done
 
 
-def problems(links, catalog=None):
+def problems(links, catalog=None, records=None):
     catalog = catalog or json.loads(CATALOG.read_text(encoding='utf-8'))
-    graph, connected = recorded_context_for(catalog)
+    records = records if records is not None else load_records()
+    graph, connected = recorded_context_for(catalog, records)
     known = {n['id'] for n in graph['nodes']}
     found = []
     names = [c['id'] for c in links['constellations']]
@@ -96,26 +99,33 @@ def problems(links, catalog=None):
             found.append(f"solo: 없는 기록 {s['id']}")
         if not s.get('why', '').strip():
             found.append(f"solo {s['id']}: 혼자 두는 이유가 필요합니다.")
-    waiting = waiting_records(links, catalog, connected)
+    waiting = waiting_records(links, catalog, connected, records)
     if waiting:
         found.append('아직 연결을 정하지 않은 기록이 있습니다: ' + ', '.join(waiting))
     return found
 
 
-def recorded_context_for(catalog):
+def load_records():
+    return json.loads(RECORDS.read_text(encoding='utf-8'))
+
+
+def recorded_context_for(catalog, records):
     from constellation_data import build_graph
     hub = 'creator:joonho'
-    graph = build_graph(catalog, links={'constellations': [], 'pairs': [], 'solo': []})
+    graph = build_graph(catalog, links={'constellations': [], 'pairs': [], 'solo': []}, records=records)
     connected = set()
     for e in graph['edges']:
-        if hub not in (e['source'], e['target']):
+        # A title topic is automatic and says nothing about what this record is connected to.
+        if hub not in (e['source'], e['target']) and not e['target'].startswith('topic:'):
             connected |= {e['source'], e['target']}
     return graph, connected
 
 
-def waiting_records(links, catalog, connected):
+def waiting_records(links, catalog, connected, records=None):
     done = placed(links) | connected
-    return [b['body_id'] for b in catalog['bodies'] if b['status'] in PUBLIC and 'work:' + b['body_id'] not in done]
+    records = records if records is not None else load_records()
+    works = [b['body_id'] for b in catalog['bodies'] if b['status'] in PUBLIC and 'work:' + b['body_id'] not in done]
+    return works + [r['id'] for r in records['records'] if r['id'] not in done]
 
 
 def find(links, name):
@@ -131,6 +141,7 @@ def main():
     sub = parser.add_subparsers(dest='command')
     sub.add_parser('todo')
     sub.add_parser('list')
+    sub.add_parser('review')
     add = sub.add_parser('add')
     add.add_argument('id')
     add.add_argument('--to', required=True)
@@ -165,13 +176,26 @@ def main():
         return 0
     if args.command == 'todo':
         catalog = json.loads(CATALOG.read_text(encoding='utf-8'))
-        _, connected = recorded_context_for(catalog)
+        records = load_records()
+        _, connected = recorded_context_for(catalog, records)
         by_id = {b['body_id']: b for b in catalog['bodies']}
-        waiting = waiting_records(links, catalog, connected)
+        by_id.update({r['id']: r for r in records['records']})
+        waiting = waiting_records(links, catalog, connected, records)
         print(f'연결을 정할 기록 {len(waiting)}개')
-        for body in waiting:
-            b = by_id[body]
-            print(f"\n{body}\n  제목: {b['title']}\n  소개: {b['message_sentence']}\n  태그: {', '.join(b.get('tags', []))}\n  주소: {b['canonical_url']}")
+        for name in waiting:
+            b = by_id[name]
+            print(f"\n{name}\n  제목: {b['title']}\n  소개: {b.get('message_sentence', b.get('summary'))}\n  태그: {', '.join(b.get('tags', []))}\n  주소: {b.get('canonical_url', b.get('url', ''))}")
+        return 0
+    if args.command == 'review':
+        for c in links['constellations']:
+            waiting = [m for m in c['members'] if m.get('status') == 'proposed'] if c['status'] == 'approved' else c['members']
+            if waiting:
+                print(f"\n별자리 {c['id']} ({c['title']}): {c['text']}" + ('' if c['status'] == 'approved' else ' [새 별자리]'))
+                for m in waiting:
+                    print(f"  + {m['id']}: {m['reason']}")
+        for p in links['pairs']:
+            if p.get('status') == 'proposed':
+                print(f"\n연결 {p['a']} - {p['b']} [{p['label']}]: {p['reason']}")
         return 0
     if args.command == 'list':
         for c in links['constellations']:
@@ -180,7 +204,7 @@ def main():
         return 0
     if args.command == 'add':
         c = find(links, args.to)
-        member = {'id': args.id, 'reason': args.reason}
+        member = {'id': args.id, 'reason': args.reason, 'status': 'proposed'}
         if args.key:
             member['key'] = True
         c['members'].append(member)
@@ -196,6 +220,8 @@ def main():
             for c in links['constellations']:
                 if c['id'] == name:
                     c['status'] = 'approved'
+                    for m in c['members']:
+                        m.pop('status', None)
                     matched = True
             if not matched:
                 sys.exit(f'없는 별자리입니다: {name}')

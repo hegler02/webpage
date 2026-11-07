@@ -73,10 +73,6 @@
       "destination": "/pages/profile/notes/cheongnyeon-wangmandu/"
     },
     {
-      "source": "/constellation/",
-      "destination": "/pages/profile/constellation/"
-    },
-    {
       "source": "/",
       "destination": "/pages/profile/"
     },
@@ -89,28 +85,12 @@
       "destination": "/pages/profile/work/:path*"
     },
     {
-      "source": "/archive/",
-      "destination": "/pages/profile/archive/"
-    },
-    {
       "source": "/archive/:path*",
       "destination": "/pages/profile/archive/:path*"
     },
     {
-      "source": "/notes/",
-      "destination": "/pages/profile/notes/"
-    },
-    {
       "source": "/notes/:path*",
       "destination": "/pages/profile/notes/:path*"
-    },
-    {
-      "source": "/books/",
-      "destination": "/pages/profile/books/"
-    },
-    {
-      "source": "/books/:path*",
-      "destination": "/pages/profile/books/:path*"
     },
     {
       "source": "/mirinae/",
@@ -119,14 +99,6 @@
     {
       "source": "/mirinae/:path*",
       "destination": "/pages/profile/mirinae/:path*"
-    },
-    {
-      "source": "/profile/",
-      "destination": "/pages/profile/profile/"
-    },
-    {
-      "source": "/profile/:path*",
-      "destination": "/pages/profile/profile/:path*"
     },
     {
       "source": "/assets/:path*",
@@ -145,10 +117,6 @@
       "destination": "/pages/profile/app.js"
     },
     {
-      "source": "/archive.js",
-      "destination": "/pages/profile/archive.js"
-    },
-    {
       "source": "/favicon.svg",
       "destination": "/pages/profile/favicon.svg"
     },
@@ -161,11 +129,40 @@
       "destination": "/pages/profile/sitemap.xml"
     },
     {
-      "source": "/constellation/:path*",
-      "destination": "/pages/profile/constellation/:path*"
+      "source": "/galaxy/",
+      "destination": "/pages/profile/galaxy/"
+    },
+    {
+      "source": "/galaxy/:path*",
+      "destination": "/pages/profile/galaxy/:path*"
+    },
+    {
+      "source": "/research/",
+      "destination": "/pages/profile/research/"
+    },
+    {
+      "source": "/research/:path*",
+      "destination": "/pages/profile/research/:path*"
+    },
+    {
+      "source": "/about/",
+      "destination": "/pages/profile/about/"
+    },
+    {
+      "source": "/about/:path*",
+      "destination": "/pages/profile/about/:path*"
+    },
+    {
+      "source": "/site/:path*",
+      "destination": "/pages/profile/site/:path*"
     }
   ],
   "redirects": [
+    {
+      "source": "/constellation/:path*",
+      "destination": "/galaxy/:path*",
+      "permanent": true
+    },
     {
       "source": "/pages/profile/index.html",
       "destination": "/",
@@ -197,63 +194,33 @@
       "permanent": true
     },
     {
-      "source": "/pages/profile/archive/index.html",
-      "destination": "/archive/",
+      "source": "/pages/profile/galaxy/index.html",
+      "destination": "/galaxy/",
       "permanent": true
     },
     {
-      "source": "/pages/profile/archive/index",
-      "destination": "/archive/",
+      "source": "/pages/profile/galaxy/index",
+      "destination": "/galaxy/",
       "permanent": true
     },
     {
-      "source": "/pages/profile/archive/",
-      "destination": "/archive/",
+      "source": "/pages/profile/galaxy/",
+      "destination": "/galaxy/",
       "permanent": true
     },
     {
-      "source": "/pages/profile/notes/index.html",
-      "destination": "/notes/",
+      "source": "/pages/profile/research/index.html",
+      "destination": "/research/",
       "permanent": true
     },
     {
-      "source": "/pages/profile/notes/index",
-      "destination": "/notes/",
+      "source": "/pages/profile/research/index",
+      "destination": "/research/",
       "permanent": true
     },
     {
-      "source": "/pages/profile/notes/",
-      "destination": "/notes/",
-      "permanent": true
-    },
-    {
-      "source": "/pages/profile/constellation/index.html",
-      "destination": "/constellation/",
-      "permanent": true
-    },
-    {
-      "source": "/pages/profile/constellation/index",
-      "destination": "/constellation/",
-      "permanent": true
-    },
-    {
-      "source": "/pages/profile/constellation/",
-      "destination": "/constellation/",
-      "permanent": true
-    },
-    {
-      "source": "/pages/profile/books/index.html",
-      "destination": "/books/",
-      "permanent": true
-    },
-    {
-      "source": "/pages/profile/books/index",
-      "destination": "/books/",
-      "permanent": true
-    },
-    {
-      "source": "/pages/profile/books/",
-      "destination": "/books/",
+      "source": "/pages/profile/research/",
+      "destination": "/research/",
       "permanent": true
     },
     {
@@ -272,18 +239,18 @@
       "permanent": true
     },
     {
-      "source": "/pages/profile/profile/index.html",
-      "destination": "/profile/",
+      "source": "/pages/profile/about/index.html",
+      "destination": "/about/",
       "permanent": true
     },
     {
-      "source": "/pages/profile/profile/index",
-      "destination": "/profile/",
+      "source": "/pages/profile/about/index",
+      "destination": "/about/",
       "permanent": true
     },
     {
-      "source": "/pages/profile/profile/",
-      "destination": "/profile/",
+      "source": "/pages/profile/about/",
+      "destination": "/about/",
       "permanent": true
     },
     {
@@ -539,6 +506,106 @@
     {
       "source": "/pages/profile/notes/cheongnyeon-wangmandu/",
       "destination": "/notes/cheongnyeon-wangmandu/",
+      "permanent": true
+    },
+    {
+      "source": "/archive/",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/notes/",
+      "destination": "/work/?kind=notes",
+      "permanent": true
+    },
+    {
+      "source": "/books/",
+      "destination": "/research/",
+      "permanent": true
+    },
+    {
+      "source": "/profile/",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/constellation/",
+      "destination": "/galaxy/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/index.html",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/archive/index",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/notes/",
+      "destination": "/work/?kind=notes",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/notes/index.html",
+      "destination": "/work/?kind=notes",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/notes/index",
+      "destination": "/work/?kind=notes",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/books/",
+      "destination": "/research/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/books/index.html",
+      "destination": "/research/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/books/index",
+      "destination": "/research/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/profile/",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/profile/index.html",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/profile/index",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/constellation/",
+      "destination": "/galaxy/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/constellation/index.html",
+      "destination": "/galaxy/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/profile/constellation/index",
+      "destination": "/galaxy/",
       "permanent": true
     }
   ],

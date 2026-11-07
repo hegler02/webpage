@@ -14,7 +14,7 @@ work=next(w for w in catalog['bodies'] if w['body_id']=='on-stage')
 assert work['canonical_url']==url
 creator=json.loads((PROFILE/'data/creator-profile.json').read_text(encoding='utf-8'))
 assert creator['featured_film']['url']==url
-profile=(PROFILE/'profile/index.html').read_text(encoding='utf-8')
+profile=(PROFILE/'about/index.html').read_text(encoding='utf-8')
 assert profile.count('class="creator-film-card"')==1
 assert profile.index('CREATOR_CONTACT_END') < profile.index('CREATOR_FILM_START')
 with wave.open(str(FILM/'media/score.wav')) as audio:
@@ -23,6 +23,6 @@ for i in range(1,6): assert (FILM/f'media/portrait-{i}.jpg').is_file()
 html=(FILM/'index.html').read_text(encoding='utf-8')
 assert 'autoplay' not in html and '시안' not in html
 assert '/archive/image-cinema/' in html and '/constellation/?node=work%3Aon-stage' in html
-graph=json.loads((PROFILE/'constellation/graph.json').read_text(encoding='utf-8'))
+graph=json.loads((PROFILE/'galaxy/graph.json').read_text(encoding='utf-8'))
 assert any(n['id']=='work:on-stage' for n in graph['nodes'])
 print('On Stage: PASS (48s audio, assets, profile, catalog, constellation and discovery)')

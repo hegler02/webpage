@@ -174,8 +174,8 @@ def main() -> int:
         ([sys.executable, str(ROOT / "tools/check_wind_intro.py")], "Wind editorial discovery gate"),
         ([sys.executable, str(ROOT / "tools/check_constellation_discovery.py")], "Constellation discovery gate"),
         (["node", str(ROOT / "tools" / "test_navigation_lifecycle.mjs")], "Navigation lifecycle gate"),
-        (["node", str(ROOT / "tools" / "test_constellation_renderer.mjs")], "Constellation projection lifecycle gate"),
-        (["node", str(ROOT / "tools" / "test_constellation_state.mjs")], "Constellation state gate"),
+        ([sys.executable, str(ROOT / "tools" / "check_site.py")], "Site contract gate"),
+        ([sys.executable, str(ROOT / "tools" / "test_site_growth.py")], "Site growth test"),
         ([sys.executable, str(ROOT / "tools" / "check_unfold_intro.py")], "Unfold editorial discovery gate"),
         ([sys.executable, str(ROOT / "tools" / "test_constellation.py")], "Constellation source and registration gate"),
         ([sys.executable, str(ROOT / "tools" / "constellation_links.py"), "--check"], "Constellation links gate"),
@@ -298,40 +298,6 @@ def main() -> int:
             elif path.read_text(encoding="utf-8").count(value) != target.get("count", 1):
                 errors.append(f"trace mismatch: {fact_id} -> {target['path']}")
 
-    archive_source = (PROFILE / "archive" / "index.html").read_text(encoding="utf-8")
-    archive = Document()
-    archive.feed(archive_source)
-    deployable_bodies = sorted(
-        (body for body in catalog.get("bodies", []) if body.get("status") in {"DEPLOYED", "GOLDEN"}),
-        key=lambda body: (body["latest_deployed_at"], body["body_id"]),
-        reverse=True,
-    )
-    expected_ids = [body["body_id"] for body in deployable_bodies]
-    rendered_ids = re.findall(r'data-body-id="([a-z0-9-]+)"', archive_source)
-    if sorted(rendered_ids) != sorted(expected_ids):
-        errors.append("archive cards do not equal deployable public catalog records")
-    errors.extend(check_body_card_links(archive, deployable_bodies, "archive"))
-    archive_thumbnail_ids = re.findall(r'data-body-thumbnail="([a-z0-9-]+)"', archive_source)
-    if sorted(archive_thumbnail_ids) != sorted(expected_ids):
-        errors.append("archive thumbnails do not equal deployable public catalog records")
-    if re.search(r'data-body-thumbnail="[^"]+"[^>]+src="https?://', archive_source):
-        errors.append("archive thumbnails must use project-owned local assets")
-    home_source = (PROFILE / "index.html").read_text(encoding="utf-8")
-    home = Document()
-    home.feed(home_source)
-    home_thumbnail_ids = re.findall(r'data-body-thumbnail="([a-z0-9-]+)"', home_source)
-    if home_thumbnail_ids != expected_ids[:6]:
-        errors.append("home thumbnails do not equal the six latest public bodies")
-    errors.extend(check_body_card_links(home, deployable_bodies[:6], "home"))
-    if archive.audio_count:
-        errors.append("archive must not render audio controls")
-    if "cdn1.suno.ai" in archive_source or "cdn2.suno.ai" in archive_source:
-        errors.append("archive contains forbidden Suno playback transport")
-    if archive.canonicals != ["https://mirinaeman.com/archive/"] or archive.og_urls != archive.canonicals:
-        errors.append("archive canonical and og:url must match")
-    if not archive.og_images or any(urlparse(url).scheme != "https" for url in archive.og_images):
-        errors.append("archive requires an absolute HTTPS og:image")
-
     css = (PROFILE / "styles.css").read_text(encoding="utf-8")
     token_patterns = {
         "leading-display": (r"--leading-display:([0-9.]+)", DISPLAY_LEADING_FLOOR),
@@ -343,10 +309,6 @@ def main() -> int:
         match = re.search(pattern, css)
         if not match or float(match.group(1)) < floor:
             errors.append(f"typography token below floor or missing: {name}")
-    if not re.search(r"\.body-card\{[^}]*display:flex", css):
-        errors.append("body card must stretch its whole-card link")
-    if not re.search(r"\.body-card-hit\{[^}]*display:grid[^}]*flex:1[^}]*text-decoration:none", css):
-        errors.append("whole-card link layout contract missing")
     for html_path in PROFILE.rglob("*.html"):
         source = html_path.read_text(encoding="utf-8")
         document = Document()
@@ -357,35 +319,6 @@ def main() -> int:
             errors.append(f"multiple audio control surfaces: {html_path.relative_to(ROOT)}")
         if unapproved_heading_breaks(source):
             errors.append(f"unapproved heading hard break: {html_path.relative_to(ROOT)}")
-
-    books_source = (PROFILE / "books" / "index.html").read_text(encoding="utf-8")
-    thesis_list = re.search(
-        r'<ol class="research-list" data-research-list="theses">(.*?)</ol>',
-        books_source,
-        re.S,
-    )
-    article_list = re.search(
-        r'<ol class="research-list" data-research-list="articles">(.*?)</ol>',
-        books_source,
-        re.S,
-    )
-    if not thesis_list or not article_list:
-        errors.append("degree thesis and journal article groups must both exist")
-    else:
-        thesis_items = thesis_list.group(1)
-        article_items = article_list.group(1)
-        if books_source.index(thesis_list.group(0)) > books_source.index(article_list.group(0)):
-            errors.append("degree thesis group must precede journal articles")
-        if thesis_items.count('class="research-item"') != 2:
-            errors.append("degree thesis group must contain exactly 2 records")
-        if article_items.count('class="research-item"') != 14:
-            errors.append("journal article group must contain exactly 14 records")
-        if thesis_items.count("박사학위논문") != 2 or thesis_items.count("석사학위논문") != 2:
-            errors.append("doctoral and master's thesis labels must remain explicit")
-        if thesis_items.index("박사학위논문") > thesis_items.index("석사학위논문"):
-            errors.append("doctoral thesis must precede master's thesis")
-    if "<span data-ko>학위논문·학술논문</span>" not in books_source:
-        errors.append("research tab must name degree theses before journal articles")
 
     sitemap = (PROFILE / "sitemap.xml").read_text(encoding="utf-8")
     for route in routes:

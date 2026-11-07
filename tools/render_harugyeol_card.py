@@ -5,7 +5,7 @@ from fontTools.ttLib import TTFont
 from PIL import Image, ImageDraw, ImageFont
 import json,hashlib
 R=Path(__file__).resolve().parents[1];P=R/'pages/profile';OUT=P/'archive/harugyeol-ai-health/assets'
-font=TTFont(P/'constellation/assets/NanumGothic-Bold.woff2');font.flavor=None;buf=BytesIO();font.save(buf);font_bytes=buf.getvalue()
+font=TTFont(P.parents[1]/'tools/assets/fonts/NanumGothic-Bold.woff2');font.flavor=None;buf=BytesIO();font.save(buf);font_bytes=buf.getvalue()
 def card(width,height,path):
  im=Image.new('RGB',(width,height),'#081319');d=ImageDraw.Draw(im);k=width/1200
  def text(x,y,label,size,color):d.text((int(x*k),int(y*k)),label,font=ImageFont.truetype(BytesIO(font_bytes),int(size*k)),fill=color)

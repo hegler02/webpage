@@ -112,16 +112,7 @@ def render():
 {editorial_html}
 </main><footer class="footer"><div class="wrap"><p>© 미리내맨 · mirinaeman.com</p></div></footer></body></html>
 '''
-    card = f'''{START}<a class="card feature" href="{url}"><img class="card-media" src="../{e(body['thumbnail']['path'])}" alt="{e(body['thumbnail']['alt'])}" loading="lazy"><div class="card-body"><span class="tag">MUSIC · IMAGE CINEMA · WEBTOON</span><h2>{e(body['title'])}</h2><p>{e(body['message_sentence'])}</p></div></a>{END}'''
-    work = PROFILE / 'work/index.html'
-    original = work.read_text()
-    if START in original:
-        updated = original[:original.index(START)] + card + original[original.index(END) + len(END):]
-    else:
-        anchor = '<div class="grid two"><article class="card feature">'
-        assert original.count(anchor) == 1
-        updated = original.replace(anchor, '<div class="grid two">' + card + '<article class="card feature">', 1)
-    return {OUTPUT: text, work: updated}
+    return {OUTPUT: text}
 
 
 if __name__ == '__main__':

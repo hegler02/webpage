@@ -73,9 +73,13 @@ class Links(unittest.TestCase):
         self.assertTrue(all(e['evidence'].startswith('https://') for e in graph['edges']))
 
     def test_committed_graph_matches_only_approved_data(self):
-        graph = json.loads((PROFILE / 'constellation/graph.json').read_text(encoding='utf-8'))
+        graph = json.loads((PROFILE / 'galaxy/graph.json').read_text(encoding='utf-8'))
         approved = {'constellation:' + c['id'] for c in self.links['constellations'] if c['status'] == 'approved'}
-        self.assertEqual(approved, {n['id'] for n in graph['nodes'] if n['kind'] == 'constellation'})
+        self.assertEqual(approved, {n['id'] for n in graph['nodes'] if n['k'] == 'constellation'})
+        for c in self.links['constellations']:
+            for m in c['members']:
+                if m.get('status') == 'proposed':
+                    self.assertNotIn(m['reason'], json.dumps(graph, ensure_ascii=False))
 
 
 if __name__ == '__main__':

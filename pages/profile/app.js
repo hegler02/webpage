@@ -25,7 +25,7 @@ window.ProfileBus = (() => {
   let saved = null;
   try { saved = localStorage.getItem('profile-theme'); } catch (_) {}
   const normalizeTheme = (theme) => theme === 'night' ? 'dark' : theme === 'morning' ? 'light' : theme;
-  const initial = normalizeTheme(saved) || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const initial = normalizeTheme(saved) || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
   const apply = (theme) => {
     root.dataset.theme = theme;
     button?.setAttribute('aria-pressed', String(theme === 'dark'));
@@ -64,7 +64,7 @@ window.ProfileBus = (() => {
   const button = document.querySelector('[data-menu-toggle]');
   const drawer = document.querySelector('[data-drawer]');
   if (!button || !drawer) return;
-  const wide = matchMedia('(min-width: 80.001rem)');
+  const wide = matchMedia('(min-width: 1101px)');
   const background = [...document.querySelectorAll('main, body > footer')];
   const priorInert = new Map();
   let opened = false;
@@ -173,65 +173,6 @@ window.ProfileBus = (() => {
     audio.pause(); audio.removeAttribute('src'); audio.load(); delete audio.dataset.current;
     player.classList.remove('is-open'); player.setAttribute('aria-hidden', 'true');
   });
-})();
-
-(() => {
-  document.querySelectorAll('[data-rail]').forEach((rail) => {
-    const track = rail.querySelector('[data-rail-track]');
-    const prev = rail.querySelector('[data-rail-prev]');
-    const next = rail.querySelector('[data-rail-next]');
-    if (!track || !prev || !next) return;
-    const update = () => {
-      const end = track.scrollWidth - track.clientWidth;
-      prev.disabled = track.scrollLeft <= 2;
-      next.disabled = track.scrollLeft >= end - 2;
-    };
-    const move = (direction) => {
-      const card = track.querySelector('.book');
-      const distance = card ? card.getBoundingClientRect().width + 16 : track.clientWidth * .8;
-      track.scrollBy({ left: direction * distance, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-    };
-    prev.addEventListener('click', () => move(-1));
-    next.addEventListener('click', () => move(1));
-    track.addEventListener('scroll', update, { passive: true });
-    addEventListener('resize', update, { passive: true });
-    update();
-  });
-})();
-
-(() => {
-  const browser = document.querySelector('[data-research-tabs]');
-  if (!browser) return;
-  const tabs = [...browser.querySelectorAll('[data-research-tab]')];
-  const panels = [...browser.querySelectorAll('[data-research-panel]')];
-  const names = new Set(tabs.map((tab) => tab.dataset.researchTab));
-  const activate = (name, { focus = false, updateHash = false } = {}) => {
-    const selected = names.has(name) ? name : 'papers';
-    tabs.forEach((tab) => {
-      const active = tab.dataset.researchTab === selected;
-      tab.setAttribute('aria-selected', String(active));
-      tab.tabIndex = active ? 0 : -1;
-      if (active && focus) tab.focus();
-    });
-    panels.forEach((panel) => panel.toggleAttribute('hidden', panel.dataset.researchPanel !== selected));
-    if (updateHash) history.replaceState(null, '', `#${selected}`);
-    ProfileBus.emit('research:changed', { panel: selected });
-  };
-  tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => activate(tab.dataset.researchTab, { updateHash: true }));
-    tab.addEventListener('keydown', (event) => {
-      let next = null;
-      if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
-      if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
-      if (event.key === 'Home') next = 0;
-      if (event.key === 'End') next = tabs.length - 1;
-      if (next === null) return;
-      event.preventDefault();
-      activate(tabs[next].dataset.researchTab, { focus: true, updateHash: true });
-    });
-  });
-  addEventListener('hashchange', () => activate(location.hash.slice(1)));
-  activate(location.hash.slice(1));
 })();
 
 document.documentElement.classList.add('js');

@@ -265,25 +265,26 @@
       "relation": {
         "statement": "공개 작품과 개념·기록의 근거 있는 관계를 동일한 그래프에서 HTML·JSON-LD·입체 화면으로 전달한다.",
         "enforcement": [
-          "tools/test_constellation.py"
+          "tools/test_constellation.py",
+          "tools/check_site.py"
         ]
       },
       "attitude": {
         "statement": "작품을 선택하고 연결 이유를 읽으며 다음 기록으로 이동한다. GPU와 키보드·모바일 차이가 내용을 숨기지 않는다.",
         "enforcement": [
-          "tools/test_constellation_renderer.mjs; tools/constellation/verification.json"
+          "tools/check_site.py; tools/test_site_growth.py"
         ]
       },
       "memory": {
-        "statement": "사용자가 반려한 정적 배치와 수용한 입체 시안, 실제 검증 결과를 보존한다.",
+        "statement": "창작자가 승인한 연결만 공개하고, 별의 자리는 data/galaxy-layout.json에 남겨 새 기록이 들어와도 하늘이 흔들리지 않는다.",
         "enforcement": [
-          "tools/constellation/approved-prototype.json; tools/constellation/verification.json"
+          "pages/profile/data/galaxy-layout.json; tools/test_site_growth.py"
         ]
       },
       "transformation": {
         "statement": "관계 누락·고립 출력·상태 손실은 릴리스 게이트를 중단한다. 새 승인 기록은 생성기를 통해 누적된다.",
         "enforcement": [
-          "tools/release_gate.py; tools/test_constellation_state.mjs"
+          "tools/release_gate.py; tools/constellation_links.py --check"
         ]
       },
       "human_judgment": {
@@ -295,7 +296,7 @@
           "reject",
           "hold"
         ],
-        "reason_evidence": "좋다 / 진행하자; approved-prototype.json",
+        "reason_evidence": "이 방향 좋다 / 미리내는 메뉴로 / 시작하고 새 작품이나 논문이 올라가면 맥락 그래프가 다 연결되는 구조",
         "override_effect": "rejection blocks publication",
         "appeal_path": "same-route review with the release owner",
         "rejection_memory": "MESSAGE BODIES CQI archive",

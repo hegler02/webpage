@@ -32,14 +32,7 @@ def outputs():
 <section class="page-hero"><div class="wrap"><span class="eyebrow">A SONG FOR YOU</span><h1>{e(b['title'])}</h1><div style="max-width:var(--measure)">{paragraphs}</div><div class="actions"><a class="button primary" href="{e(b['canonical_url'])}">노래 · 영상 · 웹툰 감상하기</a></div></div></section>
 <section class="section"><div class="wrap"><figure><img src="assets/birthday-og.png" width="1200" height="630" alt="{e(d['og']['alt'])}" loading="lazy"></figure></div></section>
 <section class="section"><div class="wrap"><div style="max-width:var(--measure)"><h2>생일 축하해</h2><p>노래 원작 · {e(d['creator'])}</p>{lyrics}</div></div></section></main><footer class="footer"><div class="wrap"><p>© 미리내맨 · mirinaeman.com</p></div></footer></body></html>'''
-    start='<!-- BIRTHDAY_INTRO_START -->';end='<!-- BIRTHDAY_INTRO_END -->'
-    card=f'{start}<a class="card feature" href="{url}"><img class="card-media" src="../{e(b["thumbnail"]["path"])}" width="960" height="540" alt="{e(b["thumbnail"]["alt"])}" loading="lazy"><div class="card-body"><span class="tag">MUSIC · IMAGE CINEMA · WEBTOON</span><h2>{e(b["title"])}</h2><p>{e(b["message_sentence"])}</p></div></a>{end}'
-    work=PROFILE/'work/index.html';text=work.read_text()
-    if start in text: text=text[:text.index(start)]+card+text[text.index(end)+len(end):]
-    else:
-        anchor='<!-- HWASAN_INTRO_START -->';assert text.count(anchor)==1
-        text=text.replace(anchor,card+anchor,1)
-    return {PROFILE/'work/birthday-your-day/index.html':page,work:text}
+    return {PROFILE/'work/birthday-your-day/index.html':page}
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--check',action='store_true');args=parser.parse_args()

@@ -1,0 +1,39 @@
+/* The one token source. Every page, generated or hand-written, takes colour, space, type and motion from here. */
+:root,[data-theme="dark"]{
+ color-scheme:dark;
+ --bg:#070a12;--panel:#0f1524f2;--surface:#111827;--raised:#1a2338;--rule:#27324a;--text:#eef1f8;--muted:#a7b2c8;--faint:#7f8ca6;--accent:#8fb0ff;--on-accent:#0a1020;--gold:#ffd27a;--soft-body:#cfd6e6;--white:#fff;
+ --glass:#0e1422d9;--glass-soft:#0e142299;--chip:#182136cc;--edge-label:#0a0f20cc;--scrim:#04060ccc;--fade-90:#070a12cc;--fade-0:#070a1200;
+ --glow-a:#121c3a;--glow-b:#0a0f20;--lift:0 6px 22px #000a;--halo:0 0 6px var(--bg),0 0 14px var(--bg);--line-img:#ffffff33;
+ --pill-thought:#17152cd9;--pill-topic:#0f2230d9;--pill-star:#241a10d9;--pill-core:#241d14d9;--line-thought:#d9c7ff55;--line-topic:#9fe6ff55;--line-star:#ffcf9e66;--line-core:#fff1d666;
+}
+[data-theme="light"]{
+ color-scheme:light;
+ --bg:#ece9e2;--panel:#f7f5f0f2;--surface:#f7f5f0;--raised:#ddd9d0;--rule:#c9c5bb;--text:#17191d;--muted:#565960;--faint:#6f7279;--accent:#2948bd;--on-accent:#ffffff;--gold:#8a5a00;--soft-body:#33363c;--white:#17191d;
+ --glass:#f7f5f0d9;--glass-soft:#f7f5f099;--chip:#ddd9d0cc;--edge-label:#f7f5f0cc;--scrim:#17191d66;--fade-90:#ece9e2cc;--fade-0:#ece9e200;
+ --glow-a:#ddd9d0;--glow-b:#ece9e2;--lift:0 6px 22px #1c1e231a;--halo:0 0 6px var(--bg),0 0 14px var(--bg);--line-img:#00000022;
+}
+:root{
+ /* Star colours: the sky is always dark, so these never change with the theme */
+ --k-song:#7fb2ff;--k-slide:#7fe3cf;--k-screen:#ff9f7d;--k-story:#e4b3ff;--k-knowledge:#ffd27a;--k-paper:#9fe6ff;--k-book:#9fe6ff;--k-project:#9fe6ff;--k-patent:#9fe6ff;--k-research:#9fe6ff;
+ --k-film:#ffb3c7;--k-collection:#ffb3c7;--k-product:#ffb3c7;--k-outside:#ffb3c7;--k-concept:#d9c7ff;--k-judgment:#d9c7ff;--k-essay:#d9c7ff;--k-thought:#d9c7ff;--k-topic:#9fe6ff;--k-constellation:#ffcf9e;--k-creator:#fff1d6;--dust-far:#a9bdf5;--dust-core:#fff0d8;
+ /* Type */
+ --sans:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--serif:"Noto Serif KR",Georgia,serif;
+ --size-tiny:.6875rem;--size-eyebrow:.75rem;--size-caption:.8125rem;--size-small:.875rem;--size-control:.9375rem;--size-body:1rem;--size-lead:1.0625rem;--size-title-s:1.25rem;--size-title:1.5rem;
+ --size-sec:clamp(1.375rem,2.4vw,1.75rem);--size-band:clamp(1.5rem,3vw,2.25rem);--size-page:clamp(1.875rem,4vw,3rem);--size-record:clamp(1.625rem,3.4vw,2.625rem);--size-name:clamp(3rem,7vw,5.5rem);--size-say:clamp(1.25rem,2.2vw,1.625rem);--size-state:clamp(1.625rem,4vw,3rem);
+ --weight-body:400;--weight-label:500;--weight-control:600;--weight-strong:700;
+ --lh-tight:1.3;--lh-heading:1.4;--lh-control:1.5;--lh-compact:1.55;--lh-body:1.7;--track-body:-.01em;--track-heading:-.02em;
+ /* Space: scale */
+ --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px;--space-14:56px;--space-20:80px;
+ /* Space: rhythm. Change these and the whole site follows */
+ --gap-tiny:var(--space-1);--gap-text:var(--space-2);--gap-para:var(--space-4);--gap-action:var(--space-6);--gap-control:var(--space-2);--gap-card:var(--space-4);--gap-block:var(--space-5);--gap-section:var(--space-14);
+ --inset-card:var(--space-4);--inset-panel:var(--space-5);--page-top:var(--space-10);--page-bottom:var(--space-20);
+ /* Frame: one top bar and one left edge */
+ --edge:max(clamp(16px,5vw,72px),env(safe-area-inset-left,0px));--edge-right:max(16px,env(safe-area-inset-right,0px));--top-h:56px;--wide:1296px;--read:44rem;--list:58rem;--reader:372px;
+ --card-min:17rem;--door-min:15rem;--step-min:14rem;--book-min:10rem;--copy-max:38rem;--time-col:7rem;--record-fig:26rem;--opening-h:min(78vh,720px);--opening-stage:46dvh;--btn-pad-narrow:var(--space-1);--reader-h-narrow:52%;--results-h:44vh;--search-w:19rem;--filter-w:15rem;--gx-head-w:26rem;--label-w:13em;--trail-w:12em;
+ /* Shape */
+ --radius-s:6px;--radius:10px;--radius-l:12px;--radius-xl:14px;--pill:99px;--border:1px;--marker:2px;--ratio-card:16/9;--ratio-wide:21/9;--ratio-book:3/4;
+ /* Controls */
+ --ctl-h:36px;--ctl-h-l:44px;--touch:48px;--thumb:124px;--thumb-s:68px;--close:32px;--dot:8px;--bar-w:18px;--bar-gap:6px;--icon:20px;--player-h:166px;--screen-h:100dvh;
+ /* Motion */
+ --curve:cubic-bezier(.22,.7,.2,1);--dur-fast:160ms;--dur:300ms;--dur-slow:420ms;--rise:8px;--stagger:36ms;--blur:10px;
+}

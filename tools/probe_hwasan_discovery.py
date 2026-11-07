@@ -1,5 +1,6 @@
 """Observe public delivery; never infer indexing or AI citation from HTTP success."""
 import argparse
+from urllib.parse import urljoin
 import hashlib
 import io
 import json
@@ -86,7 +87,7 @@ def verify(local=False):
         assert CANONICAL in [n.text for n in sitemap.iter() if n.tag.endswith('loc')]
         image = Image.open(io.BytesIO(data[3])); image.load(); assert image.format == 'JPEG' and image.size == (1200, 630)
         assert hashlib.sha256(data[3]).digest() == hashlib.sha256((PROFILE / paths[3]).read_bytes()).digest()
-        work = Document(); work.feed(data[4].decode()); assert CANONICAL in work.links
+        work = Document(); work.feed(data[4].decode()); assert CANONICAL in [urljoin(urls[4], link) for link in work.links]
         assert 'https://hwasan-pan-v6.mirinaeman.chatgpt.site/' in doc.links
         report.update({'result': 'PASS', 'seo_title': doc.meta['og:title'], 'seo_description': doc.meta['description'],
                        'json_ld_types': sorted(set(n['@type'] for n in graph)),

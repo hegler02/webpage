@@ -5,7 +5,7 @@
     "Mirinaeman",
     "JOONHO KIM"
   ],
-  "url": "https://mirinaeman.com/profile/",
+  "url": "https://mirinaeman.com/about/",
   "home": "https://mirinaeman.com/",
   "email": "hegler.kim@gmail.com",
   "title": "김준호(미리내맨) | 프로필·공식 채널",
@@ -44,7 +44,7 @@
     },
     {
       "label": "전체 창작 아카이브",
-      "url": "https://mirinaeman.com/archive/"
+      "url": "https://mirinaeman.com/work/"
     }
   ],
   "movement": {
@@ -58,7 +58,7 @@
   },
   "featured_film": {
     "url": "https://mirinaeman.com/pages/on-stage/",
-    "image": "../assets/thumbnails/on-stage.webp",
+    "image": "/assets/thumbnails/on-stage.webp",
     "alt": "붉은 조명 아래 정면을 바라보는 김준호의 바디 프로필",
     "title": {
       "ko": "무대에 서다",

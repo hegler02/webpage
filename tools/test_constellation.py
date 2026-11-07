@@ -38,11 +38,12 @@ class ConstellationTests(unittest.TestCase):
         editorial['edges'][0]['target']='essay:future';editorial['edges'][0]['reason']=''
         with self.assertRaises(AssertionError):build_graph(self.catalog,editorial)
     def test_static_reading_survives_without_runtime(self):
-        from render_constellation import outputs
-        source=outputs()[PROFILE/'constellation/index.html']
+        from render_site import outputs
+        source=outputs()[PROFILE/'galaxy/index.html']
         for n in self.g['nodes']:
-            self.assertIn('record-'+n['id'],source)
-        self.assertIn('class="reading-index" open',source)
+            if n['kind'] in ('work','paper','book','project','patent','film','collection','product'):
+                self.assertIn(n['title'].replace('&','&amp;').replace('"','&quot;').replace("'",'&#x27;').replace('<','&lt;').replace('>','&gt;'),source)
+        self.assertIn('class="reading-index"',source)
         self.assertNotIn('src="https://cdnjs',source)
     def test_internal_catalog_fields_never_escape(self):
         self.catalog['bodies'][0].update(incidents=['SECRET-INTERNAL'],approvals=['SECRET-INTERNAL'],source_revision='SECRET-INTERNAL')
@@ -50,7 +51,7 @@ class ConstellationTests(unittest.TestCase):
     def test_research_is_bibliography_and_title_grouping(self):
         papers=[n for n in self.g['nodes'] if n['kind']=='paper']
         self.assertEqual(len(papers),16)
-        for p in papers:self.assertEqual(p['sourceLabel'],'논문 · 서지 기록')
+        for p in papers:self.assertEqual(p['sourceLabel'],'논문')
         for e in self.g['edges']:
             if e['target'].startswith('topic:'):self.assertEqual(e['label'],'제목 기반 주제')
     def test_local_assets_exist(self):

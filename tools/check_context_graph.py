@@ -39,11 +39,11 @@ for c in d['concepts']:assert c['id'] in m.ids and c['text'] in ''.join(m.text)
 for w in d['works']:assert w.get('intro_url',w['url']) in m.links and w['reason'] in ''.join(m.text)
 for name in ['jeju-we','noreut-galchi-album']:
  s=(PROFILE/'archive'/name/'index.html').read_text();assert d['hub_url'] in s and d['intro_url'] in s
-for file in ['index.html','archive/index.html']:assert d['hub_url'] in (PROFILE/file).read_text()
-archive=(PROFILE/'archive/index.html').read_text()
+for file in ['index.html','work/index.html']:assert d['hub_url'] in (PROFILE/file).read_text(encoding='utf-8')
+archive=(PROFILE/'work/index.html').read_text(encoding='utf-8')
 archive_main=re.search(r'<main\b[^>]*>(.*?)</main>',archive,re.S).group(1)
 archive_footer=re.search(r'<footer\b[^>]*>(.*?)</footer>',archive,re.S).group(1)
 assert d['hub_url'] not in archive_main,'Creative notes must not interrupt archive browsing'
 assert d['hub_url'] in archive_footer and CREATIVE_NOTES_LABEL in archive_footer
-assert archive.count('data-context-nav')==1,'Archive needs one creative-notes navigation entry'
+assert archive.count('data-context-nav')==1,'Work needs one creative-notes navigation entry'
 print('Context graph: PASS (visible relations, reciprocal links, creator identity, crawl metadata and heading regression)')

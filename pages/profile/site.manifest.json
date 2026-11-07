@@ -20,32 +20,18 @@
       "en": "Work"
     },
     {
-      "key": "archive",
-      "public_path": "/archive/",
-      "physical_path": "archive/index.html",
-      "ko": "아카이브",
-      "en": "Archive"
+      "key": "galaxy",
+      "public_path": "/galaxy/",
+      "physical_path": "galaxy/index.html",
+      "ko": "은하수",
+      "en": "Galaxy"
     },
     {
-      "key": "notes",
-      "public_path": "/notes/",
-      "physical_path": "notes/index.html",
-      "ko": "작품해설",
-      "en": "Work notes"
-    },
-    {
-      "key": "constellation",
-      "public_path": "/constellation/",
-      "physical_path": "constellation/index.html",
-      "ko": "별자리",
-      "en": "Constellation"
-    },
-    {
-      "key": "books",
-      "public_path": "/books/",
-      "physical_path": "books/index.html",
-      "ko": "저서·연구",
-      "en": "Books & research"
+      "key": "research",
+      "public_path": "/research/",
+      "physical_path": "research/index.html",
+      "ko": "연구",
+      "en": "Research"
     },
     {
       "key": "mirinae",
@@ -55,20 +41,24 @@
       "en": "Mirinae"
     },
     {
-      "key": "profile",
-      "public_path": "/profile/",
-      "physical_path": "profile/index.html",
-      "ko": "프로필",
-      "en": "Profile"
+      "key": "about",
+      "public_path": "/about/",
+      "physical_path": "about/index.html",
+      "ko": "소개",
+      "en": "About"
     }
   ],
   "catalog": "data/message-bodies.json",
   "generated_outputs": [
-    "archive/index.html",
-    "notes/index.html",
-    "sitemap.xml",
-    "constellation/index.html",
-    "constellation/graph.json"
+    "index.html",
+    "work/",
+    "research/",
+    "galaxy/index.html",
+    "galaxy/graph.json",
+    "mirinae/index.html",
+    "about/index.html",
+    "site/editorial-context.json",
+    "sitemap.xml"
   ],
   "editorial_pages": [
     "/work/hwasan-pan-v6/",
@@ -89,6 +79,15 @@
     "/archive/sibang-sibang/",
     "/notes/cheongnyeon-wangmandu/"
   ],
-  "additional_sitemap_paths": ["/coding/"],
-  "external_images": 0
+  "additional_sitemap_paths": [
+    "/coding/"
+  ],
+  "external_images": 0,
+  "moved": {
+    "/archive/": "/work/",
+    "/notes/": "/work/?kind=notes",
+    "/books/": "/research/",
+    "/profile/": "/about/",
+    "/constellation/": "/galaxy/"
+  }
 }

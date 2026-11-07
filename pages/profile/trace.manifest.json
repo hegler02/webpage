@@ -9,15 +9,15 @@
           "count": 1
         },
         {
-          "path": "pages/profile/archive/index.html",
-          "count": 1
-        },
-        {
           "path": "pages/profile/work/index.html",
           "count": 1
         },
         {
-          "path": "pages/profile/books/index.html",
+          "path": "pages/profile/galaxy/index.html",
+          "count": 1
+        },
+        {
+          "path": "pages/profile/research/index.html",
           "count": 1
         },
         {
@@ -25,17 +25,8 @@
           "count": 1
         },
         {
-          "path": "pages/profile/profile/index.html",
+          "path": "pages/profile/about/index.html",
           "count": 1
-        }
-      ]
-    },
-    "archive-route": {
-      "value": "\"https://mirinaeman.com/archive/\"",
-      "targets": [
-        {
-          "path": "pages/profile/archive/index.html",
-          "count": 3
         }
       ]
     },
@@ -56,48 +47,26 @@
         }
       ]
     },
-    "research-bibliography": {
-      "value": "class=\"research-list\"",
-      "targets": [
-        {
-          "path": "pages/profile/books/index.html",
-          "count": 2
-        }
-      ]
-    },
     "research-degree-priority": {
       "value": "data-research-list=\"theses\"",
       "targets": [
         {
-          "path": "pages/profile/books/index.html",
+          "path": "pages/profile/research/index.html",
           "count": 1
         }
       ]
     },
     "research-tabs": {
-      "value": "data-research-tabs",
+      "value": "id=\"research-tabs\"",
       "targets": [
         {
-          "path": "pages/profile/books/index.html",
-          "count": 1
-        },
-        {
-          "path": "pages/profile/app.js",
+          "path": "pages/profile/research/index.html",
           "count": 1
         }
       ]
     },
-    "research-projects": {
-      "value": "class=\"project-list\"",
-      "targets": [
-        {
-          "path": "pages/profile/books/index.html",
-          "count": 1
-        }
-      ]
-    },
-    "archive-sitemap": {
-      "value": "<loc>https://mirinaeman.com/archive/</loc>",
+    "money-introduction-sitemap": {
+      "value": "<loc>https://mirinaeman.com/archive/dont-you-want-my-money/</loc>",
       "targets": [
         {
           "path": "pages/profile/sitemap.xml",
@@ -105,8 +74,17 @@
         }
       ]
     },
-    "money-introduction-sitemap": {
-      "value": "<loc>https://mirinaeman.com/archive/dont-you-want-my-money/</loc>",
+    "work-route": {
+      "value": "<link rel=\"canonical\" href=\"https://mirinaeman.com/work/\">",
+      "targets": [
+        {
+          "path": "pages/profile/work/index.html",
+          "count": 1
+        }
+      ]
+    },
+    "work-sitemap": {
+      "value": "<loc>https://mirinaeman.com/work/</loc>",
       "targets": [
         {
           "path": "pages/profile/sitemap.xml",

@@ -1,0 +1,907 @@
+{
+"book:ai-agent": [
+-6.704,
+0.842,
+7.301
+],
+"book:coco": [
+5.962,
+-0.79,
+5.711
+],
+"book:content-guide": [
+3.211,
+0.829,
+5.756
+],
+"book:judgment-en": [
+9.704,
+0.163,
+7.344
+],
+"book:judgment-ko": [
+10.315,
+-0.287,
+5.254
+],
+"book:media-convergence": [
+0.024,
+-1.722,
+4.924
+],
+"book:music-video-guide": [
+1.853,
+-0.415,
+4.481
+],
+"book:pinky": [
+9.304,
+-0.727,
+-5.472
+],
+"book:sharon": [
+11.995,
+0.004,
+2.988
+],
+"collection:ai-music-archive": [
+0.048,
+1.244,
+-10.486
+],
+"collection:gangneung-sound": [
+2.998,
+0.739,
+-12.618
+],
+"collection:worldview-theme-song": [
+-9.84,
+0.31,
+-3.128
+],
+"concept:felt-time": [
+1.191,
+-1.002,
+-5.512
+],
+"concept:image-cinema": [
+-0.024,
+-0.771,
+-2.858
+],
+"concept:interpretive-space": [
+-2.204,
+-1.12,
+-3.349
+],
+"constellation:absurd": [
+8.722,
+0.582,
+-6.815
+],
+"constellation:ai-days": [
+2.24,
+-0.368,
+1.958
+],
+"constellation:body": [
+-3.802,
+-0.126,
+4.672
+],
+"constellation:build": [
+-2.596,
+1.297,
+4.957
+],
+"constellation:causal-chain": [
+4.578,
+1.18,
+-1.53
+],
+"constellation:code-film": [
+6.624,
+-0.061,
+-2.182
+],
+"constellation:comfort": [
+-2.341,
+-1.638,
+1.965
+],
+"constellation:drone": [
+2.979,
+1.67,
+-4.006
+],
+"constellation:family": [
+-5.889,
+0.693,
+-3.715
+],
+"constellation:groupchat": [
+-7.885,
+-0.376,
+-0.361
+],
+"constellation:heavy": [
+9.935,
+-0.469,
+-1.213
+],
+"constellation:hwasan": [
+4.4,
+-0.941,
+0.239
+],
+"constellation:jeju": [
+4.029,
+-0.631,
+-4.443
+],
+"constellation:judgment": [
+6.257,
+0.338,
+3.177
+],
+"constellation:meal": [
+-2.207,
+0.957,
+-2.849
+],
+"constellation:teach": [
+5.026,
+1.596,
+2.505
+],
+"constellation:wuxia": [
+7.801,
+0.361,
+0.351
+],
+"creator:joonho": [
+0.0,
+0.0,
+0.0
+],
+"essay:autumn-still-stories": [
+1.081,
+-1.29,
+-6.782
+],
+"essay:unfold-origin": [
+0.042,
+-2.462,
+-3.399
+],
+"film:hell-gate": [
+3.807,
+-0.352,
+-14.509
+],
+"film:love-is-pain": [
+1.944,
+0.268,
+-14.565
+],
+"film:yawil": [
+5.018,
+-0.057,
+-13.629
+],
+"judgment:autumn-subtitles": [
+-1.353,
+-1.545,
+-5.569
+],
+"judgment:unfold-vocal-texture": [
+1.406,
+-2.357,
+-1.79
+],
+"paper:android-digital-signage-2016": [
+-12.131,
+0.37,
+-5.462
+],
+"paper:bee-counting-system-2021": [
+-6.478,
+-0.652,
+-9.764
+],
+"paper:beehive-door-hornet-2022": [
+-7.515,
+-0.605,
+-10.911
+],
+"paper:beekeeping-loading-box-2022": [
+-7.707,
+0.128,
+-10.092
+],
+"paper:deep-learning-home-training-2021": [
+2.528,
+-0.253,
+8.97
+],
+"paper:education-metaverse-platform-2023": [
+0.445,
+0.906,
+7.484
+],
+"paper:honeybee-activity-2022": [
+-4.511,
+-0.573,
+-12.16
+],
+"paper:metaverse-360-lighting-2022": [
+-0.549,
+0.393,
+9.693
+],
+"paper:metaversity-doctoral-2022": [
+0.536,
+1.724,
+7.916
+],
+"paper:mobile-ar-digital-design-2011": [
+-1.996,
+-0.363,
+9.118
+],
+"paper:panorama-360-2020": [
+-0.916,
+-0.252,
+10.976
+],
+"paper:prompt-to-production-2025": [
+3.487,
+-0.474,
+3.566
+],
+"paper:queen-bee-sound-2023": [
+-5.812,
+0.191,
+-13.271
+],
+"paper:remote-education-metaverse-2022": [
+-1.364,
+1.355,
+8.248
+],
+"paper:social-network-cyworld-facebook-2011": [
+-4.185,
+-1.564,
+6.253
+],
+"paper:ucc-guideline-masters-2009": [
+-0.332,
+-0.95,
+7.351
+],
+"patent:bee-counter": [
+-5.852,
+0.249,
+-10.496
+],
+"patent:hornet-door": [
+-5.263,
+-0.628,
+-13.567
+],
+"patent:underwater-360": [
+0.621,
+-0.933,
+9.981
+],
+"patent:wearable": [
+-4.947,
+-0.921,
+-9.065
+],
+"product:able-canvas": [
+-6.75,
+-0.278,
+7.659
+],
+"product:creatoroo": [
+-6.342,
+0.258,
+10.109
+],
+"product:magicsrt": [
+-7.975,
+0.224,
+8.667
+],
+"product:ssulwha-world": [
+-0.614,
+-0.796,
+3.526
+],
+"project:convergence-game": [
+-4.747,
+-0.823,
+9.336
+],
+"project:did-operation": [
+-9.291,
+1.017,
+-8.465
+],
+"project:digital-radio": [
+-5.224,
+-0.456,
+-0.877
+],
+"project:document-security": [
+-12.044,
+0.734,
+8.011
+],
+"project:fitness-5g-mr": [
+4.884,
+0.277,
+9.941
+],
+"project:forklift-safety": [
+-1.563,
+-0.206,
+-11.656
+],
+"project:keris-metaverse-report": [
+1.351,
+1.282,
+8.488
+],
+"project:metaversity": [
+0.669,
+1.761,
+5.88
+],
+"project:mobile-stethoscope": [
+-10.178,
+-0.907,
+0.04
+],
+"project:mobile-vr": [
+-2.442,
+-0.183,
+13.21
+],
+"project:open-api-mashup": [
+-6.962,
+-1.081,
+0.43
+],
+"project:smart-beekeeping": [
+-4.11,
+0.094,
+-13.053
+],
+"project:smart-welfare": [
+11.627,
+0.353,
+6.481
+],
+"project:underwater-360-vr": [
+-1.549,
+-0.775,
+10.497
+],
+"project:vr-content-support": [
+-5.493,
+-1.002,
+11.025
+],
+"project:vr-frontier": [
+0.832,
+-0.762,
+12.068
+],
+"project:wearable-diagnosis": [
+-4.642,
+-0.026,
+-9.386
+],
+"project:xr-remote-education": [
+3.759,
+1.209,
+7.772
+],
+"topic:bees": [
+-6.084,
+-0.216,
+-11.63
+],
+"topic:metaverse": [
+-0.665,
+1.155,
+9.2
+],
+"topic:moving-image": [
+1.008,
+-0.463,
+8.289
+],
+"work:agu-girls": [
+-0.759,
+0.424,
+-1.535
+],
+"work:ai-judgment-lecture": [
+8.356,
+0.228,
+4.728
+],
+"work:ai-slave": [
+7.899,
+-0.304,
+1.232
+],
+"work:ai-slave-slide": [
+5.919,
+-0.055,
+1.693
+],
+"work:ai-ti-judgment": [
+7.049,
+0.056,
+6.342
+],
+"work:aidx-curriculum-agent": [
+3.957,
+2.11,
+1.252
+],
+"work:already-autumn": [
+-0.848,
+-1.099,
+-3.854
+],
+"work:astra-motion-study": [
+-3.239,
+-0.252,
+3.541
+],
+"work:baekje-renaissance": [
+-7.632,
+-0.126,
+4.664
+],
+"work:baekun-five-strike-action-cinema": [
+5.379,
+-0.462,
+-0.682
+],
+"work:bindaetteok-gentleman": [
+-0.587,
+-0.545,
+-5.053
+],
+"work:birthday-your-day": [
+-0.943,
+-1.357,
+0.404
+],
+"work:bq2-read-with-me": [
+-4.326,
+1.034,
+6.527
+],
+"work:chamgyoyuk": [
+11.948,
+-0.013,
+0.417
+],
+"work:cheongnyeon-wangmandu": [
+-2.046,
+1.456,
+-0.752
+],
+"work:coding-body-message": [
+-3.132,
+0.526,
+4.465
+],
+"work:coffee-confession-comic": [
+-0.424,
+0.894,
+-6.962
+],
+"work:daughter-twice-carousel": [
+-3.236,
+0.042,
+-1.326
+],
+"work:dji-drone-prep": [
+1.414,
+1.728,
+-1.402
+],
+"work:dji-fly-classroom": [
+1.207,
+1.804,
+-4.492
+],
+"work:dont-you-want-my-money": [
+7.112,
+0.738,
+-5.699
+],
+"work:dragon-toad": [
+8.797,
+0.115,
+-0.159
+],
+"work:drone-cinema-2026": [
+3.654,
+1.647,
+-5.729
+],
+"work:drone-fpv-100": [
+4.194,
+1.657,
+-2.849
+],
+"work:drone-matchup-cinema": [
+5.466,
+1.24,
+-2.891
+],
+"work:eagle-five-love": [
+-7.551,
+0.783,
+-4.03
+],
+"work:editorial-magazine-deck": [
+-11.306,
+-0.094,
+5.466
+],
+"work:electrical-drawing": [
+3.459,
+1.806,
+3.767
+],
+"work:fan-cinema-comparison": [
+2.945,
+0.065,
+-5.949
+],
+"work:farewell-sarang": [
+-5.47,
+1.396,
+-4.347
+],
+"work:first-fire-hackathon": [
+0.468,
+0.132,
+2.728
+],
+"work:first-night-exorcist": [
+-3.746,
+-0.936,
+-5.5
+],
+"work:first-pitch-200": [
+-3.562,
+-0.863,
+-2.616
+],
+"work:for-tomorrow": [
+-0.2,
+-1.775,
+1.259
+],
+"work:gileodo-geudaero-astra": [
+0.675,
+-0.831,
+1.375
+],
+"work:git-github-deployment-guide": [
+-5.356,
+1.596,
+5.292
+],
+"work:github-vercel-guide": [
+-6.236,
+1.112,
+4.924
+],
+"work:gongnyangi-era": [
+-9.434,
+-0.413,
+-1.184
+],
+"work:guardhouse-classroom": [
+4.271,
+1.688,
+4.664
+],
+"work:hangeul-everyday": [
+1.099,
+-0.042,
+-2.629
+],
+"work:harugyeol-ai-health": [
+-0.722,
+0.944,
+4.042
+],
+"work:home-was-inside": [
+-5.617,
+1.11,
+-6.452
+],
+"work:hwasan-insu": [
+2.27,
+-1.086,
+0.032
+],
+"work:hwasan-pan-v6": [
+2.314,
+-0.534,
+-0.932
+],
+"work:ilseon": [
+-3.048,
+-1.443,
+-1.667
+],
+"work:image-agent": [
+3.061,
+1.711,
+-1.018
+],
+"work:image-cinema-review": [
+4.229,
+0.211,
+-2.997
+],
+"work:jeju-we": [
+1.332,
+-0.605,
+-3.848
+],
+"work:jotdagado": [
+-1.579,
+-0.655,
+-1.614
+],
+"work:kimbujang-unsealed": [
+10.385,
+-0.661,
+-2.717
+],
+"work:last-resonance": [
+-5.012,
+-0.433,
+0.659
+],
+"work:listen-before-photo": [
+11.249,
+0.755,
+-5.023
+],
+"work:lotus-of-steel": [
+11.736,
+-0.965,
+-0.015
+],
+"work:media-body-video": [
+-5.879,
+-0.808,
+4.776
+],
+"work:media-message-body-deck": [
+-6.438,
+-0.05,
+3.225
+],
+"work:medium-body-lecture": [
+-4.473,
+-0.892,
+4.231
+],
+"work:message-body-plugins": [
+-1.882,
+0.285,
+5.995
+],
+"work:message-body-slide": [
+-1.439,
+0.163,
+3.153
+],
+"work:mirinae-motion-atelier": [
+-13.493,
+0.001,
+3.582
+],
+"work:mirinaeman-coding-lab": [
+2.013,
+0.854,
+4.064
+],
+"work:mirinaeman-theme": [
+3.442,
+-0.327,
+-2.439
+],
+"work:modern-myeongsimbogam": [
+0.15,
+-0.809,
+-9.75
+],
+"work:my-son": [
+-6.219,
+0.296,
+-5.594
+],
+"work:noreut-galchi-album": [
+-0.987,
+-0.184,
+-2.9
+],
+"work:on-stage": [
+2.389,
+-1.183,
+-1.61
+],
+"work:one-more-guest-album": [
+7.461,
+0.599,
+-8.532
+],
+"work:one-more-guest-single": [
+8.878,
+0.379,
+-9.225
+],
+"work:physical-ai-field-lab-ulsan-jeju": [
+4.152,
+1.023,
+-0.368
+],
+"work:prompt-atelier": [
+3.151,
+1.107,
+1.559
+],
+"work:rain-has-stopped": [
+-2.819,
+-1.36,
+-5.568
+],
+"work:red-light-run": [
+11.456,
+0.366,
+-6.211
+],
+"work:report-full-after": [
+6.511,
+1.167,
+4.03
+],
+"work:sai": [
+-4.38,
+-1.691,
+-3.879
+],
+"work:sara-vs-natasha": [
+11.99,
+-0.185,
+-1.212
+],
+"work:school-rule-knowledge-bot": [
+-3.575,
+1.544,
+3.652
+],
+"work:show-me-one-page": [
+2.097,
+-1.245,
+1.665
+],
+"work:sibang-sibang": [
+3.917,
+0.292,
+0.729
+],
+"work:snail-time-jeju": [
+3.999,
+-0.899,
+-5.903
+],
+"work:songbirds": [
+4.87,
+-1.276,
+-4.052
+],
+"work:songbirds-image-cinema": [
+2.58,
+-1.017,
+-3.295
+],
+"work:sound-design-lab": [
+-1.69,
+1.412,
+2.659
+],
+"work:suno-song-guide": [
+-3.347,
+1.303,
+1.684
+],
+"work:taste-expiration": [
+-3.423,
+1.498,
+-4.181
+],
+"work:today-i-believe": [
+-4.738,
+-1.899,
+2.595
+],
+"work:too-many-screws-left": [
+5.852,
+0.278,
+-7.194
+],
+"work:ttak-joa": [
+-1.471,
+-0.851,
+0.835
+],
+"work:ttaro-coffee": [
+-2.055,
+0.725,
+-4.829
+],
+"work:ttaro-coffee-image-cinema": [
+-1.973,
+0.137,
+-1.863
+],
+"work:tuna-man": [
+-1.105,
+-1.247,
+-1.59
+],
+"work:unfold-your-turn": [
+-0.275,
+-1.587,
+-2.423
+],
+"work:walk-with-you-ep01": [
+4.962,
+-0.099,
+13.623
+],
+"work:walk-with-you-ep02": [
+3.421,
+-0.102,
+14.175
+],
+"work:we-fixed-it": [
+-0.312,
+-0.77,
+-1.361
+],
+"work:wind-of-longing": [
+-0.017,
+-1.254,
+-3.388
+],
+"work:winter-dragon-war": [
+6.459,
+-0.667,
+-2.654
+],
+"work:wuxia-causal-prompt-study": [
+6.979,
+1.094,
+-0.342
+]
+}

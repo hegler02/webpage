@@ -26,11 +26,34 @@ def outputs():
         result[path] = re.sub(r'(<a\b[^>]*\bhref=")([^"]+)(")', replace, path.read_text())
     config_path = ROOT / 'vercel.json'
     config = json.loads(config_path.read_text())
-    existing = [r for r in config.get('redirects', []) if r['source'] not in aliases]
-    config['redirects'] = existing + [{'source': source, 'destination': target, 'permanent': True} for source, target in aliases.items()]
+    moved = dict(data.get('moved', {}))
+    for source, target in data.get('moved', {}).items():
+        physical = data['physical_root'].rstrip('/') + source
+        moved.update({physical: target, physical + 'index.html': target, physical + 'index': target})
+    existing = [r for r in config.get('redirects', []) if r['source'] not in aliases and r['source'] not in moved and not r['source'].startswith(data['physical_root'])]
+    config['redirects'] = existing + [{'source': source, 'destination': target, 'permanent': True} for source, target in {**aliases, **moved}.items()]
+    # A moved section keeps its sub-paths (hand-written introductions) but not its own front page.
+    gone = set(data.get('moved', {}))
+    config['rewrites'] = [r for r in config.get('rewrites', []) if r['source'] not in gone and r['source'] not in ('/constellation/:path*',)]
+    present = {r['source'] for r in config['rewrites']}
+    for route in data['routes']:
+        if route['public_path'] == '/':
+            continue
+        for source, destination in ((route['public_path'], data['physical_root'].rstrip('/') + route['public_path']), (route['public_path'] + ':path*', data['physical_root'].rstrip('/') + route['public_path'] + ':path*')):
+            if source not in present:
+                config['rewrites'].append({'source': source, 'destination': destination})
+    for source in ('/site/:path*',):
+        if source not in present:
+            config['rewrites'].append({'source': source, 'destination': data['physical_root'] + 'site/:path*'})
+    # Rewrites into folders that no longer exist would only hide a 404.
+    config['rewrites'] = [r for r in config['rewrites'] if r['source'] != '/archive.js' and (ROOT / r['destination'].lstrip('/').split(':')[0]).exists()]
+    redirects = {r['source'] for r in config['redirects']}
+    if '/constellation/:path*' not in redirects:
+        config['redirects'].append({'source': '/constellation/:path*', 'destination': '/galaxy/:path*', 'permanent': True})
+
     editorial = [{'source': path, 'destination': data['physical_root'].rstrip('/') + path} for path in data.get('editorial_pages', [])]
     editorial_sources = {entry['source'] for entry in editorial}
-    config['rewrites'] = editorial + [entry for entry in config.get('rewrites', []) if entry['source'] not in editorial_sources]
+    config['rewrites'] = editorial + [entry for entry in config['rewrites'] if entry['source'] not in editorial_sources]
     result[config_path] = json.dumps(config, ensure_ascii=False, indent=2) + '\n'
     return result
 

@@ -61,6 +61,11 @@
       "status": "proposed",
       "members": [
         {
+          "id": "baekje-renaissance",
+          "reason": "미디어는 메시지의 몸이라는 관점을 실제로 구현한 대표 사례입니다.",
+          "key": true
+        },
+        {
           "id": "media-message-body-deck",
           "reason": "이 관점과 그 검증법을 강의합니다."
         },
@@ -267,6 +272,22 @@
         {
           "id": "home-was-inside",
           "reason": "집이 마음 안의 온기였음을 깨닫습니다."
+        }
+      ]
+    },
+    {
+      "id": "groupchat",
+      "title": "단톡방에서 온 소식",
+      "text": "카카오톡 단톡방 소식을 노래와 이미지로 만든 자리.",
+      "status": "proposed",
+      "members": [
+        {
+          "id": "last-resonance",
+          "reason": "카카오톡 단톡방 소식을 노래와 이미지로 만들었습니다."
+        },
+        {
+          "id": "gongnyangi-era",
+          "reason": "카카오톡 단톡방 소식을 노래와 이미지로 만들었습니다."
         }
       ]
     },
@@ -544,20 +565,16 @@
   ],
   "solo": [
     {
-      "id": "last-resonance",
-      "why": "소개 문장만으로 묶을 근거를 찾지 못했습니다."
-    },
-    {
-      "id": "gongnyangi-era",
-      "why": "소개 문장만으로 묶을 근거를 찾지 못했습니다."
-    },
-    {
-      "id": "baekje-renaissance",
-      "why": "소개 문장만으로 묶을 근거를 찾지 못했습니다."
-    },
-    {
       "id": "modern-myeongsimbogam",
-      "why": "소개 문장만으로 묶을 근거를 찾지 못했습니다."
+      "why": "인터넷에 떠도는 명언을 구성해 본 기록으로, 아직 이어질 곳을 정하지 않았습니다."
+    },
+    {
+      "id": "paper:92367165c1d8d071",
+      "why": "소상공인용 저비용 디지털 사이니지 논문으로, 아직 이어질 곳을 정하지 않았습니다."
+    },
+    {
+      "id": "paper:72c303e92542ebdd",
+      "why": "싸이월드와 페이스북의 네트워크 구조를 비교한 논문으로, 아직 이어질 곳을 정하지 않았습니다."
     }
   ]
 }

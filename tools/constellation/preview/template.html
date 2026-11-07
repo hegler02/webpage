@@ -223,7 +223,7 @@ function start(){
 
  /* Stars */
  const sp=new Float32Array(nodes.length*3),sc=new Float32Array(nodes.length*3),ss=new Float32Array(nodes.length),sg=new Float32Array(nodes.length).fill(1);
- const sizeOf=n=>n.k==='creator'?9:n.k==='proposal'?4.2:isThought(n)?6+Math.min(n.d,14)*.3:n.d?4+Math.min(n.d,8)*.42:2.8;
+ const sizeOf=n=>n.key?9:n.k==='creator'?9:n.k==='proposal'?4.2:isThought(n)?6+Math.min(n.d,14)*.3:n.d?4+Math.min(n.d,8)*.42:2.8;
  nodes.forEach((n,i)=>{sp.set(n.p,i*3);const c=color(colorOf(n.k));sc.set([c.r,c.g,c.b],i*3);ss[i]=sizeOf(n);n.v=new T.Vector3(...n.p);});
  const starGeo=new T.BufferGeometry();starGeo.setAttribute('position',new T.BufferAttribute(sp,3));starGeo.setAttribute('color',new T.BufferAttribute(sc,3));starGeo.setAttribute('aSize',new T.BufferAttribute(ss,1));starGeo.setAttribute('aGlow',new T.BufferAttribute(sg,1));
  const starMat=mat(1);world.add(new T.Points(starGeo,starMat));
@@ -334,8 +334,8 @@ function start(){
   const budget=selected?26:width<820?12:hover?20:28;let shown=0;
   order.forEach(n=>{
    const el=pool.get(n),s=screen[n.i];
-   const eligible=(n.k!=='proposal'||showProposals)&&(rank(n)<4||(!anchor&&!filtered&&(n.k==='creator'||isThought(n)&&n.k!=='essay'||n.d>=4)));
-   const mini=!selected&&!filtered&&!hover&&!!n.img&&n.d>=5&&width>1100;const asCard=(!!(selected&&n.img&&n!==selected&&sel.has(n.id))||mini)&&width>820;el.classList.toggle('mini',mini);
+   const eligible=(n.k!=='proposal'||showProposals)&&(rank(n)<4||(!anchor&&!filtered&&(n.key||n.k==='creator'||isThought(n)&&n.k!=='essay'||n.d>=4)));
+   const mini=!selected&&!filtered&&!hover&&!!n.img&&(n.d>=5||n.key)&&width>1100;const asCard=(!!(selected&&n.img&&n!==selected&&sel.has(n.id))||mini)&&width>820;el.classList.toggle('mini',mini);
    if(el.classList.contains('card')!==asCard){el.classList.toggle('card',asCard);
     if(asCard&&!el.querySelector('img')){const img=new Image();img.src=n.img;img.alt='';el.prepend(img);}
     if(!asCard)el.querySelector('img')?.remove();

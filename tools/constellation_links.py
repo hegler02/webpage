@@ -135,6 +135,7 @@ def main():
     add.add_argument('id')
     add.add_argument('--to', required=True)
     add.add_argument('--reason', required=True)
+    add.add_argument('--key', action='store_true', help='창작자가 중요한 자료라고 한 기록')
     new = sub.add_parser('new')
     new.add_argument('id')
     new.add_argument('--title', required=True)
@@ -179,7 +180,10 @@ def main():
         return 0
     if args.command == 'add':
         c = find(links, args.to)
-        c['members'].append({'id': args.id, 'reason': args.reason})
+        member = {'id': args.id, 'reason': args.reason}
+        if args.key:
+            member['key'] = True
+        c['members'].append(member)
     elif args.command == 'new':
         links['constellations'].append({'id': args.id, 'title': args.title, 'text': args.text, 'status': 'proposed', 'members': []})
     elif args.command == 'pair':

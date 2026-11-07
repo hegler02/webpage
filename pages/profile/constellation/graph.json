@@ -9,6 +9,30 @@
       "url": "https://mirinaeman.com/profile/"
     },
     {
+      "id": "work:electrical-drawing",
+      "kind": "work",
+      "title": "전기도면 종합설계",
+      "summary": "회로를 직접 그리고 실제 컨베이어 도면을 읽으며, AutoCAD Electrical 전기도면 설계를 혼자서 익힙니다.",
+      "url": "https://mirinaeman.com/pages/electrical-drawing/",
+      "image": "/pages/profile/assets/thumbnails/electrical-drawing.webp",
+      "alt": "전기도면 종합설계 제목과 컨베이어 전력 회로 도면",
+      "year": "2026",
+      "tags": [
+        "electrical",
+        "education",
+        "autocad-electrical",
+        "plc",
+        "conveyor"
+      ],
+      "sourceLabel": "작품 아카이브",
+      "sections": [
+        {
+          "title": "작품의 기록",
+          "text": "회로를 직접 그리고 실제 컨베이어 도면을 읽으며, AutoCAD Electrical 전기도면 설계를 혼자서 익힙니다."
+        }
+      ]
+    },
+    {
       "id": "work:mirinaeman-theme",
       "kind": "work",
       "title": "미리내맨 — 미리내맨 주제곡",
@@ -2751,6 +2775,13 @@
     }
   ],
   "edges": [
+    {
+      "source": "work:electrical-drawing",
+      "target": "creator:joonho",
+      "label": "창작자",
+      "reason": "김준호의 공개 작품 아카이브에 등록된 기록입니다.",
+      "evidence": "https://mirinaeman.com/archive/"
+    },
     {
       "source": "work:mirinaeman-theme",
       "target": "creator:joonho",

@@ -1,0 +1,39 @@
+/* Sizes this course adds to the shared tokens. Colour, type and rhythm all come from tokens.css and typography-tokens.css. */
+:root{
+ /* Course layout */
+ --full-h:100dvh;
+ --full-w:100vw;
+ --rail:264px;
+ --copy-min:440px;
+ --copy-max:640px;
+ --reading:68ch;
+ --lesson-mark:40px;
+ --page-title:clamp(var(--sys-size-page),3.4vw,var(--space-10));
+ --cta-h:44px;
+ --term-figure:420px;
+ --figure-dock:34dvh;
+ --figure-dock-phone:28dvh;
+ --figure-card:min(78vw,420px);
+ --viewer-pad:var(--space-4);
+ /* Code */
+ --code-font:ui-monospace,Consolas,"Malgun Gothic",monospace;
+ --code-scale:.92em;
+ /* Tool pages */
+ --tool-max:1400px;
+ --tool-read:920px;
+ --tool-task-min:280px;
+ --tool-tile-min:225px;
+ --drawing-max:70vh;
+ --drawing-max-phone:58vh;
+ --sheet-figure:430px;
+ --pin:20px;
+ --pin-hit:5px;
+ --board-gap:clamp(var(--space-4),6vw,72px);
+ --terminal-h:48px;
+ --terminal-dot:6px;
+ --lead-width:3.5;
+ --table-min:430px;
+ --number-input:5em;
+ --bench-step:clamp(var(--space-3),3vw,var(--space-8));
+ --line-gauge:2px;
+}

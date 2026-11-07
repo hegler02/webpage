@@ -1,0 +1,83 @@
+/* Generated from 공간과 전기 public/classroom.css and workbench.css. Edit there. */
+:root{--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px}
+:root{
+ /* Colour: surfaces step up from page to control */
+ --wb-bg:#0f1317;
+ --wb-surface:#171c21;
+ --wb-raised:#20262d;
+ --wb-hover:#2a323b;
+ --wb-line:#2f3842;
+ --wb-line-strong:#46525e;
+ --wb-scrim:#000000a6;
+ --wb-label-bg:#0f1317cc;
+ /* Colour: text */
+ --wb-text:#e9edf1;
+ --wb-muted:#a9b4be;
+ /* Colour: one accent for what is on or current */
+ --wb-accent:#f6b93b;
+ --wb-accent-soft:#f6b93b1f;
+ --wb-accent-hover:#f6b93b33;
+ --wb-on-accent:#1a1405;
+ /* Colour: status */
+ --wb-ok:#5fd0a5;
+ --wb-off:#f08a5d;
+ --wb-danger:#ff8a80;
+ --wb-danger-soft:#ff8a801f;
+ /* Colour: form fields, text never inherits from the page */
+ --wb-field-bg:#20262d;
+ --wb-field-text:#e9edf1;
+ --wb-field-border:#46525e;
+ --wb-field-placeholder:#a9b4be;
+ /* Colour: drawing sheet before it is inverted to CAD model space */
+ --wb-sheet:#f8fafb;
+ --wb-sheet-ink:#183540;
+ --wb-sheet-muted:#566b75;
+ --wb-sheet-line:#d5e1e4;
+
+ /* Line height */
+ --wb-lh-heading:var(--sys-leading-heading);
+ --wb-lh-control:var(--sys-leading-control);
+ --wb-lh-body:var(--sys-leading-compact);
+
+ /* Vertical rhythm: heading to text, text to text, text to controls, card to card, section to section */
+ --wb-gap-text:var(--space-2);
+ --wb-gap-para:var(--space-3);
+ --wb-gap-action:var(--space-4);
+ --wb-gap-card:var(--space-3);
+ --wb-gap-section:var(--space-6);
+ /* Horizontal rhythm: between controls, between tools in a strip */
+ --wb-gap-control:var(--space-2);
+ --wb-gap-tool:var(--space-1);
+ /* Insets: panel edge, card edge, bars */
+ --wb-inset-panel:var(--space-4);
+ --wb-inset-card:var(--space-3);
+ --wb-inset-bar-x:var(--space-3);
+ --wb-inset-bar-y:var(--space-1);
+ --wb-inset-tool-y:6px;
+
+ /* Controls */
+ --wb-ctl-h:32px;
+ --wb-ctl-h-sm:24px;
+ --wb-ctl-pad-x:var(--space-3);
+ --wb-ctl-pad-x-sm:var(--space-2);
+ --wb-radius:6px;
+ --wb-radius-card:8px;
+ --wb-border:1px;
+ --wb-marker:2px;
+
+ /* Frame */
+ --wb-top:48px;
+ --wb-panel:400px;
+ --wb-tab-h:36px;
+ --wb-brand-mark:28px;
+ --wb-sheet-select:clamp(180px,20vw,300px);
+ --wb-sheet-select-narrow:200px;
+ --wb-sheet-select-phone:148px;
+ --wb-nav-pad:clamp(6px,.7vw,12px);
+ --wb-doc-max:1280px;
+ --wb-panel-narrow:320px;
+ --wb-strip-fade:32px;
+ --wb-stack-viewer:52dvh;
+ --wb-ctl-h-touch:40px;
+ --wb-tab-h-touch:44px;
+}

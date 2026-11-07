@@ -1,0 +1,49 @@
+/* Parts every page shares: page, top bar, controls, fields, tables, details. Only token references live here. */
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;background:var(--wb-bg);color:var(--wb-text);font-family:var(--sys-font-family);font-size:var(--sys-size-body);line-height:var(--wb-lh-body);word-break:keep-all;overflow-wrap:break-word}
+a{color:inherit}
+h1,h2,h3,h4,p,figure,dl,dd{margin:0}
+h1,h2,h3,h4{line-height:var(--wb-lh-heading);font-weight:var(--sys-weight-strong)}
+b,strong{font-weight:var(--sys-weight-strong)}
+img{max-width:100%}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+:focus-visible{outline:var(--wb-marker) solid var(--wb-accent);outline-offset:var(--wb-marker)}
+
+/* Controls */
+button,.button{display:inline-flex;align-items:center;justify-content:center;gap:var(--wb-gap-control);min-height:var(--wb-ctl-h);padding:var(--wb-inset-bar-y) var(--wb-ctl-pad-x);border:var(--wb-border) solid var(--wb-line-strong);border-radius:var(--wb-radius);background:var(--wb-raised);color:var(--wb-text);font:inherit;font-size:var(--sys-size-small);font-weight:var(--sys-weight-control);line-height:var(--wb-lh-control);text-decoration:none;cursor:pointer}
+button:hover:not(:disabled),.button:hover{background:var(--wb-hover)}
+button:disabled{color:var(--wb-muted);cursor:default}
+button[aria-pressed=true]{border-color:var(--wb-accent);background:var(--wb-accent-soft);color:var(--wb-accent)}
+button.primary,.button.primary{border-color:var(--wb-accent);background:var(--wb-accent);color:var(--wb-on-accent)}
+button.primary:hover:not(:disabled),.button.primary:hover{background:var(--wb-accent)}
+.links{display:flex;flex-wrap:wrap;gap:var(--wb-gap-control)}
+
+/* Fields: text never inherits from the page */
+select,input:not([type=checkbox],[type=radio]){min-height:var(--wb-ctl-h);max-width:100%;padding-inline:var(--wb-gap-control);border:var(--wb-border) solid var(--wb-field-border);border-radius:var(--wb-radius);background-color:var(--wb-field-bg);color:var(--wb-field-text);font:inherit;font-size:var(--sys-size-small);line-height:var(--wb-lh-control)}
+input::placeholder{color:var(--wb-field-placeholder)}
+input[type=checkbox],input[type=radio]{accent-color:var(--wb-accent)}
+select:disabled,input:disabled{color:var(--wb-muted)}
+
+/* Text parts */
+code{padding-inline:var(--wb-gap-tool);border-radius:var(--wb-radius);background:var(--wb-raised);font-family:var(--code-font);font-size:var(--code-scale)}
+table{width:100%;border-collapse:collapse;font-size:var(--sys-size-small)}
+:is(th,td){padding:var(--wb-gap-tool) var(--wb-gap-control);border-bottom:var(--wb-border) solid var(--wb-line);text-align:left;vertical-align:top}
+th{color:var(--wb-muted);font-weight:var(--sys-weight-label)}
+caption{margin-bottom:var(--wb-gap-tool);color:var(--wb-muted);font-size:var(--sys-size-caption);text-align:left}
+details{border:var(--wb-border) solid var(--wb-line);border-radius:var(--wb-radius-card);background:var(--wb-surface)}
+summary{padding:var(--wb-gap-control) var(--wb-inset-card);font-size:var(--sys-size-small);font-weight:var(--sys-weight-control);line-height:var(--wb-lh-control);cursor:pointer}
+details>:not(summary){margin-inline:var(--wb-inset-card)}
+details>:last-child:not(summary){margin-bottom:var(--wb-inset-card)}
+
+/* Notes: what to confirm, what to repair */
+.note-ok,.note-fix,.note-key{padding:var(--wb-inset-card);border-left:var(--wb-marker) solid var(--wb-ok);border-radius:var(--wb-radius);background:var(--wb-raised)}
+.note-fix{border-color:var(--wb-off)}
+.note-key{border-color:var(--wb-accent)}
+
+/* Drawing sheets stay on paper in every theme */
+.paper{border-radius:var(--wb-radius-card);background:var(--wb-sheet)}
+
+@media(pointer:coarse){
+ button,.button,select,input:not([type=checkbox],[type=radio]){min-height:var(--wb-ctl-h-touch)}
+}

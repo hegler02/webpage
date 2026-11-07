@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="공간과 전기">
+  <rect width="64" height="64" rx="14" fill="#12171c"/>
+  <path fill="#f2f4f6" d="M32 7 54 19.7 32 32.4 10 19.7Z"/>
+  <path fill="#6d7a87" d="M10 19.7 32 32.4V57.8L10 45.1Z"/>
+  <path fill="#39434d" d="M54 19.7V45.1L32 57.8V32.4Z"/>
+  <path fill="#f6b93b" stroke="#12171c" stroke-width="2" stroke-linejoin="round" d="M36 15 21 37H30.5L27.5 52 43 29H33.5Z"/>
+</svg>

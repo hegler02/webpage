@@ -1083,6 +1083,34 @@
       "latest_deployed_at": "2026-08-29T02:23:22Z"
     },
     {
+      "body_id": "electrical-drawing",
+      "title": "전기도면 종합설계",
+      "body_type": "KNOWLEDGEBODY",
+      "source_kinds": [
+        "dwg-drawings",
+        "education"
+      ],
+      "tags": [
+        "electrical",
+        "education",
+        "autocad-electrical",
+        "plc",
+        "conveyor"
+      ],
+      "message_sentence": "회로를 직접 그리고 실제 컨베이어 도면을 읽으며, AutoCAD Electrical 전기도면 설계를 혼자서 익힙니다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/electrical-drawing.webp",
+        "alt": "전기도면 종합설계 제목과 컨베이어 전력 회로 도면",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/electrical-drawing/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-11-07T05:23:36Z",
+      "latest_deployed_at": "2026-11-07T05:23:36Z"
+    },
+    {
       "body_id": "guardhouse-classroom",
       "title": "공간과 전기",
       "body_type": "KNOWLEDGEBODY",

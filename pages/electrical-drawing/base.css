@@ -1,10 +1,10 @@
 /* Parts every page shares: page, top bar, controls, fields, tables, details. Only token references live here. */
 *{box-sizing:border-box}
 html{color-scheme:dark}
-body{margin:0;background:var(--wb-bg);color:var(--wb-text);font-family:var(--sys-font-family);font-size:var(--sys-size-body);line-height:var(--wb-lh-body);word-break:keep-all;overflow-wrap:break-word}
+body{margin:0;background:var(--wb-bg);color:var(--wb-text);font-family:var(--sys-font-family);font-size:var(--sys-size-body);line-height:var(--wb-lh-body);letter-spacing:var(--sys-tracking-body);word-break:keep-all;overflow-wrap:break-word}
 a{color:inherit}
 h1,h2,h3,h4,p,figure,dl,dd{margin:0}
-h1,h2,h3,h4{line-height:var(--wb-lh-heading);font-weight:var(--sys-weight-strong)}
+h1,h2,h3,h4{line-height:var(--wb-lh-heading);font-weight:var(--sys-weight-strong);letter-spacing:var(--sys-tracking-heading)}
 b,strong{font-weight:var(--sys-weight-strong)}
 img{max-width:100%}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}

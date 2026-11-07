@@ -17,8 +17,8 @@
  --figure-card:min(78vw,420px);
  --viewer-pad:var(--space-4);
  /* Code */
- --code-font:ui-monospace,Consolas,"Malgun Gothic",monospace;
- --code-scale:.92em;
+ --code-font:var(--sys-font-family);
+ --code-scale:1em;
  /* Tool pages */
  --tool-max:1400px;
  --tool-read:920px;

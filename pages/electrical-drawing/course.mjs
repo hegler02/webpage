@@ -211,3 +211,5 @@ addEventListener('keydown',e=>{
  if(e.key==='ArrowLeft')document.querySelector('.pager a:not(.primary)')?.click();
 });
 render();
+// Fetch the rest of the typeface while idle, so moving to another screen never waits for letters.
+if(!navigator.connection?.saveData)setTimeout(()=>{document.fonts.forEach(f=>{f.load().catch(()=>{});});},1500);

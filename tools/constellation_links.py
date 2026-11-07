@@ -30,7 +30,8 @@ def load():
 
 def save(links):
     links['constellations'].sort(key=lambda c: c['id'])
-    DATA.write_text(json.dumps(links, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    with DATA.open('w', encoding='utf-8', newline='\n') as out:
+        out.write(json.dumps(links, ensure_ascii=False, indent=2) + '\n')
 
 
 def full(record):

@@ -78,7 +78,8 @@ def build_graph(catalog=None, editorial=None, links=None, records=None):
         edge(r['id'],creator['id'],'창작자' if menu=='work' else '저자','김준호의 공개 기록입니다.',ORIGIN+'/'+menu+'/')
     # Constellations and links the creator approved. Proposals stay out of the public graph.
     links=links if links is not None else json.loads((PROFILE/'data/constellation-links.json').read_text())
-    work_url={n['id']:n['url'] for n in nodes}
+    # A record outside the catalog is evidenced by its own page here, whatever its outside address is.
+    work_url={n['id']:(ORIGIN+'/'+KINDS[n['kind']][0]+'/'+n['id'].split(':',1)[1]+'/' if n['kind'] in KINDS else n['url']) for n in nodes}
     public_work=lambda record:record if ':' in record else 'work:'+record
     for c in links['constellations']:
         if c.get('status')!='approved': continue

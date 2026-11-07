@@ -58,7 +58,7 @@
       "id": "bees",
       "title": "벌통을 듣다",
       "text": "꿀벌의 소리와 움직임을 재는 연구, 특허와 과제.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "project:smart-beekeeping",
@@ -139,8 +139,7 @@
         },
         {
           "id": "paper:ucc-guideline-masters-2009",
-          "reason": "유튜브 같은 동영상 플랫폼을 만드는 가이드라인을 다룬 석사학위논문입니다.",
-          "status": "proposed"
+          "reason": "유튜브 같은 동영상 플랫폼을 만드는 가이드라인을 다룬 석사학위논문입니다."
         }
       ]
     },
@@ -148,7 +147,7 @@
       "id": "body-sensing",
       "title": "몸과 삶을 돌보는 기술",
       "text": "생체 신호와 운동을 재고 노인의 삶을 돕는 기기와 연구.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "project:wearable-diagnosis",
@@ -212,8 +211,7 @@
         },
         {
           "id": "book:ai-agent",
-          "reason": "자기만의 AI 에이전트를 직접 만드는 방법을 다룬 책입니다.",
-          "status": "proposed"
+          "reason": "자기만의 AI 에이전트를 직접 만드는 방법을 다룬 책입니다."
         }
       ]
     },
@@ -281,7 +279,7 @@
       "id": "code-systems",
       "title": "코드로 짠 시스템",
       "text": "보안과 API를 직접 코딩해 만든 시스템과 연구.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "project:document-security",
@@ -321,7 +319,7 @@
       "id": "directed",
       "title": "연출한 뮤직비디오",
       "text": "다른 음악가의 공식 뮤직비디오를 연출한 기록.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "film:hell-gate",
@@ -369,7 +367,7 @@
       "id": "fairy-tales",
       "title": "함께 쓴 동화",
       "text": "사랑라임맘과 AI로 함께 만든 동화책.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "book:sharon",
@@ -485,7 +483,7 @@
       "id": "iot",
       "title": "사물인터넷으로 잇다",
       "text": "센서와 통신으로 현장의 기계와 생명을 재는 시스템.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "project:forklift-safety",
@@ -561,13 +559,11 @@
         },
         {
           "id": "book:judgment-ko",
-          "reason": "제목 그대로 AI가 사람의 판단을 빌려가는 방식을 다룬 책입니다.",
-          "status": "proposed"
+          "reason": "제목 그대로 AI가 사람의 판단을 빌려가는 방식을 다룬 책입니다."
         },
         {
           "id": "book:judgment-en",
-          "reason": "같은 책의 영문판입니다.",
-          "status": "proposed"
+          "reason": "같은 책의 영문판입니다."
         }
       ]
     },
@@ -603,7 +599,7 @@
       "id": "metaversity",
       "title": "메타버시티",
       "text": "대학의 수업과 교육을 메타버스로 옮긴 연구와 개발.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "project:metaversity",
@@ -639,7 +635,7 @@
       "id": "products",
       "title": "판단을 돕는 도구",
       "text": "복잡한 과정을 이해 가능한 선택으로 바꾸는 제품.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "product:able-canvas",
@@ -687,8 +683,7 @@
         },
         {
           "id": "book:content-guide",
-          "reason": "생성형 AI로 콘텐츠를 만드는 법을 가르치는 교재입니다.",
-          "status": "proposed"
+          "reason": "생성형 AI로 콘텐츠를 만드는 법을 가르치는 교재입니다."
         }
       ]
     },
@@ -696,7 +691,7 @@
       "id": "vr",
       "title": "360도로 본다",
       "text": "360 영상, VR과 AR, 메타버스를 찍고 만드는 기술.",
-      "status": "proposed",
+      "status": "approved",
       "members": [
         {
           "id": "paper:panorama-360-2020",
@@ -836,84 +831,84 @@
       "b": "paper:beehive-door-hornet-2022",
       "label": "논문과 특허",
       "reason": "같은 말벌 소리 벌집문 시스템을 다룬 논문과 특허입니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "patent:bee-counter",
       "b": "paper:bee-counting-system-2021",
       "label": "논문과 특허",
       "reason": "같은 벌통 내부 꿀벌 이동량 측정을 다룬 논문과 특허입니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "project:metaversity",
       "b": "paper:metaversity-doctoral-2022",
       "label": "개발과 학위논문",
       "reason": "메타버시티 구축 과제와 그 개발 사례를 다룬 박사학위논문입니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "project:underwater-360-vr",
       "b": "patent:underwater-360",
       "label": "과제와 특허",
       "reason": "같은 수중 360 VR 촬영 시스템의 개발 과제와 특허입니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "project:wearable-diagnosis",
       "b": "patent:wearable",
       "label": "과제와 특허",
       "reason": "같은 웨어러블 생체진단장치의 개발 과제와 특허입니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "project:fitness-5g-mr",
       "b": "paper:deep-learning-home-training-2021",
       "label": "비대면 운동",
       "reason": "비대면 휘트니스 플랫폼 과제와 비대면 홈트레이닝 앱 논문입니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "book:judgment-ko",
       "b": "book:judgment-en",
       "label": "같은 책, 두 언어",
       "reason": "『AI는 어떻게 내 판단을 빌려가는가』의 한국어판과 영문판입니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "book:music-video-guide",
       "b": "paper:prompt-to-production-2025",
       "label": "생성형 AI 영상 제작",
       "reason": "생성형 AI로 영상을 만드는 과정을 다룬 책과 논문입니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "book:media-convergence",
       "b": "project:digital-radio",
       "label": "방송의 미래",
       "reason": "방송 매체의 미래를 다룬 공저와 디지털 라디오 활성화 연구입니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "collection:ai-music-archive",
       "b": "collection:worldview-theme-song",
       "label": "같은 음악 아카이브",
       "reason": "주제곡과 1,189곡의 기록이 같은 공개 음악 아카이브에 있습니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "paper:android-digital-signage-2016",
       "b": "project:did-operation",
       "label": "디지털 사이니지",
       "reason": "안드로이드 디지털 사이니지 논문과 DID 운용시스템 개발 과제입니다.",
-      "status": "proposed"
+      "status": "approved"
     },
     {
       "a": "collection:gangneung-sound",
       "b": "collection:ai-music-archive",
       "label": "같은 AI 음악 작업",
       "reason": "강릉 가게들의 로고송도 AI 음악으로 만들어 앨범으로 냈습니다.",
-      "status": "proposed"
+      "status": "approved"
     }
   ],
   "solo": [

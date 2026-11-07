@@ -84,10 +84,20 @@
 -0.368,
 1.958
 ],
+"constellation:bees": [
+-9.807,
+-0.36,
+-17.099
+],
 "constellation:body": [
 -3.802,
 -0.126,
 4.672
+],
+"constellation:body-sensing": [
+-1.418,
+9.816,
+2.242
 ],
 "constellation:build": [
 -2.596,
@@ -104,15 +114,30 @@
 -0.061,
 -2.182
 ],
+"constellation:code-systems": [
+-21.152,
+-0.655,
+7.268
+],
 "constellation:comfort": [
 -2.341,
 -1.638,
 1.965
 ],
+"constellation:directed": [
+6.486,
+-0.057,
+-22.578
+],
 "constellation:drone": [
 2.979,
 1.67,
 -4.006
+],
+"constellation:fairy-tales": [
+19.99,
+-1.61,
+2.51
 ],
 "constellation:family": [
 -5.889,
@@ -134,6 +159,11 @@
 -0.941,
 0.239
 ],
+"constellation:iot": [
+-4.911,
+-0.157,
+-23.79
+],
 "constellation:jeju": [
 4.029,
 -0.631,
@@ -149,10 +179,25 @@
 0.957,
 -2.849
 ],
+"constellation:metaversity": [
+1.812,
+5.51,
+15.095
+],
+"constellation:products": [
+-12.022,
+-0.608,
+15.085
+],
 "constellation:teach": [
 5.026,
 1.596,
 2.505
+],
+"constellation:vr": [
+-3.357,
+-1.856,
+17.7
 ],
 "constellation:wuxia": [
 7.801,

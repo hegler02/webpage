@@ -30,6 +30,7 @@ main.enter{animation:page-in var(--dur-slow) var(--curve) both}
 .sec>h2{font-size:var(--size-sec)}
 .sec>h3{margin-top:var(--gap-block)}
 .sec>p{margin-top:var(--gap-text);max-width:var(--read);color:var(--muted)}
+.sec>p.state{max-width:none;color:var(--text)}
 .sec>h2+*{margin-top:var(--gap-block)}
 .sec>h2+p{margin-top:var(--gap-text)}
 .sec>p+*{margin-top:var(--gap-para)}

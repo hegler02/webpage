@@ -1084,7 +1084,7 @@
     },
     {
       "body_id": "guardhouse-classroom",
-      "title": "공간과 전기 — 교육용 샘플 1·2",
+      "title": "공간과 전기",
       "body_type": "KNOWLEDGEBODY",
       "source_kinds": [
         "dwg-drawings",

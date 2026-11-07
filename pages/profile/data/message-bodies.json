@@ -1098,7 +1098,7 @@
         "2d-3d",
         "fire-safety"
       ],
-      "message_sentence": "경비실과 방 3개인 아파트에서 건축·재료·전기·소방·계산·안전점검을 도면과 3D로 연결하고, 배관과 신호의 경로를 따라가며 배우는 교육용 학습실입니다.",
+      "message_sentence": "건축·재료·구조·전기·소방·계산·안전점검을 하나의 모델 위에서 이어 가며 건물을 통합적으로 배웁니다.",
       "thumbnail": {
         "path": "assets/thumbnails/guardhouse-classroom.webp",
         "alt": "경비실 3D 외관과 공간과 전기 학습실 제목",

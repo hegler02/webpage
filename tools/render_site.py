@@ -246,7 +246,7 @@ class Site:
 {self.context(n)}</div>'''
         kind = {'paper': 'ScholarlyArticle', 'book': 'Book', 'patent': 'CreativeWork', 'product': 'SoftwareApplication'}.get(n['k'], 'CreativeWork')
         schema = {'@context': 'https://schema.org', '@type': kind, 'name': n['t'], 'description': n['s'], 'url': ORIGIN + n['page'], 'author': {'@type': 'Person', 'name': '김준호', 'url': ORIGIN + '/about/'}}
-        if n['u']:
+        if n['u'] and urlsplit(n['u']).path not in ('/work/', '/research/'):
             schema['sameAs'] = n['u']
         return page(n['page'], menu, f'{n["t"]} | 김준호', n['s'], main, image=n.get('img') or '/assets/images/profile-hero.webp', image_alt=n.get('alt', ''), schema=schema, og='article')
 

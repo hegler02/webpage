@@ -1,0 +1,78 @@
+/* 한 줄 개념: 고정된 고글 화면 하나, 스크롤은 스로틀. 게이트 하나가 한 차시다. */
+/* 사이트 토큰은 /pages/profile/site/tokens.css에서 온다. 여기서는 작품 고유값만 더한다. */
+:root {
+  color-scheme: dark;
+  --fpv-orange: #e96822;
+  --fpv-orange-deep: #b44818;
+  --fpv-orange-hot: #ff9048;
+  --fpv-steel: #2a3433;
+  --fpv-wall: #1b2424;
+  --fpv-floor-a: #141b1c;
+  --fpv-floor-b: #101617;
+  --fpv-window: #5f7f86;
+  --fpv-lamp: #dfe8e0;
+  --fpv-sign: #0b0e10;
+  --fpv-void: #03050a;
+  --fpv-dust: #a9bdf5;
+  --fpv-disc-hot: #ffe2b0;
+  --fpv-beat: 135dvh;
+  --fpv-beat-hero: 110dvh;
+  --fpv-beat-hole: 170dvh;
+  --fpv-copy: 30rem;
+  --fpv-copy-top: 34dvh;
+  --fpv-streak: .3;
+}
+* { box-sizing: border-box; }
+html { background: var(--fpv-void); }
+body { margin: 0; background: var(--fpv-void); color: var(--text); font: var(--weight-body) var(--size-body)/var(--lh-body) var(--sans); letter-spacing: var(--track-body); word-break: keep-all; overflow-wrap: anywhere; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: var(--marker) solid var(--fpv-orange-hot); outline-offset: var(--marker); }
+
+.top { position: fixed; z-index: 5; inset: 0 0 auto; display: flex; flex-wrap: nowrap; align-items: center; gap: var(--space-2); min-height: var(--top-h); padding-top: env(safe-area-inset-top, 0px); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.share-status { position: absolute; inset-block-start: 100%; inset-inline-start: max(16px, env(safe-area-inset-left, 0px)); display: grid; gap: var(--space-1); max-inline-size: calc(100% - 32px); margin: 0; padding: var(--space-1) var(--space-2); border-radius: var(--radius-s); background: var(--text); color: var(--bg); font-size: var(--size-small); }
+.share-status input { min-inline-size: 0; font: inherit; }
+.top[data-solid] { background: var(--glass); backdrop-filter: blur(var(--blur)); }
+.brand { margin-inline-end: auto; font-weight: var(--weight-strong); font-size: var(--size-small); white-space: nowrap; text-shadow: var(--halo); text-decoration: none; }
+.pill { display: inline-flex; align-items: center; min-height: var(--ctl-h); padding-inline: var(--space-3); border: var(--border) solid var(--rule); border-radius: var(--pill); background: var(--glass); font-size: var(--size-caption); font-weight: var(--weight-control); white-space: nowrap; cursor: pointer; text-decoration: none; }
+.pill[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+@media (max-width: 30rem) { .pill .long { display: none; } }
+@media (max-width: 22rem) { .pill { padding-inline: var(--space-2); } .top { gap: var(--space-1); } .brand { display: none; } .pill:first-of-type { margin-inline-start: auto; } }
+
+.story { position: relative; }
+.stage { position: sticky; top: 0; height: 100dvh; overflow: hidden; background: var(--fpv-void); }
+.stage canvas { display: block; width: 100%; height: 100lvh; }
+.stage[data-static] { background: var(--fpv-void) url("assets/start-poster.webp") center/cover no-repeat; }
+.stage[data-static] canvas { display: none; }
+.stage::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at var(--fpv-vx, 64%) var(--fpv-vy, 50%), transparent 52%, var(--fade-90) 118%); }
+.stage::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, var(--fade-90), var(--fade-0) 58%); }
+.osd { position: absolute; z-index: 2; inset-block-end: var(--space-6); inset-inline-end: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-wrap: nowrap; gap: var(--space-3); font-size: var(--size-caption); font-weight: var(--weight-control); font-variant-numeric: tabular-nums; letter-spacing: 0; white-space: nowrap; text-shadow: var(--halo); }
+.osd .warn { color: var(--fpv-orange-hot); }
+
+.beats { position: relative; z-index: 2; margin-top: -100dvh; }
+.beat { display: flex; align-items: flex-start; min-height: var(--fpv-beat); padding-left: max(var(--edge), env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.beat-hero { min-height: var(--fpv-beat-hero); }
+.beat-hole { min-height: var(--fpv-beat-hole); }
+.beat > div { position: sticky; top: var(--fpv-copy-top); max-width: var(--fpv-copy); display: grid; gap: var(--gap-text); text-shadow: var(--halo); }
+h1, h2 { margin: 0; font-size: var(--size-state); line-height: var(--lh-tight); letter-spacing: var(--track-heading); font-weight: var(--weight-strong); text-wrap: balance; }
+.lesson { font-size: var(--size-small); font-weight: var(--weight-strong); color: var(--fpv-orange-hot); }
+.say { margin: 0; font-size: var(--size-say); line-height: var(--lh-compact); text-wrap: pretty; }
+.hint { font-size: var(--size-small); color: var(--muted); }
+
+.beat-end { min-height: 100dvh; align-items: center; padding-block: calc(var(--top-h) + var(--space-6)) var(--space-10); }
+.beat-end > div { position: static; max-width: var(--wide); width: 100%; gap: var(--gap-block); }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--card-min)), 1fr)); gap: var(--gap-control); }
+.card { display: grid; gap: var(--space-1); align-content: start; padding: var(--inset-card); border: var(--border) solid var(--rule); border-radius: var(--radius); background: var(--glass); text-decoration: none; text-shadow: none; transition: border-color var(--dur-fast) var(--curve); }
+.card:hover { border-color: var(--fpv-orange-hot); }
+.card b { color: var(--fpv-orange-hot); font-size: var(--size-small); }
+.card strong { font-size: var(--size-title-s); line-height: var(--lh-tight); letter-spacing: var(--track-heading); }
+.card span { color: var(--muted); font-size: var(--size-small); line-height: var(--lh-compact); }
+
+@media (max-width: 48rem), (orientation: portrait) {
+  .stage::after { background: linear-gradient(0deg, var(--fade-90) 8%, var(--fade-0) 56%); }
+  .beat:not(.beat-end) { align-items: flex-end; }
+  .beat:not(.beat-end) > div { top: auto; bottom: var(--space-10); padding-bottom: var(--space-6); }
+  .osd { inset-block: calc(var(--top-h) + env(safe-area-inset-top, 0px)) auto; inset-inline: max(16px, env(safe-area-inset-left, 0px)) auto; }
+}
+@media (max-width: 48rem) { .cards { grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--book-min)), 1fr)); } }
+@media (max-width: 22rem) { .osd .wide-only { display: none; } }

@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="LiPo 배터리 사양과 상태를 읽고 기체, 현장, 승인 조건을 함께 확인하는 FPV 드론 6차시.">
+<title>6차시 · LiPo 배터리와 실기 안전 | FPV 첫 비행</title>
+<link rel="canonical" href="https://mirinaeman.com/pages/fpv-first-flight/lessons/06/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="6차시 · LiPo 배터리와 실기 안전 | FPV 첫 비행">
+<meta property="og:description" content="LiPo 배터리 사양과 상태를 읽고 기체, 현장, 승인 조건을 함께 확인하는 FPV 드론 6차시.">
+<meta property="og:url" content="https://mirinaeman.com/pages/fpv-first-flight/lessons/06/">
+<meta property="og:image" content="https://mirinaeman.com/pages/fpv-first-flight/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="어두운 공간의 주황색 게이트 너머로 빛나는 고리의 블랙홀이 보이는 FPV 시점 장면">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="6차시 · LiPo 배터리와 실기 안전 | FPV 첫 비행">
+<meta name="twitter:description" content="LiPo 배터리 사양과 상태를 읽고 기체, 현장, 승인 조건을 함께 확인하는 FPV 드론 6차시.">
+<meta name="twitter:image" content="https://mirinaeman.com/pages/fpv-first-flight/og.jpg">
+<link rel="stylesheet" href="/pages/profile/fonts/pretendard-1.3.9/pretendard-variable.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="full-lesson practical-lesson lesson-06">
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="camera-icon" viewBox="0 0 120 100">
+      <path d="M23 28h74a7 7 0 0 1 7 7v36a7 7 0 0 1-7 7H23a7 7 0 0 1-7-7V35a7 7 0 0 1 7-7Z" fill="#e3e3dd" stroke="currentColor" stroke-width="3"/>
+      <path d="M41 28l7-9h24l7 9M24 78v8m72-8v8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="60" cy="53" r="18" fill="#252522" stroke="currentColor" stroke-width="2"/>
+      <circle cx="60" cy="53" r="10" fill="#79807f"/>
+      <circle cx="57" cy="50" r="3" fill="#f4f4f0"/>
+    </symbol>
+    <symbol id="vtx-icon" viewBox="0 0 120 100">
+      <rect x="21" y="38" width="77" height="43" rx="4" fill="#d9dad4" stroke="currentColor" stroke-width="3"/>
+      <rect x="42" y="47" width="33" height="25" rx="3" fill="#535450"/>
+      <path d="M30 50h7m-7 9h7m-7 9h7m43-18h8m-8 9h8m-8 9h8M94 37l8-17m0 0 5-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="goggles-icon" viewBox="0 0 120 100">
+      <path d="M20 38Q60 23 100 38L108 59Q106 77 93 78H75L60 66 45 78H27Q14 77 12 59Z" fill="#deded8" stroke="currentColor" stroke-width="3"/>
+      <path d="M22 46Q60 35 98 46L103 57Q101 68 91 68H76L60 56 44 68H29Q19 68 17 57Z" fill="#333531"/>
+      <path d="M28 38L24 20m67 17 5-17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="controller-icon" viewBox="0 0 120 100">
+      <path d="M35 31h50q12 0 17 15l5 23q2 13-11 13-5 0-10-5l-12-12H46L34 77q-5 5-10 5-13 0-11-13l5-23q5-15 17-15Z" fill="#deded8" stroke="currentColor" stroke-width="3"/>
+      <path d="M60 31V15m-6 0h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="51" r="9" fill="#535450"/><circle cx="80" cy="51" r="9" fill="#535450"/>
+      <circle cx="40" cy="51" r="3" fill="#fff"/><circle cx="80" cy="51" r="3" fill="#fff"/>
+    </symbol>
+    <symbol id="rx-icon" viewBox="0 0 120 100">
+      <rect x="30" y="40" width="60" height="33" rx="4" fill="#d9dad4" stroke="currentColor" stroke-width="3"/>
+      <rect x="44" y="47" width="29" height="19" rx="2" fill="#535450"/>
+      <path d="M82 40l9-17m0 0 14-6M35 73v9m9-9v9m9-9v9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="arrow-right" viewBox="0 0 100 16" preserveAspectRatio="none">
+      <path d="M1 8H97m-7-5 7 5-7 5" stroke="currentColor" fill="none" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+    </symbol>
+    <symbol id="arrow-air" viewBox="0 0 100 16" preserveAspectRatio="none">
+      <path d="M1 8H96" stroke="currentColor" fill="none" stroke-width="1.8" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/>
+      <path d="m90 3 7 5-7 5" stroke="currentColor" fill="none" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+    </symbol>
+
+  </defs>
+</svg>
+<header class="site-head">
+  <div class="wrap head-inner">
+    <div class="identity"><a class="home-link" href="../../"><strong>FPV 드론</strong></a><span>6차시 · 배터리와 실기 안전</span></div>
+    <div class="head-actions">
+      <button class="control" id="share" type="button" aria-label="페이지 공유" hidden><span class="share-long">페이지&nbsp;</span>공유</button>
+      <button class="control" id="open-toc" type="button" aria-haspopup="dialog" hidden>목차</button>
+    </div>
+    <p class="share-status" id="share-status" role="status" hidden></p>
+  </div>
+</header>
+<main class="wrap">
+  <article class="slide" id="s01" aria-labelledby="title-01">
+    <header class="slide-head">
+      <p class="kicker">01 · 시뮬레이터에서 실기로</p>
+      <h1 id="title-01" tabindex="-1">실기체 앞에서 멈춘다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">기체는 작업대 위, 배터리는 분리된 상태 <small>· 설명용 생성 이미지</small></figcaption><div class="practical-body practical-split"><div class="practical-image shared-anchor"><img class="photograph" src="../../assets/fpv-bench.webp" alt="배터리를 분리하고 프로펠러를 떼어 둔 FPV 기체" decoding="sync"></div><div class="practical-notes"><div class="cue"><h2>01 · 배터리</h2><p>기체에 맞는 팩인지 읽는다.</p></div><div class="cue"><h2>02 · 기체</h2><p>고정 상태와 연결을 확인한다.</p></div><div class="cue"><h2>03 · 현장</h2><p>비행 위치와 진행 조건을 살핀다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">코스를 완주했다면 이제 실제 기체를 준비합니다. 배터리, 기체, 장소의 조건이 갖춰졌는지 순서대로 확인합니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/guides/current/Safety" target="_blank" rel="noopener noreferrer">Betaflight · 작업대 안전 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s02" aria-labelledby="title-02">
+    <header class="slide-head">
+      <p class="kicker">02 · 라벨</p>
+      <h1 id="title-02" tabindex="-1">배터리 라벨을 읽는다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">라벨 예시 · LiPo / 4S / 1500 mAh</figcaption><div class="practical-body practical-split"><div class="practical-image shared-anchor"><img class="photograph" src="../../assets/fpv-pack.webp" alt="라벨을 읽는 설명에 쓰인 LiPo 팩 생성 이미지" decoding="sync"></div><div class="practical-notes"><div class="cue"><strong class="spec-value">4S</strong><p>직렬로 연결된 셀 4개</p></div><div class="cue"><strong class="spec-value">1500 mAh</strong><p>팩의 용량 표시</p></div><p>배터리 종류와 셀 수를 기체 사양과 대조한다.</p></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">먼저 배터리 종류(LiPo, 리튬 폴리머)와 셀 수가 기체의 요구 조건에 맞는지 확인합니다. 용량 표시는 그다음에 읽습니다.</p>
+      <p class="credit"><a href="https://oscarliang.com/lipo-battery-guide/" target="_blank" rel="noopener noreferrer">Oscar Liang · FPV LiPo 가이드 ↗</a> · 라벨 값은 설명 예시</p>
+    </div>
+  </article>
+
+  <article class="slide" id="s03" aria-labelledby="title-03">
+    <header class="slide-head">
+      <p class="kicker">03 · 커넥터</p>
+      <h1 id="title-03" tabindex="-1">두 커넥터의 역할</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">셀이 여러 개인 LiPo의 두 리드선</figcaption><div class="practical-pair"><div class="practical-cell cue"><div class="practical-image diagram-art"><svg viewBox="0 30 400 180" role="img" aria-label="굵은 빨강과 검정 전선 두 가닥이 들어가는 XT60 커넥터 도해">
+  <path class="wire-plus" d="M0 88H180"/><path class="wire-minus" d="M0 152H180"/>
+  <path class="connector-body" d="M170 52H310L346 88V152L310 188H170Z"/>
+  <circle class="connector-pin" cx="264" cy="88" r="20"/><circle class="connector-pin" cx="264" cy="152" r="20"/>
+  <text class="diagram-label wire-mark" x="40" y="66">+</text><text class="diagram-label wire-mark" x="40" y="200">−</text>
+</svg></div><b>주 전원</b><h2>XT60 예시</h2><p>기체에 전력을 공급하는 굵은 두 가닥.</p></div><div class="practical-cell cue"><div class="practical-image diagram-art"><svg viewBox="0 30 400 180" role="img" aria-label="가는 전선 다섯 가닥이 들어가는 4S용 JST-XH 밸런스 커넥터 도해">
+  <path class="wire-thin wire-thin-plus" d="M0 70H210"/><path class="wire-thin" d="M0 95H210"/><path class="wire-thin" d="M0 120H210"/><path class="wire-thin" d="M0 145H210"/><path class="wire-thin wire-thin-minus" d="M0 170H210"/>
+  <rect class="balance-body" x="200" y="48" width="130" height="144" rx="6"/>
+  <path class="balance-slot" d="M236 70H300M236 95H300M236 120H300M236 145H300M236 170H300"/>
+</svg></div><b>밸런스</b><h2>JST-XH 예시</h2><p>호환 충전기가 각 셀의 전압을 읽는 가는 여러 가닥. 4S는 5가닥이다.</p></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">두 커넥터는 용도가 다릅니다. 주 전원은 팩의 전력을 전달하고 밸런스 리드는 셀별 전압 확인에 사용합니다.</p>
+      <p class="credit"><a href="https://oscarliang.com/lipo-battery-guide/" target="_blank" rel="noopener noreferrer">Oscar Liang · FPV LiPo 가이드 ↗</a> · 커넥터 도해</p>
+    </div>
+  </article>
+
+  <article class="slide" id="s04" aria-labelledby="title-04">
+    <header class="slide-head">
+      <p class="kicker">04 · 충전과 보관</p>
+      <h1 id="title-04" tabindex="-1">충전과 보관</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">충전기 연결 도해 · 사용 팩과 충전기 설명서를 대조</figcaption><div class="practical-body practical-split"><div class="schematic charge-map">
+  <div class="block"><strong>LiPo 팩</strong><span>4S 예시</span></div>
+  <div class="leads">
+    <div class="lead"><svg viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true"><path class="wire-plus" d="M0 6H100"/><path class="wire-minus" d="M0 14H100"/></svg><span>주 전원</span></div>
+    <div class="lead"><svg viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true"><path class="wire-thin wire-thin-plus" d="M0 2H100"/><path class="wire-thin" d="M0 6H100M0 10H100M0 14H100"/><path class="wire-thin wire-thin-minus" d="M0 18H100"/></svg><span>밸런스</span></div>
+  </div>
+  <div class="block app"><strong>충전기</strong><span class="readout">LiPo · 4S</span><span class="readout accent">밸런스</span><span class="readout dim">보관</span></div>
+</div><div class="practical-notes"><div class="cue"><h2>밸런스 충전</h2><p>충전 전에 배터리 종류, 셀 수, 제조사 충전 조건을 확인하고 충전 중 자리를 지킨다.</p></div><div class="cue"><h2>보관 모드</h2><p>장기간 보관할 때는 팩 설명서의 보관 조건을 따른다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">충전과 보관은 목적이 다릅니다. 설정값과 연결 순서는 수업에 사용하는 팩과 충전기의 설명서에서 확인합니다.</p>
+      <p class="credit"><a href="https://genstattu.com/content/instock/Lipo-Manual.pdf" target="_blank" rel="noopener noreferrer">Gens Ace/Tattu · LiPo 설명서 ↗</a> · <a href="https://oscarliang.com/lipo-battery-guide/" target="_blank" rel="noopener noreferrer">Oscar Liang · FPV LiPo 가이드 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s05" aria-labelledby="title-05">
+    <header class="slide-head">
+      <p class="kicker">05 · 이상 판정</p>
+      <h1 id="title-05" tabindex="-1">이상이 보이면 보류</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">왼쪽은 정상 외형 예시 · 오른쪽은 팽창 설명용 이미지</figcaption><div class="practical-body practical-split"><div class="practical-image "><img src="../../assets/fpv-pack-condition.webp" alt="정상 모양과 팽창한 배터리를 비교한 설명용 생성 이미지" decoding="sync"></div><div class="practical-notes"><div class="cue"><h2>팽창·변형</h2><p>팩 외형을 여러 방향에서 살핀다.</p></div><div class="cue"><h2>피복·리드선 손상</h2><p>찍힘, 찢어짐, 노출된 전선을 확인한다.</p></div><div class="cue"><h2>이상 발견</h2><p>사용과 충전을 중단하고 수업 담당자에게 알린다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">충돌 뒤에는 팩과 케이블을 다시 봅니다. 팽창이나 피복·리드선 손상이 보이면 사용과 충전을 보류합니다.</p>
+      <p class="credit"><a href="https://genstattu.com/content/instock/Lipo-Manual.pdf" target="_blank" rel="noopener noreferrer">Gens Ace/Tattu · LiPo 설명서 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s06" aria-labelledby="title-06">
+    <header class="slide-head">
+      <p class="kicker">06 · 기체 점검</p>
+      <h1 id="title-06" tabindex="-1">전원 연결 전 점검</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">전원 연결 전 확인 위치 <small>· 설명용 생성 이미지</small></figcaption><div class="practical-body practical-split"><div class="practical-image shared-anchor"><img class="photograph" src="../../assets/fpv-airframe.webp" alt="프로펠러를 분리한 기체 상부와 배터리 스트랩" decoding="sync"></div><div class="practical-notes"><div class="cue"><h2>프레임과 프로펠러</h2><p>균열, 느슨함, 손상 유무를 확인한다.</p></div><div class="cue"><h2>배터리 스트랩</h2><p>팩을 고정할 위치와 스트랩 상태를 본다.</p></div><div class="cue"><h2>배선</h2><p>프로펠러가 도는 범위에서 배선이 벗어나 있는지 확인한다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">전원이 분리된 상태에서 기체를 살핍니다. 고정이 느슨하거나 배선이 회전 범위에 들어가면 진행을 보류합니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/guides/current/Safety" target="_blank" rel="noopener noreferrer">Betaflight · 작업대 안전 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s07" aria-labelledby="title-07">
+    <header class="slide-head">
+      <p class="kicker">07 · 작업대와 이륙장</p>
+      <h1 id="title-07" tabindex="-1">작업대와 이륙장</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">같은 기체 · 다른 점검 조건</figcaption><div class="practical-pair"><div class="practical-cell cue"><div class="practical-image "><img src="../../assets/fpv-airframe.webp" alt="프로펠러가 분리된 기체 위쪽 설명 이미지" decoding="sync"></div><b>작업대</b><h2>프로펠러 분리</h2><p>앱에서 방향, 조종 입력, 스위치를 확인한다. 프로펠러를 분리한 상태로 작업한다.</p></div><div class="practical-cell cue"><b>이륙장</b><h2>사람과 링크 확인</h2><p>교관과 기체·링크·주변을 확인하고 지정된 위치에서 이륙 여부를 판단한다.</p></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">작업대 설정과 현장 이륙은 서로 다른 단계입니다. 현장에서는 조종기 입력과 고글 영상을 각각 확인합니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/guides/current/Safety" target="_blank" rel="noopener noreferrer">Betaflight · 작업대 안전 ↗</a> · <a href="https://drone.onestop.go.kr/" target="_blank" rel="noopener noreferrer">드론원스톱 · 비행가능지역 조회 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s08" aria-labelledby="title-08">
+    <header class="slide-head">
+      <p class="kicker">08 · 비행 장소</p>
+      <h1 id="title-08" tabindex="-1">비행 장소를 확인한다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">공역 조회 순서 · 왼쪽 지도는 개념도</figcaption><div class="practical-body practical-split"><div class="practical-diagram "><svg viewBox="0 0 560 340" role="img" aria-label="예정 위치와 주변 공역의 겹침을 확인하는 개념 지도. 실제 비행 승인을 표시하지 않는다">
+  <rect x="12" y="15" width="536" height="300" rx="12" class="diagram-surface"/>
+  <path d="M20 226Q120 176 186 204T340 210T547 160" stroke="var(--icon-medium)" stroke-width="12" fill="none" opacity=".42"/>
+  <path d="M144 15Q134 123 205 157T255 315 M425 15Q416 108 463 188T500 315 M12 88L548 104" stroke="var(--paper)" stroke-width="7" fill="none"/>
+  <circle cx="366" cy="129" r="111" class="diagram-safe" stroke="var(--signal)" stroke-dasharray="8 7" stroke-width="2"/>
+  <circle cx="255" cy="202" r="12" class="diagram-point"/>
+  <text x="238" y="254" class="diagram-label " text-anchor="middle">예정 위치</text><text x="378" y="126" class="diagram-label " text-anchor="middle">공역 경계</text><text x="441" y="284" class="diagram-label diagram-muted" text-anchor="middle">개념도</text></svg></div><div class="practical-notes practical-links"><ol class="practical-list"><li class="cue">드론원스톱에서 비행가능지역 지도를 연다.</li><li class="cue">예정 위치와 주변 공역(비행 규칙이 정해진 하늘의 구역)을 확인한다.</li><li class="cue">시간, 고도, 기체 등 실제 조건으로 승인 필요 여부를 확인한다.</li></ol><a class="control" href="https://drone.onestop.go.kr/" target="_blank" rel="noopener noreferrer">드론원스톱 열기 ↗</a></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">예정 위치를 먼저 특정합니다. 비행 당일에는 공식 지도와 안내에서 적용 조건을 다시 확인합니다.</p>
+      <p class="credit"><a href="https://drone.onestop.go.kr/" target="_blank" rel="noopener noreferrer">드론원스톱 · 비행가능지역 조회 ↗</a> · <a href="https://drone.onestop.go.kr/board/notice/read?id=62" target="_blank" rel="noopener noreferrer">드론원스톱 · 비행승인 안내 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s09" aria-labelledby="title-09">
+    <header class="slide-head">
+      <p class="kicker">09 · 육안 확인</p>
+      <h1 id="title-09" tabindex="-1">고글 밖의 가시권</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">조종 위치에서 보는 범위 · 현장 개념도</figcaption><div class="practical-body practical-split"><div class="practical-diagram "><svg viewBox="0 0 560 340" role="img" aria-label="조종 위치에서 기체까지의 가시선과 장애물 뒤 사각지대를 비교한 도해">
+  <rect x="12" y="34" width="536" height="250" rx="12" class="diagram-surface"/>
+  <path d="M76 220L472 91L472 239Z" class="diagram-safe"/>
+  <path d="M76 220L345 125" class="diagram-path"/>
+  <path d="M76 220L472 80" class="diagram-ghost"/>
+  <rect x="395" y="110" width="38" height="130" rx="4" fill="var(--icon-medium)"/>
+  <circle cx="76" cy="220" r="12" class="diagram-point"/>
+  <circle cx="345" cy="125" r="12" class="diagram-point"/>
+  <circle cx="472" cy="80" r="10" fill="var(--icon-medium)"/>
+  <text x="79" y="269" class="diagram-label " text-anchor="middle">조종 위치</text><text x="302" y="95" class="diagram-label " text-anchor="middle">기체</text><text x="462" y="55" class="diagram-label diagram-muted" text-anchor="middle">사각지대</text></svg></div><div class="practical-notes"><div class="cue"><h2>고글 화면</h2><p>기체 카메라가 향한 부분을 본다.</p></div><div class="cue"><h2>현장 시점</h2><p>조종 위치에서 기체와 주변을 육안으로 확인할 수 있는지 살핀다.</p></div><div class="cue"><h2>특별비행승인</h2><p>야간과 비가시권(눈으로 볼 수 없는 범위) 계획은 공식 안내에서 별도로 확인한다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">허가 없이는 조종자가 눈으로 볼 수 있는 범위에서만 조종합니다. 장애물로 기체가 가려지는 구간은 출발 전에 살핍니다.</p>
+      <p class="credit"><a href="https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1025929301&amp;chrClsCd=010202&amp;ancYnChk=" target="_blank" rel="noopener noreferrer">국가법령정보센터 · 시행규칙 제310조 ↗</a> · <a href="https://drone.onestop.go.kr/board/notice/read?id=62" target="_blank" rel="noopener noreferrer">드론원스톱 · 비행승인 안내 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s10" aria-labelledby="title-10">
+    <header class="slide-head">
+      <p class="kicker">10 · 최종 판단</p>
+      <h1 id="title-10" tabindex="-1">이륙할지 결정한다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">이륙 전 점검표 · 미확인 또는 이상이 있으면 보류</figcaption><div class="practical-four"><div class="practical-cell cue"><b>01</b><h2>배터리</h2><p>기체에 맞는 사양인지, 외관과 리드선에 이상이 없는지 확인한다.</p></div><div class="practical-cell cue"><b>02</b><h2>기체·링크</h2><p>기체 고정 상태, 조종 입력과 고글 영상이 정상인지 확인한다.</p></div><div class="practical-cell cue"><b>03</b><h2>현장</h2><p>사람과 장애물, 바람, 이착륙 위치, 육안 확인 범위를 살핀다.</p></div><div class="practical-cell cue"><b>04</b><h2>공역·승인</h2><p>예정 위치·시간을 기준으로 필요한 승인과 현장 조건을 확인한다.</p></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">배터리, 기체·링크, 현장, 공역·승인에 이상이나 미확인 항목이 있으면 이륙을 보류합니다. 7차시에서는 기체가 조종 입력을 어떻게 읽는지 확인합니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/guides/current/Safety" target="_blank" rel="noopener noreferrer">Betaflight · 작업대 안전 ↗</a> · <a href="https://drone.onestop.go.kr/" target="_blank" rel="noopener noreferrer">드론원스톱 · 비행가능지역 조회 ↗</a></p>
+    </div>
+  </article>
+</main>
+<footer class="site-foot" id="navigation" hidden>
+  <nav class="wrap foot-inner" aria-label="슬라이드 이동">
+    <button class="control" id="previous" type="button"><span aria-hidden="true">←</span> 이전</button>
+    <a class="control" id="previous-lesson" href="../05/" aria-label="이전 차시" hidden><span aria-hidden="true">←</span> 이전<span class="lesson-word"> 차시</span></a>
+    <output class="page-number" id="page-number" aria-live="polite" aria-atomic="true"></output>
+    <button class="control primary" id="next" type="button">다음 <span aria-hidden="true">→</span></button>
+    <a class="control primary" id="next-lesson" href="../07/" aria-label="다음 차시" hidden>다음<span class="lesson-word"> 차시</span> <span aria-hidden="true">→</span></a>
+  </nav>
+</footer>
+<dialog id="toc" aria-labelledby="toc-title">
+  <div class="toc-head">
+    <h2 id="toc-title">6차시 목차</h2>
+    <button class="control" id="close-toc" type="button">닫기</button>
+  </div>
+  <ol class="toc-list" id="toc-list"></ol>
+  <h3 class="toc-section">전체 차시</h3>
+  <ol class="toc-list"><li><a href="../01/"><span>01</span>1차시 · 드론의 눈으로 본다</a></li><li><a href="../02/"><span>02</span>2차시 · 스틱에서 모터까지</a></li><li><a href="../03/"><span>03</span>3차시 · 고글 영상은 왜 끊길까?</a></li><li><a href="../04/"><span>04</span>4차시 · 시뮬레이터에서 첫 코스</a></li><li><a href="../05/"><span>05</span>5차시 · Angle과 Acro</a></li><li><a href="../06/" aria-current="page"><span>06</span>6차시 · LiPo 배터리와 실기 안전<small>현재</small></a></li><li><a href="../07/"><span>07</span>7차시 · Betaflight 실습</a></li><li><a href="../08/"><span>08</span>8차시 · 종합 실습</a></li></ol><p class="toc-start"><a href="../../">시작 화면</a></p>
+</dialog>
+<div class="transition-layer" aria-hidden="true" inert></div>
+<script src="lesson.js"></script>
+</body>
+</html>

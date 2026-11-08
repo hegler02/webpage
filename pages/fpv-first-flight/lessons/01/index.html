@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="고글 화면에서 출발해 FPV 카메라와 영상 송신기, 조종 신호의 경로를 이해하는 FPV 드론 1차시.">
+<title>1차시 · 드론의 눈으로 본다 | FPV 첫 비행</title>
+<link rel="canonical" href="https://mirinaeman.com/pages/fpv-first-flight/lessons/01/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="1차시 · 드론의 눈으로 본다 | FPV 첫 비행">
+<meta property="og:description" content="고글 화면에서 출발해 FPV 카메라와 영상 송신기, 조종 신호의 경로를 이해하는 FPV 드론 1차시.">
+<meta property="og:url" content="https://mirinaeman.com/pages/fpv-first-flight/lessons/01/">
+<meta property="og:image" content="https://mirinaeman.com/pages/fpv-first-flight/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="어두운 공간의 주황색 게이트 너머로 빛나는 고리의 블랙홀이 보이는 FPV 시점 장면">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="1차시 · 드론의 눈으로 본다 | FPV 첫 비행">
+<meta name="twitter:description" content="고글 화면에서 출발해 FPV 카메라와 영상 송신기, 조종 신호의 경로를 이해하는 FPV 드론 1차시.">
+<meta name="twitter:image" content="https://mirinaeman.com/pages/fpv-first-flight/og.jpg">
+<link rel="stylesheet" href="/pages/profile/fonts/pretendard-1.3.9/pretendard-variable.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="camera-icon" viewBox="0 0 120 100">
+      <path d="M23 28h74a7 7 0 0 1 7 7v36a7 7 0 0 1-7 7H23a7 7 0 0 1-7-7V35a7 7 0 0 1 7-7Z" fill="#e3e3dd" stroke="currentColor" stroke-width="3"/>
+      <path d="M41 28l7-9h24l7 9M24 78v8m72-8v8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="60" cy="53" r="18" fill="#252522" stroke="currentColor" stroke-width="2"/>
+      <circle cx="60" cy="53" r="10" fill="#79807f"/>
+      <circle cx="57" cy="50" r="3" fill="#f4f4f0"/>
+    </symbol>
+    <symbol id="vtx-icon" viewBox="0 0 120 100">
+      <rect x="21" y="38" width="77" height="43" rx="4" fill="#d9dad4" stroke="currentColor" stroke-width="3"/>
+      <rect x="42" y="47" width="33" height="25" rx="3" fill="#535450"/>
+      <path d="M30 50h7m-7 9h7m-7 9h7m43-18h8m-8 9h8m-8 9h8M94 37l8-17m0 0 5-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="goggles-icon" viewBox="0 0 120 100">
+      <path d="M20 38Q60 23 100 38L108 59Q106 77 93 78H75L60 66 45 78H27Q14 77 12 59Z" fill="#deded8" stroke="currentColor" stroke-width="3"/>
+      <path d="M22 46Q60 35 98 46L103 57Q101 68 91 68H76L60 56 44 68H29Q19 68 17 57Z" fill="#333531"/>
+      <path d="M28 38L24 20m67 17 5-17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="controller-icon" viewBox="0 0 120 100">
+      <path d="M35 31h50q12 0 17 15l5 23q2 13-11 13-5 0-10-5l-12-12H46L34 77q-5 5-10 5-13 0-11-13l5-23q5-15 17-15Z" fill="#deded8" stroke="currentColor" stroke-width="3"/>
+      <path d="M60 31V15m-6 0h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="51" r="9" fill="#535450"/><circle cx="80" cy="51" r="9" fill="#535450"/>
+      <circle cx="40" cy="51" r="3" fill="#fff"/><circle cx="80" cy="51" r="3" fill="#fff"/>
+    </symbol>
+    <symbol id="rx-icon" viewBox="0 0 120 100">
+      <rect x="30" y="40" width="60" height="33" rx="4" fill="#d9dad4" stroke="currentColor" stroke-width="3"/>
+      <rect x="44" y="47" width="29" height="19" rx="2" fill="#535450"/>
+      <path d="M82 40l9-17m0 0 14-6M35 73v9m9-9v9m9-9v9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="arrow-right" viewBox="0 0 100 16" preserveAspectRatio="none">
+      <path d="M1 8H97m-7-5 7 5-7 5" stroke="currentColor" fill="none" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+    </symbol>
+    <symbol id="arrow-air" viewBox="0 0 100 16" preserveAspectRatio="none">
+      <path d="M1 8H96" stroke="currentColor" fill="none" stroke-width="1.8" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/>
+      <path d="m90 3 7 5-7 5" stroke="currentColor" fill="none" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+    </symbol>
+
+  </defs>
+</svg>
+<header class="site-head">
+  <div class="wrap head-inner">
+    <div class="identity"><a class="home-link" href="../../"><strong>FPV 드론</strong></a><span>1차시 · FPV 첫 비행</span></div>
+    <div class="head-actions">
+      <button class="control" id="share" type="button" aria-label="페이지 공유" hidden><span class="share-long">페이지&nbsp;</span>공유</button>
+      <button class="control" id="open-toc" type="button" aria-haspopup="dialog" hidden>목차</button>
+    </div>
+    <p class="share-status" id="share-status" role="status" hidden></p>
+  </div>
+</header>
+<main class="wrap">
+  <article class="slide phone-intro" id="s01" aria-labelledby="title-01">
+    <header class="slide-head">
+      <p class="kicker">01 · 시점</p>
+    <h1 id="title-01" tabindex="-1">드론의 눈으로 본다</h1>
+    </header>
+    <div class="slide-media hero-stage">
+      <div class="lesson-visual photo exterior" role="img" aria-label="실내 비행장의 FPV 기체와 주황색 연습 게이트를 함께 보여 주는 외부 시점">
+        <span class="visual-stamp" aria-hidden="true">외부 시점</span>
+      </div>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">FPV는 <strong>First Person View</strong>,<br>1인칭 시점입니다.<br>조종자는 기체에 달린 카메라가 보내는 영상을 보며 비행합니다.</p>
+    
+    <p class="credit">시점 설명용 생성 이미지 · <a href="https://oscarliang.com/fpv-drone-guide/" target="_blank" rel="noopener">Oscar Liang 입문 원문</a></p>
+    </div>
+  </article>
+  <article class="slide" id="s02" aria-labelledby="title-02">
+    <header class="slide-head">
+      <p class="kicker">02 · 관찰</p>
+    <h1 id="title-02" tabindex="-1">게이트를 보는 두 시점</h1>
+    </header>
+    <div class="slide-media compare-stage">
+      <div class="two-views photo-pair">
+      <figure>
+        <figcaption class="label">외부 시점</figcaption>
+        <div class="lesson-visual photo exterior" role="img" aria-label="기체와 주황색 게이트가 함께 보이는 외부 시점"></div>
+      </figure>
+      <figure>
+        <figcaption class="label">기체 카메라 시점</figcaption>
+        <div class="lesson-visual photo onboard" role="img" aria-label="기체 자체가 보이지 않고 앞쪽 주황색 게이트가 보이는 카메라 시점"></div>
+      </figure>
+    </div>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">외부에서는 기체가 보입니다.<br>고글에서는 기체 앞에 놓인 길이 보입니다.</p>
+    <p class="credit">시점 설명용 생성 이미지 · <a href="https://www.youtube.com/watch?v=lVlRDpSXlPo" target="_blank" rel="noopener">Oscar FPV 고글 녹화 원본</a></p>
+    </div>
+  </article>
+  <article class="slide" id="s03" aria-labelledby="title-03">
+    <header class="slide-head">
+      <p class="kicker">03 · 위치</p>
+    <h1 id="title-03" tabindex="-1">카메라는 어디에 있을까?</h1>
+    </header>
+    <div class="slide-media camera-stage">
+      <div class="lesson-visual">
+        <svg class="diagram-wide" viewBox="0 0 760 260" role="img" aria-labelledby="nose-title nose-desc">
+          <title id="nose-title">FPV 기체의 앞 카메라와 렌즈 방향</title>
+          <desc id="nose-desc">기체를 옆에서 본 개념도입니다. 기체 오른쪽 끝의 렌즈에서 오른쪽으로 시선이 나갑니다.</desc>
+          <path d="M53 188H705" stroke="#d4d4cd" stroke-width="1"/>
+          <path d="M86 111h169m84 0h128" stroke="#999b94" stroke-width="5" stroke-linecap="round"/>
+          <path d="M149 115h23v29h-23zm252 0h23v29h-23z" fill="#424440"/>
+          <path d="M123 142h324l-33 22H143Z" fill="#222422"/>
+          <path d="M186 138l16-44h115l34 44z" fill="#444642" stroke="#171715" stroke-width="2"/>
+          <rect x="214" y="73" width="103" height="36" rx="6" fill="#666862"/>
+          <path d="M244 73h21v66h-21z" fill="#a84018"/>
+          <path d="M319 104l32 6 42 32h-49z" fill="#2d2e2a"/>
+          <path d="M393 112h36v30h-36z" fill="#575953"/>
+          <ellipse class="fpv-lens" cx="428" cy="127" rx="9" ry="15" fill="#171715" stroke="#d4d4cd" stroke-width="2"/>
+          <g class="lens-label">
+            <path d="M428 111V57h56" class="diagram-line"/>
+            <circle cx="428" cy="111" r="4" fill="#a84018"/>
+            <text x="492" y="64" class="diagram-label">FPV 카메라</text>
+          </g>
+          <g class="lens-direction">
+            <path d="M438 127h163m-12-7 12 7-12 7" class="diagram-accent"/>
+            <text x="466" y="171" class="diagram-label">카메라가 보는 방향</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">이 기체의 FPV 카메라는 앞쪽에 달려 있습니다.<br>렌즈가 향하는 쪽이 고글에 보이는 방향입니다.</p>
+    
+    <p class="credit">기체 옆면 개념도 · <a href="https://oscarliang.com/quadcopter-hardware-overview/" target="_blank" rel="noopener">Oscar Liang 기체 구성 원문</a></p>
+    </div>
+  </article>
+  <article class="slide" id="s04" aria-labelledby="title-04">
+    <header class="slide-head">
+      <p class="kicker">04 · 기울기</p>
+    <h1 id="title-04" tabindex="-1">고글 화면은 왜 기울까?</h1>
+    </header>
+    <div class="slide-media bank-stage">
+      <div class="two-views bank-pair">
+      <figure>
+        <figcaption class="label">기체 뒤에서 본 모습</figcaption>
+        <div class="lesson-visual bank-visual">
+          <svg viewBox="0 0 400 216" role="img" aria-label="뒤에서 본 기체의 오른쪽은 내려가고 지평선은 수평으로 유지됩니다.">
+            <path d="M0 0h400v110H0z" fill="#ebefee"/><path d="M0 110h400v106H0z" fill="#d8ddd3"/>
+            <path d="M0 110h400" stroke="#647063" stroke-width="2"/>
+            <g class="bank-aircraft">
+              <path d="M75 112h250" stroke="#242622" stroke-width="10" stroke-linecap="round"/>
+              <path d="M63 93h72m130 0h72" stroke="#797d74" stroke-width="5" stroke-linecap="round"/>
+              <rect x="88" y="95" width="22" height="21" rx="4" fill="#30312d"/>
+              <rect x="290" y="95" width="22" height="21" rx="4" fill="#30312d"/>
+              <path d="M172 107q0-24 28-24t28 24v24h-56z" fill="#343632"/>
+              <path d="M181 92h38" stroke="#a84018" stroke-width="7"/>
+              <path d="M186 112h28m-24 7h20" stroke="#a0a19a" stroke-width="2" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+      </figure>
+      <figure>
+        <figcaption class="label">같은 순간의 카메라 화면</figcaption>
+        <div class="lesson-visual bank-visual camera-view">
+          <svg viewBox="0 0 400 216" role="img" aria-label="기체 카메라 좌표에서는 지평선이 반대 방향으로 기울어 보이는 화면">
+            <g class="camera-ground">
+              <path d="M-100 -95h600v205h-600z" fill="#ebefee"/><path d="M-100 110h600v240h-600z" fill="#d8ddd3"/>
+              <path d="M-100 110h600" stroke="#647063" stroke-width="2"/>
+              <path d="M149 152V74h102v78" fill="none" stroke="#a84018" stroke-width="9" stroke-linejoin="round"/>
+            </g>
+            <path d="M197 108h6m-3-3v6" stroke="#292b25" stroke-width="1.3"/>
+          </svg>
+        </div>
+      </figure>
+    </div>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">기체에 고정된 카메라는 기체와 함께 기울어집니다.<br>그래서 고글 화면에서는 지평선이 비스듬해 보일 수 있습니다.</p>
+    <p class="credit">기체와 카메라 화면의 상대 기울기 개념도</p>
+    </div>
+  </article>
+  <article class="slide" id="s05" aria-labelledby="title-05">
+    <header class="slide-head">
+      <p class="kicker">05 · 영상 경로</p>
+    <h1 id="title-05" tabindex="-1">카메라에서 고글까지</h1>
+    </header>
+    <div class="slide-media route-stage">
+      <div class="lesson-visual link-panel">
+      <section class="lane" aria-label="영상은 카메라에서 영상 송신기를 거쳐 고글로 갑니다.">
+  <h2 class="lane-title">영상 신호 · 기체에서 조종자에게</h2>
+  <div class="chain" aria-hidden="true">
+    <div class="node"><svg><use href="#camera-icon"/></svg><strong>카메라</strong><small>장면을 담음</small></div>
+    <div class="arrow"><svg viewBox="0 0 100 16" preserveAspectRatio="none"><use href="#arrow-right"/></svg><small>기체 내부</small></div>
+    <div class="node"><svg><use href="#vtx-icon"/></svg><strong>영상 송신기</strong><small>VTX</small></div>
+    <div class="arrow wireless"><svg viewBox="0 0 100 16" preserveAspectRatio="none"><use href="#arrow-air"/></svg><small>무선 전송</small></div>
+    <div class="node goggles-node"><svg><use href="#goggles-icon"/></svg><strong>고글</strong><small>받아서 표시</small></div>
+  </div>
+</section>
+      <section class="lane route-guide" aria-label="실선은 기체 내부 연결이고 점선은 무선 영상 링크입니다.">
+        <h2 class="lane-title">영상이 지나가는 두 구간</h2>
+        <div class="link-keys">
+          <div class="link-key">
+            <span class="link-sample" aria-hidden="true"></span>
+            <strong>기체 내부 연결</strong>
+            <small>카메라 → 영상 송신기</small>
+          </div>
+          <div class="link-key">
+            <span class="link-sample air" aria-hidden="true"></span>
+            <strong>무선 영상 링크</strong>
+            <small>영상 송신기 → 고글</small>
+          </div>
+        </div>
+      </section>
+    </div>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">카메라가 장면을 담습니다.<br>영상 송신기(VTX)가 영상을 무선으로 보내고,<br>고글이 받아 화면에 표시합니다.</p>
+    <p class="credit"><a href="https://oscarliang.com/fpv-drone-guide/" target="_blank" rel="noopener">Oscar Liang · FPV 시스템 구성</a></p>
+    </div>
+  </article>
+  <article class="slide" id="s06" aria-labelledby="title-06">
+    <header class="slide-head">
+      <p class="kicker">06 · 두 방향</p>
+    <h1 id="title-06" tabindex="-1">두 신호는 반대로 간다</h1>
+    </header>
+    <div class="slide-media route-stage">
+      <div class="lesson-visual link-panel">
+      <section class="lane" aria-label="영상은 카메라에서 영상 송신기를 거쳐 고글로 갑니다.">
+  <h2 class="lane-title">영상 신호 · 기체에서 조종자에게</h2>
+  <div class="chain" aria-hidden="true">
+    <div class="node"><svg><use href="#camera-icon"/></svg><strong>카메라</strong><small>장면을 담음</small></div>
+    <div class="arrow"><svg viewBox="0 0 100 16" preserveAspectRatio="none"><use href="#arrow-right"/></svg><small>기체 내부</small></div>
+    <div class="node"><svg><use href="#vtx-icon"/></svg><strong>영상 송신기</strong><small>VTX</small></div>
+    <div class="arrow wireless"><svg viewBox="0 0 100 16" preserveAspectRatio="none"><use href="#arrow-air"/></svg><small>무선 전송</small></div>
+    <div class="node goggles-node"><svg><use href="#goggles-icon"/></svg><strong>고글</strong><small>받아서 표시</small></div>
+  </div>
+</section>
+      <section class="lane command-lane" aria-label="조종 명령은 조종기에서 무선 링크를 거쳐 기체 수신기로 갑니다.">
+        <h2 class="lane-title">조종 명령 · 조종자에서 기체로</h2>
+        <div class="chain command-chain" aria-hidden="true">
+          <div class="node command-rx"><svg><use href="#rx-icon"/></svg><strong>기체 수신기</strong></div>
+          <div class="arrow"><svg viewBox="0 0 100 16" preserveAspectRatio="none" style="transform:scaleX(-1)"><use href="#arrow-air"/></svg><small>무선 조종 링크</small></div>
+          <div class="node command-tx"><svg><use href="#controller-icon"/></svg><strong>조종기</strong></div>
+        </div>
+      </section>
+    </div>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">고글은 영상을 받습니다.<br>조종기는 기체에 명령을 보냅니다.<br>다음 차시에서는 그 명령이 모터까지 가는 경로를 봅니다.</p>
+    <p class="credit"><a href="https://oscarliang.com/fpv-drone-guide/" target="_blank" rel="noopener">Oscar Liang · FPV 드론 동작 원리</a></p>
+    </div>
+  </article>
+</main>
+<footer class="site-foot" id="navigation" hidden>
+  <nav class="wrap foot-inner" aria-label="슬라이드 이동">
+    <button class="control" id="previous" type="button"><span aria-hidden="true">←</span> 이전</button>
+    <a class="control" id="previous-lesson" href="../../" aria-label="시작 화면" hidden><span aria-hidden="true">←</span> 시작<span class="lesson-word"> 화면</span></a>
+    <output class="page-number" id="page-number" aria-live="polite" aria-atomic="true"></output>
+    <button class="control primary" id="next" type="button">다음 <span aria-hidden="true">→</span></button>
+    <a class="control primary" id="next-lesson" href="../02/" aria-label="다음 차시" hidden>다음<span class="lesson-word"> 차시</span> <span aria-hidden="true">→</span></a>
+  </nav>
+</footer>
+<dialog id="toc" aria-labelledby="toc-title">
+  <div class="toc-head">
+    <h2 id="toc-title">1차시 목차</h2>
+    <button class="control" id="close-toc" type="button">닫기</button>
+  </div>
+  <ol class="toc-list" id="toc-list"></ol>
+  <h3 class="toc-section">전체 차시</h3>
+  <ol class="toc-list"><li><a href="../01/" aria-current="page"><span>01</span>1차시 · 드론의 눈으로 본다<small>현재</small></a></li><li><a href="../02/"><span>02</span>2차시 · 스틱에서 모터까지</a></li><li><a href="../03/"><span>03</span>3차시 · 고글 영상은 왜 끊길까?</a></li><li><a href="../04/"><span>04</span>4차시 · 시뮬레이터에서 첫 코스</a></li><li><a href="../05/"><span>05</span>5차시 · Angle과 Acro</a></li><li><a href="../06/"><span>06</span>6차시 · LiPo 배터리와 실기 안전</a></li><li><a href="../07/"><span>07</span>7차시 · Betaflight 실습</a></li><li><a href="../08/"><span>08</span>8차시 · 종합 실습</a></li></ol><p class="toc-start"><a href="../../">시작 화면</a></p>
+</dialog>
+<div class="transition-layer" aria-hidden="true" inert></div>
+<script src="lesson.js"></script>
+</body>
+</html>

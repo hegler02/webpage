@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="실기체 방향과 수신기 채널, ARM·비행 모드와 Failsafe를 작업대에서 확인하는 FPV 드론 7차시.">
+<title>7차시 · Betaflight 실습 | FPV 첫 비행</title>
+<link rel="canonical" href="https://mirinaeman.com/pages/fpv-first-flight/lessons/07/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="7차시 · Betaflight 실습 | FPV 첫 비행">
+<meta property="og:description" content="실기체 방향과 수신기 채널, ARM·비행 모드와 Failsafe를 작업대에서 확인하는 FPV 드론 7차시.">
+<meta property="og:url" content="https://mirinaeman.com/pages/fpv-first-flight/lessons/07/">
+<meta property="og:image" content="https://mirinaeman.com/pages/fpv-first-flight/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="어두운 공간의 주황색 게이트 너머로 빛나는 고리의 블랙홀이 보이는 FPV 시점 장면">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="7차시 · Betaflight 실습 | FPV 첫 비행">
+<meta name="twitter:description" content="실기체 방향과 수신기 채널, ARM·비행 모드와 Failsafe를 작업대에서 확인하는 FPV 드론 7차시.">
+<meta name="twitter:image" content="https://mirinaeman.com/pages/fpv-first-flight/og.jpg">
+<link rel="stylesheet" href="/pages/profile/fonts/pretendard-1.3.9/pretendard-variable.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="full-lesson practical-lesson lesson-07">
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="camera-icon" viewBox="0 0 120 100">
+      <path d="M23 28h74a7 7 0 0 1 7 7v36a7 7 0 0 1-7 7H23a7 7 0 0 1-7-7V35a7 7 0 0 1 7-7Z" fill="#e3e3dd" stroke="currentColor" stroke-width="3"/>
+      <path d="M41 28l7-9h24l7 9M24 78v8m72-8v8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="60" cy="53" r="18" fill="#252522" stroke="currentColor" stroke-width="2"/>
+      <circle cx="60" cy="53" r="10" fill="#79807f"/>
+      <circle cx="57" cy="50" r="3" fill="#f4f4f0"/>
+    </symbol>
+    <symbol id="vtx-icon" viewBox="0 0 120 100">
+      <rect x="21" y="38" width="77" height="43" rx="4" fill="#d9dad4" stroke="currentColor" stroke-width="3"/>
+      <rect x="42" y="47" width="33" height="25" rx="3" fill="#535450"/>
+      <path d="M30 50h7m-7 9h7m-7 9h7m43-18h8m-8 9h8m-8 9h8M94 37l8-17m0 0 5-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="goggles-icon" viewBox="0 0 120 100">
+      <path d="M20 38Q60 23 100 38L108 59Q106 77 93 78H75L60 66 45 78H27Q14 77 12 59Z" fill="#deded8" stroke="currentColor" stroke-width="3"/>
+      <path d="M22 46Q60 35 98 46L103 57Q101 68 91 68H76L60 56 44 68H29Q19 68 17 57Z" fill="#333531"/>
+      <path d="M28 38L24 20m67 17 5-17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="controller-icon" viewBox="0 0 120 100">
+      <path d="M35 31h50q12 0 17 15l5 23q2 13-11 13-5 0-10-5l-12-12H46L34 77q-5 5-10 5-13 0-11-13l5-23q5-15 17-15Z" fill="#deded8" stroke="currentColor" stroke-width="3"/>
+      <path d="M60 31V15m-6 0h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="51" r="9" fill="#535450"/><circle cx="80" cy="51" r="9" fill="#535450"/>
+      <circle cx="40" cy="51" r="3" fill="#fff"/><circle cx="80" cy="51" r="3" fill="#fff"/>
+    </symbol>
+    <symbol id="rx-icon" viewBox="0 0 120 100">
+      <rect x="30" y="40" width="60" height="33" rx="4" fill="#d9dad4" stroke="currentColor" stroke-width="3"/>
+      <rect x="44" y="47" width="29" height="19" rx="2" fill="#535450"/>
+      <path d="M82 40l9-17m0 0 14-6M35 73v9m9-9v9m9-9v9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="arrow-right" viewBox="0 0 100 16" preserveAspectRatio="none">
+      <path d="M1 8H97m-7-5 7 5-7 5" stroke="currentColor" fill="none" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+    </symbol>
+    <symbol id="arrow-air" viewBox="0 0 100 16" preserveAspectRatio="none">
+      <path d="M1 8H96" stroke="currentColor" fill="none" stroke-width="1.8" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/>
+      <path d="m90 3 7 5-7 5" stroke="currentColor" fill="none" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+    </symbol>
+    <symbol id="quad-top" viewBox="0 0 120 120">
+      <path d="M32 32 88 88M88 32 32 88" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="28" cy="28" r="20" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="92" cy="28" r="20" fill="none" stroke="currentColor" stroke-width="4"/>
+      <circle cx="28" cy="92" r="20" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="92" cy="92" r="20" fill="none" stroke="currentColor" stroke-width="4"/>
+      <rect x="47" y="42" width="26" height="40" rx="5" fill="currentColor"/>
+      <path d="M60 4 70 20H50Z" fill="var(--app-accent)"/>
+    </symbol>
+    <symbol id="quad-rear" viewBox="40 62 320 90">
+      <path d="M75 112h250" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+      <path d="M63 93h72m130 0h72" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+      <rect x="88" y="95" width="22" height="21" rx="4" fill="currentColor"/><rect x="290" y="95" width="22" height="21" rx="4" fill="currentColor"/>
+      <path d="M172 107q0-24 28-24t28 24v24h-56z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+<header class="site-head">
+  <div class="wrap head-inner">
+    <div class="identity"><a class="home-link" href="../../"><strong>FPV 드론</strong></a><span>7차시 · Betaflight 실습</span></div>
+    <div class="head-actions">
+      <button class="control" id="share" type="button" aria-label="페이지 공유" hidden><span class="share-long">페이지&nbsp;</span>공유</button>
+      <button class="control" id="open-toc" type="button" aria-haspopup="dialog" hidden>목차</button>
+    </div>
+    <p class="share-status" id="share-status" role="status" hidden></p>
+  </div>
+</header>
+<main class="wrap">
+  <article class="slide" id="s01" aria-labelledby="title-01">
+    <header class="slide-head">
+      <p class="kicker">01 · 작업대 준비</p>
+      <h1 id="title-01" tabindex="-1">작업대에서 시작한다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">기체 점검에서 앱 확인으로 <small>· 설명용 생성 이미지</small></figcaption><div class="practical-body practical-split"><div class="practical-image shared-anchor"><img class="photograph" src="../../assets/fpv-bench.webp" alt="배터리와 프로펠러를 분리한 FPV 드론 작업대 예시" decoding="sync"></div><div class="practical-notes"><div class="cue"><h2>프로펠러를 분리한다</h2><p>전원을 연결하기 전에 네 모터 모두에서 확인한다.</p></div><div class="cue"><h2>USB로 연결한다</h2><p>교관이 지정한 기체와 앱을 준비하고, 추가 전원이 필요한 경우 장비 절차를 확인한다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">6차시에서 기체 상태를 점검했습니다. 이 차시는 비행제어기 설정 앱 Betaflight로, 프로펠러를 분리한 기체의 방향과 입력이 제대로 읽히는지 확인합니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/guides/current/Safety" target="_blank" rel="noopener noreferrer">Betaflight · 작업대 안전 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s02" aria-labelledby="title-02">
+    <header class="slide-head">
+      <p class="kicker">02 · 연결과 백업</p>
+      <h1 id="title-02" tabindex="-1">연결하고 설정을 백업</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">작업 순서 · 설명용 도해</figcaption><div class="practical-body practical-split"><div class="schematic app setup-map">
+  <div class="link-row"><span class="node-box">노트북<small>Betaflight 앱</small></span><span class="usb">USB</span><span class="node-box">기체<small>프로펠러 분리</small></span></div>
+  <dl class="app-rows">
+    <div><dt><i class="pin">①</i>Board</dt><dd>지정된 기체가 맞는가</dd></div>
+    <div><dt><i class="pin">②</i>Firmware</dt><dd>수업 버전과 같은가</dd></div>
+    <div><dt><i class="pin">③</i>Backup</dt><dd>원래 설정을 저장했는가</dd></div>
+  </dl>
+</div><div class="practical-notes"><div class="cue"><h2>① 연결 확인</h2><p>기체가 연결됐는지 보고 올바른 장비인지 확인한다.</p></div><div class="cue"><h2>② 버전 확인</h2><p>수업 앱과 기체 펌웨어(비행제어기 안의 프로그램) 버전을 확인한다.</p></div><div class="cue"><h2>③ 백업</h2><p>설정 변경 전에 교관과 원래 설정을 저장한다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">작업할 기체와 소프트웨어 버전을 먼저 특정합니다. 설정을 바꾸기 전에 백업을 확보합니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/guides/current/Configuration" target="_blank" rel="noopener noreferrer">Betaflight · 설정 및 백업 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s03" aria-labelledby="title-03">
+    <header class="slide-head">
+      <p class="kicker">03 · Setup</p>
+      <h1 id="title-03" tabindex="-1">기체 방향을 맞춰 본다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">Setup · 실기체 앞쪽과 미리보기 앞쪽 비교</figcaption><div class="practical-body practical-split"><div class="schematic attitude-map" role="img" aria-label="앞쪽과 기울임이 같으면 진행하고 다르면 보류하는 실기체와 앱 미리보기 비교 도해">
+  <span class="col-head"></span><span class="col-head">실기체</span><span class="col-head">앱 미리보기</span>
+  <span class="row-head">같은 방향</span><span class="view"><svg class="quad-top"><use href="#quad-top"/></svg></span><span class="view app"><svg class="quad-top"><use href="#quad-top"/></svg></span>
+  <span class="row-head">같은 움직임</span><span class="view"><svg class="quad-rear lean-right"><use href="#quad-rear"/></svg></span><span class="view app"><svg class="quad-rear lean-right"><use href="#quad-rear"/></svg></span>
+  <span class="row-head stop">다르면 보류</span><span class="view stop"><svg class="quad-rear lean-right"><use href="#quad-rear"/></svg></span><span class="view app stop"><svg class="quad-rear lean-left"><use href="#quad-rear"/></svg></span>
+</div><div class="practical-notes"><div class="cue"><h2>같은 방향</h2><p>기체의 앞쪽을 찾고 화면 모델의 앞쪽과 대조한다.</p></div><div class="cue"><h2>같은 움직임</h2><p>기체를 살짝 기울일 때 미리보기가 같은 방향으로 움직이는지 본다.</p></div><div class="cue"><h2>다르면 보류</h2><p>방향이나 기울임이 다르면 교관과 장착 방향 설정을 확인한다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">실기체와 미리보기에서 앞쪽과 기울임이 일치하는지 확인합니다. 방향이 다르면 이륙 준비를 보류합니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/app/setup-tab" target="_blank" rel="noopener noreferrer">Betaflight · Setup 공식 문서 ↗</a> · 설명용 도해</p>
+    </div>
+  </article>
+
+  <article class="slide" id="s04" aria-labelledby="title-04">
+    <header class="slide-head">
+      <p class="kicker">04 · Receiver</p>
+      <h1 id="title-04" tabindex="-1">스틱과 채널을 대조한다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">Receiver(수신기) 탭 · 조종기 Mode 2와 앱 출력 막대</figcaption><div class="practical-body practical-split"><div class="schematic app rx-map"><p class="app-note">오른쪽 스틱을 오른쪽으로 밀었을 때</p><div class="rx-row on"><span class="rx-name">롤<small>Roll [A]</small></span><span class="rx-track"><i style="--at:75%"></i></span><span class="rx-value">1800</span></div><div class="rx-row"><span class="rx-name">피치<small>Pitch [E]</small></span><span class="rx-track"><i style="--at:50%"></i></span><span class="rx-value">1500</span></div><div class="rx-row"><span class="rx-name">요<small>Yaw [R]</small></span><span class="rx-track"><i style="--at:50%"></i></span><span class="rx-value">1500</span></div><div class="rx-row"><span class="rx-name">스로틀<small>Throttle [T]</small></span><span class="rx-track"><i style="--at:0%"></i></span><span class="rx-value">1000</span></div><p class="app-foot">중앙 1500 · 값은 설명 예시</p></div><div class="practical-notes"><div class="input-map" aria-label="Mode 2 스틱 위치와 채널 대응">
+  <div class="practical-cell cue"><b>왼쪽 스틱</b><strong>위아래 · 스로틀</strong><strong>좌우 · 요</strong></div>
+  <div class="practical-cell cue"><b>오른쪽 스틱</b><strong>위아래 · 피치</strong><strong>좌우 · 롤</strong></div>
+</div><p>한 축씩 움직여 이름과 반응 방향을 대조한다.</p></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">한 번에 한 축을 움직입니다. 어떤 막대가 어느 방향으로 반응하는지 보고 실습 기체의 조종기 채널 배치(매핑)를 확인합니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/app/receiver-tab" target="_blank" rel="noopener noreferrer">Betaflight · Receiver 공식 문서 ↗</a> · 2차시 조종 입력</p>
+    </div>
+  </article>
+
+  <article class="slide" id="s05" aria-labelledby="title-05">
+    <header class="slide-head">
+      <p class="kicker">05 · Modes · ARM</p>
+      <h1 id="title-05" tabindex="-1">ARM은 시동 스위치다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">Modes 탭 · AUX(조종기 보조 스위치) 범위와 실제 ARM 상태</figcaption><div class="practical-body practical-split"><div class="schematic app modes-map"><div class="mode-row ">
+    <div class="mode-head"><strong>ARM</strong><span>AUX 1 · 1700–2100</span></div>
+    <div class="mode-track" style="--from:66.67%;--size:33.33%;--at:8.33%"><b></b><i></i></div>
+    <p class="mode-state"><span>스위치 내림 · 1000</span><strong>범위 밖</strong></p>
+  </div><div class="mode-row live">
+    <div class="mode-head"><strong>ARM</strong><span>AUX 1 · 1700–2100</span></div>
+    <div class="mode-track" style="--from:66.67%;--size:33.33%;--at:91.67%"><b></b><i></i></div>
+    <p class="mode-state"><span>스위치 올림 · 2000</span><strong>범위 안 · 시동 요청</strong></p>
+  </div><p class="app-foot">실제 시동 여부 · Setup 탭의 Arming Disable Flags</p></div><div class="practical-notes"><div class="cue"><h2>범위 바깥</h2><p>스위치 위치에 따라 AUX 표시가 범위 밖에 있는지 본다.</p></div><div class="cue"><h2>범위 안</h2><p>ARM 조건을 요청하는 입력이 범위 안으로 들어오는지 확인한다.</p></div><div class="cue"><h2>실제 상태 확인</h2><p>ARM 상태와 ARM을 막는 사유는 별도 상태 표시에서 확인한다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">ARM은 모터 출력을 켜는 시동입니다. Modes의 범위는 스위치 조건을 보여주고, 실제 ARM 상태는 기체와 앱의 상태 표시로 따로 확인합니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/app/auxiliary-tab" target="_blank" rel="noopener noreferrer">Betaflight · Modes 공식 문서 ↗</a> · <a href="https://oscarliang.com/betaflight-firmware-setup/#Modes-Tab" target="_blank" rel="noopener noreferrer">Oscar Liang · Modes 설정 원문 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s06" aria-labelledby="title-06">
+    <header class="slide-head">
+      <p class="kicker">06 · Modes · Angle과 Acro</p>
+      <h1 id="title-06" tabindex="-1">Angle과 Acro를 확인한다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">Modes · Angle 행을 확인</figcaption><div class="practical-body practical-split"><div class="schematic app modes-map"><div class="mode-row live">
+    <div class="mode-head"><strong>ANGLE</strong><span>AUX 2 · 900–1300</span></div>
+    <div class="mode-track" style="--from:0.00%;--size:33.33%;--at:8.33%"><b></b><i></i></div>
+    <p class="mode-state"><span>스위치 내림 · 1000</span><strong>범위 안 · Angle</strong></p>
+  </div><div class="mode-row ">
+    <div class="mode-head"><strong>ANGLE</strong><span>AUX 2 · 900–1300</span></div>
+    <div class="mode-track" style="--from:0.00%;--size:33.33%;--at:91.67%"><b></b><i></i></div>
+    <p class="mode-state"><span>스위치 올림 · 2000</span><strong>범위 밖</strong></p>
+  </div><p class="app-foot">다른 안정화 모드도 꺼져 있으면 Acro</p></div><div class="practical-notes"><div class="cue"><h2>Angle 활성</h2><p>수업 기체에서 Angle(자동 수평)이 활성화되는 스위치 위치를 읽는다.</p></div><div class="cue"><h2>Acro 운용 상태</h2><p>Acro(수동 회전)는 따로 켜지 않는다. 다른 안정화 모드가 모두 꺼져 있는지 확인하고 5차시의 자세 반응과 연결한다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">같은 스위치 위치를 먼저 확인한 뒤 그 모드에서 기체가 어떤 반응을 보이는지 떠올립니다. 기체마다 스위치 할당을 대조합니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/app/auxiliary-tab" target="_blank" rel="noopener noreferrer">Betaflight · Modes 공식 문서 ↗</a> · <a href="https://oscarliang.com/betaflight-firmware-setup/#Modes-Tab" target="_blank" rel="noopener noreferrer">Oscar Liang · Modes 설정 원문 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s07" aria-labelledby="title-07">
+    <header class="slide-head">
+      <p class="kicker">07 · Failsafe</p>
+      <h1 id="title-07" tabindex="-1">조종 신호를 잃으면</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">Failsafe · 조종 링크 상실과 영상 문제를 구별</figcaption><div class="practical-body practical-split"><div class="schematic failsafe-map">
+  <ol class="stage-flow">
+    <li><strong>신호 끊김</strong><span>조종기 → 수신기</span></li>
+    <li><strong>Stage 1</strong><span>채널 대체값, 기본 1.5초</span></li>
+    <li><strong>Stage 2</strong><span>설정한 절차 하나 실행</span></li>
+  </ol>
+  <ul class="stage-options">
+    <li class="warn"><strong>Drop</strong><span>기본값. 모터를 끄고 떨어진다</span></li>
+    <li><strong>Land</strong><span>착륙을 시도한다</span></li>
+    <li><strong>GPS Rescue</strong><span>출발 지점 복귀를 시도한다</span></li>
+  </ul>
+</div><div class="practical-notes"><div class="cue"><h2>조종기 → 수신기</h2><p>조종 신호가 유효하지 않거나 끊겼을 때의 대응을 읽는다.</p></div><div class="cue"><h2>Stage 2 동작</h2><p>이 세 절차 중 기체에 설정된 것을 작업대에서 교관과 확인한다.</p></div><div class="cue"><h2>영상 링크</h2><p>고글 영상의 문제는 조종 링크 상태와 구별해 판단한다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">Failsafe는 조종 신호를 잃었을 때의 안전 동작입니다. 이 탭에서 설정을 확인합니다. 실제 대응이 확인되지 않았다면 실기 진행을 보류합니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/app/failsafe-tab" target="_blank" rel="noopener noreferrer">Betaflight · Failsafe 공식 문서 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s08" aria-labelledby="title-08">
+    <header class="slide-head">
+      <p class="kicker">08 · 저장과 확인</p>
+      <h1 id="title-08" tabindex="-1">다시 연결해 확인한다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">변경한 경우 · 저장 전과 재연결 후를 비교</figcaption><div class="practical-four"><div class="practical-cell cue"><b>01</b><h2>작업 전</h2><p>원래 설정과 변경할 항목을 확인한다.</p></div><div class="practical-cell cue"><b>02</b><h2>저장</h2><p>교관 지도 아래 변경한 항목을 저장한다.</p></div><div class="practical-cell cue"><b>03</b><h2>다시 연결</h2><p>기체를 다시 연결해 변경한 탭을 연다.</p></div><div class="practical-cell cue"><b>04</b><h2>다시 확인</h2><p>저장한 값과 기체의 반응을 함께 본다.</p></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">값이 남아 있는지, 기체와 조종기의 실제 반응이 의도와 같은지 확인합니다. 원래 설정은 백업에서 확인할 수 있게 둡니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/guides/current/Configuration" target="_blank" rel="noopener noreferrer">Betaflight · 설정 및 백업 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s09" aria-labelledby="title-09">
+    <header class="slide-head">
+      <p class="kicker">09 · 실기 인계</p>
+      <h1 id="title-09" tabindex="-1">실기로 넘어갈 조건</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">작업대에서 확인할 네 가지</figcaption><div class="practical-four"><div class="practical-cell cue"><b>01</b><h2>방향</h2><p>실기체와 화면의 앞쪽·기울임이 일치한다.</p></div><div class="practical-cell cue"><b>02</b><h2>스틱</h2><p>롤·피치·요·스로틀 반응이 의도와 같다.</p></div><div class="practical-cell cue"><b>03</b><h2>스위치</h2><p>ARM 조건과 Angle·Acro 상태를 읽을 수 있다.</p></div><div class="practical-cell cue"><b>04</b><h2>신호 상실</h2><p>수업 기체의 대응 설정과 점검 결과를 확인했다.</p></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">하나라도 다르거나 미확인이면 작업대에서 멈춥니다. 설정 확인을 마친 뒤 8차시에서 현장 조건과 함께 실기 진행 여부를 판단합니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/guides/current/Safety" target="_blank" rel="noopener noreferrer">Betaflight · 작업대 안전 ↗</a> · <a href="https://betaflight.com/docs/wiki/app/failsafe-tab" target="_blank" rel="noopener noreferrer">Betaflight · Failsafe 공식 문서 ↗</a></p>
+    </div>
+  </article>
+</main>
+<footer class="site-foot" id="navigation" hidden>
+  <nav class="wrap foot-inner" aria-label="슬라이드 이동">
+    <button class="control" id="previous" type="button"><span aria-hidden="true">←</span> 이전</button>
+    <a class="control" id="previous-lesson" href="../06/" aria-label="이전 차시" hidden><span aria-hidden="true">←</span> 이전<span class="lesson-word"> 차시</span></a>
+    <output class="page-number" id="page-number" aria-live="polite" aria-atomic="true"></output>
+    <button class="control primary" id="next" type="button">다음 <span aria-hidden="true">→</span></button>
+    <a class="control primary" id="next-lesson" href="../08/" aria-label="다음 차시" hidden>다음<span class="lesson-word"> 차시</span> <span aria-hidden="true">→</span></a>
+  </nav>
+</footer>
+<dialog id="toc" aria-labelledby="toc-title">
+  <div class="toc-head">
+    <h2 id="toc-title">7차시 목차</h2>
+    <button class="control" id="close-toc" type="button">닫기</button>
+  </div>
+  <ol class="toc-list" id="toc-list"></ol>
+  <h3 class="toc-section">전체 차시</h3>
+  <ol class="toc-list"><li><a href="../01/"><span>01</span>1차시 · 드론의 눈으로 본다</a></li><li><a href="../02/"><span>02</span>2차시 · 스틱에서 모터까지</a></li><li><a href="../03/"><span>03</span>3차시 · 고글 영상은 왜 끊길까?</a></li><li><a href="../04/"><span>04</span>4차시 · 시뮬레이터에서 첫 코스</a></li><li><a href="../05/"><span>05</span>5차시 · Angle과 Acro</a></li><li><a href="../06/"><span>06</span>6차시 · LiPo 배터리와 실기 안전</a></li><li><a href="../07/" aria-current="page"><span>07</span>7차시 · Betaflight 실습<small>현재</small></a></li><li><a href="../08/"><span>08</span>8차시 · 종합 실습</a></li></ol><p class="toc-start"><a href="../../">시작 화면</a></p>
+</dialog>
+<div class="transition-layer" aria-hidden="true" inert></div>
+<script src="lesson.js"></script>
+</body>
+</html>

@@ -422,7 +422,7 @@ class Site:
                 continue
             (x1, y1), (x2, y2) = spot[x['a']], spot[x['b']]
             post = 'post' in (self.by_id[x['a']]['k'], self.by_id[x['b']]['k'])
-            out.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{color("post") if post else color("song")}" stroke-opacity="{.75 if post else .13}" stroke-width="{1 if post else .6}"/>')
+            out.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{color("post") if post else color("song")}" stroke-opacity="{.32 if post else .13}" stroke-width="{1 if post else .6}"/>')
         for n in sorted(self.nodes, key=lambda n: n['k'] == 'post'):
             cx, cy = spot[n['id']]
             k = n['k']

@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="기존 게이트 코스를 시뮬레이터에서 완주하고 첫 비행의 안전 판단, 이륙, 선회, 착륙을 연결하는 FPV 드론 8차시.">
+<title>8차시 · 종합 실습 | FPV 첫 비행</title>
+<link rel="canonical" href="https://mirinaeman.com/pages/fpv-first-flight/lessons/08/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="8차시 · 종합 실습 | FPV 첫 비행">
+<meta property="og:description" content="기존 게이트 코스를 시뮬레이터에서 완주하고 첫 비행의 안전 판단, 이륙, 선회, 착륙을 연결하는 FPV 드론 8차시.">
+<meta property="og:url" content="https://mirinaeman.com/pages/fpv-first-flight/lessons/08/">
+<meta property="og:image" content="https://mirinaeman.com/pages/fpv-first-flight/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="어두운 공간의 주황색 게이트 너머로 빛나는 고리의 블랙홀이 보이는 FPV 시점 장면">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="8차시 · 종합 실습 | FPV 첫 비행">
+<meta name="twitter:description" content="기존 게이트 코스를 시뮬레이터에서 완주하고 첫 비행의 안전 판단, 이륙, 선회, 착륙을 연결하는 FPV 드론 8차시.">
+<meta name="twitter:image" content="https://mirinaeman.com/pages/fpv-first-flight/og.jpg">
+<link rel="stylesheet" href="/pages/profile/fonts/pretendard-1.3.9/pretendard-variable.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="full-lesson practical-lesson lesson-08" data-mode-course>
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="camera-icon" viewBox="0 0 120 100">
+      <path d="M23 28h74a7 7 0 0 1 7 7v36a7 7 0 0 1-7 7H23a7 7 0 0 1-7-7V35a7 7 0 0 1 7-7Z" fill="#e3e3dd" stroke="currentColor" stroke-width="3"/>
+      <path d="M41 28l7-9h24l7 9M24 78v8m72-8v8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="60" cy="53" r="18" fill="#252522" stroke="currentColor" stroke-width="2"/>
+      <circle cx="60" cy="53" r="10" fill="#79807f"/>
+      <circle cx="57" cy="50" r="3" fill="#f4f4f0"/>
+    </symbol>
+    <symbol id="vtx-icon" viewBox="0 0 120 100">
+      <rect x="21" y="38" width="77" height="43" rx="4" fill="#d9dad4" stroke="currentColor" stroke-width="3"/>
+      <rect x="42" y="47" width="33" height="25" rx="3" fill="#535450"/>
+      <path d="M30 50h7m-7 9h7m-7 9h7m43-18h8m-8 9h8m-8 9h8M94 37l8-17m0 0 5-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="goggles-icon" viewBox="0 0 120 100">
+      <path d="M20 38Q60 23 100 38L108 59Q106 77 93 78H75L60 66 45 78H27Q14 77 12 59Z" fill="#deded8" stroke="currentColor" stroke-width="3"/>
+      <path d="M22 46Q60 35 98 46L103 57Q101 68 91 68H76L60 56 44 68H29Q19 68 17 57Z" fill="#333531"/>
+      <path d="M28 38L24 20m67 17 5-17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="controller-icon" viewBox="0 0 120 100">
+      <path d="M35 31h50q12 0 17 15l5 23q2 13-11 13-5 0-10-5l-12-12H46L34 77q-5 5-10 5-13 0-11-13l5-23q5-15 17-15Z" fill="#deded8" stroke="currentColor" stroke-width="3"/>
+      <path d="M60 31V15m-6 0h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="51" r="9" fill="#535450"/><circle cx="80" cy="51" r="9" fill="#535450"/>
+      <circle cx="40" cy="51" r="3" fill="#fff"/><circle cx="80" cy="51" r="3" fill="#fff"/>
+    </symbol>
+    <symbol id="rx-icon" viewBox="0 0 120 100">
+      <rect x="30" y="40" width="60" height="33" rx="4" fill="#d9dad4" stroke="currentColor" stroke-width="3"/>
+      <rect x="44" y="47" width="29" height="19" rx="2" fill="#535450"/>
+      <path d="M82 40l9-17m0 0 14-6M35 73v9m9-9v9m9-9v9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="arrow-right" viewBox="0 0 100 16" preserveAspectRatio="none">
+      <path d="M1 8H97m-7-5 7 5-7 5" stroke="currentColor" fill="none" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+    </symbol>
+    <symbol id="arrow-air" viewBox="0 0 100 16" preserveAspectRatio="none">
+      <path d="M1 8H96" stroke="currentColor" fill="none" stroke-width="1.8" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/>
+      <path d="m90 3 7 5-7 5" stroke="currentColor" fill="none" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+    </symbol>
+
+  </defs>
+</svg>
+<header class="site-head">
+  <div class="wrap head-inner">
+    <div class="identity"><a class="home-link" href="../../"><strong>FPV 드론</strong></a><span>8차시 · 종합 실습</span></div>
+    <div class="head-actions">
+      <button class="control" id="share" type="button" aria-label="페이지 공유" hidden><span class="share-long">페이지&nbsp;</span>공유</button>
+      <button class="control" id="open-toc" type="button" aria-haspopup="dialog" hidden>목차</button>
+    </div>
+    <p class="share-status" id="share-status" role="status" hidden></p>
+  </div>
+</header>
+<main class="wrap">
+  <article class="slide" id="s01" aria-labelledby="title-01">
+    <header class="slide-head">
+      <p class="kicker">01 · 전체 흐름</p>
+      <h1 id="title-01" tabindex="-1">오늘 완성할 한 번의 비행</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">시뮬레이터에서 현장 판단으로</figcaption><div class="practical-body practical-split"><div class="practical-image course-view"><canvas data-lap-map role="img" aria-label="게이트 1, 2, 3, 출발 게이트 1 순서로 진행하는 기존 코스 평면도"></canvas></div><div class="practical-notes"><div class="cue"><h2>01 · 한 바퀴</h2><p>4·5차시 코스를 정해진 순서로 돌아온다.</p></div><div class="cue"><h2>02 · 진행 판단</h2><p>기체와 현장 조건을 함께 확인한다.</p></div><div class="cue"><h2>03 · 짧은 비행</h2><p>조건이 갖춰지면 교관과 이륙부터 착륙까지 연결한다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">먼저 시뮬레이터 코스를 완주합니다. 이후 현장 조건에 따라 교관 지도 아래 실기 또는 시뮬레이터 과제로 이어갑니다.</p>
+      <p class="credit"><a href="https://oscarliang.com/learn-flying-fpv-multirotors/" target="_blank" rel="noopener noreferrer">Oscar Liang · FPV 비행 연습 ↗</a> · 4·5차시 코스</p>
+    </div>
+  </article>
+
+  <article class="slide" id="s02" aria-labelledby="title-02">
+    <header class="slide-head">
+      <p class="kicker">02 · 시뮬레이터</p>
+      <h1 id="title-02" tabindex="-1">시뮬레이터 한 바퀴</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">기존 게이트 코스 · 1 → 2 → 3 → 1</figcaption><div class="activity-body" data-practice-player="lap">
+  <div class="practical-image lap-view"><canvas data-lap-canvas role="img" aria-label="기존 3게이트 코스를 도는 교안용 3D FPV 시연"></canvas><span class="playback-tag">시뮬레이터 재현</span></div>
+  <div class="activity-controls">
+    <button class="control" type="button" data-practice-play hidden>한 바퀴 재생</button>
+    <input type="range" min="0" max="1000" step="10" value="0" aria-label="한 바퀴 재생 위치" data-practice-seek hidden>
+    <span class="practical-label" data-practice-status>다음 01</span>
+  </div>
+</div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">1·2·3번 게이트를 차례로 통과하고 출발 게이트로 돌아옵니다. 코너가 끝나면 다음 게이트로 들어갈 길인 진입선을 다시 잡습니다.</p>
+      <p class="credit"><a href="https://oscarliang.com/learn-flying-fpv-multirotors/" target="_blank" rel="noopener noreferrer">Oscar Liang · FPV 비행 연습 ↗</a> · 4·5차시 코스</p>
+    </div>
+  </article>
+
+  <article class="slide" id="s03" aria-labelledby="title-03">
+    <header class="slide-head">
+      <p class="kicker">03 · 현장 판단</p>
+      <h1 id="title-03" tabindex="-1">오늘 띄울 수 있는가</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">6차시 안전 점검과 7차시 작업대 점검을 합친다</figcaption><div class="practical-four"><div class="practical-cell cue"><b>01</b><h2>배터리·기체</h2><p>외관, 고정, 전원, 작업대 확인 결과를 본다.</p></div><div class="practical-cell cue"><b>02</b><h2>조종과 영상</h2><p>조종 입력과 고글 영상 상태를 각각 확인한다.</p></div><div class="practical-cell cue"><b>03</b><h2>현장·공역</h2><p>사람, 장애물, 기상, 육안 확인 범위와 승인 요건을 살핀다.</p></div><div class="practical-cell cue"><b>04</b><h2>교관과 진행 판단</h2><p>조건 충족 시 지도하 실기, 미충족 시 시뮬레이터로 이어간다.</p></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">오늘 사용할 기체와 장소 기준으로 진행 여부를 판단합니다. 조건이 확인되지 않으면 지상에서 시뮬레이터 과제로 이어갑니다.</p>
+      <p class="credit"><a href="https://drone.onestop.go.kr/" target="_blank" rel="noopener noreferrer">드론원스톱 · 비행가능지역 조회 ↗</a> · <a href="https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1025929301&amp;chrClsCd=010202&amp;ancYnChk=" target="_blank" rel="noopener noreferrer">국가법령정보센터 · 시행규칙 제310조 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s04" aria-labelledby="title-04">
+    <header class="slide-head">
+      <p class="kicker">04 · 경로</p>
+      <h1 id="title-04" tabindex="-1">짧은 경로를 정한다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">첫 실기 과제 · 교관이 현장에 맞춰 지정하는 예시</figcaption><div class="practical-body practical-split"><div class="practical-diagram "><svg viewBox="0 0 560 325" role="img" aria-label="출발점에서 직진하고 넓게 돌아 별도의 착륙 지점에 접근하는 교육용 개념도">
+    <rect x="40" y="55" width="480" height="220" rx="16" class="diagram-surface"/>
+    <path d="M70 274H495" class="diagram-ghost"/>
+    <path d="M154 246L154 136C154 53 408 53 408 136L408 246" class="diagram-path flight-trajectory"/>
+    <circle cx="154" cy="246" r="9" class="diagram-point"/><text x="154" y="302" class="diagram-label diagram-ink" text-anchor="middle">출발</text><circle cx="281" cy="73" r="9" class="diagram-point"/><text x="281" y="44" class="diagram-label diagram-ink" text-anchor="middle">넓게 선회</text><circle cx="408" cy="246" r="9" class="diagram-point"/><text x="408" y="302" class="diagram-label diagram-ink" text-anchor="middle">착륙</text>
+    
+    
+    
+  </svg></div><div class="practical-notes"><div class="cue"><h2>출발점</h2><p>이륙 위치와 진행 방향을 정한다.</p></div><div class="cue"><h2>선회 구간</h2><p>정해진 구역 안에서 넓게 방향을 바꾼다.</p></div><div class="cue"><h2>착륙 지점</h2><p>사람과 분리된 지점을 확인한다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">시뮬레이터 게이트 코스와 별도로 실기에서는 교관이 지정한 짧은 경로를 사용합니다. 출발점과 착륙 지점을 먼저 확인합니다.</p>
+      <p class="credit"><a href="https://oscarliang.com/learn-flying-fpv-multirotors/" target="_blank" rel="noopener noreferrer">Oscar Liang · FPV 비행 연습 ↗</a> · 교육용 개념도</p>
+    </div>
+  </article>
+
+  <article class="slide" id="s05" aria-labelledby="title-05">
+    <header class="slide-head">
+      <p class="kicker">05 · 이륙</p>
+      <h1 id="title-05" tabindex="-1">이륙 뒤 자세를 잡는다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">측면 도해 · 이륙 직후 안정되는 구간</figcaption><div class="practical-body practical-split"><div class="practical-diagram "><svg viewBox="0 0 560 305" role="img" aria-label="이륙 뒤 자세를 안정시키고 다음 구간으로 들어가는 흐름"><rect x="20" y="55" width="520" height="226" rx="10" class="diagram-surface"/>
+  <path d="M45 241H518" stroke="var(--icon-medium)" stroke-width="3"/>
+  <path d="M125 230C125 131 176 108 241 108H439" class="diagram-path"/>
+  <circle cx="125" cy="230" r="12" class="diagram-point"/>
+  <text x="127" y="273" class="diagram-label " text-anchor="middle">이륙 위치</text>
+  <text x="317" y="84" class="diagram-label " text-anchor="middle">자세 안정 후 이동</text>
+  </svg></div><div class="practical-notes"><div class="cue"><h2>출발 위치</h2><p>교관과 주변 및 진행 방향을 확인한다.</p></div><div class="cue"><h2>이륙 직후</h2><p>기체 자세와 진행 방향이 안정되는지 본다.</p></div><div class="cue"><h2>다음 구간</h2><p>교관 지시에 따라 경로로 들어간다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">이륙한 뒤 바로 선회하지 않고 자세와 진행 방향을 확인합니다. 실제 조작과 비행 모드는 교관이 수업 기체와 현장에 맞춰 정합니다.</p>
+      <p class="credit"><a href="https://oscarliang.com/learn-flying-fpv-multirotors/" target="_blank" rel="noopener noreferrer">Oscar Liang · FPV 비행 연습 ↗</a> · 교육용 개념도</p>
+    </div>
+  </article>
+
+  <article class="slide" id="s06" aria-labelledby="title-06">
+    <header class="slide-head">
+      <p class="kicker">06 · 선회</p>
+      <h1 id="title-06" tabindex="-1">선회 뒤 착륙선을 잡는다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">같은 경로 · 선회 끝에서 착륙 방향을 확인</figcaption><div class="practical-body practical-split"><div class="practical-diagram "><svg viewBox="0 0 560 325" role="img" aria-label="출발점에서 직진하고 넓게 돌아 별도의 착륙 지점에 접근하는 교육용 개념도">
+    <rect x="40" y="55" width="480" height="220" rx="16" class="diagram-surface"/>
+    <path d="M70 274H495" class="diagram-ghost"/>
+    <path d="M154 246L154 136C154 53 408 53 408 136L408 246" class="diagram-path flight-trajectory"/>
+    <circle cx="154" cy="246" r="9" class="diagram-point"/><text x="154" y="302" class="diagram-label diagram-ink" text-anchor="middle">출발</text><circle cx="281" cy="73" r="14" class="diagram-point"/><text x="281" y="44" class="diagram-label diagram-current" text-anchor="middle">넓게 선회</text><circle cx="408" cy="246" r="9" class="diagram-point"/><text x="408" y="302" class="diagram-label diagram-ink" text-anchor="middle">착륙</text>
+    <path d="m281 73-11-7v14z" fill="var(--paper)" transform="rotate(180 281 73)"/>
+    
+    
+  </svg></div><div class="practical-notes"><div class="cue"><h2>선회에 들어갈 때</h2><p>지정 경로 안에서 여유 있게 방향을 바꾼다.</p></div><div class="cue"><h2>선회를 마칠 때</h2><p>다음 진행선과 착륙 지점의 방향을 다시 확인한다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">선회 자체보다 빠져나오는 방향을 봅니다. 선회가 끝나면 착륙 위치로 향하는 진행선을 잡습니다.</p>
+      <p class="credit"><a href="https://oscarliang.com/learn-flying-fpv-multirotors/" target="_blank" rel="noopener noreferrer">Oscar Liang · FPV 비행 연습 ↗</a> · 교육용 개념도</p>
+    </div>
+  </article>
+
+  <article class="slide" id="s07" aria-labelledby="title-07">
+    <header class="slide-head">
+      <p class="kicker">07 · 착륙</p>
+      <h1 id="title-07" tabindex="-1">착륙 후 모터를 멈춘다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">측면 도해 · 접지에서 접근 가능 상태까지</figcaption><div class="practical-body practical-split"><div class="practical-diagram "><svg viewBox="0 0 560 305" role="img" aria-label="착륙 구간의 하강, 접지, 모터 정지 순서"><rect x="20" y="55" width="520" height="226" rx="10" class="diagram-surface"/>
+  <path d="M45 241H518" stroke="var(--icon-medium)" stroke-width="3"/>
+  <path d="M98 94H200C300 94 324 222 402 230" class="diagram-path"/>
+  <circle cx="402" cy="230" r="12" class="diagram-point"/>
+  <text x="390" y="273" class="diagram-label " text-anchor="middle">접지 후 DISARM</text>
+  <text x="167" y="75" class="diagram-label " text-anchor="middle">착륙 접근</text>
+  </svg></div><div class="practical-notes"><div class="cue"><h2>착륙 접근</h2><p>교관 지시에 따라 지정된 위치로 접근한다.</p></div><div class="cue"><h2>접지 후</h2><p>DISARM(시동 끔) 상태와 모터 정지를 확인한다.</p></div><div class="cue"><h2>접근</h2><p>교관이 접근을 확인한 뒤 기체를 회수한다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">착륙 후 모터가 완전히 정지했는지 확인합니다. 기체 회수까지 마치면 첫 비행 절차가 끝납니다.</p>
+      <p class="credit"><a href="https://oscarliang.com/learn-flying-fpv-multirotors/" target="_blank" rel="noopener noreferrer">Oscar Liang · FPV 비행 연습 ↗</a> · <a href="https://betaflight.com/docs/wiki/guides/current/Safety" target="_blank" rel="noopener noreferrer">Betaflight · 작업대 안전 ↗</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s08" aria-labelledby="title-08">
+    <header class="slide-head">
+      <p class="kicker">08 · 중단 판단</p>
+      <h1 id="title-08" tabindex="-1">조건이 바뀌면 멈춘다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">같은 출발 구역 · 사람이 들어온 상황</figcaption><div class="practical-body practical-split"><div class="practical-diagram "><svg viewBox="0 0 560 325" role="img" aria-label="출발점에서 직진하고 넓게 돌아 별도의 착륙 지점에 접근하는 교육용 개념도">
+    <rect x="40" y="55" width="480" height="220" rx="16" class="diagram-surface"/>
+    <path d="M70 274H495" class="diagram-ghost"/>
+    <path d="M154 246L154 136C154 53 408 53 408 136L408 246" class="diagram-path flight-trajectory"/>
+    <circle cx="154" cy="246" r="14" class="diagram-point"/><text x="154" y="302" class="diagram-label diagram-current" text-anchor="middle">출발</text><circle cx="281" cy="73" r="9" class="diagram-point"/><text x="281" y="44" class="diagram-label diagram-ink" text-anchor="middle">넓게 선회</text><circle cx="408" cy="246" r="9" class="diagram-point"/><text x="408" y="302" class="diagram-label diagram-ink" text-anchor="middle">착륙</text>
+    
+    <circle cx="153" cy="226" r="23" fill="var(--paper)" stroke="var(--signal)" stroke-width="4"/><path d="M143 216l20 20m0-20-20 20" stroke="var(--signal)" stroke-width="4"/>
+    
+  </svg></div><div class="practical-notes"><div class="cue"><h2>이륙 전</h2><p>사람이 들어오면 이륙을 보류하고 구역 상태를 다시 확인한다.</p></div><div class="cue"><h2>비행 중</h2><p>교관의 중단 지시에 따라 수업 전에 정해 둔 절차로 전환한다.</p></div></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">예정 경로에 사람이 들어오면 상황이 달라집니다. 진행 여부는 현재 상태를 보고 다시 판단합니다.</p>
+      <p class="credit"><a href="https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1025929301&amp;chrClsCd=010202&amp;ancYnChk=" target="_blank" rel="noopener noreferrer">국가법령정보센터 · 시행규칙 제310조 ↗</a> · 교육용 상황 예시</p>
+    </div>
+  </article>
+
+  <article class="slide" id="s09" aria-labelledby="title-09">
+    <header class="slide-head">
+      <p class="kicker">09 · 연속 시연</p>
+      <h1 id="title-09" tabindex="-1">출발부터 정지까지</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">교안용 경로 재현 · 이륙 → 안정 → 선회 → 착륙 → 정지</figcaption><div class="activity-body" data-practice-player="route">
+  <div class="practical-diagram "><svg viewBox="0 0 560 325" role="img" aria-label="출발점에서 직진하고 넓게 돌아 별도의 착륙 지점에 접근하는 교육용 개념도">
+    <rect x="40" y="55" width="480" height="220" rx="16" class="diagram-surface"/>
+    <path d="M70 274H495" class="diagram-ghost"/>
+    <path d="M154 246L154 136C154 53 408 53 408 136L408 246" class="diagram-path flight-trajectory"/>
+    <circle cx="154" cy="246" r="9" class="diagram-point"/><text x="154" y="302" class="diagram-label diagram-ink" text-anchor="middle">출발</text><circle cx="281" cy="73" r="9" class="diagram-point"/><text x="281" y="44" class="diagram-label diagram-ink" text-anchor="middle">넓게 선회</text><circle cx="408" cy="246" r="9" class="diagram-point"/><text x="408" y="302" class="diagram-label diagram-ink" text-anchor="middle">착륙</text>
+    
+    
+    <circle cx="154" cy="246" r="10" class="diagram-point flight-marker" data-practice-marker/>
+  </svg></div>
+  <div class="activity-controls">
+    <button class="control" type="button" data-practice-play hidden>순서 재생</button>
+    <input type="range" min="0" max="1000" step="10" value="0" aria-label="순서 재생 위치" data-practice-seek hidden>
+    <span class="practical-label" data-practice-status>이륙 전</span>
+  </div>
+</div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">재생하면 같은 평면도에서 각 단계의 위치를 따라갑니다. 진행 막대로 멈춰서 선회와 착륙 진입 지점을 다시 볼 수 있습니다.</p>
+      <p class="credit">교안용 경로 재현</p>
+    </div>
+  </article>
+
+  <article class="slide" id="s10" aria-labelledby="title-10">
+    <header class="slide-head">
+      <p class="kicker">10 · 완료 기준</p>
+      <h1 id="title-10" tabindex="-1">무엇을 보면 완료인가</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel practical-panel "><figcaption class="panel-label">실습 화면에서 확인하는 완료 기준</figcaption><div class="practical-four"><div class="practical-cell cue"><b>01</b><h2>시뮬레이터</h2><p>게이트를 1→2→3→1 순서로 통과하고 진입선을 잡았다.</p></div><div class="practical-cell cue"><b>02</b><h2>현장 판단</h2><p>장비와 주변 조건을 확인하고 진행 또는 보류를 결정했다.</p></div><div class="practical-cell cue"><b>03</b><h2>첫 비행 절차</h2><p>정해진 경로 안에서 이륙, 선회, 착륙을 이어갔다.</p></div><div class="practical-cell cue"><b>04</b><h2>마지막 확인</h2><p>착륙 후 DISARM과 모터 정지를 확인했다.</p></div></div></figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">오늘의 기준은 정해진 경로와 순서를 안전하게 마치는 것입니다. 조건이 갖춰지지 않은 경우에는 보류 판단과 시뮬레이터 과제를 확인합니다.</p>
+      <p class="credit"><a href="https://oscarliang.com/learn-flying-fpv-multirotors/" target="_blank" rel="noopener noreferrer">Oscar Liang · FPV 비행 연습 ↗</a> · 6·7차시 점검 기준</p>
+    </div>
+  </article>
+</main>
+<footer class="site-foot" id="navigation" hidden>
+  <nav class="wrap foot-inner" aria-label="슬라이드 이동">
+    <button class="control" id="previous" type="button"><span aria-hidden="true">←</span> 이전</button>
+    <a class="control" id="previous-lesson" href="../07/" aria-label="이전 차시" hidden><span aria-hidden="true">←</span> 이전<span class="lesson-word"> 차시</span></a>
+    <output class="page-number" id="page-number" aria-live="polite" aria-atomic="true"></output>
+    <button class="control primary" id="next" type="button">다음 <span aria-hidden="true">→</span></button>
+    <a class="control primary" id="next-lesson" href="../../#lessons" aria-label="차시 목록" hidden><span class="lesson-word">차시 </span>목록 <span aria-hidden="true">→</span></a>
+  </nav>
+</footer>
+<dialog id="toc" aria-labelledby="toc-title">
+  <div class="toc-head">
+    <h2 id="toc-title">8차시 목차</h2>
+    <button class="control" id="close-toc" type="button">닫기</button>
+  </div>
+  <ol class="toc-list" id="toc-list"></ol>
+  <h3 class="toc-section">전체 차시</h3>
+  <ol class="toc-list"><li><a href="../01/"><span>01</span>1차시 · 드론의 눈으로 본다</a></li><li><a href="../02/"><span>02</span>2차시 · 스틱에서 모터까지</a></li><li><a href="../03/"><span>03</span>3차시 · 고글 영상은 왜 끊길까?</a></li><li><a href="../04/"><span>04</span>4차시 · 시뮬레이터에서 첫 코스</a></li><li><a href="../05/"><span>05</span>5차시 · Angle과 Acro</a></li><li><a href="../06/"><span>06</span>6차시 · LiPo 배터리와 실기 안전</a></li><li><a href="../07/"><span>07</span>7차시 · Betaflight 실습</a></li><li><a href="../08/" aria-current="page"><span>08</span>8차시 · 종합 실습<small>현재</small></a></li></ol><p class="toc-start"><a href="../../">시작 화면</a></p>
+</dialog>
+<div class="transition-layer" aria-hidden="true" inert></div>
+<script src="lesson.js"></script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="조종기의 스틱에서 수신기, 비행제어기, ESC, 모터로 이어지는 명령과 자이로 피드백을 이해하는 FPV 드론 2차시.">
+<title>2차시 · 스틱에서 모터까지 | FPV 첫 비행</title>
+<link rel="canonical" href="https://mirinaeman.com/pages/fpv-first-flight/lessons/02/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2차시 · 스틱에서 모터까지 | FPV 첫 비행">
+<meta property="og:description" content="조종기의 스틱에서 수신기, 비행제어기, ESC, 모터로 이어지는 명령과 자이로 피드백을 이해하는 FPV 드론 2차시.">
+<meta property="og:url" content="https://mirinaeman.com/pages/fpv-first-flight/lessons/02/">
+<meta property="og:image" content="https://mirinaeman.com/pages/fpv-first-flight/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="어두운 공간의 주황색 게이트 너머로 빛나는 고리의 블랙홀이 보이는 FPV 시점 장면">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="2차시 · 스틱에서 모터까지 | FPV 첫 비행">
+<meta name="twitter:description" content="조종기의 스틱에서 수신기, 비행제어기, ESC, 모터로 이어지는 명령과 자이로 피드백을 이해하는 FPV 드론 2차시.">
+<meta name="twitter:image" content="https://mirinaeman.com/pages/fpv-first-flight/og.jpg">
+<link rel="stylesheet" href="/pages/profile/fonts/pretendard-1.3.9/pretendard-variable.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="full-lesson">
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="camera-icon" viewBox="0 0 120 100">
+      <path d="M23 28h74a7 7 0 0 1 7 7v36a7 7 0 0 1-7 7H23a7 7 0 0 1-7-7V35a7 7 0 0 1 7-7Z" fill="#e3e3dd" stroke="currentColor" stroke-width="3"/>
+      <path d="M41 28l7-9h24l7 9M24 78v8m72-8v8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="60" cy="53" r="18" fill="#252522" stroke="currentColor" stroke-width="2"/>
+      <circle cx="60" cy="53" r="10" fill="#79807f"/>
+      <circle cx="57" cy="50" r="3" fill="#f4f4f0"/>
+    </symbol>
+    <symbol id="vtx-icon" viewBox="0 0 120 100">
+      <rect x="21" y="38" width="77" height="43" rx="4" fill="#d9dad4" stroke="currentColor" stroke-width="3"/>
+      <rect x="42" y="47" width="33" height="25" rx="3" fill="#535450"/>
+      <path d="M30 50h7m-7 9h7m-7 9h7m43-18h8m-8 9h8m-8 9h8M94 37l8-17m0 0 5-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="goggles-icon" viewBox="0 0 120 100">
+      <path d="M20 38Q60 23 100 38L108 59Q106 77 93 78H75L60 66 45 78H27Q14 77 12 59Z" fill="#deded8" stroke="currentColor" stroke-width="3"/>
+      <path d="M22 46Q60 35 98 46L103 57Q101 68 91 68H76L60 56 44 68H29Q19 68 17 57Z" fill="#333531"/>
+      <path d="M28 38L24 20m67 17 5-17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="controller-icon" viewBox="0 0 120 100">
+      <path d="M35 31h50q12 0 17 15l5 23q2 13-11 13-5 0-10-5l-12-12H46L34 77q-5 5-10 5-13 0-11-13l5-23q5-15 17-15Z" fill="#deded8" stroke="currentColor" stroke-width="3"/>
+      <path d="M60 31V15m-6 0h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="51" r="9" fill="#535450"/><circle cx="80" cy="51" r="9" fill="#535450"/>
+      <circle cx="40" cy="51" r="3" fill="#fff"/><circle cx="80" cy="51" r="3" fill="#fff"/>
+    </symbol>
+    <symbol id="rx-icon" viewBox="0 0 120 100">
+      <rect x="30" y="40" width="60" height="33" rx="4" fill="#d9dad4" stroke="currentColor" stroke-width="3"/>
+      <rect x="44" y="47" width="29" height="19" rx="2" fill="#535450"/>
+      <path d="M82 40l9-17m0 0 14-6M35 73v9m9-9v9m9-9v9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="arrow-right" viewBox="0 0 100 16" preserveAspectRatio="none">
+      <path d="M1 8H97m-7-5 7 5-7 5" stroke="currentColor" fill="none" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+    </symbol>
+    <symbol id="arrow-air" viewBox="0 0 100 16" preserveAspectRatio="none">
+      <path d="M1 8H96" stroke="currentColor" fill="none" stroke-width="1.8" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/>
+      <path d="m90 3 7 5-7 5" stroke="currentColor" fill="none" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+    </symbol>
+    <symbol id="processor-icon" viewBox="0 0 120 100">
+      <rect x="25" y="17" width="70" height="66" rx="9" fill="var(--icon-light)" stroke="currentColor" stroke-width="3"/>
+      <path d="M38 33h44v34H38z" fill="var(--icon-dark)" stroke="currentColor" stroke-width="2"/>
+      <path d="M43 28v6m10-6v6m14-6v6m10-6v6M43 67v6m10-6v6m14-6v6m10-6v6m5-34h8m-8 10h8m-8 10h8m-60-20h8m-8 10h8m-8 10h8" stroke="currentColor" stroke-width="2.5"/>
+      <circle cx="48" cy="43" r="2.8" fill="var(--paper)"/>
+    </symbol>
+    <symbol id="esc-icon" viewBox="0 0 120 100">
+      <rect x="22" y="22" width="76" height="56" rx="7" fill="var(--icon-light)" stroke="currentColor" stroke-width="3"/>
+      <path d="M11 42h11m-11 16h11m76-18h11m-11 10h11m-11 10h11" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M32 34h14v32H32zm21 0h14v32H53zm21 0h14v32H74z" fill="var(--icon-dark)"/>
+      <path d="M35 43h8m13 0h8m13 0h8" stroke="var(--paper)" stroke-width="2"/>
+    </symbol>
+    <symbol id="motor-icon" viewBox="0 0 120 100">
+      <path d="M29 42h62v26c0 12-14 19-31 19s-31-7-31-19z" fill="var(--icon-medium)" stroke="currentColor" stroke-width="3"/>
+      <ellipse cx="60" cy="42" rx="31" ry="13" fill="var(--icon-light)" stroke="currentColor" stroke-width="3"/>
+      <path d="M54 41V22q0-4 6-4t6 4v19q-6 4-12 0Z" fill="var(--icon-dark)" stroke="currentColor" stroke-width="2"/>
+      <path d="M35 33c-12 3-23 2-26-3s7-9 22-8l25 5m8 3 25 5c15 1 25-3 22-8s-14-6-26-3" fill="var(--icon-light)" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M41 58v12m13-9v14m13-14v14m12-17v12" stroke="var(--icon-dark)" stroke-width="2.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="gyro-icon" viewBox="0 0 120 100">
+      <circle cx="60" cy="50" r="31" fill="var(--icon-light)" stroke="currentColor" stroke-width="3"/>
+      <ellipse cx="60" cy="50" rx="13" ry="31" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(-31 60 50)"/>
+      <ellipse cx="60" cy="50" rx="31" ry="13" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(-31 60 50)"/>
+      <circle cx="60" cy="50" r="5" fill="var(--signal)"/>
+    </symbol>
+    <symbol id="quad-top" viewBox="0 0 120 90">
+      <path d="m31 26 58 38m0-38L31 64" stroke="var(--ink)" stroke-width="8" stroke-linecap="round"/>
+      <g fill="var(--icon-medium)" stroke="var(--ink)" stroke-width="1.7">
+        <circle cx="30" cy="25" r="9"/><circle cx="90" cy="25" r="9"/>
+        <circle cx="30" cy="65" r="9"/><circle cx="90" cy="65" r="9"/>
+      </g>
+      <rect x="52" y="28" width="16" height="33" rx="5" fill="var(--icon-dark)"/>
+      <path d="M52 40h16v8H52z" fill="var(--signal)"/>
+      <path d="m56 26 4-5 4 5z" fill="var(--ink)"/>
+    </symbol>
+    <symbol id="quad-side" viewBox="0 0 120 90">
+      <path d="M26 45h68l-8 8H34z" fill="var(--ink)"/>
+      <path d="M48 44V33h25l8 11z" fill="var(--icon-dark)"/>
+      <path d="M58 33v11" stroke="var(--signal)" stroke-width="5"/>
+      <path d="M33 45V35m54 10V35" stroke="var(--ink)" stroke-width="6"/>
+      <path d="M23 34h20m34 0h20" stroke="var(--icon-medium)" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="loop-arrow" viewBox="0 0 28 16" preserveAspectRatio="none">
+      <path d="M1 8h25m-6-4 6 4-6 4" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+<header class="site-head">
+  <div class="wrap head-inner">
+    <div class="identity"><a class="home-link" href="../../"><strong>FPV 드론</strong></a><span>2차시 · 조종 신호</span></div>
+    <div class="head-actions">
+      <button class="control" id="share" type="button" aria-label="페이지 공유" hidden><span class="share-long">페이지&nbsp;</span>공유</button>
+      <button class="control" id="open-toc" type="button" aria-haspopup="dialog" hidden>목차</button>
+    </div>
+    <p class="share-status" id="share-status" role="status" hidden></p>
+  </div>
+</header>
+<main class="wrap">
+  <article class="slide" id="s01" aria-labelledby="title-01">
+    <header class="slide-head">
+      <p class="kicker">01 · 명령의 방향</p>
+      <h1 id="title-01" tabindex="-1">스틱에서 모터까지</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual split-hero">
+        <figcaption class="hero-brief">
+          <p class="panel-label">조종 명령이 가는 방향</p>
+          <strong>조종기 <b>→</b> 기체</strong>
+        </figcaption>
+        <div class="hero-image">
+          <img src="../../assets/fpv-02-hero.webp" alt="두 개의 스틱이 달린 조종기와 프로펠러를 뗀 FPV 쿼드콥터를 위에서 본 모습" fetchpriority="high">
+        </div>
+      </figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">고글로 영상이 돌아오는 동안, 조종 명령은 기체로 갑니다.<br>조종자가 스틱을 움직이면 기체는 그 명령에 맞춰 모터 출력을 바꿉니다.</p>
+      <p class="credit">설명용 생성 이미지 · <a href="https://oscarliang.com/fpv-drone-guide/" target="_blank" rel="noopener">Oscar Liang · FPV 드론 입문</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s02" aria-labelledby="title-02">
+    <header class="slide-head">
+      <p class="kicker">02 · 스틱 입력</p>
+      <h1 id="title-02" tabindex="-1">스틱의 네 가지 입력</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel">
+        <figcaption class="panel-label">기체를 어느 방향으로 움직일까?</figcaption>
+        <div class="axis-grid">
+          <div class="axis-card">
+            <svg viewBox="0 0 120 90" aria-hidden="true">
+              <path d="M17 49h86" class="axis-guide"/>
+              <use href="#quad-side" transform="rotate(15 60 45)"/>
+              <path d="M24 17Q56 2 88 17l-10 1m10-1-6-8" class="axis-motion"/>
+            </svg>
+            <p><strong>롤</strong> <small>좌우로 기울기</small></p>
+          </div>
+          <div class="axis-card">
+            <svg viewBox="0 0 120 90" aria-hidden="true">
+              <path d="M17 49h86" class="axis-guide"/>
+              <g transform="rotate(-17 60 45)">
+                <path d="M23 44h74l-12 12H33z" fill="var(--ink)"/>
+                <path d="M42 43V30h34l11 13z" fill="var(--icon-dark)"/>
+                <path d="M52 30v14" stroke="var(--signal)" stroke-width="6"/>
+                <circle cx="89" cy="42" r="5" fill="var(--icon-medium)"/>
+              </g>
+              <path d="M105 54Q113 38 104 23l-2 10m2-10 9 5" class="axis-motion"/>
+            </svg>
+            <p><strong>피치</strong> <small>앞뒤로 기울기</small></p>
+          </div>
+          <div class="axis-card">
+            <svg viewBox="0 0 120 90" aria-hidden="true">
+              <use href="#quad-top" transform="rotate(24 60 45) scale(.92)" x="5" y="4"/>
+              <path d="M23 13Q47-2 80 7q17 5 24 17l-11-4m11 4-1-11" class="axis-motion"/>
+            </svg>
+            <p><strong>요</strong> <small>기체가 향하는 방향 돌리기</small></p>
+          </div>
+          <div class="axis-card">
+            <svg viewBox="0 0 120 90" aria-hidden="true">
+              <use href="#quad-side" y="13"/>
+              <path d="M32 39V12l-6 6m6-6 6 6m50 21V12l-6 6m6-6 6 6" class="axis-motion"/>
+            </svg>
+            <p><strong>스로틀</strong> <small>전체 추력 높이거나 낮추기</small></p>
+          </div>
+        </div>
+      </figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">롤·피치·요는 기체가 어느 축으로 돌지 정합니다.<br>스로틀은 네 모터가 만드는 전체 추력을 조절하는 입력입니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/wiki/app/receiver-tab" target="_blank" rel="noopener">Betaflight · 조종 채널</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s03" aria-labelledby="title-03">
+    <header class="slide-head">
+      <p class="kicker">03 · 무선 조종</p>
+      <h1 id="title-03" tabindex="-1">조종기에서 수신기로</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel">
+        <figcaption class="panel-label">공중을 건너고, 기체 안에서 이어진다</figcaption>
+        <div class="flow">
+          <div class="flow-node">
+            <svg aria-hidden="true"><use href="#controller-icon"/></svg>
+            <div><strong>조종기</strong><small>스틱 입력을 전송</small></div>
+          </div>
+          <div class="flow-link air">
+            <svg aria-hidden="true"><use href="#arrow-air"/></svg><small>무선 조종 링크</small>
+          </div>
+          <div class="flow-node">
+            <svg aria-hidden="true"><use href="#rx-icon"/></svg>
+            <div><strong>수신기</strong><small>조종 명령을 수신</small></div>
+          </div>
+          <div class="flow-link">
+            <svg aria-hidden="true"><use href="#arrow-right"/></svg><small>기체 내부 연결</small>
+          </div>
+          <div class="flow-node">
+            <svg class="fc-mark" aria-hidden="true"><use href="#processor-icon"/></svg>
+            <div><strong>비행제어기</strong><small>입력을 읽음</small></div>
+          </div>
+        </div>
+      </figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">조종기는 스틱 입력을 무선으로 보냅니다.<br>기체의 수신기는 받은 명령을 기체의 두뇌인 비행제어기(FC)에 전달합니다.</p>
+      <p class="credit">기체 내부 연결 예시 · <a href="https://www.expresslrs.org/quick-start/receivers/wiring-up/" target="_blank" rel="noopener">ExpressLRS · 수신기와 FC</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s04" aria-labelledby="title-04">
+    <header class="slide-head">
+      <p class="kicker">04 · 비행제어</p>
+      <h1 id="title-04" tabindex="-1">목표와 실제를 비교한다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel">
+        <figcaption class="panel-label">비행제어기에 들어오는 두 정보 <small>· 아크로 모드 기준</small></figcaption>
+        <div class="branch-row">
+          <div class="branch-inputs">
+            <div class="branch-input">
+              <svg aria-hidden="true"><use href="#controller-icon"/></svg>
+              <div><strong>조종자의 입력</strong><small>원하는 회전 속도</small></div>
+            </div>
+            <div class="branch-input">
+              <svg aria-hidden="true"><use href="#gyro-icon"/></svg>
+              <div><strong>자이로의 측정</strong><small>실제 회전 속도</small></div>
+            </div>
+          </div>
+          <div class="flow-link signal"><svg aria-hidden="true"><use href="#arrow-right"/></svg><small>두 값을 비교</small></div>
+          <div class="flow-node">
+            <svg class="fc-mark" aria-hidden="true"><use href="#processor-icon"/></svg>
+            <div><strong>비행제어기</strong><small>모터별 명령 계산</small></div>
+          </div>
+        </div>
+      </figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">아크로(Acro, 수동 회전) 모드에서 롤·피치·요 입력은 기체를 얼마나 빠르게 돌릴지 정합니다.<br>비행제어기는 회전을 재는 센서인 자이로가 잰 실제 회전 속도와 비교해 모터별 명령을 계산합니다.</p>
+      <p class="credit"><a href="https://oscarliang.com/flight-controller/" target="_blank" rel="noopener">Oscar Liang · 비행제어기</a> · <a href="https://betaflight.com/docs/development/PID-Internals" target="_blank" rel="noopener">Betaflight · 제어 루프</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s05" aria-labelledby="title-05">
+    <header class="slide-head">
+      <p class="kicker">05 · 모터 구동</p>
+      <h1 id="title-05" tabindex="-1">ESC가 모터를 돌린다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel">
+        <figcaption class="panel-label">출력 명령이 프로펠러의 회전으로</figcaption>
+        <div class="flow">
+          <div class="flow-node">
+            <svg class="fc-mark" aria-hidden="true"><use href="#processor-icon"/></svg>
+            <div><strong>비행제어기</strong><small>모터마다 명령을 보냄</small></div>
+          </div>
+          <div class="flow-link">
+            <svg aria-hidden="true"><use href="#arrow-right"/></svg><small>명령 신호</small>
+          </div>
+          <div class="flow-node">
+            <svg aria-hidden="true"><use href="#esc-icon"/></svg>
+            <div><strong>ESC</strong><small>배터리 전력으로 구동</small></div>
+          </div>
+          <div class="flow-link signal">
+            <svg aria-hidden="true"><use href="#arrow-right"/></svg><small>모터 구동 전류</small>
+          </div>
+          <div class="flow-node">
+            <svg aria-hidden="true"><use href="#motor-icon"/></svg>
+            <div><strong>모터</strong><small>프로펠러를 돌림</small></div>
+          </div>
+        </div>
+      </figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">비행제어기가 모터별 출력 명령을 보내면 전자속도제어기(ESC)가 모터를 구동합니다.<br>예를 들어 왼쪽 추력이 오른쪽보다 커지면 기체가 오른쪽으로 기웁니다.</p>
+      <p class="credit"><a href="https://oscarliang.com/esc/" target="_blank" rel="noopener">Oscar Liang · ESC의 역할</a> · <a href="https://betaflight.com/docs/development/API/Dshot" target="_blank" rel="noopener">Betaflight · 명령 신호 예시(DShot)</a></p>
+    </div>
+  </article>
+
+  <article class="slide" id="s06" aria-labelledby="title-06">
+    <header class="slide-head">
+      <p class="kicker">06 · 피드백</p>
+      <h1 id="title-06" tabindex="-1">움직임을 다시 측정한다</h1>
+    </header>
+    <div class="slide-media">
+      <figure class="lesson-visual reading-panel">
+        <figcaption class="panel-label">계산 → 움직임 → 측정 → 다시 계산</figcaption>
+        <div class="feedback">
+          <div class="flow-node">
+            <svg aria-hidden="true"><use href="#processor-icon"/></svg>
+            <div><strong>비행제어기</strong><small>출력 계산</small></div>
+            <svg class="loop-edge" aria-hidden="true"><use href="#loop-arrow"/></svg>
+          </div>
+          <div class="flow-node">
+            <svg aria-hidden="true"><use href="#quad-top"/></svg>
+            <div><strong>기체</strong><small>움직임 변화</small></div>
+            <svg class="loop-edge" aria-hidden="true"><use href="#loop-arrow"/></svg>
+          </div>
+          <div class="flow-node">
+            <svg aria-hidden="true"><use href="#gyro-icon"/></svg>
+            <div><strong>자이로</strong><small>회전 측정</small></div>
+          </div>
+          <div class="loop-return">측정값을 비행제어기에 전달</div>
+        </div>
+      </figure>
+    </div>
+    <div class="slide-copy">
+      <p class="explain">모터가 기체를 움직이면 자이로가 달라진 회전 속도를 잽니다.<br>비행제어기는 이 측정값을 받아 출력을 다시 계산합니다.</p>
+      <p class="credit"><a href="https://betaflight.com/docs/development/PID-Internals" target="_blank" rel="noopener">Betaflight · 자이로 피드백</a></p>
+    </div>
+  </article>
+</main>
+<footer class="site-foot" id="navigation" hidden>
+  <nav class="wrap foot-inner" aria-label="슬라이드 이동">
+    <button class="control" id="previous" type="button"><span aria-hidden="true">←</span> 이전</button>
+    <a class="control" id="previous-lesson" href="../01/" aria-label="이전 차시" hidden><span aria-hidden="true">←</span> 이전<span class="lesson-word"> 차시</span></a>
+    <output class="page-number" id="page-number" aria-live="polite" aria-atomic="true"></output>
+    <button class="control primary" id="next" type="button">다음 <span aria-hidden="true">→</span></button>
+    <a class="control primary" id="next-lesson" href="../03/" aria-label="다음 차시" hidden>다음<span class="lesson-word"> 차시</span> <span aria-hidden="true">→</span></a>
+  </nav>
+</footer>
+<dialog id="toc" aria-labelledby="toc-title">
+  <div class="toc-head">
+    <h2 id="toc-title">2차시 목차</h2>
+    <button class="control" id="close-toc" type="button">닫기</button>
+  </div>
+  <ol class="toc-list" id="toc-list"></ol>
+  <h3 class="toc-section">전체 차시</h3>
+  <ol class="toc-list"><li><a href="../01/"><span>01</span>1차시 · 드론의 눈으로 본다</a></li><li><a href="../02/" aria-current="page"><span>02</span>2차시 · 스틱에서 모터까지<small>현재</small></a></li><li><a href="../03/"><span>03</span>3차시 · 고글 영상은 왜 끊길까?</a></li><li><a href="../04/"><span>04</span>4차시 · 시뮬레이터에서 첫 코스</a></li><li><a href="../05/"><span>05</span>5차시 · Angle과 Acro</a></li><li><a href="../06/"><span>06</span>6차시 · LiPo 배터리와 실기 안전</a></li><li><a href="../07/"><span>07</span>7차시 · Betaflight 실습</a></li><li><a href="../08/"><span>08</span>8차시 · 종합 실습</a></li></ol><p class="toc-start"><a href="../../">시작 화면</a></p>
+</dialog>
+<div class="transition-layer" aria-hidden="true" inert></div>
+<script src="lesson.js"></script>
+</body>
+</html>

@@ -360,6 +360,10 @@
         {
           "id": "drone-matchup-cinema",
           "reason": "드론 매치업 강의에서 나온 영상입니다."
+        },
+        {
+          "id": "fpv-first-flight",
+          "reason": "드론 시점을 만드는 카메라와 조종, 첫 비행을 8차시로 배우는 강의입니다."
         }
       ]
     },
@@ -908,6 +912,13 @@
       "b": "collection:ai-music-archive",
       "label": "같은 AI 음악 작업",
       "reason": "강릉 가게들의 로고송도 AI 음악으로 만들어 앨범으로 냈습니다.",
+      "status": "approved"
+    },
+    {
+      "a": "fpv-first-flight",
+      "b": "drone-fpv-100",
+      "label": "조종을 배우고, 촬영을 읽는다",
+      "reason": "한쪽은 FPV 조종의 기초를, 다른 쪽은 FPV 촬영 사례 100선을 다룹니다.",
       "status": "approved"
     }
   ],

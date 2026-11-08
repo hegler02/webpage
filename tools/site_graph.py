@@ -28,12 +28,12 @@ def page_of(node_id, editorial=()):
     return ''
 
 
-def site_graph(catalog=None, records=None, links=None, layout=None):
+def site_graph(catalog=None, records=None, links=None, layout=None, posts=None):
     catalog = catalog or read_json(PROFILE / 'data/message-bodies.json')
     records = records if records is not None else read_json(PROFILE / 'data/records.json')
     links = links if links is not None else read_json(PROFILE / 'data/constellation-links.json')
     manifest = read_json(PROFILE / 'site.manifest.json')
-    g = build_graph(catalog, links=links, records=records)
+    g = build_graph(catalog, links=links, records=records, posts=posts)
     nodes, edges = g['nodes'], g['edges']
     known = layout if layout is not None else load_layout()
     known = {k: v for k, v in known.items() if k in {n['id'] for n in nodes}}
@@ -56,12 +56,13 @@ def site_graph(catalog=None, records=None, links=None, layout=None):
     for i, n in enumerate(nodes):
         body = bodies.get(n['id'])
         kind = BODY_KIND[body['body_type']] if body else n['kind']
-        near = sorted(((round(pairs.get((min(i, j), max(i, j)), 0), 6), nodes[j]['id']) for j in range(len(nodes)) if j != i), key=lambda x: (-x[0], x[1]))
+        # A record's neighbours are records; a post may sit beside either.
+        near = sorted(((round(pairs.get((min(i, j), max(i, j)), 0), 6), nodes[j]['id']) for j in range(len(nodes)) if j != i and (n['kind'] == 'post' or nodes[j]['kind'] != 'post')), key=lambda x: (-x[0], x[1]))
         item = dict(id=n['id'], k=kind, t=n['title'], s=re.sub(r'\s+', ' ', n.get('summary') or ''), u=n.get('url') or '', page=page_of(n['id']) if kind in RECORD_KINDS else '', y=n.get('year') or '',
                     p=positions[n['id']], d=degree[n['id']], key=n['id'] in keys, kin=[o for w, o in near[:6] if w > 0], tags=[t.lower() for t in (n.get('tags') or [])][:6])
         if n.get('introUrl'):
             item['intro'] = n['introUrl']
-        if n.get('image') and kind in RECORD_KINDS:
+        if n.get('image') and (kind in RECORD_KINDS or kind == 'post'):
             item.update(img=n['image'].removeprefix('/pages/profile'), alt=n.get('alt', ''))
         if kind not in RECORD_KINDS and n.get('sections'):
             item['sec'] = [s for s in n['sections'] if s['text'] != n.get('summary')]

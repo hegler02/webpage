@@ -69,6 +69,23 @@ class Growth(unittest.TestCase):
         self.assertNotIn('비공개 제안입니다.', out)
         self.assertNotIn('승인 전 별자리 제안입니다.', out)
 
+    def test_new_post_arrives_by_itself(self):
+        post = {'id': 'post-99999', 'title': '성장 시험 글', 'url': 'https://mirinaeverse.com/growth-test/', 'date': '2099-01-01', 'image': '/assets/images/og-home.jpg', 'summary': '시험 글입니다.', 'tags': ['이미지 시네마'], 'links': ['/pages/songbirds/', '/notes/']}
+        before = Site(self.catalog, self.records, self.links, self.layout, posts=[])
+        site = Site(self.catalog, self.records, self.links, self.layout, posts=[post])
+        out = {p.relative_to(PROFILE).as_posix(): c for p, c in site.outputs().items()}
+        star = next(n for n in json.loads(out['galaxy/graph.json'])['nodes'] if n['id'] == 'post:99999')
+        self.assertEqual((star['k'], star['u'], star['page']), ('post', post['url'], ''), 'a post is a star that opens the post')
+        self.assertTrue(star['kin'], 'a post settles near what shares its tags')
+        self.assertTrue(any({e['a'], e['b']} == {'post:99999', 'work:songbirds'} for e in site.edges), 'a link in the post is a connection')
+        self.assertEqual(problems(copy.deepcopy(self.links), self.catalog, self.records), [], 'a post never holds up a release')
+        self.assertNotIn('growth-test', out['sitemap.xml'])
+        self.assertIn('https://mirinaeverse.com/growth-test/', out['work/songbirds/index.html'], 'the linked record shows the post')
+        self.assertEqual(site.by_id['work:snail-time-jeju']['kin'], before.by_id['work:snail-time-jeju']['kin'], "a post leaves the records' neighbours alone")
+        for n in site.nodes:
+            if n['id'] in self.layout:
+                self.assertEqual(n['p'], self.layout[n['id']], n['id'])
+
     def test_existing_stars_stay_put(self):
         catalog, records = self.grown()
         site = Site(catalog, records, self.links, self.layout)

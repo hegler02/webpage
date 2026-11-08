@@ -15,6 +15,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'pages/profile/data/constellation-links.json'
@@ -115,8 +116,8 @@ def recorded_context_for(catalog, records):
     graph = build_graph(catalog, links={'constellations': [], 'pairs': [], 'solo': []}, records=records)
     connected = set()
     for e in graph['edges']:
-        # A title topic is automatic and says nothing about what this record is connected to.
-        if hub not in (e['source'], e['target']) and not e['target'].startswith('topic:'):
+        # A title topic or a post's link is automatic and is not a decision about this record.
+        if hub not in (e['source'], e['target']) and not e['target'].startswith('topic:') and e['label'] != '글에서 소개':
             connected |= {e['source'], e['target']}
     return graph, connected
 
@@ -126,6 +127,16 @@ def waiting_records(links, catalog, connected, records=None):
     records = records if records is not None else load_records()
     works = [b['body_id'] for b in catalog['bodies'] if b['status'] in PUBLIC and 'work:' + b['body_id'] not in done]
     return works + [r['id'] for r in records['records'] if r['id'] not in done]
+
+
+def unplaced_posts(links):
+    from constellation_data import read_posts
+    done = placed(links)
+    # A link the post makes is already a connection, and the two older essays already have theirs.
+    graph, _ = recorded_context_for(json.loads(CATALOG.read_text(encoding='utf-8')), load_records())
+    joined = {e['source'] for e in graph['edges'] if e['label'] == '글에서 소개'} | {e['target'] for e in graph['edges'] if e['target'].startswith('essay:')}
+    urls = {unquote(n['url']) for n in graph['nodes'] if n['id'] in joined}
+    return [p for p in read_posts() if 'post:' + p['id'].removeprefix('post-') not in done | joined and unquote(p['url']) not in urls]
 
 
 def find(links, name):
@@ -185,6 +196,11 @@ def main():
         for name in waiting:
             b = by_id[name]
             print(f"\n{name}\n  제목: {b['title']}\n  소개: {b.get('message_sentence', b.get('summary'))}\n  태그: {', '.join(b.get('tags', []))}\n  주소: {b.get('canonical_url', b.get('url', ''))}")
+        posts = unplaced_posts(links)
+        if posts:
+            print(f'\n미리내벌스 글 중 아직 제안이 없는 글 {len(posts)}개 (배포를 막지 않습니다)')
+            for p in posts:
+                print(f"  post:{p['id'].removeprefix('post-')}  {p['title']}\n    {p['summary']}")
         return 0
     if args.command == 'review':
         for c in links['constellations']:

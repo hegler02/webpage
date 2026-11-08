@@ -16,11 +16,12 @@ from work_note_thumbnails import load as load_covers
 
 ORIGIN = 'https://mirinaeman.com'
 HOME_LATEST = 8
+RAIL_ITEMS = 12
 HUB_NOTE = '/archive/image-cinema/'
 KIND_LABEL = {
     'song': ('노래', 'Song'), 'slide': ('슬라이드', 'Slide'), 'screen': ('영상', 'Screen'), 'story': ('이야기', 'Story'), 'knowledge': ('배움', 'Learning'),
     **{k: (v[1], v[2]) for k, v in KINDS.items()},
-    'concept': ('생각', 'Idea'), 'topic': ('연구 주제', 'Research topic'), 'judgment': ('제작 판단', 'Judgment'), 'essay': ('글', 'Essay'), 'constellation': ('별자리', 'Constellation'), 'creator': ('창작자', 'Creator'),
+    'concept': ('생각', 'Idea'), 'topic': ('연구 주제', 'Research topic'), 'judgment': ('제작 판단', 'Judgment'), 'essay': ('글', 'Essay'), 'post': ('미리내벌스 글', 'Mirinaeverse post'), 'constellation': ('별자리', 'Constellation'), 'creator': ('창작자', 'Creator'),
 }
 OPEN_LABEL = {**{k: v[3] for k, v in KINDS.items()}, **{k: ('작품 보기', 'Open work') for k in ('song', 'slide', 'screen', 'story', 'knowledge')}}
 TITLE = '김준호 | AI와 함께 메시지의 몸을 만드는 사람'
@@ -129,8 +130,8 @@ class Metadata(HTMLParser):
 
 
 class Site:
-    def __init__(self, catalog=None, records=None, links=None, layout=None):
-        g = site_graph(catalog, records, links, layout)
+    def __init__(self, catalog=None, records=None, links=None, layout=None, posts=None):
+        g = site_graph(catalog, records, links, layout, posts)
         self.g = g
         self.nodes = g['nodes']
         self.by_id = {n['id']: n for n in self.nodes}
@@ -164,7 +165,11 @@ class Site:
         return [o for edge, o in self.near[n['id']] if self.by_id[o]['k'] == 'constellation']
 
     def link_of(self, n):
-        return n['page'] or '/galaxy/?node=' + quote(n['id'], safe='')
+        # A post has no page here; it lives on Mirinaeverse.
+        return n['page'] or (n['u'] if n['k'] == 'post' else '/galaxy/?node=' + quote(n['id'], safe=''))
+
+    def away(self, n):
+        return out_attrs(n['u']) if n['k'] == 'post' else ''
 
     def card(self, n, text=None):
         body = n['id'].removeprefix('work:') if n['id'].startswith('work:') else ''
@@ -221,7 +226,7 @@ class Site:
                 if not rail.get('items'):
                     continue
                 cards = ''
-                for i in rail['items']:
+                for i in rail['items'][:RAIL_ITEMS]:
                     date = f'<small>{e(i["date"].replace("-", "."))}</small>' if i.get('date') else ''
                     cards += f'<li><a href="{e(i["url"])}"{out_attrs(i["url"])}><img src="{e(i["image"])}" alt="{e(i["title"])} {alt}" width="480" height="{height}" loading="lazy" decoding="async"><b>{e(i["title"])}</b>{date}</a></li>'
                 arrows = '<button class="rail-arrow prev" type="button" data-rail="-1" aria-label="이전" hidden>‹</button><button class="rail-arrow next" type="button" data-rail="1" aria-label="다음">›</button>'
@@ -297,7 +302,7 @@ class Site:
             rows = ''
             for edge, star in groups:
                 mates = [self.by_id[o] for _, o in self.near[star['id']] if o != n['id']][:6]
-                row_mates = ''.join(f'<a href="{e(self.link_of(m))}">{e(m["t"])}</a>' for m in mates)
+                row_mates = ''.join(f'<a href="{e(self.link_of(m))}"{self.away(m)}>{e(m["t"])}</a>' for m in mates)
                 rows += f'<li class="row"><a class="to" href="/galaxy/?node={quote(star["id"], safe="")}">{e(star["t"])}</a><span class="note">{e(edge["r"])}</span><span class="mates">{row_mates}</span></li>'
             parts.append(f'<section class="sec"><h2>{t("속한 별자리", "Constellations")}</h2><ul class="rows">{rows}</ul></section>')
         if others:
@@ -308,9 +313,9 @@ class Site:
             rows = ''
             for (name, reason), targets in same.items():
                 if len(targets) == 1:
-                    rows += f'<li><a class="row" href="{e(self.link_of(targets[0]))}"><span class="why">{e(name)}</span><span class="to">{e(targets[0]["t"])}</span><span class="note">{e(reason)}</span></a></li>'
+                    rows += f'<li><a class="row" href="{e(self.link_of(targets[0]))}"{self.away(targets[0])}><span class="why">{e(name)}</span><span class="to">{e(targets[0]["t"])}</span><span class="note">{e(reason)}</span></a></li>'
                 else:
-                    links = ''.join(f'<a href="{e(self.link_of(o))}">{e(o["t"])}</a>' for o in targets)
+                    links = ''.join(f'<a href="{e(self.link_of(o))}"{self.away(o)}>{e(o["t"])}</a>' for o in targets)
                     rows += f'<li class="row"><span class="why">{e(name)}</span><span class="mates to">{links}</span><span class="note">{e(reason)}</span></li>'
             parts.append(f'<section class="sec"><h2>{t("이어지는 맥락", "Connected context")}</h2><ul class="rows">{rows}</ul></section>')
         taken = {o['id'] for _, o in relations}
@@ -384,9 +389,9 @@ class Site:
     # Galaxy
     def galaxy(self):
         real = sum(not x['hub'] for x in self.edges)
-        legend = [('song', '노래', 'Songs'), ('slide', '슬라이드', 'Slides'), ('screen', '영상', 'Screens'), ('story', '이야기', 'Stories'), ('knowledge', '배움', 'Learning'), ('research', '연구', 'Research'), ('outside', '연출·제품', 'Direction & products'), ('thought', '생각·별자리', 'Ideas')]
-        legend_html = ''.join(f'<button type="button" data-k="{k}" aria-pressed="false" style="--c:var(--{k})"><i></i>{t(a, b)}</button>' for k, a, b in legend)
-        index = ''.join(f'<li><a href="{e(self.link_of(n))}">{e(n["t"])}</a> <small>{label(KIND_LABEL[n["k"]])}</small></li>' for n in sorted(self.nodes, key=lambda n: (n['k'] != 'constellation', n['t'])) if n['id'] != HUB)
+        legend = [('song', '노래', 'Songs'), ('slide', '슬라이드', 'Slides'), ('screen', '영상', 'Screens'), ('story', '이야기', 'Stories'), ('knowledge', '배움', 'Learning'), ('research', '연구', 'Research'), ('outside', '연출·제품', 'Direction & products'), ('post', '글', 'Writing'), ('thought', '생각·별자리', 'Ideas')]
+        legend_html = ''.join(f'<button type="button" data-k="{k}" aria-pressed="false" style="--c:var(--k-{k})"><i></i>{t(a, b)}</button>' for k, a, b in legend)
+        index = ''.join(f'<li><a href="{e(self.link_of(n))}"{self.away(n)}>{e(n["t"])}</a> <small>{label(KIND_LABEL[n["k"]])}</small></li>' for n in sorted(self.nodes, key=lambda n: (n['k'] != 'constellation', n['t'])) if n['id'] != HUB)
         main = f'''<div id="galaxy-page"><div id="stage-slot" class="slot-full"></div>
 <header class="gx-head"><h1>{t('미리내맨 은하수', 'Mirinaeman Galaxy')}</h1><p>{t(f'별 {len(self.nodes)}개 · 맥락 {real}개', f'{len(self.nodes)} stars · {real} connections')}</p><div class="gx-actions"><button type="button" id="all">{t('은하수 전체 보기', 'Whole galaxy')}</button><button type="button" id="stars">{t('별자리 전체 보기', 'All constellations')}</button></div><div class="search"><input id="q" type="search" placeholder="작품과 생각 찾기" aria-label="작품과 생각 찾기" autocomplete="off"><div class="results" id="results" hidden></div></div></header>
 <footer class="gx-foot"><div class="trail" id="trail" hidden></div><div class="legend" id="legend">{legend_html}</div></footer></div>

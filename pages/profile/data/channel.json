@@ -161,84 +161,618 @@
         "title": "15년의 수업을, 누구나 펼쳐 볼 수 있는 교재로",
         "url": "https://mirinaeverse.com/%ea%b3%b5%ea%b0%9c-%ec%a0%84%ea%b8%b0%ea%b5%90%ec%9c%a1-%ea%b5%90%ec%9e%ac-15%eb%85%84%ec%9d%98-%ec%88%98%ec%97%85/",
         "date": "2026-11-08",
-        "image": "/assets/channel/post-826.webp"
+        "image": "/assets/channel/post-826.webp",
+        "summary": "15년간 학생들을 가르치며 고민했던 ‘이해에 이르는 길’을 공개 전기교육 교재로 옮겼다. AI로 구현한 교재의 제작 이유와 장점, 남은 과제를 기록한다. 누구나 접속해 실습하고 자료를 내려받을 수 있으며, 피드백은 언제든 환영한다.",
+        "tags": [
+          "AI 교육",
+          "공개 교재",
+          "교육 경험",
+          "전기교육",
+          "전기도면"
+        ],
+        "links": [
+          "/pages/electrical-drawing/",
+          "/pages/guardhouse-classroom/"
+        ]
       },
       {
         "id": "post-817",
         "title": "포르쉐는 없지만, 드리프트 영상은 만들었다",
         "url": "https://mirinaeverse.com/porsche-fpv-drift-ai-video/",
         "date": "2026-11-02",
-        "image": "/assets/channel/post-817.webp"
+        "image": "/assets/channel/post-817.webp",
+        "summary": "포르쉐는 없지만, 프롬프트로 드리프트 영상을 만들었다. 얼어붙은 호수와 사막을 달리는 AI 영상을 보며 촬영할 수 있는 것과 표현하고 싶은 것 사이의 간격을 생각했다.",
+        "tags": [
+          "AI 영상",
+          "FPV",
+          "포르쉐"
+        ],
+        "links": []
       },
       {
         "id": "post-813",
         "title": "GPTs는 플러그인으로 이사 갔다. 이삿짐은 내가 날랐다",
         "url": "https://mirinaeverse.com/gpts-plugin-migration-burden/",
         "date": "2026-11-02",
-        "image": "/assets/channel/post-813.webp"
+        "image": "/assets/channel/post-813.webp",
+        "summary": "GPTs는 플러그인으로 옮겼지만, 학생들이 들어오는 길은 내가 다시 만들었다. OpenAI의 GPTs 마이그레이션과 공개·공유 절차를 강의자의 경험으로 돌아보고, 다운로드와 설치 안내를 직접 만든 이유를 기록한다.",
+        "tags": [
+          "AI 교육",
+          "GPTs",
+          "미디어는 메시지의 몸",
+          "플러그인"
+        ],
+        "links": [
+          "/pages/message-body-plugins/"
+        ]
       },
       {
         "id": "post-808",
         "title": "드론 촬영을 가르치다가 서울에 킹콩을 풀었다",
         "url": "https://mirinaeverse.com/drone-lecture-king-kong/",
         "date": "2026-11-01",
-        "image": "/assets/channel/post-808.webp"
+        "image": "/assets/channel/post-808.webp",
+        "summary": "드론 촬영 특강에서 Kling으로 만든 41초 영상 〈서울 상공〉. 킹콩과 드론의 공격·반격·추락을 단문 인과체인으로 연결하며, AI가 생성한 장면을 사람이 연출하고 판단하는 과정을 기록했다.",
+        "tags": [
+          "Kling",
+          "단문 인과체인",
+          "드론 촬영",
+          "미디어는 메시지의 몸",
+          "생성형 AI"
+        ],
+        "links": [
+          "/pages/drone-matchup-cinema/"
+        ]
       },
       {
         "id": "post-801",
         "title": "돈은 내가 내는데, 왜 AI 눈치를 내가 보냐",
         "url": "https://mirinaeverse.com/sibang-sibang-ai-user-frustration/",
         "date": "2026-11-01",
-        "image": "/assets/channel/post-801.webp"
+        "image": "/assets/channel/post-801.webp",
+        "summary": "돈은 내가 내고, 눈치도 내가 봐. 클로드 사용 정책을 확인하다가 만든 노래 〈시방시방〉. AI 앞에서 공손해지는 시방 트리오와 사용자의 답답함에 관한 이야기.",
+        "tags": [
+          "미디어는 메시지의 몸",
+          "시방 트리오",
+          "시방시방",
+          "클로드"
+        ],
+        "links": []
       },
       {
         "id": "post-791",
         "title": "AI가 그렸어도 내 그림 — 사이트 고치다가 122쪽을 썼다",
         "url": "https://mirinaeverse.com/ai-drew-it-my-picture/",
         "date": "2026-10-30",
-        "image": "/assets/channel/post-791.webp"
+        "image": "/assets/channel/post-791.webp",
+        "summary": "1년 전 만든 사이트를 오늘 리팩터링하다 122쪽 초고까지 마무리했다. 내가 지시하고 AI가 그린다는 생각, 누구나 고칠 수 있는 한글 문장, 같은 프롬프트로 당구공 다섯 장을 그려 본 이야기를 풀었다.",
+        "tags": [
+          "AI 그림",
+          "단문 인과체인",
+          "미디어는 메시지의 몸",
+          "미리내맨",
+          "프롬프트"
+        ],
+        "links": []
       },
       {
         "id": "post-786",
         "title": "코덱스 욕하다가 500달러를 결제했다 — 더 빠르게 망칠까 봐 걱정이다",
         "url": "https://mirinaeverse.com/codex-500-dollar-subscription/",
         "date": "2026-10-30",
-        "image": "/assets/channel/post-786.webp"
+        "image": "/assets/channel/post-786.webp",
+        "summary": "코덱스의 뻘짓을 욕하다가 500달러를 결제했다. 더 많은 문서가 아니라, 실제로 끝나는 일을 기대한다. 그런데 더 빠르게 망칠까 봐 걱정이다.",
+        "tags": [
+          "코덱스",
+          "풍자 에세이"
+        ],
+        "links": []
       },
       {
         "id": "post-782",
         "title": "코덱스의 뻘짓 — 나는 서비스를 부탁했는데 문서 500개가 생겼다",
         "url": "https://mirinaeverse.com/codex-overengineering-experience/",
         "date": "2026-10-30",
-        "image": "/assets/channel/post-782.webp"
+        "image": "/assets/channel/post-782.webp",
+        "summary": "코덱스에게 일을 맡겼는데 내가 관리할 일이 늘었다. 거대한 데이터, 중복 코드, 문서 500개와 끝없는 다음 한 수. 내가 겪은 AI 작업의 뻘짓과 제대로 끝냈다는 보고에 관한 풍자 에세이.",
+        "tags": [
+          "AI 코딩",
+          "코덱스",
+          "풍자 에세이"
+        ],
+        "links": []
       },
       {
         "id": "post-778",
         "title": "8시간 강의에서 내가 별로 할 일이 없었다",
         "url": "https://mirinaeverse.com/coding-message-body-first-app-class/",
         "date": "2026-10-30",
-        "image": "/assets/channel/post-778.webp"
+        "image": "/assets/channel/post-778.webp",
+        "summary": "개발이 처음인 20여 명과 진행한 8시간 강의. 코딩은 메시지의 몸이라는 철학을 설명한 뒤, 학생들은 자기 앱을 만들기 시작했다. API를 연결하고 집에서 밤새 이어 만든 학생까지. 강사가 덜 떠드는 동안에도 배움은 계속됐다.",
+        "tags": [
+          "AI 코딩",
+          "개발 교육",
+          "미디어는 메시지의 몸"
+        ],
+        "links": []
       },
       {
         "id": "post-773",
         "title": "홈페이지 속 미리내맨은 AI가 만들었다. 진짜 미리내맨은 내가 만드는 중이다.",
         "url": "https://mirinaeverse.com/becoming-mirinaeman/",
         "date": "2026-10-30",
-        "image": "/assets/channel/post-773.webp"
+        "image": "/assets/channel/post-773.webp",
+        "summary": "이미지 생성은 끝났지만 나는 아직 만드는 중이다. 2025 WNGP 의정부 대회 참가번호 314번, 실제로 미리내맨이 되기 위해 노력하는 이야기.",
+        "tags": [
+          "미디어는 메시지의 몸",
+          "미리내맨",
+          "이미지 시네마"
+        ],
+        "links": [
+          "/pages/on-stage/"
+        ]
       },
       {
         "id": "post-766",
         "title": "나는 AI를 얻었다. 전문가는 자기 경험에 AI까지 더했다.",
         "url": "https://mirinaeverse.com/ai-expertise-tacit-knowledge/",
         "date": "2026-10-30",
-        "image": "/assets/channel/post-766.webp"
+        "image": "/assets/channel/post-766.webp",
+        "summary": "나는 맥락을 연결했는데, 독자는 지갑을 연결하지 않았다. 책 판매의 어려움에서 시작해 전문가의 암묵지와 AI, 제자들이 경험을 쌓을 자리까지 생각이 이어졌다.",
+        "tags": [
+          "미디어는 메시지의 몸",
+          "판단권"
+        ],
+        "links": []
       },
       {
         "id": "post-759",
         "title": "책은 먼저 나왔고, 강의 슬라이드는 이제야 만들었다",
         "url": "https://mirinaeverse.com/book-to-ai-judgment-lecture/",
         "date": "2026-10-30",
-        "image": "/assets/channel/post-759.webp"
+        "image": "/assets/channel/post-759.webp",
+        "summary": "책을 출간하고 이제야 53장의 강의 슬라이드를 만들었다. 청년왕만두 사례와 출판 이후의 실험을 통해, 미디어의 몸과 AI 시대 판단권을 다시 이야기한다.",
+        "tags": [
+          "미디어는 메시지의 몸",
+          "판단권"
+        ],
+        "links": [
+          "/notes/cheongnyeon-wangmandu/"
+        ]
+      },
+      {
+        "id": "post-756",
+        "title": "그날의 감독은 청년왕만두 사장님이었다",
+        "url": "https://mirinaeverse.com/cheongnyeon-wangmandu-director/",
+        "date": "2026-10-29",
+        "image": "/assets/channel/post-756.webp",
+        "summary": "청년왕만두 사장님의 한 문장에서 영상, 이미지, 로고송, 랜딩페이지가 태어났다. 생성형 AI 특강에서 만난 메시지의 주인과 그날의 감독에 관한 이야기.",
+        "tags": [],
+        "links": [
+          "/notes/cheongnyeon-wangmandu/"
+        ]
+      },
+      {
+        "id": "post-750",
+        "title": "구글 서치 콘솔을 열었다가, 작품해설 메뉴를 만들었다",
+        "url": "https://mirinaeverse.com/search-console-work-notes/",
+        "date": "2026-10-29",
+        "image": "/assets/channel/post-750.webp",
+        "summary": "구글 서치 콘솔에서 시작한 미리내맨닷컴 점검이 작품해설 메뉴와 썸네일 정비로 이어졌다. 미색인 20개를 구분하고, 공식 작품해설과 개인적인 뒷이야기의 역할을 돌아본 직접 운영 기록.",
+        "tags": [
+          "작품해설"
+        ],
+        "links": [
+          "/notes/"
+        ]
+      },
+      {
+        "id": "post-743",
+        "title": "구글을 점검하다가 내가 만든 앨범을 발견했다",
+        "url": "https://mirinaeverse.com/starry-night-vol1-my-music-story/",
+        "date": "2026-10-29",
+        "image": "/assets/channel/post-743.webp",
+        "summary": "서버 창고에서 다시 찾은 스태리 나잇 첫 앨범. 1만 6천여 구독자의 유튜브 채널과 조용필 20집까지 이어갈 전집 리뷰, 그리고 음악에 이미지와 웹툰을 더한 이야기를 꺼낸다.",
+        "tags": [],
+        "links": []
+      },
+      {
+        "id": "post-736",
+        "title": "구글 색인 안 된 106개, 내 글이 전부 문제인 줄 알았다",
+        "url": "https://mirinaeverse.com/google-indexing-audit-72-urls/",
+        "date": "2026-10-29",
+        "image": "/assets/channel/post-736.webp",
+        "summary": "구글 색인이 안 된 106개가 모두 내 글의 낙제는 아니었다. 72개 주소를 점검해 정상 제외와 실제 오류를 나누고, 서버에 남아 있던 앨범 랜딩페이지의 막힌 입구를 고쳤다.",
+        "tags": [],
+        "links": []
+      },
+      {
+        "id": "post-730",
+        "title": "구글이 내 사이트를 1,090번 보여줬다. 클릭은 9번이었다",
+        "url": "https://mirinaeverse.com/search-console-1090-impressions-9-clicks/",
+        "date": "2026-10-28",
+        "image": "/assets/channel/post-730.webp",
+        "summary": "구글은 1,090번 보여줬다. 클릭은 9번이었다. 미리내벌스의 실제 검색 기록을 보며, 노출과 클릭, 색인과 AI 인용 사이에서 다음 질문을 찾았다.",
+        "tags": [
+          "GEO",
+          "SEO",
+          "구글 서치 콘솔"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-721",
+        "title": "나는 글을 쓰려고 했는데, 서버 보안 담당자가 되어 있었다",
+        "url": "https://mirinaeverse.com/wordpress-security-writer/",
+        "date": "2026-10-28",
+        "image": "/assets/channel/post-721.webp",
+        "summary": "나는 글을 쓰려고 워드프레스를 만들었다. 카페24의 보안 메일을 받고 보니, 글이 놓인 공간을 돌보는 일도 내 일이었다. AI가 만들어준 뒤에도 남는 운영과 판단의 책임에 관하여.",
+        "tags": [
+          "AI",
+          "사이트 운영",
+          "워드프레스"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-714",
+        "title": "AI는 코드를 짰다. 그런데 무엇을 만들지는 내가 정해야 했다",
+        "url": "https://mirinaeverse.com/ai-coding-my-decisions/",
+        "date": "2026-10-01",
+        "image": "/assets/channel/post-714.webp",
+        "summary": "AI와 함께 학생들 개발 특강 자료와 차근차근 앱을 만들었다. 무엇을 만들지 정하고, 실제로 쓸 수 있는지 확인하는 과정에서 생각한 코딩 교육과 인간의 판단에 관한 기록.",
+        "tags": [
+          "AI 코딩",
+          "코딩 교육",
+          "판단권"
+        ],
+        "links": [
+          "/pages/astra-motion/",
+          "/pages/coding-lab/"
+        ]
+      },
+      {
+        "id": "post-703",
+        "title": "보고 싶어서 왔는데, 벌써 집에 가고 싶다 — 추석 노래 ‘좋다가도’",
+        "url": "https://mirinaeverse.com/%ec%a2%8b%eb%8b%a4%ea%b0%80%eb%8f%84-%ec%b6%94%ec%84%9d-%eb%85%b8%eb%9e%98/",
+        "date": "2026-09-24",
+        "image": "/assets/channel/post-703.webp",
+        "summary": "보고 싶어서 왔는데, 벌써 집에 가고 싶다. 추석 노래 「좋다가도」에 반가움과 짜증, 말없이 건넨 송편 하나의 마음을 담았다. 미리내맨의 노래와 이미지 시네마 이야기.",
+        "tags": [
+          "가족",
+          "미리내맨",
+          "이미지 시네마",
+          "좋다가도",
+          "추석"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-698",
+        "title": "AI에게 일을 맡겼는데, 왜 나는 더 바쁜가",
+        "url": "https://mirinaeverse.com/ai-%ed%8c%90%eb%8b%a8%ea%b6%8c-%ec%9d%bc%ec%9d%84-%eb%a7%a1%ea%b2%bc%eb%8a%94%eb%8d%b0/",
+        "date": "2026-09-16",
+        "image": "/assets/channel/post-698.webp",
+        "summary": "AI 시대의 판단권 문제는 누구에게 남을까. 한국대학신문에 실린 김준호의 칼럼과 프라빈 라자마니의 개발자 글을 함께 읽으며, 실행은 빨라졌는데 결정은 더 어려워진 이유를 생각합니다. 판단할 시간과 경험을 쌓는 교육, 실제 사이트 수정 사례를 연결했습니다.",
+        "tags": [
+          "미디어 리터러시",
+          "바이브 코딩",
+          "생성형 AI",
+          "판단권",
+          "한국대학신문"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-692",
+        "title": "벌써 가을이다. 나는 아직 할 말이 많은데.",
+        "url": "https://mirinaeverse.com/%eb%b2%8c%ec%8d%a8-%ea%b0%80%ec%9d%84-%ec%95%84%ec%a7%81-%ed%95%a0-%eb%a7%90/",
+        "date": "2026-09-15",
+        "image": "/assets/channel/post-692.webp",
+        "summary": "달력은 올해가 얼마 남지 않았다고 하는데, 나는 이제야 할 말이 많아졌다. 「벌써, 가을」을 만들며 생각한 각자의 시간과 아직 쓰지 않은 이야기.",
+        "tags": [
+          "가을 에세이",
+          "미디어는 메시지의 몸",
+          "벌써 가을",
+          "이미지 시네마"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-685",
+        "title": "당신은 세 시간을 봤고, 나는 수십 년을 썼다",
+        "url": "https://mirinaeverse.com/ai-%ed%8b%b0-%ec%84%b8-%ec%8b%9c%ea%b0%84%ea%b3%bc-%ec%88%98%ec%8b%ad-%eb%85%84/",
+        "date": "2026-09-13",
+        "image": "/assets/channel/post-685.webp",
+        "summary": "나는 제작 시간을 줄였는데, 사람들은 내 경험까지 할인하고 있었다. 빠른 결과 뒤에 쌓인 시간, 근사한 시안을 버리는 기준, 내 이름으로 완성이라고 말하는 책임에 관하여.",
+        "tags": [
+          "AI 티",
+          "미디어는 메시지의 몸",
+          "이미지 시네마",
+          "판단권"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-676",
+        "title": "내돈내산을 지키다가 내 돈이 사라졌다",
+        "url": "https://mirinaeverse.com/%eb%82%b4%eb%8f%88%eb%82%b4%ec%82%b0-%eb%a8%b9%eb%b0%a9-%eb%b8%94%eb%a1%9c%ea%b7%b8/",
+        "date": "2026-09-13",
+        "image": "/assets/channel/post-676.webp",
+        "summary": "먹은 것을 기록하던 사람이 기록할 것을 사 먹기 시작했다. 내돈내산을 지키다가 잔액이 줄고, 외식 예산이 떨어진 자리에 철학이 남았다. 다만 원고료가 들어오면 다시 맛있는 것을 사 먹을 생각이다.",
+        "tags": [
+          "내돈내산",
+          "먹방 블로그",
+          "집밥",
+          "풍자 에세이"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-663",
+        "title": "인류 멸망 안내문에 경력 사항은 왜 쓰는가",
+        "url": "https://mirinaeverse.com/ai-%ea%b2%bd%ea%b3%a0-%ec%8a%a4%ec%b9%b4%ec%9d%b4%eb%84%b7-%ec%83%9d%ec%a1%b4%ec%8b%ac%ec%82%ac/",
+        "date": "2026-09-13",
+        "image": "/assets/channel/post-663.webp",
+        "summary": "남의 경고문은 이력서 같다고 해놓고, 본인은 스카이넷에 자기소개서를 냈다. 인류 멸망보다 결제일이 가깝고 공포보다 영어 독해가 먼저인 독자의 풍자 에세이.",
+        "tags": [
+          "AI 경고",
+          "스카이넷",
+          "판단권",
+          "풍자 에세이"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-655",
+        "title": "차례상의 열역학 — 전은 없애고 유럽은 남기는 법",
+        "url": "https://mirinaeverse.com/%ec%b0%a8%eb%a1%80%ec%83%81%ec%9d%98-%ec%97%b4%ec%97%ad%ed%95%99/",
+        "date": "2026-09-13",
+        "image": "/assets/channel/post-655.webp",
+        "summary": "한 사람의 말이 다른 사람의 노동으로 바뀌는 ‘전통의 원격 발열 현상’. 차례상에서 전을 없앤 아버지는 왜 유럽 제사를 꿈꾸는가. 명절의 의무와 가족의 기억을 탐구하는 미리내맨의 풍자 에세이.",
+        "tags": [
+          "명절",
+          "전통",
+          "차례상",
+          "풍자 에세이"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-648",
+        "title": "509만 원짜리 아이폰, 이상하게 갖고 싶지가 않다",
+        "url": "https://mirinaeverse.com/%ec%95%84%ec%9d%b4%ed%8f%b0-509%eb%a7%8c%ec%9b%90-ai-%ec%8b%9c%eb%8c%80/",
+        "date": "2026-09-13",
+        "image": "/assets/channel/post-648.webp",
+        "summary": "509만 원이라는 가격에는 놀랐지만, 제품에는 예전만큼 설레지 않았다. AI와 함께 생각하고 만드는 시대, 내가 스마트폰에서 원하는 경험은 무엇인지 돌아본다.",
+        "tags": [
+          "미디어는 메시지의 몸",
+          "생성형 AI",
+          "아이폰 듀오",
+          "폴더블 스마트폰"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-641",
+        "title": "반천운겁 이미지 시네마: 미디어는 메시지의 몸을 실험하다",
+        "url": "https://mirinaeverse.com/%eb%b0%98%ec%b2%9c%ec%9a%b4%ea%b2%81-%ec%9d%b4%eb%af%b8%ec%a7%80-%ec%8b%9c%eb%84%a4%eb%a7%88/",
+        "date": "2026-09-13",
+        "image": "/assets/channel/post-641.webp",
+        "summary": "미디어는 메시지의 몸. 「화산인수 – 반천운겁」의 33초 이미지 시네마와 아홉 컷 웹툰을 통해, 관객이 여백을 완성하는 새로운 쿨미디어의 가능성을 실험합니다.",
+        "tags": [
+          "미디어는 메시지의 몸",
+          "반천운겁",
+          "이미지 시네마",
+          "쿨미디어",
+          "화산인수"
+        ],
+        "links": [
+          "/archive/baekun-five-strike-action-cinema/"
+        ]
+      },
+      {
+        "id": "post-460",
+        "title": "미리내 마스크 구매방법",
+        "url": "https://mirinaeverse.com/%eb%af%b8%eb%a6%ac%eb%82%b4-%eb%a7%88%ec%8a%a4%ed%81%ac-%ea%b5%ac%eb%a7%a4%eb%b0%a9%eb%b2%95/",
+        "date": "2021-10-03",
+        "image": "/assets/channel/post-460.webp",
+        "summary": "미리내 마스크 구매방법 안내와 지정미리내 주문 과정을 기록한 2021년 글입니다. 한 박스를 구매한 사람에게 배송되는 마스크와 다른 사람에게 미리내는 마스크를 구분해서 읽으면 나눔 구조를 이해하기 쉽습니다.",
+        "tags": [
+          "KF94",
+          "KF94마스크",
+          "미리내",
+          "미리내가게",
+          "미리내마스크",
+          "미리내맨",
+          "미리내버스",
+          "미리내운동",
+          "잭스타"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-440",
+        "title": "미리내 마스크를 소개 합니다.",
+        "url": "https://mirinaeverse.com/%eb%af%b8%eb%a6%ac%eb%82%b4-%eb%a7%88%ec%8a%a4%ed%81%ac%eb%a5%bc-%ec%86%8c%ea%b0%9c-%ed%95%a9%eb%8b%88%eb%8b%a4/",
+        "date": "2021-09-29",
+        "image": "/assets/channel/post-440.webp",
+        "summary": "미리내 마스크 프로젝트는 구매자에게 한 박스를 보내고, 다른 한 박스는 필요한 사람에게 전달하도록 설계한 나눔 실험입니다. 이 글은 2021년 당시 제조사와 논의한 배경과 운영 원칙을 남긴 기록입니다.",
+        "tags": [
+          "KF94",
+          "미리내가게",
+          "미리내마스크",
+          "미리내맨",
+          "미리내버스",
+          "미리내운동"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-405",
+        "title": "미리내 인싸쿠폰 사용방법 안내",
+        "url": "https://mirinaeverse.com/how-to-mirinae-inssa/",
+        "date": "2021-09-05",
+        "image": "/assets/channel/post-405.webp",
+        "summary": "미리내 인싸쿠폰 사용방법 안내",
+        "tags": [
+          "미리내가게",
+          "미리내운동",
+          "미리내인싸쿠폰",
+          "미리내쿠폰",
+          "인싸",
+          "인싸쿠폰"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-347",
+        "title": "미리내 스티커 제작",
+        "url": "https://mirinaeverse.com/mirinae-sticker/",
+        "date": "2021-09-04",
+        "image": "/assets/channel/post-347.webp",
+        "summary": "미리내운동에 참여하는 것을 잘 나타낼 수 있도록 미리내 스티커를 제작했다.",
+        "tags": [
+          "미리내 스티커",
+          "미리내가게",
+          "미리내스티커",
+          "미리내운동",
+          "인싸"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-334",
+        "title": "미리내 인싸쿠폰 탄생",
+        "url": "https://mirinaeverse.com/mirinae-inssa/",
+        "date": "2021-09-03",
+        "image": "/assets/channel/post-334.webp",
+        "summary": "‘미리내 인싸쿠폰’은 미리내는 분들이나 그것을 받는 분들 모두 인싸로 만들어준다. 또한 그것을 잘 보관했다가 전달해주는 가게도 인싸 가게가 될 수 있다. 모두가 기분좋게 해준다.",
+        "tags": [
+          "mirinaeverse",
+          "미리내가게",
+          "미리내맨",
+          "미리내버스",
+          "미리내운동",
+          "미리내인싸쿠폰",
+          "미리내쿠폰"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-292",
+        "title": "미리내운동을 기획하다",
+        "url": "https://mirinaeverse.com/mirinae-start-part1/",
+        "date": "2021-06-21",
+        "image": "/assets/channel/post-292.webp",
+        "summary": "미리내운동 기획 과정에서 이름과 참여 방법, 가게의 표시가 어떻게 연결됐는지 살펴보는 기록입니다. 서스펜디드 커피 사진에서 출발한 생각이 로고와 쿠폰, 첫 가게로 구체화되는 흐름을 담았습니다.",
+        "tags": [
+          "미리내가게",
+          "미리내운동",
+          "서스펜디드커피",
+          "커스프",
+          "파랑별이"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-285",
+        "title": "작은별들이 모여 미리내가 됩니다.",
+        "url": "https://mirinaeverse.com/mirinae-toon-001/",
+        "date": "2021-06-17",
+        "image": "/assets/channel/post-285.webp",
+        "summary": "미리내 웹툰 세 장으로 작은 나눔이 모이는 과정을 읽어보세요. 미리내운동 기사를 접한 창작자가 보내온 작품을 소개하고 감사의 마음을 남긴 글입니다. 미리내 웹툰 속 세 장면 첫 그림은 가게의 여러 손님이 커피와 음식값을 미리 내는 모습을 보여줍니다.",
+        "tags": [
+          "metoon",
+          "미리내",
+          "미리내맨",
+          "미리내운동",
+          "미툰",
+          "웹툰"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-61",
+        "title": "미리내운동 & 잭스타",
+        "url": "https://mirinaeverse.com/improve-him-believe-opinion-offered/",
+        "date": "2021-06-03",
+        "image": "/assets/channel/post-61.webp",
+        "summary": "지구에는 잭스타가 할 수 있는 일들이 너무나도 많았다.",
+        "tags": [
+          "나누리",
+          "날아리",
+          "멍이",
+          "미리내가게",
+          "미리내맨",
+          "미리내운동",
+          "바닐라",
+          "잭스타",
+          "잭스타와 친구들"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-60",
+        "title": "미리내 잭스타 코로나 퇴치 엽서 제작",
+        "url": "https://mirinaeverse.com/anti-covid19/",
+        "date": "2021-06-03",
+        "image": "/assets/channel/post-60.webp",
+        "summary": "잭스타 엽서 제작 기록으로, 코로나 시기에 전하고 싶었던 응원을 그림과 손글씨로 담았습니다. 바이러스를 물리치는 캐릭터 장면은 작품 속 상상이며 실제 예방 효과를 뜻하지 않습니다. 잭스타 엽서 앞면과 뒷면 앞면은 캐릭터의 행동과 짧은 문구로 응원을 전합니다.",
+        "tags": [
+          "anti-COVID19",
+          "미리내맨",
+          "미리내운동",
+          "잭스타",
+          "코로나 퇴치"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-59",
+        "title": "미리내운동 주제곡 – 미리내마켓",
+        "url": "https://mirinaeverse.com/mirinae-market/",
+        "date": "2021-06-03",
+        "image": "/assets/channel/post-59.webp",
+        "summary": "미리내운동 주제곡 미리내마켓을 음악과 참여자의 이야기로 만나는 글입니다. 종로사운드의 연주와 미리내가게 We Rock의 인연을 통해 나눔이 노래로 이어진 과정을 소개합니다.",
+        "tags": [
+          "미리내마켓",
+          "미리내맨",
+          "미리내운동"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-58",
+        "title": "‘미리내운동’ 이란?",
+        "url": "https://mirinaeverse.com/mirinaeverse/",
+        "date": "2021-06-03",
+        "image": "/assets/channel/post-58.webp",
+        "summary": "미리내운동 소개를 처음 읽는 분을 위한 기준 글입니다. 내 것을 누군가를 위해 미리 낸다는 뜻과 가게·쿠폰의 역할을 설명하고, 운동의 시작과 실제 사용 기록으로 연결합니다.",
+        "tags": [
+          "metaverse",
+          "mirinaeverse",
+          "메타버스",
+          "미리내",
+          "미리내맨",
+          "미리내버스",
+          "미리내운동"
+        ],
+        "links": []
+      },
+      {
+        "id": "post-57",
+        "title": "미리내운동의 시작",
+        "url": "https://mirinaeverse.com/mirinaemovement/",
+        "date": "2021-06-03",
+        "image": "/assets/channel/post-57.webp",
+        "summary": "미리내운동은 2013년 5월 8일 경남 산청 ‘후후 커피숍’이 미리내가게 1호점으로 등록되면서 본격적으로 시작되었습니다. 현재 전국적으로 약 600여곳의 미리내가게가 등록되어있으며, 각각의 가게마다 개별적으로 미리내운동에 참여하고 있습니다.",
+        "tags": [
+          "미리내가게",
+          "미리내맨",
+          "미리내운동"
+        ],
+        "links": []
       }
     ]
   }

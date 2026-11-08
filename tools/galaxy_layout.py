@@ -23,9 +23,9 @@ def tag_sets(nodes):
 
 
 def affinity(nodes):
-    """Shared rare tags count more than shared common ones."""
+    """Shared rare tags count more than shared common ones. Posts don't count, so a new post leaves the records' neighbours alone."""
     sets = tag_sets(nodes)
-    df = Counter(t for s in sets for t in s)
+    df = Counter(t for n, s in zip(nodes, sets) if n['kind'] != 'post' for t in s)
     pairs = {}
     for a in range(len(nodes)):
         for b in range(a + 1, len(nodes)):
@@ -116,7 +116,14 @@ def place_new(nodes, edges, known):
     _relax(pos, free, near, close, 240)
     out = dict(known)
     for record in fresh:
-        out[record] = [round(v, 3) for v in pos[index[record]]]
+        p = pos[index[record]]
+        # A star with few ties must not drift out of the sky.
+        r = math.hypot(p[0], p[2])
+        if r > RADIUS:
+            rim = RADIUS * random.Random(record).uniform(.8, 1) / r
+            p[0], p[2] = p[0] * rim, p[2] * rim
+        p[1] = max(-3, min(3, p[1]))
+        out[record] = [round(v, 3) for v in p]
     return out
 
 

@@ -4,8 +4,9 @@
 Videos come from the artist channel; albums from the topic channel YouTube makes for every
 distributed release. Both open on YouTube, free to play. The YouTube feed endpoint has been
 unreliable since late 2025, so this reads the channels' list pages. Posts come from the
-WordPress API, which also gives the featured image and date. When a source answers with
-nothing usable for a rail, that rail is kept as it is.
+WordPress API, which also gives the featured image, date, tags and the links a post makes.
+The rail shows the newest posts; all of them become stars in the galaxy. When a source answers
+with nothing usable for a rail, that rail is kept as it is.
 
   python3 tools/update_channel.py          fetch and update data/channel.json and covers
   python3 tools/update_channel.py --check  covers on disk match the data (release gate)
@@ -15,6 +16,7 @@ import io
 import json
 import re
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -29,7 +31,7 @@ RAILS = {
                'type': 'LOCKUP_CONTENT_TYPE_VIDEO', 'size': (480, 270), 'url': 'https://www.youtube.com/watch?v={}'},
     'albums': {'page': 'https://www.youtube.com/channel/UCQdVq0had1QV32_E6b5gXig/releases', 'home': 'https://www.youtube.com/@themirinaemanproject',
                'type': 'LOCKUP_CONTENT_TYPE_ALBUM', 'size': (480, 480), 'url': 'https://www.youtube.com/playlist?list={}'},
-    'posts': {'api': f'https://mirinaeverse.com/wp-json/wp/v2/posts?per_page={KEEP}&_embed=wp:featuredmedia', 'home': 'https://mirinaeverse.com/', 'size': (480, 270)},
+    'posts': {'api': f'https://mirinaeverse.com/wp-json/wp/v2/posts?per_page=100&_embed=wp:featuredmedia,wp:term', 'home': 'https://mirinaeverse.com/', 'size': (480, 270)},
 }
 # A post without a featured image still belongs on the rail.
 NO_IMAGE = '/assets/images/og-home.jpg'
@@ -117,13 +119,37 @@ def check():
     return 0
 
 
+def excerpt(rendered):
+    text = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', rendered))).replace('[…]', '').strip()
+    if len(text) <= 150:
+        return text
+    # Long excerpts run on into the post's first heading; keep whole sentences.
+    cut = text.rfind('. ', 0, 150)
+    return text[:cut + 1] if cut > 0 else text[:150].rstrip() + '…'
+
+
 def posts(rail):
     found = []
-    for post in json.loads(fetch(rail['api']).decode('utf-8')):
-        media = (post.get('_embedded', {}).get('wp:featuredmedia') or [{}])[0]
-        # The original on the site itself: the resized copies sit on a CDN that refuses some readers.
-        best = media.get('source_url')
-        found.append({'id': f"post-{post['id']}", 'title': html.unescape(re.sub(r'<[^>]+>', '', post['title']['rendered'])).strip(), 'url': post['link'], 'date': post['date'][:10], 'images': [best] if best else None})
+    page = 1
+    while True:
+        try:
+            batch = json.loads(fetch(f"{rail['api']}&page={page}").decode('utf-8'))
+        except urllib.error.HTTPError as error:
+            if page > 1 and error.code == 400:  # WordPress answers 400 just past the last page.
+                break
+            raise
+        for post in batch:
+            embedded = post.get('_embedded', {})
+            media = (embedded.get('wp:featuredmedia') or [{}])[0]
+            # The original on the site itself: the resized copies sit on a CDN that refuses some readers.
+            best = media.get('source_url')
+            terms = [term for group in embedded.get('wp:term', []) for term in group]
+            links = re.findall(r'href="https?://(?:www\.)?mirinaeman\.com(/[^"#?]+)', post['content']['rendered'])
+            found.append({'id': f"post-{post['id']}", 'title': html.unescape(re.sub(r'<[^>]+>', '', post['title']['rendered'])).strip(), 'url': post['link'], 'date': post['date'][:10], 'images': [best] if best else None,
+                          'summary': excerpt(post['excerpt']['rendered']), 'tags': [html.unescape(term['name']) for term in terms if term['taxonomy'] == 'post_tag'], 'links': sorted(set(links))})
+        if len(batch) < 100:
+            break
+        page += 1
     return found
 
 
@@ -147,7 +173,7 @@ def refresh_posts(name, rail, current):
             except Exception as error:
                 print(f"{name}: default image for {item['title']} ({error})")
                 image = NO_IMAGE
-        out.append({'id': item['id'], 'title': item['title'], 'url': item['url'], 'date': item['date'], 'image': image})
+        out.append({'id': item['id'], 'title': item['title'], 'url': item['url'], 'date': item['date'], 'image': image, 'summary': item['summary'], 'tags': item['tags'], 'links': item['links']})
     print(f'{name}: {len(out)}')
     return {'home': rail['home'], 'items': out}
 

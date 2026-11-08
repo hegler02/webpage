@@ -8,12 +8,32 @@ PROFILE = ROOT / 'pages/profile'
 ORIGIN = 'https://mirinaeman.com'
 ASSETS = '/pages/profile/'
 sys.path.insert(0, str(Path(__file__).parent))
+from urllib.parse import unquote, urlsplit
+
 from records import KINDS
+
+# Mirinaeverse tags in the site's own words, so a post settles near the records it shares a subject with.
+POST_TAGS={'이미지 시네마':'image-cinema','미디어는 메시지의 몸':'message-body','판단권':'judgment','단문 인과체인':'causal-chain','웹툰':'webtoon','FPV':'fpv','드론 촬영':'drone','Kling':'kling','AI 코딩':'coding','코딩 교육':'coding','AI 교육':'education','개발 교육':'education','전기교육':'electrical','전기도면':'electrical','가족':'family','미디어 리터러시':'ai-literacy','생성형 AI':'ai','AI':'ai'}
 
 # Research records whose titles use these words join the topic on their own: a browsing aid, not a claim.
 TOPICS=[('metaverse','메타버스와 교육',['메타버스','metaver']),('bees','스마트 양봉',['꿀벌','여왕벌','벌통','벌집','양봉','honeybee','beehive','beekeeping']),('moving-image','영상과 창작',['영상','동영상','panorama','디지털 디자인','뮤직비디오','360'])]
 
-def build_graph(catalog=None, editorial=None, links=None, records=None):
+def read_posts():
+    path=PROFILE/'data/channel.json'
+    return json.loads(path.read_text(encoding='utf-8')).get('posts',{}).get('items',[]) if path.is_file() else []
+
+def linked_record(path,nodes):
+    """The record a post's link points at, whichever of the record's addresses it uses."""
+    records=[n for n in nodes if n['kind']=='work' or n['kind'] in KINDS]
+    names={n['id'].split(':',1)[1]:n['id'] for n in records}
+    for part in path.strip('/').split('/'):
+        if part in names: return names[part]
+    if path.count('/')<3: return None
+    for n in records:
+        if urlsplit(n['url']).netloc=='mirinaeman.com' and unquote(urlsplit(n['url']).path).startswith(path.rstrip('/')+'/'): return n['id']
+    return None
+
+def build_graph(catalog=None, editorial=None, links=None, records=None, posts=None):
     catalog = catalog or json.loads((PROFILE/'data/message-bodies.json').read_text())
     context=json.loads((PROFILE/'data/context-graph.json').read_text())
     editorial=editorial if editorial is not None else json.loads((PROFILE/'data/constellation-editorial.json').read_text())
@@ -76,6 +96,16 @@ def build_graph(catalog=None, editorial=None, links=None, records=None):
         n=node(r['id'],r['kind'],r['title'],r['summary'],r.get('url') or ORIGIN+'/'+menu+'/',year=r.get('year',''),tags=r.get('tags',[]),sourceLabel=KINDS[r['kind']][1])
         if r.get('image'):n.update(image=ASSETS+r['image']['path'],alt=r['image']['alt'])
         edge(r['id'],creator['id'],'창작자' if menu=='work' else '저자','김준호의 공개 기록입니다.',ORIGIN+'/'+menu+'/')
+    # Mirinaeverse posts arrive by themselves. A link in a post is the author's own connection; anything else waits for approval below.
+    by_url={unquote(n['url']).rstrip('/'):n for n in nodes}
+    for p in (posts if posts is not None else read_posts()):
+        n=by_url.get(unquote(p['url']).rstrip('/'))
+        if not n:
+            n=node('post:'+p['id'].removeprefix('post-'),'post',p['title'],p['summary'],p['url'],sourceLabel='미리내벌스')
+            edge(n['id'],creator['id'],'글쓴이','김준호가 미리내벌스에 쓴 글입니다.',p['url'])
+        n.update(kind='post',image=ASSETS+p['image'].lstrip('/'),alt=p['title']+' 표지',year=p['date'][:4],tags=[POST_TAGS.get(t,t) for t in p['tags']])
+        for target in dict.fromkeys(linked_record(path,nodes) for path in p['links']):
+            if target: edge(n['id'],target,'글에서 소개','이 글의 본문에 이 기록의 링크가 있습니다.',p['url'])
     # Constellations and links the creator approved. Proposals stay out of the public graph.
     links=links if links is not None else json.loads((PROFILE/'data/constellation-links.json').read_text())
     # A record outside the catalog is evidenced by its own page here, whatever its outside address is.

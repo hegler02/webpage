@@ -6,7 +6,7 @@ import sys
 import xml.etree.ElementTree as ElementTree
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import unquote, urljoin, urlsplit
 
 sys.path.insert(0, str(Path(__file__).parent))
 from constellation_data import PROFILE, ROOT
@@ -109,6 +109,14 @@ def main():
             errors.append(f'{name}: not listed on {"/research/" if listing is research else "/work/"}')
         if n['id'] not in stars or n['id'] not in layout:
             errors.append(f'{name}: no star in the galaxy')
+    # Every Mirinaeverse post is a star that opens the post, and the rail shows the newest.
+    posts = json.loads((PROFILE / 'data/channel.json').read_text(encoding='utf-8')).get('posts', {}).get('items', [])
+    post_stars = {unquote(n['u']).rstrip('/') for n in stars.values() if n['k'] == 'post'}
+    for p in posts:
+        if unquote(p['url']).rstrip('/') not in post_stars:
+            errors.append(f"{p['title']}: post has no star in the galaxy")
+    if posts and posts[0]['url'] not in home.split('id="posts"', 1)[-1]:
+        errors.append('home: the newest post is not on the rail')
     expected_home = [n['page'] for n in site.latest()]
     shown = re.findall(r'<a class="card" href="([^"]+)"', home.split('latest-bodies', 1)[-1])[:HOME_LATEST]
     if shown != expected_home:

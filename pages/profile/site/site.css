@@ -137,7 +137,7 @@ html.js .panel:not(.on){display:none}
 .books em+b{margin-top:var(--gap-tiny)}
 .books b{display:block;margin-top:var(--gap-text);font-size:var(--size-control);line-height:var(--lh-heading)}.books span{color:var(--muted);font-size:var(--size-caption)}
 .list{display:grid;margin-top:var(--gap-text)}
-.page .rows{max-width:none;grid-template-columns:repeat(auto-fill,minmax(min(var(--record-fig),100%),1fr))}
+.page .rows{max-width:none;grid-template-columns:repeat(auto-fit,minmax(min(var(--record-fig),100%),1fr))}
 .list a,.list>div{display:grid;grid-template-columns:var(--time-col) minmax(0,1fr);gap:var(--space-3);padding:var(--space-3) 0;border-bottom:var(--border) solid var(--rule);text-decoration:none}
 .list a:hover b{color:var(--accent)}
 .list time{color:var(--faint);font-size:var(--size-small);font-variant-numeric:tabular-nums}

@@ -153,7 +153,14 @@ def main():
     if not theses or theses.group(1).find('박사학위논문') > theses.group(1).find('석사학위논문'):
         errors.append('research: degree theses come first, doctoral before master')
 
-    # 5. Style comes from the one token source.
+    # 5. Every video on the site states when it was published, with a time zone (Search Console asks for both).
+    for page in (ROOT / 'pages').rglob('*.html'):
+        text = page.read_text(encoding='utf-8', errors='ignore')
+        for value in re.findall(r'"uploadDate"\s*:\s*"([^"]*)"', text):
+            if not re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})', value):
+                errors.append(f'{page.relative_to(ROOT)}: uploadDate {value!r} needs a time and a time zone')
+
+    # 6. Style comes from the one token source.
     errors += token_problems()
     for path in outputs:
         if path.suffix == '.html' and re.search(r'style="(?!--[\w-]+:)', path.read_text(encoding='utf-8')):

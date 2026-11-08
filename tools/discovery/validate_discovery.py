@@ -79,11 +79,11 @@ def video_errors(node):
         errors.append('VideoObject missing uploadDate (original publication)')
     else:
         try:
-            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?", value):
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})", value):
                 raise ValueError('not an ISO date/time')
             datetime.fromisoformat(value.replace('Z', '+00:00'))
         except ValueError:
-            errors.append('VideoObject uploadDate must be a valid ISO 8601 date/time')
+            errors.append('VideoObject uploadDate must be an ISO 8601 date/time with a time zone, such as 2026-11-06T14:08:58-08:00')
     return errors
 
 def public_base(canonical):

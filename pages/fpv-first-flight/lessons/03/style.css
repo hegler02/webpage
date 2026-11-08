@@ -7,11 +7,13 @@
   --surface: #f4f4f0;
   --signal: #a84018;
   --signal-soft: #f4e3da;
-  --max-width: 72rem;
+  --screen-scale-x: 1.111vw;
+  --screen-scale-y: 1.778svh;
+  --max-width: min(84rem, 150svh);
   --gutter: clamp(1rem, 4vw, 3rem);
   --gap: clamp(.75rem, 2vw, 1.5rem);
   --small: .875rem;
-  --heading: clamp(1.8rem, 4.5vw, 4rem);
+  --heading: clamp(1.8rem, 4.5vw, 3rem);
   --body: clamp(1.0625rem, 1.65vw, 1.375rem);
   --header-depth: 4rem;
   --footer-depth: 4.6rem;
@@ -55,9 +57,9 @@
   --panel-gap: clamp(.75rem, 2.5vw, 1.75rem);
   --panel-label: clamp(.9375rem, 1.5vw, 1.125rem);
   --panel-title: clamp(1.1rem, 2vw, 1.5rem);
-  --panel-note: clamp(.8125rem, 1.5vw, 1rem);
+  --panel-note: clamp(.8125rem, 1.5vw, 1.0625rem);
   --hero-title: clamp(1.6rem, 4vw, 3.35rem);
-  --axis-symbol: clamp(3.1rem, 10vw, 8rem);
+  --axis-symbol: clamp(3.1rem, min(10vw, 13svh), 8rem);
   --flow-icon: clamp(3.4rem, min(9vw, 13svh), 7rem);
   --flow-card-depth: clamp(8rem, 23svh, 14rem);
   --feedback-phone-gap: .85rem;
@@ -86,6 +88,8 @@
   --schematic-label: clamp(3.25rem, 9vw, 5.5rem);
 }
 * { box-sizing: border-box; }
+/* 강의실 화면: 폭 1440px, 높이 900px을 기준으로 rem 전체가 함께 커진다. 작은 화면은 브라우저 기본값을 지킨다. */
+html { font-size: max(100%, min(var(--screen-scale-x), var(--screen-scale-y))); }
 [hidden] { display: none !important; }
 body {
   min-height: 100svh;
@@ -308,10 +312,18 @@ dialog::backdrop { background: rgb(23 23 21 / .42); }
 .toc-section { margin: var(--gap) 0 0; font-size: var(--body); }
 .toc-start { display: flex; align-items: center; min-height: var(--touch); margin: 0; }
 .svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+@media (min-width: 46rem) {
+  :root { --small: .9375rem; }
+  .node small, .arrow small, .link-key small { font-size: var(--panel-note); }
+  .node strong, .link-key strong { font-size: var(--panel-label); }
+}
 @media (min-width: 46rem) and (max-height: 52rem) {
   :root {
-    --max-width: min(72rem, 136vh);
-    --heading: clamp(1.8rem, min(4.5vw, 6vh), 3.4rem);
+    --heading: clamp(1.8rem, min(4.5vw, 5.4vh), 3rem);
+    --header-depth: 3.25rem;
+    --footer-depth: 3.5rem;
+    --copy-lines: 2;
+    --panel-gap: .625rem;
     --body: clamp(1.0625rem, 2.55vh, 1.25rem);
     --compare-height: clamp(12rem, 31svh, 16rem);
     --panel-inset: 1rem;
@@ -597,6 +609,8 @@ dialog::backdrop { background: rgb(23 23 21 / .42); }
   --player-min-width: 200px;
   --player-max-width: 52rem;
   --player-height-limit: 61svh;
+  --frame-height-limit: 36svh;
+  --tile-height-limit: 27svh;
 }
 .visual-pair {
   display: grid;
@@ -624,9 +638,11 @@ dialog::backdrop { background: rgb(23 23 21 / .42); }
   overflow: hidden;
   isolation: isolate;
   aspect-ratio: var(--signal-frame-ratio);
+  max-block-size: var(--frame-height-limit);
   background: var(--icon-dark) var(--gate-image) center bottom / auto 200% no-repeat;
 }
 .cover-panel .gate-frame { aspect-ratio: var(--cover-frame-ratio); }
+.visual-tile .gate-frame, .visual-tile .rf-map { max-block-size: var(--tile-height-limit); }
 .weak-frame::before, .analog-noise, .pixel-layer {
   position: absolute;
   inset: 0;
@@ -664,7 +680,7 @@ dialog::backdrop { background: rgb(23 23 21 / .42); }
 .recording-trigger { margin-block-start: var(--heading-gap); text-decoration: none; }
 .recording-trigger:hover { text-decoration: underline; }
 
-.rf-map { display: block; inline-size: 100%; aspect-ratio: var(--field-ratio); align-self: center; }
+.rf-map { display: block; inline-size: 100%; aspect-ratio: var(--field-ratio); max-block-size: var(--frame-height-limit); align-self: center; }
 .map-tile figcaption { border-block-start: 1px solid var(--rule); }
 .rf-link { stroke: var(--signal); stroke-width: 3; stroke-dasharray: 7 6; }
 .rf-link.weakened { opacity: .38; stroke-dasharray: 3 7; }

@@ -407,7 +407,7 @@ class Site:
         return json.dumps({'schemaVersion': 3, 'nodes': nodes, 'edges': self.edges}, ensure_ascii=False, separators=(',', ':')) + '\n'
 
     def map_svg(self):
-        """A plain picture of the sky for other sites; mirinaeverse.com shows it on its first screen."""
+        """A map of the sky for other sites, with every star a link; mirinaeverse.com shows it on its first screen."""
         tokens = (PROFILE / 'site/tokens.css').read_text(encoding='utf-8')
         color = lambda k: (re.search(rf'--k-{k}:(#\w+)', tokens) or re.search(r'--k-creator:(#\w+)', tokens)).group(1)
         width, height = 800, 520
@@ -416,7 +416,9 @@ class Site:
             x, y, z = n['p']
             return round(width / 2 + x * width / 2 / reach * .96, 1), round(height / 2 + (z * .62 + y * .25) * height / 2 / (reach * .62) * .96, 1)
         spot = {n['id']: place(n) for n in self.nodes}
-        out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}">']
+        # Fills the box it is shown in, like a picture cropped from the middle.
+        out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" preserveAspectRatio="xMidYMid slice"><style>line{{pointer-events:none}}text{{font:10px "Pretendard Variable","Apple SD Gothic Neo","Malgun Gothic",sans-serif;fill:#eef1f8;stroke:#070a12;stroke-width:3;paint-order:stroke;opacity:0;pointer-events:none}}a:hover text,a:focus text{{opacity:1}}a:hover .d,a:focus .d{{stroke:#fff;stroke-width:1.5;fill-opacity:1}}.hit{{fill:transparent}}a{{cursor:pointer;outline:0}}</style>',
+               f'<a href="{ORIGIN}/galaxy/" target="_blank"><rect class="hit" width="{width}" height="{height}"/></a>']
         for x in self.edges:
             if x['hub']:
                 continue
@@ -426,7 +428,9 @@ class Site:
         for n in sorted(self.nodes, key=lambda n: n['k'] == 'post'):
             cx, cy = spot[n['id']]
             k = n['k']
-            out.append(f'<circle cx="{cx}" cy="{cy}" r="{4 if k == "post" else 5 if k == "creator" else 2.2}" fill="{color(k)}" fill-opacity="{1 if k in ("post", "creator") else .72}"/>')
+            right = cx > width * .62
+            label = f'<text x="{round(cx + (-9 if right else 9), 1)}" y="{round(cy + 3.5, 1)}"{" text-anchor=" + chr(34) + "end" + chr(34) if right else ""}>{e(n["t"])}</text>'
+            out.append(f'<a href="{ORIGIN}/galaxy/?node={quote(n["id"], safe="")}" target="_blank" aria-label="{e(n["t"])}"><circle class="hit" cx="{cx}" cy="{cy}" r="9"/><circle class="d" cx="{cx}" cy="{cy}" r="{4 if k == "post" else 5 if k == "creator" else 2.2}" fill="{color(k)}" fill-opacity="{1 if k in ("post", "creator") else .72}"/>{label}</a>')
         return ''.join(out) + '</svg>\n'
 
     def context_json(self):

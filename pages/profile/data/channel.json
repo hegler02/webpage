@@ -152,5 +152,94 @@
         "image": "/assets/channel/OLAK5uy_nslicTA8qf_slnKmJr-ivFnXvpOsOPWJI.webp"
       }
     ]
+  },
+  "posts": {
+    "home": "https://mirinaeverse.com/",
+    "items": [
+      {
+        "id": "post-826",
+        "title": "15년의 수업을, 누구나 펼쳐 볼 수 있는 교재로",
+        "url": "https://mirinaeverse.com/%ea%b3%b5%ea%b0%9c-%ec%a0%84%ea%b8%b0%ea%b5%90%ec%9c%a1-%ea%b5%90%ec%9e%ac-15%eb%85%84%ec%9d%98-%ec%88%98%ec%97%85/",
+        "date": "2026-11-08",
+        "image": "/assets/channel/post-826.webp"
+      },
+      {
+        "id": "post-817",
+        "title": "포르쉐는 없지만, 드리프트 영상은 만들었다",
+        "url": "https://mirinaeverse.com/porsche-fpv-drift-ai-video/",
+        "date": "2026-11-02",
+        "image": "/assets/channel/post-817.webp"
+      },
+      {
+        "id": "post-813",
+        "title": "GPTs는 플러그인으로 이사 갔다. 이삿짐은 내가 날랐다",
+        "url": "https://mirinaeverse.com/gpts-plugin-migration-burden/",
+        "date": "2026-11-02",
+        "image": "/assets/channel/post-813.webp"
+      },
+      {
+        "id": "post-808",
+        "title": "드론 촬영을 가르치다가 서울에 킹콩을 풀었다",
+        "url": "https://mirinaeverse.com/drone-lecture-king-kong/",
+        "date": "2026-11-01",
+        "image": "/assets/channel/post-808.webp"
+      },
+      {
+        "id": "post-801",
+        "title": "돈은 내가 내는데, 왜 AI 눈치를 내가 보냐",
+        "url": "https://mirinaeverse.com/sibang-sibang-ai-user-frustration/",
+        "date": "2026-11-01",
+        "image": "/assets/channel/post-801.webp"
+      },
+      {
+        "id": "post-791",
+        "title": "AI가 그렸어도 내 그림 — 사이트 고치다가 122쪽을 썼다",
+        "url": "https://mirinaeverse.com/ai-drew-it-my-picture/",
+        "date": "2026-10-30",
+        "image": "/assets/channel/post-791.webp"
+      },
+      {
+        "id": "post-786",
+        "title": "코덱스 욕하다가 500달러를 결제했다 — 더 빠르게 망칠까 봐 걱정이다",
+        "url": "https://mirinaeverse.com/codex-500-dollar-subscription/",
+        "date": "2026-10-30",
+        "image": "/assets/channel/post-786.webp"
+      },
+      {
+        "id": "post-782",
+        "title": "코덱스의 뻘짓 — 나는 서비스를 부탁했는데 문서 500개가 생겼다",
+        "url": "https://mirinaeverse.com/codex-overengineering-experience/",
+        "date": "2026-10-30",
+        "image": "/assets/channel/post-782.webp"
+      },
+      {
+        "id": "post-778",
+        "title": "8시간 강의에서 내가 별로 할 일이 없었다",
+        "url": "https://mirinaeverse.com/coding-message-body-first-app-class/",
+        "date": "2026-10-30",
+        "image": "/assets/channel/post-778.webp"
+      },
+      {
+        "id": "post-773",
+        "title": "홈페이지 속 미리내맨은 AI가 만들었다. 진짜 미리내맨은 내가 만드는 중이다.",
+        "url": "https://mirinaeverse.com/becoming-mirinaeman/",
+        "date": "2026-10-30",
+        "image": "/assets/channel/post-773.webp"
+      },
+      {
+        "id": "post-766",
+        "title": "나는 AI를 얻었다. 전문가는 자기 경험에 AI까지 더했다.",
+        "url": "https://mirinaeverse.com/ai-expertise-tacit-knowledge/",
+        "date": "2026-10-30",
+        "image": "/assets/channel/post-766.webp"
+      },
+      {
+        "id": "post-759",
+        "title": "책은 먼저 나왔고, 강의 슬라이드는 이제야 만들었다",
+        "url": "https://mirinaeverse.com/book-to-ai-judgment-lecture/",
+        "date": "2026-10-30",
+        "image": "/assets/channel/post-759.webp"
+      }
+    ]
   }
 }

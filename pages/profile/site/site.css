@@ -84,6 +84,7 @@ main.enter{animation:page-in var(--dur-slow) var(--curve) both}
 .rail img{width:100%;aspect-ratio:var(--ratio-card);object-fit:cover;border-radius:var(--radius);background:var(--surface);transition:opacity var(--dur-fast) var(--curve)}
 .rail a:hover img{opacity:.86}
 .rail b{font-size:var(--size-small);font-weight:var(--weight-control);line-height:var(--lh-compact);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.rail small{color:var(--muted);font-size:var(--size-caption)}
 .rail-wrap{position:relative}
 .rail-wrap.square{--rail-media:var(--rail-square)}
 /* Arrows sit on the left and right edges over the pictures; touch screens swipe instead */

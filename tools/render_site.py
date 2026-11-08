@@ -206,23 +206,29 @@ class Site:
         return page('/', 'home', TITLE, DESCRIPTION, main, schema=schema, og='profile')
 
     def channel_rails(self):
-        """Videos and released music of The Mirinaeman Project; tools/update_channel.py keeps them current."""
+        """Videos and music of The Mirinaeman Project, then new Mirinaeverse posts; tools/update_channel.py keeps them current."""
         path = PROFILE / 'data/channel.json'
         data = read_json(path) if path.is_file() else {}
-        rails = [('videos', ('새 영상 · The Mirinaeman Project', 'New videos · The Mirinaeman Project'), ('영상 장면', 'video'), (270, '')),
-                 ('albums', ('음원 · The Mirinaeman Project', 'Music · The Mirinaeman Project'), ('앨범 표지', 'album'), (480, ' square'))]
+        # Each group ends with one way out to where everything lives.
+        groups = [([('videos', ('새 영상 · The Mirinaeman Project', 'New videos · The Mirinaeman Project'), '영상 장면', 270, ''),
+                    ('albums', ('음원 · The Mirinaeman Project', 'Music · The Mirinaeman Project'), '앨범 표지', 480, ' square')], ('YouTube에서 모두 보기', 'All on YouTube')),
+                  ([('posts', ('새 글 · 미리내벌스', 'New writing · Mirinaeverse'), '글 표지', 270, '')], ('미리내벌스에서 모두 보기', 'All on Mirinaeverse'))]
         out = ''
-        for name, title, alt, (height, shape) in rails:
-            rail = data.get(name, {})
-            if not rail.get('items'):
-                continue
-            cards = ''.join(f'<li><a href="{e(i["url"])}"{out_attrs(i["url"])}><img src="{e(i["image"])}" alt="{e(i["title"])} {alt[0]}" width="480" height="{height}" loading="lazy" decoding="async"><b>{e(i["title"])}</b></a></li>' for i in rail['items'])
-            arrows = '<button class="rail-arrow prev" type="button" data-rail="-1" aria-label="이전" hidden>‹</button><button class="rail-arrow next" type="button" data-rail="1" aria-label="다음">›</button>'
-            out += f'<section class="sec releases" id="{name}"><h2>{t(*title)}</h2><div class="rail-wrap{shape}">{arrows}<ul class="rail{shape}" data-rail-track>{cards}</ul></div></section>'
-            home = rail['home']
-        if out:
-            # One way out to the channel, after both rails.
-            out = out[:-len('</section>')] + f'<div class="btns"><a class="btn" href="{e(home)}"{out_attrs(home)}>{t("YouTube에서 모두 보기", "All on YouTube")} ↗</a></div></section>'
+        for rails, more in groups:
+            group = ''
+            for name, title, alt, height, shape in rails:
+                rail = data.get(name, {})
+                if not rail.get('items'):
+                    continue
+                cards = ''
+                for i in rail['items']:
+                    date = f'<small>{e(i["date"].replace("-", "."))}</small>' if i.get('date') else ''
+                    cards += f'<li><a href="{e(i["url"])}"{out_attrs(i["url"])}><img src="{e(i["image"])}" alt="{e(i["title"])} {alt}" width="480" height="{height}" loading="lazy" decoding="async"><b>{e(i["title"])}</b>{date}</a></li>'
+                arrows = '<button class="rail-arrow prev" type="button" data-rail="-1" aria-label="이전" hidden>‹</button><button class="rail-arrow next" type="button" data-rail="1" aria-label="다음">›</button>'
+                group += f'<section class="sec releases" id="{name}"><h2>{t(*title)}</h2><div class="rail-wrap{shape}">{arrows}<ul class="rail{shape}" data-rail-track>{cards}</ul></div></section>'
+                home = rail['home']
+            if group:
+                out += group[:-len('</section>')] + f'<div class="btns"><a class="btn" href="{e(home)}"{out_attrs(home)}>{t(*more)} ↗</a></div></section>'
         return out
 
     # Work

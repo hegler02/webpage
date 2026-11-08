@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
-"""Keep the two home rails of The Mirinaeman Project current: videos and released music.
+"""Keep the home rails current: videos, released music and new Mirinaeverse posts.
 
 Videos come from the artist channel; albums from the topic channel YouTube makes for every
 distributed release. Both open on YouTube, free to play. The YouTube feed endpoint has been
-unreliable since late 2025, so this reads the channels' list pages. When YouTube answers with
+unreliable since late 2025, so this reads the channels' list pages. Posts come from the
+WordPress API, which also gives the featured image and date. When a source answers with
 nothing usable for a rail, that rail is kept as it is.
 
   python3 tools/update_channel.py          fetch and update data/channel.json and covers
   python3 tools/update_channel.py --check  covers on disk match the data (release gate)
 """
+import html
 import io
 import json
 import re
 import sys
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -26,11 +29,16 @@ RAILS = {
                'type': 'LOCKUP_CONTENT_TYPE_VIDEO', 'size': (480, 270), 'url': 'https://www.youtube.com/watch?v={}'},
     'albums': {'page': 'https://www.youtube.com/channel/UCQdVq0had1QV32_E6b5gXig/releases', 'home': 'https://www.youtube.com/@themirinaemanproject',
                'type': 'LOCKUP_CONTENT_TYPE_ALBUM', 'size': (480, 480), 'url': 'https://www.youtube.com/playlist?list={}'},
+    'posts': {'api': f'https://mirinaeverse.com/wp-json/wp/v2/posts?per_page={KEEP}&_embed=wp:featuredmedia', 'home': 'https://mirinaeverse.com/', 'size': (480, 270)},
 }
+# A post without a featured image still belongs on the rail.
+NO_IMAGE = '/assets/images/og-home.jpg'
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36', 'Accept-Language': 'ko,en;q=0.8'}
 
 
 def fetch(url):
+    # WordPress keeps Korean file names in its image addresses.
+    url = urllib.parse.quote(url, safe=":/?&=%#+,;@~!$'()*[]")
     with urllib.request.urlopen(urllib.request.Request(url, headers=HEADERS), timeout=30) as response:
         return response.read()
 
@@ -50,7 +58,8 @@ def items(html, content_type):
                 image = image.get('collectionThumbnailViewModel', {}).get('primaryThumbnail', image)
                 sources = image.get('thumbnailViewModel', {}).get('image', {}).get('sources', [])
                 if lockup.get('contentId') and title:
-                    found.append({'id': lockup['contentId'], 'title': title, 'source': max(sources, key=lambda s: s.get('width', 0))['url'] if sources else None})
+                    # Album art has no fixed address; videos use the standard thumbnail addresses.
+                    found.append({'id': lockup['contentId'], 'title': title, 'images': [max(sources, key=lambda s: s.get('width', 0))['url']] if sources and content_type.endswith('ALBUM') else None})
             for value in node.values():
                 walk(value)
         elif isinstance(node, list):
@@ -67,7 +76,8 @@ def items(html, content_type):
 def cover(item, size):
     from PIL import Image
     data = None
-    for url in [f"https://i.ytimg.com/vi/{item['id']}/maxresdefault.jpg", f"https://i.ytimg.com/vi/{item['id']}/hqdefault.jpg"] if size[0] != size[1] else [item['source']]:
+    urls = item.get('images') or [f"https://i.ytimg.com/vi/{item['id']}/maxresdefault.jpg", f"https://i.ytimg.com/vi/{item['id']}/hqdefault.jpg"]
+    for url in urls:
         try:
             data = fetch(url)
             break
@@ -107,7 +117,44 @@ def check():
     return 0
 
 
+def posts(rail):
+    found = []
+    for post in json.loads(fetch(rail['api']).decode('utf-8')):
+        media = (post.get('_embedded', {}).get('wp:featuredmedia') or [{}])[0]
+        # The original on the site itself: the resized copies sit on a CDN that refuses some readers.
+        best = media.get('source_url')
+        found.append({'id': f"post-{post['id']}", 'title': html.unescape(re.sub(r'<[^>]+>', '', post['title']['rendered'])).strip(), 'url': post['link'], 'date': post['date'][:10], 'images': [best] if best else None})
+    return found
+
+
+def refresh_posts(name, rail, current):
+    try:
+        found = posts(rail)
+    except Exception as error:  # A blog outage must never empty the rail.
+        print(f'{name} unchanged: could not read Mirinaeverse ({error})')
+        return current
+    if not found:
+        print(f'{name} unchanged: Mirinaeverse returned nothing')
+        return current
+    out = []
+    for item in found:
+        image = f"/assets/channel/{item['id']}.webp"
+        if not (COVERS / f"{item['id']}.webp").is_file():
+            try:
+                if not item['images']:
+                    raise RuntimeError('no featured image')
+                cover(item, rail['size'])
+            except Exception as error:
+                print(f"{name}: default image for {item['title']} ({error})")
+                image = NO_IMAGE
+        out.append({'id': item['id'], 'title': item['title'], 'url': item['url'], 'date': item['date'], 'image': image})
+    print(f'{name}: {len(out)}')
+    return {'home': rail['home'], 'items': out}
+
+
 def refresh(name, rail, current):
+    if 'api' in rail:
+        return refresh_posts(name, rail, current)
     try:
         found = items(fetch(rail['page']).decode('utf-8', 'replace'), rail['type'])
     except Exception as error:  # A YouTube outage must never empty a rail.

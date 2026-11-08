@@ -22,9 +22,9 @@ DATA = PROFILE / 'data/channel.json'
 COVERS = PROFILE / 'assets/channel'
 KEEP = 12
 RAILS = {
-    'videos': {'page': 'https://www.youtube.com/channel/UCOtuxTyT2s4UNc-zcOyA6aA/videos', 'home': 'https://www.youtube.com/@themirinaemanproject/videos',
+    'videos': {'page': 'https://www.youtube.com/channel/UCOtuxTyT2s4UNc-zcOyA6aA/videos', 'home': 'https://www.youtube.com/@themirinaemanproject',
                'type': 'LOCKUP_CONTENT_TYPE_VIDEO', 'size': (480, 270), 'url': 'https://www.youtube.com/watch?v={}'},
-    'albums': {'page': 'https://www.youtube.com/channel/UCQdVq0had1QV32_E6b5gXig/releases', 'home': 'https://www.youtube.com/channel/UCQdVq0had1QV32_E6b5gXig/releases',
+    'albums': {'page': 'https://www.youtube.com/channel/UCQdVq0had1QV32_E6b5gXig/releases', 'home': 'https://www.youtube.com/@themirinaemanproject',
                'type': 'LOCKUP_CONTENT_TYPE_ALBUM', 'size': (480, 480), 'url': 'https://www.youtube.com/playlist?list={}'},
 }
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36', 'Accept-Language': 'ko,en;q=0.8'}

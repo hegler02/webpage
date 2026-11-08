@@ -28,7 +28,7 @@
  --gap-tiny:var(--space-1);--gap-text:var(--space-2);--gap-para:var(--space-4);--gap-action:var(--space-6);--gap-control:var(--space-2);--gap-card:var(--space-4);--gap-block:var(--space-5);--gap-section:var(--space-14);
  --inset-card:var(--space-4);--inset-panel:var(--space-5);--page-top:var(--space-10);--page-bottom:var(--space-20);
  /* Frame: one top bar and one left edge */
- --edge:max(clamp(16px,5vw,72px),env(safe-area-inset-left,0px));--edge-right:max(16px,env(safe-area-inset-right,0px));--top-h:56px;--wide:1296px;--read:44rem;--list:58rem;--reader:372px;
+ --edge:max(clamp(16px,5vw,72px),env(safe-area-inset-left,0px),env(safe-area-inset-right,0px),calc((100vw - var(--wide)) / 2));--edge-right:var(--edge);--top-h:56px;--wide:1296px;--read:44rem;--list:58rem;--reader:372px;
  --card-min:17rem;--door-min:15rem;--step-min:14rem;--book-min:10rem;--copy-max:38rem;--time-col:7rem;--record-fig:26rem;--opening-h:min(78vh,720px);--opening-stage:46dvh;--btn-pad-narrow:var(--space-1);--reader-h-narrow:52%;--results-h:44vh;--search-w:19rem;--filter-w:15rem;--gx-head-w:26rem;--label-w:13em;--trail-w:12em;
  /* Shape */
  --radius-s:6px;--radius:10px;--radius-l:12px;--radius-xl:14px;--pill:99px;--border:1px;--marker:2px;--ratio-card:16/9;--ratio-wide:21/9;--ratio-book:3/4;

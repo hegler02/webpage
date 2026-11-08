@@ -75,6 +75,15 @@ main.enter{animation:page-in var(--dur-slow) var(--curve) both}
 .band img{width:100%;aspect-ratio:var(--ratio-card);object-fit:cover;border-radius:var(--radius-l)}
 .band h2{margin-top:var(--gap-tiny);font-size:var(--size-band)}.band p{margin-top:var(--space-3);color:var(--muted)}
 
+/* Release rail: one row that scrolls sideways, starting on the shared left edge */
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:var(--rail-item);gap:var(--gap-card);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:thin;padding-bottom:var(--space-2)}
+.rail li{scroll-snap-align:start}
+.rail a{display:grid;gap:var(--gap-text);text-decoration:none}
+.rail img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius);background:var(--surface);transition:opacity var(--dur-fast) var(--curve)}
+.rail a:hover img{opacity:.86}
+.rail b{font-size:var(--size-small);font-weight:var(--weight-control);line-height:var(--lh-compact);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.releases .btns .btn[data-rail]{justify-content:center;width:var(--ctl-h-l);padding:0}
+
 /* Work */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(var(--card-min),100%),1fr));gap:var(--gap-card)}
 .card{display:grid;align-content:start;border:var(--border) solid var(--rule);border-radius:var(--radius-l);background:var(--surface);overflow:hidden;text-decoration:none;transition:background-color var(--dur-fast) var(--curve)}

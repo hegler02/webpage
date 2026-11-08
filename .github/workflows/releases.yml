@@ -1,0 +1,36 @@
+# Once a day: add new The Mirinaeman Project albums to the home rail and publish through the usual gate.
+name: Release rail
+
+on:
+  schedule:
+    - cron: "0 21 * * *"  # 06:00 in Korea
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-rail
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements-build.txt
+      - name: Read the albums on YouTube
+        run: python tools/update_releases.py
+      - name: Publish when the rail changed
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "No new albums"; exit 0; fi
+          python tools/render_archive.py
+          python tools/release_gate.py
+          git config user.name "mirinaeman-release-rail"
+          git config user.email "hegler02@users.noreply.github.com"
+          git add -A
+          git commit -m "Add new The Mirinaeman Project releases to the home rail"
+          git push

@@ -196,6 +196,12 @@
     });
   }
 
+  document.addEventListener('click', (event) => {
+    const step = event.target.closest('[data-rail]');
+    const track = step?.closest('section')?.querySelector('[data-rail-track]');
+    if (track) track.scrollBy({ left: Number(step.dataset.rail) * track.clientWidth * 0.8, behavior: calm.matches ? 'auto' : 'smooth' });
+  });
+
   document.addEventListener('click', async (event) => {
     const button = event.target.closest('[data-copy-email]');
     if (!button) return;

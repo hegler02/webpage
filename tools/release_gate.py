@@ -175,6 +175,7 @@ def main() -> int:
         ([sys.executable, str(ROOT / "tools/check_constellation_discovery.py")], "Constellation discovery gate"),
         (["node", str(ROOT / "tools" / "test_navigation_lifecycle.mjs")], "Navigation lifecycle gate"),
         ([sys.executable, str(ROOT / "tools" / "check_site.py")], "Site contract gate"),
+        ([sys.executable, str(ROOT / "tools" / "update_releases.py"), "--check"], "Release rail covers gate"),
         ([sys.executable, str(ROOT / "tools" / "test_site_growth.py")], "Site growth test"),
         ([sys.executable, str(ROOT / "tools" / "check_unfold_intro.py")], "Unfold editorial discovery gate"),
         ([sys.executable, str(ROOT / "tools" / "test_constellation.py")], "Constellation source and registration gate"),

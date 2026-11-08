@@ -83,7 +83,7 @@ def video_errors(node):
                 raise ValueError('not an ISO date/time')
             datetime.fromisoformat(value.replace('Z', '+00:00'))
         except ValueError:
-            errors.append('VideoObject uploadDate must be an ISO 8601 date/time with a time zone, such as 2026-11-06T14:08:58-08:00')
+            errors.append('VideoObject uploadDate must be a valid ISO 8601 date/time with a time zone, such as 2026-11-06T14:08:58-08:00')
     return errors
 
 def public_base(canonical):

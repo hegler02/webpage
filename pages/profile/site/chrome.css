@@ -64,6 +64,7 @@ a.row:hover{background:var(--raised)}
 /* Context added under hand-written introductions */
 .page-context{padding:var(--gap-section) var(--edge-right) var(--gap-section) var(--edge);font-family:var(--sans)}
 .page-context .btns{margin-top:0}
+.page-context .rows>li{display:grid}
 .page-context .rows{max-width:none;grid-template-columns:repeat(auto-fit,minmax(min(var(--record-fig),100%),1fr))}
 .page-context .sec{margin-top:var(--gap-section)}
 .page-context h2{margin:0 0 var(--gap-block);font-size:var(--size-sec)}

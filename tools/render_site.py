@@ -218,8 +218,11 @@ class Site:
                 continue
             cards = ''.join(f'<li><a href="{e(i["url"])}"{out_attrs(i["url"])}><img src="{e(i["image"])}" alt="{e(i["title"])} {alt[0]}" width="480" height="{height}" loading="lazy" decoding="async"><b>{e(i["title"])}</b></a></li>' for i in rail['items'])
             arrows = '<button class="rail-arrow prev" type="button" data-rail="-1" aria-label="이전" hidden>‹</button><button class="rail-arrow next" type="button" data-rail="1" aria-label="다음">›</button>'
-            out += (f'<section class="sec releases" id="{name}"><h2>{t(*title)}</h2><div class="rail-wrap{shape}">{arrows}<ul class="rail{shape}" data-rail-track>{cards}</ul></div>'
-                    f'<div class="btns"><a class="btn" href="{e(rail["home"])}"{out_attrs(rail["home"])}>{t("YouTube에서 모두 보기", "All on YouTube")} ↗</a></div></section>')
+            out += f'<section class="sec releases" id="{name}"><h2>{t(*title)}</h2><div class="rail-wrap{shape}">{arrows}<ul class="rail{shape}" data-rail-track>{cards}</ul></div></section>'
+            home = rail['home']
+        if out:
+            # One way out to the channel, after both rails.
+            out = out[:-len('</section>')] + f'<div class="btns"><a class="btn" href="{e(home)}"{out_attrs(home)}>{t("YouTube에서 모두 보기", "All on YouTube")} ↗</a></div></section>'
         return out
 
     # Work

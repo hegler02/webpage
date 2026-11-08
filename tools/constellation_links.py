@@ -116,8 +116,8 @@ def recorded_context_for(catalog, records):
     graph = build_graph(catalog, links={'constellations': [], 'pairs': [], 'solo': []}, records=records)
     connected = set()
     for e in graph['edges']:
-        # A title topic or a post's link is automatic and is not a decision about this record.
-        if hub not in (e['source'], e['target']) and not e['target'].startswith('topic:') and e['label'] != '글에서 소개':
+        # A title topic, a post's link or a channel's song is automatic and is not a decision about this record.
+        if hub not in (e['source'], e['target']) and not e['target'].startswith('topic:') and e['label'] not in ('글에서 소개', '채널의 곡'):
             connected |= {e['source'], e['target']}
     return graph, connected
 

@@ -143,6 +143,12 @@ python3 tools/constellation_links.py add post:808 --to causal-chain --reason "�
 
 글의 본문은 이 사이트로 옮기지 않습니다. 별을 누르면 MIRINAEVERSE의 글이 열립니다.
 
+## 영상과 음원
+
+The Mirinaeman Project 채널의 영상과 앨범도 `tools/update_channel.py`가 매일 읽어 은하수의 별로 넣습니다. 영상은 `video:아이디`, 앨범은 `album:아이디`입니다. 로파이처럼 끝없이 이어지는 시리즈는 `series:lofi`처럼 별 하나로 묶고 편수만 셉니다. 새 시리즈를 묶으려면 `update_channel.py`의 `SERIES`와 `constellation_data.py`의 `SERIES`에 함께 넣습니다.
+
+채널에 속한다는 연결만 자동입니다. 별자리와 작품 연결은 글과 똑같이 AI가 제안하고 교수님이 승인합니다. 채널 전체를 처음부터 다시 읽으려면 `python3 tools/update_channel.py --all`을 실행합니다.
+
 ## 건드리지 않는 것
 
 - 다른 맥락 파일(`context-graph.json`, `wind-context.json` 등)은 작가가 쓴 글이 근거입니다. 그 글이 바뀔 때만 고칩니다.

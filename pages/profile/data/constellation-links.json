@@ -336,6 +336,21 @@
         {
           "id": "birthday-your-day",
           "reason": "한 사람을 위한 생일노래가 다음 사람에게 건너갑니다."
+        },
+        {
+          "id": "video:s6BOagGGz8o",
+          "reason": "어려울 때 힘이 되는 노래입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:yI_FJ6uLenw",
+          "reason": "「겨울나무」 한 시간 연속 듣기입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:1cU9_a6PKoo",
+          "reason": "인생이 쉽지 않다는 말을 건네는 노래입니다.",
+          "status": "proposed"
         }
       ]
     },
@@ -492,6 +507,11 @@
         {
           "id": "ai-slave",
           "reason": "거친 음악으로 경고합니다."
+        },
+        {
+          "id": "video:IbfFBExKrkY",
+          "reason": "오지 오스본에게 바치는 곡입니다.",
+          "status": "proposed"
         }
       ]
     },
@@ -532,6 +552,84 @@
         {
           "id": "project:smart-beekeeping",
           "reason": "사물인터넷과 AI로 벌통을 관리하는 스마트 양봉 시스템입니다."
+        }
+      ]
+    },
+    {
+      "id": "iron-emperor",
+      "title": "강철의 열제",
+      "text": "강철의 열제 세계의 인물과 전투를 노래한 자리.",
+      "status": "proposed",
+      "members": [
+        {
+          "id": "video:lrm3t6QhfyY",
+          "reason": "세 개의 달을 건너는 서곡입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:tcclAOKJEB4",
+          "reason": "계웅삼을 노래한 곡입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:Zfdin9iz0eo",
+          "reason": "계웅삼 곡의 쇼츠입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:z0lMvH30hEo",
+          "reason": "개문산성의 수호자 을지부루를 노래한 곡입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:OlBMBXhIjN4",
+          "reason": "활의 달인 을지우루를 노래한 곡입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:hpY4cQ0DZbI",
+          "reason": "대마법사 리셀 시아론을 노래한 곡입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:S5TaEHLNKvo",
+          "reason": "뇌전의 소드 마스터 필리언 제라르를 노래한 곡입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:LHquOVRZnuU",
+          "reason": "을지의 열여섯 번째 봄을 노래한 곡입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:A8OD3sUY4I8",
+          "reason": "가우리의 방패 하일론을 노래한 곡입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:5Ln-joeI1-4",
+          "reason": "은빛 정령 연휘가람을 노래한 곡입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:ZGhTvUt6UrU",
+          "reason": "대무덕을 노래한 곡입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:_GBH7YVAlsw",
+          "reason": "가우리의 삼총사를 노래한 곡입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:GeKfUeRbCrI",
+          "reason": "개문산성의 진혼곡입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:6wlkRZhOScY",
+          "reason": "앨범 「이계정벌기」 전체 듣기입니다.",
+          "status": "proposed"
         }
       ]
     },
@@ -620,6 +718,16 @@
         {
           "id": "post:714",
           "reason": "무엇을 만들지 정하는 일이 사람에게 남는다는 기록입니다."
+        },
+        {
+          "id": "video:TzHgY5ZBssk",
+          "reason": "AI 윤리 7원칙을 기억하자는 캠페인송 남성 버전입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:squL9E_eJpI",
+          "reason": "AI 윤리 7원칙을 기억하자는 캠페인송 여성 버전입니다.",
+          "status": "proposed"
         }
       ]
     },
@@ -824,6 +932,74 @@
       ]
     },
     {
+      "id": "sung-poems",
+      "title": "노래가 된 시",
+      "text": "영미시를 노래로 옮긴 자리.",
+      "status": "proposed",
+      "members": [
+        {
+          "id": "video:LOvlxTRHLlo",
+          "reason": "롱펠로의 「인생 찬가」를 노래로 옮겼습니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:L1WnJc2Um7U",
+          "reason": "포의 「까마귀」를 노래로 옮겼습니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:TYYcHU6rkEw",
+          "reason": "블레이크의 「호랑이」를 노래로 옮겼습니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:trmBUSdqR9Y",
+          "reason": "워즈워스의 「수선화」를 노래로 옮겼습니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:8lfeIjgzuVw",
+          "reason": "셰익스피어의 소네트 18번을 노래로 옮겼습니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:fb-xeJkuTPY",
+          "reason": "헨리의 「인빅터스」를 노래로 옮겼습니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:-pMUONCYn-E",
+          "reason": "프로스트의 「가지 않은 길」을 노래로 옮겼습니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:iOQ8MQXrciM",
+          "reason": "딜런 토머스의 시를 노래로 옮겼습니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:ei1Rm6sGFGo",
+          "reason": "키플링의 「만약」을 노래로 옮겼습니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:ULir7QEQEHw",
+          "reason": "프로스트의 눈 내리는 숲 시를 노래로 옮겼습니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:44j1bZCfp0Y",
+          "reason": "디킨슨의 희망에 관한 시를 노래로 옮겼습니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:XBecIRgKGTg",
+          "reason": "키츠의 「나이팅게일에게」 일부를 노래로 옮겼습니다.",
+          "status": "proposed"
+        }
+      ]
+    },
+    {
       "id": "teach",
       "title": "수업을 다시 짜다",
       "text": "가르치는 일의 구조를 새로 설계한 기록.",
@@ -860,6 +1036,59 @@
         {
           "id": "post:826",
           "reason": "15년간 고민한 이해에 이르는 길을 공개 전기교육 교재로 옮겼습니다."
+        }
+      ]
+    },
+    {
+      "id": "those-days",
+      "title": "그날의 노래",
+      "text": "명절과 기념일에 맞춰 부른 노래.",
+      "status": "proposed",
+      "members": [
+        {
+          "id": "video:C2IGvptNdzs",
+          "reason": "설날에 부른 노래입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:LXAM064kzFE",
+          "reason": "발렌타인데이에 부른 노래입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:mngavOEEGjc",
+          "reason": "핼러윈에 맞춘 연주곡입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:e8zSMyn0v2I",
+          "reason": "크리스마스 노래입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:VTMJaqYixCg",
+          "reason": "크리스마스 캐럴입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:HAlm82Zdjj8",
+          "reason": "미리내맨의 크리스마스 캐럴 모음입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:E_01tG6j_e4",
+          "reason": "메탈로 부른 크리스마스 캐럴입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:1vNybHKllyM",
+          "reason": "첫눈을 노래한 뮤직비디오입니다.",
+          "status": "proposed"
+        },
+        {
+          "id": "video:dCbeJdfCRdw",
+          "reason": "2025년 새해 인사 노래입니다.",
+          "status": "proposed"
         }
       ]
     },
@@ -1148,6 +1377,62 @@
       "label": "이어지는 이야기",
       "reason": "글 끝에서 판단권의 문제의식이 이 노래와 칼럼으로 이어진다고 밝힙니다.",
       "status": "approved"
+    },
+    {
+      "a": "album:OLAK5uy_niaATdXe0do66OWDxujzXzG26wFDALvYw",
+      "b": "songbirds",
+      "label": "앨범과 작품",
+      "reason": "이 노래의 앨범입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "album:OLAK5uy_npC2QiZa1jlfNVugiKwg_YijaskfrGbQM",
+      "b": "baekje-renaissance",
+      "label": "앨범과 작품",
+      "reason": "같은 제목 「검이불루, 화이불치」의 앨범입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "album:OLAK5uy_m5gSWs0wTyIJ48J77xR0rwCpZXAbF0El0",
+      "b": "my-son",
+      "label": "앨범과 작품",
+      "reason": "이 노래의 앨범입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "album:OLAK5uy_lMOl27dKRaUyO6tpEbK11iAj6tNmITLOs",
+      "b": "taste-expiration",
+      "label": "앨범과 작품",
+      "reason": "「맛의 유통기한」의 앨범으로 보입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "album:OLAK5uy_nslicTA8qf_slnKmJr-ivFnXvpOsOPWJI",
+      "b": "ai-slave",
+      "label": "앨범과 작품",
+      "reason": "이 노래의 앨범입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "album:OLAK5uy_l3C1dKaKieFUYnuZgYwGv6Iel0JpDLVBA",
+      "b": "book:pinky",
+      "label": "같은 이야기, 다른 몸",
+      "reason": "동화책 『핑키의 무지개 마음』과 같은 제목의 앨범입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "album:OLAK5uy_lg_FGnD4-C6kcWRHbskZVh3TXlspeKph8",
+      "b": "post:743",
+      "label": "앨범의 뒷이야기",
+      "reason": "서버에서 다시 찾은 스태리 나잇 첫 앨범을 쓴 글입니다.",
+      "status": "proposed"
+    },
+    {
+      "a": "album:OLAK5uy_mB0OWndv7-3_I7ItQbX8ctAlVRWb5mfZA",
+      "b": "series:palette",
+      "label": "같은 시리즈",
+      "reason": "Palette of Classics 시리즈의 앨범입니다.",
+      "status": "proposed"
     }
   ],
   "solo": [

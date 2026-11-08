@@ -9,6 +9,7 @@ The rail shows the newest posts; all of them become stars in the galaxy. When a 
 with nothing usable for a rail, that rail is kept as it is.
 
   python3 tools/update_channel.py          fetch and update data/channel.json and covers
+  python3 tools/update_channel.py --all     read the channels to the very end, not only their newest page
   python3 tools/update_channel.py --check  covers on disk match the data (release gate)
 """
 import html
@@ -25,7 +26,10 @@ ROOT = Path(__file__).resolve().parents[1]
 PROFILE = ROOT / 'pages/profile'
 DATA = PROFILE / 'data/channel.json'
 COVERS = PROFILE / 'assets/channel'
-KEEP = 12
+KEEP = 12  # The rail shows this many; every item stays in the data for the galaxy.
+# Long-running series are one star each. A cover is kept for the rail, for a star, and for each series' newest video.
+SERIES = [('ghibli', re.compile('ghibli', re.I)), ('palette', re.compile('palette of classics', re.I)), ('lofi', re.compile('lofi|lo-fi|starbucks', re.I))]
+INNERTUBE = {'context': {'client': {'clientName': 'WEB', 'clientVersion': '2.20250101.00.00', 'hl': 'ko', 'gl': 'KR'}}}
 RAILS = {
     'videos': {'page': 'https://www.youtube.com/channel/UCOtuxTyT2s4UNc-zcOyA6aA/videos', 'home': 'https://www.youtube.com/@themirinaemanproject',
                'type': 'LOCKUP_CONTENT_TYPE_VIDEO', 'size': (480, 270), 'url': 'https://www.youtube.com/watch?v={}'},
@@ -45,14 +49,21 @@ def fetch(url):
         return response.read()
 
 
-def items(html, content_type):
+def series_of(title):
+    return next((name for name, pattern in SERIES if pattern.search(title)), None)
+
+
+def items(html, content_type, everything=False):
     match = re.search(r'var ytInitialData = (\{.*?\});</script>', html, re.S)
     if not match:
         return []
     found = []
+    pending = []
 
     def walk(node):
         if isinstance(node, dict):
+            if isinstance(node.get('continuationCommand'), dict) and node['continuationCommand'].get('token'):
+                pending.append(node['continuationCommand']['token'])
             lockup = node.get('lockupViewModel')
             if lockup and lockup.get('contentType') == content_type:
                 title = lockup.get('metadata', {}).get('lockupMetadataViewModel', {}).get('title', {}).get('content')
@@ -69,10 +80,20 @@ def items(html, content_type):
                 walk(value)
 
     walk(json.loads(match.group(1)))
+    # The next pages come from YouTube's own browse request, as the page itself asks for them.
+    seen = set()
+    while everything and pending and len(seen) < 200:
+        token = pending.pop()
+        if token in seen:
+            continue
+        seen.add(token)
+        request = urllib.request.Request('https://www.youtube.com/youtubei/v1/browse?prettyPrint=false', data=json.dumps({**INNERTUBE, 'continuation': token}).encode(), headers={**HEADERS, 'Content-Type': 'application/json'})
+        with urllib.request.urlopen(request, timeout=30) as response:
+            walk(json.load(response))
     unique = {}
     for item in found:
         unique.setdefault(item['id'], item)
-    return list(unique.values())[:KEEP]
+    return list(unique.values())
 
 
 def cover(item, size):
@@ -111,7 +132,7 @@ def save(data):
 
 def check():
     data = load()
-    problems = [f"{name}: missing cover {i['id']}" for name in RAILS for i in data.get(name, {}).get('items', []) if not (PROFILE / i['image'].lstrip('/')).is_file()]
+    problems = [f"{name}: missing cover {i['id']}" for name in RAILS for i in data.get(name, {}).get('items', []) if i.get('image') and not (PROFILE / i['image'].lstrip('/')).is_file()]
     if problems:
         print('Channel rails: FAIL', *problems, sep='\n - ')
         return 1
@@ -145,8 +166,9 @@ def posts(rail):
             best = media.get('source_url')
             terms = [term for group in embedded.get('wp:term', []) for term in group]
             links = re.findall(r'href="https?://(?:www\.)?mirinaeman\.com(/[^"#?]+)', post['content']['rendered'])
+            videos = re.findall(r'(?:youtu\.be/|youtube(?:-nocookie)?\.com/(?:watch\?v=|embed/|shorts/))([\w-]{11})', post['content']['rendered'])
             found.append({'id': f"post-{post['id']}", 'title': html.unescape(re.sub(r'<[^>]+>', '', post['title']['rendered'])).strip(), 'url': post['link'], 'date': post['date'][:10], 'images': [best] if best else None,
-                          'summary': excerpt(post['excerpt']['rendered']), 'tags': [html.unescape(term['name']) for term in terms if term['taxonomy'] == 'post_tag'], 'links': sorted(set(links))})
+                          'summary': excerpt(post['excerpt']['rendered']), 'tags': [html.unescape(term['name']) for term in terms if term['taxonomy'] == 'post_tag'], 'links': sorted(set(links)), 'videos': sorted(set(videos))})
         if len(batch) < 100:
             break
         page += 1
@@ -173,7 +195,7 @@ def refresh_posts(name, rail, current):
             except Exception as error:
                 print(f"{name}: default image for {item['title']} ({error})")
                 image = NO_IMAGE
-        out.append({'id': item['id'], 'title': item['title'], 'url': item['url'], 'date': item['date'], 'image': image, 'summary': item['summary'], 'tags': item['tags'], 'links': item['links']})
+        out.append({'id': item['id'], 'title': item['title'], 'url': item['url'], 'date': item['date'], 'image': image, 'summary': item['summary'], 'tags': item['tags'], 'links': item['links'], 'videos': item['videos']})
     print(f'{name}: {len(out)}')
     return {'home': rail['home'], 'items': out}
 
@@ -182,22 +204,36 @@ def refresh(name, rail, current):
     if 'api' in rail:
         return refresh_posts(name, rail, current)
     try:
-        found = items(fetch(rail['page']).decode('utf-8', 'replace'), rail['type'])
+        found = items(fetch(rail['page']).decode('utf-8', 'replace'), rail['type'], '--all' in sys.argv)
     except Exception as error:  # A YouTube outage must never empty a rail.
         print(f'{name} unchanged: could not read YouTube ({error})')
         return current
     if not found:
         print(f'{name} unchanged: YouTube returned nothing')
         return current
+    # Newest first; what has scrolled off the channel's first page stays in the data.
+    new = {item['id'] for item in found}
+    merged = found + [i for i in current.get('items', []) if i['id'] not in new]
     out = []
-    for item in found:
-        if not (COVERS / f"{item['id']}.webp").is_file():
-            try:
-                cover(item, rail['size'])
-            except Exception as error:
-                print(f"{name}: skipped {item['title']} ({error})")
-                continue
-        out.append({'id': item['id'], 'title': item['title'], 'url': rail['url'].format(item['id']), 'image': f"/assets/channel/{item['id']}.webp"})
+    covered = set()
+    for index, item in enumerate(merged):
+        entry = {'id': item['id'], 'title': item['title'], 'url': rail['url'].format(item['id'])}
+        series = series_of(item['title'])
+        if series:
+            entry['series'] = series
+        if index < KEEP or not series or series not in covered:
+            covered.add(series)
+            if not (COVERS / f"{item['id']}.webp").is_file():
+                try:
+                    cover(item, rail['size'])
+                except Exception as error:
+                    print(f"{name}: no cover for {item['title']} ({error})")
+                    if index < KEEP:
+                        continue
+                    out.append(entry)
+                    continue
+            entry['image'] = f"/assets/channel/{item['id']}.webp"
+        out.append(entry)
     print(f'{name}: {len(out)}')
     return {'home': rail['home'], 'items': out}
 
@@ -212,7 +248,7 @@ def main():
         print('Channel rails unchanged')
         return 0
     save(data)
-    keep = {i['id'] for rail in data.values() for i in rail['items']}
+    keep = {i['id'] for rail in data.values() for i in rail['items'] if i.get('image')}
     for path in COVERS.glob('*.webp'):
         if path.stem not in keep:
             path.unlink()

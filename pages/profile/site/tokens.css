@@ -15,7 +15,7 @@
 :root{
  /* Star colours: the sky is always dark, so these never change with the theme */
  --k-song:#7fb2ff;--k-slide:#7fe3cf;--k-screen:#ff9f7d;--k-story:#e4b3ff;--k-knowledge:#ffd27a;--k-paper:#9fe6ff;--k-book:#9fe6ff;--k-project:#9fe6ff;--k-patent:#9fe6ff;--k-research:#9fe6ff;
- --k-film:#ffb3c7;--k-collection:#ffb3c7;--k-product:#ffb3c7;--k-outside:#ffb3c7;--k-concept:#d9c7ff;--k-judgment:#d9c7ff;--k-essay:#d9c7ff;--k-post:#a8e6a1;--k-thought:#d9c7ff;--k-topic:#9fe6ff;--k-constellation:#ffcf9e;--k-creator:#fff1d6;--dust-far:#a9bdf5;--dust-core:#fff0d8;
+ --k-film:#ffb3c7;--k-collection:#ffb3c7;--k-product:#ffb3c7;--k-outside:#ffb3c7;--k-concept:#d9c7ff;--k-judgment:#d9c7ff;--k-essay:#d9c7ff;--k-post:#a8e6a1;--k-media:#ffa6e0;--k-video:#ffa6e0;--k-album:#ffa6e0;--k-series:#ffa6e0;--k-thought:#d9c7ff;--k-topic:#9fe6ff;--k-constellation:#ffcf9e;--k-creator:#fff1d6;--dust-far:#a9bdf5;--dust-core:#fff0d8;
  /* Type */
  --sans:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--serif:"Noto Serif KR",Georgia,serif;
  --size-tiny:.6875rem;--size-eyebrow:.75rem;--size-caption:.8125rem;--size-small:.875rem;--size-control:.9375rem;--size-body:1rem;--size-lead:1.0625rem;--size-title-s:1.25rem;--size-title:1.5rem;

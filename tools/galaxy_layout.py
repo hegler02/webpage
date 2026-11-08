@@ -16,6 +16,8 @@ DATA = ROOT / 'pages/profile/data/galaxy-layout.json'
 HUB = 'creator:joonho'
 GENERIC = {'audio', 'album', 'lecture', 'slide', 'video', 'song', 'music', 'gsap', 'motion', 'motion-js', 'interactive', 'interactive-web', 'webgl', '16:9', 'photoreal', 'gestalt', 'code', 'chartjs'}
 RADIUS = 15
+# Stars that arrive by themselves and live on another site.
+OUTSIDE = {'post', 'video', 'album', 'series'}
 
 
 def tag_sets(nodes):
@@ -25,7 +27,7 @@ def tag_sets(nodes):
 def affinity(nodes):
     """Shared rare tags count more than shared common ones. Posts don't count, so a new post leaves the records' neighbours alone."""
     sets = tag_sets(nodes)
-    df = Counter(t for n, s in zip(nodes, sets) if n['kind'] != 'post' for t in s)
+    df = Counter(t for n, s in zip(nodes, sets) if n['kind'] not in OUTSIDE for t in s)
     pairs = {}
     for a in range(len(nodes)):
         for b in range(a + 1, len(nodes)):

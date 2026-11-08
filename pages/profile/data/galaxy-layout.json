@@ -1,4 +1,64 @@
 {
+"album:OLAK5uy_k51qattR_RNUYpRJJ71UwVIfr4L7WMPTU": [
+-12.84,
+-3,
+-5.618
+],
+"album:OLAK5uy_l3C1dKaKieFUYnuZgYwGv6Iel0JpDLVBA": [
+-6.357,
+3,
+-10.297
+],
+"album:OLAK5uy_l7_iKFDJSxXYfxyXsSiffQNmKhtssMTP0": [
+7.03,
+-2.418,
+-10.334
+],
+"album:OLAK5uy_lANQ467c7f6z8AV6DM1LD3QjxU5de1j8g": [
+-9.15,
+-2.671,
+-10.784
+],
+"album:OLAK5uy_lMOl27dKRaUyO6tpEbK11iAj6tNmITLOs": [
+1.243,
+1.963,
+-13.033
+],
+"album:OLAK5uy_lg_FGnD4-C6kcWRHbskZVh3TXlspeKph8": [
+-14.201,
+3,
+-1.956
+],
+"album:OLAK5uy_m5gSWs0wTyIJ48J77xR0rwCpZXAbF0El0": [
+-1.72,
+-3,
+-12.265
+],
+"album:OLAK5uy_mB0OWndv7-3_I7ItQbX8ctAlVRWb5mfZA": [
+-0.078,
+3,
+-14.749
+],
+"album:OLAK5uy_nhFXRf-h7tcKJ8nE_IiWoc1HgrsPTS1tU": [
+-3.613,
+3,
+-12.175
+],
+"album:OLAK5uy_niaATdXe0do66OWDxujzXzG26wFDALvYw": [
+6.214,
+2.715,
+-11.838
+],
+"album:OLAK5uy_npC2QiZa1jlfNVugiKwg_YijaskfrGbQM": [
+-2.163,
+3,
+-13.27
+],
+"album:OLAK5uy_nslicTA8qf_slnKmJr-ivFnXvpOsOPWJI": [
+1.687,
+-3,
+-12.655
+],
 "book:ai-agent": [
 -6.704,
 0.842,
@@ -659,6 +719,21 @@
 1.209,
 7.772
 ],
+"series:ghibli": [
+-9.225,
+2.388,
+-10.295
+],
+"series:lofi": [
+1.381,
+3,
+-13.342
+],
+"series:palette": [
+6.306,
+-3,
+-12.517
+],
 "topic:bees": [
 -6.084,
 -0.216,
@@ -673,6 +748,276 @@
 1.008,
 -0.463,
 8.289
+],
+"video:-pMUONCYn-E": [
+7.997,
+3,
+-11.713
+],
+"video:1TXgf4_f4h0": [
+3.697,
+3,
+-7.849
+],
+"video:1cU9_a6PKoo": [
+5.145,
+-0.234,
+-13.834
+],
+"video:1vNybHKllyM": [
+-0.778,
+3,
+-13.402
+],
+"video:44j1bZCfp0Y": [
+-2.423,
+-0.297,
+-14.303
+],
+"video:5Ln-joeI1-4": [
+-8.962,
+3,
+-11.139
+],
+"video:6wlkRZhOScY": [
+-11.124,
+-3,
+-5.904
+],
+"video:8lfeIjgzuVw": [
+7.622,
+3,
+-11.198
+],
+"video:A8OD3sUY4I8": [
+-4.541,
+3,
+-11.997
+],
+"video:C2IGvptNdzs": [
+-4.826,
+3,
+-11.009
+],
+"video:Dmxohe3VVQw": [
+7.7,
+-3,
+-9.432
+],
+"video:E_01tG6j_e4": [
+2.153,
+-3,
+-13.148
+],
+"video:GeKfUeRbCrI": [
+-5.361,
+3,
+-13.668
+],
+"video:HAlm82Zdjj8": [
+1.834,
+-3,
+-12.624
+],
+"video:IbfFBExKrkY": [
+8.887,
+2.044,
+-10.615
+],
+"video:L1WnJc2Um7U": [
+-12.346,
+3,
+-7.382
+],
+"video:LHquOVRZnuU": [
+-0.672,
+-3,
+-12.767
+],
+"video:LOvlxTRHLlo": [
+6.235,
+-3,
+-13.321
+],
+"video:LXAM064kzFE": [
+2.461,
+3,
+-11.957
+],
+"video:MiyzmP8XLRM": [
+-9.494,
+3,
+7.473
+],
+"video:OlBMBXhIjN4": [
+-8.121,
+3,
+-9.287
+],
+"video:S5TaEHLNKvo": [
+10.754,
+3,
+-5.81
+],
+"video:TAb_TF444iU": [
+9.974,
+-3,
+-8.181
+],
+"video:TYYcHU6rkEw": [
+-1.926,
+3,
+-13.8
+],
+"video:TzHgY5ZBssk": [
+0.458,
+-3,
+-14.377
+],
+"video:ULir7QEQEHw": [
+-2.325,
+3,
+-13.78
+],
+"video:VTMJaqYixCg": [
+11.076,
+3,
+-8.387
+],
+"video:XBecIRgKGTg": [
+-9.509,
+-3,
+-9.002
+],
+"video:ZGhTvUt6UrU": [
+-5.558,
+-3,
+-11.626
+],
+"video:Zfdin9iz0eo": [
+9.746,
+-3,
+-10.984
+],
+"video:_GBH7YVAlsw": [
+-3.392,
+-3,
+-12.823
+],
+"video:cX37K9CQHjg": [
+-4.677,
+-3,
+-11.782
+],
+"video:dCbeJdfCRdw": [
+-13.537,
+3,
+-4.933
+],
+"video:e8zSMyn0v2I": [
+-8.27,
+-3,
+-11.872
+],
+"video:ei1Rm6sGFGo": [
+3.343,
+3,
+-12.919
+],
+"video:fb-xeJkuTPY": [
+-5.598,
+-0.916,
+-10.829
+],
+"video:g4GiLu0N1P4": [
+-4.224,
+-3,
+-5.019
+],
+"video:hjrCHev-WyA": [
+5.989,
+3,
+-12.254
+],
+"video:hpY4cQ0DZbI": [
+-11.364,
+1.688,
+-7.087
+],
+"video:iOQ8MQXrciM": [
+12.646,
+3,
+-2.665
+],
+"video:jfTn1-EwIDI": [
+2.025,
+3,
+-13.411
+],
+"video:lrm3t6QhfyY": [
+-9.119,
+-3,
+-10.387
+],
+"video:mbwtJSt5R2g": [
+-11.263,
+-3,
+-8.489
+],
+"video:mcMzWksjdkE": [
+-7.858,
+3,
+-12.324
+],
+"video:mngavOEEGjc": [
+-9.755,
+3,
+-8.089
+],
+"video:noPBZsXThnU": [
+3.689,
+-3,
+-12.176
+],
+"video:pMW4CSw4nR0": [
+14.471,
+-3,
+1.149
+],
+"video:phXEVl5DYCY": [
+4.411,
+3,
+-12.451
+],
+"video:s6BOagGGz8o": [
+9.768,
+3,
+-8.43
+],
+"video:squL9E_eJpI": [
+-3.72,
+-2.743,
+-11.563
+],
+"video:tcclAOKJEB4": [
+14.596,
+3,
+-0.247
+],
+"video:trmBUSdqR9Y": [
+10.251,
+-3,
+-7.148
+],
+"video:yI_FJ6uLenw": [
+-0.391,
+-3,
+-12.241
+],
+"video:z0lMvH30hEo": [
+-8.924,
+3,
+-8.216
 ],
 "work:agu-girls": [
 -0.759,

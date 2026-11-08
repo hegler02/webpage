@@ -18,9 +18,17 @@ POST_TAGS={'이미지 시네마':'image-cinema','미디어는 메시지의 몸':
 # Research records whose titles use these words join the topic on their own: a browsing aid, not a claim.
 TOPICS=[('metaverse','메타버스와 교육',['메타버스','metaver']),('bees','스마트 양봉',['꿀벌','여왕벌','벌통','벌집','양봉','honeybee','beehive','beekeeping']),('moving-image','영상과 창작',['영상','동영상','panorama','디지털 디자인','뮤직비디오','360'])]
 
-def read_posts():
+def read_channel():
     path=PROFILE/'data/channel.json'
-    return json.loads(path.read_text(encoding='utf-8')).get('posts',{}).get('items',[]) if path.is_file() else []
+    return json.loads(path.read_text(encoding='utf-8')) if path.is_file() else {}
+
+def read_posts():
+    return read_channel().get('posts',{}).get('items',[])
+
+# Long-running series are one star each, however many videos they hold.
+SERIES={'lofi':('LoFi Addict','카페와 공부를 위한 로파이 연속 재생 시리즈입니다.'),'ghibli':('LoFi GHIBLI','지브리풍 음악 연속 재생 시리즈입니다.'),'palette':('Palette of Classics','피아노와 현악 중심의 연주 시리즈입니다.')}
+CHANNEL_RECORD='collection:ai-music-archive'
+CHANNEL_VIDEOS='https://www.youtube.com/@themirinaemanproject/videos'
 
 def linked_record(path,nodes):
     """The record a post's link points at, whichever of the record's addresses it uses."""
@@ -33,7 +41,7 @@ def linked_record(path,nodes):
         if urlsplit(n['url']).netloc=='mirinaeman.com' and unquote(urlsplit(n['url']).path).startswith(path.rstrip('/')+'/'): return n['id']
     return None
 
-def build_graph(catalog=None, editorial=None, links=None, records=None, posts=None):
+def build_graph(catalog=None, editorial=None, links=None, records=None, posts=None, media=None):
     catalog = catalog or json.loads((PROFILE/'data/message-bodies.json').read_text())
     context=json.loads((PROFILE/'data/context-graph.json').read_text())
     editorial=editorial if editorial is not None else json.loads((PROFILE/'data/constellation-editorial.json').read_text())
@@ -96,9 +104,32 @@ def build_graph(catalog=None, editorial=None, links=None, records=None, posts=No
         n=node(r['id'],r['kind'],r['title'],r['summary'],r.get('url') or ORIGIN+'/'+menu+'/',year=r.get('year',''),tags=r.get('tags',[]),sourceLabel=KINDS[r['kind']][1])
         if r.get('image'):n.update(image=ASSETS+r['image']['path'],alt=r['image']['alt'])
         edge(r['id'],creator['id'],'창작자' if menu=='work' else '저자','김준호의 공개 기록입니다.',ORIGIN+'/'+menu+'/')
+    # Videos and albums arrive by themselves too. Belonging to the channel is a fact; what they connect to waits for approval below.
+    channel=media if media is not None else read_channel()
+    taken=' '.join(n['url'] for n in nodes)
+    video_star={}
+    has_channel=any(n['id']==CHANNEL_RECORD for n in nodes)
+    def media_star(id,kind,title,summary,url,image):
+        n=node(id,kind,title,summary,url,sourceLabel='The Mirinaeman Project')
+        if image: n.update(image=ASSETS+image.lstrip('/'),alt=title+' 표지')
+        edge(id,creator['id'],'창작자','김준호의 공개 기록입니다.',url)
+        if has_channel: edge(id,CHANNEL_RECORD,'채널의 곡','이 채널에 올라 있는 곡입니다.',url)
+        return n
+    series={}
+    for v in channel.get('videos',{}).get('items',[]):
+        if v.get('series'): series.setdefault(v['series'],[]).append(v)
+        elif v['id'] not in taken:
+            media_star('video:'+v['id'],'video',v['title'],'The Mirinaeman Project 채널의 영상입니다.',v['url'],v.get('image'))
+            video_star[v['id']]='video:'+v['id']
+    for name,held in series.items():
+        title,summary=SERIES[name]
+        media_star('series:'+name,'series',title,f'{summary} 영상 {len(held)}편.',CHANNEL_VIDEOS,next((v['image'] for v in held if v.get('image')),None))
+        for v in held: video_star[v['id']]='series:'+name
+    for a in channel.get('albums',{}).get('items',[]):
+        media_star('album:'+a['id'],'album',a['title'],'The Mirinaeman Project의 앨범입니다.',a['url'],a.get('image'))
     # Mirinaeverse posts arrive by themselves. A link in a post is the author's own connection; anything else waits for approval below.
     by_url={unquote(n['url']).rstrip('/'):n for n in nodes}
-    for p in (posts if posts is not None else read_posts()):
+    for p in (posts if posts is not None else channel.get('posts',{}).get('items',[])):
         n=by_url.get(unquote(p['url']).rstrip('/'))
         if not n:
             n=node('post:'+p['id'].removeprefix('post-'),'post',p['title'],p['summary'],p['url'],sourceLabel='MIRINAEVERSE')
@@ -106,6 +137,8 @@ def build_graph(catalog=None, editorial=None, links=None, records=None, posts=No
         n.update(kind='post',image=ASSETS+p['image'].lstrip('/'),alt=p['title']+' 표지',year=p['date'][:4],tags=[POST_TAGS.get(t,t) for t in p['tags']])
         for target in dict.fromkeys(linked_record(path,nodes) for path in p['links']):
             if target: edge(n['id'],target,'글에서 소개','이 글의 본문에 이 기록의 링크가 있습니다.',p['url'])
+        for target in dict.fromkeys(video_star[v] for v in p.get('videos',[]) if v in video_star):
+            edge(n['id'],target,'글에서 소개','이 글의 본문에 이 영상이 있습니다.',p['url'])
     # Constellations and links the creator approved. Proposals stay out of the public graph.
     links=links if links is not None else json.loads((PROFILE/'data/constellation-links.json').read_text())
     # A record outside the catalog is evidenced by its own page here, whatever its outside address is.

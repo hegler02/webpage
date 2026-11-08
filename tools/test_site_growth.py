@@ -86,6 +86,19 @@ class Growth(unittest.TestCase):
             if n['id'] in self.layout:
                 self.assertEqual(n['p'], self.layout[n['id']], n['id'])
 
+    def test_new_video_and_album_arrive_by_themselves(self):
+        media = {'videos': {'items': [{'id': 'growthvideo', 'title': '성장 시험 노래', 'url': 'https://www.youtube.com/watch?v=growthvideo', 'image': '/assets/images/og-home.jpg'}, {'id': 'growthlofi', 'title': 'LoFi 시험', 'series': 'lofi', 'url': 'https://www.youtube.com/watch?v=growthlofi'}]}, 'albums': {'items': [{'id': 'growthalbum', 'title': '성장 시험 앨범', 'url': 'https://www.youtube.com/playlist?list=growthalbum', 'image': '/assets/images/og-home.jpg'}]}}
+        before = Site(self.catalog, self.records, self.links, self.layout, posts=[], media={})
+        site = Site(self.catalog, self.records, self.links, self.layout, posts=[], media=media)
+        stars = {n['id']: n for n in site.nodes}
+        self.assertEqual(stars['video:growthvideo']['k'], 'video')
+        self.assertEqual(stars['album:growthalbum']['page'], '')
+        self.assertIn('영상 1편', stars['series:lofi']['s'], 'a series is one star that counts its videos')
+        self.assertNotIn('video:growthlofi', stars)
+        self.assertTrue(any({e['a'], e['b']} == {'video:growthvideo', 'collection:ai-music-archive'} for e in site.edges), 'it belongs to its channel')
+        self.assertEqual(problems(copy.deepcopy(self.links), self.catalog, self.records), [], 'a video never holds up a release')
+        self.assertEqual(site.by_id['work:snail-time-jeju']['kin'], before.by_id['work:snail-time-jeju']['kin'], "a video leaves the records' neighbours alone")
+
     def test_existing_stars_stay_put(self):
         catalog, records = self.grown()
         site = Site(catalog, records, self.links, self.layout)

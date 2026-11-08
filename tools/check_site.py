@@ -117,6 +117,16 @@ def main():
             errors.append(f"{p['title']}: post has no star in the galaxy")
     if posts and posts[0]['url'] not in home.split('id="posts"', 1)[-1]:
         errors.append('home: the newest post is not on the rail')
+    # Every song and album is a star, and each long series is one.
+    channel = json.loads((PROFILE / 'data/channel.json').read_text(encoding='utf-8'))
+    for v in channel.get('videos', {}).get('items', []):
+        if v.get('series') and f"series:{v['series']}" not in stars:
+            errors.append(f"{v['title']}: its series has no star")
+        if not v.get('series') and f"video:{v['id']}" not in stars and v['id'] not in ' '.join(n['u'] for n in stars.values()):
+            errors.append(f"{v['title']}: video has no star")
+    for a in channel.get('albums', {}).get('items', []):
+        if f"album:{a['id']}" not in stars:
+            errors.append(f"{a['title']}: album has no star")
     expected_home = [n['page'] for n in site.latest()]
     shown = re.findall(r'<a class="card" href="([^"]+)"', home.split('latest-bodies', 1)[-1])[:HOME_LATEST]
     if shown != expected_home:

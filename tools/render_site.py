@@ -9,7 +9,7 @@ from html.parser import HTMLParser
 from urllib.parse import quote, urlsplit
 
 from constellation_data import PROFILE
-from galaxy_layout import HUB
+from galaxy_layout import HUB, OUTSIDE
 from records import KINDS, slug
 from render_creator_profile import contact_block, film_block, person_schema
 from site_graph import RECORD_KINDS, read_json, site_graph
@@ -22,7 +22,7 @@ HUB_NOTE = '/archive/image-cinema/'
 KIND_LABEL = {
     'song': ('노래', 'Song'), 'slide': ('슬라이드', 'Slide'), 'screen': ('영상', 'Screen'), 'story': ('이야기', 'Story'), 'knowledge': ('배움', 'Learning'),
     **{k: (v[1], v[2]) for k, v in KINDS.items()},
-    'concept': ('생각', 'Idea'), 'topic': ('연구 주제', 'Research topic'), 'judgment': ('제작 판단', 'Judgment'), 'essay': ('글', 'Essay'), 'post': ('MIRINAEVERSE 글', 'MIRINAEVERSE post'), 'constellation': ('별자리', 'Constellation'), 'creator': ('창작자', 'Creator'),
+    'concept': ('생각', 'Idea'), 'topic': ('연구 주제', 'Research topic'), 'judgment': ('제작 판단', 'Judgment'), 'essay': ('글', 'Essay'), 'post': ('MIRINAEVERSE 글', 'MIRINAEVERSE post'), 'video': ('영상', 'Video'), 'album': ('앨범', 'Album'), 'series': ('영상 시리즈', 'Video series'), 'constellation': ('별자리', 'Constellation'), 'creator': ('창작자', 'Creator'),
 }
 OPEN_LABEL = {**{k: v[3] for k, v in KINDS.items()}, **{k: ('작품 보기', 'Open work') for k in ('song', 'slide', 'screen', 'story', 'knowledge')}}
 TITLE = '김준호 | AI와 함께 메시지의 몸을 만드는 사람'
@@ -131,8 +131,8 @@ class Metadata(HTMLParser):
 
 
 class Site:
-    def __init__(self, catalog=None, records=None, links=None, layout=None, posts=None):
-        g = site_graph(catalog, records, links, layout, posts)
+    def __init__(self, catalog=None, records=None, links=None, layout=None, posts=None, media=None):
+        g = site_graph(catalog, records, links, layout, posts, media)
         self.g = g
         self.nodes = g['nodes']
         self.by_id = {n['id']: n for n in self.nodes}
@@ -166,11 +166,11 @@ class Site:
         return [o for edge, o in self.near[n['id']] if self.by_id[o]['k'] == 'constellation']
 
     def link_of(self, n):
-        # A post has no page here; it lives on Mirinaeverse.
-        return n['page'] or (n['u'] if n['k'] == 'post' else '/galaxy/?node=' + quote(n['id'], safe=''))
+        # These have no page here; they live on another site.
+        return n['page'] or (n['u'] if n['k'] in OUTSIDE else '/galaxy/?node=' + quote(n['id'], safe=''))
 
     def away(self, n):
-        return out_attrs(n['u']) if n['k'] == 'post' else ''
+        return out_attrs(n['u']) if n['k'] in OUTSIDE else ''
 
     def card(self, n, text=None):
         body = n['id'].removeprefix('work:') if n['id'].startswith('work:') else ''
@@ -390,7 +390,7 @@ class Site:
     # Galaxy
     def galaxy(self):
         real = sum(not x['hub'] for x in self.edges)
-        legend = [('song', '노래', 'Songs'), ('slide', '슬라이드', 'Slides'), ('screen', '영상', 'Screens'), ('story', '이야기', 'Stories'), ('knowledge', '배움', 'Learning'), ('research', '연구', 'Research'), ('outside', '연출·제품', 'Direction & products'), ('post', '글', 'Writing'), ('thought', '생각·별자리', 'Ideas')]
+        legend = [('song', '노래', 'Songs'), ('slide', '슬라이드', 'Slides'), ('screen', '영상', 'Screens'), ('story', '이야기', 'Stories'), ('knowledge', '배움', 'Learning'), ('research', '연구', 'Research'), ('outside', '연출·제품', 'Direction & products'), ('post', '글', 'Writing'), ('media', '영상·음원', 'Videos & albums'), ('thought', '생각·별자리', 'Ideas')]
         legend_html = ''.join(f'<button type="button" data-k="{k}" aria-pressed="false" style="--c:var(--k-{k})"><i></i>{t(a, b)}</button>' for k, a, b in legend)
         index = ''.join(f'<li><a href="{e(self.link_of(n))}"{self.away(n)}>{e(n["t"])}</a> <small>{label(KIND_LABEL[n["k"]])}</small></li>' for n in sorted(self.nodes, key=lambda n: (n['k'] != 'constellation', n['t'])) if n['id'] != HUB)
         main = f'''<div id="galaxy-page"><div id="stage-slot" class="slot-full"></div>

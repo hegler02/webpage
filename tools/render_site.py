@@ -2,6 +2,7 @@
 """Every public page comes from one graph, so a new record reaches all of them at once."""
 import html
 import json
+import math
 import re
 from datetime import datetime
 from html.parser import HTMLParser
@@ -405,6 +406,29 @@ class Site:
         nodes = [{k: n[k] for k in keep if k in n} for n in self.nodes]
         return json.dumps({'schemaVersion': 3, 'nodes': nodes, 'edges': self.edges}, ensure_ascii=False, separators=(',', ':')) + '\n'
 
+    def map_svg(self):
+        """A plain picture of the sky for other sites; mirinaeverse.com shows it on its first screen."""
+        tokens = (PROFILE / 'site/tokens.css').read_text(encoding='utf-8')
+        color = lambda k: (re.search(rf'--k-{k}:(#\w+)', tokens) or re.search(r'--k-creator:(#\w+)', tokens)).group(1)
+        width, height = 800, 520
+        reach = max(math.hypot(n['p'][0], n['p'][2]) for n in self.nodes if n['k'] != 'constellation') or 1
+        def place(n):
+            x, y, z = n['p']
+            return round(width / 2 + x * width / 2 / reach * .96, 1), round(height / 2 + (z * .62 + y * .25) * height / 2 / (reach * .62) * .96, 1)
+        spot = {n['id']: place(n) for n in self.nodes}
+        out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}">']
+        for x in self.edges:
+            if x['hub']:
+                continue
+            (x1, y1), (x2, y2) = spot[x['a']], spot[x['b']]
+            post = 'post' in (self.by_id[x['a']]['k'], self.by_id[x['b']]['k'])
+            out.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{color("post") if post else color("song")}" stroke-opacity="{.75 if post else .13}" stroke-width="{1 if post else .6}"/>')
+        for n in sorted(self.nodes, key=lambda n: n['k'] == 'post'):
+            cx, cy = spot[n['id']]
+            k = n['k']
+            out.append(f'<circle cx="{cx}" cy="{cy}" r="{4 if k == "post" else 5 if k == "creator" else 2.2}" fill="{color(k)}" fill-opacity="{1 if k in ("post", "creator") else .72}"/>')
+        return ''.join(out) + '</svg>\n'
+
     def context_json(self):
         """Introductions are written by hand; the context around them arrives through the shared script."""
         blocks = {}
@@ -441,7 +465,7 @@ class Site:
         pages = {
             'index.html': self.home(), 'work/index.html': self.work(), 'research/index.html': self.research(),
             'mirinae/index.html': self.mirinae(), 'about/index.html': self.about(), 'galaxy/index.html': self.galaxy(),
-            'galaxy/graph.json': self.graph_json(), 'site/editorial-context.json': self.context_json(), 'sitemap.xml': self.sitemap(),
+            'galaxy/graph.json': self.graph_json(), 'galaxy/map.svg': self.map_svg(), 'site/editorial-context.json': self.context_json(), 'sitemap.xml': self.sitemap(),
         }
         for n in self.records:
             if n['page'] not in self.editorial:

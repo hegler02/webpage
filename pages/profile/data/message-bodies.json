@@ -1003,6 +1003,36 @@
       "latest_deployed_at": "2026-09-30T14:32:56.549413+00:00"
     },
     {
+      "body_id": "fpv-first-flight",
+      "title": "FPV 첫 비행",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "creator-primary-sources",
+        "generated-teaching-illustration",
+        "interactive-3d-demo"
+      ],
+      "tags": [
+        "drone",
+        "fpv",
+        "lecture",
+        "simulator",
+        "betaflight"
+      ],
+      "message_sentence": "FPV 드론을 처음 배우는 사람이 영어 원자료를 한국어 8차시로 따라가며 시뮬레이터에서 첫 비행까지 잇습니다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/fpv-first-flight.webp",
+        "alt": "어두운 공간의 주황색 게이트 너머로 빛나는 고리의 블랙홀이 보이는 FPV 시점 장면",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/fpv-first-flight/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-11-08T10:04:49+00:00",
+      "latest_deployed_at": "2026-11-08T10:04:49+00:00"
+    },
+    {
       "body_id": "gileodo-geudaero-astra",
       "title": "길어도 그대로 — Astra 105만 토큰",
       "body_type": "SONGBODY",

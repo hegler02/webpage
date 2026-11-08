@@ -405,6 +405,10 @@
       "destination": "/pages/profile/work/for-tomorrow/"
     },
     {
+      "source": "/work/fpv-first-flight/",
+      "destination": "/pages/profile/work/fpv-first-flight/"
+    },
+    {
       "source": "/work/gangneung-sound/",
       "destination": "/pages/profile/work/gangneung-sound/"
     },

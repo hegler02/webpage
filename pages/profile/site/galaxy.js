@@ -4,7 +4,7 @@ import * as THREE from '/site/vendor/three.module.min.js';
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const t = (ko, en) => `<span data-ko>${esc(ko)}</span><span data-en lang="en">${esc(en)}</span>`;
-const LABEL = { song: ['노래', 'Song'], slide: ['슬라이드', 'Slide'], screen: ['영상', 'Screen'], story: ['이야기', 'Story'], knowledge: ['배움', 'Learning'], paper: ['논문', 'Paper'], book: ['책', 'Book'], project: ['연구 과제', 'Project'], patent: ['특허', 'Patent'], film: ['뮤직비디오 연출', 'Music video'], collection: ['프로젝트', 'Project'], product: ['제품', 'Product'], concept: ['생각', 'Idea'], topic: ['연구 주제', 'Research topic'], judgment: ['제작 판단', 'Judgment'], essay: ['글', 'Essay'], post: ['미리내벌스 글', 'Mirinaeverse post'], constellation: ['별자리', 'Constellation'], creator: ['창작자', 'Creator'] };
+const LABEL = { song: ['노래', 'Song'], slide: ['슬라이드', 'Slide'], screen: ['영상', 'Screen'], story: ['이야기', 'Story'], knowledge: ['배움', 'Learning'], paper: ['논문', 'Paper'], book: ['책', 'Book'], project: ['연구 과제', 'Project'], patent: ['특허', 'Patent'], film: ['뮤직비디오 연출', 'Music video'], collection: ['프로젝트', 'Project'], product: ['제품', 'Product'], concept: ['생각', 'Idea'], topic: ['연구 주제', 'Research topic'], judgment: ['제작 판단', 'Judgment'], essay: ['글', 'Essay'], post: ['MIRINAEVERSE 글', 'MIRINAEVERSE post'], constellation: ['별자리', 'Constellation'], creator: ['창작자', 'Creator'] };
 const OPEN = { paper: ['서지 보기', 'View record'], book: ['책 보기', 'View book'], film: ['영상 보기', 'Watch'], collection: ['보러 가기', 'Open'], product: ['서비스 열기', 'Open service'], song: ['작품 보기', 'Open work'], slide: ['작품 보기', 'Open work'], screen: ['작품 보기', 'Open work'], story: ['작품 보기', 'Open work'], knowledge: ['작품 보기', 'Open work'] };
 const RESEARCH = new Set(['paper', 'book', 'project', 'patent']);
 const OUTSIDE = new Set(['film', 'collection', 'product']);
@@ -112,7 +112,7 @@ function openReader(n) {
   const name = LABEL[n.k] || ['', ''];
   const action = n.page
     ? `<a class="btn main" href="${esc(n.page)}">${t('기록 페이지 열기', 'Open record page')}</a>`
-    : n.k === 'post' ? `<a class="btn main" href="${esc(n.u)}" target="_blank" rel="noopener noreferrer">${t('미리내벌스에서 읽기', 'Read on Mirinaeverse')} ↗</a>`
+    : n.k === 'post' ? `<a class="btn main" href="${esc(n.u)}" target="_blank" rel="noopener noreferrer">${t('MIRINAEVERSE에서 읽기', 'Read on MIRINAEVERSE')} ↗</a>`
     : n.u && n.k !== 'constellation' ? `<a class="btn main" href="${esc(n.u)}">${t('원문 보기', 'Read source')}</a>` : '';
   const outward = n.page && n.u && OPEN[n.k] && !/mirinaeman\.com\/(work|research)\/$/.test(n.u) ? `<a class="btn" href="${esc(n.u)}" target="_blank" rel="noopener noreferrer">${t(...OPEN[n.k])} ↗</a>` : '';
   const sections = (n.sec || []).map((s) => `<h3>${esc(s.title)}</h3><p class="sum">${esc(s.text)}</p>`).join('');

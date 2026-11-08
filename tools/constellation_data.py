@@ -65,7 +65,7 @@ def build_graph(catalog=None, editorial=None, links=None, records=None, posts=No
     for related in wind['related']:
         edge('work:'+wind['body_id'],'work:'+related['body_id'],'이어 읽는 작품',related['reason'],wind_intro)
     essay=editorial['essay']
-    node(essay['id'],'essay',essay['title'],essay['summary'],essay['url'],sourceLabel='미리내벌스 · 개인적인 기록',year='2026',sections=essay['sections'])
+    node(essay['id'],'essay',essay['title'],essay['summary'],essay['url'],sourceLabel='MIRINAEVERSE · 개인적인 기록',year='2026',sections=essay['sections'])
     edge('work:already-autumn',essay['id'],'작품을 낳은 마음','작가가 이 노래를 만든 마음과 다섯 세대의 가을을 선택한 이유를 직접 기록했습니다.',essay['url'])
     edge(essay['id'],'concept:felt-time','같은 이야기, 서로 다른 시간','글에서 노래, 웹툰, 이미지 시네마가 시간을 쓰는 방식과 각자의 가을을 설명합니다.',essay['url'])
     # Approved introduction owns these facts; no second copy of its prose or identity.
@@ -73,7 +73,7 @@ def build_graph(catalog=None, editorial=None, links=None, records=None, posts=No
     intro=next(n['introUrl'] for n in nodes if n['id']=='work:'+unfold['body_id'])
     source_id='essay:unfold-origin';judgment_id='judgment:unfold-vocal-texture'
     first=unfold['sections'][0];voice=unfold['sections'][1];finding=unfold['sections'][-1]
-    node(source_id,'essay',first['heading'],first['paragraphs'][0],unfold['source']['url'],sourceLabel='미리내벌스 · 작품의 출발점',sections=[{'title':first['heading'],'text':first['paragraphs'][1]}])
+    node(source_id,'essay',first['heading'],first['paragraphs'][0],unfold['source']['url'],sourceLabel='MIRINAEVERSE · 작품의 출발점',sections=[{'title':first['heading'],'text':first['paragraphs'][1]}])
     node(judgment_id,'judgment',voice['heading'],voice['paragraphs'][0],intro,sourceLabel='제작 판단 · 펼칠 차례',sections=[{'title':'보컬을 바꾸며 들은 것','text':voice['paragraphs'][1]},{'title':finding['heading'],'text':'\n\n'.join(finding['paragraphs'])}])
     edge('work:'+unfold['body_id'],source_id,'작품이 시작된 글',first['paragraphs'][1],intro)
     edge('work:'+unfold['body_id'],judgment_id,'목소리를 고른 이유',finding['paragraphs'][1],intro)
@@ -101,8 +101,8 @@ def build_graph(catalog=None, editorial=None, links=None, records=None, posts=No
     for p in (posts if posts is not None else read_posts()):
         n=by_url.get(unquote(p['url']).rstrip('/'))
         if not n:
-            n=node('post:'+p['id'].removeprefix('post-'),'post',p['title'],p['summary'],p['url'],sourceLabel='미리내벌스')
-            edge(n['id'],creator['id'],'글쓴이','김준호가 미리내벌스에 쓴 글입니다.',p['url'])
+            n=node('post:'+p['id'].removeprefix('post-'),'post',p['title'],p['summary'],p['url'],sourceLabel='MIRINAEVERSE')
+            edge(n['id'],creator['id'],'글쓴이','김준호가 MIRINAEVERSE에 쓴 글입니다.',p['url'])
         n.update(kind='post',image=ASSETS+p['image'].lstrip('/'),alt=p['title']+' 표지',year=p['date'][:4],tags=[POST_TAGS.get(t,t) for t in p['tags']])
         for target in dict.fromkeys(linked_record(path,nodes) for path in p['links']):
             if target: edge(n['id'],target,'글에서 소개','이 글의 본문에 이 기록의 링크가 있습니다.',p['url'])

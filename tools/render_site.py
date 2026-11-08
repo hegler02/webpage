@@ -22,7 +22,7 @@ HUB_NOTE = '/archive/image-cinema/'
 KIND_LABEL = {
     'song': ('노래', 'Song'), 'slide': ('슬라이드', 'Slide'), 'screen': ('영상', 'Screen'), 'story': ('이야기', 'Story'), 'knowledge': ('배움', 'Learning'),
     **{k: (v[1], v[2]) for k, v in KINDS.items()},
-    'concept': ('생각', 'Idea'), 'topic': ('연구 주제', 'Research topic'), 'judgment': ('제작 판단', 'Judgment'), 'essay': ('글', 'Essay'), 'post': ('미리내벌스 글', 'Mirinaeverse post'), 'constellation': ('별자리', 'Constellation'), 'creator': ('창작자', 'Creator'),
+    'concept': ('생각', 'Idea'), 'topic': ('연구 주제', 'Research topic'), 'judgment': ('제작 판단', 'Judgment'), 'essay': ('글', 'Essay'), 'post': ('MIRINAEVERSE 글', 'MIRINAEVERSE post'), 'constellation': ('별자리', 'Constellation'), 'creator': ('창작자', 'Creator'),
 }
 OPEN_LABEL = {**{k: v[3] for k, v in KINDS.items()}, **{k: ('작품 보기', 'Open work') for k in ('song', 'slide', 'screen', 'story', 'knowledge')}}
 TITLE = '김준호 | AI와 함께 메시지의 몸을 만드는 사람'
@@ -218,7 +218,7 @@ class Site:
         # Each group ends with one way out to where everything lives.
         groups = [([('videos', ('새 영상 · The Mirinaeman Project', 'New videos · The Mirinaeman Project'), '영상 장면', 270, ''),
                     ('albums', ('음원 · The Mirinaeman Project', 'Music · The Mirinaeman Project'), '앨범 표지', 480, ' square')], ('YouTube에서 모두 보기', 'All on YouTube')),
-                  ([('posts', ('새 글 · 미리내벌스', 'New writing · Mirinaeverse'), '글 표지', 270, '')], ('미리내벌스에서 모두 보기', 'All on Mirinaeverse'))]
+                  ([('posts', ('새 글 · MIRINAEVERSE', 'New writing · MIRINAEVERSE'), '글 표지', 270, '')], ('MIRINAEVERSE에서 모두 보기', 'All on MIRINAEVERSE'))]
         out = ''
         for rails, more in groups:
             group = ''

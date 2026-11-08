@@ -198,7 +198,7 @@ def main():
             print(f"\n{name}\n  제목: {b['title']}\n  소개: {b.get('message_sentence', b.get('summary'))}\n  태그: {', '.join(b.get('tags', []))}\n  주소: {b.get('canonical_url', b.get('url', ''))}")
         posts = unplaced_posts(links)
         if posts:
-            print(f'\n미리내벌스 글 중 아직 제안이 없는 글 {len(posts)}개 (배포를 막지 않습니다)')
+            print(f'\nMIRINAEVERSE 글 중 아직 제안이 없는 글 {len(posts)}개 (배포를 막지 않습니다)')
             for p in posts:
                 print(f"  post:{p['id'].removeprefix('post-')}  {p['title']}\n    {p['summary']}")
         return 0

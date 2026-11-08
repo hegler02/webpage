@@ -124,7 +124,7 @@ python3 tools/constellation_links.py approve causal-chain judgment
 
 별자리를 승인하면 그 별자리에 제안된 기록도 함께 승인됩니다. 기록 하나만 승인할 때는 `constellation-links.json`에서 그 항목의 `"status": "proposed"`를 지우고, 연결 하나는 `status`를 `approved`로 바꿉니다. 빼라고 하면 그 항목을 지웁니다. 승인 뒤 `render_archive.py`와 `release_gate.py`를 실행합니다.
 
-## 미리내벌스 글
+## MIRINAEVERSE 글
 
 글은 절차 없이 들어옵니다. `tools/update_channel.py`가 매일 아침 워드프레스에서 모든 글을 읽어 `data/channel.json`에 넣고, 글마다 은하수의 별이 생깁니다. 새 글이 배포를 막는 일은 없습니다.
 
@@ -141,7 +141,7 @@ python3 tools/constellation_links.py approve causal-chain judgment
 python3 tools/constellation_links.py add post:808 --to causal-chain --reason "킹콩과 드론의 공격과 추락을 단문 인과체인으로 이은 영상의 기록입니다."
 ```
 
-글의 본문은 이 사이트로 옮기지 않습니다. 별을 누르면 미리내벌스의 글이 열립니다.
+글의 본문은 이 사이트로 옮기지 않습니다. 별을 누르면 MIRINAEVERSE의 글이 열립니다.
 
 ## 건드리지 않는 것
 
@@ -159,7 +159,7 @@ python3 tools/constellation_links.py add post:808 --to causal-chain --reason "�
 | `tools/constellation_data.py` | 원본을 하나의 그래프로 모읍니다. 승인된 연결만 넣습니다 |
 | `tools/site_graph.py` | 그래프에 주소, 별의 자리, 비슷한 기록을 붙입니다 |
 | `tools/render_site.py` | 모든 공개 페이지를 그래프에서 만듭니다 |
-| `tools/update_channel.py` | 영상, 음원, 미리내벌스 글을 매일 읽어 옵니다 |
+| `tools/update_channel.py` | 영상, 음원, MIRINAEVERSE 글을 매일 읽어 옵니다 |
 | `tools/render_archive.py` | 위를 한 번에 실행하는 명령입니다 |
 | `tools/check_site.py` | 모든 기록이 제자리에 닿았는지, 모든 링크가 열리는지, 모든 스타일이 토큰인지 검사합니다 |
 | `tools/test_site_growth.py` | 새 노래와 새 논문을 넣어 보고 모든 화면에 닿는지 시험합니다 |

@@ -201,21 +201,26 @@ class Site:
 <div class="page"><p class="state">{t('미디어는 메시지의 몸이다.', 'Media is the body of the message.')}</p>
 <section class="sec"><h2>{t('한 사람을 이루는 관계', 'Relations that form one person')}</h2><p>{t('홈은 모든 내용을 쌓아놓는 곳이 아니라 각 관계로 들어가는 문입니다.', 'The home page is a set of doors into distinct relationships, not a pile of every detail.')}</p><div class="doors">{door_html}</div></section>
 <section class="sec"><div class="band"><div><span class="eyebrow">{t('미리내운동', 'Mirinae Movement')}</span><h2>{t('한 사람의 선의가 다음 사람의 일상을 먼저 지불한다.', 'One person’s goodwill pays ahead for another person’s day.')}</h2><p>{t('2013년 시작한 선결제 나눔 운동입니다. 미리내맨이라는 이름도 여기서 나왔습니다.', 'A pay-it-forward movement begun in 2013. The name Mirinaeman comes from it.')}</p><div class="btns"><a class="btn" href="/mirinae/">{t('미리내 보기', 'About Mirinae')}</a></div></div><img src="/assets/images/mirinae-hero-v1.webp" alt="작은 나눔이 코발트 빛을 따라 다음 사람에게 이어지는 장면" loading="lazy"></div></section>
-<section class="sec latest-bodies"><h2>{t('내 미디어 철학이 몸을 입는 순간', 'The moment my media philosophy takes a body')}</h2><p>{t('노래, 슬라이드, 화면과 이야기가 배포로 끝나지 않고 다음 창작을 바꾸는 기억으로 축적됩니다.', 'Songs, slides, screens, and stories accumulate as memory that changes the next creation.')}</p><div class="grid">{''.join(self.card(n) for n in self.latest())}</div><div class="btns"><a class="btn main" href="/work/">{t('전체 작업', 'All work')}</a><a class="btn" href="{ORIGIN}{HUB_NOTE}">{t('이미지 시네마 창작 연구', 'Image cinema notes')}</a></div></section>{self.releases()}</div>'''
+<section class="sec latest-bodies"><h2>{t('내 미디어 철학이 몸을 입는 순간', 'The moment my media philosophy takes a body')}</h2><p>{t('노래, 슬라이드, 화면과 이야기가 배포로 끝나지 않고 다음 창작을 바꾸는 기억으로 축적됩니다.', 'Songs, slides, screens, and stories accumulate as memory that changes the next creation.')}</p><div class="grid">{''.join(self.card(n) for n in self.latest())}</div><div class="btns"><a class="btn main" href="/work/">{t('전체 작업', 'All work')}</a><a class="btn" href="{ORIGIN}{HUB_NOTE}">{t('이미지 시네마 창작 연구', 'Image cinema notes')}</a></div></section>{self.channel_rails()}</div>'''
         schema = {'@context': 'https://schema.org', '@type': 'Person', 'name': '김준호', 'alternateName': 'JOONHO KIM', 'url': ORIGIN + '/', 'jobTitle': '교수 · 저자 · 창작자 · 시스템 설계자'}
         return page('/', 'home', TITLE, DESCRIPTION, main, schema=schema, og='profile')
 
-    def releases(self):
-        """Albums from the artist's YouTube topic channel; tools/update_releases.py keeps them current."""
-        data = read_json(PROFILE / 'data/releases.json') if (PROFILE / 'data/releases.json').is_file() else {'releases': []}
-        if not data['releases']:
-            return ''
-        items = ''.join(f'<li><a href="{e(r["url"])}"{out_attrs(r["url"])}><img src="{e(r["image"])}" alt="{e(r["title"])} 앨범 표지" width="480" height="480" loading="lazy" decoding="async"><b>{e(r["title"])}</b></a></li>' for r in data['releases'])
-        channel = f'https://www.youtube.com/channel/{data["channel"]}/releases'
-        return (f'<section class="sec releases" id="releases"><h2>{t("새 음원 · The Mirinaeman Project", "New music · The Mirinaeman Project")}</h2>'
-                f'<p>{t("음원을 발표하면 이곳에 자동으로 더해집니다.", "New releases appear here on their own.")}</p><ul class="rail" data-rail-track>{items}</ul>'
-                f'<div class="btns"><button class="btn" type="button" data-rail="-1" aria-label="이전 앨범">←</button><button class="btn" type="button" data-rail="1" aria-label="다음 앨범">→</button>'
-                f'<a class="btn" href="{channel}"{out_attrs(channel)}>{t("YouTube에서 모두 보기", "All releases on YouTube")} ↗</a></div></section>')
+    def channel_rails(self):
+        """Videos and released music of The Mirinaeman Project; tools/update_channel.py keeps them current."""
+        path = PROFILE / 'data/channel.json'
+        data = read_json(path) if path.is_file() else {}
+        rails = [('videos', ('새 영상 · The Mirinaeman Project', 'New videos · The Mirinaeman Project'), ('영상 장면', 'video'), (270, '')),
+                 ('albums', ('음원 · The Mirinaeman Project', 'Music · The Mirinaeman Project'), ('앨범 표지', 'album'), (480, ' square'))]
+        out = ''
+        for name, title, alt, (height, shape) in rails:
+            rail = data.get(name, {})
+            if not rail.get('items'):
+                continue
+            cards = ''.join(f'<li><a href="{e(i["url"])}"{out_attrs(i["url"])}><img src="{e(i["image"])}" alt="{e(i["title"])} {alt[0]}" width="480" height="{height}" loading="lazy" decoding="async"><b>{e(i["title"])}</b></a></li>' for i in rail['items'])
+            arrows = '<button class="rail-arrow prev" type="button" data-rail="-1" aria-label="이전" hidden>‹</button><button class="rail-arrow next" type="button" data-rail="1" aria-label="다음">›</button>'
+            out += (f'<section class="sec releases" id="{name}"><h2>{t(*title)}</h2><div class="rail-wrap{shape}">{arrows}<ul class="rail{shape}" data-rail-track>{cards}</ul></div>'
+                    f'<div class="btns"><a class="btn" href="{e(rail["home"])}"{out_attrs(rail["home"])}>{t("YouTube에서 모두 보기", "All on YouTube")} ↗</a></div></section>')
+        return out
 
     # Work
     def work(self):

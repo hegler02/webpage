@@ -33,7 +33,7 @@
  /* Shape */
  --radius-s:6px;--radius:10px;--radius-l:12px;--radius-xl:14px;--pill:99px;--border:1px;--marker:2px;--ratio-card:16/9;--ratio-wide:21/9;--ratio-book:3/4;
  /* Controls */
- --ctl-h:36px;--ctl-h-l:44px;--touch:48px;--thumb:124px;--thumb-s:68px;--close:32px;--dot:8px;--bar-w:18px;--bar-gap:6px;--icon:20px;--player-h:166px;--rail-item:11rem;--screen-h:100dvh;
+ --ctl-h:36px;--ctl-h-l:44px;--touch:48px;--thumb:124px;--thumb-s:68px;--close:32px;--dot:8px;--bar-w:18px;--bar-gap:6px;--icon:20px;--player-h:166px;--rail-item:16rem;--rail-square:11rem;--rail-media:calc(var(--rail-item) * 9 / 16);--screen-h:100dvh;
  /* Motion */
  --curve:cubic-bezier(.22,.7,.2,1);--dur-fast:160ms;--dur:300ms;--dur-slow:420ms;--rise:8px;--stagger:36ms;--blur:10px;
 }

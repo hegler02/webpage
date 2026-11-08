@@ -198,9 +198,26 @@
 
   document.addEventListener('click', (event) => {
     const step = event.target.closest('[data-rail]');
-    const track = step?.closest('section')?.querySelector('[data-rail-track]');
+    const track = step?.closest('.rail-wrap')?.querySelector('[data-rail-track]');
     if (track) track.scrollBy({ left: Number(step.dataset.rail) * track.clientWidth * 0.8, behavior: calm.matches ? 'auto' : 'smooth' });
   });
+
+  // An arrow shows only where there is more to see.
+  function setUpRails() {
+    document.querySelectorAll('.rail-wrap').forEach((wrap) => {
+      const track = wrap.querySelector('[data-rail-track]');
+      const [prev, next] = [wrap.querySelector('.prev'), wrap.querySelector('.next')];
+      const update = () => {
+        prev.hidden = track.scrollLeft <= 2;
+        next.hidden = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+      };
+      track.addEventListener('scroll', update, { passive: true });
+      // Some browsers settle the rail's width after the first paint; check again whenever it does.
+      new ResizeObserver(update).observe(track);
+      track.querySelectorAll('img').forEach((img) => img.addEventListener('load', update, { once: true }));
+      update();
+    });
+  }
 
   document.addEventListener('click', async (event) => {
     const button = event.target.closest('[data-copy-email]');
@@ -222,6 +239,7 @@
     setUpWork();
     setUpResearch();
     setUpStage();
+    setUpRails();
     setUpLanguage();
   }
 

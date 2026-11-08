@@ -1,0 +1,156 @@
+{
+  "videos": {
+    "home": "https://www.youtube.com/@themirinaemanproject/videos",
+    "items": [
+      {
+        "id": "mbwtJSt5R2g",
+        "title": "회상 - 김성호 (Remake)",
+        "url": "https://www.youtube.com/watch?v=mbwtJSt5R2g",
+        "image": "/assets/channel/mbwtJSt5R2g.webp"
+      },
+      {
+        "id": "Dmxohe3VVQw",
+        "title": "HULKAMANIA NEVER DIE",
+        "url": "https://www.youtube.com/watch?v=Dmxohe3VVQw",
+        "image": "/assets/channel/Dmxohe3VVQw.webp"
+      },
+      {
+        "id": "IbfFBExKrkY",
+        "title": "Still you burn -Ozzy Osbourne Tribute",
+        "url": "https://www.youtube.com/watch?v=IbfFBExKrkY",
+        "image": "/assets/channel/IbfFBExKrkY.webp"
+      },
+      {
+        "id": "cX37K9CQHjg",
+        "title": "음악 다이어리 | 2025.05.19 | 고요한 여운, 창밖의 바람",
+        "url": "https://www.youtube.com/watch?v=cX37K9CQHjg",
+        "image": "/assets/channel/cX37K9CQHjg.webp"
+      },
+      {
+        "id": "hjrCHev-WyA",
+        "title": "노래하는 밤의 마법 같은 순간 - 고요한 밤의 생각",
+        "url": "https://www.youtube.com/watch?v=hjrCHev-WyA",
+        "image": "/assets/channel/hjrCHev-WyA.webp"
+      },
+      {
+        "id": "1TXgf4_f4h0",
+        "title": "[Full Album] Sharon - Jazz Heart Vol.1 | 감성적인 AI JAZZ 싱어의 첫 앨범 🎷✨",
+        "url": "https://www.youtube.com/watch?v=1TXgf4_f4h0",
+        "image": "/assets/channel/1TXgf4_f4h0.webp"
+      },
+      {
+        "id": "LXAM064kzFE",
+        "title": "달콤한 발렌타인 데이, Sweet Valentine's Day - Acoustic Folk Song (발렌타인 데이에 들으면 좋은 어쿠스틱 포크송)",
+        "url": "https://www.youtube.com/watch?v=LXAM064kzFE",
+        "image": "/assets/channel/LXAM064kzFE.webp"
+      },
+      {
+        "id": "jfTn1-EwIDI",
+        "title": "고양이를 위한 편안한 음악 🐱 | 스트레스 해소 & 불안 완화 힐링 사운드",
+        "url": "https://www.youtube.com/watch?v=jfTn1-EwIDI",
+        "image": "/assets/channel/jfTn1-EwIDI.webp"
+      },
+      {
+        "id": "LOvlxTRHLlo",
+        "title": "Wake up! ('A Psalm of Life' by Henry Wadsworth Longfellow)",
+        "url": "https://www.youtube.com/watch?v=LOvlxTRHLlo",
+        "image": "/assets/channel/LOvlxTRHLlo.webp"
+      },
+      {
+        "id": "InQq5AqJ5t8",
+        "title": "Smooth Jazz & LoFi ☕ | Chill Coffeehouse Ambience for Focus",
+        "url": "https://www.youtube.com/watch?v=InQq5AqJ5t8",
+        "image": "/assets/channel/InQq5AqJ5t8.webp"
+      },
+      {
+        "id": "L1WnJc2Um7U",
+        "title": "The Raven (까마귀) by Edgar Allan Poe",
+        "url": "https://www.youtube.com/watch?v=L1WnJc2Um7U",
+        "image": "/assets/channel/L1WnJc2Um7U.webp"
+      },
+      {
+        "id": "JeIygTTpmiM",
+        "title": "Coffee & LoFi Jazz 🎶 | Relaxing Café Music for Study & Work",
+        "url": "https://www.youtube.com/watch?v=JeIygTTpmiM",
+        "image": "/assets/channel/JeIygTTpmiM.webp"
+      }
+    ]
+  },
+  "albums": {
+    "home": "https://www.youtube.com/channel/UCQdVq0had1QV32_E6b5gXig/releases",
+    "items": [
+      {
+        "id": "OLAK5uy_niaATdXe0do66OWDxujzXzG26wFDALvYw",
+        "title": "오랜만이야(BEAN A WHILE, SONGBIRDS)",
+        "url": "https://www.youtube.com/playlist?list=OLAK5uy_niaATdXe0do66OWDxujzXzG26wFDALvYw",
+        "image": "/assets/channel/OLAK5uy_niaATdXe0do66OWDxujzXzG26wFDALvYw.webp"
+      },
+      {
+        "id": "OLAK5uy_lg_FGnD4-C6kcWRHbskZVh3TXlspeKph8",
+        "title": "Starry Night, Vol. 1",
+        "url": "https://www.youtube.com/playlist?list=OLAK5uy_lg_FGnD4-C6kcWRHbskZVh3TXlspeKph8",
+        "image": "/assets/channel/OLAK5uy_lg_FGnD4-C6kcWRHbskZVh3TXlspeKph8.webp"
+      },
+      {
+        "id": "OLAK5uy_k51qattR_RNUYpRJJ71UwVIfr4L7WMPTU",
+        "title": "불멸의 제독 이순신 (Immortal Admiral)",
+        "url": "https://www.youtube.com/playlist?list=OLAK5uy_k51qattR_RNUYpRJJ71UwVIfr4L7WMPTU",
+        "image": "/assets/channel/OLAK5uy_k51qattR_RNUYpRJJ71UwVIfr4L7WMPTU.webp"
+      },
+      {
+        "id": "OLAK5uy_l7_iKFDJSxXYfxyXsSiffQNmKhtssMTP0",
+        "title": "신들의 전쟁 (War of the Gods)",
+        "url": "https://www.youtube.com/playlist?list=OLAK5uy_l7_iKFDJSxXYfxyXsSiffQNmKhtssMTP0",
+        "image": "/assets/channel/OLAK5uy_l7_iKFDJSxXYfxyXsSiffQNmKhtssMTP0.webp"
+      },
+      {
+        "id": "OLAK5uy_mB0OWndv7-3_I7ItQbX8ctAlVRWb5mfZA",
+        "title": "Palette of Classics | Serenity of Nature | Quartet & Piano Vignettes",
+        "url": "https://www.youtube.com/playlist?list=OLAK5uy_mB0OWndv7-3_I7ItQbX8ctAlVRWb5mfZA",
+        "image": "/assets/channel/OLAK5uy_mB0OWndv7-3_I7ItQbX8ctAlVRWb5mfZA.webp"
+      },
+      {
+        "id": "OLAK5uy_l3C1dKaKieFUYnuZgYwGv6Iel0JpDLVBA",
+        "title": "핑키의 무지개 마음",
+        "url": "https://www.youtube.com/playlist?list=OLAK5uy_l3C1dKaKieFUYnuZgYwGv6Iel0JpDLVBA",
+        "image": "/assets/channel/OLAK5uy_l3C1dKaKieFUYnuZgYwGv6Iel0JpDLVBA.webp"
+      },
+      {
+        "id": "OLAK5uy_npC2QiZa1jlfNVugiKwg_YijaskfrGbQM",
+        "title": "검이불루, 화이불치",
+        "url": "https://www.youtube.com/playlist?list=OLAK5uy_npC2QiZa1jlfNVugiKwg_YijaskfrGbQM",
+        "image": "/assets/channel/OLAK5uy_npC2QiZa1jlfNVugiKwg_YijaskfrGbQM.webp"
+      },
+      {
+        "id": "OLAK5uy_nhFXRf-h7tcKJ8nE_IiWoc1HgrsPTS1tU",
+        "title": "가끔 생각나",
+        "url": "https://www.youtube.com/playlist?list=OLAK5uy_nhFXRf-h7tcKJ8nE_IiWoc1HgrsPTS1tU",
+        "image": "/assets/channel/OLAK5uy_nhFXRf-h7tcKJ8nE_IiWoc1HgrsPTS1tU.webp"
+      },
+      {
+        "id": "OLAK5uy_lANQ467c7f6z8AV6DM1LD3QjxU5de1j8g",
+        "title": "암만",
+        "url": "https://www.youtube.com/playlist?list=OLAK5uy_lANQ467c7f6z8AV6DM1LD3QjxU5de1j8g",
+        "image": "/assets/channel/OLAK5uy_lANQ467c7f6z8AV6DM1LD3QjxU5de1j8g.webp"
+      },
+      {
+        "id": "OLAK5uy_m5gSWs0wTyIJ48J77xR0rwCpZXAbF0El0",
+        "title": "가끔은 내말도 들어줘",
+        "url": "https://www.youtube.com/playlist?list=OLAK5uy_m5gSWs0wTyIJ48J77xR0rwCpZXAbF0El0",
+        "image": "/assets/channel/OLAK5uy_m5gSWs0wTyIJ48J77xR0rwCpZXAbF0El0.webp"
+      },
+      {
+        "id": "OLAK5uy_lMOl27dKRaUyO6tpEbK11iAj6tNmITLOs",
+        "title": "유통기한",
+        "url": "https://www.youtube.com/playlist?list=OLAK5uy_lMOl27dKRaUyO6tpEbK11iAj6tNmITLOs",
+        "image": "/assets/channel/OLAK5uy_lMOl27dKRaUyO6tpEbK11iAj6tNmITLOs.webp"
+      },
+      {
+        "id": "OLAK5uy_nslicTA8qf_slnKmJr-ivFnXvpOsOPWJI",
+        "title": "A.I Slave (A.I 노예)",
+        "url": "https://www.youtube.com/playlist?list=OLAK5uy_nslicTA8qf_slnKmJr-ivFnXvpOsOPWJI",
+        "image": "/assets/channel/OLAK5uy_nslicTA8qf_slnKmJr-ivFnXvpOsOPWJI.webp"
+      }
+    ]
+  }
+}

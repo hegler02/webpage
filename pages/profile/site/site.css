@@ -75,14 +75,23 @@ main.enter{animation:page-in var(--dur-slow) var(--curve) both}
 .band img{width:100%;aspect-ratio:var(--ratio-card);object-fit:cover;border-radius:var(--radius-l)}
 .band h2{margin-top:var(--gap-tiny);font-size:var(--size-band)}.band p{margin-top:var(--space-3);color:var(--muted)}
 
-/* Release rail: one row that scrolls sideways, starting on the shared left edge */
+/* Video rail: one row that scrolls sideways, starting on the shared left edge */
 .rail{display:grid;grid-auto-flow:column;grid-auto-columns:var(--rail-item);gap:var(--gap-card);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:thin;padding-bottom:var(--space-2)}
 .rail li{scroll-snap-align:start}
+.rail.square{grid-auto-columns:var(--rail-square)}
+.rail.square img{aspect-ratio:1}
 .rail a{display:grid;gap:var(--gap-text);text-decoration:none}
-.rail img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius);background:var(--surface);transition:opacity var(--dur-fast) var(--curve)}
+.rail img{width:100%;aspect-ratio:var(--ratio-card);object-fit:cover;border-radius:var(--radius);background:var(--surface);transition:opacity var(--dur-fast) var(--curve)}
 .rail a:hover img{opacity:.86}
 .rail b{font-size:var(--size-small);font-weight:var(--weight-control);line-height:var(--lh-compact);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
-.releases .btns .btn[data-rail]{justify-content:center;width:var(--ctl-h-l);padding:0}
+.rail-wrap{position:relative}
+.rail-wrap.square{--rail-media:var(--rail-square)}
+/* Arrows sit on the left and right edges over the pictures; touch screens swipe instead */
+.rail-arrow{position:absolute;z-index:2;top:calc(var(--rail-media) / 2 - var(--touch) / 2);display:grid;place-items:center;width:var(--touch);height:var(--touch);border:var(--border) solid var(--rule);border-radius:var(--pill);background:var(--glass);color:var(--text);font-size:var(--size-title);line-height:var(--lh-tight);opacity:0;transition:opacity var(--dur) var(--curve),background-color var(--dur-fast) var(--curve);backdrop-filter:blur(var(--blur))}
+.rail-arrow.prev{left:calc(var(--space-2) * -1)}.rail-arrow.next{right:calc(var(--space-2) * -1)}
+.rail-wrap:hover .rail-arrow,.rail-arrow:focus-visible{opacity:1}
+.rail-arrow:hover{background:var(--raised)}
+@media(hover:none),(pointer:coarse){.rail-arrow{display:none}}
 
 /* Work */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(var(--card-min),100%),1fr));gap:var(--gap-card)}

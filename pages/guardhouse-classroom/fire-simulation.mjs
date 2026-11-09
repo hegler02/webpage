@@ -32,13 +32,22 @@ export class FireSimulation{
   this.glow=new THREE.PointLight(0xff8e34,4,3,2);this.glow.position.copy(this.origin).add(new THREE.Vector3(0,.3,0));this.group.add(this.glow);
   const tray=new THREE.Mesh(new THREE.CylinderGeometry(.29,.30,.06,32),new THREE.MeshStandardMaterial({color:0x424b4d,roughness:.8,metalness:.4}));tray.position.copy(this.origin).add(new THREE.Vector3(0,-.06,0));this.group.add(tray);
   this.signal=this.path(this.lesson.signal,0xe87938,.018);this.route=this.path(this.lesson.escape,0x229b79,.025);this.marker=new THREE.Mesh(new THREE.SphereGeometry(.08,12,8),new THREE.MeshBasicMaterial({color:0xbef5cb}));this.group.add(this.marker);
-  this.tool=createExtinguisher();this.tool.position.copy(this.origin).add(new THREE.Vector3(.48,-.10,.76));this.group.add(this.tool);this.tool.visible=false;
+  this.tool=createExtinguisher();this.tool.position.copy(this.toolSpot());this.group.add(this.tool);this.tool.visible=false;
   this.powder=Array.from({length:32},()=>{const s=new THREE.Sprite(new THREE.SpriteMaterial({map:this.texture,color:0xf3f1da,transparent:true,opacity:.65,depthWrite:false}));this.group.add(s);return s;});
   this.cameraNear();if(this.state.phase==='extinguish')this.extinguisherCamera();this.drawReadout();
  }
+ // The extinguisher stands in the burning room, between the fire and the room's middle, never beyond a wall.
+ toolSpot(){const [x,y,X,Y]=this.room.bounds,o=this.origin,fx=o.x,fy=-o.z;let cx=(x+X)/2,cy=(y+Y)/2;const m=.35,inside=(px,py)=>px>=x+m&&px<=X-m&&py>=y+m&&py<=Y-m;
+  // About a metre from the fire on the side of the way out, so the exit stays at the user's back as the lesson teaches.
+  const exit=(this.lesson.escape||[]).find(p=>Math.hypot(p[0]-fx,p[1]-fy)>.6);if(exit){const ex=exit[0],ey=exit[1];if(ex>=x&&ex<=X&&ey>=y&&ey<=Y)[cx,cy]=[ex,ey];}
+  for(const reach of [1.1,.9,.7]){let best=null,score=-Infinity;for(let i=0;i<24;i++){const a=i/24*Math.PI*2,px=fx+Math.cos(a)*reach,py=fy+Math.sin(a)*reach;if(!inside(px,py))continue;const s=(px-fx)*(cx-fx)+(py-fy)*(cy-fy);if(s>score){score=s;best=[px,py];}}if(best)return new THREE.Vector3(best[0],o.y-.10,-best[1]);}
+  return new THREE.Vector3(Math.min(X-m,Math.max(x+m,fx)),o.y-.10,-Math.min(Y-m,Math.max(y+m,fy)));}
  path(points,color,r){const group=new THREE.Group();for(let i=1;i<points.length;i++){const a=V(points[i-1]),b=V(points[i]),d=b.clone().sub(a);if(d.length()<.001)continue;const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,d.length(),10),new THREE.MeshBasicMaterial({color,transparent:true,opacity:.85,depthTest:false}));m.position.copy(a).add(b).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize());group.add(m);}this.group.add(group);return group;}
  cameraNear(){const v=this.view,[x,y,X,Y]=this.room.bounds,p=this.origin.clone();v.active=v.camera;v.controls.object=v.camera;v.controls.enabled=true;v.camera.fov=65;v.camera.updateProjectionMatrix();v.camera.position.set(Math.max(x+.15,Math.min(X-.15,p.x+.8)),v.project.finishLevel+1.6,-Math.max(y+.18,Math.min(Y-.18,-p.z-1.35)));v.controls.target.copy(p).add(new THREE.Vector3(0,.7,0));v.controls.update();}
- extinguisherCamera(){this.cameraNear();const v=this.view;v.controls.target.copy(this.origin).add(new THREE.Vector3(.15,.35,.25));v.controls.update();}
+ // Stand behind the extinguisher and look past it at the fire, so both are in view whatever the room.
+ extinguisherCamera(){this.cameraNear();const v=this.view,[x,y,X,Y]=this.room.bounds,t=this.toolSpot(),o=this.origin,dx=t.x-o.x,dz=t.z-o.z,d=Math.hypot(dx,dz)||1;
+  v.camera.position.set(Math.max(x+.15,Math.min(X-.15,t.x+dx/d*.9)),v.project.finishLevel+1.45,-Math.max(y+.15,Math.min(Y-.15,-(t.z+dz/d*.9))));
+  v.controls.target.copy(t).add(o).multiplyScalar(.5).add(new THREE.Vector3(0,.3,0));v.controls.update();}
  silence(){this.output.play(false);}
  stopSignalSound(){clearTimeout(this.signalTimer);this.signalTimer=null;this.silence();}
  signalSound(){this.stopSignalSound();this.output.unlock();this.signalTimer=setTimeout(()=>this.stopSignalSound(),3200);this.output.play(this.a.readFire().alarm);}

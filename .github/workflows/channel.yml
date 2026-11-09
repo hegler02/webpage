@@ -1,9 +1,9 @@
-# Once a day: add new The Mirinaeman Project videos and music and new Mirinaeverse posts to the home rails, and publish through the usual gate.
+# Every three hours: add new The Mirinaeman Project videos and music and new Mirinaeverse posts to the home rails, and publish through the usual gate.
 name: Channel rails
 
 on:
   schedule:
-    - cron: "0 21 * * *"  # 06:00 in Korea
+    - cron: "0 */3 * * *"  # every three hours; GitHub may start a scheduled run late
   workflow_dispatch:
   push:
     branches: [main]

@@ -1,7 +1,7 @@
 // mirinae-charts: one data spec drawn as a precise chart card. Pure SVG and canvas, no dependencies.
 // Colours come only from --mc-* CSS variables, which each project maps to its own design tokens (see mirinae-charts.css).
 // Card ideas (one accent, a bold one-line takeaway) follow ztd-charts by Junhan2, MIT; the code here is our own.
-export const VERSION='0.2.0';
+export const VERSION='0.3.0';
 const NS='http://www.w3.org/2000/svg';
 const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -101,7 +101,7 @@ const leftPad=(ctx,sc)=>Math.ceil(Math.max(...sc.ticks.map(v=>ctx.text(ctx.fmt.a
 const unit=(ctx,v)=>`${ctx.fmt(v)}${ctx.o.unit??ctx.spec.unit?' '+(ctx.o.unit??ctx.spec.unit):''}`;
 
 // ---------- forms ----------
-const FORMS={bar,line,area:c=>line(c,true),waterfall,heatmap,donut,sankey,scatter,dumbbell,slope,bump,treemap,calendar,gauge,candlestick,sunpath,windrose,psychro,loadduration};
+const FORMS={bar,line,area:c=>line(c,true),waterfall,heatmap,donut,sankey,scatter,dumbbell,slope,bump,treemap,calendar,gauge,candlestick,sunpath,windrose,psychro,loadduration,histogram,box,bullet,gantt,lollipop,radar,funnel,pareto};
 
 function bar(ctx){
  const {spec,o,W}=ctx,x=spec.encoding.x,ys=keysOf(spec.encoding.y),rows=spec.data,stack=!!o.stack&&ys.length>1,colors=colorFor(o,o.highlight!=null&&ys.length===1?rows.map(r=>r[x]):ys);
@@ -421,4 +421,104 @@ function loadduration(ctx){
  const q=[0,.01,.1,.5,.9].map(f=>Math.min(n-1,Math.floor(f*n)));
  return {height:H,svg:yAxis(ctx,sc,L,R,T,H-B)+area+`<polyline class="mc-line" points="${line}" stroke="var(--mc-s1)"/>`+refLines+peak+ticks+`<text class="mc-tick" x="${R}" y="${H-2}" text-anchor="end">큰 순서로 늘어놓은 시간 →</text>`,pick,
   table:table(['순위','시간 비율',spec.labels?.value??'값'],q.map(i=>[`${ctx.fmt(i+1)}번째`,`상위 ${ctx.fmt(i/n*100,1)}%`,vals[i]]),ctx.fmt)};
+}
+
+// ---------- third set ----------
+const valuesOf=(spec,o)=>o.values??spec.data.map(r=>r[spec.encoding?.value??'value']);
+// Histogram: how values spread. options.binWidth or options.bins (about how many), options.mark {value,label}.
+function histogram(ctx){
+ const {spec,o,W}=ctx,vals=valuesOf(spec,o).filter(v=>v!=null&&!Number.isNaN(v)),lo0=Math.min(...vals),hi0=Math.max(...vals);
+ const bw=o.binWidth??niceTicks(lo0,hi0,o.bins??12).step,lo=Math.floor(lo0/bw)*bw,nb=Math.max(1,Math.ceil((hi0-lo)/bw+1e-9)),counts=Array(nb).fill(0);
+ vals.forEach(v=>{counts[Math.min(nb-1,Math.floor((v-lo)/bw))]++;});
+ const H=o.height??clamp(Math.round(W*.42),200,320),T=16,B=34,sc=niceTicks(0,Math.max(...counts),4),L=leftPad(ctx,sc),R=W-8,X=v=>L+(R-L)*(v-lo)/(nb*bw),Y=c=>T+(H-T-B)*(1-c/sc.hi),u=o.unit??spec.unit??'';
+ const marks=counts.map((c,i)=>{const a=lo+i*bw,b=a+bw,x0=X(a)+1,x1=X(b)-1,hi=o.mark&&o.mark.value>=a&&o.mark.value<b;
+  return `<g><rect class="mc-hit" data-tip="${esc(`<strong>${ctx.fmt(a)}–${ctx.fmt(b)}${u?' '+u:''}</strong><span>${ctx.fmt(c)}개 · ${ctx.fmt(c/vals.length*100,1)}%</span>`)}" x="${X(a)}" y="${T}" width="${X(b)-X(a)}" height="${H-T-B}"/><rect class="mc-mark" x="${x0}" y="${Y(c)}" width="${Math.max(0,x1-x0)}" height="${Math.max(0,Y(0)-Y(c))}" rx="2" fill="${hi?'var(--mc-accent)':'var(--mc-s1)'}"/></g>`;}).join('');
+ let lastEnd=-Infinity;const edges=Array.from({length:nb+1},(_,i)=>lo+i*bw).filter(v=>{const w=ctx.text(ctx.fmt(v),12),s=X(v)-w/2;if(s<lastEnd+6)return false;lastEnd=s+w;return true;});
+ const xt=edges.map(v=>`<text class="mc-tick" x="${X(v)}" y="${H-B+16}" text-anchor="middle">${esc(ctx.fmt(v))}</text>`).join('')+`<text class="mc-tick" x="${R}" y="${H-2}" text-anchor="end">${esc(spec.labels?.value??'값')}${u?' ('+esc(u)+')':''} →</text>`;
+ const mark=o.mark?`<line class="mc-join" x1="${X(o.mark.value)}" x2="${X(o.mark.value)}" y1="${T-4}" y2="${H-B}" style="stroke:var(--mc-accent)"/><text class="mc-label" x="${X(o.mark.value)+5}" y="${T+6}">${esc(o.mark.label??'')} ${esc(ctx.fmt(o.mark.value))}</text>`:'';
+ return {height:H,svg:yAxis(ctx,sc,L,R,T,H-B)+marks+mark+`<line class="mc-axis" x1="${L}" x2="${R}" y1="${Y(0)}" y2="${Y(0)}"/>`+xt,table:table(['구간','개수','%'],counts.map((c,i)=>[`${ctx.fmt(lo+i*bw)}–${ctx.fmt(lo+(i+1)*bw)}`,c,c/vals.length*100]),ctx.fmt)};
+}
+// Box plot, one row per group: the middle half as a box, the median as a line, whiskers to 1.5 × IQR, dots beyond.
+// data rows {group, value} with encoding {group, value}, or options.groups {name: [values]}.
+function box(ctx){
+ const {spec,o,W}=ctx,groups=o.groups??spec.data.reduce((a,r)=>{(a[r[spec.encoding.group]]??=[]).push(r[spec.encoding.value]);return a;},{}),names=Object.keys(groups);
+ const q=(s,p)=>{const i=(s.length-1)*p,a=Math.floor(i);return s[a]+(s[Math.min(s.length-1,a+1)]-s[a])*(i-a);};
+ const st=names.map(n=>{const s=[...groups[n]].filter(v=>v!=null).sort((a,b)=>a-b),q1=q(s,.25),q3=q(s,.75),iqr=q3-q1,lw=s.find(v=>v>=q1-1.5*iqr),hw=[...s].reverse().find(v=>v<=q3+1.5*iqr);return {n,s,q1,med:q(s,.5),q3,lw,hw,out:s.filter(v=>v<lw||v>hw)};});
+ const row=o.rowHeight??40,T=8,B=34,H=T+names.length*row+B,all=st.flatMap(x=>x.s),sc=niceTicks(Math.min(...all),Math.max(...all),5),L=Math.min(W*.3,Math.max(...names.map(n=>ctx.text(n,13)))+14),R=W-12,X=v=>L+(R-L)*(v-sc.lo)/(sc.hi-sc.lo),u=o.unit??spec.unit??'';
+ const grid=sc.ticks.map(v=>`<line class="mc-grid" x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${H-B}"/><text class="mc-tick" x="${X(v)}" y="${H-B+16}" text-anchor="middle">${esc(ctx.fmt.axis(v))}</text>`).join('');
+ const marks=st.map((x,i)=>{const cy=T+i*row+row/2,h=row*.46,on=o.highlight===x.n,c=o.highlight!=null?(on?'var(--mc-accent)':'var(--mc-neutral)'):'var(--mc-s1)';
+  const tip=`<strong>${esc(x.n)}</strong><span>중앙값 ${ctx.fmt(x.med)}${u?' '+u:''}</span><span>가운데 절반 ${ctx.fmt(x.q1)}–${ctx.fmt(x.q3)}</span><span>범위 ${ctx.fmt(x.s[0])}–${ctx.fmt(x.s[x.s.length-1])} · ${x.s.length}개</span>`;
+  return `<g><rect class="mc-hit" data-tip="${esc(tip)}" x="0" y="${cy-row/2}" width="${W}" height="${row}"/><text class="mc-label${on?' is-strong':''}" x="${L-10}" y="${cy+4}" text-anchor="end">${esc(x.n)}</text><line class="mc-axis" x1="${X(x.lw)}" x2="${X(x.hw)}" y1="${cy}" y2="${cy}"/><line class="mc-axis" x1="${X(x.lw)}" x2="${X(x.lw)}" y1="${cy-h/3}" y2="${cy+h/3}"/><line class="mc-axis" x1="${X(x.hw)}" x2="${X(x.hw)}" y1="${cy-h/3}" y2="${cy+h/3}"/><rect class="mc-mark" x="${X(x.q1)}" y="${cy-h/2}" width="${Math.max(1,X(x.q3)-X(x.q1))}" height="${h}" rx="3" fill="${c}" fill-opacity=".85"/><line x1="${X(x.med)}" x2="${X(x.med)}" y1="${cy-h/2}" y2="${cy+h/2}" stroke="var(--mc-text)" stroke-width="2.5"/>${x.out.map(v=>`<circle cx="${X(v)}" cy="${cy}" r="3" fill="none" stroke="${c}" stroke-width="1.5"/>`).join('')}</g>`;}).join('');
+ return {height:H,svg:grid+marks,table:table(['','최소','1사분위','중앙값','3사분위','최대','개수'],st.map(x=>[x.n,x.s[0],x.q1,x.med,x.q3,x.s[x.s.length-1],x.s.length]),ctx.fmt)};
+}
+// Bullet: a measure against its target, over bands of poor/fair/good. rows {label, value, target, ranges:[a,b,c]}.
+function bullet(ctx){
+ const {spec,o,W}=ctx,rows=spec.data,row=o.rowHeight??46,T=6,H=T+rows.length*row+4,L=Math.min(W*.34,Math.max(...rows.map(r=>ctx.text(r.label,13,600)))+16),R=W-12,u=o.unit??spec.unit??'';
+ const marks=rows.map((r,i)=>{const top=Math.max(r.value,r.target??0,...(r.ranges??[])),sc=niceTicks(0,top*1.05,4),X=v=>L+(R-L)*v/sc.hi,cy=T+i*row+row/2-4,bh=row*.5,good=r.target==null?null:(o.lowerIsBetter??r.lowerIsBetter?r.value<=r.target:r.value>=r.target);
+  const bands=(r.ranges??[]).map((v,k,a)=>`<rect x="${X(k?a[k-1]:0)}" y="${cy-bh/2}" width="${X(v)-X(k?a[k-1]:0)}" height="${bh}" fill="var(--mc-${['line','neutral-2','neutral'][Math.min(2,k)]})" opacity="${.55+.15*k}"/>`).join('');
+  const tip=`<strong>${esc(r.label)}</strong><span>값 ${ctx.fmt(r.value)}${u?' '+u:''}</span>${r.target!=null?`<span>기준 ${ctx.fmt(r.target)}${u?' '+u:''} · ${good?'충족':'미달'}</span>`:''}`;
+  return `<g><rect class="mc-hit" data-tip="${esc(tip)}" x="0" y="${T+i*row}" width="${W}" height="${row}"/><text class="mc-label is-strong" x="${L-12}" y="${cy+4}" text-anchor="end">${esc(r.label)}</text>${bands}<rect class="mc-mark" x="${L}" y="${cy-bh/5}" width="${Math.max(0,X(r.value)-L)}" height="${bh*.4}" fill="${good===false?'var(--mc-s2)':'var(--mc-accent)'}"/>${r.target!=null?`<line x1="${X(r.target)}" x2="${X(r.target)}" y1="${cy-bh/2-3}" y2="${cy+bh/2+3}" stroke="var(--mc-text)" stroke-width="2.5"/>`:''}<text class="mc-tick" x="${L}" y="${cy+bh/2+14}">0</text><text class="mc-tick" x="${R}" y="${cy+bh/2+14}" text-anchor="end">${esc(ctx.fmt(sc.hi))}${u?' '+esc(u):''}</text></g>`;}).join('');
+ return {height:H,svg:marks,legend:[{label:o.valueLabel??'값',color:'var(--mc-accent)'},{label:o.targetLabel??'기준',color:'var(--mc-text)',line:true},...(rows.some(r=>r.ranges)?[{label:'구간',color:'var(--mc-neutral)'}]:[])],
+  table:table(['',o.valueLabel??'값',o.targetLabel??'기준'],rows.map(r=>[r.label,r.value,r.target??'—']),ctx.fmt)};
+}
+// Gantt: rows {task, start, end, group?, done? (0..1)}; dates as 'YYYY-MM-DD' or numbers. start = end is a milestone. options.now.
+function gantt(ctx){
+ const {spec,o,W}=ctx,rows=spec.data,isDate=typeof rows[0].start==='string',t=v=>isDate?Date.parse(v+'T00:00:00Z'):v,DAY=864e5;
+ const t0=Math.min(...rows.map(r=>t(r.start))),t1=Math.max(...rows.map(r=>t(r.end)),o.now!=null?t(o.now):-Infinity),groups=[...new Set(rows.map(r=>r.group).filter(Boolean))],colors=colorFor(o,groups.length?groups:['_']);
+ const row=o.rowHeight??30,T=26,H=T+rows.length*row+8,L=Math.min(W*.36,Math.max(...rows.map(r=>ctx.text(r.task,13)))+16),R=W-10,span=(t1-t0)||1,X=v=>L+(R-L)*(t(v)-t0)/span,XT=ms=>L+(R-L)*(ms-t0)/span;
+ let ticks=[];if(isDate){const d0=new Date(t0),days=span/DAY;if(days>120){for(let d=Date.UTC(d0.getUTCFullYear(),d0.getUTCMonth(),1);d<=t1;d=Date.UTC(new Date(d).getUTCFullYear(),new Date(d).getUTCMonth()+1,1))if(d>=t0)ticks.push([d,`${new Date(d).getUTCMonth()+1}월`]);}
+  else{const step=days>35?7:days>10?2:1;for(let d=t0;d<=t1;d+=step*DAY){const x=new Date(d);ticks.push([d,`${x.getUTCMonth()+1}/${x.getUTCDate()}`]);}}}
+ else ticks=niceTicks(t0,t1,6).ticks.filter(v=>v>=t0&&v<=t1).map(v=>[v,ctx.fmt(v)]);
+ let lastEnd=-Infinity;ticks=ticks.filter(([v,l])=>{const w=ctx.text(l,12),s=XT(v)-w/2;if(s<lastEnd+6)return false;lastEnd=s+w;return true;});
+ const grid=ticks.map(([v,l])=>`<line class="mc-grid" x1="${XT(v)}" x2="${XT(v)}" y1="${T-4}" y2="${H-8}"/><text class="mc-tick" x="${XT(v)}" y="${T-10}" text-anchor="middle">${esc(l)}</text>`).join('');
+ const fmtT=v=>isDate?v.slice(5).replace('-','/'):ctx.fmt(v);
+ const marks=rows.map((r,i)=>{const y=T+i*row,c=colors[r.group??'_'],x0=X(r.start),x1=X(r.end),bh=row*.56,cy=y+row/2,mile=t(r.start)===t(r.end);
+  const tip=`<strong>${esc(r.task)}</strong><span>${fmtT(r.start)}${mile?'':' – '+fmtT(r.end)}</span>${r.group?`<span>${esc(r.group)}</span>`:''}${r.done!=null?`<span>진행 ${ctx.fmt(r.done*100)}%</span>`:''}`;
+  const bar=mile?`<path class="mc-mark" d="M${x0},${cy-7}L${x0+7},${cy}L${x0},${cy+7}L${x0-7},${cy}Z" fill="${c}"/>`:`<rect class="mc-mark" x="${x0}" y="${cy-bh/2}" width="${Math.max(2,x1-x0)}" height="${bh}" rx="4" fill="${c}" fill-opacity="${r.done!=null?.35:.9}"/>${r.done!=null?`<rect x="${x0}" y="${cy-bh/2}" width="${Math.max(0,(x1-x0)*clamp(r.done,0,1))}" height="${bh}" rx="4" fill="${c}"/>`:''}`;
+  return `<g><rect class="mc-hit" data-tip="${esc(tip)}" x="0" y="${y}" width="${W}" height="${row}"/><text class="mc-label" x="${L-10}" y="${cy+4}" text-anchor="end">${esc(r.task)}</text>${bar}</g>`;}).join('');
+ const now=o.now!=null?`<line x1="${X(o.now)}" x2="${X(o.now)}" y1="${T-4}" y2="${H-8}" stroke="var(--mc-accent)" stroke-width="2"/><text class="mc-label is-strong" x="${X(o.now)+5}" y="${H-12}">${esc(o.nowLabel??'오늘')}</text>`:'';
+ return {height:H,svg:grid+marks+now,legend:groups.map(g=>({label:g,color:colors[g]})),table:table(['일','시작','끝',...(groups.length?['구분']:[]),...(rows.some(r=>r.done!=null)?['진행 %']:[])],rows.map(r=>[r.task,String(r.start),String(r.end),...(groups.length?[r.group??'']:[]),...(rows.some(x=>x.done!=null)?[r.done!=null?r.done*100:'—']:[])]),ctx.fmt)};
+}
+// Lollipop: a ranked list drawn light, a stick and a dot per item.
+function lollipop(ctx){
+ const {spec,o,W}=ctx,x=spec.encoding.x,k=keysOf(spec.encoding.y)[0],rows=o.sort===false?spec.data:[...spec.data].sort((a,b)=>(b[k]??0)-(a[k]??0)),row=o.rowHeight??28,T=6,H=T+rows.length*row+22;
+ const L=Math.min(W*.36,Math.max(...rows.map(r=>ctx.text(r[x],13)))+14),sc=niceTicks(Math.min(0,...rows.map(r=>r[k])),Math.max(...rows.map(r=>r[k])),4),R=W-ctx.text(ctx.fmt(sc.hi),12,600)-14,X=v=>L+(R-L)*(v-sc.lo)/(sc.hi-sc.lo),u=o.unit??spec.unit??'';
+ const grid=sc.ticks.map(v=>`<line class="mc-grid" x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${H-22}"/><text class="mc-tick" x="${X(v)}" y="${H-6}" text-anchor="middle">${esc(ctx.fmt.axis(v))}</text>`).join('');
+ const marks=rows.map((r,i)=>{const cy=T+i*row+row/2,v=r[k]??0,on=r[x]===o.highlight,c=o.highlight!=null?(on?'var(--mc-accent)':'var(--mc-neutral-3)'):'var(--mc-s1)';
+  return `<g><rect class="mc-hit" data-tip="${esc(`<strong>${esc(r[x])}</strong><span>${ctx.fmt(v)}${u?' '+u:''}</span>`)}" x="0" y="${cy-row/2}" width="${W}" height="${row}"/><text class="mc-label${on?' is-strong':''}" x="${L-10}" y="${cy+4}" text-anchor="end">${esc(r[x])}</text><line x1="${X(0)}" x2="${X(v)}" y1="${cy}" y2="${cy}" stroke="${c}" stroke-width="2"/><circle cx="${X(v)}" cy="${cy}" r="${on?7:5.5}" fill="${c}"/><text class="mc-value" x="${X(v)+(v>=0?11:-11)}" y="${cy+4}" text-anchor="${v>=0?'start':'end'}">${esc(ctx.fmt(v))}</text></g>`;}).join('');
+ return {height:H,svg:grid+marks,table:table([x,spec.labels?.[k]??k],rows.map(r=>[r[x],r[k]??0]),ctx.fmt)};
+}
+// Radar: a few series over the same measures. rows are series {name, measure1, ...}; encoding {series, axes:[...]}; options.max.
+function radar(ctx){
+ const {spec,o,W}=ctx,axes=spec.encoding.axes,sk=spec.encoding.series??'name',rows=spec.data,names=rows.map(r=>r[sk]),colors=colorFor(o,names);
+ const H=o.height??clamp(Math.round(W*.8),280,460),lw=Math.max(...axes.map(a=>ctx.text(spec.labels?.[a]??a,12,600))),cx=W/2,cy=H/2+4,Rr=Math.min(W/2-lw-18,H/2-30),max=o.max??niceTicks(0,Math.max(...rows.flatMap(r=>axes.map(a=>r[a]??0))),4).hi;
+ const ang=i=>-Math.PI/2+i*2*Math.PI/axes.length,P=(i,v)=>[cx+Math.cos(ang(i))*Rr*v/max,cy+Math.sin(ang(i))*Rr*v/max];
+ let g='';for(const f of [.25,.5,.75,1])g+=`<polygon class="mc-grid" points="${axes.map((_,i)=>P(i,max*f).join(',')).join(' ')}" fill="none"/>`;
+ g+=axes.map((a,i)=>{const [x,y]=P(i,max),[lx,ly]=P(i,max*1.1),c=Math.cos(ang(i));return `<line class="mc-grid" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/><text class="mc-label" x="${lx}" y="${ly+4}" text-anchor="${Math.abs(c)<.2?'middle':c>0?'start':'end'}">${esc(spec.labels?.[a]??a)}</text>`;}).join('')+`<text class="mc-tick" x="${cx+10}" y="${cy-Rr+16}">${esc(ctx.fmt(max))}</text>`;
+ const order=[...rows].sort((a,b)=>(a[sk]===o.highlight)-(b[sk]===o.highlight));
+ const shapes=order.map(r=>{const c=colors[r[sk]],on=r[sk]===o.highlight,pts=axes.map((a,i)=>P(i,clamp(r[a]??0,0,max)));
+  return `<polygon class="mc-mark" data-tip="${esc(`<strong>${esc(r[sk])}</strong>`+axes.map(a=>`<span>${esc(spec.labels?.[a]??a)} ${ctx.fmt(r[a]??0)}</span>`).join(''))}" points="${pts.map(p=>p.join(',')).join(' ')}" fill="${c}" fill-opacity="${o.highlight==null||on?.22:.08}" stroke="${c}" stroke-width="${on?2.5:1.5}"/>${pts.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3" fill="${c}"/>`).join('')}`;}).join('');
+ return {height:H,svg:g+shapes,legend:rows.length>1?names.map(n=>({label:n,color:colors[n]})):[],table:table([sk==='name'?'':sk,...axes.map(a=>spec.labels?.[a]??a)],rows.map(r=>[r[sk],...axes.map(a=>r[a]??0)]),ctx.fmt)};
+}
+// Funnel: stages that narrow; each step shows what share went on from the one before, and from the start.
+function funnel(ctx){
+ const {spec,o,W}=ctx,lk=spec.encoding?.label??'label',vk=spec.encoding?.value??'value',rows=spec.data,row=o.rowHeight??44,T=4,H=T+rows.length*row+4,first=rows[0][vk]||1,max=Math.max(...rows.map(r=>r[vk]));
+ const lab=Math.min(W*.32,Math.max(...rows.map(r=>ctx.text(r[lk],13,600)))+16),rate=Math.max(...rows.map((r,i)=>ctx.text(i?`다음 ${ctx.fmt(r[vk]/rows[i-1][vk]*100)}%`:'',12)))+12,cx=lab+(W-lab-rate)/2,wmax=W-lab-rate-8,u=o.unit??spec.unit??'';
+ const marks=rows.map((r,i)=>{const w=Math.max(4,wmax*r[vk]/max),y=T+i*row,on=r[lk]===o.highlight,c=o.highlight!=null?(on?'var(--mc-accent)':'var(--mc-neutral)'):'var(--mc-s1)',step=i?r[vk]/rows[i-1][vk]*100:null;
+  const tip=`<strong>${esc(r[lk])}</strong><span>${ctx.fmt(r[vk])}${u?' '+u:''}</span><span>처음의 ${ctx.fmt(r[vk]/first*100,1)}%</span>${step!=null?`<span>앞 단계의 ${ctx.fmt(step,1)}%</span>`:''}`;
+  return `<g><rect class="mc-hit" data-tip="${esc(tip)}" x="0" y="${y}" width="${W}" height="${row}"/><text class="mc-label is-strong" x="${lab-12}" y="${y+row/2+4}" text-anchor="end">${esc(r[lk])}</text><rect class="mc-mark" x="${cx-w/2}" y="${y+4}" width="${w}" height="${row-8}" rx="4" fill="${c}"/><text class="mc-on-mark" x="${cx}" y="${y+row/2+5}" text-anchor="middle" style="fill:${inkOn(ctx.card,c)}">${w>ctx.text(ctx.fmt(r[vk]),13,600)+12?esc(ctx.fmt(r[vk])):''}</text>${step!=null?`<text class="mc-tick" x="${W-4}" y="${y+row/2+4}" text-anchor="end">다음 ${esc(ctx.fmt(step))}%</text>`:''}</g>`;}).join('');
+ return {height:H,svg:marks,table:table([lk,vk,'처음 대비 %','앞 단계 대비 %'],rows.map((r,i)=>[r[lk],r[vk],r[vk]/first*100,i?r[vk]/rows[i-1][vk]*100:'—']),ctx.fmt)};
+}
+// Pareto: causes largest first as shares, with the running total on the same 0-100 % axis (never a second axis).
+function pareto(ctx){
+ const {spec,o,W}=ctx,lk=spec.encoding?.label??'label',vk=spec.encoding?.value??'value',rows=[...spec.data].sort((a,b)=>b[vk]-a[vk]),total=rows.reduce((a,r)=>a+r[vk],0)||1;
+ let run=0;const items=rows.map(r=>{const share=r[vk]/total*100;run+=share;return {r,share,cum:run};});
+ const H=o.height??clamp(Math.round(W*.42),220,340),T=14,B=30,sc={lo:0,hi:100,ticks:[0,25,50,75,100]},L=leftPad({...ctx,fmt:Object.assign(v=>ctx.fmt(v)+'%',{axis:v=>v+'%'})},sc),R=W-8,band=(R-L)/items.length,Y=v=>T+(H-T-B)*(1-v/100),cut=o.cut??80,u=o.unit??spec.unit??'';
+ const axis=sc.ticks.map(v=>`<line class="mc-grid${v===0?' is-zero':''}" x1="${L}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="mc-tick" x="${L-8}" y="${Y(v)+4}" text-anchor="end">${v}%</text>`).join('');
+ const firstOver=items.findIndex(x=>x.cum>=cut);
+ const bars=items.map((x,i)=>{const x0=L+i*band+band*.18,w=band*.64,vital=i<=firstOver;return `<g><rect class="mc-hit" data-tip="${esc(`<strong>${esc(x.r[lk])}</strong><span>${ctx.fmt(x.r[vk])}${u?' '+u:''} · ${ctx.fmt(x.share,1)}%</span><span>누적 ${ctx.fmt(x.cum,1)}%</span>`)}" x="${L+i*band}" y="${T}" width="${band}" height="${H-T-B}"/><rect class="mc-mark" x="${x0}" y="${Y(x.share)}" width="${w}" height="${Y(0)-Y(x.share)}" rx="3" fill="${vital?'var(--mc-accent)':'var(--mc-neutral)'}"/></g>`;}).join('');
+ const pts=items.map((x,i)=>[L+i*band+band/2,Y(x.cum)]);
+ const line=`<polyline class="mc-line" points="${pts.map(p=>p.join(',')).join(' ')}" stroke="var(--mc-text)"/>${pts.map(([a,b])=>`<circle class="mc-dot" cx="${a}" cy="${b}" r="3.5" fill="var(--mc-text)"/>`).join('')}<line class="mc-join" x1="${L}" x2="${R}" y1="${Y(cut)}" y2="${Y(cut)}"/><text class="mc-tick" x="${R}" y="${Y(cut)-5}" text-anchor="end">누적 ${cut}%</text>`;
+ return {height:H,svg:axis+bars+line+xLabels(ctx,items.map(x=>String(x.r[lk])),i=>L+i*band+band/2,H-10,band),legend:[{label:`누적 ${cut}%까지 (${firstOver+1}개)`,color:'var(--mc-accent)'},{label:'나머지',color:'var(--mc-neutral)'},{label:'누적 비율',color:'var(--mc-text)',line:true}],
+  table:table([lk,vk,'%','누적 %'],items.map(x=>[x.r[lk],x.r[vk],x.share,x.cum]),ctx.fmt)};
 }

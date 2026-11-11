@@ -1,0 +1,16 @@
+@charset "UTF-8";
+/* Salk sample only: the reconstruction notice and the tag that says where each dimension comes from. */
+.rebuilt-note{margin:var(--gap-copy) 0 0;padding:var(--space-3) var(--space-4);border-left:3px solid var(--wb-accent);background:var(--wb-accent-soft);color:var(--wb-field-text);line-height:var(--leading-reading)}
+.basis{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2);margin-top:var(--space-3);font-size:var(--sys-size-small)}
+.basis b{padding:2px var(--space-2);border-radius:999px;border:1px solid var(--wb-line-strong);background:var(--wb-field-bg);color:var(--wb-field-text);font-weight:var(--sys-weight-label)}
+.basis b[data-basis="문헌 치수"]{border-color:var(--wb-accent);background:var(--wb-accent-soft)}
+.basis b[data-basis="사진 판독"]{border-color:var(--wb-accent);border-style:dashed}
+.basis a{color:var(--wb-accent)}
+.salk-rows{display:grid;gap:var(--space-2);margin-top:var(--gap-actions)}
+.salk-rows>div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-3);padding:var(--space-2) 0;border-bottom:1px solid var(--wb-line);font-size:var(--sys-size-small)}
+.salk-rows span{color:var(--wb-muted)}
+.salk-stages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-2);margin-top:var(--gap-actions);padding:0;list-style:none}
+.salk-stages li{padding:var(--space-3);border:1px solid var(--wb-line);border-radius:var(--radius);font-size:var(--sys-size-small);color:var(--wb-muted)}
+.salk-stages li[data-on=true]{border-color:var(--wb-danger);background:var(--wb-danger-soft);color:var(--wb-field-text)}
+.equation{margin-top:var(--gap-actions);padding:var(--space-4);border-radius:var(--space-2);background:var(--wb-field-bg);color:var(--wb-field-text);line-height:var(--leading-reading);font-weight:var(--sys-weight-control)}
+.bay-card .energy-controls label{align-items:flex-start}

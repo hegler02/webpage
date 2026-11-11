@@ -100,7 +100,7 @@ export class SceneLook {
   }
   if(turf){g.map=grass?this.grass??=grassTexture(v.renderer):null;g.needsUpdate=true;this.envSun=null;}
   this.glassUniforms.through.value=want==='day'&&!v.fpv?LOOK.glass.outside:LOOK.glass.inside;this.glassUniforms.cap.value=want==='day'&&v.fpv?LOOK.glass.capDayInside:LOOK.glass.cap;
-  this.fade.value.set(v.project.center?.[0]??4.1,-(v.project.center?.[1]??2),LOOK.fade[0],want==='off'?0:LOOK.fade[1]);
+  const fade=v.project.fade??LOOK.fade;this.fade.value.set(v.project.center?.[0]??4.1,-(v.project.center?.[1]??2),fade[0],want==='off'?0:fade[1]);
   if(want==='off')return;
   if(want==='day')this.day();else v.scene.environment=v.environment;
   this.fitShadow();
@@ -108,7 +108,7 @@ export class SceneLook {
  // Put back the numbers the view itself sets for this mode.
  restore(){const v=this.view;this.applying=true;v.scene.environment=v.environment;v.setNight(v.night);this.applying=false;}
  day(){
-  const v=this.view,p=LOOK.day,d=this.sunDirection(),e=THREE.MathUtils.radToDeg(Math.asin(Math.max(-1,Math.min(1,d.y))));
+  const v=this.view,p={...LOOK.day,...v.project.day},d=this.sunDirection(),e=THREE.MathUtils.radToDeg(Math.asin(Math.max(-1,Math.min(1,d.y))));
   const warm=e<15?[1,lerp(.62,.86,(e-4)/11),lerp(.38,.68,(e-4)/11)]:[1,lerp(.86,.96,(e-15)/25),lerp(.68,.9,(e-15)/25)];
   const power=Math.max(.15,Math.min(1,Math.sin(THREE.MathUtils.degToRad(Math.max(e,0)))*2.4));
   v.sun.color.setRGB(...warm);v.sun.intensity=p.sun*power;v.ambient.intensity=v.fpv?p.ambientIndoor:p.ambient;if(v.ground.material.map)v.ground.material.color.set(0xffffff);
@@ -134,10 +134,10 @@ export class SceneLook {
  fitShadow(){
   const v=this.view,cam=v.sun.shadow.camera,box=new THREE.Box3();if(v.base)box.expandByObject(v.base);
   if(v.site.visible)for(const o of v.site.children)if(o.castShadow)box.expandByObject(o);
-  if(box.isEmpty())return;box.min.y=Math.max(box.min.y,-1);
+  if(box.isEmpty())return;box.min.y=Math.max(box.min.y,v.project.shadowFloor??-1);
   const d=this.sunDirection(),pts=[];
   for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z]){const p=new THREE.Vector3(x,y,z);pts.push(p);
-   if(y===box.max.y&&d.y>.01)pts.push(p.clone().addScaledVector(d,-Math.min((y+.3)/d.y,20)));}
+   if(y===box.max.y&&d.y>.01)pts.push(p.clone().addScaledVector(d,-Math.min((y+.3)/d.y,v.project.shadowReach??20)));}
   v.sun.updateMatrixWorld();v.sun.target.updateMatrixWorld();cam.position.setFromMatrixPosition(v.sun.matrixWorld);cam.lookAt(new THREE.Vector3().setFromMatrixPosition(v.sun.target.matrixWorld));cam.updateMatrixWorld();
   const inv=cam.matrixWorld.clone().invert(),b=new THREE.Box3();for(const p of pts)b.expandByPoint(p.applyMatrix4(inv));
   Object.assign(cam,{left:b.min.x-.6,right:b.max.x+.6,bottom:b.min.y-.6,top:b.max.y+.6,near:-b.max.z-1,far:-b.min.z+1});cam.updateProjectionMatrix();v.renderer.shadowMap.needsUpdate=true;

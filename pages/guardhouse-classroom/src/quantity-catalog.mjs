@@ -1,8 +1,8 @@
 import {measureElement,lengthOf,unionRouteLength,groupQuantities} from './quantity-engine.mjs';
 import {rebarSize} from './rebar-sizes.mjs';
 
-const names={panel:'분전반',light:'천장 조명',switch:'조명 스위치',socket:'콘센트',ac:'냉방기',ffu:'팬 필터 유닛', 'task-light':'작업등',smoke:'연기감지기',heat:'열감지기','fire-panel':'수신기',receiver:'수신기',callpoint:'발신기',alarm:'경보장치',bell:'경보장치','exit-light':'유도등',exit:'유도등',emergency:'비상조명',extinguisher:'소화기'};
-const sheets={guardhouse:{building:'A-101',structure:'S-101',fire:'F-101',light:'E-101',power:'E-102',circuit:'E-103'},apartment:{building:'A-201',structure:'S-201',fire:'F-201',light:'E-201',power:'E-202',circuit:'E-203'},cleanroom:{building:'A-301',structure:'S-301',fire:'F-301',light:'E-301',power:'E-301',circuit:'E-302'}};
+const names={panel:'분전반',light:'천장 조명',switch:'조명 스위치',socket:'콘센트',ac:'냉방기',ffu:'팬 필터 유닛', 'task-light':'작업등',smoke:'연기감지기',heat:'열감지기','fire-panel':'수신기',receiver:'수신기',callpoint:'발신기',alarm:'경보장치',bell:'경보장치','exit-light':'유도등',exit:'유도등',emergency:'비상조명',extinguisher:'소화기',fan:'배기 팬',ahu:'공조기 팬',sprinkler:'스프링클러 헤드',hydrant:'옥내소화전'};
+const sheets={guardhouse:{building:'A-101',structure:'S-101',fire:'F-101',light:'E-101',power:'E-102',circuit:'E-103'},apartment:{building:'A-201',structure:'S-201',fire:'F-201',light:'E-201',power:'E-202',circuit:'E-203'},cleanroom:{building:'A-301',structure:'S-301',fire:'F-301',light:'E-301',power:'E-301',circuit:'E-302'},salk:{building:'A-501',structure:'S-501',fire:'F-501',light:'E-501',power:'E-501',circuit:'E-502'}};
 const round=v=>Number(v.toFixed(4)),mm=v=>round(v*1000);
 const longestEdge=points=>Math.max(...points.map((p,i)=>lengthOf([p,points[(i+1)%points.length]])));
 const sizeText=d=>[...d.size.slice(0,2)].sort((a,b)=>b-a).concat(d.size[2]).map(mm).join(' × ')+' mm';
@@ -12,6 +12,7 @@ const hasId=(e,prefix)=>e.id.startsWith(prefix);
 // representative construction swatches are deliberately not manufacturing objects.
 export function constructionBinding(sample,e){
  if(e.kind==='ornament'||e.linePoints)return {exclude:'도면 장식선'};
+ if(sample==='salk'&&(e.context||e.kind==='water'))return {exclude:e.context?'남쪽 동·주변 맥락 형상 · 북쪽 동만 산출':'중정 물길의 물 · 재료 물량 아님'};
  if(sample==='cleanroom'&&e.id==='south-cut')return {exclude:'전면 벽의 절개 표시 · south-wall과 같은 벽'};
  if(['furniture','fixture'].includes(e.kind)||sample==='cleanroom'&&e.id.startsWith('leg-'))return {exclude:'가구·위생기구·소품의 부속 형상 · 조립품 명세 범위 밖'};
  if(['door','window','window-glass','hatch'].includes(e.kind))return {name:e.kind==='door'?'문짝':e.kind==='hatch'?e.name:'창·문 유리',unit:e.kind==='door'||e.kind==='hatch'?'개':'m²',measure:e.kind==='door'||e.kind==='hatch'?'count':'face'};
@@ -25,6 +26,9 @@ export function constructionBinding(sample,e){
   if(e.id==='slab')return {name:'콘크리트 · 구조 바닥',unit:'m³',measure:'volume'};
   if(e.kind==='wall')return {name:'벽 패널 구성체',unit:'m²',measure:'face',note:'모형의 벽 두께별 면적. M-301의 100 mm 구성은 대표 단면이며 110 mm 벽에 일괄 적용하지 않습니다.'};
   if(hasId(e,'tile-'))return {name:'바닥 패널 · 정전기 분산 마감 포함',unit:'m²',measure:'plan',note:'실제 패널 형상의 합계 면적. 패널 사이 틈은 제외합니다. M-302: 마감 2 mm + 패널 38 mm.'};
+ }
+ if(sample==='salk'){
+  if(['wall','floor','roof','column','truss'].includes(e.kind))return {name:'콘크리트 · '+e.name,unit:'m³',measure:'volume',note:'재구성 모형의 부피입니다. 원본 구조 도면의 물량이 아닙니다.'};
  }
  if(sample==='guardhouse'&&['wall','floor','roof','foundation','canopy','step'].includes(e.kind))return {name:(e.id.includes('blinding')?'버림콘크리트':'콘크리트')+' · '+e.name,unit:'m³',measure:'volume'};
  if(e.kind==='partition')return {name:e.name,unit:'m²',measure:'face',note:'칸막이 구성체 면적. 구성 재료의 세부 규격은 별도 지정 대상입니다.'};

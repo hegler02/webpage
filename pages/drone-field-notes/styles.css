@@ -12,7 +12,7 @@ button.next,.evidence-button{border-color:var(--color-accent)}
 p,h1,h2,h3{margin:0}
 a{color:var(--color-secondary);text-decoration-thickness:var(--border-width);text-underline-offset:var(--focus-offset)}
 .presenter{width:100%;max-width:var(--shell-width);min-height:100svh;margin:auto;padding:var(--shell-padding);display:flex;flex-direction:column;justify-content:center;gap:var(--space-2)}
-.chrome-header{position:relative;display:flex;align-items:center;justify-content:space-between;gap:var(--space-2);font-size:var(--type-ui-small);color:var(--color-muted)}
+.chrome-header{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-2);font-size:var(--type-ui-small);color:var(--color-muted)}
 .brand{letter-spacing:var(--tracking-kicker);color:var(--color-ink)}
 .brand span{display:var(--brand-detail-display);margin-left:var(--space-2);color:var(--color-muted)}
 .edition{margin-left:auto}
@@ -257,6 +257,7 @@ figure{margin:0}
 .panel-wide{width:min(var(--panel-wide),calc(100% - var(--dialog-inset) - var(--dialog-inset)))}
 .stage-explanation{border-left:var(--border-emphasis) solid var(--color-accent);padding-left:var(--space-2);margin-bottom:var(--panel-gap)}
 .legend-list{display:grid;gap:var(--legend-gap)}.legend-list strong{display:block;color:var(--color-accent)}
+.chrome-link{display:inline-flex;align-items:center;min-height:var(--ui-min);padding:0 var(--ui-padding);border-radius:var(--ui-radius);color:var(--color-ink);text-decoration:none}.chrome-link:hover{background:var(--color-raised)}
 .share-status{position:absolute;top:100%;right:0;z-index:var(--layer-controls);display:grid;gap:var(--space-1);max-width:var(--share-status-width);margin:0;padding:var(--space-1) var(--space-2);border-radius:var(--ui-radius);background:var(--color-ink);color:var(--color-bg);font-size:var(--type-ui)}
 .share-status[hidden]{display:none}.share-status input{min-width:0;font:inherit}
 .activity-copy-status{margin-top:var(--space-2);font-size:var(--type-ui);color:var(--color-muted)}.activity-copy-status textarea{display:block;width:100%;min-height:var(--input-min-height);margin-top:var(--space-1);font-family:var(--font-family);font-size:var(--input-font)}

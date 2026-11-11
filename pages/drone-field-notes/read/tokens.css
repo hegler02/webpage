@@ -1,0 +1,19 @@
+@font-face{font-family:'Pretendard Variable';font-style:normal;font-weight:45 920;font-display:swap;src:url('../assets/fonts/PretendardVariable.woff2') format('woff2')}
+/* Scroll reading page. Sole design-value owner; authority: Aboard (field journal), adapted for Korean text. */
+:root{
+color-scheme:light;
+--paper:#fffefb;--linen:#f3f2ee;--hairline:#e5e7eb;--stone:#c1bdba;--ink:#271503;--muted:#5e5246;
+--forest:#040c06;--on-dark:#fffefb;--on-dark-muted:#ddd6c9;--ember:#de4c00;--ember-text:#b33d00;
+--scrim:linear-gradient(0deg,#040c06f2 0%,#040c06b3 38%,#040c0626 72%,#040c0600 100%);
+--stage-commercial:#3f9e6a;--stage-operating:#2f7fbf;--stage-trial:#8a55b8;--stage-research:#c4573a;
+--font:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;
+--weight-light:300;--weight-regular:400;--weight-bold:700;
+--display:clamp(40px,6vw,72px);--chapter:clamp(26px,3vw,36px);--case:clamp(25px,2.6vw,34px);--beat:19px;--body:17px;--small:14px;--micro:12px;--figure:clamp(44px,6vw,64px);
+--line-display:1.12;--line-head:1.32;--line-body:1.85;--line-ui:1.5;--line-figure:1;--tracking-head:-.025em;--tracking-micro:.16em;
+--space-1:8px;--space-2:16px;--space-3:24px;--space-4:32px;--space-5:48px;--space-6:64px;--space-7:96px;--gutter:24px;
+--max:1200px;--measure:620px;--read-columns:5fr 6fr;--band-height:clamp(260px,52vh,560px);--hero-height:clamp(520px,92vh,860px);
+--hairline-width:1px;--ruler-bar:3px;--ruler-cell:84px;--ruler-span:5;--radius-pill:9999px;--radius-tag:8px;--focus:3px;--offscreen:1px;
+--top-height:56px;--top-bg:#fffefb;--share-width:360px;
+}
+@media(max-width:760px){:root{--gutter:20px;--body:16px;--beat:18px;--ruler-cell:0px;--read-columns:1fr;--top-height:96px}}
+@media(forced-colors:active){:root{--stage-commercial:CanvasText;--stage-operating:CanvasText;--stage-trial:CanvasText;--stage-research:CanvasText;--ember-text:LinkText}}

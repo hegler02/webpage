@@ -1,0 +1,20 @@
+"use strict";
+window.DRONE_SPATIAL_DIAGRAMS=(()=>{
+ const {img,esc}=window.DRONE_UTILS;
+ const data=()=>window.DRONE_CONTENT.geometry;
+ const marks=(r)=>data().photoMatches.filter(p=>p.x>=r.x&&p.x<=r.x+r.w).map(p=>`<g class="match-point match-${p.kind}"><circle cx="${p.x}" cy="${p.y}"/><path d="M${p.x-30} ${p.y}h60M${p.x} ${p.y-30}v60"/></g>`).join('');
+ const photo=(viewBox,cls='')=>`<svg class="${cls}" viewBox="${viewBox}" aria-hidden="true"><image href="assets/drone/harbor.png" width="${data().grid.width}" height="${data().grid.height}"/></svg>`;
+ const percent=(n,axis)=>n/data().grid[axis]*100+'%';
+ function world(){
+  const g=data();
+  const buildings=g.roofs.map(([x,y,w,h],i)=>`<div class="harbor-building building-${i}" style="--roof-x:${percent(x,'width')};--roof-y:${percent(y,'height')};--roof-w:${percent(w,'width')};--roof-h:${percent(h,'height')}"><div class="building-wall wall-front"></div><div class="building-wall wall-side"></div><div class="building-roof">${photo([x,y,w,h].join(' '))}</div></div>`).join('');
+  const tiles=g.photoTiles.map((r,i)=>`<div class="photo-piece" data-dx="${r.dx}" data-dy="${r.dy}" data-angle="${r.angle}" style="--tile-x:${percent(r.x,'width')};--tile-y:${percent(r.y,'height')};--tile-w:${percent(r.w,'width')};--tile-h:${percent(r.h,'height')}"><svg viewBox="${[r.x,r.y,r.w,r.h].join(' ')}" aria-hidden="true"><image href="assets/drone/harbor.png" width="${g.grid.width}" height="${g.grid.height}"/>${marks(r)}</svg><span class="photo-piece-label">사진 ${i+1}</span></div>`).join('');
+  return `<div class="spatial-world" id="spatialWorld">${img('harbor','spatial-plane spatial-photo')}${img('harbor-oblique','spatial-plane perspective-photo')}<svg class="spatial-plane map-annotations" viewBox="${g.viewBox}" aria-hidden="true">${g.roofs.map(([x,y,w,h])=>`<rect x="${x}" y="${y}" width="${w}" height="${h}"/>`).join('')}<path d="${g.road}"/><text x="620" y="610">부두</text><text x="220" y="80">창고 5동</text></svg><div class="harbor-volumes">${buildings}</div><div class="photo-pieces">${tiles}</div></div>`;
+ }
+ function spatial(copy){return copy()+`<div class="visual-label"><span id="spatialLabel"></span><strong>같은 항구, 다른 결과물</strong></div><div class="spatial-viewport" role="img" aria-label="같은 항구를 사진, 사진 지도, 입체 모델로 비교합니다.">${world()}</div><div class="spatial-explainer"><span class="map-result">사진 지도 · 건물과 도로의 위치</span><span class="volume-result">입체 모델 · 지붕 + 벽 + 높이</span><small>원리 설명용 항구 모형</small></div>`;}
+ function survey(){
+  const g=data(),c=g.survey,point=(x,y,cls)=>`<g class="${cls}"><circle cx="${x}" cy="${y}"/><path d="M${x-20} ${y}h40M${x} ${y-20}v40"/></g>`;
+  return `<div class="survey-legend"><span class="control-key">주황 네모: 실제 기준 위치</span><span class="photo-key">흰 점: 사진 속 위치</span></div><svg class="survey-diagram" viewBox="${g.viewBox}" role="img" aria-label="사진 지도의 위치를 주황 기준점에 맞춘 뒤, 보정에 쓰지 않은 파란 검사점으로 남은 오차를 확인합니다."><image class="survey-underlay" href="assets/drone/harbor.png" width="${g.grid.width}" height="${g.grid.height}"/><g id="surveyPhoto"><image href="assets/drone/harbor.png" width="${g.grid.width}" height="${g.grid.height}"/>${c.control.map(([x,y])=>point(x,y,'photo-position')).join('')}</g>${c.control.map(([x,y])=>`<rect class="control-position" x="${x-25}" y="${y-25}" width="50" height="50"/>`).join('')}<g class="check-point">${point(c.check[0],c.check[1],'photo-position')}<rect class="check-position" x="${c.check[0]+5}" y="${c.check[1]-15}" width="30" height="30"/><path class="check-leader" d="M${c.check[0]+25} ${c.check[1]}H870V660"/><g class="check-detail"><rect class="detail-panel" x="850" y="600" width="720" height="250"/><circle class="photo-position" cx="990" cy="720"/><rect class="check-position" x="1080" y="690" width="60" height="60"/><path class="check-distance" d="M990 790H1110M990 775v30M1110 775v30"/><text x="1190" y="710">남은 거리</text><text x="1190" y="770">= 위치 오차</text></g></g></svg><p class="survey-state" id="surveyState"></p><p class="diagram-disclosure" id="surveyCaption"></p>`;
+ }
+ return {spatial,survey};
+})();

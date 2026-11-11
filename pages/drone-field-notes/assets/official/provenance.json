@@ -1,0 +1,36 @@
+{
+  "reviewedAt": "2026-11-11",
+  "kind": "기존 공식 영상의 공개 미리보기 이미지",
+  "items": [
+    {
+      "file": "cinema.jpg",
+      "imageUrl": "https://i.ytimg.com/vi/DFphM29JJq4/maxresdefault.jpg",
+      "originalUrl": "https://www.youtube.com/watch?v=DFphM29JJq4"
+    },
+    {
+      "file": "fire.jpg",
+      "imageUrl": "https://i.ytimg.com/vi/UZqDKsrgHQ8/maxresdefault.jpg",
+      "originalUrl": "https://www.youtube.com/watch?v=UZqDKsrgHQ8"
+    },
+    {
+      "file": "military.jpg",
+      "imageUrl": "https://i.ytimg.com/vi/EDmOD_4jQbA/hqdefault.jpg",
+      "originalUrl": "https://www.youtube.com/watch?v=EDmOD_4jQbA"
+    },
+    {
+      "file": "airtaxi.jpg",
+      "imageUrl": "https://i.ytimg.com/vi/3lNqhUZU7Bo/maxresdefault.jpg",
+      "originalUrl": "https://www.youtube.com/watch?v=3lNqhUZU7Bo"
+    },
+    {
+      "file": "inspection.jpg",
+      "imageUrl": "https://i.ytimg.com/vi/yyZZSyCmBqY/hqdefault.jpg",
+      "originalUrl": "https://www.youtube.com/watch?v=yyZZSyCmBqY"
+    },
+    {
+      "file": "fishing.jpg",
+      "imageUrl": "https://i.ytimg.com/vi/yUaWKhP2YKQ/hqdefault.jpg",
+      "originalUrl": "https://www.youtube.com/watch?v=yUaWKhP2YKQ"
+    }
+  ]
+}

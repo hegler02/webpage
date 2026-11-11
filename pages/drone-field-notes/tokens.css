@@ -1,0 +1,172 @@
+@font-face{font-family:'Pretendard Variable';font-style:normal;font-weight:45 920;font-display:swap;src:url('assets/fonts/PretendardVariable.woff2') format('woff2')}
+/* A / FIELD DOCUMENTARY. Sole design-value owner; runtime reads stage and motion tokens. */
+:root {
+--harbor-camera-plan:rotateX(0deg) rotateZ(0deg) scale(.92);
+--harbor-camera-volume:rotateX(52deg) rotateZ(-18deg) scale(.96);
+--harbor-building-height:80px;--harbor-wall-front:#ab9480;--harbor-wall-side:#6e716f;
+--harbor-front-rotation:rotateX(-90deg);--harbor-side-rotation:rotateY(90deg);
+--harbor-window-pattern:repeating-linear-gradient(90deg,transparent 0 16px,var(--color-surface) 17px 26px,transparent 27px 40px);
+--harbor-wall-shadow:inset 0 -14px 0 var(--color-subtle);--harbor-label-y:950px;--harbor-label-size:25px;
+--photo-piece-border:2px;--photo-piece-shadow:0 8px 24px #0005;--photo-label-background:color-mix(in srgb,var(--color-bg) 90%,transparent);
+--survey-offset:translate(70px,-48px);--survey-image-opacity:.2;--survey-symbol-radius:14px;--survey-symbol-stroke:8px;
+--survey-legend-size:24px;--survey-legend-gap:28px;--survey-state-gap:14px;--survey-detail-text:37px;
+--illustration-top:315px;--illustration-height:440px;--illustration-gap:28px;--illustration-caption:28px;
+--official-x:790px;--official-y:330px;--official-width:1030px;--official-height:490px;--official-caption-size:24px;--official-note-size:22px;
+--equipment-photo-height:315px;--equipment-rise:-12px;--equipment-caption-height:100px;--equipment-result-y:750px;
+--equipment-result-size:26px;--equipment-result-width:1250px;--equipment-result-left:335px;
+--fishing-mosaic-focus:100% 50%;--fishing-photo-width:1080px;--fishing-sequence-x:1240px;--fishing-sequence-width:540px;
+--fishing-sequence-gap:24px;--fishing-step-height:220px;--fishing-svg-height:140px;--fishing-step-title:28px;
+--bait-fall:translateY(60px);--seed-fall:translateY(150px);--bait-color:#db9c54;--water-color:var(--color-water);
+--inspection-pane-width:830px;--inspection-detail-x:990px;--inspection-photo-zoom:4;--inspection-photo-origin:40% 7%;
+--inspection-target-left:43%;--inspection-target-top:8%;--inspection-target-width:13%;--inspection-target-height:20%;
+--survey-map-height:500px;--spray-photo-width:1100px;--spray-note-left:1190px;--spray-note-width:500px;
+--inspection-detail-caption-bg:color-mix(in srgb,var(--color-bg) 92%,transparent);--inspection-caption-height:95px;
+--crop-image-width:1040px;--crop-map-color:#668a65;--crop-alert-color:var(--color-accent);--crop-focus-stroke:5px;
+--crop-key-width:630px;--crop-key-left:1180px;--crop-key-top:410px;--crop-key-title:40px;
+--reliability-card-padding:30px;--reliability-svg-height:240px;--reliability-title:42px;--reliability-text:29px;
+--diagram-stroke:6px;--diagram-round:round;--diagram-active-color:var(--color-secondary);
+--dock-photo-width:650px;--dock-cycle-x:790px;--dock-cycle-width:1030px;--dock-cycle-text:30px;
+--dock-stop-radius:14px;--dock-base-opacity:.35;--motion-route:1400;
+--ecology-half-width:830px;--ecology-svg-height:300px;--ecology-leaf:#8cb998;--ecology-ground:#ba9a78;--ecology-stem-width:8px;
+--medical-route-y:380px;--medical-route-title:31px;--medical-route-text:25px;--medical-route-label:22px;
+--formation-caption-size:25px;--formation-caption-gap:15px;--particle-radius:3px;
+--certification-card-gap:20px;--certification-card-pad:24px;--certification-title:36px;--certification-text:27px;
+--fullscreen-shell-max:none;--fullscreen-shell-pad:12px;--fullscreen-chrome-height:190px;
+color-scheme:dark;
+--color-bg:#171612;--color-page:#0f0e0b;--color-surface:#221f1a;--color-raised:#2d2a23;
+--color-ink:#f4efe4;--color-muted:#c4bcaa;--color-accent:#e3ad59;--color-secondary:#a9c1cc;--color-water:#8bbed2;
+--color-line:#6a6354;--color-subtle:#3b372e;--color-paper:#eae3d5;--color-paper-ink:#1d1b16;
+--color-clear:transparent;--color-backdrop:color-mix(in srgb,var(--color-page) 84%,transparent);
+--gradient-shade:linear-gradient(90deg,color-mix(in srgb,var(--color-bg) 93%,transparent),color-mix(in srgb,var(--color-bg) 19%,transparent) 70%,color-mix(in srgb,var(--color-bg) 0%,transparent));
+--gradient-ground:linear-gradient(0deg,var(--color-bg),color-mix(in srgb,var(--color-bg) 50%,transparent) 38%,color-mix(in srgb,var(--color-bg) 0%,transparent) 70%);
+--font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;
+--font-editorial:var(--font-family);
+--weight-normal:400;--weight-medium:500;--weight-bold:700;
+--type-title:80px;--line-title:1.24;--type-head:54px;--line-head:1.28;
+--type-lead:38px;--type-body:31px;--type-caption:24px;--type-kicker:23px;
+--type-metric:150px;--type-number:110px;--type-unit:42px;--type-document:44px;
+--type-ui:14px;--type-ui-small:12px;--type-panel:17px;--type-panel-title:27px;
+--line-body:1.6;--line-ui:1.45;--tracking-kicker:.16em;--tracking-title:-.045em;--tracking-metric:-.055em;
+--space-1:8px;--space-2:16px;--space-3:24px;--space-4:32px;--space-5:48px;--space-6:64px;--space-7:96px;
+--safe-x:96px;--safe-y:65px;--stage-width:1920;--stage-height:1080;--stage-ratio:calc(var(--stage-width) / var(--stage-height));
+--stage-w:calc(var(--stage-width) * 1px);--stage-h:calc(var(--stage-height) * 1px);--chrome-height:264px;--shell-width:1600px;--shell-padding:24px;
+--ui-min:44px;--ui-gap:8px;--ui-padding:14px;--ui-icon:20px;--ui-stroke:1.6;
+--ui-radius:5px;--panel-width:760px;--panel-padding:30px;--panel-max-height:88svh;
+--panel-gap:22px;--panel-title-gap:6px;--panel-line:1.75;--dialog-inset:3vw;
+--source-link-column-gap:var(--space-3);--source-link-row-gap:var(--space-1);--source-link-top-gap:var(--space-1);
+--video-panel-width:1200px;--video-columns:minmax(0,2fr) minmax(200px,1fr);--video-ratio:16 / 9;--video-min-height:200px;--video-gap:var(--space-4);--video-caption-gap:var(--space-3);
+--border-width:1px;--border-emphasis:2px;--focus-width:3px;--focus-offset:4px;
+--shadow-stage:0 20px 80px #00000045;--shadow-float:0 30px 65px #0000006b;
+--footer-y:54px;--title-y:142px;--title-width:1728px;--copy-x:96px;--copy-y:390px;--copy-width:510px;
+--visual-x:750px;--visual-y:330px;--visual-width:1040px;--visual-height:585px;
+--spatial-label-y:275px;--spatial-note-y:910px;--spatial-note-x:96px;--photo-dim:.66;
+--plane-perspective:1800px;--plane-x-angle:36deg;--plane-z-angle:-12deg;--plane-scale:.84;
+--layer-rise:95px;--layer-rise-double:190px;--trace-stroke:3px;--trace-light:1px;--trace-opacity:.6;
+--map-fill:color-mix(in srgb,var(--color-water) 14%,var(--color-bg));--map-roof:color-mix(in srgb,var(--color-water) 20%,transparent);--map-land:var(--color-subtle);--map-line:color-mix(in srgb,var(--color-water) 55%,var(--color-ink));--map-point-radius:4px;--map-anchor-radius:12px;
+--medical-photo-width:1030px;--medical-photo-opacity:.55;
+--medical-chart-x:96px;--medical-chart-y:340px;--medical-chart-width:1030px;
+--medical-axis-width:770px;--medical-axis-max:150;--medical-bar-height:42px;--medical-row-gap:20px;
+--medical-summary-x:1285px;--medical-summary-y:465px;--medical-summary-width:510px;
+--metric-unit-gap:12px;--medical-note-y:890px;--medical-note-width:1500px;
+--documents-x:96px;--documents-y:330px;--documents-width:1728px;--documents-gap:50px;
+--document-height:385px;--document-padding:36px;--document-quote-size:34px;
+--conclusion-y:820px;--conclusion-width:1728px;--document-date-size:25px;
+--motion-feedback:240;--motion-text-rise:12px;--motion-reveal:650;--motion-spatial:900;--motion-scene:520;--motion-exit:220;
+--motion-distance:45px;--motion-document-distance:110px;--motion-ease:cubic-bezier(.22,.7,.15,1);
+--motion-zero:0ms;--dim-opacity:.25;--muted-opacity:.65;
+--layer-base:0;--layer-content:1;--layer-overlay:2;--layer-controls:3;
+--clip-open:inset(0% 0% 0% 0%);--clip-closed:inset(0% 100% 0% 0%);
+--offscreen-size:1px;--offscreen-clip:inset(50%);
+--toolbar-justify:space-between;--brand-detail-display:inline;
+}
+@media(max-width:760px){:root{--shell-padding:12px;--chrome-height:300px;--type-ui:13px;--ui-padding:10px;--panel-padding:20px;--toolbar-justify:center;--brand-detail-display:none}}
+@media(prefers-reduced-motion:reduce){:root{--motion-feedback:0;--motion-reveal:0;--motion-spatial:0;--motion-scene:0;--motion-exit:0}}
+@media(max-width:760px){:root{--video-columns:minmax(0,1fr);--video-gap:var(--space-3)}}
+@media(forced-colors:active){:root{--color-bg:Canvas;--color-page:Canvas;--color-surface:Canvas;--color-raised:Canvas;--color-ink:CanvasText;--color-muted:CanvasText;--color-accent:Highlight;--color-secondary:LinkText;--color-water:LinkText;--color-line:CanvasText;--color-subtle:CanvasText;--color-paper:Canvas;--color-paper-ink:CanvasText;--map-line:CanvasText}}
+
+/* Full lecture roles. All new presentation dimensions and motion presets remain here. */
+:root{
+--type-title:72px;--type-head:48px;--type-body:32px;--copy-width:550px;--copy-y:370px;
+--stage-ruler-y:58px;--stage-ruler-size:21px;--stage-ruler-gap:6px;--stage-ruler-cell:150px;--stage-ruler-pad:8px;--stage-ruler-bar:5px;--stage-ruler-caption-gap:20px;
+--solo-ask-top:118px;--solo-ask-bottom:112px;--solo-ask-gap:28px;--solo-ask-bg:var(--color-bg);
+--solo-question-size:64px;--solo-prompt-size:32px;--solo-choice-size:30px;--solo-choice-width:270px;--solo-choice-height:84px;--solo-choice-fill:22%;--solo-hint-size:26px;
+--check-gap:36px;--check-question-size:34px;--check-option-size:26px;--check-option-height:68px;--check-feedback-size:24px;
+--term-underline:3px;--term-popover-width:380px;--term-popover-gap:8px;--term-popover-pad:16px;--term-popover-size:17px;--term-popover-name:18px;
+--color-commercial:#6fcf97;--color-operating:#62b0ea;--color-trial:#c79bf0;--color-research:#f2957a;
+--hero-gradient:linear-gradient(90deg,color-mix(in srgb,var(--color-bg) 99%,transparent) 0%,color-mix(in srgb,var(--color-bg) 93%,transparent) 31%,color-mix(in srgb,var(--color-bg) 31%,transparent) 65%,color-mix(in srgb,var(--color-bg) 13%,transparent) 100%),linear-gradient(0deg,color-mix(in srgb,var(--color-bg) 96%,transparent) 0%,color-mix(in srgb,var(--color-bg) 0%,transparent) 48%,color-mix(in srgb,var(--color-bg) 19%,transparent) 80%,color-mix(in srgb,var(--color-bg) 75%,transparent) 100%);
+--hero-copy-width:650px;--hero-copy-y:370px;--hero-photo-scale:1;--hero-origin:60% 45%;
+--hero-stat-x:1230px;--hero-stat-y:745px;--hero-stat-width:550px;--hero-stat-size:110px;
+--hero-stat-bg:color-mix(in srgb,var(--color-bg) 85%,transparent);--hero-stat-pad:24px;
+--band-y:805px;--band-width:1728px;--band-head:39px;--band-body:29px;--band-note:23px;--band-gap:12px;
+--mosaic-y:320px;--mosaic-height:440px;--mosaic-gap:24px;--mosaic-caption:34px;
+--mosaic-caption-pad:28px;--mosaic-gradient:linear-gradient(0deg,color-mix(in srgb,var(--color-page) 94%,transparent),color-mix(in srgb,var(--color-page) 0%,transparent) 70%);
+--quad-y:330px;--quad-height:430px;--quad-photo-height:300px;--quad-gap:32px;
+--visual-y:350px;--visual-width:1040px;--visual-height:585px;--spatial-label-y:295px;
+--system-photo-height:290px;--system-photo-position:50% 55%;--system-card-gap:18px;
+--glossary-y:270px;--glossary-gap:20px;--glossary-pad:26px;--glossary-card-height:208px;--glossary-term:34px;--glossary-meaning:27px;
+--system-x:680px;--system-y:310px;--system-width:1140px;--system-height:640px;
+--system-node-width:310px;--system-node-height:138px;--system-node-pad:24px;
+--system-node-top:20px;--system-node-bottom:390px;--system-node-left:25px;--system-node-right:25px;
+--system-link-width:3px;--system-node-title:36px;--system-node-text:25px;--system-bg:color-mix(in srgb,var(--color-surface) 91%,transparent);
+--process-y:610px;--process-height:150px;--process-photo-y:290px;--process-photo-height:470px;--process-gap:24px;--process-columns:5;
+--process-number:23px;--process-title:36px;--process-sub:25px;--process-bg:color-mix(in srgb,var(--color-bg) 91%,transparent);--process-pad:24px;
+--process-photo-opacity:.65;--process-gradient:linear-gradient(0deg,var(--color-bg),color-mix(in srgb,var(--color-bg) 0%,transparent) 60%);
+--overlap-top:45px;--overlap-left:40px;--overlap-width:650px;--overlap-height:420px;--overlap-gap:165px;--overlap-stroke:4px;--overlap-fill:color-mix(in srgb,var(--color-accent) 8%,transparent);
+--survey-x:700px;--survey-y:350px;--survey-width:1100px;--survey-height:540px;--survey-label-size:29px;--survey-point-radius:8px;--survey-ring-width:2px;--survey-shift-x:-95px;--survey-shift-y:75px;
+--compare-y:320px;--compare-height:440px;--compare-split:50%;--compare-divider-width:3px;--compare-label-pad:20px;--compare-label-offset:24px;--compare-label-bg:color-mix(in srgb,var(--color-bg) 91%,transparent);
+--dual-y:350px;--dual-width:520px;--dual-height:330px;--dual-gap:36px;--dual-pad:40px;--dual-background:color-mix(in srgb,var(--color-bg) 93%,transparent);
+--dots-x:720px;--dots-y:390px;--dots-width:1050px;--dots-height:450px;--dot-radius:3px;--dot-glow:0 0 10px var(--color-accent);--show-photo-opacity:.65;
+--metrics-y:365px;--metrics-gap:110px;--metrics-size:155px;--metrics-unit:34px;
+--medical-observed-x:96px;--medical-observed-y:355px;--medical-observed-width:720px;
+--medical-comparison-x:960px;--medical-comparison-y:350px;--medical-comparison-width:800px;
+--medical-small:26px;--medical-delta-size:35px;--medical-delta-gap:24px;--medical-bottom-y:790px;
+--documents-y:330px;--document-height:385px;--document-padding:36px;--document-quote-size:34px;
+--document-band-y:815px;
+--matrix-columns:3;--matrix-y:300px;--matrix-height:440px;--matrix-gap:24px;--matrix-pad:24px;--matrix-title:44px;--matrix-body:28px;--matrix-item-gap:10px;
+--question-y:330px;--question-gap:24px;--question-row-height:175px;--question-number:65px;--question-head:44px;--question-text:30px;--question-note-y:925px;
+--workshop-y:330px;--workshop-height:400px;--workshop-photo-height:310px;--workshop-gap:36px;--workshop-caption:38px;
+--airtaxi-axes-x:1000px;--airtaxi-axes-y:720px;--airtaxi-axes-width:780px;--airtaxi-axis-title:31px;
+--motion-pan:18px;--motion-rotate:5deg;--motion-grid:800;--motion-dots:1000;--motion-stagger:75;--motion-split:900;
+--motion-rise:60px;--state-muted:.3;--state-past:.6;--state-visible:1;
+--toc-gap:12px;--toc-title-size:17px;--toc-column-min:250px;--legend-gap:18px;--legend-dot-size:12px;
+--panel-wide:1040px;--input-pad:12px;--input-font:17px;--input-min-height:105px;
+--footer-source-width:850px;--footer-disclosure-width:1100px;
+}
+.layout-inspection{--hero-photo-scale:1.13;--hero-origin:65% 40%;--hero-copy-width:720px}
+.layout-dock,.layout-ecology{--process-columns:4}
+.layout-questions{--band-y:890px}
+@media(prefers-reduced-motion:reduce){:root{--motion-grid:0;--motion-dots:0;--motion-stagger:0;--motion-split:0;--motion-route:0}}
+@media(forced-colors:active){:root{--color-commercial:CanvasText;--color-operating:CanvasText;--color-trial:CanvasText;--color-research:CanvasText;--system-bg:Canvas;--process-bg:Canvas;--dual-background:Canvas;--hero-stat-bg:Canvas}}
+
+/* Audit revision: relational motion, comparison emphasis and reading equivalents. */
+:root{
+--motion-condition-lead:220;--motion-focus:400;
+--compare-focus-x:51%;--compare-focus-y:0%;--compare-focus-w:19%;--compare-focus-h:43%;
+--compare-focus-border:4px;--compare-focus-radius:6px;--compare-divider-origin:100%;
+--timeline-top:calc(var(--document-height) + var(--space-3));--timeline-height:3px;--timeline-dot:12px;
+--reading-item-gap:var(--space-2);--reflection-padding:var(--space-2);
+--reflection-bg:var(--color-raised);--reflection-line:var(--color-accent);
+--reflection-duration:calc(var(--motion-focus) * 1ms);
+--heading-wrap:balance;
+}
+@media(prefers-reduced-motion:reduce){:root{--motion-condition-lead:0;--motion-focus:0}}
+
+/* 12 visual/semantic corrections: common points, result states and comparison labels. */
+:root{
+--match-radius:25px;--match-stroke:6px;--match-label-size:35px;--match-label-outline:8px;
+--map-annotation-stroke:5px;--map-annotation-label:46px;--map-annotation-fill:color-mix(in srgb,var(--color-accent) 12%,transparent);
+--workflow-photo-height:315px;--workflow-target-x:43%;--workflow-target-y:8%;--workflow-target-w:13%;--workflow-target-h:20%;
+--future-columns:2;--future-caption:34px;
+--fishing-svg-height:150px;--fishing-step-height:240px;--fishing-sequence-gap:20px;--fishing-step-title:27px;
+--fishing-line-carried:path('M90 65Q180 20 340 50L340 125');--fishing-line-released:path('M90 65Q180 150 340 185L340 185');
+--fishing-clip-open:rotate(-55deg);--fishing-clip-origin:320px 40px;--fishing-label-size:25px;--fishing-rod-width:9px;
+--reliability-status-size:23px;--certification-title:32px;--certification-text:26px;--certification-card-pad:22px;--certification-card-gap:16px;
+--confidence-height:75px;--confidence-text:27px;--confidence-note:23px;--confidence-dot:9px;--confidence-stroke:5px;--photo-method-size:22px;
+}
+.layout-cinema{--hero-stat-x:790px;--hero-stat-y:920px;--hero-stat-width:1030px;--hero-stat-pad:8px;--hero-stat-size:46px;--type-unit:29px;--official-note-size:21px}
+.slide-glossary-reading{--glossary-pad:20px;--glossary-card-height:180px;--glossary-meaning:24px;--glossary-term:32px}
+.slide-glossary-space{--glossary-meaning:25px;--glossary-pad:22px}
+
+:root{--photo-piece-scatter-scale:.8;--match-label-size:42px;--photo-piece-origin:0% 0%}
+
+.slide-glossary-reading{--glossary-card-height:160px;--glossary-y:260px}

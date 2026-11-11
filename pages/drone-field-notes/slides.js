@@ -1934,7 +1934,10 @@ window.DRONE_CONTENT = {
       "motion": {
         "entry": "focus"
       },
-      "question": "사진이 선명하면 지도 위의 위치도 정확할까요?"
+      "question": "사진이 선명하면 지도 위의 위치도 정확할까요?",
+      "askImages": [
+        "harbor"
+      ]
     },
     {
       "id": "construction",
@@ -2858,7 +2861,10 @@ window.DRONE_CONTENT = {
       "motion": {
         "entry": "chronology"
       },
-      "question": "운항 허가를 받으면 바로 승객을 태울까요?"
+      "question": "운항 허가를 받으면 바로 승객을 태울까요?",
+      "askImages": [
+        "airtaxi"
+      ]
     },
     {
       "id": "status-map",
@@ -2946,7 +2952,12 @@ window.DRONE_CONTENT = {
       "motion": {
         "entry": "focus"
       },
-      "question": "지금 쓰이는 드론과 아직 실험 중인 드론은 무엇일까요?"
+      "question": "지금 쓰이는 드론과 아직 실험 중인 드론은 무엇일까요?",
+      "askImages": [
+        "delivery",
+        "airtaxi",
+        "aerial-am"
+      ]
     },
     {
       "id": "reliability",
@@ -3249,7 +3260,12 @@ window.DRONE_CONTENT = {
       "motion": {
         "entry": "focus"
       },
-      "question": "내 주변에서 드론이 도울 일은 어떻게 찾을까요?"
+      "question": "내 주변에서 드론이 도울 일은 어떻게 찾을까요?",
+      "askImages": [
+        "harbor",
+        "agriculture",
+        "construction-after"
+      ]
     },
     {
       "id": "workshop",

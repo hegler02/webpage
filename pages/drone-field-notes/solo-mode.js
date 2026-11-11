@@ -2,7 +2,7 @@
 /* Solo study mode: a question step opens each slide, a stage prediction is checked on the next step,
    terms explain themselves in place, and each section closes with a short check. */
 window.DRONE_SOLO=(()=>{
-  const {esc,token,num,stageKeys}=window.DRONE_UTILS,data=window.DRONE_CONTENT,store='drone-field-notes-solo',copy=data.solo;
+  const {esc,token,num,img,stageKeys}=window.DRONE_UTILS,data=window.DRONE_CONTENT,store='drone-field-notes-solo',copy=data.solo;
   const saved=(()=>{try{return JSON.parse(localStorage.getItem(store))||{};}catch{return {};}})();
   let on=saved.on===true;
   const guesses=saved.guesses&&typeof saved.guesses==='object'?saved.guesses:{};
@@ -55,7 +55,11 @@ window.DRONE_SOLO=(()=>{
       const choices=quiz(s)
         ?'<p class="solo-prompt" id="soloPrompt">'+esc(copy.prompt)+'</p><div class="solo-choices" role="group" aria-labelledby="soloPrompt">'+data.stageScale.map(x=>'<button type="button" class="solo-choice stage-'+x.key+'" data-stage="'+x.key+'" aria-pressed="false">'+esc(x.label)+'</button>').join('')+'</div><p class="solo-hint" role="status"></p>'
         :'<p class="solo-hint">'+esc(copy.think)+'</p>';
-      html+='<div class="solo-ask solo-sheet" hidden><p class="solo-ask-label">'+esc(copy.label)+'</p><p class="solo-question">'+esc(s.question)+'</p>'+choices+'</div>';
+      /* The slide's own pictures sit behind the question; titles and figures stay covered so the answer does not show. */
+      const photos=(s.askImages||s.images||(s.layout==='quadrants'?s.items.map(x=>x[2]):null)||(s.image?[s.image]:[])).slice(0,4);
+      const backdrop=photos.length===1?img(photos[0],'solo-ask-photo')+'<div class="solo-ask-shade"></div>':photos.length?'<div class="solo-ask-grid">'+photos.map(name=>img(name)).join('')+'</div>':'';
+      const variant=photos.length===1?' has-photo':photos.length?' has-grid':'';
+      html+='<div class="solo-ask solo-sheet'+variant+'" hidden>'+backdrop+'<div class="solo-ask-copy"><p class="solo-ask-label">'+esc(copy.label)+'</p><p class="solo-question">'+esc(s.question)+'</p>'+choices+'</div></div>';
     }
     if(s.check){
       html+='<div class="solo-check solo-sheet" hidden><p class="solo-ask-label">'+esc(copy.checkLabel+' · '+data.sections[s.section])+'</p><ol class="check-list">'+s.check.map((it,i)=>'<li class="check-item"><p class="check-question" id="checkQ'+i+'">'+esc(it.question)+'</p><div class="check-options" role="group" aria-labelledby="checkQ'+i+'">'+it.options.map((o,j)=>'<button type="button" class="check-option" data-item="'+i+'" data-option="'+j+'" aria-pressed="false">'+esc(o)+'</button>').join('')+'</div><div class="check-feedback" role="status"></div></li>').join('')+'</ol></div>';

@@ -89,7 +89,7 @@ color-scheme:dark;
 --type-title:72px;--type-head:48px;--type-body:32px;--copy-width:550px;--copy-y:370px;
 --stage-ruler-y:58px;--stage-ruler-size:21px;--stage-ruler-gap:6px;--stage-ruler-cell:150px;--stage-ruler-pad:8px;--stage-ruler-bar:5px;--stage-ruler-caption-gap:20px;
 --solo-ask-top:118px;--solo-ask-bottom:112px;--solo-ask-gap:28px;--solo-ask-bg:var(--color-bg);
---solo-question-size:64px;--solo-prompt-size:32px;--solo-choice-size:30px;--solo-choice-width:270px;--solo-choice-height:84px;--solo-choice-fill:22%;--solo-hint-size:26px;
+--solo-question-size:64px;--solo-prompt-size:32px;--solo-choice-size:30px;--solo-choice-width:270px;--solo-choice-height:84px;--solo-choice-fill:22%;--solo-hint-size:26px;--solo-ask-copy-width:900px;--solo-ask-grid-width:760px;--solo-ask-grid-wide:32 / 10;--solo-choice-width-compact:200px;--solo-ask-grid-gap:16px;--solo-ask-grid-ratio:16 / 10;--solo-choice-bg:color-mix(in srgb,var(--color-bg) 82%,transparent);
 --check-gap:36px;--check-question-size:34px;--check-option-size:26px;--check-option-height:68px;--check-feedback-size:24px;
 --term-underline:3px;--term-popover-width:380px;--term-popover-gap:8px;--term-popover-pad:16px;--term-popover-size:17px;--term-popover-name:18px;
 --color-commercial:#6fcf97;--color-operating:#62b0ea;--color-trial:#c79bf0;--color-research:#f2957a;

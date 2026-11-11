@@ -1,7 +1,7 @@
 // mirinae-charts: one data spec drawn as a precise chart card. Pure SVG and canvas, no dependencies.
 // Colours come only from --mc-* CSS variables, which each project maps to its own design tokens (see mirinae-charts.css).
 // Card ideas (one accent, a bold one-line takeaway) follow ztd-charts by Junhan2, MIT; the code here is our own.
-export const VERSION='0.1.0';
+export const VERSION='0.2.0';
 const NS='http://www.w3.org/2000/svg';
 const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -56,8 +56,9 @@ class Card{
   const ctx={spec:this.spec,o:this.spec.options??{},W:this.width,fmt:this.fmt,card:this,family,text:(t,s=12,w=400)=>measure(t,s,w,family)};
   const out=form(ctx);this.H=out.height;
   this.plot.querySelectorAll('svg,canvas').forEach(n=>n.remove());
-  if(out.canvas)this.plot.prepend(out.canvas);
+  // Canvas cells go underneath; the SVG with lines, labels and hit areas sits on top.
   this.plot.insertAdjacentHTML('afterbegin',`<svg class="mc-svg" width="${this.width}" height="${out.height}" viewBox="0 0 ${this.width} ${out.height}" role="img" aria-label="${esc(this.spec.ariaLabel??this.spec.title??this.spec.type)}">${out.svg}</svg>`);
+  if(out.canvas)this.plot.prepend(out.canvas);
   this.svg=this.plot.querySelector('svg');this.pick=out.pick;
   const legend=this.el.querySelector('.mc-legend');legend.innerHTML=(out.legend??[]).map(l=>`<span class="mc-key"><i class="mc-swatch${l.line?' is-line':''}${l.ramp?' is-ramp':''}" style="--c:${l.color}"></i>${esc(l.label)}</span>`).join('');legend.hidden=!out.legend?.length;
   this.el.querySelector('.mc-table-scroll').innerHTML=out.table??'';
@@ -100,7 +101,7 @@ const leftPad=(ctx,sc)=>Math.ceil(Math.max(...sc.ticks.map(v=>ctx.text(ctx.fmt.a
 const unit=(ctx,v)=>`${ctx.fmt(v)}${ctx.o.unit??ctx.spec.unit?' '+(ctx.o.unit??ctx.spec.unit):''}`;
 
 // ---------- forms ----------
-const FORMS={bar,line,area:c=>line(c,true),waterfall,heatmap,donut,sankey,scatter,dumbbell,slope,bump,treemap,calendar,gauge,candlestick};
+const FORMS={bar,line,area:c=>line(c,true),waterfall,heatmap,donut,sankey,scatter,dumbbell,slope,bump,treemap,calendar,gauge,candlestick,sunpath,windrose,psychro,loadduration};
 
 function bar(ctx){
  const {spec,o,W}=ctx,x=spec.encoding.x,ys=keysOf(spec.encoding.y),rows=spec.data,stack=!!o.stack&&ys.length>1,colors=colorFor(o,o.highlight!=null&&ys.length===1?rows.map(r=>r[x]):ys);
@@ -322,4 +323,102 @@ function candlestick(ctx){
   return `<g><rect class="mc-hit" data-tip="${esc(tip)}" data-group="${i}" x="${L+i*band}" y="${T}" width="${band}" height="${H-T-B}"/><line x1="${cx}" x2="${cx}" y1="${Y(r[hk])}" y2="${Y(r[lk])}" stroke="${c}" stroke-width="1.2"/><rect class="mc-mark" data-mark="${i}" x="${cx-bw/2}" y="${top}" width="${bw}" height="${h}" fill="${c}"/></g>`;}).join('');
  return {height:H,svg:yAxis(ctx,sc,L,R,T,H-B)+marks+xLabels(ctx,rows.map(r=>String(r[xk])),i=>L+i*band+band/2,H-10,band),legend:[{label:o.riseLabel??'상승',color:'var(--mc-rise)'},{label:o.fallLabel??'하락',color:'var(--mc-fall)'}],
   table:table([xk,'시가','고가','저가','종가'],rows.map(r=>[r[xk],r[ok],r[hk],r[lk],r[ck]]),ctx.fmt)};
+}
+
+// ---------- building climate set ----------
+// Sun altitude and azimuth (degrees, azimuth clockwise from north) at a local clock time.
+export function sunAt(day,clock,{lat,lon,tz}){
+ const g=2*Math.PI/365*(day-1+(clock-12)/24),R=Math.PI/180;
+ const eot=229.18*(.000075+.001868*Math.cos(g)-.032077*Math.sin(g)-.014615*Math.cos(2*g)-.040849*Math.sin(2*g));
+ const dec=.006918-.399912*Math.cos(g)+.070257*Math.sin(g)-.006758*Math.cos(2*g)+.000907*Math.sin(2*g)-.002697*Math.cos(3*g)+.00148*Math.sin(3*g);
+ const ha=((clock*60+eot+4*lon-60*tz)/4-180)*R,phi=lat*R,cz=clamp(Math.sin(phi)*Math.sin(dec)+Math.cos(phi)*Math.cos(dec)*Math.cos(ha),-1,1),zen=Math.acos(cz);
+ let az=Math.acos(clamp((Math.sin(phi)*cz-Math.sin(dec))/(Math.cos(phi)*Math.sin(zen)||1e-9),-1,1))/R;az=ha>0?(az+180)%360:(540-az)%360;
+ return {altitude:90-zen/R,azimuth:az};
+}
+// Humidity ratio in g/kg of dry air from dry-bulb °C and relative humidity %, at a pressure in kPa.
+export function humidityRatio(t,rh,p=101.325){const ps=.61094*Math.exp(17.625*t/(t+243.04)),pw=ps*rh/100;return 622*pw/(p-pw);}
+const DIRS=['북','북북동','북동','동북동','동','동남동','남동','남남동','남','남남서','남서','서남서','서','서북서','북서','북북서'];
+const DOY=[0,31,59,90,120,151,181,212,243,273,304,334];
+
+// Sun path, seen from above: rings are altitude, spokes are compass bearings, one path per month's 21st.
+// options {lat, lon, tz, now:{day, hour}?, label?}
+function sunpath(ctx){
+ const {o,W}=ctx,site={lat:o.lat??37.57,lon:o.lon??126.97,tz:o.tz??9},H=o.height??clamp(Math.round(W*.86),300,520),pad=34,Rr=Math.min(W/2-pad-30,H/2-pad),cx=W/2,cy=H/2;
+ const P=(alt,az)=>{const r=Rr*(90-alt)/90,z=az*Math.PI/180;return [cx+r*Math.sin(z),cy-r*Math.cos(z)];};
+ let g='';
+ const ringStep=Rr*15/90>16?15:30;for(const a of [0,15,30,45,60,75])g+=`<circle class="mc-grid${a===0?' is-zero':''}" cx="${cx}" cy="${cy}" r="${Rr*(90-a)/90}" fill="none"/>`+(a&&a%ringStep===0?`<text class="mc-tick" x="${cx+3}" y="${cy-Rr*(90-a)/90-3}">${a}°</text>`:'');
+ for(let az=0;az<360;az+=30){const [x,y]=P(0,az);g+=`<line class="mc-grid" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/>`;}
+ g+=[['북',0],['동',90],['남',180],['서',270]].map(([t,az])=>{const [x,y]=P(-12,az);return `<text class="mc-label is-strong" x="${x}" y="${y+4}" text-anchor="middle">${t}</text>`;}).join('');
+ const days=[[355,'12월','동지'],[21,'1·11월'],[52,'2·10월'],[80,'3·9월','춘·추분'],[111,'4·8월'],[141,'5·7월'],[172,'6월','하지']];
+ const paths=days.map(([d,label,name])=>{const pts=[];for(let m=0;m<=24*60;m+=6){const s=sunAt(d,m/60,site);if(s.altitude>=0)pts.push(P(s.altitude,s.azimuth));}
+  const noon=sunAt(d,12+(135-site.lon)/15-0.05,site),[nx,ny]=P(noon.altitude,noon.azimuth),hi=o.highlight===label;
+  return `<polyline class="mc-line${hi?'':' is-quiet'}" data-tip="${esc(`<strong>${label} 21일${name?' · '+name:''}</strong><span>남중 고도 ${ctx.fmt(noon.altitude,1)}°</span>`)}" points="${pts.map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' ')}" stroke="${hi?'var(--mc-accent)':'var(--mc-s4)'}" stroke-width="${hi?2.5:1.5}"/>${name?`<text class="mc-label" x="${nx+7}" y="${ny+4}">${name}</text>`:''}`;}).join('');
+ // Hour lines join the same clock time across the year.
+ let hours='';for(let h=5;h<=19;h++){const pts=[];for(let d=1;d<=365;d+=4){const s=sunAt(d,h,site);if(s.altitude>0)pts.push(P(s.altitude,s.azimuth));}if(pts.length<2)continue;
+  const far=pts.reduce((a,p)=>Math.hypot(p[0]-cx,p[1]-cy)>Math.hypot(a[0]-cx,a[1]-cy)?p:a);
+  hours+=`<polyline class="mc-join" points="${pts.map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' ')}" fill="none"/>`;
+  const d=Math.hypot(far[0]-cx,far[1]-cy)||1;if(h%2===0&&d>Rr*.8)hours+=`<text class="mc-tick" x="${cx+(far[0]-cx)*(1+14/d)}" y="${cy+(far[1]-cy)*(1+14/d)+4}" text-anchor="middle">${h}시</text>`;}
+ let now='';if(o.now){const s=sunAt(o.now.day,o.now.hour,site);if(s.altitude>0){const [x,y]=P(s.altitude,s.azimuth);now=`<circle class="mc-mark" data-tip="${esc(`<strong>${esc(o.now.label??'지금')}</strong><span>해 높이 ${ctx.fmt(s.altitude,1)}°</span><span>방위 ${ctx.fmt(s.azimuth,0)}°</span>`)}" cx="${x}" cy="${y}" r="8" fill="var(--mc-accent)" stroke="var(--mc-surface)" stroke-width="3"/>`;}}
+ const tbl=days.map(([d,label])=>{const s=sunAt(d,12+(135-site.lon)/15,site);let rise=null,set=null;for(let m=0;m<=24*60;m+=2){const a=sunAt(d,m/60,site).altitude;if(a>0&&rise==null)rise=m;if(a>0)set=m;}const t=m=>m==null?'—':`${Math.floor(m/60)}:${String(m%60).padStart(2,'0')}`;return [label,s.altitude,t(rise),t(set)];});
+ return {height:H,svg:g+hours+paths+now,legend:[{label:'21일의 해 길',color:'var(--mc-s4)',line:true},{label:'같은 시각',color:'var(--mc-line-strong)',line:true},...(o.now?[{label:o.now.label??'지금',color:'var(--mc-accent)'}]:[])],
+  table:table(['21일','남중 고도 °','해 뜸','해 짐'],tbl,ctx.fmt)};
+}
+
+// Wind rose: 16 bearings, wedges stacked by speed band, length is the share of all hours.
+// data rows with encoding {dir, speed} (degrees from north, m/s), or options {dir:[], speed:[]}.
+function windrose(ctx){
+ const {spec,o,W,card}=ctx,dirs=o.dir??spec.data.map(r=>r[spec.encoding.dir]),speeds=o.speed??spec.data.map(r=>r[spec.encoding.speed]),bands=o.bands??[.5,2,4,6,Infinity],calmBelow=bands[0];
+ const n=dirs.length,count=Array.from({length:16},()=>Array(bands.length-1).fill(0));let calm=0;
+ dirs.forEach((d,i)=>{const s=speeds[i];if(s<calmBelow){calm++;return;}const k=Math.round(((d%360)+360)%360/22.5)%16,b=bands.findIndex((e,j)=>s>=e&&s<bands[j+1]);count[k][b]++;});
+ const pct=count.map(r=>r.map(c=>c/n*100)),tot=pct.map(r=>r.reduce((a,v)=>a+v,0)),max=Math.max(...tot),sc=niceTicks(0,max,4);
+ const H=o.height??clamp(Math.round(W*.86),300,500),cx=W/2,cy=H/2,Rr=Math.min(W/2-40,H/2-30),r0=Rr*.08,rad=v=>r0+(Rr-r0)*v/sc.hi;
+ const f=ramp([card.css('--mc-seq-low','#1f2a33'),card.css('--mc-seq-high','#7fd3c0')]),cols=bands.slice(0,-1).map((_,j)=>`rgb(${f(.42+.58*j/Math.max(1,bands.length-2)).join(',')})`);
+ const arc=(a0,a1,ri,ro)=>{const p=(a,r)=>[cx+r*Math.sin(a),cy-r*Math.cos(a)];const [x1,y1]=p(a0,ro),[x2,y2]=p(a1,ro),[x3,y3]=p(a1,ri),[x4,y4]=p(a0,ri);return `M${x1},${y1}A${ro},${ro} 0 0 1 ${x2},${y2}L${x3},${y3}A${ri},${ri} 0 0 0 ${x4},${y4}Z`;};
+ const lb=168*Math.PI/180,every=rad(sc.step)-rad(0)<18?2:1;let g=sc.ticks.filter(v=>v>0).map((v,i)=>`<circle class="mc-grid" cx="${cx}" cy="${cy}" r="${rad(v)}" fill="none"/>${(i+1)%every?'':`<text class="mc-tick" x="${cx+rad(v)*Math.sin(lb)+3}" y="${cy-rad(v)*Math.cos(lb)+4}">${ctx.fmt(v)}%</text>`}`).join('');
+ g+=[['북',0],['동',90],['남',180],['서',270]].map(([t,az])=>{const a=az*Math.PI/180;return `<text class="mc-label is-strong" x="${cx+(Rr+16)*Math.sin(a)}" y="${cy-(Rr+16)*Math.cos(a)+4}" text-anchor="middle">${t}</text>`;}).join('');
+ let wedges='';pct.forEach((row,k)=>{const mid=k*22.5*Math.PI/180,half=9.8*Math.PI/180;let acc=0;row.forEach((v,j)=>{if(!v)return;
+  wedges+=`<path class="mc-mark" data-tip="${esc(`<strong>${DIRS[k]}풍</strong><span>${bands[j]}–${bands[j+1]===Infinity?'':bands[j+1]} m/s ${ctx.fmt(v,1)}%</span><span>${DIRS[k]} 합계 ${ctx.fmt(tot[k],1)}%</span>`)}" d="${arc(mid-half,mid+half,rad(acc)+.5,rad(acc+v))}" fill="${cols[j]}"/>`;acc+=v;});});
+ const center=`<circle cx="${cx}" cy="${cy}" r="${r0}" fill="var(--mc-surface)" stroke="var(--mc-line-strong)"/><text class="mc-tick" x="${cx}" y="${cy+4}" text-anchor="middle">${ctx.fmt(calm/n*100,0)}%</text>`;
+ return {height:H,svg:g+wedges+center,legend:[...bands.slice(0,-1).map((b,j)=>({label:`${b}${bands[j+1]===Infinity?' m/s 이상':'–'+bands[j+1]+' m/s'}`,color:cols[j]})),{label:`가운데: 바람 없음(${calmBelow} m/s 미만)`,color:'var(--mc-surface)'}],
+  table:table(['방위',...bands.slice(0,-1).map((b,j)=>`${b}${bands[j+1]===Infinity?'+':'–'+bands[j+1]}`),'합계 %'],pct.map((r,k)=>[DIRS[k],...r,tot[k]]),ctx.fmt)};
+}
+
+// Psychrometric chart: dry bulb across, humidity ratio up the right, curves of equal relative humidity.
+// Hours are counted into 1 °C × 0.5 g/kg cells and shaded by how many fall there.
+// data rows with encoding {t, rh}, or options {t:[], rh:[]}; options.comfort {tmin,tmax,rhmin,rhmax}, pressure kPa.
+function psychro(ctx){
+ const {spec,o,W,card}=ctx,ts=o.t??spec.data.map(r=>r[spec.encoding.t]),rhs=o.rh??spec.data.map(r=>r[spec.encoding.rh]),p=o.pressure??101.325;
+ const tmin=o.tmin??-20,tmax=o.tmax??40,wmax=o.wmax??26,H=o.height??clamp(Math.round(W*.62),260,440),L=14,R=W-44,T=12,B=34,X=t=>L+(R-L)*(t-tmin)/(tmax-tmin),Y=w=>T+(H-T-B)*(1-w/wmax);
+ const cells=new Map();ts.forEach((t,i)=>{const w=humidityRatio(t,rhs[i],p),k=`${Math.floor(t)}|${Math.floor(w*2)}`;cells.set(k,(cells.get(k)??0)+1);});
+ const most=Math.max(...cells.values()),f=ramp([card.css('--mc-seq-low','#1f2a33'),card.css('--mc-seq-high','#7fd3c0')]);
+ const dpr=Math.min(2,devicePixelRatio||1),cv=document.createElement('canvas');cv.className='mc-canvas';cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);cv.style.width=W+'px';cv.style.height=H+'px';
+ const g2=cv.getContext('2d');g2.scale(dpr,dpr);
+ for(const [k,c] of cells){const [t,w2]=k.split('|').map(Number);if(t<tmin||t>=tmax||w2/2>=wmax)continue;g2.fillStyle=`rgb(${f(.15+.85*Math.log(1+c)/Math.log(1+most)).join(',')})`;g2.fillRect(X(t),Y((w2+1)/2),Math.ceil(X(t+1)-X(t)),Math.ceil(Y(w2/2)-Y((w2+1)/2)));}
+ let g='';for(let t=Math.ceil(tmin/10)*10;t<=tmax;t+=10)g+=`<line class="mc-grid" x1="${X(t)}" x2="${X(t)}" y1="${T}" y2="${H-B}"/><text class="mc-tick" x="${X(t)}" y="${H-B+16}" text-anchor="middle">${t}</text>`;
+ for(let w=0;w<=wmax;w+=5)g+=`<line class="mc-grid" x1="${L}" x2="${R}" y1="${Y(w)}" y2="${Y(w)}"/><text class="mc-tick" x="${R+6}" y="${Y(w)+4}">${w}</text>`;
+ g+=`<text class="mc-tick" x="${R}" y="${H-2}" text-anchor="end">건구 온도 °C →</text><text class="mc-tick" x="${R+6}" y="${T-2}" text-anchor="start">g/kg</text>`;
+ const curve=rh=>{const pts=[];for(let t=tmin;t<=tmax;t+=.5){const w=humidityRatio(t,rh,p);if(w>wmax)break;pts.push([X(t),Y(w)]);}return pts;};
+ let rhLines='';const placed=[];for(const rh of [100,20,60,40,80]){const pts=curve(rh),last=pts[pts.length-1],w=ctx.text(rh+'%',12)+4,box=[last[0]-4-w,last[1]-18,last[0]-4,last[1]-2],free=!placed.some(b=>box[0]<b[2]&&box[2]>b[0]&&box[1]<b[3]&&box[3]>b[1]);if(free)placed.push(box);
+  rhLines+=`<polyline class="mc-line${rh===100?'':' is-quiet'}" points="${pts.map(q=>q.map(v=>v.toFixed(1)).join(',')).join(' ')}" stroke="${rh===100?'var(--mc-text)':'var(--mc-line-strong)'}" stroke-width="${rh===100?2:1}"/>${free?`<text class="mc-tick" x="${last[0]-4}" y="${last[1]-5}" text-anchor="end">${rh}%</text>`:''}`;}
+ let zone='';const c=o.comfort;if(c){const lo=[],hi=[];for(let t=c.tmin;t<=c.tmax+1e-9;t+=.5){lo.push([X(t),Y(humidityRatio(t,c.rhmin,p))]);hi.push([X(t),Y(humidityRatio(t,c.rhmax,p))]);}
+  const inside=ts.filter((t,i)=>t>=c.tmin&&t<=c.tmax&&rhs[i]>=c.rhmin&&rhs[i]<=c.rhmax).length;
+  zone=`<path data-tip="${esc(`<strong>${esc(c.label??'쾌적 범위')}</strong><span>${c.tmin}–${c.tmax} °C, 상대습도 ${c.rhmin}–${c.rhmax}%</span><span>1년 중 ${ctx.fmt(inside)}시간 (${ctx.fmt(inside/ts.length*100,1)}%)</span>`)}" d="M${lo.map(q=>q.join(',')).join('L')}L${[...hi].reverse().map(q=>q.join(',')).join('L')}Z" fill="none" stroke="var(--mc-accent)" stroke-width="2"/>`;}
+ const pick=(px,py)=>{const t=tmin+(px-L)/(R-L)*(tmax-tmin),w=(1-(py-T)/(H-T-B))*wmax;if(t<tmin||t>tmax||w<0||w>wmax)return null;const k=`${Math.floor(t)}|${Math.floor(w*2)}`,n=cells.get(k);return n?`<strong>${Math.floor(t)}–${Math.floor(t)+1} °C · ${Math.floor(w*2)/2}–${Math.floor(w*2)/2+.5} g/kg</strong><span>${ctx.fmt(n)}시간</span>`:null;};
+ return {height:H,canvas:cv,svg:g+rhLines+zone,pick,legend:[{label:'시간이 많을수록 진하게',color:`rgb(${f(1).join(',')})`},{label:'상대습도 곡선',color:'var(--mc-line-strong)',line:true},...(c?[{label:c.label??'쾌적 범위',color:'var(--mc-accent)',line:true}]:[])],
+  table:`<p class="mc-note">${ctx.fmt(ts.length)}시간을 1 °C × 0.5 g/kg 칸으로 셌습니다. 칸을 눌러 시간 수를 읽습니다.</p>`};
+}
+
+// Load duration curve: every hour's load, largest first. options.values or data with encoding.value; options.refs [{value,label}].
+function loadduration(ctx){
+ const {spec,o,W}=ctx,vals=[...(o.values??spec.data.map(r=>r[spec.encoding.value]))].sort((a,b)=>b-a),n=vals.length,refs=o.refs??[];
+ const H=o.height??clamp(Math.round(W*.4),220,320),T=14,B=34,sc=niceTicks(0,Math.max(vals[0],...refs.map(r=>r.value)),4),L=leftPad(ctx,sc),R=W-8,X=i=>L+(R-L)*i/(n-1),Y=v=>T+(H-T-B)*(1-(v-sc.lo)/(sc.hi-sc.lo));
+ const step=Math.max(1,Math.floor(n/Math.max(200,R-L))),pts=[];for(let i=0;i<n;i+=step)pts.push([X(i),Y(vals[i])]);pts.push([X(n-1),Y(vals[n-1])]);
+ const line=pts.map(q=>q.map(v=>v.toFixed(1)).join(',')).join(' '),area=`<path class="mc-area" d="M${X(0)},${Y(0)}L${pts.map(q=>q.join(',')).join('L')}L${X(n-1)},${Y(0)}Z" fill="var(--mc-s1)" opacity=".35"/>`;
+ const ticks=[0,1000,2000,4000,6000,n].filter((v,i,a)=>v<=n&&a.indexOf(v)===i&&(v===n||n-v>600)).map(v=>`<text class="mc-tick" x="${X(Math.min(v,n-1))}" y="${H-B+16}" text-anchor="${v===n?'end':'middle'}">${ctx.fmt(v)}</text>`).join('');
+ const refLines=refs.map(r=>{const above=vals.filter(v=>v>r.value).length;return `<line class="mc-join" x1="${L}" x2="${R}" y1="${Y(r.value)}" y2="${Y(r.value)}" style="stroke:var(--mc-accent)"/><text class="mc-label" x="${R}" y="${Y(r.value)-6}" text-anchor="end">${esc(r.label)} ${esc(ctx.fmt(r.value))}${esc(o.unit??spec.unit?' '+(o.unit??spec.unit):'')}${above?` · 넘는 시간 ${ctx.fmt(above)}`:''}</text>`;}).join('');
+ const peak=`<circle class="mc-dot" cx="${X(0)}" cy="${Y(vals[0])}" r="4" fill="var(--mc-s1)"/><text class="mc-value" x="${X(0)+8}" y="${Y(vals[0])+4}">최대 ${esc(unit(ctx,vals[0]))}</text>`;
+ const pick=(px,py)=>{if(px<L||px>R||py<T||py>H-B)return null;const i=clamp(Math.round((px-L)/(R-L)*(n-1)),0,n-1);return `<strong>${ctx.fmt(i+1)}번째로 큰 시간</strong><span>${unit(ctx,vals[i])}</span><span>이보다 큰 시간 ${ctx.fmt(i)}시간</span>`;};
+ const q=[0,.01,.1,.5,.9].map(f=>Math.min(n-1,Math.floor(f*n)));
+ return {height:H,svg:yAxis(ctx,sc,L,R,T,H-B)+area+`<polyline class="mc-line" points="${line}" stroke="var(--mc-s1)"/>`+refLines+peak+ticks+`<text class="mc-tick" x="${R}" y="${H-2}" text-anchor="end">큰 순서로 늘어놓은 시간 →</text>`,pick,
+  table:table(['순위','시간 비율',spec.labels?.value??'값'],q.map(i=>[`${ctx.fmt(i+1)}번째`,`상위 ${ctx.fmt(i/n*100,1)}%`,vals[i]]),ctx.fmt)};
 }

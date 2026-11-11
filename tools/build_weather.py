@@ -31,9 +31,9 @@ def main():
         'source': {'name': 'climate.onebuilding.org ' + Path(a.epw).stem, 'url': a.source_url,
                    'note': '여러 해의 관측에서 달마다 대표적인 달을 골라 이은 표준 기상년(TMYx)입니다.'},
         'design': {'heating996': float(design[heat + 2]), 'cooling04': float(design[cool + 3])},
-        'units': {'t': '0.1 °C', 'rh': '%', 'ghi': 'W/m²', 'dni': 'W/m²', 'dhi': 'W/m²', 'wind': '0.1 m/s'},
+        'units': {'t': '0.1 °C', 'rh': '%', 'ghi': 'W/m²', 'dni': 'W/m²', 'dhi': 'W/m²', 'wind': '0.1 m/s', 'wdir': '° from north'},
         # Each array starts at 1 January 01:00 and gives the hour that ends at that time.
-        't': col(6, 10), 'rh': col(8), 'ghi': col(13), 'dni': col(14), 'dhi': col(15), 'wind': col(21, 10),
+        't': col(6, 10), 'rh': col(8), 'ghi': col(13), 'dni': col(14), 'dhi': col(15), 'wind': col(21, 10), 'wdir': col(20),
     }
     Path(a.out).write_text(json.dumps(out, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     print(a.out, Path(a.out).stat().st_size, 'bytes')

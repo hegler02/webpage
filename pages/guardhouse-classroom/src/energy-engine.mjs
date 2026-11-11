@@ -35,7 +35,7 @@ export function simulate(weather,b){
  const hours=weather.t.length,H=b.surfaces.reduce((a,s)=>a+s.area*s.u*(s.b??1),0),Hv=.34*b.ach*b.volume,Htot=H+Hv;
  const glazing=b.surfaces.filter(s=>s.g);
  const months=Array.from({length:12},()=>({heat:0,cool:0,heatElec:0,coolElec:0,light:0,equip:0,pv:0,solar:0}));
- let peak={heat:0,cool:0,elec:0},peakAt={heat:0,cool:0,elec:0},pvYear=0,poaYear=0;
+ let peak={heat:0,cool:0,elec:0},peakAt={heat:0,cool:0,elec:0},pvYear=0,poaYear=0;const hourly=new Float32Array(hours);
  for(let i=0;i<hours;i++){
   const day=Math.floor(i/24)+1,clock=i%24+.5,m=monthOfDay(day),sun=sunPosition(day,clock,weather);
   const sky={dni:weather.dni[i],dhi:weather.dhi[i],ghi:weather.ghi[i]},tout=weather.t[i]/10;
@@ -46,11 +46,11 @@ export function simulate(weather,b){
   if(!heat){const free=tout+gains/Htot;cool=Math.max(0,Htot*(free-b.coolSet));}
   const poa=surfaceSun(sun,b.pv.tilt,FACING.S,sky),pv=b.pv.kwp*poa/1000*b.pv.ratio*1000;
   const heatElec=heat/b.heatCop,coolElec=cool/b.coolCop,elec=heatElec+coolElec+light+b.equipWatts;
-  const o=months[m];o.heat+=heat;o.cool+=cool;o.heatElec+=heatElec;o.coolElec+=coolElec;o.light+=light;o.equip+=b.equipWatts;o.pv+=pv;o.solar+=solar;pvYear+=pv;poaYear+=poa;
+  hourly[i]=elec;const o=months[m];o.heat+=heat;o.cool+=cool;o.heatElec+=heatElec;o.coolElec+=coolElec;o.light+=light;o.equip+=b.equipWatts;o.pv+=pv;o.solar+=solar;pvYear+=pv;poaYear+=poa;
   for(const [k,v] of [['heat',heat],['cool',cool],['elec',elec]])if(v>peak[k]){peak[k]=v;peakAt[k]=i;}
  }
  const kwh=w=>w/1000,year=Object.fromEntries(Object.keys(months[0]).map(k=>[k,kwh(months.reduce((a,o)=>a+o[k],0))]));
- return {H,Hv,Htot,months:months.map(o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[k,kwh(v)]))),year,peak,peakAt,pvYield:b.pv.kwp?year.pv/b.pv.kwp:0,poaYear:poaYear/1000};
+ return {H,Hv,Htot,hourly,months:months.map(o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[k,kwh(v)]))),year,peak,peakAt,pvYield:b.pv.kwp?year.pv/b.pv.kwp:0,poaYear:poaYear/1000};
 }
 
 // One readable hour: weather, sun and what each part of the building does at that moment.

@@ -1,0 +1,27 @@
+{
+  "assets": [
+    {
+      "id": "og-cover",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "kind": "rendered-title-card",
+        "from": [
+          "assets/drone/inspection.webp",
+          "assets/drone/agriculture.webp",
+          "assets/drone/delivery.webp",
+          "assets/drone/airtaxi.webp"
+        ]
+      },
+      "alt": "드론은 어디까지 일할 수 있을까? 제목과 시설 점검·농약 살포·물건 배송·에어택시 장면 네 장",
+      "delivery": {
+        "path": "og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "bytes": 99603,
+        "sha256": "8341af0362144e8852d25edf98a34d9521ce567feab8992d6caf83c1d5b11e52"
+      }
+    }
+  ]
+}

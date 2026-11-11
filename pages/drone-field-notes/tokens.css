@@ -129,7 +129,7 @@ color-scheme:dark;
 --motion-pan:18px;--motion-rotate:5deg;--motion-grid:800;--motion-dots:1000;--motion-stagger:75;--motion-split:900;
 --motion-rise:60px;--state-muted:.3;--state-past:.6;--state-visible:1;
 --toc-gap:12px;--toc-title-size:17px;--toc-column-min:250px;--legend-gap:18px;--legend-dot-size:12px;
---panel-wide:1040px;--input-pad:12px;--input-font:17px;--input-min-height:105px;
+--panel-wide:1040px;--share-status-width:420px;--input-pad:12px;--input-font:17px;--input-min-height:105px;
 --footer-source-width:850px;--footer-disclosure-width:1100px;
 }
 .layout-inspection{--hero-photo-scale:1.13;--hero-origin:65% 40%;--hero-copy-width:720px}

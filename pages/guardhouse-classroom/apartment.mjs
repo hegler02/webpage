@@ -38,6 +38,8 @@ const names={home:'우리 집에서 전기의 길을 찾습니다.',building:'�
 const descriptions={home:'방 3개인 약 59㎡ 세대에서 건축·전기·소방을 함께 배웁니다.',building:'방과 문, 창문을 선택하고 2D와 3D의 같은 위치를 확인하세요.',structure:'대표 1 m 폭 바닥판의 수직하중과 휨을 배우는 모형입니다.',electrical:'조명·스위치·분전반의 연결과 용도별 회로를 살펴보세요.',fire:'세대 안의 감지·경보·예비전원·피난 경로를 배우는 수업입니다.',safety:'모델에서 확인한 내용을 이 브라우저에 기록합니다.',calculations:'전력과 길이가 전류·전압강하에 어떻게 연결되는지 살펴보세요.',glossary:'뜻을 읽은 뒤 같은 대상의 도면과 3D로 돌아갑니다.',experience:'낮과 밤을 비교하고, 방마다 스위치를 조작합니다.'};
 names.quantities='설계를 재료와 수량으로 읽습니다.';descriptions.quantities='같은 설계에서 기구·건축 구성체·철근을 집계하고 산출 위치를 확인하세요.';
 names.materials='겉에 보이는 마감, 그 안쪽의 재료.';
+names.energy='에너지를 계산합니다.';
+descriptions.energy='이 집을 서울에 지으면 난방과 냉방이 얼마나 드는지 바꿔 보세요.';
 descriptions.materials='외벽·내벽·욕실·바닥을 나누어 보고, 같은 집의 마감 분위기를 바꿔보세요.';
 names.calculations='숫자가 설계를 설명합니다.';
 descriptions.calculations='단위와 조건부터 살펴보고, 기구나 하중을 바꿔 결과를 비교하세요.';
@@ -148,8 +150,15 @@ function homeContent(){
 function materialsContent(){
  $('apt-content').innerHTML=`<div class="content-grid"><article class="card"><h2>마감 분위기를 바꿔보세요.</h2><p>같은 도면의 벽지·마루·수납장·패브릭 색을 바꿉니다. 외벽의 단열 구성과 방의 크기는 유지됩니다.</p><div class="button-row">${apartmentPalettes.map(p=>`<button data-palette="${p.id}" aria-pressed="${state.palette===p.id}">${p.name}</button>`).join('')}</div></article><article class="card"><h2>외벽과 내벽은 역할이 다릅니다.</h2><p>외벽은 바깥 날씨와 실내를 나누고, 내벽은 실내의 방을 나눕니다. 욕실에는 물을 막는 층이 필요하고, 마루 아래에는 난방·단열·완충층이 있습니다.</p><p class="small">아래 두께는 이 교육 모델의 채택값입니다. 다른 벽체 방식과 재료도 있을 수 있습니다.</p></article></div><div class="content-grid apt-assemblies">${apartmentAssemblies.map(a=>`<article class="card"><h2>${a.name}</h2><p>${a.plain}</p><ol>${a.layers.map(l=>`<li><strong>${l.name} · ${l.mm} mm</strong><p>${l.role}</p></li>`).join('')}</ol><div class="button-row"><button data-assembly="${a.id}">재료층 분해해서 보기</button><button data-material-location="${a.id}">건물에서 위치 보기</button></div></article>`).join('')}</div><article class="card"><h2>같은 재료라도 구성 전체를 봅니다.</h2><p>외장재·단열재·바탕·이음부가 함께 벽을 만듭니다. 마감 색만 바꾸어 화재나 단열 성능이 바뀌었다고 판단하지 않습니다.</p><div class="button-row"><button data-page="fire">소방설계 연결</button><button data-page="safety">안전점검 연결</button>${materialSources.map(([label,url])=>`<a href="${url}" target="_blank" rel="noopener">${label}</a>`).join('')}</div></article>`;
 }
+let energy=null;
+async function showEnergy(){
+ const host=$('apt-content'),energyKey=key+':energy';
+ try{energy??=(await import('./apartment-energy.mjs')).createApartmentEnergy({read:()=>{try{return JSON.parse(localStorage.getItem(energyKey))??{};}catch{return {};}},write:v=>{try{localStorage.setItem(energyKey,JSON.stringify(v));}catch{}}});if(page==='energy')await energy.render(host);}
+ catch(error){if(page==='energy')host.innerHTML='<article class="card"><h2>에너지 계산을 열지 못했습니다.</h2><p>'+error.message+'</p></article>';}
+}
 function content(){const el=$('apt-content');
  quantities.setPage(page);if(page==='quantities'){quantities.render();return;}
+ if(page==='energy'){showEnergy();return;}
  if(page==='home'){homeContent();return;}
  if(page==='materials'){materialsContent();return;}
  if(page==='building'){el.innerHTML='<article class="card"><h2>같은 집을 여러 방법으로 읽습니다.</h2><p>평면도는 위에서 본 방의 배치입니다. 단면도는 높이를 읽습니다. 천장 열기는 천장과 위층 바닥판을 숨겨 실내를 보여줍니다.</p><div class="apt-room-list">'+apartment.rooms.map(r=>`<button data-select="room-${r.id}">${r.name}</button>`).join('')+'</div></article>';return;}
@@ -250,7 +259,7 @@ $('apt-whole').onclick=outsideApartment;$('apt-orbit').onclick=()=>{outsideApart
 $('apt-plan-only').onclick=()=>layout('plan');$('apt-model-only').onclick=()=>layout('model');$('apt-split').onclick=()=>layout('split');
 $('apt-save').onclick=()=>download(sheet+'.svg',apartmentPlan({model,electric,rebar,fire,sheet,selected:null}),'image/svg+xml');
 $('menu-toggle').onclick=()=>{const open=$('menu-toggle').getAttribute('aria-expanded')!=='true';$('site-top').dataset.menuOpen=String(open);$('menu-toggle').setAttribute('aria-expanded',String(open));$('menu-toggle').setAttribute('aria-label',open?'학습 메뉴 닫기':'학습 메뉴 열기');};
-$('reset').onclick=()=>$('apt-reset').showModal();$('apt-reset-confirm').onclick=()=>{clearLearningRecords(2,apartment.id);practicePower.baseline=null;state=freshApartment();refresh();$('apt-reset').close();go('home');};$('apt-three').addEventListener('tour-ended',()=>{if(page==='electrical')renderElectricGuide();});$('apt-three').addEventListener('fire-guide-ended',renderFireGuide);
+$('reset').onclick=()=>$('apt-reset').showModal();$('apt-reset-confirm').onclick=()=>{clearLearningRecords(2,apartment.id);try{localStorage.removeItem(key+':energy');}catch{}energy=null;practicePower.baseline=null;state=freshApartment();refresh();$('apt-reset').close();go('home');};$('apt-three').addEventListener('tour-ended',()=>{if(page==='electrical')renderElectricGuide();});$('apt-three').addEventListener('fire-guide-ended',renderFireGuide);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
 $('apt-retry').onclick=()=>{if(reloadRequired){location.reload();return;}if(retryRoute)go(...retryRoute);};
 window.addEventListener('hashchange',()=>{const target=location.hash.slice(1)||'home';if(Object.hasOwn(names,target)&&target!==page)void go(target);});

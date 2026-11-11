@@ -5,6 +5,7 @@
 .energy-controls label{display:flex;flex-direction:column;gap:var(--space-1);font-size:var(--sys-size-caption);color:var(--wb-muted)}
 .energy-controls select,.energy-controls input[type=number]{font:inherit;font-size:var(--sys-size-small);height:var(--wb-ctl-h);padding:0 var(--wb-ctl-pad-x);min-width:88px}
 .energy-range{flex:1 1 220px}
+.bay-card .energy-controls label{align-items:flex-start}
 .energy-range output{color:var(--wb-text);font-weight:var(--sys-weight-label)}
 .energy-range input{width:100%;margin:0;height:var(--wb-ctl-h)}
 .energy-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--wb-gap-card);margin:var(--space-4) 0}
@@ -16,7 +17,7 @@
 .energy-faces strong{font-size:var(--sys-size-body-large)}
 .energy-balance{margin-top:var(--space-3);color:var(--wb-text)}
 .energy-table th,.energy-table td{padding:7px 8px;border-bottom:var(--wb-border) solid var(--wb-line);text-align:right;white-space:nowrap}
-.energy-table th:first-child{text-align:left}
+.energy-table th:first-child,.energy-table .is-text{text-align:left}
 .energy-table thead th{font-size:var(--sys-size-caption);color:var(--wb-muted);font-weight:var(--sys-weight-label)}
 .energy-table tfoot th,.energy-table tfoot td{font-weight:var(--sys-weight-strong);border-bottom:0}
 .energy-share{display:inline-block;width:56px;height:6px;margin-right:8px;border-radius:3px;background:var(--wb-line);vertical-align:middle;overflow:hidden}
@@ -40,4 +41,6 @@
  .energy-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
  .energy-faces{grid-template-columns:repeat(3,minmax(0,1fr))}
  .energy-basis dl div{grid-template-columns:1fr;gap:0}
+ .energy-share{display:none}
+ .energy-table th,.energy-table td{padding-inline:var(--space-1)}
 }

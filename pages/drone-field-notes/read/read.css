@@ -14,6 +14,9 @@ img{display:block;max-width:100%;height:auto}
 .pill{display:inline-flex;align-items:center;min-height:var(--space-5);padding:0 var(--space-2);border:var(--hairline-width) solid var(--stone);border-radius:var(--radius-pill);background:var(--paper);color:var(--ink);font:inherit;text-decoration:none;cursor:pointer}
 .share-status{position:absolute;top:100%;right:0;display:grid;gap:var(--space-1);max-width:var(--share-width);margin:var(--space-1) 0 0;padding:var(--space-1) var(--space-2);border-radius:var(--radius-tag);background:var(--ink);color:var(--paper)}
 .share-status[hidden]{display:none}
+.cta-row{margin:var(--space-4) 0 0}
+.cta{min-height:var(--space-5);padding:0 var(--space-3);border-color:var(--ember-text);background:var(--ember-text);color:var(--paper);font-weight:var(--weight-bold)}
+.cta:hover{background:var(--ink);border-color:var(--ink)}
 .ruler{display:flex;gap:var(--space-1);margin:0;padding:0;list-style:none;font-size:var(--micro);line-height:var(--line-ui)}
 .ruler li{flex:1;min-width:var(--ruler-cell);padding-bottom:var(--space-1);border-bottom:var(--ruler-bar) solid var(--hairline);color:var(--muted);text-align:center;white-space:nowrap}
 .ruler li.is-on{border-bottom-color:var(--stage);color:var(--ink);font-weight:var(--weight-bold)}

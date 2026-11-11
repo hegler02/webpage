@@ -80,7 +80,8 @@
     "/notes/cheongnyeon-wangmandu/"
   ],
   "additional_sitemap_paths": [
-    "/coding/"
+    "/coding/",
+    "/pages/drone-field-notes/read/"
   ],
   "external_images": 0,
   "moved": {

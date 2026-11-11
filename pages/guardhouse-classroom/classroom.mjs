@@ -59,6 +59,10 @@ if(savedCalculation){
 const bookReading=readerContext(location.search);
 if(bookReading){document.body.classList.add('book-excursion');$('site-top').insertAdjacentHTML('beforeend',`<div class="reader-returnbar"><span>계산 해설서에서 살펴보는 중</span><a id="return-book" class="button" href="/pages/guardhouse-classroom/education/calculation-book.html${readerHash(bookReading)}">해설서 이어 읽기</a></div>`);}
 
+navData.energy=['ENERGY · 날씨와 에너지','햇빛과 바깥 온도가 전기를 바꿉니다.','서울의 1년 날씨로 해의 길과 열의 흐름을 계산합니다. 유리와 단열을 바꿔 결과를 비교하세요.'];
+// The weather lesson loads its year of Seoul weather only when it is opened.
+let energyLesson=null,energyPending=null;
+async function ensureEnergy(){if(energyLesson)return;if(!energyPending)energyPending=(async()=>{const m=await import('./energy-ui.mjs');await m.loadWeather();energyLesson=new m.EnergyLesson({model,project,viewer,finish:expansion.finish,labels:{view:$('view-name'),scene:$('scene-label'),render:$('render-label')}});})().catch(error=>{energyPending=null;throw error;});return energyPending;}
 async function ensureGuide(){if(guide)return;if(!guidePending)guidePending=import('./calculation-guide.mjs').then(m=>{guide=m;glossary.push(...m.calculationGlossary);}).catch(error=>{guidePending=null;error.requiresReload=true;throw error;});return guidePending;}
 function offerCalculationReturn(showContext=false){
  $('calculation-context-note')?.remove();
@@ -98,13 +102,14 @@ async function go(menu,sheetId=null){
  delete $('app').dataset.frameMs;delete $('app').dataset.navigationMs;$('app').dataset.sceneCache=viewer?'reused':'initial';
  const request=++navigationId,start=performance.now(),target=navData[menu]?menu:'home';retryNavigation=[target,sheetId];$('loading-title').textContent='선택한 학습을 준비합니다.';
  try{
- const scenePage=['building','structure','electrical','experience','fire','fire-test','fire-signal','materials'].includes(target);
+ const scenePage=['building','structure','electrical','experience','fire','fire-test','fire-signal','materials','energy'].includes(target);
  if(scenePage&&(!viewer||target==='experience'&&!viewer.environment)){
   loading(target==='experience'?'실감 체험의 재질·조명과 첫 화면을 준비하고 있습니다.':'도면과 3D 공간을 준비하고 있습니다. 다른 메뉴도 이용할 수 있습니다.');
   $('loading-state').scrollIntoView({block:'center',behavior:'instant'});await yieldPaint();if(request!==navigationId)return false;
  }
  if(scenePage)await ensureViewer();else if(target==='quantities')await ensureData();else if(target==='calculations'){if(!model)loading('건물의 치수와 회로 정보를 준비하고 있습니다.');await Promise.all([ensureData(),ensureGuide()]);}else if(target==='glossary')await ensureGuide();
   if(target==='structure')await ensureGuide();
+  if(target==='energy'){if(!energyLesson)loading('서울의 1년 날씨를 준비하고 있습니다.');await ensureEnergy();}
   if(request!==navigationId)return false;reloadRequired=false;delete $('app').dataset.loadError;
 
  page=navData[menu]?menu:'home';$('app').dataset.page=page;updatePowerExplanation();
@@ -112,18 +117,20 @@ async function go(menu,sheetId=null){
  document.querySelectorAll('[data-menu]').forEach(b=>{if(b.dataset.menu===(page.startsWith('fire')?'fire':page))b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
  $('home-intro').hidden=page!=='home';$('lesson-path').hidden=page!=='home';$('workspace').hidden=['home','calculations','glossary','safety','quantities'].includes(page);$('home-preview').hidden=page!=='home';$('page-content').replaceChildren();$('page-actions').replaceChildren();
  viewer?.setActive(!$('workspace').hidden);viewer?.exitWalk(false);$('walk-tools').hidden=true;$('walk-crosshair').hidden=true;
- if(viewer&&['building','structure','electrical','experience','fire','fire-test','fire-signal','materials'].includes(page)){
-  const group=page.startsWith('fire')?'fire':page==='experience'?'building':page;
+ if(viewer&&['building','structure','electrical','experience','fire','fire-test','fire-signal','materials','energy'].includes(page)){
+  const group=page.startsWith('fire')?'fire':['experience','energy'].includes(page)?'building':page;
   $('sheet-select').innerHTML=project.sheets.filter(s=>s.menu===group).map(s=>`<option value="${s.id}">${s.id} · ${s.title}</option>`).join('');
-  const next=sheetId??({structure:'S-101',electrical:'E-101',fire:'F-101','fire-test':'F-101','fire-signal':'F-101',materials:'M-101'}[page]??'A-101');setSheet(next);
-  setLayout(['experience','fire-test','fire-signal'].includes(page)?'model':'split');
-  viewer.setStudio(page!=='experience');
+  const next=sheetId??({structure:'S-101',electrical:'E-101',fire:'F-101','fire-test':'F-101','fire-signal':'F-101',materials:'M-101',energy:'A-105'}[page]??'A-101');setSheet(next);
+  setLayout(['experience','fire-test','fire-signal','energy'].includes(page)?'model':'split');
+  viewer.setStudio(!['experience','energy'].includes(page));
+  if(page!=='energy')viewer.setSun(null);
   if(page==='experience'){viewer.whole();viewer.setRealistic(true);viewer.setNight(true);$('view-name').textContent='경비실 · 전체 건물';$('scene-label').textContent='경비실 · 야간 외관';$('render-label').textContent='실감 렌더링';}
+  else if(page==='energy'){viewer.whole();viewer.setRealistic(true);}
   else {viewer.setRealistic(false);viewer.setNight(false);$('render-label').textContent='학습 보기';}
   contextTools();
  }
  if(page==='fire')$('page-content').innerHTML='<article class="card"><h2>기구의 위치 찾기</h2><div class="button-row">'+fire.devices.map(d=>'<button data-select="'+d.id+'">'+esc(d.name)+'</button>').join('')+'</div></article>';if(page==='fire-signal')$('page-content').innerHTML=fireContent(fire,expansion);if(page==='fire-test')$('page-content').innerHTML='<button data-nav="fire-signal">기구 신호만 따로 시험하기</button>';if(page==='materials'){$('page-content').innerHTML=materialsContent(expansion);viewer.setRealistic(true);}if(page==='safety'){renderSafety();}
- quantities.setPage(page);if(page==='quantities')quantities.render();if(page==='structure')structureContent();if(page==='electrical')electricalContent();if(page==='calculations')calculationsContent();if(page==='glossary')glossaryContent();if(page==='experience')experienceContent();if(page==='building')buildingContent();$('view-help').textContent='드래그로 회전 · 휠로 확대 · 대상을 눌러 정보 확인';
+ quantities.setPage(page);if(page==='quantities')quantities.render();if(page==='structure')structureContent();if(page==='electrical')electricalContent();if(page==='calculations')calculationsContent();if(page==='glossary')glossaryContent();if(page==='experience')experienceContent();if(page==='energy'){energyLesson.setFinish(expansion.finish);energyLesson.render($('page-content'));}if(page==='building')buildingContent();$('view-help').textContent='드래그로 회전 · 휠로 확대 · 대상을 눌러 정보 확인';
  viewer?.simulation?.setPage(page);if(page==='home')renderPath();offerCalculationReturn();history.replaceState(null,'','#'+page);viewer?.size();$('app').dataset.navigationMs=(performance.now()-start).toFixed(1);if(viewer&&!$('workspace').hidden){await viewer.present(()=>request===navigationId);if(request!==navigationId)return false;$('app').dataset.frameMs=(performance.now()-start).toFixed(1);}$('loading-state').hidden=true;$('app').dataset.ready='true';return true;
  }catch(error){if(request!==navigationId)return false;reloadRequired=Boolean(error.requiresReload);loading('선택한 학습을 준비하는 중 오류가 발생했습니다. 다시 시도하거나 다른 학습 메뉴를 이용해 주세요.');$('loading-title').textContent=reloadRequired?'3D 파일을 다시 받아야 합니다.':'학습을 불러오지 못했습니다.';$('loading-recovery').hidden=false;$('loading-progress').hidden=true;delete $('app').dataset.ready;$('app').dataset.loadError=error.message;return false;}
 }
@@ -236,6 +243,7 @@ const lessonActions={
   "tourOpen": async (b) => { await openTour(); },
   "tourStep": async (b) => { await openTour(tourState.id,Number(b.dataset.tourStep)); },
   "fireTrigger": async (b) => { viewer.simulation?.leave();expansion.signal=b.dataset.fireTrigger;saveExpansion();refreshElectrical();openFireGuide(b.dataset.fireTrigger,0);viewer.simulation?.signalSound();status(fire.alarm?'시험 화재신호가 수신기에 전달되어 경보가 작동했습니다.':'입력 신호가 있지만 소방 전원이 없어 경보가 작동하지 않습니다.'); },
+  "energyMoment": async (b) => { energyLesson.jump(b.dataset.energyMoment); },
   "fireGuide": async (b) => { openFireGuide(fire.signal??fireGuideId,0); },
   "fireGuideStep": async (b) => { openFireGuide(fireGuideId,Number(b.dataset.fireGuideStep)); },
   "fireAction": async (b) => { if(b.dataset.fireAction==='reset')expansion.signal=null;if(b.dataset.fireAction==='battery')expansion.battery=!expansion.battery;if(b.dataset.fireAction==='mains'){exercise.power=!exercise.power;save();}saveExpansion();refreshElectrical();status('소방 시험 상태를 갱신했습니다. 신호·전원 원리도에서 결과를 확인하세요.'); },

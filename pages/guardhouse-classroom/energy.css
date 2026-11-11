@@ -1,0 +1,56 @@
+/* Weather and energy lesson on the classroom's dark workbench surfaces. Series colors live only on chart marks. */
+.energy-grid{align-items:start}
+.energy-wide{grid-column:1/-1}
+.energy-controls{display:flex;flex-wrap:wrap;gap:var(--space-3) var(--space-5);align-items:end;margin:var(--space-4) 0}
+.energy-controls label{display:flex;flex-direction:column;gap:var(--space-1);font-size:var(--sys-size-caption);color:var(--wb-muted)}
+.energy-controls select,.energy-controls input[type=number]{font:inherit;font-size:var(--sys-size-small);height:var(--wb-ctl-h);padding:0 var(--wb-ctl-pad-x);min-width:88px}
+.energy-range{flex:1 1 220px}
+.energy-range output{color:var(--wb-text);font-weight:var(--sys-weight-label)}
+.energy-range input{width:100%;margin:0;height:var(--wb-ctl-h)}
+.energy-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--wb-gap-card);margin:var(--space-4) 0}
+.energy-facts div,.energy-faces div{padding:var(--wb-inset-card);border:var(--wb-border) solid var(--wb-line);border-radius:var(--wb-radius-card);background:var(--wb-raised)}
+.energy-facts dt,.energy-faces span,.energy-faces small{font-size:var(--sys-size-caption);color:var(--wb-muted)}
+.energy-facts dd{margin:2px 0 0;font-size:var(--sys-size-title-small);font-weight:var(--sys-weight-label)}
+.energy-faces{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--space-2);margin:var(--space-3) 0}
+.energy-faces div{display:flex;flex-direction:column}
+.energy-faces strong{font-size:var(--sys-size-body-large)}
+.energy-balance{margin-top:var(--space-3);color:var(--wb-text)}
+.energy-table th,.energy-table td{padding:7px 8px;border-bottom:var(--wb-border) solid var(--wb-line);text-align:right;white-space:nowrap}
+.energy-table th:first-child{text-align:left}
+.energy-table thead th{font-size:var(--sys-size-caption);color:var(--wb-muted);font-weight:var(--sys-weight-label)}
+.energy-table tfoot th,.energy-table tfoot td{font-weight:var(--sys-weight-strong);border-bottom:0}
+.energy-share{display:inline-block;width:56px;height:6px;margin-right:8px;border-radius:3px;background:var(--wb-line);vertical-align:middle;overflow:hidden}
+.energy-share i{display:block;height:100%;border-radius:3px;background:var(--wb-accent)}
+.energy-formula{font-size:var(--sys-size-small);line-height:var(--sys-leading-reading);color:var(--wb-text)}
+.energy-chart{margin:var(--space-4) 0 0}
+.energy-chart figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-2) var(--space-4);font-size:var(--sys-size-small);color:var(--wb-text)}
+.energy-legend{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-4);color:var(--wb-muted);font-size:var(--sys-size-caption)}
+.energy-legend span{display:inline-flex;align-items:center;gap:6px}
+.energy-legend i{width:10px;height:10px;border-radius:3px;background:var(--c)}
+.energy-legend i.line{width:16px;height:2px;border-radius:1px;background:#9085e9}
+.energy-chart svg{display:block;max-width:100%;margin-top:var(--space-2)}
+.energy-chart text{font-family:var(--sys-font-family);font-size:12px;fill:var(--wb-muted)}
+.energy-chart .grid{stroke:var(--wb-line)}
+.energy-chart .base{stroke:var(--wb-line-strong)}
+.energy-chart .hit{fill:transparent}
+.energy-chart .bar:hover .hit{fill:var(--wb-hover)}
+.energy-chart .pv{fill:none;stroke:#9085e9;stroke-width:2}
+.energy-chart .pv-dot{fill:#9085e9;stroke:var(--wb-surface);stroke-width:2}
+.energy-checks{list-style:none;padding:0;margin:var(--space-4) 0;display:grid;gap:var(--wb-gap-card)}
+.energy-checks li{padding:var(--wb-inset-card) var(--space-4);border-radius:var(--wb-radius-card);background:var(--wb-raised);border-left:4px solid var(--wb-line-strong)}
+.energy-checks li.is-ok{border-left-color:var(--wb-ok)}
+.energy-checks li.is-short{border-left-color:var(--wb-off);background:var(--wb-danger-soft)}
+.energy-checks strong{display:block;margin-bottom:2px}
+.energy-checks li.is-ok strong{color:var(--wb-ok)}
+.energy-checks li.is-short strong{color:var(--wb-off)}
+.energy-basis{margin-top:18px}
+.energy-basis dl{display:grid;gap:var(--space-2);margin:var(--space-3) 0 0}
+.energy-basis dl div{display:grid;grid-template-columns:120px 1fr;gap:var(--space-3)}
+.energy-basis dt{color:var(--wb-muted);font-size:var(--sys-size-small)}
+.energy-basis dd{margin:0;font-size:var(--sys-size-small)}
+.energy-basis a{color:var(--wb-accent)}
+@media (max-width:760px){
+ .energy-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .energy-faces{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .energy-basis dl div{grid-template-columns:1fr;gap:0}
+}

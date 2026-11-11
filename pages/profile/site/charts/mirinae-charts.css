@@ -1,4 +1,4 @@
-/* mirinae-charts card. Every colour is a --mc-* variable; a project maps them to its own tokens in one place.
+/* mirinae-charts card. Text is Pretendard, as in every 미리내맨 service. Every colour is a --mc-* variable; a project maps them to its own tokens in one place.
    Defaults below are the dark set; .mc-light or a preset file switches them. Series slots follow a CVD-checked categorical order. */
 .mc-card{
  --mc-surface:#171c21;--mc-raised:#20262d;--mc-text:#e9edf1;--mc-muted:#a9b4be;--mc-line:#2f3842;--mc-line-strong:#46525e;
@@ -7,7 +7,7 @@
  --mc-s1:#3987e5;--mc-s2:#d95926;--mc-s3:#199e70;--mc-s4:#c98500;--mc-s5:#d55181;--mc-s6:#008300;--mc-s7:#9085e9;--mc-s8:#e66767;
  --mc-rise:#e66767;--mc-fall:#3987e5;
  --mc-cold:#3987e5;--mc-mid:#2a3038;--mc-warm:#d95926;--mc-seq-low:#1f2a33;--mc-seq-high:#7fd3c0;
- --mc-font:inherit;--mc-radius:12px;--mc-inset:20px;
+ --mc-font:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--mc-radius:12px;--mc-inset:20px;
  margin:0;padding:var(--mc-inset);border:1px solid var(--mc-line);border-radius:var(--mc-radius);background:var(--mc-surface);color:var(--mc-text);font-family:var(--mc-font);min-width:0
 }
 .mc-card.mc-light{

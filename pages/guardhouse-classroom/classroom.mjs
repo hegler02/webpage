@@ -197,7 +197,7 @@ function contextTools(){if(!viewer)return;const el=$('context-tools');
  render:()=>{viewer.setRealistic(true);$('render-label').textContent='실감 렌더링 · 재질·그림자';status('재질·반사·그림자와 실내 조명을 적용했습니다.');},
  enter:()=>{viewer.enterWalk(currentRoom);walkTools();$('view-name').textContent='눈높이 실내 체험';$('scene-label').textContent='실내 체험 · 눈높이 1,600 mm';$('view-help').textContent='휠: 시야 확대·축소 · 드래그: 시선 · W A S D: 이동';$('render-label').textContent='실감 렌더링';},
  outside:()=>$('whole-view').click(),
- setNight:on=>{viewer.setNight(on);status(on?'밤 장면으로 전환했습니다.':'낮 장면으로 전환했습니다.');},
+ setNight:on=>{viewer.setNight(on);if(!viewer.fpv)$('scene-label').textContent=on?'경비실 · 야간 외관':'경비실 · 낮 외관';status(on?'밤 장면으로 전환했습니다.':'낮 장면으로 전환했습니다.');},
  route:()=>openTour(),preview:()=>showScenePreview(viewer.image(),'현재 경비실 렌더링 장면')
  });return;}
  el.innerHTML=`<span class="tool-label">부분 보기</span><button data-part="walls">벽</button><button data-part="windows">창문</button><button data-part="furniture">가구</button>${page==='structure'?'<button data-part="rebar">철근만</button>':''}${page==='electrical'?'<button data-part="electrical">전기만</button><button data-tour-open="true" class="primary">전기 길 따라가기</button>':''}<button id="explode-view">분해해서 보기</button>${page==='structure'?`<label>구조 부재 <select id="member-select"><option value="">전체 철근</option>${reinforcement.members.filter(m=>['roof','floor','pit-base','footing-south','south-pier-0','entrance-canopy'].includes(m.id)).map(m=>`<option value="${m.id}">${m.name}</option>`).join('')}</select></label>`:''}${page==='electrical'?`<label>회로 <select id="circuit-select"><option value="">모든 회로</option>${project.circuits.map(c=>`<option value="${c.id}">${c.id} ${c.name}</option>`).join('')}</select></label>`:''}`;

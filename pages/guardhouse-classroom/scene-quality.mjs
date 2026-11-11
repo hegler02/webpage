@@ -99,7 +99,9 @@ export class SceneLook {
    g.transparent=want!=='off';g.needsUpdate=true;
   }
   if(turf){g.map=grass?this.grass??=grassTexture(v.renderer):null;g.needsUpdate=true;this.envSun=null;}
-  this.glassUniforms.through.value=want==='day'&&!v.fpv?LOOK.glass.outside:LOOK.glass.inside;this.glassUniforms.cap.value=want==='day'&&v.fpv?LOOK.glass.capDayInside:LOOK.glass.cap;
+  // A project whose whole point is its glass may let more through from outside and reflect less.
+  const pane={...LOOK.glass,...v.project.glass};this.glassUniforms.boost.value=pane.boost;
+  this.glassUniforms.through.value=want==='day'&&!v.fpv?pane.outside:pane.inside;this.glassUniforms.cap.value=want==='day'&&v.fpv?LOOK.glass.capDayInside:LOOK.glass.cap;
   const fade=v.project.fade??LOOK.fade;this.fade.value.set(v.project.center?.[0]??4.1,-(v.project.center?.[1]??2),fade[0],want==='off'?0:fade[1]);
   if(want==='off')return;
   if(want==='day')this.day();else v.scene.environment=v.environment;
@@ -127,6 +129,8 @@ export class SceneLook {
   const u=this.envSky.material.uniforms,s=this.sky.material.uniforms;for(const k of ['turbidity','rayleigh','mieCoefficient','mieDirectionalG'])u[k].value=s[k].value;u.sunPosition.value.copy(d);u.uGain.value=p.envGain;u.uRich.value=p.envRich;
   // Light the ground throws back up: its colour times the sun and sky it receives.
   const lit=v.sun.intensity*Math.max(d.y,0)/Math.PI+.3;const g=v.ground.material;this.envGround.material.color.set(g.map?LOOK.grass:g.color).multiplyScalar(lit);
+  // A project may calm the green the grass throws on white soffits: `bounce` is [strength, how much of the colour stays].
+  const b=v.project?.day?.bounce;if(b){const c=this.envGround.material.color,grey=(c.r+c.g+c.b)/3;c.setRGB(grey+(c.r-grey)*b[1],grey+(c.g-grey)*b[1],grey+(c.b-grey)*b[1]).multiplyScalar(b[0]);}
   const old=this.envTarget;this.envTarget=this.pmrem.fromScene(this.envScene,0,.1,2000);old?.dispose();
   if(this.applied==='day'&&!v.fpv)v.scene.environment=this.envTarget.texture;v.renderer.shadowMap.needsUpdate=true;
  }
@@ -146,7 +150,7 @@ export class SceneLook {
  // Things that must stay out of the shade buffer: lines, labels, glass, faded walls and the skies.
  skips(o){
   if(o.isPoints||o.isLine||o.isLine2||o.isSprite||o===this.sky||o===this.dome)return true;
-  if(!o.isMesh||o.userData.aoKeep)return false;if(o.userData.detailReplacement)return true;
+  if(!o.isMesh||o.userData.aoKeep)return false;if(o.userData.detailReplacement||o.userData.aoSkip)return true;
   for(const m of Array.isArray(o.material)?o.material:[o.material])if(m.transparent||m.depthWrite===false||m.visible===false)return true;
   return false;
  }

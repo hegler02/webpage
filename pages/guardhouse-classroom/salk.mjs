@@ -64,7 +64,7 @@ function renderInspector(f){
 function paint(){
   const f=frame(),workspace=!['home','glossary','quantities','energy'].includes(tab),live=tab==='experience',walking=scene?.walking()??null;
   $('bay-app').dataset.page=tab;$('bay-walk').hidden=!live||!walking;
-  if(live)$('bay-walk').innerHTML='<div><p>눈높이 1.6 m</p><p>휠: 시야 확대·축소 · W A S D: 이동</p></div><div class="move-buttons">'+stations.map(s=>btn(s.name+'으로','walk',s.id)).join('')+btn('앞으로','walk','forward')+btn('뒤로','walk','back')+btn('왼쪽 이동','walk','strafe-left')+btn('오른쪽 이동','walk','strafe-right')+btn('왼쪽 보기','walk','left')+btn('오른쪽 보기','walk','right')+'</div>';
+  if(live)$('bay-walk').innerHTML='<div><p>눈높이 1.6 m</p><p>휠: 시야 확대·축소 · W A S D: 이동</p></div><div class="move-buttons">'+stations.map(s=>btn(s.name,'walk',s.id)).join('')+btn('앞으로','walk','forward')+btn('뒤로','walk','back')+btn('왼쪽 이동','walk','strafe-left')+btn('오른쪽 이동','walk','strafe-right')+btn('왼쪽 보기','walk','left')+btn('오른쪽 보기','walk','right')+'</div>';
   $('bay-title').textContent=pages[tab][0];$('bay-intro').textContent=pages[tab][1];
   $('bay-workspace').hidden=!workspace;$('drawing').hidden=live&&layoutMode==='model';
   $('bay-model-title').textContent=live?'솔크 연구소 · '+(stations.find(s=>s.id===walking)?.name??'해 지는 중정'):'솔크 연구소 모형';

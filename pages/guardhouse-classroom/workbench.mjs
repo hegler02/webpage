@@ -105,7 +105,7 @@ export function mountWorkbench({root,workspace,heading,canvases,plan,three,inspe
  panel.innerHTML='<div class="wb-panel-head"></div><div class="wb-tabs" role="tablist" aria-label="작업 패널"></div><div class="wb-body" role="tabpanel" tabindex="0"></div>';
  const head=panel.querySelector('.wb-panel-head'),tabBar=panel.querySelector('.wb-tabs'),body=panel.querySelector('.wb-body');
  const rules=document.createElement('style');document.head.append(rules);
- const defaults={move:['#page-actions','#study-return',...extraMove,'.inspector','#power-explanation','.domain-explanation',content],selectTab:'select',keepTabOn:['.switch-bank,#power-explanation,.domain-explanation,.wb-tabs',keepTabOn].filter(Boolean).join(',')};
+ const defaults={move:['#page-actions','#study-return',...extraMove,'.inspector','#power-explanation','.domain-explanation',content],selectTab:'select',keepTabOn:['.switch-bank,#power-explanation,.domain-explanation,.wb-tabs,[data-advance],[data-reset-test]',keepTabOn].filter(Boolean).join(',')};
  const chosen=new Map(),scrolls=new Map();let active=null,moved=[],keepTab=false,lastTitle='';
  const configFor=page=>pages[page]&&{...defaults,...pages[page]};
  const title=()=>inspector.querySelector('h2')?.textContent??'';

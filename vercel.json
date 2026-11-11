@@ -361,6 +361,10 @@
       "destination": "/pages/profile/work/drone-cinema-2026/"
     },
     {
+      "source": "/work/drone-field-notes/",
+      "destination": "/pages/profile/work/drone-field-notes/"
+    },
+    {
       "source": "/work/drone-fpv-100/",
       "destination": "/pages/profile/work/drone-fpv-100/"
     },

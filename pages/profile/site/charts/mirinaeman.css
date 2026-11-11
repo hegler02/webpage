@@ -1,0 +1,7 @@
+/* mirinaeman.com: the card reads the site's one token source (pages/profile/site/tokens.css) and follows data-theme. */
+.mc-card{--mc-surface:var(--surface);--mc-raised:var(--raised);--mc-text:var(--text);--mc-muted:var(--muted);--mc-line:var(--rule);--mc-line-strong:var(--faint);--mc-accent:var(--accent);--mc-total:var(--text)}
+[data-theme="light"] .mc-card{
+ --mc-neutral:#9aa0a6;--mc-neutral-2:#c3c7cb;--mc-neutral-3:#7d838a;--mc-up:#9aa0a6;--mc-down:#c9cdd1;
+ --mc-s1:#2a78d6;--mc-s2:#eb6834;--mc-s3:#1baf7a;--mc-s4:#eda100;--mc-s5:#e87ba4;--mc-s6:#008300;--mc-s7:#6250d6;--mc-s8:#e34948;
+ --mc-rise:#e34948;--mc-fall:#2a78d6;--mc-cold:#2a78d6;--mc-mid:#f1f1ee;--mc-warm:#eb6834;--mc-seq-low:#eef4f7;--mc-seq-high:#1d6f8c
+}

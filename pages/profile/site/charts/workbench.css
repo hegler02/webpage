@@ -1,0 +1,2 @@
+/* 공간과 전기 workbench (body.wb-theme): the card takes the workbench surfaces, text and amber accent. Series keep the dark set. */
+.mc-card{--mc-surface:var(--wb-surface);--mc-raised:var(--wb-raised);--mc-text:var(--wb-text);--mc-muted:var(--wb-muted);--mc-line:var(--wb-line);--mc-line-strong:var(--wb-line-strong);--mc-accent:var(--wb-accent);--mc-radius:var(--wb-radius-card)}

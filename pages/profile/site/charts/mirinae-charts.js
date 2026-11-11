@@ -1,7 +1,7 @@
 // mirinae-charts: one data spec drawn as a precise chart card. Pure SVG and canvas, no dependencies.
 // Colours come only from --mc-* CSS variables, which each project maps to its own design tokens (see mirinae-charts.css).
 // Card ideas (one accent, a bold one-line takeaway) follow ztd-charts by Junhan2, MIT; the code here is our own.
-export const VERSION='0.3.0';
+export const VERSION='0.4.0';
 const NS='http://www.w3.org/2000/svg';
 const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -48,13 +48,13 @@ class Card{
   this.plot=this.el.querySelector('.mc-plot');this.tip=this.el.querySelector('.mc-tip');
   this.ro.disconnect();this.ro.observe(this.plot);this.draw();return this;
  }
- destroy(){this.ro.disconnect();this.host.replaceChildren();}
+ destroy(){this.stop?.();this.ro.disconnect();this.host.replaceChildren();}
  css(name,fallback=''){return getComputedStyle(this.el).getPropertyValue(name).trim()||fallback;}
  draw(){
   const form=FORMS[this.spec.type];if(!form)throw new Error('mirinae-charts: unknown type '+this.spec.type);
   this.width=this.plot.clientWidth||600;const family=getComputedStyle(this.el).fontFamily;
   const ctx={spec:this.spec,o:this.spec.options??{},W:this.width,fmt:this.fmt,card:this,family,text:(t,s=12,w=400)=>measure(t,s,w,family)};
-  const out=form(ctx);this.H=out.height;
+  this.stop?.();this.stop=null;const out=form(ctx);this.H=out.height;
   this.plot.querySelectorAll('svg,canvas').forEach(n=>n.remove());
   // Canvas cells go underneath; the SVG with lines, labels and hit areas sits on top.
   this.plot.insertAdjacentHTML('afterbegin',`<svg class="mc-svg" width="${this.width}" height="${out.height}" viewBox="0 0 ${this.width} ${out.height}" role="img" aria-label="${esc(this.spec.ariaLabel??this.spec.title??this.spec.type)}">${out.svg}</svg>`);
@@ -62,10 +62,12 @@ class Card{
   this.svg=this.plot.querySelector('svg');this.pick=out.pick;
   const legend=this.el.querySelector('.mc-legend');legend.innerHTML=(out.legend??[]).map(l=>`<span class="mc-key"><i class="mc-swatch${l.line?' is-line':''}${l.ramp?' is-ramp':''}" style="--c:${l.color}"></i>${esc(l.label)}</span>`).join('');legend.hidden=!out.legend?.length;
   this.el.querySelector('.mc-table-scroll').innerHTML=out.table??'';
-  this.bindHits();this.el.dataset.mcReady='true';
+  // Forms that move (the bar race) start after the drawing is in the page and hand back how to stop.
+  this.stop=out.after?.(this.svg,this)??null;
+  this.bindHits(out.noKeys);this.el.dataset.mcReady='true';
  }
  // Every mark that can be read carries data-tip; the same tip follows the pointer, focus and arrow keys.
- bindHits(){
+ bindHits(noKeys){
   const svg=this.svg,hits=[...svg.querySelectorAll('[data-tip]')];
   const show=(html,x,y)=>{this.tip.innerHTML=html;this.tip.hidden=false;const w=this.tip.offsetWidth,h=this.tip.offsetHeight;this.tip.style.left=clamp(x-w/2,0,this.width-w)+'px';this.tip.style.top=(y-h-12<0?y+16:y-h-12)+'px';};
   const hide=()=>{this.tip.hidden=true;svg.querySelectorAll('.is-on').forEach(n=>n.classList.remove('is-on'));};
@@ -74,6 +76,8 @@ class Card{
    if(n){on(n);show(n.dataset.tip,x,y);return;}
    const p=this.pick?.(x,y);if(p){show(p,x,y);return;}hide();};
   svg.onpointerleave=hide;
+  // Charts of hundreds of marks are read from the table by keyboard, not one stop per mark.
+  if(noKeys)return;
   hits.forEach((n,i)=>{n.setAttribute('tabindex','0');n.setAttribute('role','img');n.setAttribute('aria-label',n.dataset.tip.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim());
    n.onfocus=()=>{const b=n.getBBox();on(n);show(n.dataset.tip,b.x+b.width/2,b.y);};n.onblur=hide;
    n.onkeydown=e=>{const d={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[e.key];if(d){e.preventDefault();hits[clamp(i+d,0,hits.length-1)].focus();}};});
@@ -82,6 +86,13 @@ class Card{
 
 // ---------- shared pieces ----------
 function inkOn(card,fill){const m=/var\((--[\w-]+)\)/.exec(fill),hex=m?card.css(m[1]):fill;if(!/^#/.test(hex))return 'var(--mc-text)';const [r,g,b]=hexRgb(hex).map(lin),y=.2126*r+.7152*g+.0722*b;return y>.22?'#14171b':'#f4f6f8';}
+function placeLabels(ctx,items,W,taken=[]){
+ let out='';for(const it of items){const size=it.size??12,w=ctx.text(it.text,size,it.weight??400),h=size;
+  for(const [x,y,anchor='start'] of it.cands){const x0=anchor==='start'?x:anchor==='end'?x-w:x-w/2,box=[x0-2,y-h*.85,x0+w+2,y+h*.3];if(box[0]<1||box[2]>W-1)continue;
+   if(taken.some(b=>box[0]<b[2]&&box[2]>b[0]&&box[1]<b[3]&&box[3]>b[1]))continue;taken.push(box);
+   out+=`<text class="${it.cls??'mc-label'}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${anchor}" style="paint-order:stroke;stroke:var(--mc-surface);stroke-width:3px;pointer-events:none;${it.style??''}">${esc(it.text)}</text>`;break;}}
+ return out;
+}
 const keysOf=v=>Array.isArray(v)?v:v==null?[]:[v];
 // One accent for the highlighted key; the rest stay neutral. Without a highlight, the categorical slots in fixed order.
 function colorFor(o,keys){
@@ -101,7 +112,8 @@ const leftPad=(ctx,sc)=>Math.ceil(Math.max(...sc.ticks.map(v=>ctx.text(ctx.fmt.a
 const unit=(ctx,v)=>`${ctx.fmt(v)}${ctx.o.unit??ctx.spec.unit?' '+(ctx.o.unit??ctx.spec.unit):''}`;
 
 // ---------- forms ----------
-const FORMS={bar,line,area:c=>line(c,true),waterfall,heatmap,donut,sankey,scatter,dumbbell,slope,bump,treemap,calendar,gauge,candlestick,sunpath,windrose,psychro,loadduration,histogram,box,bullet,gantt,lollipop,radar,funnel,pareto};
+const FORMS={bar,line,area:c=>line(c,true),waterfall,heatmap,donut,sankey,scatter,dumbbell,slope,bump,treemap,calendar,gauge,candlestick,sunpath,windrose,psychro,loadduration,histogram,box,bullet,gantt,lollipop,radar,funnel,pareto,
+ beeswarm,ridgeline,violin,hexbin,waffle,stack100,marimekko,radialbar,pie:c=>donut({...c,o:{...c.o,inner:0}}),sunburst,tree,chord,network,stream,sparkline,timeline,choropleth,tilemap,symbolmap,flowmap,barrace};
 
 function bar(ctx){
  const {spec,o,W}=ctx,x=spec.encoding.x,ys=keysOf(spec.encoding.y),rows=spec.data,stack=!!o.stack&&ys.length>1,colors=colorFor(o,o.highlight!=null&&ys.length===1?rows.map(r=>r[x]):ys);
@@ -208,7 +220,7 @@ function donut(ctx){
  // Side labels pushed apart vertically.
  for(const side of [true,false]){const ls=labels.filter(l=>l.right===side).sort((p,q)=>p.y-q.y);for(let i=1;i<ls.length;i++)ls[i].y=Math.max(ls[i].y,ls[i-1].y+15);}
  const lab=labels.map(l=>`<text class="mc-label${l.strong?' is-strong':''}" x="${l.x+(l.right?4:-4)}" y="${l.y+4}" text-anchor="${l.right?'start':'end'}">${esc(l.text)}</text>`).join('');
- const center=`<text class="mc-center" x="${cx}" y="${cy+2}" text-anchor="middle">${esc(ctx.fmt(total))}</text><text class="mc-tick" x="${cx}" y="${cy+20}" text-anchor="middle">${esc(o.centerLabel??(o.unit??spec.unit??'합계'))}</text>`;
+ const center=(o.inner??.62)<=0?'':`<text class="mc-center" x="${cx}" y="${cy+2}" text-anchor="middle">${esc(ctx.fmt(total))}</text><text class="mc-tick" x="${cx}" y="${cy+20}" text-anchor="middle">${esc(o.centerLabel??(o.unit??spec.unit??'합계'))}</text>`;
  return {height:H,svg:marks+lab+center,legend:rows.map(r=>({label:r[lk],color:colors[r[lk]]})),table:table([lk,vk,'%'],rows.map(r=>[r[lk],r[vk]??0,(r[vk]??0)/total*100]),ctx.fmt)};
 }
 
@@ -521,4 +533,260 @@ function pareto(ctx){
  const line=`<polyline class="mc-line" points="${pts.map(p=>p.join(',')).join(' ')}" stroke="var(--mc-text)"/>${pts.map(([a,b])=>`<circle class="mc-dot" cx="${a}" cy="${b}" r="3.5" fill="var(--mc-text)"/>`).join('')}<line class="mc-join" x1="${L}" x2="${R}" y1="${Y(cut)}" y2="${Y(cut)}"/><text class="mc-tick" x="${R}" y="${Y(cut)-5}" text-anchor="end">누적 ${cut}%</text>`;
  return {height:H,svg:axis+bars+line+xLabels(ctx,items.map(x=>String(x.r[lk])),i=>L+i*band+band/2,H-10,band),legend:[{label:`누적 ${cut}%까지 (${firstOver+1}개)`,color:'var(--mc-accent)'},{label:'나머지',color:'var(--mc-neutral)'},{label:'누적 비율',color:'var(--mc-text)',line:true}],
   table:table([lk,vk,'%','누적 %'],items.map(x=>[x.r[lk],x.r[vk],x.share,x.cum]),ctx.fmt)};
+}
+
+// ---------- fourth set: distributions and parts of a whole ----------
+// Smoothed density of a set of numbers (Gaussian kernel, Silverman bandwidth), sampled at xs.
+function density(vals,xs){
+ const n=vals.length,mean=vals.reduce((a,v)=>a+v,0)/n,sd=Math.sqrt(vals.reduce((a,v)=>a+(v-mean)**2,0)/n)||1,s=[...vals].sort((a,b)=>a-b),iqr=(s[Math.floor(n*.75)]-s[Math.floor(n*.25)])||sd,h=.9*Math.min(sd,iqr/1.34)*n**-.2||1;
+ return xs.map(x=>{let a=0;for(const v of vals){const u=(x-v)/h;if(u>-4&&u<4)a+=Math.exp(-.5*u*u);}return a/(n*h*Math.sqrt(2*Math.PI));});
+}
+const groupsOf=(spec,o)=>o.groups??spec.data.reduce((a,r)=>{(a[r[spec.encoding.group]]??=[]).push(r[spec.encoding.value]);return a;},{});
+function numAxis(ctx,sc,X,y,L,R){let lastEnd=-Infinity;return sc.ticks.filter(v=>{const w=ctx.text(ctx.fmt.axis(v),12),s=X(v)-w/2;if(s<lastEnd+6||X(v)<L-1||X(v)>R+1)return false;lastEnd=s+w;return true;}).map(v=>`<text class="mc-tick" x="${X(v)}" y="${y}" text-anchor="middle">${esc(ctx.fmt.axis(v))}</text>`).join('');}
+
+// Beeswarm: one dot per value, nudged apart so none overlap. Up to a few hundred values per group.
+function beeswarm(ctx){
+ const {spec,o,W}=ctx,groups=spec.encoding?.group||o.groups?groupsOf(spec,o):{'':valuesOf(spec,o)},names=Object.keys(groups),all=names.flatMap(n=>groups[n]),r=o.radius??(all.length>300?2.6:4);
+ const sc=niceTicks(Math.min(...all),Math.max(...all),5),L=names.length>1||names[0]?Math.min(W*.28,Math.max(...names.map(n=>ctx.text(n,13)))+14):10,R=W-10,X=v=>L+(R-L)*(v-sc.lo)/(sc.hi-sc.lo),u=o.unit??spec.unit??'';
+ const lanes=names.map(n=>{const placed=[];let span=0;for(const v of [...groups[n]].sort((a,b)=>a-b)){const x=X(v);let y=0;for(let k=0;k<400;k++){const cand=k===0?0:Math.ceil(k/2)*(k%2?1:-1)*r*1.05;if(!placed.some(p=>Math.abs(p.x-x)<2*r&&Math.hypot(p.x-x,p.y-cand)<2*r)){y=cand;break;}}placed.push({x,y,v});span=Math.max(span,Math.abs(y));}return {n,placed,span:span+r+6};});
+ let top=8;const marks=lanes.map((ln,i)=>{const cy=top+ln.span;top+=ln.span*2;const on=o.highlight===ln.n,c=o.highlight!=null?(on?'var(--mc-accent)':'var(--mc-neutral-3)'):`var(--mc-s${i%8+1})`;
+  return `${ln.n?`<text class="mc-label${on?' is-strong':''}" x="${L-10}" y="${cy+4}" text-anchor="end">${esc(ln.n)}</text>`:''}${ln.placed.map(p=>`<circle class="mc-mark" data-tip="${esc(`<strong>${esc(ln.n||spec.title||'')}</strong><span>${ctx.fmt(p.v)}${u?' '+u:''}</span>`)}" cx="${p.x.toFixed(1)}" cy="${(cy+p.y).toFixed(1)}" r="${r}" fill="${c}" fill-opacity=".85"/>`).join('')}`;}).join('');
+ const H=top+26,grid=sc.ticks.map(v=>`<line class="mc-grid" x1="${X(v)}" x2="${X(v)}" y1="4" y2="${H-24}"/>`).join('');
+ // Every dot is one value; keyboard reading would mean hundreds of stops, so dots answer the pointer and the table answers the keyboard.
+ return {height:H,svg:grid+marks+numAxis(ctx,sc,X,H-8,L,R),noKeys:true,table:table(['','개수','최소','중앙값','최대'],lanes.map(ln=>{const s=ln.placed.map(p=>p.v);return [ln.n||'전체',s.length,s[0],s[Math.floor(s.length/2)],s[s.length-1]];}),ctx.fmt)};
+}
+// Ridgeline: one smoothed shape per group, stacked and overlapping, like hills seen from the side.
+function ridgeline(ctx){
+ const {spec,o,W}=ctx,groups=groupsOf(spec,o),names=Object.keys(groups),all=names.flatMap(n=>groups[n]),sc=niceTicks(Math.min(...all),Math.max(...all),5);
+ const row=o.rowHeight??26,overlap=o.overlap??2.4,T=row*overlap,H=T+names.length*row+30,L=Math.min(W*.22,Math.max(...names.map(n=>ctx.text(n,12)))+12),R=W-10,X=v=>L+(R-L)*(v-sc.lo)/(sc.hi-sc.lo);
+ const xs=Array.from({length:80},(_,i)=>sc.lo+(sc.hi-sc.lo)*i/79),dens=names.map(n=>density(groups[n],xs)),peak=Math.max(...dens.flat()),f=ramp([ctx.card.css('--mc-cold','#3987e5'),ctx.card.css('--mc-warm','#d95926')]);
+ const means=names.map(n=>groups[n].reduce((a,v)=>a+v,0)/groups[n].length),mlo=Math.min(...means),mhi=Math.max(...means),u=o.unit??spec.unit??'';
+ const marks=names.map((n,i)=>{const base=T+i*row+row,pts=xs.map((x,k)=>[X(x),base-dens[i][k]/peak*row*overlap]),c=o.highlight!=null?(n===o.highlight?'var(--mc-accent)':'var(--mc-neutral)'):`rgb(${f((means[i]-mlo)/((mhi-mlo)||1)).join(',')})`;
+  return `<g data-tip="${esc(`<strong>${esc(n)}</strong><span>평균 ${ctx.fmt(means[i],1)}${u?' '+u:''}</span><span>${groups[n].length}개</span>`)}"><path class="mc-mark" d="M${X(sc.lo)},${base}L${pts.map(p=>p.map(v=>v.toFixed(1)).join(',')).join('L')}L${X(sc.hi)},${base}Z" fill="${c}" fill-opacity=".8" stroke="var(--mc-surface)" stroke-width="1.5"/><text class="mc-tick" x="${L-8}" y="${base-2}" text-anchor="end">${esc(n)}</text></g>`;}).join('');
+ return {height:H,svg:sc.ticks.map(v=>`<line class="mc-grid" x1="${X(v)}" x2="${X(v)}" y1="${T*.4}" y2="${H-24}"/>`).join('')+marks+numAxis(ctx,sc,X,H-8,L,R),
+  table:table(['','평균','최소','최대','개수'],names.map((n,i)=>[n,means[i],Math.min(...groups[n]),Math.max(...groups[n]),groups[n].length]),ctx.fmt)};
+}
+// Violin: each group's density mirrored around its row, with the median and the middle half marked.
+function violin(ctx){
+ const {spec,o,W}=ctx,groups=groupsOf(spec,o),names=Object.keys(groups),all=names.flatMap(n=>groups[n]),sc=niceTicks(Math.min(...all),Math.max(...all),5),u=o.unit??spec.unit??'';
+ const row=o.rowHeight??64,T=6,H=T+names.length*row+30,L=Math.min(W*.3,Math.max(...names.map(n=>ctx.text(n,13)))+14),R=W-10,X=v=>L+(R-L)*(v-sc.lo)/(sc.hi-sc.lo);
+ const xs=Array.from({length:80},(_,i)=>sc.lo+(sc.hi-sc.lo)*i/79),dens=names.map(n=>density(groups[n],xs)),peak=Math.max(...dens.flat());
+ const q=(s,p)=>s[Math.min(s.length-1,Math.floor((s.length-1)*p))];
+ const marks=names.map((n,i)=>{const cy=T+i*row+row/2,h=row*.46,s=[...groups[n]].sort((a,b)=>a-b),on=o.highlight===n,c=o.highlight!=null?(on?'var(--mc-accent)':'var(--mc-neutral)'):`var(--mc-s${i%8+1})`;
+  const top=xs.map((x,k)=>[X(x),cy-dens[i][k]/peak*h]),bot=[...xs].reverse().map((x,k)=>[X(x),cy+dens[i][xs.length-1-k]/peak*h]);
+  return `<g><rect class="mc-hit" data-tip="${esc(`<strong>${esc(n)}</strong><span>중앙값 ${ctx.fmt(q(s,.5))}${u?' '+u:''}</span><span>가운데 절반 ${ctx.fmt(q(s,.25))}–${ctx.fmt(q(s,.75))}</span><span>${s.length}개</span>`)}" x="0" y="${cy-row/2}" width="${W}" height="${row}"/><text class="mc-label${on?' is-strong':''}" x="${L-10}" y="${cy+4}" text-anchor="end">${esc(n)}</text><path class="mc-mark" d="M${top.map(p=>p.map(v=>v.toFixed(1)).join(',')).join('L')}L${bot.map(p=>p.map(v=>v.toFixed(1)).join(',')).join('L')}Z" fill="${c}" fill-opacity=".75"/><line x1="${X(q(s,.25))}" x2="${X(q(s,.75))}" y1="${cy}" y2="${cy}" stroke="var(--mc-text)" stroke-width="4" stroke-linecap="round"/><circle cx="${X(q(s,.5))}" cy="${cy}" r="4" fill="var(--mc-surface)" stroke="var(--mc-text)" stroke-width="2"/></g>`;}).join('');
+ return {height:H,svg:sc.ticks.map(v=>`<line class="mc-grid" x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${H-24}"/>`).join('')+marks+numAxis(ctx,sc,X,H-8,L,R),
+  table:table(['','최소','1사분위','중앙값','3사분위','최대'],names.map(n=>{const s=[...groups[n]].sort((a,b)=>a-b);return [n,s[0],q(s,.25),q(s,.5),q(s,.75),s[s.length-1]];}),ctx.fmt)};
+}
+// Hexbin: many points counted into hexagons, shaded by how many fall in each. encoding {x, y} or options {x:[], y:[]}.
+function hexbin(ctx){
+ const {spec,o,W,card}=ctx,xs=o.x??spec.data.map(r=>r[spec.encoding.x]),ys=o.y??spec.data.map(r=>r[spec.encoding.y]),H=o.height??clamp(Math.round(W*.55),240,400),T=14,B=34;
+ const sy=niceTicks(Math.min(...ys),Math.max(...ys),4),sx=niceTicks(Math.min(...xs),Math.max(...xs),5),L=leftPad(ctx,sy),R=W-10,X=v=>L+(R-L)*(v-sx.lo)/(sx.hi-sx.lo),Y=v=>T+(H-T-B)*(1-(v-sy.lo)/(sy.hi-sy.lo));
+ const rad=o.hexRadius??clamp(Math.round(W/70),5,12),dx=rad*Math.sqrt(3),dy=rad*1.5,bins=new Map();
+ xs.forEach((x,i)=>{const px=X(x),py=Y(ys[i]);let row=Math.round((py-T)/dy),col=Math.round((px-L-(row&1?dx/2:0))/dx);const k=row+'|'+col;const b=bins.get(k)??{row,col,n:0,sx:0,sy:0};b.n++;b.sx+=x;b.sy+=ys[i];bins.set(k,b);});
+ const most=Math.max(...[...bins.values()].map(b=>b.n)),f=ramp([card.css('--mc-seq-low','#1f2a33'),card.css('--mc-seq-high','#7fd3c0')]),hex=(cx,cy)=>Array.from({length:6},(_,k)=>{const a=Math.PI/3*k+Math.PI/6;return `${(cx+rad*Math.cos(a)).toFixed(1)},${(cy+rad*Math.sin(a)).toFixed(1)}`;}).join(' ');
+ const name=k=>spec.labels?.[k]??k,ux=o.xUnit??'',uy=o.yUnit??'';
+ const cells=[...bins.values()].map(b=>{const cx=L+b.col*dx+(b.row&1?dx/2:0),cy=T+b.row*dy;if(cx<L-rad||cx>R+rad||cy<T-rad||cy>H-B+rad)return '';
+  return `<polygon class="mc-mark" data-tip="${esc(`<strong>${ctx.fmt(b.n)}개</strong><span>${esc(name(spec.encoding?.x??'x'))} 평균 ${ctx.fmt(b.sx/b.n,1)}${ux}</span><span>${esc(name(spec.encoding?.y??'y'))} 평균 ${ctx.fmt(b.sy/b.n,1)}${uy}</span>`)}" points="${hex(cx,cy)}" fill="rgb(${f(.12+.88*Math.log(1+b.n)/Math.log(1+most)).join(',')})"/>`;}).join('');
+ const xt=numAxis(ctx,sx,X,H-B+16,L,R)+`<text class="mc-tick" x="${R}" y="${H-1}" text-anchor="end">${esc(name(spec.encoding?.x??o.xLabel??'x'))} →</text><text class="mc-tick" x="${L}" y="${T-3}">↑ ${esc(name(spec.encoding?.y??o.yLabel??'y'))}</text>`;
+ return {height:H,svg:yAxis(ctx,sy,L,R,T,H-B)+cells+xt,noKeys:true,legend:[{label:'점이 많을수록 진하게',color:`rgb(${f(1).join(',')})`}],table:`<p class="mc-note">점 ${ctx.fmt(xs.length)}개를 육각형 ${ctx.fmt(bins.size)}칸으로 셌습니다. 칸을 눌러 읽습니다.</p>`};
+}
+// Waffle: a hundred squares, each one percent. Parts by the largest-remainder rule so they add to exactly 100.
+function waffle(ctx){
+ const {spec,o,W}=ctx,lk=spec.encoding?.label??'label',vk=spec.encoding?.value??'value',rows=spec.data,total=rows.reduce((a,r)=>a+r[vk],0)||1,colors=colorFor(o,rows.map(r=>r[lk]));
+ const raw=rows.map(r=>r[vk]/total*100),cells=raw.map(Math.floor);let left=100-cells.reduce((a,v)=>a+v,0);raw.map((v,i)=>[v-Math.floor(v),i]).sort((a,b)=>b[0]-a[0]).forEach(([,i])=>{if(left>0){cells[i]++;left--;}});
+ const size=Math.min(o.cell??26,(Math.min(W,420)-9*3)/10),gap=3,side=size*10+gap*9,H=side+8,x0=(W-side)/2;let k=0,sq='';
+ cells.forEach((n,i)=>{const r=rows[i];for(let j=0;j<n;j++,k++){const cx=x0+(k%10)*(size+gap),cy=4+Math.floor(k/10)*(size+gap);sq+=`<rect class="mc-mark" data-tip="${esc(`<strong>${esc(r[lk])}</strong><span>${ctx.fmt(r[vk])}${o.unit??spec.unit?' '+(o.unit??spec.unit):''} · ${ctx.fmt(raw[i],1)}%</span>`)}" x="${cx}" y="${cy}" width="${size}" height="${size}" rx="${size/6}" fill="${colors[r[lk]]}"/>`;}});
+ return {height:H,svg:sq,noKeys:true,legend:rows.map((r,i)=>({label:`${r[lk]} ${cells[i]}%`,color:colors[r[lk]]})),table:table([lk,vk,'%'],rows.map((r,i)=>[r[lk],r[vk],raw[i]]),ctx.fmt)};
+}
+// 100 % bars: each row split into its parts' shares. rows {label, part1, part2, ...}; encoding {x, y:[parts]}.
+function stack100(ctx){
+ const {spec,o,W}=ctx,x=spec.encoding.x,ys=keysOf(spec.encoding.y),rows=spec.data,colors=colorFor(o,ys),row=o.rowHeight??34,T=4,H=T+rows.length*row+24,L=Math.min(W*.3,Math.max(...rows.map(r=>ctx.text(r[x],13)))+14),R=W-8,X=p=>L+(R-L)*p/100;
+ const marks=rows.map((r,i)=>{const tot=ys.reduce((a,k)=>a+(r[k]??0),0)||1,y=T+i*row;let acc=0;
+  return `<text class="mc-label" x="${L-10}" y="${y+row/2+4}" text-anchor="end">${esc(r[x])}</text>`+ys.map(k=>{const p=(r[k]??0)/tot*100,x0=X(acc),w=X(acc+p)-x0;acc+=p;if(w<=0)return '';const ink=inkOn(ctx.card,colors[k]);
+   return `<rect class="mc-mark" data-tip="${esc(`<strong>${esc(r[x])} · ${esc(spec.labels?.[k]??k)}</strong><span>${ctx.fmt(r[k]??0)}${o.unit??spec.unit?' '+(o.unit??spec.unit):''} · ${ctx.fmt(p,1)}%</span>`)}" x="${x0+.5}" y="${y+4}" width="${Math.max(0,w-1)}" height="${row-8}" fill="${colors[k]}"/>${w>ctx.text(ctx.fmt(p,0)+'%',12,600)+8?`<text class="mc-on-mark" x="${x0+w/2}" y="${y+row/2+4}" text-anchor="middle" style="fill:${ink};font-size:12px">${ctx.fmt(p,0)}%</text>`:''}`;}).join('');}).join('');
+ const axis=[0,25,50,75,100].map(p=>`<text class="mc-tick" x="${X(p)}" y="${H-6}" text-anchor="${p===0?'start':p===100?'end':'middle'}">${p}%</text>`).join('');
+ return {height:H,svg:marks+axis,legend:ys.map(k=>({label:spec.labels?.[k]??k,color:colors[k]})),table:table([x,...ys.map(k=>spec.labels?.[k]??k)],rows.map(r=>[r[x],...ys.map(k=>r[k]??0)]),ctx.fmt)};
+}
+// Marimekko: columns as wide as their totals, each split into its parts' shares.
+function marimekko(ctx){
+ const {spec,o,W}=ctx,x=spec.encoding.x,ys=keysOf(spec.encoding.y),rows=spec.data,colors=colorFor(o,ys),H=o.height??clamp(Math.round(W*.5),240,380),T=8,B=34,L=40,R=W-8,Y=p=>T+(H-T-B)*(1-p/100);
+ const tots=rows.map(r=>ys.reduce((a,k)=>a+(r[k]??0),0)),grand=tots.reduce((a,v)=>a+v,0)||1;let cx=L;
+ const marks=rows.map((r,i)=>{const w=(R-L)*tots[i]/grand,x0=cx;cx+=w;let acc=0;
+  const cells=ys.map(k=>{const p=(r[k]??0)/(tots[i]||1)*100,y1=Y(acc+p),y0=Y(acc);acc+=p;const h=y0-y1,ink=inkOn(ctx.card,colors[k]);
+   return `<rect class="mc-mark" data-tip="${esc(`<strong>${esc(r[x])} · ${esc(spec.labels?.[k]??k)}</strong><span>${ctx.fmt(r[k]??0)} · 열 안 ${ctx.fmt(p,1)}% · 전체의 ${ctx.fmt((r[k]??0)/grand*100,1)}%</span>`)}" x="${x0+1}" y="${y1+1}" width="${Math.max(0,w-2)}" height="${Math.max(0,h-2)}" fill="${colors[k]}"/>${w>40&&h>18?`<text class="mc-on-mark" x="${x0+6}" y="${y1+15}" style="fill:${ink};font-size:12px">${ctx.fmt(p,0)}%</text>`:''}`;}).join('');
+  return cells+`<text class="mc-tick" x="${x0+w/2}" y="${H-B+16}" text-anchor="middle">${w>ctx.text(r[x],12)+4?esc(r[x]):''}</text><text class="mc-tick" x="${x0+w/2}" y="${H-B+30}" text-anchor="middle">${w>34?ctx.fmt(tots[i]/grand*100,0)+'%':''}</text>`;}).join('');
+ const axis=[0,50,100].map(p=>`<text class="mc-tick" x="${L-6}" y="${Y(p)+4}" text-anchor="end">${p}%</text>`).join('');
+ return {height:H+6,svg:axis+marks,legend:ys.map(k=>({label:spec.labels?.[k]??k,color:colors[k]})),table:table([x,...ys.map(k=>spec.labels?.[k]??k),'합계'],rows.map((r,i)=>[r[x],...ys.map(k=>r[k]??0),tots[i]]),ctx.fmt)};
+}
+// Radial bars: one ring per item, its arc as long as its share of the largest (or of options.max).
+function radialbar(ctx){
+ const {spec,o,W}=ctx,lk=spec.encoding?.label??'label',vk=spec.encoding?.value??'value',rows=spec.data,max=o.max??Math.max(...rows.map(r=>r[vk])),colors=colorFor(o,rows.map(r=>r[lk]));
+ const H=o.height??clamp(Math.round(W*.6),240,380),cx=W/2,cy=H/2,R0=Math.min(W/2-10,H/2-10),ring=Math.min(26,R0*.75/rows.length),gap=ring*.25;
+ const marks=rows.map((r,i)=>{const rad=R0-i*ring-ring/2,t=clamp(r[vk]/max,0,.9999),a0=-Math.PI/2,a1=a0+t*2*Math.PI,lg=t>.5?1:0,p=a=>[cx+rad*Math.cos(a),cy+rad*Math.sin(a)],[x0,y0]=p(a0),[x1,y1]=p(a1),sw=ring-gap;
+  return `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="var(--mc-line)" stroke-width="${sw}"/><path class="mc-mark" data-tip="${esc(`<strong>${esc(r[lk])}</strong><span>${ctx.fmt(r[vk])}${o.unit??spec.unit?' '+(o.unit??spec.unit):''} · ${ctx.fmt(r[vk]/max*100,0)}%</span>`)}" d="M${x0},${y0}A${rad},${rad} 0 ${lg} 1 ${x1},${y1}" fill="none" stroke="${colors[r[lk]]}" stroke-width="${sw}" stroke-linecap="round"/><text class="mc-label" x="${cx-8}" y="${cy-rad+4}" text-anchor="end">${esc(r[lk])} <tspan class="is-strong">${esc(ctx.fmt(r[vk]))}</tspan></text>`;}).join('');
+ return {height:H,svg:marks,table:table([lk,vk,'%'],rows.map(r=>[r[lk],r[vk],r[vk]/max*100]),ctx.fmt)};
+}
+
+// ---------- fourth set: structures, networks and time ----------
+// A nested tree {name, value?, children?}; a node's value is its own or the sum of its children.
+function sumTree(n,depth=0,parent=null){n.depth=depth;n.parent=parent;if(n.children?.length){n.children.forEach(c=>sumTree(c,depth+1,n));n.total=n.children.reduce((a,c)=>a+c.total,0);}else n.total=n.value??1;return n;}
+const walk=(n,f)=>{f(n);n.children?.forEach(c=>walk(c,f));};
+const pathOf=n=>{const p=[];for(let x=n;x;x=x.parent)p.unshift(x.name);return p;};
+// Sunburst: the root in the middle, each ring one level deeper, arcs as wide as their share.
+function sunburst(ctx){
+ const {spec,o,W,card}=ctx,root=sumTree(structuredClone(o.tree??spec.data)),H=o.height??clamp(Math.round(W*.8),280,480),cx=W/2,cy=H/2;let deep=0;walk(root,n=>{deep=Math.max(deep,n.depth);});
+ const R0=Math.min(W,H)/2-8,ring=R0/(deep+.6),tops=root.children??[],colors=colorFor(o,tops.map(c=>c.name)),u=o.unit??spec.unit??'',surface=card.css('--mc-surface','#171c21');
+ let arcs='';const lay=(n,a0,a1,base)=>{if(n.depth>0){const r0=ring*(n.depth-.4),r1=ring*(n.depth+.6)-2,c=base,shade=n.depth>1?mixHex(card,c,surface,.22*(n.depth-1)):c,p=(a,r)=>[cx+r*Math.sin(a),cy-r*Math.cos(a)],[x1,y1]=p(a0,r1),[x2,y2]=p(a1,r1),[x3,y3]=p(a1,r0),[x4,y4]=p(a0,r0),lg=a1-a0>Math.PI?1:0;
+   const mid=(a0+a1)/2,rm=(r0+r1)/2,[tx,ty]=p(mid,rm),fits=(a1-a0)*rm>ctx.text(n.name,12,600)+10&&r1-r0>16;
+   arcs+=`<path class="mc-mark" data-tip="${esc(`<strong>${esc(pathOf(n).slice(1).join(' › '))}</strong><span>${ctx.fmt(n.total)}${u?' '+u:''} · 전체의 ${ctx.fmt(n.total/root.total*100,1)}%</span>`)}" d="M${x1},${y1}A${r1},${r1} 0 ${lg} 1 ${x2},${y2}L${x3},${y3}A${r0},${r0} 0 ${lg} 0 ${x4},${y4}Z" fill="${shade}" stroke="var(--mc-surface)" stroke-width="1.5"/>${fits?`<text class="mc-on-mark" x="${tx}" y="${ty+4}" text-anchor="middle" style="fill:${inkOn(card,shade)};font-size:12px">${esc(n.name)}</text>`:''}`;}
+  let a=a0;n.children?.forEach(c=>{const b=a+(a1-a0)*c.total/n.total;lay(c,a,b,n.depth===0?colors[c.name]:base);a=b;});};
+ lay(root,0,2*Math.PI,null);
+ const center=`<text class="mc-center" x="${cx}" y="${cy+4}" text-anchor="middle" style="font-size:18px">${esc(ctx.fmt(root.total))}</text><text class="mc-tick" x="${cx}" y="${cy+20}" text-anchor="middle">${esc(root.name??'')}</text>`;
+ const rows=[];walk(root,n=>{if(n.depth)rows.push([pathOf(n).slice(1).join(' › '),n.total,n.total/root.total*100]);});
+ return {height:H,svg:arcs+center,legend:tops.map(c=>({label:c.name,color:colors[c.name]})),table:table(['항목',spec.labels?.value??'값','%'],rows,ctx.fmt)};
+}
+function mixHex(card,a,b,t){const res=c=>{const m=/var\((--[\w-]+)\)/.exec(c);return m?card.css(m[1]):c;},A=hexRgb(res(a)),B=hexRgb(res(b));return `rgb(${A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(',')})`;}
+// Tree: root on the left, children to the right, leaves spaced evenly down the page.
+function tree(ctx){
+ const {spec,o,W}=ctx,root=sumTree(structuredClone(o.tree??spec.data)),leaves=[];let deep=0;walk(root,n=>{deep=Math.max(deep,n.depth);if(!n.children?.length)leaves.push(n);});
+ const row=o.rowHeight??24,T=10,H=T+leaves.length*row+6,lastW=Math.max(...leaves.map(n=>ctx.text(n.name+(o.showValues===false?'':' '+ctx.fmt(n.total)),12)))+16,L=8,R=W-lastW,X=d=>L+(R-L)*d/Math.max(1,deep),u=o.unit??spec.unit??'';
+ leaves.forEach((n,i)=>{n.y=T+i*row+row/2;});const place=n=>{if(n.children?.length){n.children.forEach(place);n.y=(n.children[0].y+n.children[n.children.length-1].y)/2;}};place(root);
+ const tops=root.children??[],colors=colorFor(o,tops.map(c=>c.name)),branch=n=>{let x=n;while(x.parent&&x.parent.parent)x=x.parent;return x.depth?colors[x.name]:'var(--mc-text)';};
+ let links='',nodes='';const labels=[];walk(root,n=>{const x=X(n.depth);n.children?.forEach(c=>{const x2=X(c.depth),mx=(x+x2)/2;links+=`<path d="M${x},${n.y}C${mx},${n.y} ${mx},${c.y} ${x2},${c.y}" fill="none" stroke="${branch(c)}" stroke-opacity=".55" stroke-width="${1+3*c.total/root.total}"/>`;});
+  const leaf=!n.children?.length,lab=n.name+(o.showValues===false?'':' '+ctx.fmt(n.total));
+  nodes+=`<circle class="mc-mark" data-tip="${esc(`<strong>${esc(pathOf(n).join(' › '))}</strong><span>${ctx.fmt(n.total)}${u?' '+u:''}</span>`)}" cx="${x}" cy="${n.y}" r="${leaf?3.5:5}" fill="${branch(n)}"/>`;
+  labels.push({text:lab,weight:leaf?400:600,cls:`mc-label${leaf?'':' is-strong'}`,cands:leaf?[[x+8,n.y+4]]:[[x+8,n.y-7],[x+8,n.y+15],[x-8,n.y-7,'end'],[x+8,n.y+4]]});});
+ const rows=[];walk(root,n=>rows.push([pathOf(n).join(' › '),n.total]));
+ return {height:H,svg:links+nodes+placeLabels(ctx,labels.sort((a,b)=>(b.weight??400)-(a.weight??400)),W),table:table(['경로',spec.labels?.value??'값'],rows,ctx.fmt)};
+}
+// Chord: flows between groups around a circle. options {names:[...], matrix:[[from i to j]]}.
+function chord(ctx){
+ const {spec,o,W}=ctx,names=o.names,M=o.matrix,n=names.length,colors=colorFor(o,names),H=o.height??clamp(Math.round(W*.8),300,480),cx=W/2,cy=H/2,lw=Math.max(...names.map(s=>ctx.text(s,12,600))),R1=Math.min(W/2-lw-24,H/2-24),R0=R1-12,u=o.unit??spec.unit??'';
+ const out=M.map(r=>r.reduce((a,v)=>a+v,0)),inn=names.map((_,j)=>M.reduce((a,r)=>a+r[j],0)),tot=names.map((_,i)=>out[i]+inn[i]),grand=tot.reduce((a,v)=>a+v,0)||1,pad=.03,span=2*Math.PI-pad*n;
+ let a=0;const arcs=names.map((_,i)=>{const a0=a,a1=a+span*tot[i]/grand;a=a1+pad;return {a0,a1,cur:a0};}),P=(t,r)=>[cx+r*Math.sin(t),cy-r*Math.cos(t)];
+ const seg=(i,v)=>{const g=arcs[i],w=span*v/grand,s=[g.cur,g.cur+w];g.cur+=w;return s;};
+ let ribbons='';for(let i=0;i<n;i++)for(let j=0;j<n;j++){const v=M[i][j];if(!v)continue;const [s0,s1]=seg(i,v),[t0,t1]=seg(j,v),[ax,ay]=P(s0,R0),[bx,by]=P(s1,R0),[cx1,cy1]=P(t0,R0),[dx,dy]=P(t1,R0);
+  ribbons+=`<path class="mc-band" data-tip="${esc(`<strong>${esc(names[i])} → ${esc(names[j])}</strong><span>${ctx.fmt(v)}${u?' '+u:''}</span>`)}" d="M${ax},${ay}A${R0},${R0} 0 0 1 ${bx},${by}Q${cx},${cy} ${cx1},${cy1}A${R0},${R0} 0 0 1 ${dx},${dy}Q${cx},${cy} ${ax},${ay}Z" style="fill:${colors[names[i]]};stroke:none;opacity:.42"/>`;}
+ const ring=arcs.map((g,i)=>{const [x1,y1]=P(g.a0,R1),[x2,y2]=P(g.a1,R1),[x3,y3]=P(g.a1,R0),[x4,y4]=P(g.a0,R0),lg=g.a1-g.a0>Math.PI?1:0,mid=(g.a0+g.a1)/2,[lx,ly]=P(mid,R1+10);
+  return `<path class="mc-node" data-tip="${esc(`<strong>${esc(names[i])}</strong><span>보냄 ${ctx.fmt(out[i])} · 받음 ${ctx.fmt(inn[i])}</span>`)}" d="M${x1},${y1}A${R1},${R1} 0 ${lg} 1 ${x2},${y2}L${x3},${y3}A${R0},${R0} 0 ${lg} 0 ${x4},${y4}Z" fill="${colors[names[i]]}"/><text class="mc-label is-strong" x="${lx}" y="${ly+4}" text-anchor="${Math.sin(mid)>.15?'start':Math.sin(mid)<-.15?'end':'middle'}">${esc(names[i])}</text>`;}).join('');
+ return {height:H,svg:ribbons+ring,table:table(['보냄 \\ 받음',...names],names.map((s,i)=>[s,...M[i]]),ctx.fmt)};
+}
+// Network: nodes pulled together by their links and pushed apart from each other; the same input always lands the same way.
+// options {nodes:[{id, label?, group?}], links:[{source, target, value?}]}
+function network(ctx){
+ const {o,W}=ctx,nodes=o.nodes.map(n=>({...n})),links=o.links,H=o.height??clamp(Math.max(Math.round(W*.7),o.nodes.length*24),300,520),by=Object.fromEntries(nodes.map(n=>[n.id,n])),groups=[...new Set(nodes.map(n=>n.group??''))],colors=colorFor(o,groups);
+ const deg=Object.fromEntries(nodes.map(n=>[n.id,0]));links.forEach(l=>{deg[l.source]++;deg[l.target]++;});
+ nodes.forEach((n,i)=>{const a=i/nodes.length*2*Math.PI;n.x=W/2+Math.cos(a)*W*.3;n.y=H/2+Math.sin(a)*H*.3;});
+ const k=Math.sqrt(W*H/nodes.length)*.55;
+ for(let it=0;it<320;it++){const t=Math.max(.6,12*(1-it/320));
+  for(const a of nodes){a.dx=0;a.dy=0;for(const b of nodes){if(a===b)continue;const dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy)||.01,f=k*k/d;a.dx+=dx/d*f;a.dy+=dy/d*f;}}
+  for(const l of links){const a=by[l.source],b=by[l.target],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy)||.01,f=d*d/k;a.dx-=dx/d*f;a.dy-=dy/d*f;b.dx+=dx/d*f;b.dy+=dy/d*f;}
+  for(const a of nodes){const d=Math.hypot(a.dx,a.dy)||1;a.x=clamp(a.x+a.dx/d*Math.min(d,t),40,W-40);a.y=clamp(a.y+a.dy/d*Math.min(d,t),24,H-24);}}
+ const vmax=Math.max(1,...links.map(l=>l.value??1)),r=n=>4+Math.sqrt(deg[n.id])*2.6;
+ const edges=links.map(l=>{const a=by[l.source],b=by[l.target];return `<line x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}" stroke="var(--mc-line-strong)" stroke-width="${1+2.5*(l.value??1)/vmax}"/>`;}).join('');
+ const dots=nodes.map(n=>{const on=o.highlight===n.id,c=on?'var(--mc-accent)':colors[n.group??''];return `<circle class="mc-mark" data-tip="${esc(`<strong>${esc(n.label??n.id)}</strong><span>연결 ${deg[n.id]}개</span>${n.group?`<span>${esc(n.group)}</span>`:''}`)}" cx="${n.x.toFixed(1)}" cy="${n.y.toFixed(1)}" r="${r(n)}" fill="${c}" stroke="var(--mc-surface)" stroke-width="2"/>`;}).join('');
+ const taken=nodes.map(n=>[n.x-r(n),n.y-r(n),n.x+r(n),n.y+r(n)]),names=placeLabels(ctx,[...nodes].sort((a,b)=>deg[b.id]-deg[a.id]).map(n=>({text:n.label??n.id,weight:o.highlight===n.id?700:400,cls:`mc-label${o.highlight===n.id?' is-strong':''}`,cands:[[n.x+r(n)+4,n.y+4],[n.x-r(n)-4,n.y+4,'end'],[n.x,n.y-r(n)-5,'middle'],[n.x,n.y+r(n)+13,'middle']]})),W,taken);
+ return {height:H,svg:edges+dots+names,legend:o.highlight!=null?[]:groups.filter(Boolean).map(g=>({label:g,color:colors[g]})),table:table(['출발','도착','값'],links.map(l=>[by[l.source].label??l.source,by[l.target].label??l.target,l.value??1]),ctx.fmt)};
+}
+// Stream: stacked layers around a centre line, so the whole shape breathes with the total.
+function stream(ctx){
+ const {spec,o,W}=ctx,x=spec.encoding.x,ys=keysOf(spec.encoding.y),rows=spec.data,colors=colorFor(o,ys),H=o.height??clamp(Math.round(W*.4),220,320),T=10,B=30,L=10,R=W-10;
+ const totals=rows.map(r=>ys.reduce((a,k)=>a+(r[k]??0),0)),max=Math.max(...totals)||1,X=i=>L+(R-L)*i/Math.max(1,rows.length-1),mid=T+(H-T-B)/2,s=(H-T-B)/max;
+ const smooth=pts=>pts.map((p,i)=>{if(!i)return `M${p[0]},${p[1]}`;const a=pts[i-1],m=(a[0]+p[0])/2;return `C${m},${a[1]} ${m},${p[1]} ${p[0]},${p[1]}`;}).join('');
+ const base=rows.map((_,i)=>mid-totals[i]*s/2),acc=[...base];
+ const layers=ys.map(k=>{const top=rows.map((r,i)=>[X(i),acc[i]]),bot=rows.map((r,i)=>[X(i),acc[i]+(r[k]??0)*s]);rows.forEach((r,i)=>{acc[i]+=(r[k]??0)*s;});
+  const back=[...bot].reverse();return `<path class="mc-mark" d="${smooth(top)}L${back[0][0]},${back[0][1]}${smooth(back).replace(/^M[^C]*/,'')}Z" fill="${colors[k]}" fill-opacity=".9" stroke="var(--mc-surface)" stroke-width=".8"/>`;}).join('');
+ const hits=rows.map((r,i)=>`<rect class="mc-hit" data-tip="${esc(`<strong>${esc(r[x])}</strong>`+ys.map(k=>`<span><i style="--c:${colors[k]}"></i>${esc(spec.labels?.[k]??k)} ${ctx.fmt(r[k]??0)}</span>`).join(''))}" data-group="${i}" x="${X(i)-(R-L)/Math.max(1,rows.length-1)/2}" y="${T}" width="${(R-L)/Math.max(1,rows.length-1)}" height="${H-T-B}"/><line class="mc-cross" data-mark="${i}" x1="${X(i)}" x2="${X(i)}" y1="${T}" y2="${H-B}"/>`).join('');
+ return {height:H,svg:layers+xLabels(ctx,rows.map(r=>String(r[x])),X,H-10,(R-L)/Math.max(1,rows.length-1))+hits,legend:ys.map(k=>({label:spec.labels?.[k]??k,color:colors[k]})),table:table([x,...ys.map(k=>spec.labels?.[k]??k)],rows.map(r=>[r[x],...ys.map(k=>r[k]??0)]),ctx.fmt)};
+}
+// Sparklines: one small line per measure with its latest value and the change from the first.
+// data rows {label, values:[...], unit?}
+function sparkline(ctx){
+ const {spec,o,W}=ctx,rows=spec.data,row=o.rowHeight??46,H=rows.length*row,lab=Math.min(W*.32,Math.max(...rows.map(r=>ctx.text(r.label,13)))+12),valW=Math.max(...rows.map(r=>ctx.text(ctx.fmt(r.values[r.values.length-1])+(r.unit?' '+r.unit:''),15,700)))+8,chW=Math.max(64,...rows.map(r=>{const a=r.values[0],b=r.values[r.values.length-1];return ctx.text((b>=a?'▲ ':'▼ ')+ctx.fmt(Math.abs(b-a)),12);}))+10,L=lab,R=W-valW-chW-10;
+ const marks=rows.map((r,i)=>{const v=r.values,y0=i*row+6,h=row-14,lo=Math.min(...v),hi=Math.max(...v),X=k=>L+(R-L)*k/Math.max(1,v.length-1),Y=x=>y0+h*(1-(x-lo)/((hi-lo)||1)),last=v[v.length-1],d=last-v[0],up=d>=0,good=(r.higherIsBetter??true)===up;
+  const imin=v.indexOf(lo),imax=v.indexOf(hi);
+  return `<g><rect class="mc-hit" data-tip="${esc(`<strong>${esc(r.label)}</strong><span>마지막 ${ctx.fmt(last)}${r.unit?' '+r.unit:''}</span><span>최저 ${ctx.fmt(lo)} · 최고 ${ctx.fmt(hi)}</span><span>처음보다 ${up?'+':''}${ctx.fmt(d)}</span>`)}" x="0" y="${i*row}" width="${W}" height="${row}"/><text class="mc-label" x="0" y="${y0+h/2+4}">${esc(r.label)}</text><polyline class="mc-line" points="${v.map((x,k)=>`${X(k).toFixed(1)},${Y(x).toFixed(1)}`).join(' ')}" stroke="var(--mc-s1)" stroke-width="1.6"/><circle cx="${X(imin)}" cy="${Y(lo)}" r="2.5" fill="var(--mc-neutral-3)"/><circle cx="${X(imax)}" cy="${Y(hi)}" r="2.5" fill="var(--mc-neutral-3)"/><circle cx="${X(v.length-1)}" cy="${Y(last)}" r="3.5" fill="var(--mc-accent)"/><text class="mc-value" x="${R+10}" y="${y0+h/2+5}" style="font-size:15px;font-weight:700">${esc(ctx.fmt(last))}${r.unit?`<tspan class="mc-tick" style="font-size:12px"> ${esc(r.unit)}</tspan>`:''}</text><text class="mc-tick" x="${W}" y="${y0+h/2+4}" text-anchor="end" style="fill:${good?'var(--mc-up-text,var(--mc-text))':'var(--mc-s2)'}">${up?'▲':'▼'} ${esc(ctx.fmt(Math.abs(d)))}</text></g>`;}).join('');
+ return {height:H,svg:marks,table:table(['','처음','마지막','최저','최고'],rows.map(r=>[r.label,r.values[0],r.values[r.values.length-1],Math.min(...r.values),Math.max(...r.values)]),ctx.fmt)};
+}
+// Timeline: dated events on one line, labels above and below, pushed apart so they never touch.
+// rows {date:'YYYY-MM-DD' or number, label, detail?, group?}
+function timeline(ctx){
+ const {spec,o,W}=ctx,rows=[...spec.data].sort((a,b)=>String(a.date)<String(b.date)?-1:1),isDate=typeof rows[0].date==='string',t=v=>isDate?Date.parse(v+'T00:00:00Z'):v,t0=t(rows[0].date),t1=t(rows[rows.length-1].date),span=(t1-t0)||1,L=16,R=W-16,X=v=>L+(R-L)*(t(v)-t0)/span;
+ const groups=[...new Set(rows.map(r=>r.group).filter(Boolean))],colors=colorFor(o,groups.length?groups:['_']),lines=[[],[]],lv=[0,0],lanes=[[],[]];
+ const items=rows.map((r,i)=>{const w=ctx.text(r.label,12,600)+8,side=i%2,x=clamp(X(r.date),L+w/2,R-w/2);let lane=0;while(lanes[side][lane]!=null&&lanes[side][lane]>x-w/2-6)lane++;lanes[side][lane]=x+w/2;return {r,x:X(r.date),lx:x,side,lane,w};});
+ const depth=[0,1].map(s=>Math.max(1,...items.filter(it=>it.side===s).map(it=>it.lane+1))),gap=34,axisY=44+(depth[0]-1)*gap,H=axisY+24+(depth[1]-1)*gap+20;
+ const fmtD=v=>isDate?`${v.slice(0,4)}.${+v.slice(5,7)}.${+v.slice(8,10)}`:ctx.fmt(v);
+ const marks=items.map(it=>{const c=colors[it.r.group??'_'],ly=it.side?axisY+24+it.lane*gap:axisY-30-it.lane*gap;
+  return `<g data-tip="${esc(`<strong>${esc(it.r.label)}</strong><span>${fmtD(it.r.date)}</span>${it.r.detail?`<span>${esc(it.r.detail)}</span>`:''}`)}"><line x1="${it.x}" x2="${it.lx}" y1="${axisY}" y2="${it.side?ly-13:ly+18}" stroke="var(--mc-line-strong)"/><circle class="mc-mark" cx="${it.x}" cy="${axisY}" r="5" fill="${c}" stroke="var(--mc-surface)" stroke-width="2"/><text class="mc-label is-strong" x="${it.lx}" y="${ly}" text-anchor="middle">${esc(it.r.label)}</text><text class="mc-tick" x="${it.lx}" y="${ly+14}" text-anchor="middle">${esc(fmtD(it.r.date))}</text></g>`;}).join('');
+ return {height:H,svg:`<line class="mc-axis" x1="${L}" x2="${R}" y1="${axisY}" y2="${axisY}" stroke-width="2"/>`+marks,legend:groups.map(g=>({label:g,color:colors[g]})),table:table(['날짜','일',...(rows.some(r=>r.detail)?['내용']:[])],rows.map(r=>[fmtD(r.date),r.label,...(rows.some(x=>x.detail)?[r.detail??'']:[])]),ctx.fmt)};
+}
+
+// ---------- fourth set: maps and the bar race ----------
+// Maps take options.map, a shape file such as geo/kr-sido.json, passed in by the page. Regions are matched by id
+// (KR-11), full name (서울특별시) or short name (서울). The projection keeps east-west distances true at the map's middle latitude.
+function mapFrame(map,W,H,pad=10){
+ // Dokdo counts toward the frame, so the easternmost point is drawn inside the card.
+ const pts=[...map.regions.flatMap(r=>r.polys.flat()),...(map.dokdo?[map.dokdo.lonlat]:[])],lon0=Math.min(...pts.map(p=>p[0])),lon1=Math.max(...pts.map(p=>p[0])),lat0=Math.min(...pts.map(p=>p[1])),lat1=Math.max(...pts.map(p=>p[1]));
+ const k=Math.cos((lat0+lat1)/2*Math.PI/180),sw=(lon1-lon0)*k,sh=lat1-lat0,s=Math.min((W-2*pad)/sw,(H-2*pad)/sh),ox=(W-sw*s)/2,oy=(H-sh*s)/2;
+ return {P:([lon,lat])=>[ox+(lon-lon0)*k*s,oy+(lat1-lat)*s],aspect:sh/sw};
+}
+const regionKey=(map,v)=>map.regions.find(r=>r.id===v||r.name===v||r.short===v);
+const ringPath=(poly,P)=>'M'+poly.map(p=>P(p).map(v=>v.toFixed(1)).join(',')).join('L')+'Z';
+// Where a region's name sits: the middle of its largest piece.
+function labelSpot(r,P){const big=r.polys.reduce((a,p)=>p.length>a.length?p:a,r.polys[0]);let ax=0,ay=0,A=0;for(let i=0;i<big.length;i++){const [x0,y0]=P(big[i]),[x1,y1]=P(big[(i+1)%big.length]),c=x0*y1-x1*y0;A+=c;ax+=(x0+x1)*c;ay+=(y0+y1)*c;}return A?[ax/(3*A),ay/(3*A)]:P(big[0]);}
+function mapValues(ctx){const {spec,o}=ctx,rk=spec.encoding?.region??'region',vk=spec.encoding?.value??'value',vals={};for(const r of spec.data??[]){const g=regionKey(o.map,r[rk]);if(g)vals[g.id]=r[vk];}return vals;}
+function mapRamp(ctx,vals){const v=Object.values(vals),min=ctx.o.min??Math.min(...v),max=ctx.o.max??Math.max(...v),f=ramp(ctx.o.mid!=null?[ctx.card.css('--mc-cold','#3987e5'),ctx.card.css('--mc-mid','#2a3038'),ctx.card.css('--mc-warm','#d95926')]:[ctx.card.css('--mc-seq-low','#1f2a33'),ctx.card.css('--mc-seq-high','#7fd3c0')]);
+ const t=x=>ctx.o.mid!=null?(x<ctx.o.mid?(x-min)/(ctx.o.mid-min)/2:.5+(x-ctx.o.mid)/(max-ctx.o.mid)/2):(x-min)/((max-min)||1);return {min,max,color:x=>`rgb(${f(clamp(t(x),0,1)).join(',')})`,f};}
+function rampKey(ctx,rk,x,y,w){const id='mc-k'+Math.random().toString(36).slice(2,7),u=ctx.o.unit??ctx.spec.unit??'';return `<defs><linearGradient id="${id}">${Array.from({length:9},(_,i)=>`<stop offset="${i/8}" stop-color="rgb(${rk.f(i/8).join(',')})"/>`).join('')}</linearGradient></defs><rect x="${x}" y="${y}" width="${w}" height="8" rx="2" fill="url(#${id})"/><text class="mc-tick" x="${x}" y="${y-4}">${esc(ctx.fmt(rk.min))}</text><text class="mc-tick" x="${x+w}" y="${y-4}" text-anchor="end">${esc(ctx.fmt(rk.max))}${u?' '+esc(u):''}</text>`;}
+const dokdo=(map,P)=>map.dokdo?(()=>{const [x,y]=P(map.dokdo.lonlat);return `<circle cx="${x}" cy="${y}" r="1.8" fill="var(--mc-text)"><title>${esc(map.dokdo.name)}</title></circle>`;})():'';
+
+// Choropleth: each region shaded by its value.
+function choropleth(ctx){
+ const {o,W,spec}=ctx,map=o.map,H=o.height??clamp(Math.round(W*1.05),320,560),{P}=mapFrame(map,W,H-30),vals=mapValues(ctx),rk=mapRamp(ctx,vals),u=o.unit??spec.unit??'';
+ const shapes=map.regions.map(r=>{const v=vals[r.id],has=v!=null,on=o.highlight&&regionKey(map,o.highlight)===r;return `<path class="mc-mark" data-tip="${esc(`<strong>${esc(r.name)}</strong><span>${has?ctx.fmt(v)+(u?' '+u:''):'자료 없음'}</span>`)}" d="${r.polys.map(p=>ringPath(p,P)).join('')}" fill="${has?rk.color(v):'var(--mc-raised)'}" stroke="${on?'var(--mc-accent)':'var(--mc-surface)'}" stroke-width="${on?2.5:1}"/>`;}).join('');
+ const names=o.labels===false?'':placeLabels(ctx,map.regions.map(r=>{const [x,y]=labelSpot(r,P);return {text:r.short,cls:'mc-tick',style:'fill:var(--mc-text)',cands:[[x,y+4,'middle'],[x,y+18,'middle'],[x,y-10,'middle']]};}),W);
+ return {height:H,svg:shapes+names+dokdo(map,P)+rampKey(ctx,rk,10,H-14,Math.min(220,W-20)),noKeys:map.regions.length>30,table:table(['지역',spec.labels?.value??'값'],map.regions.filter(r=>vals[r.id]!=null).sort((a,b)=>vals[b.id]-vals[a.id]).map(r=>[r.name,vals[r.id]]),ctx.fmt)};
+}
+// Tile map: every region the same size, so small cities weigh as much as large provinces.
+function tilemap(ctx){
+ const {o,W,spec}=ctx,map=o.map,vals=mapValues(ctx),rk=mapRamp(ctx,vals),cols=Math.max(...map.regions.map(r=>r.tile[0]))+1,rows=Math.max(...map.regions.map(r=>r.tile[1]))+1,s=Math.min(84,(W-20)/cols),gap=4,x0=(W-cols*s)/2,H=rows*s+36,u=o.unit??spec.unit??'';
+ const tiles=map.regions.map(r=>{const [cx,cy]=r.tile,v=vals[r.id],fill=v!=null?rk.color(v):'var(--mc-raised)',ink=v!=null?inkOn(ctx.card,fill.startsWith('rgb')?'#'+fill.match(/\d+/g).map(n=>(+n).toString(16).padStart(2,'0')).join(''):fill):'var(--mc-muted)',x=x0+cx*s,y=4+cy*s,on=o.highlight&&regionKey(map,o.highlight)===r;
+  return `<g><rect class="mc-mark" data-tip="${esc(`<strong>${esc(r.name)}</strong><span>${v!=null?ctx.fmt(v)+(u?' '+u:''):'자료 없음'}</span>`)}" x="${x+gap/2}" y="${y+gap/2}" width="${s-gap}" height="${s-gap}" rx="6" fill="${fill}" stroke="${on?'var(--mc-accent)':'none'}" stroke-width="3"/><text class="mc-on-mark" x="${x+s/2}" y="${y+s/2-2}" text-anchor="middle" style="fill:${ink};font-size:${s>60?14:12}px;pointer-events:none">${esc(r.short)}</text><text class="mc-on-mark is-soft" x="${x+s/2}" y="${y+s/2+14}" text-anchor="middle" style="fill:${ink};font-size:11px;pointer-events:none">${v!=null?esc(ctx.fmt(v)):''}</text></g>`;}).join('');
+ return {height:H,svg:tiles+rampKey(ctx,rk,x0,H-14,Math.min(220,cols*s)),table:table(['지역',spec.labels?.value??'값'],map.regions.filter(r=>vals[r.id]!=null).sort((a,b)=>vals[b.id]-vals[a.id]).map(r=>[r.name,vals[r.id]]),ctx.fmt)};
+}
+// Symbol map: circles at places, their area proportional to the value, over a quiet base map.
+// data rows {name, lon, lat, value}
+function symbolmap(ctx){
+ const {o,W,spec}=ctx,map=o.map,H=o.height??clamp(Math.round(W*1.05),320,560),{P}=mapFrame(map,W,H),vk=spec.encoding?.value??'value',rows=[...spec.data].sort((a,b)=>b[vk]-a[vk]),max=Math.max(...rows.map(r=>r[vk])),rmax=o.maxRadius??clamp(W/16,14,34),u=o.unit??spec.unit??'',colors=colorFor(o,rows.map(r=>r.name));
+ const base=map.regions.map(r=>`<path d="${r.polys.map(p=>ringPath(p,P)).join('')}" fill="var(--mc-raised)" stroke="var(--mc-line-strong)" stroke-width=".8"/>`).join('');
+ const dots=rows.map((r,i)=>{const [x,y]=P([r.lon,r.lat]),rad=rmax*Math.sqrt(r[vk]/max),on=r.name===o.highlight,c=o.highlight!=null?(on?'var(--mc-accent)':'var(--mc-s1)'):'var(--mc-s1)';
+  return `<circle class="mc-mark" data-tip="${esc(`<strong>${esc(r.name)}</strong><span>${ctx.fmt(r[vk])}${u?' '+u:''}</span>`)}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${Math.max(2.5,rad).toFixed(1)}" fill="${c}" fill-opacity=".55" stroke="${c}" stroke-width="1.5"/>`;}).join('');
+ const names=placeLabels(ctx,rows.slice(0,o.labelTop??5).map(r=>{const [x,y]=P([r.lon,r.lat]),rad=Math.max(2.5,rmax*Math.sqrt(r[vk]/max));return {text:r.name,cands:[[x+rad+4,y+4],[x-rad-4,y+4,'end'],[x,y-rad-4,'middle'],[x,y+rad+13,'middle']]};}),W);
+ return {height:H,svg:base+dokdo(map,P)+dots+names,table:table(['곳',spec.labels?.value??'값'],rows.map(r=>[r.name,r[vk]]),ctx.fmt)};
+}
+// Flow map: curved arrows between places, as thick as the flow. data rows {from, to, value}; options.places {name:[lon,lat]}.
+function flowmap(ctx){
+ const {o,W,spec}=ctx,map=o.map,H=o.height??clamp(Math.round(W*1.05),320,560),{P}=mapFrame(map,W,H),places=o.places,vk=spec.encoding?.value??'value',rows=[...spec.data].sort((a,b)=>a[vk]-b[vk]),max=Math.max(...rows.map(r=>r[vk])),u=o.unit??spec.unit??'',id='mc-a'+Math.random().toString(36).slice(2,7);
+ const base=map.regions.map(r=>`<path d="${r.polys.map(p=>ringPath(p,P)).join('')}" fill="var(--mc-raised)" stroke="var(--mc-line-strong)" stroke-width=".8"/>`).join('');
+ const arrows=rows.map(r=>{const [x1,y1]=P(places[r.from]),[x2,y2]=P(places[r.to]),mx=(x1+x2)/2,my=(y1+y2)/2,dx=x2-x1,dy=y2-y1,bend=.22,cx=mx-dy*bend,cy=my+dx*bend,w=1.5+7*r[vk]/max,on=o.highlight&&(r.from===o.highlight||r.to===o.highlight),c=o.highlight!=null?(on?'var(--mc-accent)':'var(--mc-neutral-3)'):'var(--mc-s1)';
+  return `<path class="mc-band" data-tip="${esc(`<strong>${esc(r.from)} → ${esc(r.to)}</strong><span>${ctx.fmt(r[vk])}${u?' '+u:''}</span>`)}" d="M${x1.toFixed(1)},${y1.toFixed(1)}Q${cx.toFixed(1)},${cy.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)}" stroke="${c}" stroke-width="${w.toFixed(1)}" fill="none" stroke-linecap="round" marker-end="url(#${id})" style="opacity:${o.highlight!=null&&!on?.35:.8}"/>`;}).join('');
+ const pins=Object.entries(places).map(([n,ll])=>{const [x,y]=P(ll);return `<circle cx="${x}" cy="${y}" r="3.5" fill="var(--mc-text)"/><text class="mc-label" x="${x+6}" y="${y-5}" style="paint-order:stroke;stroke:var(--mc-surface);stroke-width:3px">${esc(n)}</text>`;}).join('');
+ const marker=`<defs><marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0L10,5L0,10Z" fill="var(--mc-text)"/></marker></defs>`;
+ return {height:H,svg:marker+base+dokdo(map,P)+arrows+pins,table:table(['출발','도착',spec.labels?.value??'값'],[...rows].reverse().map(r=>[r.from,r.to,r[vk]]),ctx.fmt)};
+}
+// Bar race: the ranking at each period, played one period after another. rows {period, item, value}; options.top, options.step (ms).
+function barrace(ctx){
+ const {spec,o,W}=ctx,e=spec.encoding??{},pk=e.period??'period',ik=e.item??'item',vk=e.value??'value',periods=[...new Set(spec.data.map(r=>r[pk]))],items=[...new Set(spec.data.map(r=>r[ik]))],top=Math.min(o.top??8,items.length),colors=colorFor(o,items);
+ const val=(p,it)=>spec.data.find(r=>r[pk]===p&&r[ik]===it)?.[vk]??0,row=o.rowHeight??30,T=8,H=T+top*row+40,L=Math.min(W*.3,Math.max(...items.map(s=>ctx.text(s,13)))+14),R=W-70,u=o.unit??spec.unit??'',max=Math.max(...spec.data.map(r=>r[vk]));
+ const frame=(p)=>{const ranked=items.map(it=>({it,v:val(p,it)})).sort((a,b)=>b.v-a.v);return Object.fromEntries(ranked.map((x,i)=>[x.it,{v:x.v,rank:i}]));};
+ const bars=items.map(it=>`<g data-item="${esc(it)}" style="transition:transform .7s ease"><text class="mc-label" x="${L-10}" y="${row/2+4}" text-anchor="end">${esc(it)}</text><rect class="mc-mark" x="${L}" y="${row*.15}" width="1" height="${row*.7}" rx="4" fill="${colors[it]}" style="transition:width .7s ease"/><text class="mc-value" x="0" y="${row/2+4}" style="transition:transform .7s ease"></text></g>`).join('');
+ const label=`<text class="mc-race-period" x="${W-8}" y="${H-10}" text-anchor="end" style="font-size:28px;font-weight:700;fill:var(--mc-muted)"></text>`;
+ const button=`<g class="mc-race-play" role="button" tabindex="0" aria-label="재생" style="cursor:pointer"><rect x="0" y="${H-30}" width="64" height="26" rx="13" fill="var(--mc-raised)" stroke="var(--mc-line-strong)"/><text x="32" y="${H-13}" text-anchor="middle" class="mc-label">▶ 재생</text></g>`;
+ // Each period re-ranks the bars; the browser animates the moves. Reduced motion jumps without sliding.
+ const after=(svg)=>{let i=periods.length-1,timer=null;const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const show=k=>{const f=frame(periods[k]),scale=v=>(R-L)*v/max;svg.querySelectorAll('[data-item]').forEach(g=>{const it=g.dataset.item,s=f[it],vis=s.rank<top;g.style.transform=`translateY(${T+(vis?s.rank:top)*row}px)`;g.style.display=vis?'':'none';if(reduce)g.querySelectorAll('*').forEach(n=>n.style.transition='none'),g.style.transition='none';const bar=g.querySelector('rect'),w=Math.max(1,scale(s.v));bar.style.width=w+'px';const t=g.querySelector('.mc-value');t.style.transform=`translateX(${L+w+6}px)`;t.textContent=ctx.fmt(s.v)+(u?' '+u:'');g.setAttribute('data-tip',`<strong>${esc(it)}</strong><span>${esc(periods[k])} · ${s.rank+1}위 · ${ctx.fmt(s.v)}${u?' '+u:''}</span>`);});svg.querySelector('.mc-race-period').textContent=periods[k];};
+  const btn=svg.querySelector('.mc-race-play'),txt=btn.querySelector('text'),stop=()=>{clearInterval(timer);timer=null;txt.textContent='▶ 재생';},play=()=>{if(timer){stop();return;}if(i>=periods.length-1)i=-1;txt.textContent='❚❚ 멈춤';timer=setInterval(()=>{i++;show(i);if(i>=periods.length-1)stop();},o.step??1100);};
+  btn.onclick=play;btn.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();play();}};show(i);return stop;};
+ return {height:H,svg:bars+label+button,after,noKeys:true,table:table(['',...periods],items.map(it=>[it,...periods.map(p=>val(p,it))]),ctx.fmt)};
 }

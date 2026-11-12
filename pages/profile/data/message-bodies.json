@@ -1063,6 +1063,38 @@
       "latest_deployed_at": "2026-11-08T10:32:29+00:00"
     },
     {
+      "body_id": "geuge",
+      "title": "그게 그거야 — 뮤직비디오",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-provided-audio",
+        "generated-image-cinema",
+        "code-rendered-video",
+        "stem-driven-motion"
+      ],
+      "tags": [
+        "audio",
+        "image-cinema",
+        "motion",
+        "music-video",
+        "youtube",
+        "making-of",
+        "label-swap"
+      ],
+      "message_sentence": "같은 사람이 같은 일을 하는데, 간첩이라 부르면 고개를 돌리고 스파이라 부르면 박수를 친다. 그림은 그대로 두고 이름표만 바꾸는 뮤직비디오와, 같은 장치로 조서와 영화 포스터를 오가는 페이지.",
+      "thumbnail": {
+        "path": "assets/thumbnails/geuge.webp",
+        "alt": "누런 조서 종이에 붙은 흑백 망점 첩보원 사진과 붉은 간첩 도장, 사건명 그게 그거야",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 45%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/geuge/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-11-12T21:05:55+00:00",
+      "latest_deployed_at": "2026-11-12T21:05:55+00:00"
+    },
+    {
       "body_id": "gileodo-geudaero-astra",
       "title": "길어도 그대로 — Astra 105만 토큰",
       "body_type": "SONGBODY",

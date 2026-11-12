@@ -417,6 +417,10 @@
       "destination": "/pages/profile/work/gangneung-sound/"
     },
     {
+      "source": "/work/geuge/",
+      "destination": "/pages/profile/work/geuge/"
+    },
+    {
       "source": "/work/gileodo-geudaero-astra/",
       "destination": "/pages/profile/work/gileodo-geudaero-astra/"
     },

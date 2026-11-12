@@ -300,6 +300,11 @@
         {
           "id": "image-cinema-review",
           "reason": "코드 애니메이션과 원화·영상을 비교합니다."
+        },
+        {
+          "id": "geuge",
+          "reason": "같은 그림을 코드가 흑백 망점과 원색으로 두 번 그려 이름표만 바꾸는 뮤직비디오입니다.",
+          "status": "proposed"
         }
       ]
     },

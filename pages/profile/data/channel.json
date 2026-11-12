@@ -3,6 +3,12 @@
     "home": "https://www.youtube.com/@themirinaemanproject",
     "items": [
       {
+        "id": "dzRe7F4zb3o",
+        "title": "그게 그거야 — 뮤직비디오",
+        "url": "https://www.youtube.com/watch?v=dzRe7F4zb3o",
+        "image": "/assets/channel/dzRe7F4zb3o.webp"
+      },
+      {
         "id": "mbwtJSt5R2g",
         "title": "회상 - 김성호 (Remake)",
         "url": "https://www.youtube.com/watch?v=mbwtJSt5R2g",
@@ -73,8 +79,7 @@
         "id": "JeIygTTpmiM",
         "title": "Coffee & LoFi Jazz 🎶 | Relaxing Café Music for Study & Work",
         "url": "https://www.youtube.com/watch?v=JeIygTTpmiM",
-        "series": "lofi",
-        "image": "/assets/channel/JeIygTTpmiM.webp"
+        "series": "lofi"
       },
       {
         "id": "1g2XlTZtWfE",

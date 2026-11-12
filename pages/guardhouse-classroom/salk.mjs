@@ -20,7 +20,7 @@ let saved;
 try{saved=JSON.parse(localStorage.getItem(key));}catch{}
 const state=freshSalk(saved);
 const pages={
-  home:['솔크 연구소','실험실 위마다 설비층을 둔 연구소를 도면·3D·전기·소방·에너지로 읽습니다.'],
+  home:['솔크 연구소','루이스 칸이 실험실 위마다 설비층을 둔 연구소를 도면·3D·전기·소방·에너지로 읽습니다.'],
   building:['건물을 읽습니다.','두 동과 중정, 실험실과 설비층이 어떻게 놓였는지 평면과 단면에서 찾으세요.'],
   materials:['재료를 읽습니다.','콘크리트·티크·트래버틴·유리가 어디에 쓰였는지 누르세요.'],
   structure:['구조와 설비층을 읽습니다.','대각선 없는 트러스가 설비층을 만들고 실험실을 기둥 없이 비웁니다.'],

@@ -20,7 +20,7 @@ let saved;
 try{saved=JSON.parse(localStorage.getItem(key));}catch{}
 const state=freshFarnsworth(saved);
 const pages={
-  home:['판스워스 주택','기둥 여덟 개와 유리로 지은 한 방짜리 집을 도면·3D·전기·소방·에너지로 읽습니다.'],
+  home:['판스워스 주택','미스 반 데어 로에가 기둥 여덟 개와 유리로 지은 한 방짜리 집을 도면·3D·전기·소방·에너지로 읽습니다.'],
   building:['건물을 읽습니다.','테라스, 집 바닥, 지붕 세 판이 어떻게 놓였는지 평면과 단면에서 찾으세요.'],
   materials:['재료를 읽습니다.','강재·트래버틴·유리·프리마베라가 어디에 쓰였는지 누르세요.'],
   structure:['구조와 접합을 읽습니다.','기둥이 판을 뚫지 않고 테두리보 옆에 붙어 바닥과 지붕을 띄웁니다.'],

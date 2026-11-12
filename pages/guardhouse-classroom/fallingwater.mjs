@@ -20,7 +20,7 @@ let saved;
 try{saved=JSON.parse(localStorage.getItem(key));}catch{}
 const state=freshFallingwater(saved);
 const pages={
-  home:['낙수장','폭포 위로 판을 내민 집을 도면·3D·전기·소방·에너지로 읽습니다.'],
+  home:['낙수장','프랭크 로이드 라이트가 폭포 위로 판을 내민 집을 도면·3D·전기·소방·에너지로 읽습니다.'],
   building:['건물을 읽습니다.','돌탑에서 물 쪽으로 어긋나게 내민 세 층의 방과 테라스를 평면과 단면에서 찾으세요.'],
   materials:['재료를 읽습니다.','사암·콘크리트·판석·유리·호두나무가 어디에 쓰였는지 누르세요.'],
   structure:['내민 구조를 읽습니다.','받침벽 위에서 주보와 장선이 물 위로 나가 바닥 판을 띄웁니다.'],

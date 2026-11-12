@@ -118,16 +118,28 @@ export class SceneLook {
   v.sun.color.setRGB(...warm);v.sun.intensity=p.sun*power;v.ambient.intensity=v.fpv?p.ambientIndoor:p.ambient;if(v.ground.material.map)v.ground.material.color.set(0xffffff);
   v.scene.environmentIntensity=v.fpv?p.envIndoor:p.env;v.renderer.toneMappingExposure=v.fpv?p.exposureIndoor:p.exposure;
   const u=this.sky.material.uniforms;u.turbidity.value=p.turbidity;u.rayleigh.value=p.rayleigh;u.mieCoefficient.value=p.mie;u.mieDirectionalG.value=p.mieG;u.sunPosition.value.copy(d);u.uGain.value=p.skyGain;u.uRich.value=p.skyRich;
-  const sun=d.clone();if(!this.envSun||this.envSun.distanceTo(sun)>.002){if(this.envTarget)this.envDue=performance.now()+150;else this.buildEnvironment();this.envSun=sun;}
+  const sun=d.clone();if(!this.envSun||this.envSun.distanceTo(sun)>.002){if(this.envTarget)this.envDue=performance.now()+150;else this.askEnvironment();this.envSun=sun;}
   // Indoors the room's own surroundings light the surfaces, so the ceiling does not pick up the colour of the grass.
   v.scene.environment=v.fpv||!this.envTarget?v.environment:this.envTarget.texture;
  }
  // Sky light for the whole scene, taken from the same sky without the sun disc; the sun itself is the directional light.
+ envParts(){
+  if(this.envScene)return;this.pmrem=new THREE.PMREMGenerator(this.view.renderer);this.envSky=daySky();this.envSky.material.uniforms.uDisk.value=0;
+  this.envGround=new THREE.Mesh(new THREE.CircleGeometry(1000,48),new THREE.MeshBasicMaterial());this.envGround.rotation.x=-Math.PI/2;this.envGround.position.y=-1.6;
+  this.envScene=new THREE.Scene();this.envScene.add(this.envSky,this.envGround);
+  // Every sky light is drawn over a backdrop whose material three makes anew and throws away, and its shader with it. This twin keeps that shader alive, so a later sky light does not stop to build it again.
+  this.envBackdrop=new THREE.MeshBasicMaterial({side:THREE.BackSide,depthWrite:false,depthTest:false});
+ }
+ // The first sky light is drawn with shaders of its own. They are asked for ahead and the picture waits for them, as it does for the scene's.
+ askEnvironment(){
+  if(this.envAsk)return;this.envParts();
+  const ask=this.envAsk=this.gate.extras(null,this.view.active,[this.envSky.material,this.envGround.material,this.envBackdrop]).then(()=>{
+   if(this.envAsk!==ask)return;this.envAsk=null;if(this.disposed)return;
+   if(this.applied==='day'){this.buildEnvironment();this.onReady?.();}else this.envSun=null;
+  });
+ }
  buildEnvironment(){
-  const v=this.view,p=LOOK.day,d=this.sunDirection();this.envDue=0;
-  if(!this.envScene){this.pmrem=new THREE.PMREMGenerator(v.renderer);this.envSky=daySky();this.envSky.material.uniforms.uDisk.value=0;
-   this.envGround=new THREE.Mesh(new THREE.CircleGeometry(1000,48),new THREE.MeshBasicMaterial());this.envGround.rotation.x=-Math.PI/2;this.envGround.position.y=-1.6;
-   this.envScene=new THREE.Scene();this.envScene.add(this.envSky,this.envGround);}
+  const v=this.view,p=LOOK.day,d=this.sunDirection();this.envDue=0;this.envAsk=null;this.envParts();
   const u=this.envSky.material.uniforms,s=this.sky.material.uniforms;for(const k of ['turbidity','rayleigh','mieCoefficient','mieDirectionalG'])u[k].value=s[k].value;u.sunPosition.value.copy(d);u.uGain.value=p.envGain;u.uRich.value=p.envRich;
   // Light the ground throws back up: its colour times the sun and sky it receives.
   const lit=v.sun.intensity*Math.max(d.y,0)/Math.PI+.3;const g=v.ground.material;this.envGround.material.color.set(g.map?LOOK.grass:g.color).multiplyScalar(lit);
@@ -173,6 +185,11 @@ export class SceneLook {
   const shade=new ShadePass(v.scene,v.camera,size.x,size.y),output=new OutputPass(),p=LOOK.shade;
   shade.updateGtaoMaterial({radius:p.radius,distanceExponent:p.distanceExponent,thickness:p.thickness,scale:p.scale,samples:p.samples});shade.blendIntensity=p.blend;
   composer.addPass(new RenderPass(v.scene,v.camera));composer.addPass(shade);composer.addPass(output);
+  // The passes bring shaders of their own: the shade, its smoothing, the two that lay it over the picture, and one that draws every surface by the way it faces. They are built beside the page before the first shaded picture, like the scene's.
+  // The last of them writes the tone curve into its shader when it is first drawn, so it is walked through once with nothing to draw on.
+  output.render({outputColorSpace:r.outputColorSpace,toneMapping:r.toneMapping,toneMappingExposure:r.toneMappingExposure,setRenderTarget(){},clear(){},render(){}},null,{texture:null});
+  await this.gate.extras(v.scene,v.active,[shade.gtaoMaterial,shade.pdMaterial,shade.copyMaterial,shade.blendMaterial,output.material],shade.normalMaterial,o=>!this.skips(o));
+  if(this.disposed||this.shadeOff){shade.dispose();output.dispose();composer.renderTarget1.dispose();composer.renderTarget2.dispose();composer.dispose();return;}
   this.composer=composer;this.shade=shade;this.passes=[shade,output];this.size=[size.x,size.y];this.frames.from=performance.now()+2000;
  }
  dropShade(){this.shadeOff=true;this.passes?.forEach(p=>p.dispose());this.composer?.renderTarget1.dispose();this.composer?.renderTarget2.dispose();this.composer?.dispose();this.composer=this.shade=this.passes=null;}
@@ -191,13 +208,14 @@ export class SceneLook {
   // The first outdoor picture waits for corner shade to arrive, so its shaders are built once for the buffer and not a second time for the screen.
   const held=!!(shade&&!this.composer&&!this.shadeOff&&this.shadeLoad&&performance.now()<this.shadeBy);
   if(held!==!!this.held){this.held=held;if(held)v.host.dataset.busy='shade';else if(!this.gate.busy)delete v.host.dataset.busy;}
-  if(held)return false;
+  if(held||this.envAsk)return false;
   return this.gate.check(v.scene,v.active,this.composed);
  }
  settle(){return this.gate.pending??this.shadeLoad??new Promise(done=>setTimeout(done,30));}
  // Draws when the picture is ready and says whether it did; `force` draws at once, for a caller that needs the pixels now.
  render(force=false){
   const v=this.view,r=v.renderer;if(!this.prepare()&&!force)return false;
+  if(this.envAsk&&this.applied==='day')this.buildEnvironment();
   if(this.composed){
    const w=v.host.clientWidth,h=v.host.clientHeight,k=r.getPixelRatio();
    if(w&&h&&(w!==this.size[0]||h!==this.size[1]||k!==this.pixelRatio)){this.pixelRatio=k;this.size=[w,h];this.composer.setPixelRatio(k);this.composer.setSize(w,h);}
@@ -206,7 +224,7 @@ export class SceneLook {
   }else{this.glassUniforms.direct.value=1;r.render(v.scene,v.active);v.host.dataset.ao='off';}
   return true;
  }
- dispose(){this.disposed=true;this.gate.dispose();this.dropShade();this.pmrem?.dispose();this.envTarget?.dispose();this.envSky?.material.dispose();this.envSky?.geometry.dispose();this.envGround?.material.dispose();this.envGround?.geometry.dispose();this.grass?.dispose();}
+ dispose(){this.disposed=true;this.gate.dispose();this.dropShade();this.pmrem?.dispose();this.envTarget?.dispose();this.envSky?.material.dispose();this.envBackdrop?.dispose();this.envSky?.geometry.dispose();this.envGround?.material.dispose();this.envGround?.geometry.dispose();this.grass?.dispose();}
 }
 
 // Grass for open ground: broad patches and fine dabs of green on one repeating tile.

@@ -1,10 +1,10 @@
-import {observeScene,presentScene} from './render-loop.mjs';
+import {observeScene,presentScene,handBack} from './render-loop.mjs';
 import {keyboardOrbit,lightenOnSlowFrames,createRenderer} from './scene-access.mjs';
+import {roomAhead} from './program-warmup.mjs';
 import {addLuminaireDetails,syncLuminaire} from './lighting-fixture.mjs';
 import {buildDeskLamp,setLampPower} from '/pages/guardhouse-classroom/src/equipment-mesh.mjs';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {createModelGroup,disposeModelResources} from '/pages/guardhouse-classroom/src/scene.mjs';
 import {project,boundsOf} from '/pages/guardhouse-classroom/src/classroom-project.mjs';
 import {visibleElement,canWalk} from '/pages/guardhouse-classroom/src/learning-engine.mjs';
@@ -40,6 +40,8 @@ export class ClassroomView {
   this.selectionOutline=new THREE.Box3Helper(new THREE.Box3(),0xf18b20);this.selectionOutline.material.depthTest=false;this.selectionOutline.renderOrder=100;this.selectionOutline.visible=false;this.scene.add(this.selectionOutline);
   this.roomMarker=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({color:0xe9b44b,transparent:true,opacity:.45,depthWrite:false,side:THREE.DoubleSide}));this.roomMarker.rotation.x=-Math.PI/2;this.roomMarker.visible=false;this.scene.add(this.roomMarker);
   this.surfaces=new SurfaceLibrary(this.renderer);this.tour=new ElectricalTour(this);this.sceneLook=this.renderer.noGPU?null:new SceneLook(this);
+  // The realistic picture reflects a room that is drawn once. Its shaders are asked for as soon as the view stands, so that picture does not stop to build them.
+  if(!this.renderer.noGPU)handBack().then(()=>{if(!this.disposed&&!this.environment)this.roomAhead=roomAhead(this.renderer);});
   this.resize=new ResizeObserver(()=>this.size());this.resize.observe(host);
   let start=null,last=null;
   this.renderer.domElement.addEventListener('pointerdown',e=>{if(this.tour.playing){this.tour.playing=false;this.tour.readout();this.host.dispatchEvent(new CustomEvent('tour-ended'));}start=[e.clientX,e.clientY];last=[...start];if(this.fpv)this.renderer.domElement.setPointerCapture(e.pointerId);this.renderer.domElement.focus({preventScroll:true});});
@@ -51,7 +53,7 @@ export class ClassroomView {
   this.loop=observeScene(host,(dt,elapsed)=>{if(this.preparing)return;this.renderer.shadowMap.autoUpdate=Boolean(this.simulation?.active);this.tour.update(dt);this.simulation?.update(elapsed);if(this.fpv)this.walkKeys(dt);else this.controls.update();this.draw();},host.parentElement);
  }
  setActive(active){this.loop.setActive(active);if(!active)this.keys.clear();}
- dispose(){if(this.disposed)return;this.disposed=true;this.loop?.dispose();this.simulation?.dispose();this.props?.dispose();this.fireGuide?.stop();this.tour?.stop();this.resize?.disconnect();this.controls.dispose();this.sceneLook?.dispose();this.clear(this.scene);this.environmentTarget?.dispose();this.surfaces.dispose();this.renderer.dispose();this.renderer.domElement.remove();this.deviceMeshes.clear();this.fireMeshes.clear();this.lightObjects.clear();}
+ dispose(){if(this.disposed)return;this.disposed=true;this.loop?.dispose();this.simulation?.dispose();this.props?.dispose();this.fireGuide?.stop();this.tour?.stop();this.resize?.disconnect();this.controls.dispose();this.sceneLook?.dispose();this.clear(this.scene);this.roomAhead?.drop();this.environmentTarget?.dispose();this.surfaces.dispose();this.renderer.dispose();this.renderer.domElement.remove();this.deviceMeshes.clear();this.fireMeshes.clear();this.lightObjects.clear();}
  size(){const w=this.host.clientWidth,h=this.host.clientHeight;if(!w||!h)return;if(this.viewportWidth!==w||this.viewportHeight!==h){this.renderer.setSize(w,h);this.viewportWidth=w;this.viewportHeight=h;}this.camera.aspect=w/h;this.camera.updateProjectionMatrix();const height=Math.max(this.orthoHeight??7.4,(['right','left'].includes(this.viewName)?5.4:9.2)/(w/h));this.ortho.left=-height*w/h/2;this.ortho.right=-this.ortho.left;this.ortho.top=height/2;this.ortho.bottom=-this.ortho.top;this.ortho.updateProjectionMatrix();}
  createSite(){
   const pbr=(color)=>new THREE.MeshStandardMaterial({color,roughness:.96});
@@ -172,7 +174,7 @@ this.host.dataset.barsBuilt='true';}
  part(filter){if(filter==='rebar')this.ensureBars();this.filter=filter;this.rebarFocus=null;this.rebarDisplay=filter==='rebar'?'bars':'both';this.applyVisibility();}
  whole(){this.circuitFocus=null;this.rebarFocus=null;this.selected=null;this.highlight(null);this.view('exterior','iso');}
  explode(){this.view('exterior','iso');this.exploded=true;this.mode='section-exploded';this.applyVisibility();for(const g of this.base.children)if(g.userData.group==='foundation')g.visible=true;this.camera.position.set(17,15,16);this.controls.target.set(4.1,2.5,-2);this.controls.update();}
- setRealistic(on){if(on&&!this.environment&&!this.renderer.noGPU){const pmrem=new THREE.PMREMGenerator(this.renderer),room=new RoomEnvironment();this.environmentTarget=pmrem.fromScene(room,.04);this.environment=this.environmentTarget.texture;this.scene.environment=this.environment;pmrem.dispose();room.dispose();this.createSite();this.host.dataset.realisticBuilt='true';}this.renderer.shadowMap.enabled=on;this.realistic=on;if(on&&!this.props&&!this.propsPending){this.propsPending=import('./interior-props.mjs').then(({InteriorProps})=>{if(!this.disposed){this.props=new InteriorProps(this);this.props.sync();}}).catch(()=>{this.propsPending=null;this.host.dataset.propsState='error';});}if(on&&this.props?.state==='error')this.props.load();this.setNight(this.night);this.applyVisibility();}
+ setRealistic(on){if(on&&!this.environment&&!this.renderer.noGPU){const ahead=this.roomAhead??roomAhead(this.renderer);this.roomAhead=null;this.environmentTarget=ahead.make();this.environment=this.environmentTarget.texture;this.scene.environment=this.environment;this.createSite();this.host.dataset.realisticBuilt='true';}this.renderer.shadowMap.enabled=on;this.realistic=on;if(on&&!this.props&&!this.propsPending){this.propsPending=import('./interior-props.mjs').then(({InteriorProps})=>{if(!this.disposed){this.props=new InteriorProps(this);this.props.sync();}}).catch(()=>{this.propsPending=null;this.host.dataset.propsState='error';});}if(on&&this.props?.state==='error')this.props.load();this.setNight(this.night);this.applyVisibility();}
  setStudio(on){this.studio=on;this.grid.material.color.set(on?0x2b333c:0xffffff);this.grid.material.vertexColors=!on;this.grid.material.needsUpdate=true;}
  setNight(on){this.night=on;this.scene.background.set(this.studio?0x12171c:on?0x172638:this.realistic?0xb9ccd4:0xdfe8e9);this.ambient.intensity=on?.16:this.realistic?.75:1.8;this.sun.intensity=on?.10:this.realistic?(this.project.daylight??3.2):2.5;this.sun.color.set(on?0xaac9ff:0xfff0d9);this.scene.environmentIntensity=on?.10:this.realistic?.55:.6;this.renderer.toneMappingExposure=on?1.1:1.05;this.ground.material.color.set(this.studio?0x12171c:this.realistic?0x919986:0xd5dfdd);if(this.project.id==='apartment-02')this.applyVisibility();this.sceneLook?.invalidate();}
  // Sun from a direction in plan axes (x east, y north, z up); null puts back the usual light.

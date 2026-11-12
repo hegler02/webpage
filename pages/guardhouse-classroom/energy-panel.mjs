@@ -2,6 +2,7 @@
 // Controls are drawn once; only the result blocks and charts are redrawn, so a slider keeps its focus while it moves.
 import {simulate,designLoads,hourAt,dayOfYear,monthStart,sunVector} from './src/energy-engine.mjs';
 import {render as chart,sunAt} from '/pages/profile/site/charts/mirinae-charts.js';
+import {handBack} from './render-loop.mjs';
 
 export const n=(v,d=0)=>Number(v).toLocaleString('ko-KR',{minimumFractionDigits:d,maximumFractionDigits:d});
 export const glazings={single:{name:'단판 유리 6 mm',u:5.8,g:.8},double:{name:'복층 유리',u:2.8,g:.7},lowe:{name:'로이 복층 유리',u:1.5,g:.45}};
@@ -84,7 +85,7 @@ export function createEnergyPanel({read,write,fresh,card='card',controls,compute
   if(clock){const m=Math.round(Number(o.month)),d=Math.round(Number(o.day)),h=Math.round(Number(o.hour)*2)/2;o.month=m>=1&&m<=12?m:base.month;o.day=d>=1&&d<=31?d:base.day;o.hour=h>=0&&h<=23.5?h:base.hour;}
   return o;};
  const state=clean(read());
- let root=null,first=null,drawn=null,sky=null,last=null;
+ let root=null,first=null,drawn=null,sky=null,last=null,turns=0;
  const date=()=>[state.month,Math.min(state.day,DAYS[state.month-1])];
  const moment=()=>{const [m,d]=date();return hourAt(weather,last.b,dayOfYear(m,d),state.hour);};
  const control=c=>c.options?`<label>${c.label}<select data-energy-input="${c.k}">${c.options.map(([v,t])=>`<option value="${v}">${t}</option>`).join('')}</select></label>`
@@ -105,7 +106,7 @@ export function createEnergyPanel({read,write,fresh,card='card',controls,compute
  const paintNow=()=>{const host=root.querySelector('[data-energy-part="now"]');if(host)host.innerHTML=now();};
  // A part that is redrawn keeps the fold-outs the reader had opened.
  const paint=y=>{for(const [k,f] of Object.entries(parts)){const host=root.querySelector(`[data-energy-part="${k}"]`),open=[...host.querySelectorAll('details')].map(d=>d.open);host.innerHTML=f(y);host.querySelectorAll('details').forEach((d,i)=>{d.open=!!open[i];});}if(clock)paintNow();sync();};
- const update=()=>{const y=last=compute(weather,state);paint(y);for(const [k,f] of Object.entries(charts))drawn[k].update(f(y));};
+ const update=()=>{const y=last=compute(weather,state);paint(y);for(const [k,f] of Object.entries(charts))drawn[k]?.update(f(y));};
  // Moves the sun of the 3D view to the chosen hour; the sample calls it again once its view is ready.
  function sun(){
   if(!clock||!viewer||!last)return;
@@ -119,17 +120,16 @@ export function createEnergyPanel({read,write,fresh,card='card',controls,compute
  async function render(host){
   await loadWeather();
   if(clock&&first?.isConnected&&first.parentNode===host){sun();return;}
-  root=host;const y=last=compute(weather,state);
+  // The year is worked out, then the page gets the thread back before the lesson is written into it.
+  const turn=++turns,y=last=compute(weather,state);
+  await handBack();if(turn!==turns)return;
+  root=host;
   const station=clock?`관측소 ${esc(weather.station)}(북위 ${weather.lat}°, 동경 ${weather.lon}°)`:`관측소 ${esc(weather.station)}`;
   const rows=[...basis.rows(y),...(clock?[['방위',clock.north]]:[]),['날씨',`${esc(weather.source.note)} ${station}, 설계 외기 겨울 ${weather.design.heating996} °C · 여름 ${weather.design.cooling04} °C. <a href="${esc(weather.source.url)}" target="_blank" rel="noopener">${esc(weather.source.name)}</a>`],
    ...(clock?[...(clock.materials?[['재료 값',clock.materials]]:[]),['해의 위치','날짜·경도·표준시로 태양 고도와 방위를 계산합니다. 면이 받는 햇빛은 직달·하늘·지면 반사로 나눠 더합니다.']]:[])];
   host.innerHTML=sections.map((s,i)=>(s.half&&!sections[i-1]?.half?'<div class="energy-pair">':'')+section(s)+(s.half&&!sections[i+1]?.half?'</div>':'')).join('')+
    `<details class="${card} energy-basis${clock?' energy-wide':''}"><summary>계산 가정과 자료</summary><p>${basis.note}</p><dl>${rows.map(([t,v])=>`<div><dt>${t}</dt><dd>${v}</dd></div>`).join('')}</dl></details>`;
-  first=host.firstElementChild;
-  const draw=(k,spec)=>chart(host.querySelector(`[data-energy-chart="${k}"]`),spec,{bare:true});
-  drawn=Object.fromEntries(Object.entries(charts).map(([k,f])=>[k,draw(k,f(y))]));
-  sky=null;
-  for(const {chart:k,place:label} of sections)if(k&&!charts[k]&&weatherCharts[k]){const made=draw(k,weatherCharts[k](label,clock?date():null,state.hour));if(k==='sunpath'&&clock)sky=made;}
+  first=host.firstElementChild;drawn={};sky=null;
   paint(y);
   host.oninput=e=>{const k=e.target.dataset?.energyInput;if(!k||!root?.isConnected)return;const c=controls.find(x=>x.k===k);
    if(c){state[k]=c.options?e.target.value:Number(e.target.value);write(state);update();return;}
@@ -138,6 +138,11 @@ export function createEnergyPanel({read,write,fresh,card='card',controls,compute
    state[k]=v;tick();};
   if(clock)host.onclick=e=>{const b=e.target.closest?.('[data-energy-moment]');if(!b||!root?.isConnected)return;const [m,d,h]=b.dataset.energyMoment.split('-').map(Number);Object.assign(state,{month:m,day:d,hour:h});tick();};
   sun();
+  // The charts are drawn one at a time with the page free in between. A control moved meanwhile redraws the ones already there, and the rest are drawn from the numbers of that moment.
+  const mine=first,still=async()=>{await handBack();return turn===turns&&mine.isConnected;};
+  const draw=(k,spec)=>chart(host.querySelector(`[data-energy-chart="${k}"]`),spec,{bare:true});
+  for(const [k,f] of Object.entries(charts)){if(!await still())return;drawn[k]=draw(k,f(last));}
+  for(const {chart:k,place:label} of sections)if(k&&!charts[k]&&weatherCharts[k]){if(!await still())return;const made=draw(k,weatherCharts[k](label,clock?date():null,state.hour));if(k==='sunpath'&&clock)sky=made;}
  }
  return {render,sun};
 }

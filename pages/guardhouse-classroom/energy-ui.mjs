@@ -3,6 +3,7 @@
 import {simulate,designLoads,hourAt,sunVector,dayOfYear,monthStart} from './src/energy-engine.mjs';
 import {guardhouseBuilding,glazings,heaters,freshEnergy,assumptions,site,wallLayers} from './src/guardhouse-energy.mjs';
 import {render as chart,sunAt} from '/pages/profile/site/charts/mirinae-charts.js';
+import {handBack} from './render-loop.mjs';
 
 const KEY='guardhouse-energy',esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 const n=(v,d=0)=>Number(v).toLocaleString('ko-KR',{minimumFractionDigits:d,maximumFractionDigits:d});
@@ -47,8 +48,10 @@ export class EnergyLesson{
   </div>${this.basis()}`;
   if(s.pv>b.maxPv)s.pv=b.maxPv;
   // Charts come from the shared mirinae-charts engine and live inside these cards.
-  this.charts={climate:chart(root.querySelector('[data-energy-chart="climate"]'),this.climateSpec(),{bare:true}),monthly:chart(root.querySelector('[data-energy-chart="monthly"]'),this.monthlySpec(),{bare:true}),sunpath:chart(root.querySelector('[data-energy-chart="sunpath"]'),this.sunpathSpec(),{bare:true}),windrose:chart(root.querySelector('[data-energy-chart="windrose"]'),this.windroseSpec(),{bare:true}),psychro:chart(root.querySelector('[data-energy-chart="psychro"]'),this.psychroSpec(),{bare:true}),duration:chart(root.querySelector('[data-energy-chart="duration"]'),this.durationSpec(),{bare:true})};
-  this.sync();this.bind();this.update(true);}
+  const turn=this.turn=(this.turn??0)+1,charts=this.charts={};
+  this.sync();this.bind();this.update(true);
+  // The charts are drawn one at a time with the page free in between; a control moved meanwhile redraws the ones already there, and the rest are drawn from the numbers of that moment.
+  (async()=>{for(const k of ['climate','monthly','sunpath','windrose','psychro','duration']){await handBack();const at=root.querySelector(`[data-energy-chart="${k}"]`);if(turn!==this.turn||!at)return;charts[k]=chart(at,this[k+'Spec'](),{bare:true});}})();}
  climateSpec(){const rows=Array.from({length:24},(_,h)=>`${h}시`),cols=Array.from({length:365},(_,d)=>{const m=monthStart.findLastIndex(x=>x<=d);return `${m+1}월 ${d-monthStart[m]+1}일`;}),values=rows.map((_,h)=>cols.map((_,d)=>weather.t[d*24+h]/10)),flat=weather.t.map(v=>v/10),lo=Math.min(...flat),hi=Math.max(...flat);
   return {type:'heatmap',unit:'°C',takeaway:`가장 추운 시간과 가장 더운 시간의 차이가 ${n(hi-lo,1)} °C입니다.`,source:`${site.label} 관측소 표준 기상년(TMYx ${(/TMYx\.(\d{4}-\d{4})/.exec(weather.source.name)??[])[1]?.replace('-','–')??''}) · climate.onebuilding.org`,options:{matrix:{rows,cols,values},mid:15,cellHeight:9,xTicks:monthStart.map((d,m)=>({at:d+14,label:`${m+1}월`})),tableNote:'8,760칸은 표 대신 차트에서 눌러 읽습니다.'}};}
  sunpathSpec(){const [m,d]=this.date(),site_={lat:weather.lat,lon:weather.lon,tz:weather.tz},noon=day=>sunAt(day,12+(135-weather.lon)/15,site_).altitude;
@@ -64,7 +67,7 @@ export class EnergyLesson{
    takeaway:total?`${iGa(top[1])} 1년 전기의 ${n(use[top[0]]/total*100)} %를 씁니다.`:'',options:{stack:true,labels:'none',colors:Object.fromEntries(SERIES.map(([k,,c])=>[k,c])),...(r.year.pv>0?{overlay:{y:'pv',label:'태양광 발전',color:'var(--mc-s7)'}}:{})}};}
  sync(){const s=this.state,[m,d]=this.date();for(const el of this.root.querySelectorAll('[data-energy-input]')){const k=el.dataset.energyInput;el.value=k==='day'?d:k==='month'?m:s[k];if(k==='day')el.max=DAYS[m-1];if(UNIT[k])el.previousElementSibling.textContent=UNIT[k](s[k]);}
   for(const b of this.root.querySelectorAll('[data-energy-moment]')){const [mm,dd,hh]=b.dataset.energyMoment.split('-').map(Number);b.setAttribute('aria-pressed',String(mm===m&&dd===d&&hh===s.hour));}}
- update(all){const parts=all?['now','envelope','yearly','electric']:['now'];for(const p of parts){const el=this.root.querySelector(`[data-energy-part="${p}"]`);if(el)el.innerHTML=this[p]();}if(all){this.charts?.monthly.update(this.monthlySpec());this.charts?.duration.update(this.durationSpec());}this.charts?.sunpath.update(this.sunpathSpec());this.sun();}
+ update(all){const parts=all?['now','envelope','yearly','electric']:['now'];for(const p of parts){const el=this.root.querySelector(`[data-energy-part="${p}"]`);if(el)el.innerHTML=this[p]();}if(all){this.charts?.monthly?.update(this.monthlySpec());this.charts?.duration?.update(this.durationSpec());}this.charts?.sunpath?.update(this.sunpathSpec());this.sun();}
  bind(){this.root.oninput=e=>{const el=e.target.closest('[data-energy-input]');if(!el)return;const k=el.dataset.energyInput,v=['glass','heater'].includes(k)?el.value:Number(el.value);if(typeof v==='number'&&(Number.isNaN(v)||k==='day'&&(v<1||v>31)))return;
    this.state[k]=v;this.save();this.sync();this.update(!['month','day','hour'].includes(k));};}
  jump(value){const [m,d,h]=value.split('-').map(Number);Object.assign(this.state,{month:m,day:d,hour:h});this.save();this.sync();this.update(false);}

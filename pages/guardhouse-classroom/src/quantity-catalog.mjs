@@ -1,10 +1,10 @@
 import {measureElement,lengthOf,unionRouteLength,groupQuantities} from './quantity-engine.mjs';
 import {rebarSize} from './rebar-sizes.mjs';
 
-const names={panel:'분전반',light:'천장 조명',switch:'조명 스위치',socket:'콘센트',ac:'냉방기',ffu:'팬 필터 유닛', 'task-light':'작업등',smoke:'연기감지기',heat:'열감지기','fire-panel':'수신기',receiver:'수신기',callpoint:'발신기',alarm:'경보장치',bell:'경보장치','exit-light':'유도등',exit:'유도등',emergency:'비상조명',extinguisher:'소화기',fan:'배기 팬',ahu:'공조기 팬',sprinkler:'스프링클러 헤드',hydrant:'옥내소화전',cooktop:'인덕션',heatpump:'히트펌프'};
-const sheets={guardhouse:{building:'A-101',structure:'S-101',fire:'F-101',light:'E-101',power:'E-102',circuit:'E-103'},apartment:{building:'A-201',structure:'S-201',fire:'F-201',light:'E-201',power:'E-202',circuit:'E-203'},cleanroom:{building:'A-301',structure:'S-301',fire:'F-301',light:'E-301',power:'E-301',circuit:'E-302'},salk:{building:'A-501',structure:'S-501',fire:'F-501',light:'E-501',power:'E-501',circuit:'E-502'},farnsworth:{building:'A-601',structure:'S-601',fire:'F-601',light:'E-601',power:'E-601',circuit:'E-602'},fallingwater:{building:'A-701',structure:'S-701',fire:'F-701',light:'E-701',power:'E-701',circuit:'E-702'}};
+const names={panel:'분전반',light:'천장 조명',switch:'조명 스위치',socket:'콘센트',ac:'냉방기',ffu:'팬 필터 유닛', 'task-light':'작업등',smoke:'연기감지기',heat:'열감지기','fire-panel':'수신기',receiver:'수신기',callpoint:'발신기',alarm:'경보장치',bell:'경보장치','exit-light':'유도등',exit:'유도등',emergency:'비상조명',extinguisher:'소화기',fan:'배기 팬',ahu:'공조기 팬',sprinkler:'스프링클러 헤드',hydrant:'옥내소화전',pump:'순환 펌프',cooktop:'인덕션',heatpump:'히트펌프'};
+const sheets={guardhouse:{building:'A-101',structure:'S-101',fire:'F-101',light:'E-101',power:'E-102',circuit:'E-103'},apartment:{building:'A-201',structure:'S-201',fire:'F-201',light:'E-201',power:'E-202',circuit:'E-203'},cleanroom:{building:'A-301',structure:'S-301',fire:'F-301',light:'E-301',power:'E-301',circuit:'E-302'},salk:{building:'A-501',structure:'S-501',fire:'F-501',light:'E-501',power:'E-501',circuit:'E-502'},farnsworth:{building:'A-601',structure:'S-601',fire:'F-601',light:'E-601',power:'E-601',circuit:'E-602'},fallingwater:{building:'A-701',structure:'S-701',fire:'F-701',light:'E-701',power:'E-701',circuit:'E-702'},yumin:{building:'A-801',structure:'S-801',fire:'F-801',light:'E-801',power:'E-801',circuit:'E-802'}};
 // Where a sample uses a device kind differently, its own word replaces the shared one.
-const sampleNames={farnsworth:{light:'간접 조명',socket:'콘센트 · 바닥·부엌'},fallingwater:{light:'천장 조명 · 간접등 포함',socket:'콘센트 · 바닥·벽·조리대',smoke:'단독경보형 연기감지기',heat:'단독경보형 열감지기'}};
+const sampleNames={farnsworth:{light:'간접 조명',socket:'콘센트 · 바닥·부엌'},fallingwater:{light:'천장 조명 · 간접등 포함',socket:'콘센트 · 바닥·벽·조리대',smoke:'단독경보형 연기감지기',heat:'단독경보형 열감지기'},yumin:{socket:'콘센트 · 벽·바닥',bell:'경종·시각경보기',ahu:'공조기',exit:'유도등 · 피난구·통로'}};
 // A house fitted with stand-alone alarms has no signal wiring to leave uncounted.
 const standalone=['farnsworth','fallingwater'];
 const round=v=>Number(v.toFixed(4)),mm=v=>round(v*1000);
@@ -52,6 +52,21 @@ function fallingwaterBinding(e){
  if(e.kind==='stair')return {name:hasId(e,'hatch-tread-')?'매달린 디딤판':hasId(e,'hatch-')?e.name:'돌 계단',unit:'개',measure:'count'};
  return null;
 }
+function yuminBinding(e){
+ const rebuilt='재구성 모형의 치수입니다. 원본 제작 도면의 물량이 아닙니다.';
+ const poured=name=>({name:'콘크리트 · '+name,unit:'m³',measure:'volume',note:'부재끼리 겹친 곳을 빼지 않은 부피입니다. '+rebuilt});
+ if(e.context)return {exclude:e.kind==='frame'?'강철 창틀 살 · 창호 조립품':'대지의 길·정원·돌담 · 건물 밖 조경'};
+ if(e.kind==='water')return {exclude:'벽천폭포와 못의 물 · 재료 아님'};
+ if(e.kind==='window-glass')return hasId(e,'annex-')?{name:'반투명 유리',spec:'별관 유리벽',unit:'m²',measure:'face',note:'유리벽 한 면씩의 입면 면적입니다. '+rebuilt}:{name:'판유리',spec:/slit|lamp/.test(e.id)?'띠 창':'유리벽',unit:'m²',measure:'face',note:'창 하나씩의 입면 면적입니다. '+rebuilt};
+ if(e.kind==='wall')return /^(basalt|gate|fall)/.test(e.id)?{name:'현무암 쌓기 벽',unit:'m³',measure:'volume',note:'벽끼리 만나는 모서리를 빼지 않은 부피입니다. '+rebuilt}:poured('노출 콘크리트 벽');
+ if(e.kind==='beam')return poured('지붕 보');
+ if(e.kind==='parapet')return poured('난간벽');
+ if(e.kind==='floor'&&/^(deck|bridge)-(?!.*-slab$)/.test(e.id))return {name:'바닥 포장',spec:'현무암 판석',unit:'m²',measure:'plan',note:rebuilt};
+ if(e.kind==='floor')return hasId(e,'ramp-')?{name:'경사로 포장',spec:'현무암 판석',unit:'m²',measure:'plan',note:'비탈을 평면에 내려 본 면적입니다. '+rebuilt}:poured('바닥 판');
+ if(e.kind==='roof')return /annex|ticket/.test(e.id)?{name:'별관 지붕 판',spec:'두께 추정',unit:'m²',measure:'plan',note:rebuilt}:poured('지붕 판');
+ if(e.kind==='stair')return {name:'콘크리트 계단',unit:'개',measure:'count'};
+ return null;
+}
 
 // These bindings describe the source model's components. Display-only details and
 // representative construction swatches are deliberately not manufacturing objects.
@@ -60,6 +75,7 @@ export function constructionBinding(sample,e){
  if(sample==='salk'&&(e.context||e.kind==='water'))return {exclude:e.context?'남쪽 동·주변 맥락 형상 · 북쪽 동만 산출':'중정 물길의 물 · 재료 물량 아님'};
  if(sample==='farnsworth'){const b=farnsworthBinding(e);if(b)return b;}
  if(sample==='fallingwater'){const b=fallingwaterBinding(e);if(b)return b;}
+ if(sample==='yumin'){const b=yuminBinding(e);if(b)return b;}
  if(sample==='cleanroom'&&e.id==='south-cut')return {exclude:'전면 벽의 절개 표시 · south-wall과 같은 벽'};
  if(['furniture','fixture'].includes(e.kind)||sample==='cleanroom'&&e.id.startsWith('leg-'))return {exclude:'가구·위생기구·소품의 부속 형상 · 조립품 명세 범위 밖'};
  if(['door','window','window-glass','hatch'].includes(e.kind))return {name:e.kind==='door'?'문짝':e.kind==='hatch'?e.name:'창·문 유리',unit:e.kind==='door'||e.kind==='hatch'?'개':'m²',measure:e.kind==='door'||e.kind==='hatch'?'count':'face'};

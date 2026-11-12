@@ -1,4 +1,4 @@
-// Calculations page shared by the masters samples (Salk, Farnsworth, Fallingwater).
+// Calculations page shared by the masters samples (Salk, Farnsworth, Fallingwater, Yumin).
 // Circuit lessons read the project's own circuit table, so the page never recalculates a circuit a second way.
 // The member lesson is one hand calculation of the work's signature member with stated classroom loads; it judges nothing.
 import {lessonHTML,formulaHTML,calculationGlossary} from './calculation-guide.mjs';
@@ -89,6 +89,19 @@ export const fallingwaterMember=({span,width,depth})=>({id:'beam-1',name:'내민
   '윗면 철근이 받아야 하는 인장력을 철근 단면적으로 바꿉니다.',
   '인장력 M / z를 철근의 설계강도 f_yd = 400 / 1.15로 나누면 필요한 단면적입니다. 내민 보의 인장 철근은 윗면에 둡니다. 400 MPa 철근과 계수는 수업값이고 원 건물의 배근이 아닙니다.',
   [s('A_s','필요한 인장 철근 단면적','mm²'),s('M','뿌리 휨모멘트','N·mm'),s('f_yd','철근의 설계강도','MPa'),s('z','팔 길이','mm')],['steel-area','design-strength'],'concrete','N·mm ÷ (N/mm² × mm) = mm².');}});
+export const yuminMember=({span,width,depth})=>({id:'beam-ne-2',name:'지붕 보',title:'높은 전시실 지붕 보 하나',sheet:'S-801',drawing:'S-802',support:'simple',span,width,live:1,
+ dead:10,lever:Math.round(.9*(depth-.06)*1000)/1000,
+ where:'제1전시실 위를 벽에서 벽까지 '+n(span)+' m 건너 지붕 판을 받치는 철근콘크리트 보입니다. 세 개 가운데 한가운데 보를 계산합니다.',
+ deadNote:'고정하중 10.00 kN/m²는 지붕 판 0.25 m × '+concreteWeight+' kN/m³ = 6.00, 방수·단열·마감 약 1.00, 보 자중 약 3.00 kN/m²를 합쳐 가정한 수업값입니다. 사용하중 1.00 kN/m²는 사람이 머물지 않는 지붕의 수업값입니다.',
+ widthNote:'보가 '+n(width)+' m마다 놓여 그 폭의 지붕을 하나가 맡습니다.',
+ momentNote:'보의 양끝은 노출 콘크리트 벽 위에 걸쳐 있다고 봅니다. 벽과 한 몸으로 친 실제 보는 끝에서도 모멘트를 받아 가운데 값이 이보다 작습니다.',
+ leverNote:'지붕 판을 포함한 보 깊이 '+n(depth)+' m에서 피복과 철근 반지름 0.06 m를 뺀 유효 깊이 '+n(depth-.06)+' m에 0.9를 곱했습니다.',
+ coupleTheory:'양끝이 걸친 보는 가운데에서 아랫면이 당겨지고 윗면이 눌립니다. 그 모멘트를 아랫면 철근의 인장력과 윗면 콘크리트(지붕 판)의 압축력 한 쌍이 받습니다.',
+ reactionNote:'이 힘이 보 양끝의 노출 콘크리트 벽으로 내려가 기초까지 갑니다.',
+ closing:v=>{const A=v.M*1e6/(steelDesign*v.z*1000),bar=506.7;return step('steel','아랫면에 필요한 철근량 구하기','A_s = M / (f_yd × z)','A_s = '+n(v.M)+' × 1,000,000 / ('+n(steelDesign)+' × '+n(v.z*1000,0)+') = '+n(A,0)+' mm² → D25('+bar+' mm²) '+Math.ceil(A/bar)+'가닥',
+  '아랫면 철근이 받아야 하는 인장력을 철근 단면적으로 바꿉니다.',
+  '인장력 M / z를 철근의 설계강도 f_yd = 400 / 1.15로 나누면 필요한 단면적입니다. 양끝이 걸친 보의 인장 철근은 가운데 아랫면에 둡니다. 400 MPa 철근과 계수는 수업값이고 원 건물의 배근이 아닙니다. 처짐과 전단은 따로 확인해야 합니다.',
+  [s('A_s','필요한 인장 철근 단면적','mm²'),s('M','가운데 휨모멘트','N·mm'),s('f_yd','철근의 설계강도','MPa'),s('z','팔 길이','mm')],['steel-area','design-strength'],'concrete','N·mm ÷ (N/mm² × mm) = mm².');}});
 
 export function memberLesson(m,live=m.live){
  const simple=m.support==='simple',span=r2(m.span),width=r2(m.width),wd=r2(deadFactor*m.dead+liveFactor*live),w=r2(wd*width),M=r2(w*span**2/(simple?8:2)),z=m.lever,N=r2(M/z),R=r2(simple?w*span/2:w*span);

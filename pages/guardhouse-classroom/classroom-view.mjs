@@ -20,9 +20,10 @@ const colors={light:0xfff5da,switch:0xece8df,socket:0xf4f0e6,panel:0x89969d,ac:0
 export class ClassroomView {
  showStructuralLoad(id,live,base,span){if(!this.loadDiagram&&!id)return;this.loadDiagram??=new StructuralLoadView(this.scene,this.host);this.loadDiagram.update(this.base?.children.find(m=>m.userData.id===id),live,base,span);}
  static prepare(){return SurfaceLibrary.prepare();}
- present(current){return presentScene(this.host,()=>{this.size();this.draw();},{current});}
+ // The picture is shown once its shaders are built; until then the page stays free and the old picture stays.
+ async present(current){this.size();const look=this.sceneLook;if(look)for(let n=0;n<400&&!this.disposed&&current()&&!look.prepare();n++)await look.settle();return presentScene(this.host,()=>{this.size();this.draw();},{current});}
  // Outdoor scenes go through the shared look; drawing views and screens without WebGL draw directly.
- draw(){if(this.sceneLook)this.sceneLook.render();else this.renderer.render(this.scene,this.active);}
+ draw(force){if(this.sceneLook)return this.sceneLook.render(force);this.renderer.render(this.scene,this.active);return true;}
  constructor(host,{onSelect,onSwitch,onMove,projectData=project,walkCheck=canWalk}){
   this.project=projectData;this.walkCheck=walkCheck;this.host=host;this.onSelect=onSelect;this.onSwitch=onSwitch;this.onMove=onMove;this.mode='exterior';this.filter='all';this.realistic=false;this.night=false;this.fpv=false;this.selected=null;this.keys=new Set();this.yaw=0;this.pitch=0;this.exploded=false;
   this.scene=new THREE.Scene();this.scene.background=new THREE.Color('#dee7e8');
@@ -197,5 +198,5 @@ this.host.dataset.barsBuilt='true';}
  move(forward,side,dt=.22){const p=this.camera.position,dx=(-Math.sin(this.yaw)*forward+Math.cos(this.yaw)*side)*dt,dy=(Math.cos(this.yaw)*forward+Math.sin(this.yaw)*side)*dt;const steps=Math.max(1,Math.ceil(Math.hypot(dx,dy)/.04));for(let i=0;i<steps;i++){if(this.walkCheck(p.x+dx/steps,-p.z,this.model))p.x+=dx/steps;if(this.walkCheck(p.x,-p.z+dy/steps,this.model))p.z-=dy/steps;}this.host.dataset.position=`${p.x.toFixed(2)},${(-p.z).toFixed(2)}`;}
  walkKeys(dt){const f=(this.keys.has('w')||this.keys.has('ArrowUp')?1:0)-(this.keys.has('s')||this.keys.has('ArrowDown')?1:0),s=(this.keys.has('d')||this.keys.has('ArrowRight')?1:0)-(this.keys.has('a')||this.keys.has('ArrowLeft')?1:0);if(f||s)this.move(f/Math.max(1,Math.hypot(f,s)),s/Math.max(1,Math.hypot(f,s)),dt*1.5);}
  turn(delta){this.yaw+=delta;this.look();}
- image(){this.draw();return this.renderer.domElement.toDataURL('image/png');}
+ image(){this.draw(true);return this.renderer.domElement.toDataURL('image/png');}
 }

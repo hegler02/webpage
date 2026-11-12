@@ -3,6 +3,7 @@
 import * as THREE from 'three';
 import {Sky} from 'three/addons/objects/Sky.js';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
+import {ProgramGate} from './program-warmup.mjs';
 
 export const LOOK={
  day:{sun:2.7,ambient:.12,ambientIndoor:.4,env:.62,envIndoor:.5,exposure:1,exposureIndoor:1.15,skyGain:.4,skyRich:1.35,envGain:.55,envRich:.6,turbidity:2,rayleigh:1,mie:.004,mieG:.8},
@@ -61,6 +62,7 @@ export class SceneLook {
    sh.fragmentShader=swap(swap(sh.fragmentShader,'#include <common>','#include <common>\nvarying vec2 vGroundXZ;uniform vec4 uFade;'),'#include <opaque_fragment>','#include <opaque_fragment>\nif(uFade.w>0.)gl_FragColor.a*=1.-smoothstep(uFade.z,uFade.w,distance(vGroundXZ,uFade.xy));');};
   g.customProgramCacheKey=()=>'ground-fade';
   view.host.dataset.quality=this.tier;view.host.dataset.ao='off';view.host.dataset.sky='off';
+  this.gate=new ProgramGate(view.renderer,{host:view.host,onChange:on=>{if(!on)this.onReady?.();}});
  }
  invalidate(){if(!this.applying)this.epoch++;}
 
@@ -179,19 +181,32 @@ export class SceneLook {
   const f=this.frames,now=performance.now(),dt=now-f.last;f.last=now;if(now<f.from||dt>250)return;f.sum+=dt;f.n++;
   if(f.n<60)return;const slow=f.sum/f.n>32;f.sum=0;f.n=0;f.slow=slow?f.slow+1:0;if(f.slow>=2)this.dropShade();
  }
- render(){
+ // Brings the scene to the state the next picture needs. False while shaders for it are still being built beside the page; the caller keeps the picture it has.
+ prepare(){
   const v=this.view,r=v.renderer;this.sync();
   if(this.applied!=='off'){(this.applied==='day'?this.sky:this.dome).position.copy(v.active.position);if(this.envDue&&performance.now()>this.envDue&&this.applied==='day')this.buildEnvironment();}
   const shade=this.applied!=='off'&&!this.shadeOff&&!r.clippingPlanes.length&&!v.apartmentDetails?.cutaway;
-  if(shade&&!this.composer&&!this.shadePending)this.loadShade().catch(()=>{this.shadeOff=true;});
-  if(shade&&this.composer){
+  if(shade&&!this.composer&&!this.shadePending){this.shadeBy=performance.now()+4000;this.shadeLoad=this.loadShade().catch(()=>{this.shadeOff=true;}).finally(()=>{this.shadeLoad=null;this.onReady?.();});}
+  this.composed=shade&&!!this.composer;
+  // The first outdoor picture waits for corner shade to arrive, so its shaders are built once for the buffer and not a second time for the screen.
+  const held=!!(shade&&!this.composer&&!this.shadeOff&&this.shadeLoad&&performance.now()<this.shadeBy);
+  if(held!==!!this.held){this.held=held;if(held)v.host.dataset.busy='shade';else if(!this.gate.busy)delete v.host.dataset.busy;}
+  if(held)return false;
+  return this.gate.check(v.scene,v.active,this.composed);
+ }
+ settle(){return this.gate.pending??this.shadeLoad??new Promise(done=>setTimeout(done,30));}
+ // Draws when the picture is ready and says whether it did; `force` draws at once, for a caller that needs the pixels now.
+ render(force=false){
+  const v=this.view,r=v.renderer;if(!this.prepare()&&!force)return false;
+  if(this.composed){
    const w=v.host.clientWidth,h=v.host.clientHeight,k=r.getPixelRatio();
    if(w&&h&&(w!==this.size[0]||h!==this.size[1]||k!==this.pixelRatio)){this.pixelRatio=k;this.size=[w,h];this.composer.setPixelRatio(k);this.composer.setSize(w,h);}
    this.glassUniforms.direct.value=0;this.composer.render();this.measure();v.host.dataset.ao='on';
   // Drawn straight to the screen, glass is mixed after the tone curve, where a faint reflection would come out far too bright.
   }else{this.glassUniforms.direct.value=1;r.render(v.scene,v.active);v.host.dataset.ao='off';}
+  return true;
  }
- dispose(){this.disposed=true;this.dropShade();this.pmrem?.dispose();this.envTarget?.dispose();this.envSky?.material.dispose();this.envSky?.geometry.dispose();this.envGround?.material.dispose();this.envGround?.geometry.dispose();this.grass?.dispose();}
+ dispose(){this.disposed=true;this.gate.dispose();this.dropShade();this.pmrem?.dispose();this.envTarget?.dispose();this.envSky?.material.dispose();this.envSky?.geometry.dispose();this.envGround?.material.dispose();this.envGround?.geometry.dispose();this.grass?.dispose();}
 }
 
 // Grass for open ground: broad patches and fine dabs of green on one repeating tile.

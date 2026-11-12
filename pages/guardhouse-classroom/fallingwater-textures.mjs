@@ -51,10 +51,13 @@ export function flagstone(renderer,size=3.2){
  const S=512,N=8,[c,x]=sheet(S,S),[b,y]=sheet(S,S),rand=random(97),cell=S/N,seeds=[];
  for(let i=0;i<N;i++)for(let j=0;j<N;j++)seeds.push([(i+.15+rand()*.7)*cell,(j+.15+rand()*.7)*cell,rand()*30-15,rand()]);
  const all=[];for(const [sx,sy,t,w] of seeds)for(const dx of [-S,0,S])for(const dy of [-S,0,S])all.push([sx+dx,sy+dy,t,w]);
+ // Only the slabs around a point can be its nearest, so they are sorted into squares once and each point asks its own neighbourhood.
+ const G=N*3,grid=Array.from({length:G*G},()=>[]);for(const s of all)grid[(Math.floor(s[0]/cell)+N)*G+Math.floor(s[1]/cell)+N].push(s);
  const image=x.createImageData(S,S),bump=y.createImageData(S,S);
  for(let py=0;py<S;py++)for(let px=0;px<S;px++){
   let d1=1e9,d2=1e9,near=null;
-  for(const s of all){const dx=s[0]-px,dy=s[1]-py;if(dx>cell*2.2||dx<-cell*2.2||dy>cell*2.2||dy<-cell*2.2)continue;const d=dx*dx+dy*dy;if(d<d1){d2=d1;d1=d;near=s;}else if(d<d2)d2=d;}
+  const ci=Math.floor(px/cell)+N,cj=Math.floor(py/cell)+N;
+  for(let a=ci-3;a<=ci+3;a++)for(let b=cj-3;b<=cj+3;b++)for(const s of grid[a*G+b]){const dx=s[0]-px,dy=s[1]-py;if(dx>cell*2.2||dx<-cell*2.2||dy>cell*2.2||dy<-cell*2.2)continue;const d=dx*dx+dy*dy;if(d<d1){d2=d1;d1=d;near=s;}else if(d<d2)d2=d;}
   const edge=Math.sqrt(d2)-Math.sqrt(d1),joint=edge<3.2,i=(py*S+px)*4,grain=(Math.sin(px*.21+near[3]*40)+Math.sin(py*.17+px*.05))*3;
   const tone=near[3]<.2?[104,92,78]:near[3]<.45?[88,84,78]:[96,90,80],k=joint?0:near[2]+grain;
   image.data[i]=joint?58:tone[0]+k;image.data[i+1]=joint?52:tone[1]+k;image.data[i+2]=joint?45:tone[2]+k;image.data[i+3]=255;

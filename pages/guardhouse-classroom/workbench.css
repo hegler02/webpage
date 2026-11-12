@@ -107,7 +107,9 @@ body.wb-theme .header-actions{color:var(--wb-muted)}
 body.wb-theme .main-nav{background:none}
 body.wb-theme .main-nav button{background:none;border:0;border-bottom:var(--wb-marker) solid transparent;border-radius:0;color:var(--wb-muted)}
 body.wb-theme .main-nav button:hover{color:var(--wb-text);background:var(--wb-hover)}
-body.wb-theme .main-nav button[aria-current=page]{color:var(--wb-text);background:none;border-bottom-color:var(--wb-accent);font-weight:var(--sys-weight-heading)}
+body.wb-theme .main-nav button:is([aria-current=page],[aria-busy=true]){color:var(--wb-text);background:none;border-bottom-color:var(--wb-accent);font-weight:var(--sys-weight-heading)}
+/* While a pressed menu is on its way, the menu being left gives the mark up. */
+body.wb-theme .main-nav[data-pending] button[aria-current=page]:not([aria-busy=true]){color:var(--wb-muted);border-bottom-color:transparent;box-shadow:none;font-weight:var(--sys-weight-medium)}
 body.wb-theme .main-nav .experience-tab{color:var(--wb-accent)}
 body.wb-theme .sample-links a{background:var(--wb-raised);border-color:var(--wb-line);color:var(--wb-muted)}
 body.wb-theme .sample-links a[aria-current=page]{background:var(--wb-accent-soft);border-color:var(--wb-accent);color:var(--wb-accent)}

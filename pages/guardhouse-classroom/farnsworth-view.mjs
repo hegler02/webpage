@@ -121,7 +121,9 @@ export function mountFarnsworth(host,select){
  const stopKeys=keyboardOrbit(controls,canvas),stopLighten=lightenOnSlowFrames(renderer);
  let dirty=true,until=0,disposed=false,state={view:null,studio:true,id:null,show:'electrical',open:false,routeKey:''},walkState=null,sunVectorNow=null,spinning=false,aimed=null,moved=false;
  const wake=(ms=900)=>{dirty=true;until=performance.now()+ms;};
- const draw=()=>{if(look)look.render();else renderer.render(scene,camera);dirty=false;};
+ // While shaders for a new picture are still being built the old picture stays, and the frame is asked for again when they are ready.
+ const draw=force=>{if(look){if(!look.render(force))return false;}else renderer.render(scene,camera);dirty=false;return true;};
+ if(look)look.onReady=()=>wake();
  const size=()=>{const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();};
  const doors=()=>{doorGoal=state.open||(walkState&&walkState.zone!=='yard'&&walkState.zone!=='terrace')?OPEN:0;wake();};
 
@@ -244,8 +246,8 @@ export function mountFarnsworth(host,select){
   setNight:on=>setNight(on),
   setSun:v=>{sunVectorNow=v;placeSun();},
   walking:()=>walkState?.zone??null,
-  present:current=>presentScene(host,()=>{size();draw();},{current}),
-  image:()=>{draw();return canvas.toDataURL('image/png');},
+  present:async current=>{size();if(look)for(let n=0;n<400&&!disposed&&current()&&!look.prepare();n++)await look.settle();return presentScene(host,()=>{size();draw();},{current});},
+  image:()=>{draw(true);return canvas.toDataURL('image/png');},
   setActive:on=>loop.setActive(on),
   dispose(){
    if(disposed)return;disposed=true;loop.dispose();resize.disconnect();controls.dispose();stopKeys?.();stopLighten?.();look?.dispose();env.dispose();

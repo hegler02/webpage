@@ -20,6 +20,8 @@
   --loading-spinner-size:36px;
   --loading-spinner-duration:1s;
   --loading-spinner-stroke:3px;
+  --loading-line-duration:1.4s;
+  --loading-appear-delay:.2s;
 }
 .loading-state{display:flex;align-items:center;gap:var(--space-5);padding:var(--space-5);margin-block:var(--gap-section)}
 .loading-state>div{min-width:0}
@@ -28,6 +30,16 @@
 :is(.loading-spinner,.apt-spinner) path{stroke:var(--teal)}
 @keyframes learning-spin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){:is(.loading-spinner,.apt-spinner){animation:none}}
+/* A pressed menu is marked at once; the line under the header and the ring on the 3D picture run while the new screen is being prepared. */
+.main-nav button[aria-busy=true]{cursor:progress}
+.nav-progress{position:absolute;inset:auto 0 0;height:var(--loading-spinner-stroke);overflow:hidden;pointer-events:none;background:var(--line);animation:loading-appear var(--loading-appear-delay) step-end}
+body>.nav-progress{position:fixed;inset:0 0 auto}
+.nav-progress[hidden]{display:none}
+.nav-progress::before{content:"";position:absolute;inset:0 auto 0 0;width:40%;background:var(--teal);animation:nav-progress var(--loading-line-duration) ease-in-out infinite}
+@keyframes nav-progress{from{transform:translateX(-100%)}to{transform:translateX(250%)}}
+:is(#three-host,#apt-three,#bay-canvas):is([data-busy],:has(>p[role=status]:not(:has(button))))::after{content:"";position:absolute;inset:0;margin:auto;width:var(--loading-spinner-size);height:var(--loading-spinner-size);border:var(--loading-spinner-stroke) solid var(--line);border-top-color:var(--teal);border-radius:50%;background:var(--paper);box-shadow:0 0 0 var(--space-2) var(--paper);pointer-events:none;animation:learning-spin var(--loading-spinner-duration) linear infinite,loading-appear var(--loading-appear-delay) step-end}
+@keyframes loading-appear{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.nav-progress::before{width:100%;animation:none}:is(#three-host,#apt-three,#bay-canvas):is([data-busy],:has(>p[role=status]))::after{animation:none}}
 main[data-page]{max-width:var(--layout-content-max)}
 main[data-page=home] :is(.home-intro,.home-preview,.lesson-path){margin:0}
 main[data-page=home] :is(#home-preview,#lesson-path){margin-top:var(--gap-section)}

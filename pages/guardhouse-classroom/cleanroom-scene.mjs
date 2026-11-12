@@ -5,6 +5,7 @@ import {createExtinguisher} from './fire-extinguisher.mjs';
 import {SurfaceLibrary,worldUV} from './surface-materials.mjs';
 import {observeScene,presentScene} from './render-loop.mjs';
 import {keyboardOrbit,lightenOnSlowFrames} from './scene-access.mjs';
+import {ProgramGate} from './program-warmup.mjs';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
@@ -159,7 +160,10 @@ export function mountBay(host,select,fireAdapter){
   const resize=new ResizeObserver(()=>{const {width,height}=host.getBoundingClientRect();if(width>0&&height>0){camera.aspect=width/height;camera.updateProjectionMatrix();renderer.setSize(width,height,false);if(!simulation?.active)home();redraw();}});
   resize.observe(host);controls.addEventListener('change',redraw);
   let simulation;
-  const loop=observeScene(host,dt=>{simulation?.update(dt);if(!dirty&&!litFans.length&&!simulation?.active)return;for(const g of litFans)g.rotation.y-=dt*3.4;renderer.render(scene,camera);dirty=false;},host.parentElement);
+  // While shaders for a new picture are still being built the old picture stays; the gate asks for the frame again when they are ready.
+  const gate=new ProgramGate(renderer,{host,onChange:on=>{if(!on)dirty=true;}});
+  const draw=force=>{if(!force&&!gate.check(scene,camera))return false;renderer.render(scene,camera);dirty=false;return true;};
+  const loop=observeScene(host,dt=>{simulation?.update(dt);if(!dirty&&!litFans.length&&!simulation?.active)return;for(const g of litFans)g.rotation.y-=dt*3.4;draw();},host.parentElement);
   let start,disposed=false;
   const down=e=>{start=[e.clientX,e.clientY];if(walking){drag=start;renderer.domElement.setPointerCapture(e.pointerId);renderer.domElement.focus({preventScroll:true});}};
   const aim=e=>{if(!drag||!walking)return;yaw-=(e.clientX-drag[0])*.006;pitch=Math.max(-1.1,Math.min(1.25,pitch-(e.clientY-drag[1])*.006));drag=[e.clientX,e.clientY];look();redraw();};
@@ -177,7 +181,7 @@ export function mountBay(host,select,fireAdapter){
   const view={host,scene,camera,controls,site,fireMeshes,project:{id:'cleanroom-03',finishLevel:0,rooms:rooms.map(r=>({...r,spawn:r.id==='room-work'?[4.55,2.45]:[.8,1.1]}))},clear:g=>{disposeTree(g);g.clear();},size:()=>{const {width,height}=host.getBoundingClientRect();if(width>0&&height>0){camera.aspect=width/height;camera.updateProjectionMatrix();renderer.setSize(width,height,false);}redraw();},exitWalk:()=>{controls.enabled=true;},setRealistic:()=>{renderer.toneMappingExposure=.9;},setNight:on=>{renderer.toneMappingExposure=on?.45:.9;},view:()=>{for(const m of enclosure)m.visible=false;controls.enabled=true;home();},highlight:id=>{const g=objects.get(id);if(g){highlight.visible=true;highlight.setFromObject(g);}redraw();}};
   if(fireAdapter)simulation=new FireSimulation(view,{...fireAdapter,lesson:bayFireLesson,before:()=>{controls.enabled=true;}});
   host.dataset.cachedSurfaces=String(surfaces.cachedMaps);host.dataset.generatedSurfaces=String(surfaces.generatedMaps);
-  return {simulation,present:current=>presentScene(host,()=>{view.size();renderer.render(scene,camera);dirty=false;},{current}),image:()=>{renderer.render(scene,camera);return canvas.toDataURL('image/png');},realistic:()=>{renderer.shadowMap.enabled=true;redraw();},home:()=>{home();redraw();},whole:()=>{for(const m of enclosure)m.visible=true;home();redraw();},walk,setActive:active=>loop.setActive(active),update({electric,fire,id,tab,path,color,assembly,layer,display,live=slabDesign.live,sheet='A-301',experienceView='outside',night=false}){
+  return {simulation,present:async current=>{view.size();for(let n=0;n<400&&!disposed&&current()&&!gate.check(scene,camera);n++)await gate.settle();return presentScene(host,()=>{view.size();draw();},{current});},image:()=>{draw(true);return canvas.toDataURL('image/png');},realistic:()=>{renderer.shadowMap.enabled=true;redraw();},home:()=>{home();redraw();},whole:()=>{for(const m of enclosure)m.visible=true;home();redraw();},walk,setActive:active=>loop.setActive(active),update({electric,fire,id,tab,path,color,assembly,layer,display,live=slabDesign.live,sheet='A-301',experienceView='outside',night=false}){
     const nextWalking=tab==='experience'&&experienceView==='inside';
     const changed=physicalMode!==tab||drawingId!==sheet||walking!==nextWalking||tab==='materials'&&constructionKey!=='material-'+assembly;
     walking=nextWalking;host.dataset.walking=String(walking);host.dataset.night=String(night);
@@ -213,6 +217,6 @@ export function mountBay(host,select,fireAdapter){
     host.dataset.fireAlarm=String(fire?.alarm===true);host.dataset.selection=id;host.dataset.pathPoints=String(path.length);host.dataset.fansRunning=String(litFans.length);
     redraw();
   },dispose(){
-    if(disposed)return;disposed=true;simulation?.dispose();loop.dispose();resize.disconnect();controls.dispose();env.dispose();disposeTree(scene);surfaces.dispose();renderer.dispose();canvas.remove();
+    if(disposed)return;disposed=true;gate.dispose();simulation?.dispose();loop.dispose();resize.disconnect();controls.dispose();env.dispose();disposeTree(scene);surfaces.dispose();renderer.dispose();canvas.remove();
   }};
 }

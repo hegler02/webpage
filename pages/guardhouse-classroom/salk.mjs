@@ -4,7 +4,8 @@ import {clearLearningRecords} from './study-state.mjs';
 import {mountExperienceTools,showScenePreview,selectionDimensions} from './workspace-ui.mjs';
 import {mountSamples,mountGlossary} from './learning-shell.mjs';
 import {bindActions} from './action-events.mjs';
-import {provenance} from './src/salk-model.mjs';
+import {createCalculations,salkMember} from './masters-calculations.mjs';
+import {provenance,W,BAY,SLAB} from './src/salk-model.mjs';
 import {rooms,materials,sheets,steps,circuits,panel,equipment,fireDevices,fireStages,fireSource,signalPath,alarmPath,escapePath,stations,freshSalk,salkElectrical,salkFire} from './src/salk-project.mjs';
 import {salkTerms,termFor} from './src/salk-glossary.mjs';
 import {model} from './salk-plan-parts.mjs';
@@ -28,12 +29,13 @@ const pages={
   energy:['에너지를 계산합니다.','이 실험실 한 층을 서울에 지으면 난방과 냉방이 얼마나 드는지 바꿔 보세요.'],
   glossary:['용어사전','도면과 수업에서 만나는 말을 찾아보세요.'],
   experience:['안에 서 봅니다.','해 지는 중정에서 실험실로, 실험실에서 설비층으로 걸어 올라가세요.'],
+  calculations:['계산으로 확인합니다.','한 회로와 비렌딜 트러스 하나를 숫자로 따라가며, 식에 넣은 값이 도면 어디에서 왔는지 확인하세요.'],
   quantities:['설계를 재료와 수량으로 읽습니다.','같은 설계에서 기구와 콘크리트 수량을 집계하고 산출 위치를 확인하세요.']
 };
 const menus={building:'room-lab',materials:'end-w',structure:'truss2-6',electrical:panel.id,fire:fireSource};
 // The few things worth picking first on each menu, shown above the drawing.
 const quick={building:rooms.map(r=>[r.id,r.name]),materials:materials.map(m=>[m.target,m.name]),structure:[['truss2-6','비렌딜 트러스'],['pipe2-floor','설비층 바닥'],['lab2-floor','실험실 바닥'],['end-w','끝벽']],electrical:[[panel.id,'분전반'],['LR3','조명'],['S4','콘센트'],['EF1','배기 팬'],['AHU1','공조기 팬'],['SW1','스위치']],fire:[['FR1','수신기'],['SD5','연기감지기'],['SP1','스프링클러'],['HY2','옥내소화전'],['BL2','경종'],['EX3','유도등'],['FE3','소화기']]};
-let tab='home',drawing='A-501',selected='room-lab',stage=-1,returnPage='',planZoom=1,layoutMode='split',night=false,focusOnOpen=null,termReturn='',glossaryTermOnOpen=null;
+let tab='home',drawing='A-501',selected='room-lab',stage=-1,returnPage='',planZoom=1,layoutMode='split',night=false,wiring=false,focusOnOpen=null,termReturn='',glossaryTermOnOpen=null;
 let scene=null,loading=null,epoch=0,reloadRequired=false,energy=null,dictionary=null;
 const idle=new Set(salkFire({}).devices.filter(d=>d.on).map(d=>d.id));
 function save(){try{localStorage.setItem(key,JSON.stringify(state));}catch{$('bay-status').textContent='이 브라우저에 학습 표시를 저장하지 못했습니다.';}}
@@ -47,9 +49,11 @@ function frame(){
   const color=Object.fromEntries(electric.circuits.map(c=>[c.id,c.color]));
   const paths=tab==='fire'?[[1,signalPath,'#d19129'],[2,alarmPath,'#c8452f'],[3,escapePath,'#08734d','6 4']].filter(p=>stage>=p[0]).map(([,points,c,dash])=>({points,color:c,dash,radius:.06,through:true}))
     :tab==='electrical'?electric.routes.filter(r=>selected===panel.id||r.target===selected).map(r=>({points:r.points,color:color[r.circuit],radius:.04,through:true})):[];
-  return {electric,fire,paths};
+  // Every route at once, for the in-wall wiring overlay of the walk.
+  const wires=electric.routes.map(r=>({points:r.points,color:color[r.circuit],radius:.04,through:true}));
+  return {electric,fire,paths,wires};
 }
-const sceneFrame=f=>{const live=tab==='experience';return {view:live?'site':sheet().view,studio:!live,id:live?null:selected,show:tab==='fire'?'fire':live?'all':'electrical',devices:[...f.electric.devices,...f.fire.devices],paths:live?[]:f.paths,night};};
+const sceneFrame=f=>{const live=tab==='experience';return {view:live?'site':sheet().view,studio:!live,id:live?null:selected,show:tab==='fire'?'fire':live?'all':'electrical',devices:[...f.electric.devices,...f.fire.devices],paths:live?(wiring?f.wires:[]):f.paths,night};};
 
 function renderInspector(f){
   const d=lookup(selected),host=$('bay-inspector');
@@ -58,11 +62,11 @@ function renderInspector(f){
   const route=f.electric.routes.find(r=>r.target===d.id),length=route?route.points.slice(1).reduce((sum,p,i)=>sum+Math.hypot(...p.map((v,j)=>v-route.points[i][j])),0):null;
   host.innerHTML='<h2>'+d.name+'</h2><div class="selection-id">'+d.id+'</div><p>'+(d.note??d.description??actual.stateLabel??definition?.plain??'')+'</p>'+
     (part?'<div class="basis"><b data-basis="'+part.label+'">'+part.label+'</b>'+(part.source?'<a href="'+part.source.url+'" target="_blank" rel="noopener">'+part.source.name+'</a>':'')+'</div>':'')+
-    selectionDimensions(actual,{routeLength:length})+actions(definition?btn('쉬운 용어 설명','term',term):'');
+    selectionDimensions(actual,{routeLength:length})+actions((definition?btn('쉬운 용어 설명','term',term):'')+(f.electric.circuits.some(c=>c.id===actual.circuit)?btn('이 회로 계산','open-calc',actual.circuit):'')+(d.id===calc.memberId?btn('이 부재 계산','open-calc','member'):''));
 }
 
 function paint(){
-  const f=frame(),workspace=!['home','glossary','quantities','energy'].includes(tab),live=tab==='experience',walking=scene?.walking()??null;
+  const f=frame(),workspace=!['home','glossary','quantities','energy','calculations'].includes(tab),live=tab==='experience',walking=scene?.walking()??null;
   $('bay-app').dataset.page=tab;$('bay-walk').hidden=!live||!walking;
   if(live)$('bay-walk').innerHTML='<div><p>눈높이 1.6 m</p><p>휠: 시야 확대·축소 · W A S D: 이동</p></div><div class="move-buttons">'+stations.map(s=>btn(s.name,'walk',s.id)).join('')+btn('앞으로','walk','forward')+btn('뒤로','walk','back')+btn('왼쪽 이동','walk','strafe-left')+btn('오른쪽 이동','walk','strafe-right')+btn('왼쪽 보기','walk','left')+btn('오른쪽 보기','walk','right')+'</div>';
   $('bay-title').textContent=pages[tab][0];$('bay-intro').textContent=pages[tab][1];
@@ -72,15 +76,16 @@ function paint(){
   const menu=live?'building':tab;
   $('bay-sheet').innerHTML=sheets.filter(s=>s.menu===menu).map(s=>'<option value="'+s.id+'"'+(s.id===drawing?' selected':'')+'>'+s.id+' · '+s.title+'</option>').join('');
   if(workspace){$('bay-plan').innerHTML=salkPlan({sheet:drawing,id:selected,electric:f.electric,fire:f.fire,state,paths:f.paths});planZoom=1;}
-  if(live)mountExperienceTools($('bay-tools'),{night,render:()=>showScenePreview(scene?.image(),'솔크 연구소'),enter:()=>walk('lab'),outside:()=>walk('outside'),setNight:on=>{night=on;paint();},preview:()=>showScenePreview(scene?.image(),'솔크 연구소')});
+  if(live)mountExperienceTools($('bay-tools'),{night,wiring,route:()=>{wiring=!wiring;paint();$('bay-status').textContent=wiring?'벽과 바닥 속 전기 길을 회로 색으로 겹쳐 보입니다.':'전기 길을 숨겼습니다.';},render:()=>showScenePreview(scene?.image(),'솔크 연구소'),enter:()=>walk('lab'),outside:()=>walk('outside'),setNight:on=>{night=on;paint();},preview:()=>showScenePreview(scene?.image(),'솔크 연구소')});
   else $('bay-tools').innerHTML=(quick[tab]??[]).map(([id,name])=>lessons.btn(name,'pick',id,lessons.pressed(id===selected))).join('');
   renderInspector(f);quantities.inspector($('bay-inspector'),selected);
   $('bay-render-label').textContent=live?(night?'야간 조명':'춘분 저녁 · 라호이아'):'학습 보기';
   $('bay-view-help').textContent=walking?'드래그로 둘러보기 · W A S D로 이동':'드래그로 회전 · 휠로 확대 · 대상을 눌러 정보 확인';
-  const view={state,electric:f.electric,fire:f.fire,selected,stage,walking};
+  const view={state,electric:f.electric,fire:f.fire,selected,stage,walking,wiring};
   if(tab==='glossary'){dictionary=mountGlossary($('bay-lesson'),[...salkTerms.values()],{sample:5,action:'related-term',detailsAction:'term'});if(glossaryTermOnOpen){dictionary.input.value=salkTerms.get(glossaryTermOnOpen)?.term??'';dictionary.update();glossaryTermOnOpen=null;}}
   else if(tab==='quantities')quantities.render();
   else if(tab==='energy')showEnergy();
+  else if(tab==='calculations')$('bay-lesson').innerHTML=calc.html();
   else $('bay-lesson').innerHTML=({home:lessons.home,building:lessons.building,materials:lessons.material,structure:lessons.structure,electrical:lessons.electrical,fire:lessons.fire,experience:lessons.experience})[tab](view);
   for(const b of document.querySelectorAll('#learning-nav button[data-go]'))b.toggleAttribute('aria-current',false),b.dataset.go===tab&&b.setAttribute('aria-current','page');
   quantities.setPage(tab);$('bay-return').hidden=!returnPage||returnPage===tab;
@@ -114,7 +119,7 @@ function walk(action){scene?.walk(action);paint();}
 let navigationId=0;
 async function openPage(){
   const started=performance.now(),request=++navigationId;delete $('bay-app').dataset.frameMs;delete $('bay-app').dataset.navigationMs;
-  tab=location.hash.slice(1);if(!Object.hasOwn(pages,tab))tab='home';layoutMode=tab==='experience'?'model':'split';stage=-1;
+  tab=location.hash.slice(1);if(!Object.hasOwn(pages,tab))tab='home';layoutMode=tab==='experience'?'model':'split';stage=-1;if(tab!=='experience')wiring=false;
   const focused=focusOnOpen?.menu===tab?focusOnOpen.id:null;if(focused&&Object.hasOwn(menus,tab))menus[tab]=focused;selected=menus[tab]??selected;focusOnOpen=null;
   const menu=tab==='experience'?'building':tab;if(!sheets.some(s=>s.id===drawing&&s.menu===menu))drawing=sheets.find(s=>s.menu===menu)?.id??'A-501';
   if(tab==='experience')drawing='A-501';
@@ -147,7 +152,10 @@ function zoomDrawing(action){
   const full=svg.dataset.fullView?.split(' ').map(Number)??svg.getAttribute('viewBox').split(' ').map(Number);svg.dataset.fullView=full.join(' ');
   const [x,y,w,h]=full;svg.setAttribute('viewBox',[x+w*(1-1/planZoom)/2,y+h*(1-1/planZoom)/2,w/planZoom,h/planZoom].join(' '));
 }
+// The calculation page reads the same circuit table the panel schedule shows.
+const calc=createCalculations({key:key+':calc',file:'솔크-계산.json',terms:salkTerms,electric:()=>salkElectrical(state),sheets,panel,plan:'E-501',drawing:'E-502',member:salkMember({span:W,width:BAY,slab:SLAB,depth:2.74}),destination,go,saveFile,paint,status:t=>{$('bay-status').textContent=t;}});
 const salkActions={
+  ...calc.actions,
   go:b=>go(b.dataset.go),pick:b=>pick(b.dataset.pick),device:b=>pick(b.dataset.device),
   walk:b=>walk(b.dataset.walk),
   saveDrawing:()=>saveFile(drawing+'.svg',$('bay-plan').querySelector('svg').outerHTML,'image/svg+xml'),
@@ -165,12 +173,13 @@ const salkActions={
   retry:()=>{if(reloadRequired)location.reload();else ensureScene();},
   '#reframe':()=>{if(tab==='experience')walk('outside');else scene?.home();},
   '#bay-reset':()=>$('bay-reset-dialog').showModal(),
-  '#bay-reset-confirm':()=>{clearLearningRecords(5,'salk-05');try{localStorage.removeItem(energyKey);}catch{}energy=null;Object.assign(state,freshSalk());save();$('bay-reset-dialog').close();go('home');},
+  '#bay-reset-confirm':()=>{clearLearningRecords(5,'salk-05');try{localStorage.removeItem(energyKey);}catch{}energy=null;calc.reset();Object.assign(state,freshSalk());save();$('bay-reset-dialog').close();go('home');},
   '#menu-toggle':b=>{const active=$('site-top').dataset.menuOpen!=='true';$('site-top').dataset.menuOpen=String(active);b.setAttribute('aria-expanded',String(active));b.setAttribute('aria-label',active?'학습 메뉴 닫기':'학습 메뉴 열기');}
 };
 bindActions([$('site-top'),$('bay-app'),$('bay-term'),$('bay-reset-dialog')],salkActions,error=>{$('bay-status').textContent='작업을 마치지 못했습니다: '+error.message;});
 document.addEventListener('keydown',e=>{if(e.target.matches?.('[data-device]')&&['Enter',' '].includes(e.key)){e.preventDefault();pick(e.target.dataset.device);}});
-$('bay-app').addEventListener('change',e=>{const id=e.target.dataset.complete;if(!id)return;state.completed=steps.filter(s=>s.id===id?e.target.checked:state.completed.includes(s.id)).map(s=>s.id);save();paint();});
+$('bay-app').addEventListener('submit',e=>calc.submit(e));
+$('bay-app').addEventListener('change',e=>{if(calc.change(e))return;const id=e.target.dataset.complete;if(!id)return;state.completed=steps.filter(s=>s.id===id?e.target.checked:state.completed.includes(s.id)).map(s=>s.id);save();paint();});
 const quantities=createQuantities({host:$('bay-lesson'),nav:$('learning-nav'),workspace:$('bay-workspace'),go,read:()=>{const f=frame();return {sample:'salk',model,electric:f.electric,fire:f.fire,panel,rebar:{bars:[]},resolveSheet:e=>e.kind==='truss'?'S-501':e.group==='pipe'?'S-502':'A-501'};},locate:async m=>{drawing=m.sheet;returnPage='quantities';focusOnOpen={menu:m.menu,id:m.id};history.replaceState(null,'','#'+m.menu);await openPage();return !reloadRequired;}});
 mountSamples(5,()=>go('home'),()=>go('glossary'));
 window.addEventListener('hashchange',openPage);

@@ -53,7 +53,9 @@ export function fire({stage,fire}){
   card('한 층을 경계구역 셋으로',rows([...fireZones.map(z=>[z.name,num(z.area,1)+' m²']),['연기감지기',counts('smoke')+'개'],['스프링클러 헤드','한 칸 '+sprinklerPlan.perBay+'개 · 한 층 '+sprinklerPlan.floor+'개'],['헤드 간격',sprinklerPlan.spacing+' m']]));
 }
 
-export function experience({walking}){
+// One stroke per circuit, in the colour the model draws its routes.
+export const wireLegend=electric=>card('벽 속 전기 길','<p>분전반에서 기구까지 가는 길을 회로 색으로 겹쳐 보입니다.</p><div class="salk-rows">'+electric.circuits.map(c=>'<div><span><svg width="28" height="8" viewBox="0 0 28 8" aria-hidden="true"><line x1="2" y1="4" x2="26" y2="4" stroke="'+c.color+'" stroke-width="4" stroke-linecap="round"/></svg> '+c.id+' · '+c.name+'</span><strong>가장 먼 기구까지 '+num(c.length)+' m</strong></div>').join('')+'</div>');
+export function experience({walking,wiring,electric}){
  const here=stations.find(s=>s.id===walking);
- return card(here?here.name+'에 서 있습니다':'해 지는 중정',here?'<p>드래그로 둘러보고 W A S D로 걷습니다.</p>':'<p>춘분 저녁, 해가 물길 끝 바다로 집니다.</p>'+actions(stations.map(s=>btn(s.name+'에 서기','walk',s.id)).join('')));
+ return card(here?here.name+'에 서 있습니다':'해 지는 중정',here?'<p>드래그로 둘러보고 W A S D로 걷습니다.</p>':'<p>춘분 저녁, 해가 물길 끝 바다로 집니다.</p>'+actions(stations.map(s=>btn(s.name+'에 서기','walk',s.id)).join('')))+(wiring?wireLegend(electric):'');
 }

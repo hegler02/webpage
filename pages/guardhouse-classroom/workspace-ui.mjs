@@ -1,8 +1,10 @@
 // The guardhouse toolbar is the shared interaction contract for every sample.
-export function mountExperienceTools(host,{night=false,render,enter,outside,setNight,route,preview}){
+export function mountExperienceTools(host,{night=false,wiring,render,enter,outside,setNight,route,preview}){
   host.innerHTML='<button type="button" data-experience="render" class="primary">실감 렌더링</button><button type="button" data-experience="enter">실내 둘러보기</button><button type="button" data-experience="outside">밖에서 보기</button><label><input type="checkbox" data-experience="night"> 야간 조명</label><button type="button" data-experience="route">벽 속 전기 길 보기</button><button type="button" data-experience="preview">장면 미리보기</button>';
   const actions={render,enter,outside,route,preview};
   for(const button of host.querySelectorAll('button[data-experience]'))button.onclick=actions[button.dataset.experience];
+  // Samples that overlay the routes in place pass wiring so the button reads as a toggle.
+  if(typeof wiring==='boolean')host.querySelector('[data-experience=route]').setAttribute('aria-pressed',String(wiring));
   const toggle=host.querySelector('input');toggle.checked=night;toggle.onchange=()=>setNight(toggle.checked);
 }
 

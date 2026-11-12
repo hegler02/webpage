@@ -35,7 +35,7 @@
 @media(max-width:500px){.checklist>div{flex-wrap:wrap}.bay-card label{line-height:var(--leading-body)}}
 @media(max-width:1100px){#model{scroll-margin-top:90px}}
 #bay-return{margin-bottom:var(--gap-actions)}
-#bay-lesson .calc-guide{width:100%;max-width:1200px;margin-inline:auto}
+#bay-lesson .calc-guide{width:100%;max-width:none;margin-inline:0}
 #bay-app[data-page=test] #drawing,#bay-app[data-page=test] #bay-view-tools{display:none}
 #bay-app[data-page=test] .fire-sim{border-bottom:1px solid var(--line)}
 #bay-app[data-page=glossary] .bay-card p+p{margin-top:var(--space-3)}

@@ -2,7 +2,7 @@
 import {rooms,steps,materials,interior,lighting,requiredFittings,houseLoad,fireStages,fireRule,requiredDetectors,requiredExtinguishers,fireRooms,stations,sheets} from './src/fallingwater-project.mjs';
 import {F1,F2,F3,ROOF,PAR,BAY,CANT,JOISTS} from './src/fallingwater-model.mjs';
 import {lessonSummary} from './src/lesson-catalog.mjs';
-import {btn,pressed,card,actions} from './salk-lessons.mjs';
+import {btn,pressed,card,actions,wireLegend} from './salk-lessons.mjs';
 export {btn,pressed,card,actions};
 
 const rows=list=>'<div class="salk-rows">'+list.map(([k,v])=>'<div><span>'+k+'</span><strong>'+v+'</strong></div>').join('')+'</div>';
@@ -52,7 +52,7 @@ export function fire({stage,fire}){
   card('주택에는 소화기와 단독경보형 감지기를 둡니다',rows([['법이 요구하는 감지기',requiredDetectors()+'개 · 방 '+fireRooms.length+'곳에 하나씩, 계단 꼭대기에 하나'],['이 설계의 감지기','연기 '+counts('smoke')+'개 · 열 '+counts('heat')+'개'],['소화기',counts('extinguisher')+'개 · 법이 요구하는 '+requiredExtinguishers()+'개는 층마다 하나, 부엌에 하나 더'],['경보음',fireRule.sound+' dB · 감지기 제 몸에서 울림'],['근거',fireRule.law],['감지기 기준',fireRule.detector]]));
 }
 
-export function experience({walking}){
+export function experience({walking,wiring,electric}){
  const here=stations.find(s=>s.id===walking);
- return card(here?here.name+'에 서 있습니다':'계곡 위에서 보는 집',here?'<p>드래그로 둘러보고 W A S D로 걷습니다.</p>':'<p>초여름 낮, 물이 집 아래를 지나 폭포로 떨어집니다.</p>'+actions(stations.map(s=>btn(s.name+'에 서기','walk',s.id)).join('')));
+ return card(here?here.name+'에 서 있습니다':'계곡 위에서 보는 집',here?'<p>드래그로 둘러보고 W A S D로 걷습니다.</p>':'<p>초여름 낮, 물이 집 아래를 지나 폭포로 떨어집니다.</p>'+actions(stations.map(s=>btn(s.name+'에 서기','walk',s.id)).join('')))+(wiring?wireLegend(electric):'');
 }

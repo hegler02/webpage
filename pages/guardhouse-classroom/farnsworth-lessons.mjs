@@ -2,7 +2,7 @@
 import {rooms,steps,materials,interior,lighting,requiredFittings,houseLoad,fireStages,fireRule,requiredDetectors,stations,sheets} from './src/farnsworth-project.mjs';
 import {L,W,FLOOR,CLEAR,TZ,BAY,CANT} from './src/farnsworth-model.mjs';
 import {lessonSummary} from './src/lesson-catalog.mjs';
-import {btn,pressed,card,actions} from './salk-lessons.mjs';
+import {btn,pressed,card,actions,wireLegend} from './salk-lessons.mjs';
 export {btn,pressed,card,actions};
 
 const rows=list=>'<div class="salk-rows">'+list.map(([k,v])=>'<div><span>'+k+'</span><strong>'+v+'</strong></div>').join('')+'</div>';
@@ -51,7 +51,7 @@ export function fire({stage,fire}){
   card('주택에는 소화기와 단독경보형 감지기를 둡니다',rows([['법이 요구하는 감지기',requiredDetectors()+'개 · 실내 '+num(interior.area,1)+' m²가 '+fireRule.room+' m² 이하'],['이 설계의 감지기','연기 '+counts('smoke')+'개 · 열 '+counts('heat')+'개'],['소화기',counts('extinguisher')+'개 · 현관과 부엌'],['경보음',fireRule.sound+' dB · 감지기 제 몸에서 울림'],['근거',fireRule.law],['감지기 기준',fireRule.detector]]));
 }
 
-export function experience({walking}){
+export function experience({walking,wiring,electric}){
  const here=stations.find(s=>s.id===walking);
- return card(here?here.name+'에 서 있습니다':'강가 풀밭에서 보는 집',here?'<p>드래그로 둘러보고 W A S D로 걷습니다.</p>':'<p>하지 오후, 유리 너머로 반대편 풀밭이 비칩니다.</p>'+actions(stations.map(s=>btn(s.name+'에 서기','walk',s.id)).join('')));
+ return card(here?here.name+'에 서 있습니다':'강가 풀밭에서 보는 집',here?'<p>드래그로 둘러보고 W A S D로 걷습니다.</p>':'<p>하지 오후, 유리 너머로 반대편 풀밭이 비칩니다.</p>'+actions(stations.map(s=>btn(s.name+'에 서기','walk',s.id)).join('')))+(wiring?wireLegend(electric):'');
 }

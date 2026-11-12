@@ -122,7 +122,7 @@ async function ensureScene(){
  sceneLoading=(async()=>{
   await yieldForPaint();const moduleURL=new URL('./conveyor-scene.mjs',import.meta.url);if(sceneAttempt++)moduleURL.searchParams.set('retry',sceneAttempt);
   const {createConveyorScene}=await import(moduleURL.href);
-  scene=createConveyorScene(host,{select,onFrame:dt=>{
+  scene=await createConveyorScene(host,{select,onFrame:dt=>{
    tick(state,dt);const status=evaluate(state);frameElapsed+=dt;
    if(page==='intro'&&observeIntro(introSession,state,{contactTravel:Number(host.dataset.contactTravel)}))refreshIntro(introPanel,introSession,state,true);
    const signals=JSON.stringify(status.inputs);
@@ -155,7 +155,9 @@ async function navigate(){
  renderContent();renderStudy();renderIntro();
  if(visual&&layout!=='plan'){
   const s=await ensureScene();if(v!==navVersion){s?.setActive(visualPages.includes(page)&&layout!=='plan');return;}
-  if(s){s.teaching(page==='intro'?introProgress.step:null);s.routes(showRoutes||page==='electrical'||page==='signals');s.night(page==='intro'?false:night);s.select(selected);frameScene(pendingTarget??(page==='components'?'cabinet':page==='electrical'?'operator':'whole'));pendingTarget=null;s.setActive(true);refreshStudy();frameIntro();}
+  if(s){s.teaching(page==='intro'?introProgress.step:null);s.routes(showRoutes||page==='electrical'||page==='signals');s.night(page==='intro'?false:night);s.select(selected);
+   // The view takes the shape of its pane when it wakes, and the camera is set by that shape, so it wakes first. Framed the other way round, the picture kept the shape of the pane it was last seen in.
+   s.setActive(true);frameScene(pendingTarget??(page==='components'?'cabinet':page==='electrical'?'operator':'whole'));pendingTarget=null;refreshStudy();frameIntro();}
  }
  if(pendingStudy&&page==='electrical'&&v===navVersion){pendingStudy=false;workbench.show('study');if(studyMode==='trace')studyLocation(traceSteps[0].region);else study.scrollIntoView({block:'start',behavior:'instant'});}
  if(reading&&v===navVersion)requestAnimationFrame(()=>{scrollTo({top:reading.scroll,behavior:'instant'});workbench.resume();});

@@ -127,15 +127,16 @@ export class ProgramGate {
   this.runs++;
   this.pending=(async()=>{
    try{
-    await handBack();
+    // The first lot is primed with a small draw that asks the graphics process a question, so it waits until that process is free.
+    await graphicsIdle(r);
     while(at<work.length&&!this.disposed){
      for(const from=performance.now();this.making()>ATONCE&&!this.disposed&&performance.now()-from<this.limit;)await new Promise(next=>setTimeout(next,8));
      ask();await handBack();
     }
     while(!this.disposed&&!built()&&performance.now()-started<this.limit)await new Promise(next=>setTimeout(next,16));
-    // Textures go once the shaders are built, when the graphics process has nothing else to do.
-    await this.send(missing);
+    // Shaders are opened while the graphics process has nothing else to do, and the textures go after that: opened behind them, each question would wait for the textures with the whole page.
     await this.open();
+    await this.send(missing);
    }catch(error){console.warn('shader warm-up skipped',error);}
    this.mark(seen,missing);this.pending=null;this.waited+=performance.now()-started;this.flag(false);
   })();

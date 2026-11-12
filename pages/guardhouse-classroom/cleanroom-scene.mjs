@@ -3,12 +3,11 @@ import {StructuralLoadView} from './structural-load-view.mjs';
 import {bayFireLesson,extinguisher} from './src/cleanroom-fire.mjs';
 import {createExtinguisher} from './fire-extinguisher.mjs';
 import {SurfaceLibrary,worldUV} from './surface-materials.mjs';
-import {observeScene,presentScene} from './render-loop.mjs';
-import {keyboardOrbit,lightenOnSlowFrames} from './scene-access.mjs';
-import {ProgramGate} from './program-warmup.mjs';
+import {observeScene,presentScene,timeSlices} from './render-loop.mjs';
+import {keyboardOrbit,lightenOnSlowFrames,holdCanvas,seatCanvas} from './scene-access.mjs';
+import {ProgramGate,roomLight,graphicsIdle} from './program-warmup.mjs';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {layerModel,strip,stripBars,slabDesign,walkable} from './src/cleanroom-construction.mjs';
 import {rebarSize} from './src/rebar-sizes.mjs';
 import {createModelGroup,disposeModelResources as disposeTree} from './src/scene.mjs';
@@ -63,20 +62,25 @@ function pipe(points,material,radius){
 
 export const prepareBayMaterials=()=>SurfaceLibrary.prepare();
 
-export function mountBay(host,select,fireAdapter){
-  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});
+// The scene is built in slices, so the page stays free while it grows; the notice stays in its place until the scene is whole.
+export async function mountBay(host,select,fireAdapter){
+  const pause=timeSlices(),renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});
   const camera=new THREE.PerspectiveCamera(37,1,.04,60), scene=new THREE.Scene();
   const loadDiagram=new StructuralLoadView(scene,host);
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.55));
   renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.90;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-  scene.background=new THREE.Color(0xe6eceb);
-  const generator=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment(),env=generator.fromScene(room,.03);
-  scene.environment=env.texture;scene.environmentIntensity=.7;generator.dispose();room.dispose();
+  scene.background=new THREE.Color(0xe6eceb);holdCanvas(host,renderer);
+  await pause();
+  const env=await roomLight(renderer,.03);
+  scene.environment=env.texture;scene.environmentIntensity=.7;
   const ambient=new THREE.HemisphereLight(0xe9f2f4,0x697d87,1.20);scene.add(ambient);
   const sun=new THREE.DirectionalLight(0xfff6e2,2.1);sun.position.set(1,9,3);sun.target.position.set(3,0,-2);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-6,right:6,top:6,bottom:-6,far:20});sun.shadow.normalBias=.025;scene.add(sun,sun.target);
+  await pause();
   const model=bayModel();const base=createModelGroup(model);scene.add(base);
+  await pause();
   const surfaces=new SurfaceLibrary(renderer);
   for(const m of base.children){if(!m.material)continue;const d=m.userData;if(d.id==='slab'){worldUV(m.geometry);surfaces.apply(m.material,'concrete');}else if(d.id.startsWith('tile-')){worldUV(m.geometry);surfaces.apply(m.material,'tile',0xc6d8d8);}else if(d.kind==='wall'||d.kind==='ceiling'){m.material.roughness=.36;m.material.metalness=.25;}else if(d.name.includes('작업대')){m.material.roughness=.26;m.material.metalness=.76;}}
+  await pause();
   const site=new THREE.Group();scene.add(site);const ground=cuboid(site,[13,.04,11],0xc8d0cc,[3.6,-.29,-2.4]);ground.receiveShadow=true;
   for(const x of [3.32,5.72])for(let i=0;i<6;i++){
     const wafer=part(base,new THREE.CylinderGeometry(.145,.145,.008,48),i%2?0x526878:0x706d85,[x+i*.037,1.15,-3.94],.78);wafer.rotation.z=Math.PI/2;
@@ -113,7 +117,8 @@ export function mountBay(host,select,fireAdapter){
     if(tab==='structure'){steel.visible=display!=='concrete';concrete.visible=display!=='bars';concrete.material.transparent=display==='both';concrete.material.opacity=display==='both'?.19:1;concrete.material.depthWrite=display!=='both';}
     construction.visible=Boolean(next);base.visible=!next;for(const m of enclosure)m.visible=tab==='experience';
   }
-  const objects=new Map([panel,...equipment,...fireDevices,extinguisher].map(d=>[d.id,deviceMesh(d)]));
+  const objects=new Map();
+  for(const d of [panel,...equipment,...fireDevices,extinguisher]){await pause();objects.set(d.id,deviceMesh(d));}
   for(const g of objects.values())scene.add(g);
   const controls=new OrbitControls(camera,renderer.domElement);
   controls.minDistance=2.2;controls.maxDistance=20;controls.maxPolarAngle=Math.PI*.48;
@@ -151,7 +156,7 @@ export function mountBay(host,select,fireAdapter){
     const distance=1.08*sphere.radius/Math.sin(Math.min(vertical,horizontal));
     controls.target.copy(sphere.center);controls.maxDistance=Math.max(20,distance*2);
     camera.position.copy(sphere.center).addScaledVector(new THREE.Vector3(.48,.80,1).normalize(),distance);controls.update();};
-  host.replaceChildren(renderer.domElement);renderer.domElement.setAttribute('aria-label','반도체 클린룸 3D 모형');
+  renderer.domElement.setAttribute('aria-label','반도체 클린룸 3D 모형');
   let highlight=new THREE.BoxHelper(new THREE.Object3D(),0x9e4f18);highlight.visible=false;scene.add(highlight);
   let routeGroup=new THREE.Group(),routeKey='',litFans=[],shown=[],dirty=true;
   const roomMarker=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({color:0xe8b572,transparent:true,opacity:.4,depthWrite:false,side:THREE.DoubleSide}));roomMarker.rotation.x=-Math.PI/2;roomMarker.visible=false;scene.add(roomMarker);
@@ -160,6 +165,9 @@ export function mountBay(host,select,fireAdapter){
   const resize=new ResizeObserver(()=>{const {width,height}=host.getBoundingClientRect();if(width>0&&height>0){camera.aspect=width/height;camera.updateProjectionMatrix();renderer.setSize(width,height,false);if(!simulation?.active)home();redraw();}});
   resize.observe(host);controls.addEventListener('change',redraw);
   let simulation;
+  // The loop draws from its first frame, so the graphics process is given time to catch up before it starts.
+  await graphicsIdle(renderer);
+  seatCanvas(host,renderer.domElement);
   // While shaders for a new picture are still being built the old picture stays; the gate asks for the frame again when they are ready.
   const gate=new ProgramGate(renderer,{host,onChange:on=>{if(!on)dirty=true;}});
   const draw=force=>{if(!force&&!gate.check(scene,camera))return false;renderer.render(scene,camera);dirty=false;return true;};

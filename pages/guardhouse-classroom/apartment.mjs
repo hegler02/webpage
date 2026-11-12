@@ -59,7 +59,7 @@ async function ensureView(){
   let v;
   try{
    const [{ClassroomView},{ApartmentDetails},{ApartmentFireView},{FireSimulation}]=await loadPhase('3D 화면을 불러오고 있습니다.',()=>Promise.all([import('./classroom-view.mjs').then(async module=>{await module.ClassroomView.prepare();return module;}),import('./apartment-details.mjs'),import('./apartment-fire-view.mjs'),import('./fire-simulation.mjs')]).catch(error=>{error.requiresReload=true;throw error;}));
-   await loadPhase('건물과 재료를 준비합니다.',()=>{v=new ClassroomView($('apt-three'),{projectData:apartment,walkCheck:apartmentWalk,onSelect:select,onSwitch:toggleSwitch,onMove:n=>status(n+' · 눈높이 1,600 mm')});v.preparing=true;v.load(model,rebar);});
+   await loadPhase('건물과 재료를 준비합니다.',async()=>{v=new ClassroomView($('apt-three'),{projectData:apartment,walkCheck:apartmentWalk,onSelect:select,onSwitch:toggleSwitch,onMove:n=>status(n+' · 눈높이 1,600 mm')});v.preparing=true;await paint();v.load(model,rebar);});
    await loadPhase('문·창문·가구의 상세를 준비합니다.',()=>{v.apartmentDetails=new ApartmentDetails(v);v.apartmentDetails.setPalette(state.palette);v.fireGuide=new ApartmentFireView(v);});
    await loadPhase('전기·소방 기구를 연결합니다.',()=>{v.updateElectrical(electric);v.updateFire(fire);});
    await loadPhase('빛과 재질을 준비합니다.',()=>{v.setRealistic(true);v.site.visible=false;});
@@ -89,8 +89,8 @@ async function go(next,sheetId=null){
    ready.setStudio(page!=='experience');ready.setNight(false);
    if(page==='experience'){ready.whole();ready.site.visible=false;ready.setNight(false);$('apt-view-title').textContent='아파트 · 전체 건물';layout('model');}else layout(['fire-test','fire-signal'].includes(page)?'model':'split');
    ready.setActive(true);
-   if(!ready.compilation){ready.preparing=true;ready.compilation=ready.renderer.compileAsync(ready.scene,ready.active).finally(()=>{ready.preparing=false;});}
-   await ready.compilation;
+   // The view may draw from here on. Its shaders are asked for, a few at a time, by the picture that needs them.
+   if(ready.preparing){await paint();ready.preparing=false;}
    if(request!==serial)return false;
   }catch(error){
    if(request!==serial)return false;

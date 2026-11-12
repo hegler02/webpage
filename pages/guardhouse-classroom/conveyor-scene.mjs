@@ -1,19 +1,21 @@
 import * as T from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {devices,byId,wires} from './src/conveyor-project.mjs';
-import {observeScene} from './render-loop.mjs';
-import {keyboardOrbit,lightenOnSlowFrames} from './scene-access.mjs';
-import {ProgramGate} from './program-warmup.mjs';
+import {observeScene,timeSlices} from './render-loop.mjs';
+import {keyboardOrbit,lightenOnSlowFrames,holdCanvas} from './scene-access.mjs';
+import {ProgramGate,roomLight,graphicsIdle} from './program-warmup.mjs';
 import {createEquipment} from './conveyor-equipment.mjs';
 import {routeOn} from './src/conveyor-investigation.mjs';
 
-export function createConveyorScene(host,{select,onFrame,getState,onContext}){
+// The scene is built in slices, so the page stays free while it grows; the notice stays in its place until the scene is whole.
+export async function createConveyorScene(host,{select,onFrame,getState,onContext}){
+ const pause=timeSlices();
  const scene=new T.Scene();scene.background=new T.Color('#12171c');scene.fog=new T.Fog('#12171c',15,45);
  const camera=new T.PerspectiveCamera(40,1,.025,80);const renderer=new T.WebGLRenderer({antialias:true,alpha:false,preserveDrawingBuffer:true});
- renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=.94;host.replaceChildren(renderer.domElement);
- const badge=document.createElement('div');badge.className='cv-scene-badge';badge.textContent='모터 → 감속기 → 벨트 · 기기를 눌러 연결 확인';host.append(badge);
- const pmrem=new T.PMREMGenerator(renderer),envScene=new RoomEnvironment(),env=pmrem.fromScene(envScene,.04);scene.environment=env.texture;pmrem.dispose();envScene.dispose();
+ renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=.94;holdCanvas(host,renderer);
+ const badge=document.createElement('div');badge.className='cv-scene-badge';badge.textContent='모터 → 감속기 → 벨트 · 기기를 눌러 연결 확인';
+ await pause();
+ const env=await roomLight(renderer,.04);scene.environment=env.texture;
  const sun=new T.DirectionalLight('#fff4e4',2.7);sun.position.set(-3,8,4);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-7,right:7,top:7,bottom:-7,near:1,far:22});sun.shadow.bias=-.0003;sun.shadow.normalBias=.018;const ambient=new T.HemisphereLight('#e9f5ff','#4a5358',.75);scene.add(sun,ambient);scene.environmentIntensity=.65;
  const fill=new T.DirectionalLight('#d6eaff',1.1);fill.position.set(-5,4,-3);scene.add(fill);
  const mat=(color,metalness=0,roughness=.65)=>new T.MeshStandardMaterial({color,metalness,roughness});
@@ -27,13 +29,14 @@ export function createConveyorScene(host,{select,onFrame,getState,onContext}){
  function label(p,text,pos,w=.3,h=.07){const canvas=document.createElement('canvas');canvas.width=512;canvas.height=128;const c=canvas.getContext('2d');c.fillStyle='#f4f5ed';c.fillRect(0,0,512,128);c.fillStyle='#263c43';c.font='bold 56px sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText(text,256,64,490);const tx=new T.CanvasTexture(canvas);tx.colorSpace=T.SRGBColorSpace;const o=mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({map:tx}),p,pos);o.castShadow=false;return o;}
  function screw(p,x,y,z){cyl(p,.012,.008,[x,y,z],m.steel,'z',8);box(p,[.014,.002,.002],[x,y,z+.006],m.dark);}
  function terminal(p,x,y,z,color=m.cream){box(p,[.065,.1,.09],[x,y,z],color);cyl(p,.014,.006,[x,y+.025,z+.048],m.steel,'z',12);cyl(p,.012,.006,[x,y-.025,z+.048],m.steel,'z',12);}
+ await pause();
  const equipment=createEquipment({materials:m,label});
  const ground=new T.Group();scene.add(ground);
  box(ground,[24,.08,20],[0,-.07,0],mat('#1d242b',.08,.86));
  for(const z of [-1.38,1.38])box(ground,[6,.004,.045],[0,-.021,z],m.yellow);
  for(const x of [-3,3])box(ground,[.045,.004,2.8],[x,-.021,0],m.yellow);
  // The grouped mesh is the physical device; all subparts retain its one ID.
- for(const d of devices){const g=new T.Group();g.position.set(...d.pos);g.userData.deviceId=d.id;groups.set(d.id,g);scene.add(g);
+ for(const d of devices){await pause();const g=new T.Group();g.position.set(...d.pos);g.userData.deviceId=d.id;groups.set(d.id,g);scene.add(g);
   if(equipment.build(d,g)){
   }else if(d.kind==='conveyor'){
    box(g,[4.88,.11,1.02],[0,0,0],m.belt);for(const x of [-2.44,2.44])cyl(g,.1,1.04,[x,-.015,0],m.dark,'z');
@@ -74,6 +77,7 @@ export function createConveyorScene(host,{select,onFrame,getState,onContext}){
   equipment.finish(g,d.id);
   g.traverse(o=>{if(o.isMesh){o.userData.deviceId=d.id;pickables.push(o);}});
  }
+ await pause();
  // A separate enlarged cross-section uses the same K1 state, never a second device.
  const detail=new T.Group();detail.position.set(-.4,1.3,-2);detail.visible=false;scene.add(detail);box(detail,[.8,.12,.5],[0,-.35,0],m.dark);
  const core=box(detail,[.12,.44,.2],[0,-.08,0],m.steel.clone());for(let i=0;i<19;i++){const ring=mesh(new T.TorusGeometry(.16,.018,8,24),m.copper,detail,[0,-.25+i*.018,0]);ring.rotation.x=Math.PI/2;}
@@ -82,8 +86,10 @@ export function createConveyorScene(host,{select,onFrame,getState,onContext}){
  magnetic.visible=false;
  const armature=new T.Group();detail.add(armature);box(armature,[.66,.08,.24],[0,.27,0],m.steel);for(const x of [-.26,0,.26]){box(detail,[.08,.045,.15],[x,.49,.18],m.copper);box(detail,[.04,.04,.2],[x,.49,.03],m.dark);box(armature,[.035,.3,.035],[x,.445,.26],m.dark);box(armature,[.08,.04,.15],[x,.62,.18],m.copper);}label(detail,'K1 · A1 / A2',[0,-.5,.27],.85,.11);
  const pallet=new T.Group();scene.add(pallet);for(const z of [-.36,0,.36])box(pallet,[.75,.06,.12],[0,0,z],m.wood);for(const x of [-.28,0,.28])box(pallet,[.12,.08,.82],[x,.07,0],m.wood);box(pallet,[.65,.28,.61],[0,.25,0],m.cream);box(pallet,[.5,.02,.08],[0,-.035,-.49],m.steel);label(pallet,'METAL TARGET',[0,.2,.31],.48,.08);
+ await pause();
  const cables=new T.Group();scene.add(cables);
  for(const w of wires){const o=tube(cables,w.points,.007,m.cable);o.userData.deviceId=w.from;o.userData.wire=w;pickables.push(o);}
+ await pause();
  const routes=new T.Group();routes.visible=false;scene.add(routes);const routesMap=new Map();let tracedRoutes=null;
  for(const w of wires){const material=mat(w.role==='power'?'#c57727':w.role==='control'?'#397eaa':'#8158a3',.2,.5);const o=tube(routes,w.points,.012,material);o.userData.deviceId=w.from;pickables.push(o);routesMap.set(w.id,o);}
  function highlightDevice(id){selection=id;if(highlight){scene.remove(highlight);highlight.geometry.dispose();highlight.material.dispose();highlight=null;}const g=groups.get(id);if(g){highlight=new T.BoxHelper(g,'#d48a26');scene.add(highlight);}}
@@ -127,6 +133,9 @@ export function createConveyorScene(host,{select,onFrame,getState,onContext}){
   for(const [id,o] of routesMap){const on=routeOn(id,state,status),focused=!tracedRoutes||tracedRoutes.has(id);o.material.transparent=!focused;o.material.opacity=focused?1:.12;o.material.depthWrite=focused;o.material.emissive.copy(o.material.color).multiplyScalar(on?(focused?.8:.08):0);}
   host.dataset.motor=String(status.motor);host.dataset.coil=String(status.coil);host.dataset.pallet=state.pallet.toFixed(3);host.dataset.input00=String(status.inputs['I:001/00']);host.dataset.input01=String(status.inputs['I:001/01']);
  }
+ // The loop draws from its first frame, so the graphics process is given time to catch up before it starts.
+ await graphicsIdle(renderer);
+ renderer.domElement.style.display='';host.replaceChildren(renderer.domElement,badge);
  // While shaders for a new picture are still being built the old picture stays; the loop draws it on the first frame after they are ready.
  const gate=new ProgramGate(renderer,{host});
  function draw(force){controls.update();if(!force&&!gate.check(scene,camera))return false;renderer.render(scene,camera);return true;}

@@ -19,7 +19,7 @@ function bank(top,toward){
 }
 
 // A strip between two lines on the ground whose colour fades across it from one alpha to the other.
-function fading(a,b,height,from,to=0){
+export function fading(a,b,height,from,to=0){
  const pos=[],col=[],index=[];
  a.forEach(([x,y],i)=>{pos.push(x,height,-y,b[i][0],height,-b[i][1]);col.push(1,1,1,from,1,1,1,to);if(i){const k=(i-1)*2;index.push(k,k+1,k+2,k+1,k+3,k+2);}});
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('color',new THREE.Float32BufferAttribute(col,4));g.setIndex(index);g.computeVertexNormals();
@@ -33,7 +33,7 @@ function bend(d,tilt,turn){
  return d.clone().multiplyScalar(Math.cos(tilt)).addScaledVector(u,Math.sin(tilt)*Math.cos(turn)).addScaledVector(w,Math.sin(tilt)*Math.sin(turn)).normalize();
 }
 // A tree grown limb by limb: the trunk forks, every limb forks again into thinner ones, and the leaves hang where the twigs end.
-function grow(H,spread,rand,depth){
+export function grow(H,spread,rand,depth){
  const limbs=[],tips=[];
  const limb=(from,dir,len,r,level)=>{
   // A limb is never straight: it sets off one way and turns a little halfway along.
@@ -54,14 +54,14 @@ function grow(H,spread,rand,depth){
  return {limbs,tips};
 }
 // One limb as a tapered tube. The foot of the trunk flares into the ground.
-function tube([from,to,r0,r1,level]){
+export function tube([from,to,r0,r1,level]){
  const axis=to.clone().sub(from),len=axis.length(),sides=level?level>2?5:7:12,g=new THREE.CylinderGeometry(r1,r0,len,sides,level?1:5,true),p=g.attributes.position,uv=g.attributes.uv;
  if(!level)for(let i=0;i<p.count;i++){const t=p.getY(i)/len+.5,k=1+.7*Math.pow(1-t,5);p.setX(i,p.getX(i)*k);p.setZ(i,p.getZ(i)*k);}
  const round=Math.max(1,Math.round(6.2832*r0/.9));for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)*round,uv.getY(i)*len/1.3);
  g.translate(0,len/2,0);g.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(UP,axis.normalize()));g.translate(from.x,from.y,from.z);return g;
 }
 // A soft dark mass inside the crown: what is seen between the leaves.
-function clump(c,r,squash,rand,tint,detail=2){
+export function clump(c,r,squash,rand,tint,detail=2){
  const g=new THREE.IcosahedronGeometry(1,detail),p=g.attributes.position,n=g.attributes.normal,col=new Float32Array(p.count*3),a=rand()*6,b=rand()*6;
  for(let i=0;i<p.count;i++){
   const x=p.getX(i),y=p.getY(i),z=p.getZ(i),k=1+.22*Math.sin(x*3.1+a)*Math.sin(z*2.7+b)+.14*Math.sin(y*4.3+a);
@@ -72,7 +72,7 @@ function clump(c,r,squash,rand,tint,detail=2){
 }
 
 // Cut-out cards gathered into one mesh. Both faces of a card are drawn with the normals it is given, so a whole crown shades as one soft volume instead of a pile of flat boards.
-function sheaf(){
+export function sheaf(){
  const pos=[],nor=[],uv=[],col=[],corners=[[-1,-1],[1,-1],[1,1],[-1,1]],faces=[[0,1,2,0,2,3],[0,2,1,0,3,2]];
  return {
   count:0,
@@ -86,9 +86,9 @@ function sheaf(){
   }
  };
 }
-const anywhere=rand=>{const y=rand()*2-1,t=rand()*6.2832,r=Math.sqrt(1-y*y);return V(r*Math.cos(t),y,r*Math.sin(t));};
+export const anywhere=rand=>{const y=rand()*2-1,t=rand()*6.2832,r=Math.sqrt(1-y*y);return V(r*Math.cos(t),y,r*Math.sin(t));};
 // Leaves hung round one point of a crown. They are lit as if they faced out of the crown and up, and are darker toward its heart and its underside.
-function leaves(out,at,size,n,crown,rand,tint){
+export function leaves(out,at,size,n,crown,rand,tint){
  const normal=p=>p.clone().sub(crown.c).divide(crown.r).normalize().lerp(UP,.3).normalize();
  const shadeAt=p=>{const d=p.clone().sub(crown.c).divide(crown.r),k=Math.min(1,d.length()),lit=(.5+.5*k)*(.74+.26*Math.max(-1,Math.min(1,d.y*1.2)));return [tint[0]*lit,tint[1]*lit,tint[2]*lit];};
  for(let i=0;i<n;i++){
@@ -97,7 +97,7 @@ function leaves(out,at,size,n,crown,rand,tint){
   out.add(c,u.clone().multiplyScalar(Math.cos(turn)*s).addScaledVector(w,Math.sin(turn)*s),w.clone().multiplyScalar(Math.cos(turn)*s).addScaledVector(u,-Math.sin(turn)*s),normal,shadeAt);
  }
 }
-const greens=rand=>[.84+rand()*.3,.9+rand()*.2,.72+rand()*.38];
+export const greens=rand=>[.84+rand()*.3,.9+rand()*.2,.72+rand()*.38];
 
 export function buildLand(renderer,tier='full'){
  const land=new THREE.Group(),site=new THREE.Group(),rand=random(71),full=tier==='full';land.name='land';site.name='site';

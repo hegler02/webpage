@@ -1,9 +1,9 @@
 // Surfaces drawn for this house: travertine slabs on the 0.838 × 0.61 m module, ribbon-striped veneer and river ripples.
 import * as THREE from 'three';
 
-function random(seed){let s=seed>>>0;return()=>{s=(s+0x6D2B79F5)|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-const sheet=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return [c,c.getContext('2d')];};
-function texture(canvas,renderer,colour=true){
+export function random(seed){let s=seed>>>0;return()=>{s=(s+0x6D2B79F5)|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+export const sheet=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return [c,c.getContext('2d')];};
+export function texture(canvas,renderer,colour=true){
  const t=new THREE.CanvasTexture(canvas);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
  if(colour)t.colorSpace=THREE.SRGBColorSpace;return t;
 }
@@ -60,7 +60,7 @@ export function ripples(renderer,metres){
 }
 
 // Cut-outs keep colour and outline on two sheets, so the edge of a leaf never blends toward black.
-function cutout(colour,alpha,renderer){
+export function cutout(colour,alpha,renderer){
  const map=texture(colour,renderer),alphaMap=texture(alpha,renderer,false);
  for(const t of [map,alphaMap])t.wrapS=t.wrapT=THREE.ClampToEdgeWrapping;
  return {map,alphaMap};

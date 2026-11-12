@@ -4,7 +4,7 @@ import {clearLearningRecords} from './study-state.mjs';
 import {mountExperienceTools,showScenePreview,selectionDimensions} from './workspace-ui.mjs';
 import {mountSamples,mountGlossary} from './learning-shell.mjs';
 import {bindActions} from './action-events.mjs';
-import {provenance} from './src/farnsworth-model.mjs';
+import {provenance,FLOOR,TZ} from './src/farnsworth-model.mjs';
 import {rooms,materials,sheets,steps,circuits,panel,equipment,fireDevices,fireStages,fireSource,soundPath,reachPath,escapePath,stations,freshFarnsworth,farnsworthElectrical,farnsworthFire} from './src/farnsworth-project.mjs';
 import {farnsworthTerms,termFor} from './src/farnsworth-glossary.mjs';
 import {model} from './farnsworth-plan-parts.mjs';
@@ -57,7 +57,7 @@ function renderInspector(f){
   const route=f.electric.routes.find(r=>r.target===d.id),length=route?route.points.slice(1).reduce((sum,p,i)=>sum+Math.hypot(...p.map((v,j)=>v-route.points[i][j])),0):null;
   host.innerHTML='<h2>'+d.name+'</h2><div class="selection-id">'+d.id+'</div><p>'+(d.note??d.description??actual.stateLabel??definition?.plain??'')+'</p>'+
     (part?'<div class="basis"><b data-basis="'+part.label+'">'+part.label+'</b>'+(part.source?'<a href="'+part.source.url+'" target="_blank" rel="noopener">'+part.source.name+'</a>':'')+'</div>':'')+
-    selectionDimensions(actual,{routeLength:length})+actions(definition?btn('쉬운 용어 설명','term',term):'');
+    selectionDimensions(actual,{finishLevel:actual.pos?(actual.pos[2]<FLOOR?TZ:FLOOR):0,routeLength:length})+actions(definition?btn('쉬운 용어 설명','term',term):'');
 }
 
 const directions={section:'동쪽을 보고 자른 모습 · 왼쪽이 북',joint:'동쪽을 보고 자른 모습 · 왼쪽이 북',circuit:'분전반에서 나가는 순서',materials:'재료 견본'};
@@ -76,7 +76,7 @@ function paint(){
   else $('bay-tools').innerHTML=(quick[tab]??[]).map(([id,name])=>lessons.btn(name,'pick',id,lessons.pressed(id===selected))).join('');
   renderInspector(f);quantities.inspector($('bay-inspector'),selected);
   $('bay-render-label').textContent=live?(night?'야간 조명':'하지 오후 · 플레이노'):'학습 보기';
-  $('bay-view-help').textContent=walking?'드래그로 둘러보기 · W A S D로 이동':'드래그로 회전 · 휠로 확대 · 대상을 눌러 정보 확인';
+  $('bay-view-help').textContent=live&&walking?'드래그로 둘러보기 · W A S D로 이동':'드래그로 회전 · 휠로 확대 · 대상을 눌러 정보 확인';
   const view={state,electric:f.electric,fire:f.fire,selected,stage,walking};
   if(tab==='glossary'){dictionary=mountGlossary($('bay-lesson'),[...farnsworthTerms.values()],{sample:6,action:'related-term',detailsAction:'term'});if(glossaryTermOnOpen){dictionary.input.value=farnsworthTerms.get(glossaryTermOnOpen)?.term??'';dictionary.update();glossaryTermOnOpen=null;}}
   else if(tab==='quantities')quantities.render();

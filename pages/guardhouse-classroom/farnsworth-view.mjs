@@ -1,15 +1,15 @@
 // The Farnsworth scene: a steel and glass room lifted over a river meadow, built from data and walked from the grass to the bed.
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {createModelGroup,disposeModelResources as disposeTree} from './src/scene.mjs';
 import {farnsworthModel,colors,FLOOR,CEIL,PORCH,G,MOD,CORE,TERR} from './src/farnsworth-model.mjs';
 import {project,rooms,panel,equipment,fireDevices,stations} from './src/farnsworth-project.mjs';
 import {sunPosition,sunVector,dayOfYear} from './src/energy-engine.mjs';
 import {SurfaceLibrary,worldUV} from './surface-materials.mjs';
 import {SceneLook,qualityTier} from './scene-quality.mjs';
-import {observeScene,presentScene} from './render-loop.mjs';
-import {keyboardOrbit,lightenOnSlowFrames,createRenderer} from './scene-access.mjs';
+import {observeScene,presentScene,timeSlices} from './render-loop.mjs';
+import {roomLight,graphicsIdle} from './program-warmup.mjs';
+import {keyboardOrbit,lightenOnSlowFrames,createRenderer,holdCanvas,seatCanvas} from './scene-access.mjs';
 import {createLampHalos} from './masters-power-view.mjs';
 import {point,deviceMesh,pipe,mergeContext,zones,indoorAt,walkableAt} from './farnsworth-scene-parts.mjs';
 import {travertine,veneer} from './farnsworth-textures.mjs';
@@ -48,25 +48,32 @@ function slabUV(geometry,x0,y0){
  geometry.setAttribute('uv',new THREE.BufferAttribute(uv,2));
 }
 
-export function mountFarnsworth(host,select){
- const renderer=createRenderer(THREE,host,{antialias:true,preserveDrawingBuffer:true}),canvas=renderer.domElement;
+// The model is put together in slices, so the page keeps answering while it is built. The canvas is shown once the scene is whole.
+export async function mountFarnsworth(host,select){
+ const pause=timeSlices(),renderer=createRenderer(THREE,host,{antialias:true,preserveDrawingBuffer:true}),canvas=renderer.domElement;
  renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.shadowMap.enabled=true;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
  renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.localClippingEnabled=true;
- canvas.setAttribute('aria-label','판스워스 주택 3D 모델');canvas.tabIndex=0;host.append(canvas);
+ canvas.setAttribute('aria-label','판스워스 주택 3D 모델');canvas.tabIndex=0;holdCanvas(host,renderer);
  const scene=new THREE.Scene();scene.background=new THREE.Color(0x12171c);
  const camera=new THREE.PerspectiveCamera(36,1,.15,40000);
  const ambient=new THREE.HemisphereLight(0xe9f2f4,0x7d7566,1.5),sun=new THREE.DirectionalLight(0xfff0d9,2.2);
  sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.normalBias=.03;sun.target.position.copy(point([project.center[0],project.center[1],0]));
  Object.assign(sun.shadow.camera,{left:-34,right:34,top:34,bottom:-34,near:1,far:420});scene.add(ambient,sun,sun.target);
- const generator=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment(),env=generator.fromScene(room,.04);generator.dispose();room.dispose();
+ await pause();
+ const env=await roomLight(renderer);
  scene.environment=env.texture;
 
- const base=createModelGroup(farnsworthModel()),context=mergeContext(base),building=new THREE.Group();
+ await pause();
+ const base=createModelGroup(farnsworthModel());await pause();
+ const context=mergeContext(base),building=new THREE.Group();
  building.add(base,context);
  const view={scene,renderer,host,camera,active:camera,sun,ambient,ground:null,site:null,base:building,environment:env.texture,project,realistic:true,studio:true,night:false,fpv:false,mode:'orbit',setNight};
- const {land,ground,site}=buildLand(renderer,qualityTier());view.ground=ground;view.site=site;scene.add(building,land,ground,site);
+ await pause();
+ const {land,ground,site}=await buildLand(renderer,qualityTier(),pause);view.ground=ground;view.site=site;scene.add(building,land,ground,site);
  const look=renderer.noGPU?null:new SceneLook(view),surfaces=new SurfaceLibrary(renderer),clip=[];
- const stone=travertine(renderer),woods={
+ await pause();
+ const stone=travertine(renderer);await pause();
+ const woods={
   primavera:veneer(renderer,{base:'#c9995a',dark:'#8b5e2e',light:'#e6c088',panel:1.2,from:FLOOR,seed:3}),
   teak:veneer(renderer,{base:'#96693f',dark:'#5e3d20',light:'#b98a58',panel:.6,from:FLOOR,seed:8})};
  const cut=m=>{m.clippingPlanes=clip;m.clipShadows=true;return m;};let soffit=null;
@@ -91,7 +98,9 @@ export function mountFarnsworth(host,select){
   if(name==='concrete'){worldUV(mesh.geometry);surfaces.apply(m,'concrete',m.color.getHex());return;}
   m.roughness=name==='plaster'?.92:name==='dark'?.55:1;if(d.id==='ceiling')soffit=m;
  }
- for(const mesh of [...base.children,...context.children])if(mesh.isMesh)dress(mesh);
+ await pause();
+ for(const mesh of [...base.children,...context.children])if(mesh.isMesh){await pause();dress(mesh);}
+ await pause();
  for(const mesh of context.children)cut(mesh.material);
 
  // The two door leaves swing out onto the veranda about their hinges.
@@ -232,13 +241,15 @@ export function mountFarnsworth(host,select){
   doors();mark(id);host.dataset.view=name;host.dataset.studio=String(studio);host.dataset.pathPoints=String(paths.reduce((n,p)=>n+p.points.length,0));wake();
  }
 
+ // The loop draws from its first frame, so the graphics process is given time to catch up before it starts.
+ await graphicsIdle(renderer);
  const loop=observeScene(host,dt=>{
   if(!walkState&&controls.update())dirty=true;
   if(doorNow!==doorGoal){const d=doorGoal-doorNow,stepNow=Math.min(Math.abs(d),dt*2.4);swing(doorNow+Math.sign(d)*stepNow);if(state.id)mark(state.id);look?.invalidate();dirty=true;host.dataset.doors=doorNow.toFixed(2);}
   if(spinning){for(const g of deviceMeshes.values())if(g.userData.spin)g.userData.rotor.rotation.z+=dt*9;dirty=true;}
   if(dirty||performance.now()<until)draw();
  },host.parentElement);
- size();update();host.dataset.elements=String(base.children.length);host.dataset.devices=String(deviceMeshes.size);host.dataset.doors='0.00';
+ seatCanvas(host,canvas);size();update();host.dataset.elements=String(base.children.length);host.dataset.devices=String(deviceMeshes.size);host.dataset.doors='0.00';
 
  return {
   view,walk,home,update,station,

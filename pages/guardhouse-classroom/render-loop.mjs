@@ -9,6 +9,21 @@ export function yieldForPaint() {
   });
 }
 
+// The thread is handed back to the page with a message, not a timer, because timers are slowed in a background tab.
+export function handBack() {
+  return new Promise(resolve=>{
+    const {port1,port2}=new MessageChannel();
+    port1.onmessage=()=>{port1.close();resolve();};
+    port2.postMessage(0);
+  });
+}
+
+// A long build is cut into slices: when a slice has used its budget the page gets the thread back, so input and painting never wait for the whole build.
+export function timeSlices(budget=10) {
+  let since=performance.now();
+  return ()=>performance.now()-since<budget?undefined:handBack().then(()=>{since=performance.now();});
+}
+
 // A submitted WebGL frame followed by a paint opportunity, not a GPU timing claim.
 // A hidden/suspended tab must not leave navigation waiting forever or report painted.
 export async function presentScene(host, draw, {current=()=>true, request=callback=>requestAnimationFrame(callback), cancel=id=>cancelAnimationFrame(id), now=()=>performance.now(), timeout=250}={}) {

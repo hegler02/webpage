@@ -1,15 +1,15 @@
 // The Yumin museum scene: a concrete square sunk inside basalt walls on a windy cape, built from data and walked from the stone gate down the ramp to the galleries.
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {createModelGroup,disposeModelResources as disposeTree} from './src/scene.mjs';
 import {yuminModel,colors,CEIL,LOW} from './src/yumin-model.mjs';
 import {project,rooms,panel,equipment,fireDevices,stations} from './src/yumin-project.mjs';
 import {sunPosition,sunVector,dayOfYear} from './src/energy-engine.mjs';
 import {SurfaceLibrary,worldUV} from './surface-materials.mjs';
 import {SceneLook,qualityTier} from './scene-quality.mjs';
-import {observeScene,presentScene} from './render-loop.mjs';
-import {keyboardOrbit,lightenOnSlowFrames,createRenderer} from './scene-access.mjs';
+import {observeScene,presentScene,timeSlices} from './render-loop.mjs';
+import {roomLight,graphicsIdle} from './program-warmup.mjs';
+import {keyboardOrbit,lightenOnSlowFrames,createRenderer,holdCanvas,seatCanvas,buildInSlices} from './scene-access.mjs';
 import {createLampHalos} from './masters-power-view.mjs';
 import {point,deviceMesh,pipe,mergeContext,zones,levelAt,indoorAt,walkableAt} from './yumin-scene-parts.mjs';
 import {concrete,basalt,paving,trowelled,gravel} from './yumin-textures.mjs';
@@ -47,31 +47,38 @@ const lids=new Set(['pool-east','water-east']),capped=d=>d.kind==='roof'||d.kind
 const onLevel=(p,level)=>level===1?p[2]>-.2:!(p[2]>-.2&&p[0]<2.4);
 const tone=new Map(Object.entries(colors).map(([name,hex])=>[new THREE.Color(hex).getHex(),name]));
 
-export function mountYumin(host,select){
- const renderer=createRenderer(THREE,host,{antialias:true,preserveDrawingBuffer:true}),canvas=renderer.domElement;
+export async function mountYumin(host,select){
+ const pause=timeSlices(),renderer=createRenderer(THREE,host,{antialias:true,preserveDrawingBuffer:true}),canvas=renderer.domElement;
  renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.shadowMap.enabled=true;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
  renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.localClippingEnabled=true;
- canvas.setAttribute('aria-label','유민미술관 3D 모델');canvas.tabIndex=0;host.append(canvas);
+ canvas.setAttribute('aria-label','유민미술관 3D 모델');canvas.tabIndex=0;holdCanvas(host,renderer);
  const scene=new THREE.Scene();scene.background=new THREE.Color(0x12171c);
  const camera=new THREE.PerspectiveCamera(36,1,.15,40000);
  const ambient=new THREE.HemisphereLight(0xe9f2f4,0x87857a,1.5),sun=new THREE.DirectionalLight(0xfff0d9,2.2);
  sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.normalBias=.03;sun.target.position.copy(point([project.center[0],project.center[1],0]));
  Object.assign(sun.shadow.camera,{left:-56,right:56,top:56,bottom:-56,near:1,far:420});scene.add(ambient,sun,sun.target);
- const generator=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment(),env=generator.fromScene(room,.04);generator.dispose();room.dispose();
+ await pause();
+ const env=await roomLight(renderer);
  scene.environment=env.texture;
 
- const base=createModelGroup(yuminModel()),context=mergeContext(base),building=new THREE.Group();
+ await pause();
+ const model=yuminModel();await pause();
+ const base=await buildInSlices(createModelGroup,model,pause);await pause();
+ const context=mergeContext(base),building=new THREE.Group();
  building.add(base,context);
  const view={scene,renderer,host,camera,active:camera,sun,ambient,ground:null,site:null,base:building,environment:env.texture,project,realistic:true,studio:true,night:false,fpv:false,mode:'orbit',setNight};
- const {land,ground,site,flow,water}=buildLand(renderer,qualityTier());view.ground=ground;view.site=site;scene.add(building,land,ground,site);
+ await pause();
+ const {land,ground,site,flow,water}=await buildLand(renderer,qualityTier(),pause);view.ground=ground;view.site=site;scene.add(building,land,ground,site);
  const look=renderer.noGPU?null:new SceneLook(view),surfaces=new SurfaceLibrary(renderer),clip=[];
- const skins={concrete:concrete(renderer),basalt:basalt(renderer),paving:paving(renderer),floor:trowelled(renderer)};
+ const skins={};
+ for(const [name,make] of [['concrete',concrete],['basalt',basalt],['paving',paving],['floor',trowelled]]){await pause();skins[name]=make(renderer);}
  // Two planes keep what lies on the near side of either one, which is how the basement plan leaves the tall galleries standing.
  const cut=m=>{m.clippingPlanes=clip;m.clipIntersection=true;m.clipShadows=true;return m;};
  const wood=cut(new THREE.MeshStandardMaterial({vertexColors:true,roughness:.6}));
  // Lamp shades shine by themselves, and the frosted pavilions glow at night.
  const shade=cut(new THREE.MeshStandardMaterial({vertexColors:true,emissive:0xff9a3a,emissiveIntensity:1,roughness:.35})),shades=new THREE.Group(),lanterns=[],soffits=[];
  cut(water.fall);cut(water.still);building.add(shades);
+ await pause();
  const ballast=cut(new THREE.MeshStandardMaterial({color:0xffffff,...gravel(renderer)}));
  function cover(mesh,m){
   const b=new THREE.Box3().setFromBufferAttribute(mesh.geometry.attributes.position),w=b.max.x-b.min.x,l=b.max.z-b.min.z,cx=(b.min.x+b.max.x)/2,cz=(b.min.z+b.max.z)/2,top=b.max.y,E=.22,H=.16;
@@ -92,7 +99,9 @@ export function mountYumin(host,select){
    return;}
   m.roughness=name==='steel'?.5:name==='white'||name==='plinth'?.82:.9;
  }
- for(const mesh of [...base.children,...context.children])if(mesh.isMesh)dress(mesh);
+ await pause();
+ for(const mesh of [...base.children,...context.children])if(mesh.isMesh){await pause();dress(mesh);}
+ await pause();
 
  const devices=new THREE.Group(),deviceMeshes=new Map(),electricIds=new Set([panel.id,...equipment.map(d=>d.id)]),height=new Map();
  for(const d of [panel,...equipment,...fireDevices]){const g=deviceMesh(d);g.userData.kind=d.kind;height.set(d.id,d.pos);
@@ -105,6 +114,7 @@ export function mountYumin(host,select){
  const routes=new THREE.Group(),highlight=new THREE.BoxHelper(new THREE.Object3D(),0xe0903a);highlight.material.depthTest=false;highlight.renderOrder=10;highlight.visible=false;
  const marker=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({color:0xe8b572,transparent:true,opacity:.4,depthWrite:false,side:THREE.DoubleSide}));marker.rotation.x=-Math.PI/2;marker.visible=false;
  scene.add(devices,bounce,routes,highlight,marker);
+ await pause();
  const halos=createLampHalos(deviceMeshes);scene.add(halos.group);
 
  // The museum is sunk into the ground, so the camera may drop a little under the level it looks at.
@@ -232,6 +242,8 @@ export function mountYumin(host,select){
   mark(id);host.dataset.view=name;host.dataset.studio=String(studio);host.dataset.pathPoints=String(paths.reduce((n,p)=>n+p.points.length,0));wake();
  }
 
+ // The loop draws from its first frame, so the graphics process is given time to catch up before it starts.
+ await graphicsIdle(renderer);
  const loop=observeScene(host,dt=>{
   if(!walkState&&controls.update())dirty=true;
   // The water never stands still: while the land is shown the walls of water keep sliding and the sea moves.
@@ -239,7 +251,7 @@ export function mountYumin(host,select){
   if(spinning){for(const g of deviceMeshes.values())if(g.userData.spin)g.userData.rotor.rotation.z+=dt*9;dirty=true;}
   if(dirty||performance.now()<until)draw();
  },host.parentElement);
- size();update();host.dataset.elements=String(base.children.length);host.dataset.devices=String(deviceMeshes.size);
+ seatCanvas(host,canvas);size();update();host.dataset.elements=String(base.children.length);host.dataset.devices=String(deviceMeshes.size);
 
  return {
   view,walk,home,update,station,

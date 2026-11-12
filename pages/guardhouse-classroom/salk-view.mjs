@@ -1,15 +1,15 @@
 // The Salk scene: one block built from data, the evening sun at the end of the court, and a walk from a lab up into the pipe space.
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {createModelGroup,disposeModelResources as disposeTree} from './src/scene.mjs';
 import {salkModel,colors,L,W,CLEAR,AXIS} from './src/salk-model.mjs';
 import {project,rooms,panel,equipment,fireDevices,stations,moduleBay} from './src/salk-project.mjs';
 import {sunPosition,sunVector,dayOfYear} from './src/energy-engine.mjs';
 import {SurfaceLibrary,worldUV} from './surface-materials.mjs';
 import {SceneLook} from './scene-quality.mjs';
-import {observeScene,presentScene} from './render-loop.mjs';
-import {keyboardOrbit,lightenOnSlowFrames,createRenderer} from './scene-access.mjs';
+import {observeScene,presentScene,timeSlices} from './render-loop.mjs';
+import {roomLight,graphicsIdle} from './program-warmup.mjs';
+import {keyboardOrbit,lightenOnSlowFrames,createRenderer,holdCanvas,seatCanvas,buildInSlices} from './scene-access.mjs';
 import {createLampHalos} from './masters-power-view.mjs';
 import {point,deviceMesh,pipe,mergeContext,buildLand,zones,walkableAt} from './salk-scene-parts.mjs';
 
@@ -33,20 +33,25 @@ homes.circuit=homes.power;
 const withContext=new Set(['site','section']);
 const clipFor={section:[[1,0,0],-MID],truss:[[1,0,0],-(X0-.16)],pipe:[[0,-1,0],5.85],power:[[0,-1,0],CLEAR-.005],circuit:[[0,-1,0],CLEAR-.005],fire:[[0,-1,0],CLEAR-.005]};
 
-export function mountSalk(host,select){
- const renderer=createRenderer(THREE,host,{antialias:true,preserveDrawingBuffer:true}),canvas=renderer.domElement;
+export async function mountSalk(host,select){
+ const pause=timeSlices(),renderer=createRenderer(THREE,host,{antialias:true,preserveDrawingBuffer:true}),canvas=renderer.domElement;
  renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.shadowMap.enabled=true;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
  renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.localClippingEnabled=true;
- canvas.setAttribute('aria-label','솔크 연구소 3D 모델');canvas.tabIndex=0;host.append(canvas);
+ canvas.setAttribute('aria-label','솔크 연구소 3D 모델');canvas.tabIndex=0;holdCanvas(host,renderer);
  const scene=new THREE.Scene();scene.background=new THREE.Color(0x12171c);
  const camera=new THREE.PerspectiveCamera(36,1,.15,40000);
  const ambient=new THREE.HemisphereLight(0xe9f2f4,0x7d7566,1.5),sun=new THREE.DirectionalLight(0xfff0d9,2.2);
  sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.normalBias=.05;sun.target.position.copy(point([project.center[0],project.center[1],0]));
  Object.assign(sun.shadow.camera,{left:-95,right:95,top:95,bottom:-95,near:1,far:420});scene.add(ambient,sun,sun.target);
- const generator=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment(),env=generator.fromScene(room,.04);generator.dispose();room.dispose();
+ await pause();
+ const env=await roomLight(renderer);
  scene.environment=env.texture;
 
- const base=createModelGroup(salkModel()),context=mergeContext(base),building=new THREE.Group(),{land,ground}=buildLand();
+ await pause();
+ const model=salkModel();await pause();
+ const base=await buildInSlices(createModelGroup,model,pause);await pause();
+ const context=mergeContext(base);await pause();
+ const building=new THREE.Group(),{land,ground}=buildLand();
  building.add(base,context);scene.add(building,land,ground);
  const view={scene,renderer,host,camera,active:camera,sun,ambient,ground,site:new THREE.Group(),base:building,environment:env.texture,project,realistic:true,studio:true,night:false,fpv:false,mode:'orbit',setNight};
  view.site.visible=false;
@@ -59,13 +64,16 @@ export function mountSalk(host,select){
   if(d.kind==='context'){if(color!==colors.steel)surfaces.apply(m,color===colors.teak?'wood':color===colors.travertine?'marble':'concrete',color);return;}
   if(d.kind==='paving'&&d.group==='court'){surfaces.apply(m,'marble',color);m.roughness=.58;}else if(d.kind==='finish')surfaces.apply(m,'wood',color);else if(d.kind!=='furniture')surfaces.apply(m,'concrete',color);
  };
- for(const mesh of [...base.children,...context.children])if(mesh.isMesh)dress(mesh);
+ await pause();
+ for(const mesh of [...base.children,...context.children])if(mesh.isMesh){await pause();dress(mesh);}
+ await pause();
 
  const devices=new THREE.Group(),deviceMeshes=new Map(),electricIds=new Set([panel.id,...equipment.map(d=>d.id)]);
  for(const d of [panel,...equipment,...fireDevices]){const g=deviceMesh(d);g.userData.kind=d.kind;
   // Every second row carries the light that falls on the room, so the scene stays light on weak graphics.
   if(d.kind==='light'&&Number(d.id.slice(2))%2===0){g.remove(g.userData.glow);g.userData.glow=null;}
   deviceMeshes.set(d.id,g);devices.add(g);}
+ await pause();
  const workLight=new THREE.PointLight(0xffe2b8,0,16,1.5);workLight.position.copy(point([MID,9.9,moduleBay.pipeFloor+2.3]));
  const routes=new THREE.Group(),highlight=new THREE.BoxHelper(new THREE.Object3D(),0xe0903a);highlight.material.depthTest=false;highlight.renderOrder=10;highlight.visible=false;
  const marker=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({color:0xe8b572,transparent:true,opacity:.4,depthWrite:false,side:THREE.DoubleSide}));marker.rotation.x=-Math.PI/2;marker.visible=false;
@@ -74,12 +82,13 @@ export function mountSalk(host,select){
 
  const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.12;controls.minDistance=3;controls.maxDistance=420;controls.maxPolarAngle=Math.PI*.495;
  const stopKeys=keyboardOrbit(controls,canvas),stopLighten=lightenOnSlowFrames(renderer);
- let dirty=true,until=0,disposed=false,state={view:null,studio:true,id:null,show:'electrical',routeKey:''},walkState=null,sunVectorNow=null,spinning=false;
+ let dirty=true,until=0,disposed=false,state={view:null,studio:true,id:null,show:'electrical',routeKey:''},walkState=null,sunVectorNow=null,spinning=false,unsized=false;
  const wake=(ms=900)=>{dirty=true;until=performance.now()+ms;};
  // While shaders for a new picture are still being built the old picture stays, and the frame is asked for again when they are ready.
  const draw=force=>{if(look){if(!look.render(force))return false;}else renderer.render(scene,camera);dirty=false;return true;};
  if(look)look.onReady=()=>wake();
- const size=()=>{const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();};
+ // A view aimed while the pane was out of sight could not tell an upright pane from a wide one, so it is aimed again once the pane has a size.
+ const size=()=>{const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();if(unsized)home();};
 
  function placeSun(){
   const t=sun.target.position,v=view.studio?[-.42,-.5,.76]:sunVectorNow??eveningSun();
@@ -91,7 +100,7 @@ export function mountSalk(host,select){
   scene.environmentIntensity=(s?.6:on?.1:.55)*k;renderer.toneMappingExposure=on&&!s?1.05:1;host.dataset.night=String(view.night);look?.invalidate();wake();
  }
  function aim(id){
-  const h=homes[id]??homes.site,narrow=host.clientWidth<host.clientHeight,to=point(h.at),from=point(h.pos);
+  const h=homes[id]??homes.site,narrow=host.clientWidth<host.clientHeight,to=point(h.at),from=point(h.pos);unsized=!host.clientWidth;
   if(narrow)from.sub(to).multiplyScalar(1.7).add(to);
   camera.near=.15;camera.fov=h.fov;camera.position.copy(from);controls.target.copy(to);camera.updateProjectionMatrix();controls.update();wake();
  }
@@ -170,12 +179,14 @@ export function mountSalk(host,select){
   mark(id);host.dataset.view=name;host.dataset.studio=String(studio);host.dataset.pathPoints=String(paths.reduce((n,p)=>n+p.points.length,0));wake();
  }
 
+ // The loop draws from its first frame, so the graphics process is given time to catch up before it starts.
+ await graphicsIdle(renderer);
  const loop=observeScene(host,dt=>{
   if(!walkState&&controls.update())dirty=true;
   if(spinning){for(const g of deviceMeshes.values())if(g.userData.spin)g.userData.rotor.rotation.z+=dt*9;dirty=true;}
   if(dirty||performance.now()<until)draw();
  },host.parentElement);
- size();update();host.dataset.elements=String(base.children.length);host.dataset.devices=String(deviceMeshes.size);
+ seatCanvas(host,canvas);size();update();host.dataset.elements=String(base.children.length);host.dataset.devices=String(deviceMeshes.size);
 
  return {
   view,walk,home,update,station,

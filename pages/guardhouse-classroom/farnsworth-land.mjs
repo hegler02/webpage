@@ -99,7 +99,8 @@ export function leaves(out,at,size,n,crown,rand,tint){
 }
 export const greens=rand=>[.84+rand()*.3,.9+rand()*.2,.72+rand()*.38];
 
-export function buildLand(renderer,tier='full'){
+// pause is asked between the pieces, so a caller that builds in slices can hand the thread back to the page.
+export async function buildLand(renderer,tier='full',pause=()=>{}){
  const land=new THREE.Group(),site=new THREE.Group(),rand=random(71),full=tier==='full';land.name='land';site.name='site';
  const shape=new THREE.Shape([[-HALF,-HALF],[HALF,-HALF],[HALF,HALF],[-HALF,HALF]].map(p=>new THREE.Vector2(...p)));
  shape.holes.push(new THREE.Path([...xs.map(x=>new THREE.Vector2(x,northBank(x))),...[...xs].reverse().map(x=>new THREE.Vector2(x,southBank(x)))]));
@@ -110,12 +111,14 @@ export function buildLand(renderer,tier='full'){
  ground.rotation.x=-Math.PI/2;ground.position.y=-.03;ground.receiveShadow=true;ground.raycast=()=>{};
  const mud=new THREE.MeshStandardMaterial({color:0x5c6744,roughness:1,side:THREE.DoubleSide});
  for(const [top,toward] of [[northBank,-1],[southBank,1]]){const m=quiet(new THREE.Mesh(bank(top,toward),mud));m.receiveShadow=true;land.add(m);}
+ await pause();
  const water=quiet(new THREE.Mesh(new THREE.PlaneGeometry(1180,80),new THREE.MeshStandardMaterial({color:0x2b3a32,roughness:.1,metalness:0,bumpMap:ripples(renderer,[1180,80]),bumpScale:.5,envMapIntensity:.6})));
  water.rotation.x=-Math.PI/2;water.position.set(0,WATER,59.5);water.receiveShadow=true;land.add(water);
  // What the trees of each bank lay on the water: a dark band that thins out toward midstream.
  const mirrored=new THREE.MeshStandardMaterial({color:0x17231a,vertexColors:true,transparent:true,depthWrite:false,roughness:.3,envMapIntensity:.2});
  for(const [top,toward,width,alpha] of [[northBank,-1,12,.6],[southBank,1,30,.85]])land.add(still(new THREE.Mesh(fading(xs.map(x=>[x,top(x)+toward*3]),xs.map(x=>[x,top(x)+toward*(3+width)]),WATER+.03,alpha),mirrored)));
  // Bare earth under the house and the terrace, where no grass gets the sun.
+ await pause();
  const earth=new THREE.MeshStandardMaterial({color:0xa59c84,vertexColors:true,transparent:true,depthWrite:false,roughness:1,polygonOffset:true,polygonOffsetFactor:-4,polygonOffsetUnits:-4});
  for(const [x0,y0,x1,y1] of [[0,0,L,W],[TERR.x0,TERR.y0,TERR.x1,TERR.y1]]){
   const ring=(m,n=16)=>[...Array.from({length:n},(_,i)=>[x0-m+(x1-x0+2*m)*i/n,y0-m]),...Array.from({length:n},(_,i)=>[x1+m,y0-m+(y1-y0+2*m)*i/n]),...Array.from({length:n},(_,i)=>[x1+m-(x1-x0+2*m)*i/n,y1+m]),...Array.from({length:n+1},(_,i)=>[x0-m,y1+m-(y1-y0+2*m)*i/n])];
@@ -123,9 +126,11 @@ export function buildLand(renderer,tier='full'){
  }
 
  // Patches over the turf. The plane stops short of the river so that nothing hangs over the bank.
+ await pause();
  const SIZE=300,south=-24,north=HOUSE[1]+SIZE/2,west=HOUSE[0]-SIZE/2,plane=new THREE.PlaneGeometry(SIZE,north-south),puv=plane.attributes.uv;
  for(let i=0;i<puv.count;i++)puv.setY(i,1-(1-puv.getY(i))*(north-south)/SIZE);
  const patches=still(new THREE.Mesh(plane,new THREE.MeshStandardMaterial({...meadow(renderer,{size:SIZE,lawn:[HOUSE[0]-west,north-HOUSE[1]+4,34,.62]}),transparent:true,depthWrite:false,roughness:1,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2})));
+ await pause();
  patches.rotation.x=-Math.PI/2;patches.position.set(HOUSE[0],-.028,-(south+north)/2);patches.receiveShadow=true;patches.renderOrder=-.5;site.add(patches);
 
  // The great maple stood at the south edge of the terrace; others stand about the lawn, follow the bank and close the meadow on every side.
@@ -143,7 +148,8 @@ export function buildLand(renderer,tier='full'){
  for(let k=0;k<2;k++)row(Math.round(62/gap),t=>{const x=-240+t*480+rand()*4;return [x,southBank(x)-5-k*11-rand()*5];});
 
  const near={cards:sheaf(),limbs:[],lumps:[]},far={cards:sheaf(),limbs:[],lumps:[]},shadows=sheaf(),flat=()=>UP,black=()=>[1,1,1];
- trees.forEach(([x,y,H,spread])=>{
+ for(const [x,y,H,spread] of trees){
+  await pause();
   const reach=Math.hypot(x-HOUSE[0],y-HOUSE[1]),close=reach<NEAR,set=close?near:far,tint=greens(rand),dark=tint.map((v,i)=>v*[.1,.16,.065][i]),o=V(x,0,-y);
   if(reach<MID){
    const {limbs,tips}=grow(H,spread,rand,close&&full?4:3),box=new THREE.Box3();
@@ -164,15 +170,20 @@ export function buildLand(renderer,tier='full'){
     for(let i=0;i<(full?18:11);i++){const d=anywhere(rand);d.y=Math.abs(d.y)*.8+.1;leaves(set.cards,V(b.x+d.x*s*.8,b.y+d.y*s*.55,b.z+d.z*s*.8),s*.5,1,bush,rand,tint);}}
   }
   if(!close){const r=H*.4;shadows.add(V(o.x+r*.25,-.022,o.z-r*.15),V(r,0,0),V(0,0,-r),flat,black);}
- });
- const leafSheets=foliage(renderer),leafy=new THREE.MeshStandardMaterial({...leafSheets,alphaTest:.42,vertexColors:true,roughness:.86}),massy=new THREE.MeshStandardMaterial({vertexColors:true,roughness:1}),woody=new THREE.MeshStandardMaterial({...bark(renderer)});
+ }
+ await pause();
+ const leafSheets=foliage(renderer),leafy=new THREE.MeshStandardMaterial({...leafSheets,alphaTest:.42,vertexColors:true,roughness:.86}),massy=new THREE.MeshStandardMaterial({vertexColors:true,roughness:1});await pause();
+ const woody=new THREE.MeshStandardMaterial({...bark(renderer)});
  for(const [set,cast] of [[near,true],[far,false]]){
-  const parts=[[set.cards.geometry(),leafy,true],...[[set.lumps,massy],[set.limbs,woody]].filter(([list])=>list.length).map(([list,material])=>[mergeGeometries(list),material,false])];
+  await pause();
+  const parts=[[set.cards.geometry(),leafy,true]];
+  for(const [list,material] of [[set.lumps,massy],[set.limbs,woody]])if(list.length){await pause();parts.push([mergeGeometries(list),material,false]);}
   for(const g of [...set.lumps,...set.limbs])g.dispose();
   // Far crowns keep more of each card: a hard cut thins them out as the texture shrinks with distance.
   if(!cast){parts[0][1]=leafy.clone();parts[0][1].alphaTest=.24;}
   for(const [geometry,material,cut] of parts){const mesh=still(new THREE.Mesh(geometry,material));mesh.castShadow=cast;mesh.receiveShadow=true;mesh.userData.aoSkip=cut;site.add(mesh);}
  }
+ await pause();
  const shady=still(new THREE.Mesh(shadows.geometry(),new THREE.MeshBasicMaterial({color:0x1d2a16,alphaMap:shade(renderer),transparent:true,opacity:.5,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-3,polygonOffsetUnits:-3})));
  shady.renderOrder=-.4;site.add(shady);
 
@@ -182,12 +193,16 @@ export function buildLand(renderer,tier='full'){
   if(mown(x,y)||y<northBank(x)+.2)return;const t=rand()*3.14,w=h*(.5+rand()*.3),c=wild(),tint=()=>c;
   for(const a of [t,t+1.57])tufts.add(V(x,h/2-.04,-y),V(Math.cos(a)*w,0,Math.sin(a)*w),V(0,h/2,0),flat,tint);
  };
+ await pause();
  for(let x=-150;x<=175;x+=.55+rand()*.7)if(Math.sin(x/4.3)+Math.sin(x/1.7+2)>-.9)tuft(x,northBank(x)+.3+rand()*rand()*4.5,.5+rand()*.75);
+ await pause();
  trees.forEach(([x,y,H])=>{if(Math.hypot(x-HOUSE[0],y-HOUSE[1])<MID)for(let i=0;i<7;i++){const a=rand()*6.2832,r=H*(.035+rand()*.07);tuft(x+Math.cos(a)*r,y+Math.sin(a)*r,.3+rand()*.4);}});
  for(let k=0;k<(full?46:24);k++){
+  await pause();
   const a=rand()*6.2832,r=24+rand()*82,cx=HOUSE[0]+Math.cos(a)*r,cy=HOUSE[1]+Math.sin(a)*r*.8+14,spread=2.5+rand()*5;
   for(let i=0;i<26;i++){const b=rand()*6.2832,q=spread*Math.sqrt(rand());tuft(cx+Math.cos(b)*q*1.6,cy+Math.sin(b)*q,.3+rand()*.5);}
  }
+ await pause();
  const grass=still(new THREE.Mesh(tufts.geometry(),new THREE.MeshStandardMaterial({...blades(renderer),alphaTest:.4,vertexColors:true,roughness:1})));
  grass.receiveShadow=true;grass.userData.aoSkip=true;site.add(grass);
  return {land,ground,site};

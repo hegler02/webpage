@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+import {handBack} from './render-loop.mjs';
 
 // The first picture after the lights, the cut planes or the drawing target change needs a new shader for every material.
 // Drawn straight away, the driver builds them one after another and the whole page stands still for seconds.
@@ -6,6 +8,34 @@ import * as THREE from 'three';
 const LIGHTS=['isDirectionalLight','isPointLight','isSpotLight','isHemisphereLight','isRectAreaLight','isLightProbe'];
 const MAPS=['map','normalMap','roughnessMap','metalnessMap','emissiveMap','alphaMap','aoMap','bumpMap','lightMap','envMap'];
 const drawn=o=>o.isMesh||o.isLine||o.isPoints||o.isSprite;
+// Milliseconds of shader work done in one go before the thread goes back to the page.
+const SLICE=8;
+
+// A call that asks the graphics process a question holds the page until that process has worked through everything it was sent, the textures of a long build among them. This waits for it with the page left free.
+export async function graphicsIdle(renderer,limit=1500){
+ const gl=renderer.noGPU?null:renderer.getContext?.();if(!gl?.fenceSync)return;
+ const mark=gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE,0),until=performance.now()+limit;gl.flush();
+ while(!gl.isContextLost()&&gl.getSyncParameter(mark,gl.SYNC_STATUS)!==gl.SIGNALED&&performance.now()<until)await(document.hidden?handBack():new Promise(done=>setTimeout(done,8)));
+ gl.deleteSync(mark);
+}
+// The room that surfaces reflect is drawn once into a small cube. Its shaders are asked for first and built beside the page, so drawing it does not stop the page either.
+export async function roomLight(renderer,blur=.04){
+ const generator=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment(),spare=[];
+ if(!renderer.noGPU&&renderer.extensions?.has('KHR_parallel_shader_compile')){
+  // The cube is drawn into a buffer without tone mapping, and a shader is built for exactly that.
+  const target=new THREE.WebGLRenderTarget(1,1),back=[renderer.getRenderTarget(),renderer.getActiveCubeFace(),renderer.getActiveMipmapLevel()],tone=renderer.toneMapping;
+  // The generator has two shaders of its own, the backdrop of the cube and the blur. They are asked for with the room's; three keeps the blur to itself, so it is reached only where this build still holds it there.
+  const own=new THREE.Group(),backdrop=new THREE.Mesh(new THREE.BoxGeometry(),new THREE.MeshBasicMaterial({side:THREE.BackSide,depthWrite:false,depthTest:false}));
+  own.add(backdrop);spare.push(backdrop.geometry,backdrop.material);
+  try{generator._setSize(256);spare.push(generator._allocateTargets());if(generator._blurMaterial&&generator._lodPlanes?.[0])own.add(new THREE.Mesh(generator._lodPlanes[0],generator._blurMaterial));}catch{}
+  let built=null;
+  try{renderer.toneMapping=THREE.NoToneMapping;renderer.setRenderTarget(target);const camera=new THREE.PerspectiveCamera(90,1,.1,100);built=Promise.all([renderer.compileAsync(room,camera),renderer.compileAsync(own,camera)]);}
+  catch(error){console.warn('shader warm-up skipped',error);}
+  finally{renderer.setRenderTarget(...back);renderer.toneMapping=tone;}
+  await built;target.dispose();
+ }
+ const env=generator.fromScene(room,blur);generator.dispose();room.dispose();for(const item of spare)item.dispose();return env;
+}
 
 export class ProgramGate {
  constructor(renderer,{host=null,onChange=null,limit=8000}={}){
@@ -68,28 +98,43 @@ export class ProgramGate {
   r.setRenderTarget(p.target);r.render(p.scene,camera);
  }
  warm(scene,camera,buffered,seen,missing){
-  const r=this.renderer,local=r.localClippingEnabled,groups=new Map(),started=performance.now();
+  const r=this.renderer,local=r.localClippingEnabled,work=[],started=performance.now();
   for(const [o,m] of missing){
-   const planes=local&&m.clippingPlanes?m.clippingPlanes.length:0,k=planes*2+(planes&&m.clipIntersection?1:0);
-   let g=groups.get(k);if(!g)groups.set(k,g=[]);g.push(Array.isArray(o.material)?Object.create(o,{material:{value:m}}):o);
+   const planes=local&&m.clippingPlanes?m.clippingPlanes.length:0;
+   work.push([planes*2+(planes&&m.clipIntersection?1:0),Array.isArray(o.material)?Object.create(o,{material:{value:m}}):o]);
   }
-  const back=[r.getRenderTarget(),r.getActiveCubeFace(),r.getActiveMipmapLevel()];
-  try{
-   for(const [k,list] of groups){
-    this.prime(k>>1,k&1,camera);r.setRenderTarget(buffered?this.primer.target:null);
-    r.compile({traverse(f){for(const o of list)f(o);},traverseVisible(){}},camera,scene);
-   }
-  }catch(error){console.warn('shader warm-up skipped',error);}
-  finally{r.setRenderTarget(...back);}
-  this.runs++;
-  this.pending=new Promise(resolve=>{
-   const poll=()=>{
-    let ready=true;try{for(const p of r.info.programs)if(!p.isReady()){ready=false;break;}}catch{ready=true;}
-    if(!ready&&!this.disposed&&performance.now()-started<this.limit){setTimeout(poll,16);return;}
-    this.mark(seen,missing);this.pending=null;this.waited+=performance.now()-started;this.flag(false);resolve();
-   };
-   setTimeout(poll,0);
-  });
+  work.sort((a,b)=>a[0]-b[0]);
+  let at=0;
+  // Writing out the text of a shader is work of this thread, so they are asked for a few at a time. The drawing target is put back after every go, because the page may draw in between.
+  const ask=()=>{
+   const until=performance.now()+SLICE,back=[r.getRenderTarget(),r.getActiveCubeFace(),r.getActiveMipmapLevel()];
+   try{
+    for(let primed=-1;at<work.length&&performance.now()<until;){
+     const k=work[at][0],list=[];while(at<work.length&&work[at][0]===k&&list.length<2)list.push(work[at++][1]);
+     if(k!==primed){this.prime(k>>1,k&1,camera);r.setRenderTarget(buffered?this.primer.target:null);primed=k;}
+     r.compile({traverse(f){for(const o of list)f(o);},traverseVisible(){}},camera,scene);
+    }
+   }catch(error){console.warn('shader warm-up skipped',error);at=work.length;}
+   finally{r.setRenderTarget(...back);}
+  };
+  const built=()=>{try{for(const p of r.info.programs)if(!p.isReady())return false;}catch{}return true;};
+  ask();this.runs++;
+  this.pending=(async()=>{
+   try{
+    await handBack();
+    while(at<work.length&&!this.disposed){ask();await handBack();}
+    while(!this.disposed&&!built()&&performance.now()-started<this.limit)await new Promise(next=>setTimeout(next,16));
+    // A built shader is opened the first time it is used: its inputs are read back from the driver, one slow question at a time. That is done here rather than inside the first picture.
+    if(!this.disposed&&built()){
+     let until=performance.now()+SLICE;
+     for(const p of [...r.info.programs]){
+      if(p.program&&p.isReady())p.getUniforms();
+      if(performance.now()>until){await handBack();if(this.disposed)break;until=performance.now()+SLICE;}
+     }
+    }
+   }catch(error){console.warn('shader warm-up skipped',error);}
+   this.mark(seen,missing);this.pending=null;this.waited+=performance.now()-started;this.flag(false);
+  })();
   this.flag(true);
  }
  dispose(){this.disposed=true;const p=this.primer;if(p){p.target.dispose();p.mesh.geometry.dispose();p.mesh.material.dispose();this.primer=null;}if(this.host)delete this.host.dataset.busy;}

@@ -104,12 +104,15 @@ async function showEnergy(){
 
 function ensureScene(){
   if(scene)return Promise.resolve(scene);
-  if(loading)return loading;
   if($('bay-workspace').hidden)return null;
+  if(loading)return loading;
   const turn=++epoch,host=$('bay-canvas');
   host.innerHTML='<p role="status">3D 모형을 준비하고 있습니다.</p>';
   loading=(async()=>{
-    try{const {mountFallingwater,prepareFallingwaterMaterials}=await import('./fallingwater-view.mjs').catch(error=>{error.requiresReload=true;throw error;});await prepareFallingwaterMaterials();if(turn!==epoch||$('bay-workspace').hidden)return;host.innerHTML='';scene=mountFallingwater(host,pick);scene.update(sceneFrame(frame()));return scene;}
+    try{const {mountFallingwater,prepareFallingwaterMaterials}=await import('./fallingwater-view.mjs').catch(error=>{error.requiresReload=true;throw error;});await prepareFallingwaterMaterials();if(turn!==epoch||$('bay-workspace').hidden)return;
+      // The notice stays in the host while the model is built in slices; a page that was left meanwhile gives the model back.
+      const made=await mountFallingwater(host,pick);if(turn!==epoch){made.dispose();return;}
+      scene=made;scene.update(sceneFrame(frame()));return scene;}
     catch(error){reloadRequired=Boolean(error.requiresReload);if(turn===epoch)host.innerHTML='<p role="status">3D를 준비하지 못했습니다. 도면과 회로 계산은 계속 사용할 수 있습니다. '+btn('3D 다시 열기','retry')+'</p>';}
     finally{if(turn===epoch)loading=null;}
   })();

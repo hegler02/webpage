@@ -109,7 +109,7 @@ function ensureScene(){
   const turn=++epoch,host=$('bay-canvas');
   host.innerHTML='<p role="status">3D 모형을 준비하고 있습니다.</p>';
   loading=(async()=>{
-    try{const {mountYumin,prepareYuminMaterials}=await import('./yumin-view.mjs').catch(error=>{error.requiresReload=true;throw error;});await prepareYuminMaterials();if(turn!==epoch||$('bay-workspace').hidden)return;host.innerHTML='';scene=mountYumin(host,pick);scene.update(sceneFrame(frame()));return scene;}
+    try{const {mountYumin,prepareYuminMaterials}=await import('./yumin-view.mjs').catch(error=>{error.requiresReload=true;throw error;});await prepareYuminMaterials();if(turn!==epoch||$('bay-workspace').hidden)return;const made=await mountYumin(host,pick);if(turn!==epoch){made.dispose();return;} scene=made;scene.update(sceneFrame(frame()));return scene;}
     catch(error){reloadRequired=Boolean(error.requiresReload);if(turn===epoch)host.innerHTML='<p role="status">3D를 준비하지 못했습니다. 도면과 회로 계산은 계속 사용할 수 있습니다. '+btn('3D 다시 열기','retry')+'</p>';}
     finally{if(turn===epoch)loading=null;}
   })();

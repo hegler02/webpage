@@ -1,15 +1,15 @@
 // The Fallingwater scene: concrete trays held out over a waterfall from a stone core, built from data and walked from the pool below to the roof terrace.
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {createModelGroup,disposeModelResources as disposeTree} from './src/scene.mjs';
 import {fallingwaterModel,colors,F1,C1,C2,C3} from './src/fallingwater-model.mjs';
 import {project,rooms,panel,equipment,fireDevices,stations} from './src/fallingwater-project.mjs';
 import {sunPosition,sunVector,dayOfYear} from './src/energy-engine.mjs';
 import {SurfaceLibrary,worldUV} from './surface-materials.mjs';
 import {SceneLook,qualityTier} from './scene-quality.mjs';
-import {observeScene,presentScene} from './render-loop.mjs';
-import {keyboardOrbit,lightenOnSlowFrames,createRenderer} from './scene-access.mjs';
+import {observeScene,presentScene,timeSlices} from './render-loop.mjs';
+import {roomLight,graphicsIdle} from './program-warmup.mjs';
+import {keyboardOrbit,lightenOnSlowFrames,createRenderer,holdCanvas,seatCanvas} from './scene-access.mjs';
 import {createLampHalos} from './masters-power-view.mjs';
 import {point,deviceMesh,pipe,mergeContext,zones,levelAt,indoorAt,walkableAt} from './fallingwater-scene-parts.mjs';
 import {sandstone,ochre,flagstone,ledge} from './fallingwater-textures.mjs';
@@ -43,25 +43,31 @@ const sliced={section:[[1,0,0],-5.6],joint:[[1,0,0],-5.6]};
 const bones=new Set(['frame','joint']),carrying=new Set(['column','beam','floor','parapet','wall','roof']),structural=d=>carrying.has(d.kind);
 const tone=new Map(Object.entries(colors).map(([name,hex])=>[new THREE.Color(hex).getHex(),name]));
 
-export function mountFallingwater(host,select){
- const renderer=createRenderer(THREE,host,{antialias:true,preserveDrawingBuffer:true}),canvas=renderer.domElement;
+// The model is put together in slices, so the page keeps answering while it is built. The canvas takes its place in the host once the scene is whole.
+export async function mountFallingwater(host,select){
+ const pause=timeSlices(),renderer=createRenderer(THREE,host,{antialias:true,preserveDrawingBuffer:true}),canvas=renderer.domElement;
  renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.shadowMap.enabled=true;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
  renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.localClippingEnabled=true;
- canvas.setAttribute('aria-label','낙수장 3D 모델');canvas.tabIndex=0;host.append(canvas);
+ canvas.setAttribute('aria-label','낙수장 3D 모델');canvas.tabIndex=0;holdCanvas(host,renderer);
  const scene=new THREE.Scene();scene.background=new THREE.Color(0x12171c);
  const camera=new THREE.PerspectiveCamera(36,1,.15,40000);
  const ambient=new THREE.HemisphereLight(0xe9f2f4,0x6f7458,1.5),sun=new THREE.DirectionalLight(0xfff0d9,2.2);
  sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.normalBias=.03;sun.target.position.copy(point([project.center[0],project.center[1],0]));
  Object.assign(sun.shadow.camera,{left:-40,right:40,top:40,bottom:-40,near:1,far:420});scene.add(ambient,sun,sun.target);
- const generator=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment(),env=generator.fromScene(room,.04);generator.dispose();room.dispose();
+ await pause();
+ const env=await roomLight(renderer);
  scene.environment=env.texture;
 
- const base=createModelGroup(fallingwaterModel()),context=mergeContext(base),building=new THREE.Group();
+ await pause();
+ const base=createModelGroup(fallingwaterModel());await pause();
+ const context=mergeContext(base),building=new THREE.Group();
  building.add(base,context);
  const view={scene,renderer,host,camera,active:camera,sun,ambient,ground:null,site:null,base:building,environment:env.texture,project,realistic:true,studio:true,night:false,fpv:false,mode:'orbit',setNight};
- const {land,ground,site,flow}=buildLand(renderer,qualityTier());view.ground=ground;view.site=site;scene.add(building,land,ground,site);
+ await pause();
+ const {land,ground,site,flow}=await buildLand(renderer,qualityTier(),pause);view.ground=ground;view.site=site;scene.add(building,land,ground,site);
  const look=renderer.noGPU?null:new SceneLook(view),surfaces=new SurfaceLibrary(renderer),clip=[];
- const skins={sandstone:sandstone(renderer),ochre:ochre(renderer),flagstone:flagstone(renderer),rock:ledge(renderer,3)};
+ const skins={};
+ for(const [name,make] of [['sandstone',sandstone],['ochre',ochre],['flagstone',r=>flagstone(r,3.2,pause)],['rock',r=>ledge(r,3)]]){await pause();skins[name]=await make(renderer);}
  const cut=m=>{m.clippingPlanes=clip;m.clipShadows=true;return m;};
  const wood=cut(new THREE.MeshStandardMaterial({vertexColors:true,roughness:.6}));
  function dress(mesh){
@@ -72,7 +78,8 @@ export function mountFallingwater(host,select){
   if(skins[name]){worldUV(mesh.geometry);m.color.set(0xffffff);Object.assign(m,skins[name]);m.needsUpdate=true;return;}
   m.roughness=name==='red'?.48:name==='walnut'?.55:.9;
  }
- for(const mesh of [...base.children,...context.children])if(mesh.isMesh)dress(mesh);
+ for(const mesh of [...base.children,...context.children])if(mesh.isMesh){await pause();dress(mesh);}
+ await pause();
 
  const devices=new THREE.Group(),deviceMeshes=new Map(),electricIds=new Set([panel.id,...equipment.map(d=>d.id)]),height=new Map();
  for(const d of [panel,...equipment,...fireDevices]){const g=deviceMesh(d);g.userData.kind=d.kind;height.set(d.id,d.pos[2]);
@@ -209,6 +216,8 @@ export function mountFallingwater(host,select){
   mark(id);host.dataset.view=name;host.dataset.studio=String(studio);host.dataset.pathPoints=String(paths.reduce((n,p)=>n+p.points.length,0));wake();
  }
 
+ // The loop draws from its first frame, so the graphics process is given time to catch up before it starts.
+ await graphicsIdle(renderer);
  const loop=observeScene(host,dt=>{
   if(!walkState&&controls.update())dirty=true;
   // The water never stands still: while the land is shown the falls keep sliding.
@@ -216,7 +225,7 @@ export function mountFallingwater(host,select){
   if(spinning){for(const g of deviceMeshes.values())if(g.userData.spin)g.userData.rotor.rotation.z+=dt*9;dirty=true;}
   if(dirty||performance.now()<until)draw();
  },host.parentElement);
- size();update();host.dataset.elements=String(base.children.length);host.dataset.devices=String(deviceMeshes.size);
+ seatCanvas(host,canvas);size();update();host.dataset.elements=String(base.children.length);host.dataset.devices=String(deviceMeshes.size);
 
  return {
   view,walk,home,update,station,

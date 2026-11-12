@@ -64,18 +64,18 @@ function lines(centre,fine,inner,outer){
  while(v<outer){v+=s;out.push(v);if(v>inner)s*=1.18;}
  return [...out.slice(1).reverse().map(v=>centre-v),...out.map(v=>centre+v)];
 }
-function terrain(fine){
+async function terrain(fine,pause){
  const xs=lines(3,fine,45,320),ys=lines(-8,fine,45,320),nx=xs.length,ny=ys.length,pos=new Float32Array(nx*ny*3),uv=new Float32Array(nx*ny*2),col=new Float32Array(nx*ny*3),index=[];
- for(let j=0;j<ny;j++)for(let i=0;i<nx;i++){const k=j*nx+i,x=xs[i],y=ys[j];pos.set([x,groundAt(x,y),-y],k*3);uv.set([x,y],k*2);}
+ for(let j=0;j<ny;j++){await pause();for(let i=0;i<nx;i++){const k=j*nx+i,x=xs[i],y=ys[j];pos.set([x,groundAt(x,y),-y],k*3);uv.set([x,y],k*2);}}
  for(let j=0;j<ny-1;j++)for(let i=0;i<nx-1;i++){const a=j*nx+i,b=a+1,c=a+nx,d=c+1;index.push(a,b,d,a,d,c);}
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('uv',new THREE.BufferAttribute(uv,2));g.setIndex(index);g.computeVertexNormals();
  const nor=g.attributes.normal;
- for(let j=0;j<ny;j++)for(let i=0;i<nx;i++){
+ for(let j=0;j<ny;j++){await pause();for(let i=0;i<nx;i++){
   const k=j*nx+i,x=xs[i],y=ys[j],h=pos[k*3+1],[q]=stream(x,y),steep=1-step(.72,.92,nor.getY(k)),rocky=Math.max(steep,1-step(.4,3.2,q)),made=Math.max(shelf(x,y)*step(7,7.6,y)*(1-step(12.2,12.8,y)),road(x,y),step(16.4,18.2,x)*(1-step(22.6,24.4,x))*step(.2,1,y)*(1-step(12.2,12.8,y)));
   const wet=1-step(-.05,.35,h-waterAt(x,y)),t=1+noise(x/3.1,y/3.1)*.12;
   let c=[mix(1,1.12,rocky)*t,mix(1,1.1,rocky)*t,mix(1,1.45,rocky)*t];
   c=c.map((v,m)=>mix(v,[1.62,1.52,1.62][m],made));c=c.map((v,m)=>mix(v,[.42,.46,.5][m],wet));col.set(c,k*3);
- }
+ }}
  g.setAttribute('color',new THREE.BufferAttribute(col,3));return g;
 }
 
@@ -176,15 +176,17 @@ const reach=(x,y)=>Math.hypot(x-HOUSE[0],y-HOUSE[1]);
 const sight=(x,y)=>{const a=VIEW,b=[4,-4],dx=b[0]-a[0],dy=b[1]-a[1],t=Math.min(1,Math.max(0,((x-a[0])*dx+(y-a[1])*dy)/(dx*dx+dy*dy)));return Math.hypot(x-a[0]-dx*t,y-a[1]-dy*t);};
 const built=(x,y)=>(x>-9&&x<19.5&&y>-8.5&&y<14.2)||(y>6.6&&y<13.4&&x>-42&&x<25)||(x>15.6&&x<25&&y>-52&&y<16);
 
-export function buildLand(renderer,tier='full'){
+// pause is asked between pieces of work and hands the thread back to the page when a slice has run long enough.
+export async function buildLand(renderer,tier='full',pause=()=>{}){
  const land=new THREE.Group(),site=new THREE.Group(),rand=random(137),full=tier==='full';land.name='land';site.name='site';
  // Far below the valley, so the shared ground fade never shows through the forest floor.
  const ground=new THREE.Mesh(new THREE.PlaneGeometry(4000,4000),new THREE.MeshStandardMaterial({color:0x4d5a36,roughness:1}));
  ground.rotation.x=-Math.PI/2;ground.position.y=-40;ground.raycast=()=>{};
- const floor=still(new THREE.Mesh(terrain(full?.6:1),new THREE.MeshStandardMaterial({...litter(renderer),vertexColors:true})));
+ const floor=still(new THREE.Mesh(await terrain(full?.6:1,pause),new THREE.MeshStandardMaterial({...litter(renderer),vertexColors:true})));
  floor.receiveShadow=true;floor.castShadow=true;floor.name='forest floor';land.add(floor);
 
  // Water: three level sheets, one for each reach. The valley sides hide them everywhere but in the stream.
+ await pause();
  const rip=ripples(renderer,[60,60]),flowing=[];
  for(const [b0,b1,z,tint] of [[-460,0,LEVELS[0],0x2f3d33],[0,SECOND,LEVELS[1],0x2a3b33],[SECOND,470,LEVELS[2],0x2b3a32]]){
   const bump=rip.clone();bump.repeat.set(560/7,(b1-b0)/7);flowing.push([bump,0,.012]);
@@ -193,12 +195,13 @@ export function buildLand(renderer,tier='full'){
  }
 
  // Rock: ledges wherever the ground is steep or meets the water, the two fall faces, and boulders in the stream.
+ await pause();
  const rock=heap();
  face(rock,0,LEVELS[0],-LEVELS[1],rand);face(rock,SECOND,LEVELS[1],LEVELS[1]-LEVELS[2],rand);
  // Where the lip stands dry between the sheets of water: a low hump of one or two beds, not a pillar.
  const gaps=[[0,[[-.8,1],[5.6,6.1],[9.8,10.2],[12.8,14.2]]],[SECOND,[[.4,2],[6.4,7],[11.6,13]]]],turnU=Math.atan2(U[1],U[0]);
  gaps.forEach(([b0,list],f)=>list.forEach(([s0,s1])=>{const [x,y]=lip((s0+s1)/2,b0-.35);stack(rock,x,y,(s1-s0)*.55+.3,.8+rand()*.3,turnU,LEVELS[f]+.14+rand()*.22,rand,2);}));
- for(let gx=-48;gx<58;gx+=2.2)for(let gy=-58;gy<42;gy+=2.2){
+ for(let gx=-48;gx<58;gx+=2.2){await pause();for(let gy=-58;gy<42;gy+=2.2){
   const x=gx+rand()*2.2,y=gy+rand()*2.2,[q]=stream(x,y),d=down(x,y),s=along(x,y);
   if((x>-4.4&&x<15.2&&y>.8&&y<7.9)||(y>7.1&&y<12.75&&x>-42&&x<24.6)||road(x,y)>.2||(x>17.6&&x<23.2&&y>.4&&y<13))continue;
   if(q<.9&&s>-2.5&&s<LIP+2.5&&((d>-1.4&&d<2.4)||(d>SECOND-1.4&&d<SECOND+2.4)))continue;
@@ -206,14 +209,18 @@ export function buildLand(renderer,tier='full'){
   if(q<-1.2&&slope<.6)continue;
   if(!(slope>.6?rand()<.88:q>-.4&&q<2.8?rand()<.36:rand()<.03))continue;
   const long=1.4+rand()*1.5;stack(rock,x,y,long,long*(.5+rand()*.3),slope>.15?Math.atan2(sy,sx)+1.5708:rand()*3.14,h+.12+rand()*.4,rand);
- }
+ }}
+ await pause();
  const drop=(x,y,r,squash=.6+rand()*.25,sink=.45)=>boulder(rock,V(x,groundAt(x,y)+r*squash*(1-sink*2)+r*squash*sink,-y),r,squash,rand);
  for(let i=0;i<(full?70:40);i++){const t=rand(),k=6+Math.floor(rand()*2),a=CHANNEL[k],b=CHANNEL[k+1]??a,x=mix(a[0],b[0],t)+(rand()-.5)*6.4,y=mix(a[1],b[1],t)+(rand()-.5)*6.4;if(stream(x,y)[0]<-.2&&down(x,y)<-1.5)drop(x,y,.25+rand()*rand()*1.1);}
+ await pause();
  for(let i=0;i<(full?90:50);i++){const t=rand(),k=8+Math.floor(rand()*4),a=CHANNEL[k],b=CHANNEL[k+1],x=mix(a[0],b[0],t)+(rand()-.5)*13,y=mix(a[1],b[1],t)+(rand()-.5)*13,d=down(x,y),q=stream(x,y)[0];if(q<.3&&q>-6.5&&(d>2.6&&d<SECOND-1.6||d>SECOND+2.2)&&(q>-2.2||rand()<.3))drop(x,y,.4+rand()*rand()*1.7);}
+ await pause();
  const stone=still(new THREE.Mesh(solid(rock),new THREE.MeshStandardMaterial({...ledge(renderer),vertexColors:true})));
  stone.castShadow=stone.receiveShadow=true;stone.name='rock ledges';land.add(stone);
 
  // The falls: two layers of sliding white water on each lip, with foam where they land.
+ await pause();
  const white=cascade(renderer),froth=foam(renderer),falls=new THREE.Group();falls.name='falls';
  const pour=(speed,opacity)=>{
   const map=white.map.clone(),alphaMap=white.alphaMap.clone();flowing.push([map,speed,0],[alphaMap,speed,0]);
@@ -230,14 +237,17 @@ export function buildLand(renderer,tier='full'){
   }
  }
  land.add(falls);
+ await pause();
 
  // Forest: full trees near the house, lighter ones on the valley sides, laurel on the banks and ferns on the floor.
  const open=(x,y)=>Math.hypot(x-VIEW[0],y-VIEW[1]),spots=[],plant=(x,y,gap,H,spread)=>{if(stream(x,y)[0]<1.8||built(x,y)||sight(x,y)<5||open(x,y)<8)return;for(const s of spots)if(Math.hypot(s[0]-x,s[1]-y)<gap)return;spots.push([x,y,H,spread]);};
  for(let i=0;i<900;i++){const a=rand()*6.2832,r=Math.sqrt(mix(64,MID*MID,rand()));plant(HOUSE[0]+Math.cos(a)*r,HOUSE[1]+Math.sin(a)*r,r<NEAR?6.6:7.6,16+rand()*10,.72+rand()*.3);}
  const grown=spots.length;
+ await pause();
  for(let i=0;i<5000&&spots.length-grown<(full?520:280);i++){const a=rand()*6.2832,r=Math.sqrt(mix(MID*MID,FAR*FAR,rand()));plant(HOUSE[0]+Math.cos(a)*r,HOUSE[1]+Math.sin(a)*r,10+r*.03,18+rand()*11,1);}
  const near={cards:sheaf(),limbs:[],lumps:[]},far={cards:sheaf(),limbs:[],lumps:[]},flat=()=>UP,dim=[.1,.16,.065];
- spots.forEach(([x,y,H,spread])=>{
+ for(const [x,y,H,spread] of spots){
+  await pause();
   const away=reach(x,y),close=away<NEAR,set=close?near:far,tint=greens(rand).map((v,i)=>v*[.92,.96,.9][i]),dark=tint.map((v,i)=>v*dim[i]),o=V(x,groundAt(x,y)-.25,-y);
   if(away<MID){
    const {limbs,tips}=grow(H,spread,rand,close&&full&&away<20?4:3),box=new THREE.Box3();
@@ -253,29 +263,34 @@ export function buildLand(renderer,tier='full'){
    trunk.translate(o.x,o.y+H*.225,o.z);set.limbs.push(trunk);set.lumps.push(clump(c,r*.62,H*.3/(r*.62),rand,dark));
    for(let i=0;i<(full?(away<150?34:18):14);i++){const d=anywhere(rand);d.y=d.y*.75+.2;leaves(set.cards,V(c.x+d.x*r*.9,c.y+d.y*H*.36,c.z+d.z*r*.9),H*.155,1,crown,rand,tint);}
   }
- });
+ }
  // Mountain laurel and rhododendron: low dark mounds along the banks and under the trees.
  for(let i=0,n=0;i<1400&&n<(full?130:70);i++){
+  await pause();
   const a=rand()*6.2832,r=8+rand()*38,x=HOUSE[0]+Math.cos(a)*r,y=HOUSE[1]+Math.sin(a)*r-4,[q]=stream(x,y);
   if(q<1.2||built(x,y)||sight(x,y)<4.5||open(x,y)<7||(q>9&&rand()<.6))continue;n++;
   const size=.7+rand()*.9,c=V(x,groundAt(x,y)+size*.5,-y),tint=[.62+rand()*.2,.78+rand()*.16,.5+rand()*.2],crown={c,r:V(size*1.3,size,size*1.3)};
   far.lumps.push(clump(c,size*.85,.7,rand,tint.map((v,k)=>v*dim[k])));
   for(let k=0;k<16;k++){const d=anywhere(rand);d.y=Math.abs(d.y)*.8+.1;leaves(far.cards,V(c.x+d.x*size*1.05,c.y+d.y*size*.8,c.z+d.z*size*1.05),size*.62,1,crown,rand,tint);}
  }
+ await pause();
  const leafSheets=foliage(renderer),leafy=new THREE.MeshStandardMaterial({...leafSheets,alphaTest:.42,vertexColors:true,roughness:.86}),massy=new THREE.MeshStandardMaterial({vertexColors:true,roughness:1}),woody=new THREE.MeshStandardMaterial({...bark(renderer)});
  for(const [set,cast] of [[near,true],[far,false]]){
-  const parts=[[set.cards.geometry(),leafy,true],...[[set.lumps,massy],[set.limbs,woody]].filter(([list])=>list.length).map(([list,material])=>[mergeGeometries(list),material,false])];
+  await pause();const parts=[[set.cards.geometry(),leafy,true]];
+  for(const [list,material] of [[set.lumps,massy],[set.limbs,woody]])if(list.length){await pause();parts.push([mergeGeometries(list),material,false]);}
   for(const g of [...set.lumps,...set.limbs])g.dispose();
   if(!cast){parts[0][1]=leafy.clone();parts[0][1].alphaTest=.24;}
   for(const [geometry,material,cut] of parts){const mesh=still(new THREE.Mesh(geometry,material));mesh.castShadow=cast;mesh.receiveShadow=true;mesh.userData.aoSkip=cut;site.add(mesh);}
  }
  const tufts=sheaf();
  for(let i=0,n=0;i<9000&&n<(full?1500:700);i++){
+  if(!(i&127))await pause();
   const a=rand()*6.2832,r=5+Math.sqrt(rand())*36,x=HOUSE[0]+Math.cos(a)*r,y=HOUSE[1]+Math.sin(a)*r-3,[q]=stream(x,y);
   if(q<.9||open(x,y)<3.2||(x>-4.4&&x<15.2&&y>-5&&y<7.9)||(y>7.1&&y<12.75&&x>-42&&x<24.6)||road(x,y)>.2||(x>17.6&&x<23.2&&y>.4&&y<13))continue;n++;
   const h=.35+rand()*.5,w=h*(.7+rand()*.4),t=rand()*3.14,g=groundAt(x,y),tint=()=>[.34+rand()*.2,.5+rand()*.2,.2+rand()*.14];
   for(const b of [t,t+1.57])tufts.add(V(x,g+h/2-.05,-y),V(Math.cos(b)*w,0,Math.sin(b)*w),V(0,h/2,0),flat,tint);
  }
+ await pause();
  const ferns=still(new THREE.Mesh(tufts.geometry(),new THREE.MeshStandardMaterial({...blades(renderer),alphaTest:.4,vertexColors:true,roughness:1})));
  ferns.receiveShadow=true;ferns.userData.aoSkip=true;site.add(ferns);
 

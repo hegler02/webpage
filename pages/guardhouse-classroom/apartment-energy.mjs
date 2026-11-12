@@ -2,7 +2,7 @@
 import {uValue} from './src/energy-engine.mjs';
 import {apartmentModel,apartmentElectrical,apartmentArea,freshApartment} from './src/apartment-project.mjs';
 import {apartmentAssemblies} from './src/apartment-materials.mjs';
-import {createEnergyPanel,glazings,yearOf,used,factList,checkList,envelopeTable,monthlySpec,topShare,durationSpec,n} from './energy-panel.mjs';
+import {createEnergyPanel,glazings,yearOf,used,factList,checkList,envelopeTable,monthlySpec,topShare,durationSpec,weatherSections,n} from './energy-panel.mjs';
 
 export const heaters={boiler:{name:'가스 보일러',cop:Infinity},heatpump:{name:'히트펌프',cop:3}};
 export const freshEnergy=()=>({glass:'double',wool:100,ach:.5,heater:'boiler'});
@@ -38,6 +38,7 @@ export function createApartmentEnergy({read,write}){
   controls:[{k:'glass',label:'유리',options:Object.entries(glazings).map(([k,g])=>[k,g.name])},{k:'wool',label:'외벽 단열 두께',min:0,max:200,step:10,unit:v=>v+' mm'},{k:'ach',label:'1시간 환기 횟수',min:.3,max:2,step:.1,unit:v=>n(v,1)+'회'},{k:'heater',label:'난방',options:Object.entries(heaters).map(([k,h])=>[k,h.name])}],
   sections:[{title:'이 집을 서울에 놓으면',lead:'가운데 층 한 세대를 서울의 8,760시간 날씨에 놓고 한 해의 난방과 전기를 계산합니다.',controls:true,part:'facts'},
    {title:'열은 어디로 빠져나가나',lead:'안팎 온도가 1 °C 다를 때 빠지는 열(W/K)입니다.',part:'envelope'},
+   ...weatherSections('서울',false),
    {title:'1년 전기 사용',chart:'monthly'},
    {title:'부하 지속 곡선',lead:'1년 8,760시간의 전력을 큰 것부터 늘어놓았습니다.',chart:'duration'},
    {title:'전기설계로 이어 보기',part:'electric'}],

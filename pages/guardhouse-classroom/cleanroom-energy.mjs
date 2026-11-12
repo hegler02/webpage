@@ -2,7 +2,7 @@
 import {uValue} from './src/energy-engine.mjs';
 import {bay,bayModel,bayElectrical,freshBay} from './src/cleanroom-project.mjs';
 import {assemblies} from './src/cleanroom-construction.mjs';
-import {createEnergyPanel,glazings,yearOf,used,factList,checkList,envelopeTable,monthlySpec,topShare,durationSpec,n} from './energy-panel.mjs';
+import {createEnergyPanel,glazings,yearOf,used,factList,checkList,envelopeTable,monthlySpec,topShare,durationSpec,weatherSections,n} from './energy-panel.mjs';
 
 export const freshEnergy=()=>({glass:'double',ach:3,recovery:0,pv:0});
 const SERIES=[['heatElec','난방','slot2'],['coolElec','냉방','slot1'],['light','조명','slot4'],['equip','팬','slot3']];
@@ -35,6 +35,7 @@ export function createCleanroomEnergy({read,write}){
   controls:[{k:'glass',label:'관찰창 유리',options:Object.entries(glazings).map(([k,g])=>[k,g.name])},{k:'ach',label:'1시간 환기 횟수',min:1,max:10,step:1,unit:v=>v+'회'},{k:'recovery',label:'환기 열회수',min:0,max:80,step:10,unit:v=>v+' %'},{k:'pv',label:'지붕 태양광',min:0,max:MAX_PV,step:1,unit:v=>v+' kW'}],
   sections:[{title:'이 클린룸을 서울에 놓으면',lead:'클린룸 한 칸을 서울의 8,760시간 날씨에 놓고 한 해의 전기를 계산합니다.',controls:true,part:'facts'},
    {title:'열은 어디로 빠져나가나',lead:'안팎 온도가 1 °C 다를 때 빠지는 열(W/K)입니다.',part:'envelope'},
+   ...weatherSections('서울',false),
    {title:'1년 전기 사용',chart:'monthly'},
    {title:'부하 지속 곡선',lead:'1년 8,760시간의 전력을 큰 것부터 늘어놓았습니다.',chart:'duration'},
    {title:'전기설계로 이어 보기',part:'electric'}],

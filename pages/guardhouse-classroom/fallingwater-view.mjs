@@ -16,7 +16,7 @@ import {furnish} from './fallingwater-furniture.mjs';
 import {buildLand} from './fallingwater-land.mjs';
 
 export const prepareFallingwaterMaterials=()=>SurfaceLibrary.prepare();
-// The model's south is the side of the falls, which really faces south-south-east: compass directions are turned 30 degrees into the model.
+// The model's south is the side of the falls, which really faces south-south-east: compass directions are turned 30 degrees into the model. A sun set from outside already comes in the model's directions.
 const turned=v=>[.866*v[0]+.5*v[1],-.5*v[0]+.866*v[1],v[2]];
 // A summer morning at Mill Run: the sun comes down the stream and lights the long trays from the front.
 export const summerSun=()=>sunVector(sunPosition(dayOfYear(6,21),11,project.site));
@@ -94,7 +94,7 @@ export function mountFallingwater(host,select){
  const size=()=>{const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();};
 
  function placeSun(){
-  const t=sun.target.position,v=view.studio?[-.36,-.6,.72]:turned(sunVectorNow??summerSun());
+  const t=sun.target.position,v=view.studio?[-.36,-.6,.72]:sunVectorNow??turned(summerSun());
   sun.position.set(t.x+v[0]*REACH,t.y+Math.max(v[2],.02)*REACH,t.z-v[1]*REACH);renderer.shadowMap.needsUpdate=true;look?.invalidate();wake();
  }
  function setNight(on){

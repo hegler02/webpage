@@ -24,7 +24,9 @@ const homes={
  truss:{pos:[X0-36,6,9],at:[X0,9.9,3.6],fov:34},
  pipe:{pos:[MID-17,-9,19],at:[MID,9.9,3.6],fov:36},
  power:{pos:[MID-10,32,15],at:[MID,9.9,1.4],fov:36},
- fire:{pos:[L/2,66,54],at:[L/2,9.9,0],fov:36}
+ fire:{pos:[L/2,66,54],at:[L/2,9.9,0],fov:36},
+ // Above the east end of the court, looking to the sea: the towers' shadows cross the paving and show the hour.
+ sun:{pos:[118,AXIS-3,17.5],at:[22,AXIS,3],fov:42}
 };
 homes.circuit=homes.power;
 const withContext=new Set(['site','section']);
@@ -171,6 +173,8 @@ export function mountSalk(host,select){
  return {
   view,walk,home,update,station,
   whole:()=>walk('outside'),
+  // Both wings and the court from above, where the shadows of the hour can be read.
+  overview:()=>{if(walkState)leave();aim('sun');},
   setNight:on=>setNight(on),
   setSun:v=>{sunVectorNow=v;placeSun();},
   walking:()=>walkState?.zone??null,

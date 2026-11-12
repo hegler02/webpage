@@ -1,6 +1,12 @@
 /* Weather and energy lesson on the classroom's dark workbench surfaces. Series colors live only on chart marks. */
 .energy-grid{align-items:start}
 .energy-wide{grid-column:1/-1}
+.energy-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--wb-gap-section);align-items:start}
+/* A lesson with the day clock pairs its narrow cards under the 3D view; wide cards keep the full row. */
+#bay-app[data-page=energy] #bay-lesson:has([data-energy-input=month]){grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+/* Nothing is picked on this page, so the view takes the row the inspector and the part tools would use. */
+#bay-app[data-page=energy] :is(#bay-view-tools,#bay-tools,.inspector){display:none}
+#bay-app[data-page=energy] .canvas-row{grid-template-columns:minmax(0,1fr)}
 .energy-controls{display:flex;flex-wrap:wrap;gap:var(--space-3) var(--space-5);align-items:end;margin:var(--space-4) 0}
 .energy-controls label{display:flex;flex-direction:column;gap:var(--space-1);font-size:var(--sys-size-caption);color:var(--wb-muted)}
 .energy-controls select,.energy-controls input[type=number]{font:inherit;font-size:var(--sys-size-small);height:var(--wb-ctl-h);padding:0 var(--wb-ctl-pad-x);min-width:88px}
@@ -38,6 +44,8 @@
 .energy-basis dd{margin:0;font-size:var(--sys-size-small)}
 .energy-basis a{color:var(--wb-accent)}
 @media (max-width:760px){
+ .energy-pair{grid-template-columns:minmax(0,1fr)}
+ #bay-app[data-page=energy] #bay-lesson:has([data-energy-input=month]){grid-template-columns:minmax(0,1fr)}
  .energy-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
  .energy-faces{grid-template-columns:repeat(3,minmax(0,1fr))}
  .energy-basis dl div{grid-template-columns:1fr;gap:0}

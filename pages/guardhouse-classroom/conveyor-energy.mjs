@@ -2,7 +2,7 @@
 import {monthOfDay} from './src/energy-engine.mjs';
 import {byId} from './src/conveyor-project.mjs';
 import {defaults,calculations} from './src/conveyor-engine.mjs';
-import {createEnergyPanel,used,factList,checkList,monthlySpec,topShare,n} from './energy-panel.mjs';
+import {createEnergyPanel,used,factList,checkList,monthlySpec,topShare,weatherSections,n} from './energy-panel.mjs';
 
 export const freshEnergy=()=>({hours:8,load:70,warm:5,cooling:'none'});
 const SERIES=[['motor','모터','slot3'],['control','제어 회로','slot4'],['cooling','제어반 냉각','slot1']];
@@ -46,6 +46,8 @@ export function createConveyorEnergy({read,write}){
   controls:[{k:'hours',label:'하루 운전 시간',min:4,max:24,step:2,unit:v=>v+'시간'},{k:'load',label:'모터 부하',min:30,max:100,step:10,unit:v=>v+' %'},{k:'warm',label:'공장 안팎 온도차',min:0,max:15,step:1,unit:v=>v+' °C'},{k:'cooling',label:'제어반 냉각',options:Object.entries(coolers).map(([k,c])=>[k,c.name])}],
   sections:[{title:'이 컨베이어를 서울 공장에 놓으면',lead:'컨베이어 한 대를 서울의 8,760시간 날씨에 놓고 한 해의 전기와 제어반 온도를 계산합니다.',controls:true,part:'facts'},
    {title:'제어반 안에서 나는 열',lead:'기기가 내는 열은 제어반 강판으로 빠져나가고, 그만큼 안이 공장 공기보다 더워집니다.',part:'heat'},
+   // Only the outdoor temperature reaches a machine indoors, so the sun and the wind are left out.
+   ...weatherSections('서울',false).filter(s=>s.chart==='climate'),
    {title:'1년 전기 사용',chart:'monthly'},
    {title:'제어반 온도 지속 곡선',lead:'운전하는 시간의 제어반 안 온도를 높은 것부터 늘어놓았습니다.',chart:'temperature'},
    {title:'전기설계로 이어 보기',part:'electric'}],

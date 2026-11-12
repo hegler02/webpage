@@ -1,7 +1,7 @@
 
 .brand-mark{flex:none;width:32px;height:32px}
 .switch-bank{gap:var(--gap-controls,var(--space-3))}
-.switch-bank button{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-1);padding:var(--space-3) var(--space-4)}
+.switch-bank button{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-1);padding:var(--space-3) var(--space-4);text-align:left}
 .switch-bank small{font-size:var(--sys-size-caption);font-weight:var(--sys-weight-body);line-height:var(--sys-leading-body)}
 .lighting-summary{width:100%;padding:var(--space-3);border-left:var(--space-1) solid var(--teal);background:var(--surface-soft,#edf6f3);margin-block:var(--gap-copy)}
 :root{

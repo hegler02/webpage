@@ -3,6 +3,7 @@ import {rooms,steps,materials,interior,lighting,requiredFittings,houseLoad,fireS
 import {F1,F2,F3,ROOF,PAR,BAY,CANT,JOISTS} from './src/fallingwater-model.mjs';
 import {lessonSummary} from './src/lesson-catalog.mjs';
 import {btn,pressed,card,actions,wireLegend} from './salk-lessons.mjs';
+import {powerControls} from './masters-power.mjs';
 export {btn,pressed,card,actions};
 
 const rows=list=>'<div class="salk-rows">'+list.map(([k,v])=>'<div><span>'+k+'</span><strong>'+v+'</strong></div>').join('')+'</div>';
@@ -35,11 +36,9 @@ export function structure(){
 
 export function electrical({state,electric,selected}){
  const fit=requiredFittings(),placed=electric.devices.filter(d=>d.kind==='light'&&/^LT[1-6]$/.test(d.id)).length;
- const breakers=electric.circuits.map(c=>{const on=state.breakers[c.id]!==false;return btn(c.id+' '+c.name+' '+(on?'끄기':'켜기'),'breaker',c.id,pressed(on));}).join('');
- const switches=[['SW1','1층 조명 스위치'],['SW2','2·3층 조명 스위치']].map(([id,name])=>btn(name+' '+(state.switches[id]?'끄기':'켜기'),'switch',id,pressed(state.switches[id]))).join('');
  const body=electric.circuits.map(c=>'<tr><th scope="row">'+c.id+'</th><td>'+c.name+'</td><td>'+c.volts+' V '+(c.phase===3?'3상':'단상')+'</td><td>'+c.breaker+' A</td><td>'+c.area+' mm²</td><td>'+num(c.watts,0)+' W</td><td>'+num(c.current,2)+' A</td><td>'+c.percent.toFixed(2)+' %</td><td>'+(c.pass?'통과':'다시 검토')+'</td></tr>').join('');
  const target=electric.devices.find(d=>d.id===selected),route=electric.routes.find(r=>r.target===selected);
- return card('전기는 돌탑을 타고 세 층으로 오릅니다',actions(breakers)+actions(switches)+(target&&route?'<p>'+target.name+'까지 분전반에서 '+num(electric.circuits.find(c=>c.id===target.circuit).length,1)+' m 회로입니다.</p>':''))+
+ return card('전기는 돌탑을 타고 세 층으로 오릅니다',powerControls(electric,state)+(target&&route?'<p>'+target.name+'까지 분전반에서 '+num(electric.circuits.find(c=>c.id===target.circuit).length,1)+' m 회로입니다.</p>':''))+
   card('거실 조명은 몇 개가 필요한가','<p class="equation">'+lighting.lux+' lx × '+num(lighting.area,1)+' m² ÷ ('+num(lighting.lumens,0)+' lm × '+lighting.use+' × '+lighting.keep+') = '+fit+'개</p>'+rows([['목표 조도','거실 전반 '+lighting.lux+' lx'],['조명 방식','천장 격자 안에 숨겨 천장을 비추는 간접 조명'],['거실에 놓은 조명',placed+'개']]))+
   card('집 한 채의 부하',rows([['연결 부하 합계',num(houseLoad(electric),0)+' W'],['가장 큰 부하','난방 히트펌프 · 380 V 3상'],['들어오는 길','진입로 쪽 땅속으로 들어와 부엌 분전반으로'],['오르는 길','굴뚝 뒤 돌탑 속 세로 배관으로 2층과 3층까지']]))+
   '<article class="bay-card"><h2>분기 회로표</h2><table><thead><tr><th>회로</th><th>이름</th><th>전원</th><th>차단기</th><th>전선</th><th>부하</th><th>전류</th><th>전압강하</th><th>판정</th></tr></thead><tbody>'+body+'</tbody></table></article>';

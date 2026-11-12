@@ -11,6 +11,7 @@ import {farnsworthTerms,termFor} from './src/farnsworth-glossary.mjs';
 import {model} from './farnsworth-plan-parts.mjs';
 import {farnsworthPlan} from './farnsworth-plan.mjs';
 import * as lessons from './farnsworth-lessons.mjs';
+import {powerStatus,routeLive} from './masters-power.mjs';
 
 const {btn,actions}=lessons;
 const $=id=>document.getElementById(id);
@@ -46,14 +47,14 @@ function frame(){
   const electric=farnsworthElectrical(state),fire=farnsworthFire({signal:tab==='fire'&&stage>=0?fireSource:null});
   const color=Object.fromEntries(electric.circuits.map(c=>[c.id,c.color]));
   const paths=tab==='fire'?[[1,soundPath,'#d19129'],[2,reachPath,'#c8452f'],[3,escapePath,'#08734d','6 4']].filter(p=>stage>=p[0]).map(([,points,c,dash])=>({points,color:c,dash,radius:.05,through:true}))
-    :tab==='electrical'?electric.routes.filter(r=>selected===panel.id||r.target===selected).map(r=>({points:r.points,color:color[r.circuit],radius:.035,through:true})):[];
+    :tab==='electrical'?electric.routes.map(r=>{const d=electric.devices.find(x=>x.id===r.target),pick=r.target===selected||d?.switch===selected;return {points:r.points,color:routeLive(electric,state,r)?color[r.circuit]:'#8a9296',radius:pick?.06:.028,through:true};}):[];
   // Every route at once, for the in-wall wiring overlay of the walk.
   const wires=electric.routes.map(r=>({points:r.points,color:color[r.circuit],radius:.035,through:true}));
   return {electric,fire,paths,wires};
 }
 // The entrance doors swing open once the fire walk-through reaches the way out.
 // The energy page shows the whole building under the sun of the chosen hour, so it borrows the lived-in view without its tools.
-const sceneFrame=f=>{const sunny=tab==='energy',live=tab==='experience'||sunny;return {view:live?'site':sheet().view,studio:!live,id:live?null:selected,show:tab==='fire'?'fire':live?'all':'electrical',devices:[...f.electric.devices,...f.fire.devices],paths:sunny?[]:live?(wiring?f.wires:[]):f.paths,night:sunny?energyNight:night,open:tab==='fire'&&stage>=3};};
+const sceneFrame=f=>{const sunny=tab==='energy',live=tab==='experience'||sunny;return {view:live?'site':sheet().view,studio:!live,id:live?null:selected,show:tab==='fire'?'fire':live?'all':'electrical',devices:[...f.electric.devices,...f.fire.devices],paths:sunny?[]:live?(wiring?f.wires:[]):f.paths,night:sunny?energyNight:night,power:tab==='electrical',open:tab==='fire'&&stage>=3};};
 
 function renderInspector(f){
   const d=lookup(selected),host=$('bay-inspector');
@@ -171,8 +172,9 @@ const farnsworthActions={
   layout:b=>{layoutMode=b.dataset.layout;paint();},
   zoom:b=>zoomDrawing(b.dataset.zoom),
   whole:()=>{if(tab==='experience'||tab==='energy')walk('outside');else{paint();scene?.home();}},
-  breaker:b=>{const id=b.dataset.breaker;if(!circuits.some(c=>c.id===id))return;state.breakers[id]=!state.breakers[id];save();paint();$('bay-status').textContent=id+' 차단기를 '+(state.breakers[id]?'켰습니다.':'껐습니다.');},
-  switch:b=>{const id=b.dataset.switch;if(!Object.hasOwn(state.switches,id))return;state.switches[id]=!state.switches[id];save();paint();$('bay-status').textContent='조명 스위치를 '+(state.switches[id]?'켰습니다.':'껐습니다.');},
+  breaker:b=>{const id=b.dataset.breaker;if(!circuits.some(c=>c.id===id))return;state.breakers[id]=!state.breakers[id];save();paint();$('bay-status').textContent=powerStatus(farnsworthElectrical(state),state,'breaker',id);},
+  power:()=>{state.power=state.power===false;save();paint();$('bay-status').textContent=powerStatus(farnsworthElectrical(state),state,'power','main');},
+  switch:b=>{const id=b.dataset.switch;if(!Object.hasOwn(state.switches,id))return;state.switches[id]=!state.switches[id];save();paint();$('bay-status').textContent=powerStatus(farnsworthElectrical(state),state,'switch',id);},
   advance:()=>{if(stage<fireStages.length-1){stage++;selected=fireStages[stage].id;paint();}},
   resetTest:()=>{stage=-1;selected=fireSource;paint();},
   term:b=>moveTerm(b.dataset.term),

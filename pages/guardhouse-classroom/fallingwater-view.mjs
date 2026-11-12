@@ -10,6 +10,7 @@ import {SurfaceLibrary,worldUV} from './surface-materials.mjs';
 import {SceneLook,qualityTier} from './scene-quality.mjs';
 import {observeScene,presentScene} from './render-loop.mjs';
 import {keyboardOrbit,lightenOnSlowFrames,createRenderer} from './scene-access.mjs';
+import {createLampHalos} from './masters-power-view.mjs';
 import {point,deviceMesh,pipe,mergeContext,zones,levelAt,indoorAt,walkableAt} from './fallingwater-scene-parts.mjs';
 import {sandstone,ochre,flagstone,ledge} from './fallingwater-textures.mjs';
 import {furnish} from './fallingwater-furniture.mjs';
@@ -84,6 +85,7 @@ export function mountFallingwater(host,select){
  const routes=new THREE.Group(),highlight=new THREE.BoxHelper(new THREE.Object3D(),0xe0903a);highlight.material.depthTest=false;highlight.renderOrder=10;highlight.visible=false;
  const marker=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({color:0xe8b572,transparent:true,opacity:.4,depthWrite:false,side:THREE.DoubleSide}));marker.rotation.x=-Math.PI/2;marker.visible=false;
  scene.add(devices,bounce,routes,highlight,marker);
+ const halos=createLampHalos(deviceMeshes);scene.add(halos.group);
 
  // The house is best known from below the falls, so the camera may drop under the level it looks at.
  const controls=new OrbitControls(camera,canvas);view.controls=controls;controls.enableDamping=true;controls.dampingFactor=.12;controls.minDistance=1.5;controls.maxDistance=110;controls.maxPolarAngle=Math.PI*.6;
@@ -98,9 +100,9 @@ export function mountFallingwater(host,select){
   sun.position.set(t.x+v[0]*REACH,t.y+Math.max(v[2],.02)*REACH,t.z-v[1]*REACH);renderer.shadowMap.needsUpdate=true;look?.invalidate();wake();
  }
  function setNight(on){
-  view.night=!!on;const s=view.studio;scene.background.set(s?0x12171c:on?0x141f2c:0xb9ccd4);
-  ambient.intensity=s?.3:on?.14:.75;sun.intensity=s?1.35:on?.1:3.2;sun.color.set(on&&!s?0xaac9ff:0xfff0d9);
-  scene.environmentIntensity=s?.45:on?.1:.55;renderer.toneMappingExposure=on&&!s?1.05:1;host.dataset.night=String(view.night);look?.invalidate();wake();
+  view.night=!!on;const s=view.studio,k=s&&view.power?.36+.64*(view.share??1):1;scene.background.set(s?0x12171c:on?0x141f2c:0xb9ccd4);
+  ambient.intensity=(s?.3:on?.14:.75)*k;sun.intensity=(s?1.35:on?.1:3.2)*k;sun.color.set(on&&!s?0xaac9ff:0xfff0d9);
+  scene.environmentIntensity=(s?.45:on?.1:.55)*k;renderer.toneMappingExposure=on&&!s?1.05:1;host.dataset.night=String(view.night);look?.invalidate();wake();
  }
  // A view that names a box steps back along its own line of sight until every corner sits inside the pane, and centres on what it shows; the others only step back in an upright pane.
  function frame(h,to,back,shape){
@@ -172,7 +174,7 @@ export function mountFallingwater(host,select){
   const space=rooms.find(r=>r.id===id),z=space?space.level+1:height.get(id)??base.children.find(o=>o.userData.id===id)?.userData.base??F1+1;
   return z<C1+.5?0:z<C2+.4?1:2;
  }
- function update({view:name='site',studio=true,id=null,show='electrical',devices:live=[],paths=[],night=view.night}={}){
+ function update({view:name='site',studio=true,id=null,show='electrical',devices:live=[],paths=[],night=view.night,power=false}={}){
   const changed=name!==state.view||studio!==state.studio,level=studio&&plans.has(name)?storey(id):null,recut=changed||level!==state.cut;
   state={...state,view:name,studio,id,show,cut:level};
   if(recut){
@@ -185,15 +187,18 @@ export function mountFallingwater(host,select){
    if(studio&&walkState){walkState=null;controls.enabled=true;view.fpv=false;view.mode='orbit';host.dataset.walking='false';delete host.dataset.zone;}
    placeSun();if(!walkState)aim(studio?name:'outside');
   }
-  if(changed||night!==view.night)setNight(night);
+  // In the power lesson the room dims with every lamp that loses power.
+  const lights=live.filter(d=>d.kind==='light'),share=lights.length?lights.filter(d=>d.on).length/lights.length:1,dimmed=power!==view.power||share!==view.share;view.power=power;view.share=share;
+  if(changed||dimmed||night!==view.night)setNight(night);
   const on=new Map(live.map(d=>[d.id,d])),skeleton=studio&&bones.has(name);spinning=false;let lamps=0;
   for(const [key,g] of deviceMeshes){
    const electric=electricIds.has(key),d=on.get(key),lit=!!d?.on;g.visible=!skeleton&&(show==='all'||(show==='fire')!==electric)&&(level===null||height.get(key)<cuts[level]+.5);
    const dot=g.userData.indicator?.material,lamp=g.userData.kind==='light';
    if(dot){dot.emissive.set(lit?(lamp?0xfff0d0:0xff5a3c):0x000000);dot.emissiveIntensity=lit?(lamp?2.6:1.1):0;}
    if(lamp&&lit)lamps++;
-   if(g.userData.glow)g.userData.glow.intensity=lit&&!studio?(view.night?2.2:.9):0;
-   if(g.userData.rotor){g.userData.spin=lit;spinning||=lit&&!studio;}
+   if(g.userData.glow)g.userData.glow.intensity=lit&&(power||!studio)?(power?2.6:view.night?2.2:.9):0;
+   halos.show(key,g,{lit,power,visible:g.visible});
+   if(g.userData.rotor){g.userData.spin=lit;spinning||=lit&&(power||!studio);}
   }
   for(const l of bounce.children)l.intensity=studio?0:Math.min(lamps,6)*(view.night?2.4:.45);
   const keyNow=JSON.stringify(paths);

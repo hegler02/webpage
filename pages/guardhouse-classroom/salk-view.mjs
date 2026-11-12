@@ -10,6 +10,7 @@ import {SurfaceLibrary,worldUV} from './surface-materials.mjs';
 import {SceneLook} from './scene-quality.mjs';
 import {observeScene,presentScene} from './render-loop.mjs';
 import {keyboardOrbit,lightenOnSlowFrames,createRenderer} from './scene-access.mjs';
+import {createLampHalos} from './masters-power-view.mjs';
 import {point,deviceMesh,pipe,mergeContext,buildLand,zones,walkableAt} from './salk-scene-parts.mjs';
 
 export const prepareSalkMaterials=()=>SurfaceLibrary.prepare();
@@ -69,6 +70,7 @@ export function mountSalk(host,select){
  const routes=new THREE.Group(),highlight=new THREE.BoxHelper(new THREE.Object3D(),0xe0903a);highlight.material.depthTest=false;highlight.renderOrder=10;highlight.visible=false;
  const marker=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({color:0xe8b572,transparent:true,opacity:.4,depthWrite:false,side:THREE.DoubleSide}));marker.rotation.x=-Math.PI/2;marker.visible=false;
  scene.add(devices,workLight,routes,highlight,marker);
+ const halos=createLampHalos(deviceMeshes,{size:1.9});scene.add(halos.group);
 
  const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.12;controls.minDistance=3;controls.maxDistance=420;controls.maxPolarAngle=Math.PI*.495;
  const stopKeys=keyboardOrbit(controls,canvas),stopLighten=lightenOnSlowFrames(renderer);
@@ -82,9 +84,9 @@ export function mountSalk(host,select){
   sun.position.set(t.x+v[0]*REACH,t.y+Math.max(v[2],.02)*REACH,t.z-v[1]*REACH);renderer.shadowMap.needsUpdate=true;look?.invalidate();wake();
  }
  function setNight(on){
-  view.night=!!on;const s=view.studio;scene.background.set(s?0x12171c:on?0x172638:0xb9ccd4);
-  ambient.intensity=s?1.5:on?.16:.75;sun.intensity=s?2.2:on?.1:3.2;sun.color.set(on&&!s?0xaac9ff:0xfff0d9);
-  scene.environmentIntensity=s?.6:on?.1:.55;renderer.toneMappingExposure=on&&!s?1.05:1;host.dataset.night=String(view.night);look?.invalidate();wake();
+  view.night=!!on;const s=view.studio,k=s&&view.power?.36+.64*(view.share??1):1;scene.background.set(s?0x12171c:on?0x172638:0xb9ccd4);
+  ambient.intensity=(s?1.5:on?.16:.75)*k;sun.intensity=(s?2.2:on?.1:3.2)*k;sun.color.set(on&&!s?0xaac9ff:0xfff0d9);
+  scene.environmentIntensity=(s?.6:on?.1:.55)*k;renderer.toneMappingExposure=on&&!s?1.05:1;host.dataset.night=String(view.night);look?.invalidate();wake();
  }
  function aim(id){
   const h=homes[id]??homes.site,narrow=host.clientWidth<host.clientHeight,to=point(h.at),from=point(h.pos);
@@ -139,7 +141,7 @@ export function mountSalk(host,select){
   marker.visible=!!space;if(space){const [x0,y0,x1,y1]=space.bounds;marker.scale.set(x1-x0,y1-y0,1);marker.position.copy(point([(x0+x1)/2,(y0+y1)/2,space.level+.04]));}
   host.dataset.selection=id??'';
  }
- function update({view:name='site',studio=true,id=null,show='electrical',devices:live=[],paths=[],night=view.night}={}){
+ function update({view:name='site',studio=true,id=null,show='electrical',devices:live=[],paths=[],night=view.night,power=false}={}){
   const changed=name!==state.view||studio!==state.studio;state={...state,view:name,studio,id,show};
   if(changed){
    view.studio=studio;clip.length=0;const c=studio&&clipFor[name];if(c)clip.push(new THREE.Plane(new THREE.Vector3(...c[0]),c[1]));
@@ -147,14 +149,17 @@ export function mountSalk(host,select){
    if(studio&&walkState){walkState=null;controls.enabled=true;view.fpv=false;view.mode='orbit';host.dataset.walking='false';}
    placeSun();if(!walkState)aim(studio?name:'outside');
   }
-  if(changed||night!==view.night)setNight(night);
+  // In the power lesson the room dims with every lamp that loses power.
+  const lights=live.filter(d=>d.kind==='light'),share=lights.length?lights.filter(d=>d.on).length/lights.length:1,dimmed=power!==view.power||share!==view.share;view.power=power;view.share=share;
+  if(changed||dimmed||night!==view.night)setNight(night);
   const on=new Map(live.map(d=>[d.id,d]));spinning=false;
   for(const [key,g] of deviceMeshes){
    const electric=electricIds.has(key),d=on.get(key),lit=!!d?.on;g.visible=show==='all'||(show==='fire')!==electric;
    const dot=g.userData.indicator?.material;
    if(dot){const lamp=g.userData.kind==='light';dot.emissive.set(lit?(lamp?0xfff0d0:g.userData.kind==='exit'?0x35d08a:0xff5a3c):0x000000);dot.emissiveIntensity=lit?(lamp?2.4:1.1):0;}
-   if(g.userData.glow)g.userData.glow.intensity=lit&&!studio?34:0;
-   if(g.userData.rotor){g.userData.spin=lit;spinning||=lit&&!studio;}
+   if(g.userData.glow)g.userData.glow.intensity=lit&&(power||!studio)?(power?26:34):0;
+   halos.show(key,g,{lit,power,visible:g.visible});
+   if(g.userData.rotor){g.userData.spin=lit;spinning||=lit&&(power||!studio);}
   }
   workLight.intensity=studio?0:5;
   const keyNow=JSON.stringify(paths);

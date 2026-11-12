@@ -1,6 +1,7 @@
 // Lesson panels for the Salk sample. Each one reads the same project data the drawings and the model use.
 import {rooms,steps,materials,moduleBay,lighting,requiredFittings,blockLoad,fireStages,fireZones,sprinklerPlan,stations,sheets} from './src/salk-project.mjs';
 import {lessonSummary} from './src/lesson-catalog.mjs';
+import {powerControls} from './masters-power.mjs';
 
 export const btn=(text,action,value='',attrs='')=>'<button type="button" data-'+action+'="'+value+'" '+attrs+'>'+text+'</button>';
 export const pressed=v=>'aria-pressed="'+Boolean(v)+'"';
@@ -37,10 +38,9 @@ export function structure(){
 
 export function electrical({state,electric,selected}){
  const fit=requiredFittings(),load=blockLoad(electric),placed=electric.devices.filter(d=>d.kind==='light').length*5;
- const breakers=electric.circuits.map(c=>{const on=state.breakers[c.id]!==false;return btn(c.id+' '+c.name+' '+(on?'끄기':'켜기'),'breaker',c.id,pressed(on));}).join('');
  const body=electric.circuits.map(c=>'<tr><th scope="row">'+c.id+'</th><td>'+c.name+'</td><td>'+c.volts+' V '+(c.phase===3?'3상':'단상')+'</td><td>'+c.breaker+' A</td><td>'+c.area+' mm²</td><td>'+num(c.watts,0)+' W</td><td>'+num(c.current,2)+' A</td><td>'+c.percent.toFixed(2)+' %</td><td>'+(c.pass?'통과':'다시 검토')+'</td></tr>').join('');
  const target=electric.devices.find(d=>d.id===selected),route=electric.routes.find(r=>r.target===selected);
- return card('한 칸에 분기 회로 네 개',actions(breakers)+actions(btn('조명 스위치 '+(state.switches.SW1?'끄기':'켜기'),'switch','SW1',pressed(state.switches.SW1)))+(target&&route?'<p>'+target.name+'까지 분전반에서 '+num(electric.circuits.find(c=>c.id===target.circuit).length,1)+' m 회로입니다.</p>':''))+
+ return card('한 칸에 분기 회로 네 개',powerControls(electric,state,{unit:'열'})+(target&&route?'<p>'+target.name+'까지 분전반에서 '+num(electric.circuits.find(c=>c.id===target.circuit).length,1)+' m 회로입니다.</p>':''))+
   card('조명은 몇 개가 필요한가','<p class="equation">'+lighting.lux+' lx × '+num(lighting.area,1)+' m² ÷ ('+num(lighting.lumens,0)+' lm × '+lighting.use+' × '+lighting.keep+') = '+fit+'개</p>'+rows([['놓은 조명','6열 × 5개 = '+placed+'개'],['필요한 조명',fit+'개 이상']]))+
   card('한 칸에서 한 동으로',rows([['한 칸',num(load.bay,0)+' W'],['한 층 12칸',num(load.floor/1000,1)+' kW'],['세 층',num(load.block/1000,1)+' kW']]))+
   '<article class="bay-card"><h2>분기 회로표</h2><table><thead><tr><th>회로</th><th>이름</th><th>전원</th><th>차단기</th><th>전선</th><th>부하</th><th>전류</th><th>전압강하</th><th>판정</th></tr></thead><tbody>'+body+'</tbody></table></article>';

@@ -57,7 +57,7 @@ export const lighting={lux:60,area:interior.area,lumens:3600,use:.45,keep:.7};
 export const requiredFittings=()=>Math.ceil(lighting.lux*lighting.area/(lighting.lumens*lighting.use*lighting.keep));
 
 export function freshFarnsworth(raw={}){
- const state={breakers:{},switches:{SW1:true},watts:{},completed:[]};
+ const state={power:raw?.power!==false,breakers:{},switches:{SW1:true},watts:{},completed:[]};
  const saved=Array.isArray(raw?.completed)?raw.completed:[];
  state.completed=steps.filter(s=>saved.includes(s.id)).map(s=>s.id);
  for(const c of circuits)state.breakers[c.id]=typeof raw?.breakers?.[c.id]==='boolean'?raw.breakers[c.id]:true;
@@ -82,7 +82,7 @@ export function farnsworthElectrical(state=freshFarnsworth()){
   const drop=factor*length*current/(1000*c.area),percent=drop/c.volts*100;
   return {...c,loads,watts,current,factor,length,drop,percent,pass:current<=c.breaker&&c.breaker<=c.ampacity&&percent<=c.limit};
  });
- return {panel,devices:applyPowerState(devices,{circuits:calculated,state,panel,hasMain:false,overloadCutsPower:false}),routes,circuits:calculated};
+ return {panel,devices:applyPowerState(devices,{circuits:calculated,state:{...state,power:state.power!==false},panel,hasMain:true,overloadCutsPower:false}),routes,circuits:calculated};
 }
 export const houseLoad=electric=>electric.circuits.reduce((s,c)=>s+c.watts,0);
 

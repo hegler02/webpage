@@ -14,3 +14,5 @@
 .salk-stages li[data-on=true]{border-color:var(--wb-danger);background:var(--wb-danger-soft);color:var(--wb-field-text)}
 .equation{margin-top:var(--gap-actions);padding:var(--space-4);border-radius:var(--space-2);background:var(--wb-field-bg);color:var(--wb-field-text);line-height:var(--leading-reading);font-weight:var(--sys-weight-control)}
 .bay-card .energy-controls label{align-items:flex-start}
+/* A control that is closed but carries no current reads apart from a live one. */
+body.wb-theme main .switch-bank button[aria-pressed=true][data-lit=false]{background:transparent;border-style:dashed;border-color:var(--wb-line-strong);color:var(--wb-muted)}

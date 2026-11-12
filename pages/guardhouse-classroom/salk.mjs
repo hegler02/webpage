@@ -11,6 +11,7 @@ import {salkTerms,termFor} from './src/salk-glossary.mjs';
 import {model} from './salk-plan-parts.mjs';
 import {salkPlan} from './salk-plan.mjs';
 import * as lessons from './salk-lessons.mjs';
+import {powerStatus,routeLive} from './masters-power.mjs';
 
 const {btn,actions}=lessons;
 const $=id=>document.getElementById(id);
@@ -48,13 +49,13 @@ function frame(){
   const fire={...raw,devices:raw.devices.map(d=>({...d,alarm:d.alarm&&shown(d),on:idle.has(d.id)||(d.on&&shown(d))}))};
   const color=Object.fromEntries(electric.circuits.map(c=>[c.id,c.color]));
   const paths=tab==='fire'?[[1,signalPath,'#d19129'],[2,alarmPath,'#c8452f'],[3,escapePath,'#08734d','6 4']].filter(p=>stage>=p[0]).map(([,points,c,dash])=>({points,color:c,dash,radius:.06,through:true}))
-    :tab==='electrical'?electric.routes.filter(r=>selected===panel.id||r.target===selected).map(r=>({points:r.points,color:color[r.circuit],radius:.04,through:true})):[];
+    :tab==='electrical'?electric.routes.map(r=>{const d=electric.devices.find(x=>x.id===r.target),pick=r.target===selected||d?.switch===selected;return {points:r.points,color:routeLive(electric,state,r)?color[r.circuit]:'#8a9296',radius:pick?.06:.028,through:true};}):[];
   // Every route at once, for the in-wall wiring overlay of the walk.
   const wires=electric.routes.map(r=>({points:r.points,color:color[r.circuit],radius:.04,through:true}));
   return {electric,fire,paths,wires};
 }
 // The energy page shows the whole building under the sun of the chosen hour, so it borrows the lived-in view without its tools.
-const sceneFrame=f=>{const sunny=tab==='energy',live=tab==='experience'||sunny;return {view:live?'site':sheet().view,studio:!live,id:live?null:selected,show:tab==='fire'?'fire':live?'all':'electrical',devices:[...f.electric.devices,...f.fire.devices],paths:sunny?[]:live?(wiring?f.wires:[]):f.paths,night:sunny?energyNight:night};};
+const sceneFrame=f=>{const sunny=tab==='energy',live=tab==='experience'||sunny;return {view:live?'site':sheet().view,studio:!live,id:live?null:selected,show:tab==='fire'?'fire':live?'all':'electrical',devices:[...f.electric.devices,...f.fire.devices],paths:sunny?[]:live?(wiring?f.wires:[]):f.paths,night:sunny?energyNight:night,power:tab==='electrical'};};
 
 function renderInspector(f){
   const d=lookup(selected),host=$('bay-inspector');
@@ -164,8 +165,9 @@ const salkActions={
   layout:b=>{layoutMode=b.dataset.layout;paint();},
   zoom:b=>zoomDrawing(b.dataset.zoom),
   whole:()=>{if(tab==='energy')scene?.overview();else if(tab==='experience')walk('outside');else{paint();scene?.home();}},
-  breaker:b=>{const id=b.dataset.breaker;if(!circuits.some(c=>c.id===id))return;state.breakers[id]=!state.breakers[id];save();paint();$('bay-status').textContent=id+' 차단기를 '+(state.breakers[id]?'켰습니다.':'껐습니다.');},
-  switch:b=>{const id=b.dataset.switch;if(!Object.hasOwn(state.switches,id))return;state.switches[id]=!state.switches[id];save();paint();$('bay-status').textContent='조명 스위치를 '+(state.switches[id]?'켰습니다.':'껐습니다.');},
+  breaker:b=>{const id=b.dataset.breaker;if(!circuits.some(c=>c.id===id))return;state.breakers[id]=!state.breakers[id];save();paint();$('bay-status').textContent=powerStatus(salkElectrical(state),state,'breaker',id,{unit:'열'});},
+  power:()=>{state.power=state.power===false;save();paint();$('bay-status').textContent=powerStatus(salkElectrical(state),state,'power','main',{unit:'열'});},
+  switch:b=>{const id=b.dataset.switch;if(!Object.hasOwn(state.switches,id))return;state.switches[id]=!state.switches[id];save();paint();$('bay-status').textContent=powerStatus(salkElectrical(state),state,'switch',id,{unit:'열'});},
   advance:()=>{if(stage<fireStages.length-1){stage++;selected=fireStages[stage].id;paint();}},
   resetTest:()=>{stage=-1;selected=fireSource;paint();},
   term:b=>moveTerm(b.dataset.term),

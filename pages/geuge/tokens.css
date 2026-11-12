@@ -1,0 +1,99 @@
+/* The only file allowed to hold raw design values. tools/lint-tokens.mjs enforces this. */
+@font-face{font-family:"Gancheop";src:url("assets/gancheop.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Spy";src:url("assets/spy.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Tape";src:url("assets/tape.woff2") format("woff2");font-display:swap}
+:root{
+ /* 간첩판: a police file — newsprint, ink, a red rubber stamp. */
+ --paper:#ece4cf;
+ --paper-shade:#d9cfb4;
+ --ink:#16130f;
+ --ink-soft:#16130fa6;
+ --stamp:#c8231b;
+ /* 스파이판: a film poster — black, the painting's own blue, poster yellow. */
+ --night:#0b0b0d;
+ --night-veil:#0b0b0dd9;
+ --night-clear:#0b0b0d00;
+ --marquee:#ffd21f;
+ --marquee-dim:#ffd21f40;
+ --pair-min:18rem;
+ --stem-label:3.2rem;
+ --stem-height:clamp(44px,7vw,84px);
+ --axis-height:32px;
+ --used-label:6.5rem;
+ --readout-height:3.2em;
+ --headline-width:14ch;
+ --gloss:#ffffffe6;
+ --gloss-clear:#ffffff00;
+ --bone:#f4f1e8;
+ /* The answer: label-maker tape. */
+ --tape:#111111;
+ --tape-ink:#f4f1e8;
+
+ --font-gancheop:"Gancheop","Nanum Myeongjo",serif;
+ --font-spy:"Spy","Do Hyeon",sans-serif;
+ --font-tape:"Tape","Nanum Gothic Coding",monospace;
+
+ --type-file-title:clamp(2.6rem,7vw,6.5rem);
+ --type-poster-title:clamp(4.2rem,15vw,15rem);
+ --type-body:clamp(1rem,1.5vw,1.25rem);
+ --type-field:.75rem;
+ --type-stamp:clamp(2.2rem,6vw,5rem);
+ --type-strip:.8125rem;
+ --line-title:1;
+ --line-body:1.75;
+ --track-field:.18em;
+ --track-strip:.24em;
+
+ --gutter:clamp(16px,5vw,80px);
+ --space-xs:6px;
+ --space-s:12px;
+ --space-m:24px;
+ --space-l:48px;
+ --rule:1px;
+ --rule-heavy:3px;
+ --underline:2px;
+ --photo-tilt:-1.6deg;
+ --stamp-tilt:-8deg;
+ --stamp-border:.09em;
+ --photo-shadow:0 18px 40px #16130f40;
+ --title-outline:.06em;
+ --view:100svh;
+ --file-photo:clamp(260px,42vw,720px);
+ --read-width:34rem;
+ --flip-time:.52s;
+ --gloss-time:1.4s;
+ --ease:cubic-bezier(.65,0,.35,1);
+ --gloss-delay:.3s;
+ --gloss-band:30% 100%;
+ --gloss-from:-60%;
+ --gloss-to:160%;
+ --title-drop:.05em .05em 0 var(--night);
+ --zero:0px;
+ --focus-gap:4px;
+ --depth:1600px;
+ --credit-label:3em;
+ --ruling:31px;
+ --ruling-step:32px;
+ --stamp-pad:.1em .35em;
+ --focus-hero:76% 40%;
+ --focus-ch01:스포트라이트 아래 베이스를 치는 연주자;
+ --focus-ch02:극장 좌석에 앉아 팔짱을 끼고 고개를 돌린 세 사람;
+ --focus-ch03:검은 장갑 낀 손이 가방에 봉투를 넣는 장면;
+ --focus-ch04:서류 가방을 들고 골목을 달리는 첩보원과 벽의 그림자;
+ --focus-ch05:전구 간판이 달린 붉은 극장 앞에 줄 선 관객;
+ --focus-ch06:극장 좌석에서 몸을 내밀고 환호하는 세 사람;
+ --focus-ch07:노란 벽에 비친 서류 가방 든 남자의 그림자;
+ --focus-ch08:극장 좌석 앞에 서서 손뼉을 치는 세 사람;
+ --focus-ch09:붉은 막 뒤 문으로 빠져나가는 첩보원과 객석의 뒷모습;
+ --clock-width:3.4em;
+ --entry-photo:clamp(240px,30vw,460px);
+ --panel:92svh;
+ --screen-width:1100px;
+ --tape-pad:.18em .5em;
+ --track-tape:.04em;
+ --type-tape:clamp(1.05rem,2vw,1.6rem);
+ --type-file-head:clamp(1.8rem,3.6vw,3rem);
+ --type-poster-head:clamp(2.8rem,8vw,7rem);
+ --type-poster-line:clamp(1.25rem,2.4vw,2rem);
+ --type-stamp-small:1.6rem;
+}

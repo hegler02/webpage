@@ -1,0 +1,75 @@
+/* The making-of under the same two labels: a typed case record, or a film's making-of booklet. */
+*{box-sizing:border-box}
+html,body{margin:0}
+body{transition:background-color var(--flip-time) var(--ease)}
+img{display:block;max-width:100%}
+a,button{font:inherit;color:inherit}
+.tag{position:sticky;top:env(safe-area-inset-top,var(--zero));z-index:3;display:flex;justify-content:space-between;align-items:center;gap:var(--space-m);
+ padding-block:var(--space-m);padding-left:max(var(--gutter),env(safe-area-inset-left,var(--zero)));padding-right:max(var(--gutter),env(safe-area-inset-right,var(--zero)));
+ font:var(--type-strip)/1 var(--font-tape);letter-spacing:var(--track-strip)}
+.tag button,.tag a{background:none;border:0;padding:var(--space-xs) 0;cursor:pointer;letter-spacing:inherit;text-decoration:none;border-bottom:var(--underline) solid currentColor}
+.tag button:focus-visible,.tag a:focus-visible,.action:focus-visible{outline:var(--underline) solid currentColor;outline-offset:var(--focus-gap)}
+.tag a span::after,.action span::after{content:attr(data-gancheop)}
+[data-label="spy"] .tag a span::after,[data-label="spy"] .action span::after{content:attr(data-spy)}
+.field::before{content:attr(data-gancheop);display:block;font:var(--type-field)/1.4 var(--font-tape);letter-spacing:var(--track-field)}
+[data-label="spy"] .field::before{content:attr(data-spy)}
+.action{display:inline-block;text-decoration:none;border-bottom:var(--underline) solid currentColor;padding-bottom:var(--space-xs)}
+
+main{display:grid;gap:var(--space-l);padding-block:var(--space-l) calc(var(--space-l)*2);
+ padding-left:max(var(--gutter),env(safe-area-inset-left,var(--zero)));padding-right:max(var(--gutter),env(safe-area-inset-right,var(--zero)))}
+main>section{display:grid;gap:var(--space-m);max-width:var(--read-width);min-width:0}
+main>section.wide,main>section.open{max-width:none}
+.open h1{max-width:var(--headline-width)}
+.narrow{max-width:var(--read-width)}
+h1,h2{margin:0;word-break:keep-all;text-wrap:balance;line-height:var(--line-title)}
+h1{font-size:var(--type-file-title)}
+h2{font-size:var(--type-file-head)}
+p,li{word-break:keep-all;line-height:var(--line-body)}
+p{margin:0}
+.lead{font-size:var(--type-body)}
+.measures{display:grid;gap:var(--space-m)}
+.measures b{display:block}
+.pair{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,var(--pair-min)),1fr));gap:var(--space-m)}
+.pair figcaption{font:var(--type-field)/1.6 var(--font-tape);letter-spacing:var(--track-field);padding-top:var(--space-xs)}
+.stems{margin:0;display:grid;gap:var(--space-xs);min-width:0}
+.readout{font:var(--type-field)/1.6 var(--font-tape);min-height:var(--readout-height)}
+.stem-row{display:grid;grid-template-columns:var(--stem-label) minmax(0,1fr);align-items:end;gap:var(--space-s)}
+.stem-row span{font:var(--type-field)/1 var(--font-tape)}
+.stem-row svg{width:100%;height:var(--stem-height);display:block}
+.stem-row line{stroke-width:var(--rule);vector-effect:non-scaling-stroke}
+.axis{position:relative;height:var(--axis-height);margin-left:calc(var(--stem-label) + var(--space-s));font:var(--type-field)/1 var(--font-tape)}
+.axis span{position:absolute;top:var(--space-xs);transform:translateX(-50%)}
+.table-wrap{overflow-x:auto;max-width:100%}
+table{border-collapse:collapse;font:var(--type-strip)/1.5 var(--font-tape);min-width:100%}
+th,td{text-align:left;padding:var(--space-xs) var(--space-s);border-bottom:var(--rule) solid currentColor}
+summary{cursor:pointer;font:var(--type-strip)/1.5 var(--font-tape)}
+.notes{display:grid;gap:var(--space-l);padding-left:var(--space-m);max-width:var(--read-width)}
+blockquote{margin:0 0 var(--space-s);font-size:var(--type-body)}
+.fine{font-size:var(--type-strip)}
+.gaps{display:grid;gap:var(--space-s);padding-left:var(--space-m)}
+.used{display:grid;gap:var(--space-s);margin:0}
+.used div{display:grid;grid-template-columns:var(--used-label) minmax(0,1fr);gap:var(--space-s)}
+.used dt{font:var(--type-field)/1.8 var(--font-tape);letter-spacing:var(--track-field)}
+.used dd{margin:0}
+
+/* 간첩판: the case record. */
+[data-label="gancheop"]{background:var(--paper) repeating-linear-gradient(0deg,var(--paper) 0 var(--ruling),var(--paper-shade) var(--ruling) var(--ruling-step));color:var(--ink);font-family:var(--font-tape)}
+[data-label="gancheop"] .tag{background:var(--paper)}
+[data-label="gancheop"] h1,[data-label="gancheop"] h2{font-family:var(--font-gancheop)}
+[data-label="gancheop"] h1{border-bottom:var(--rule-heavy) solid var(--ink);padding-bottom:var(--space-s)}
+[data-label="gancheop"] .field::before,[data-label="gancheop"] .fine{color:var(--ink-soft)}
+[data-label="gancheop"] .pair img{border:var(--space-s) solid var(--bone);box-shadow:var(--photo-shadow)}
+[data-label="gancheop"] .stem-row path{fill:var(--ink)}
+[data-label="gancheop"] .stem-row line{stroke:var(--stamp)}
+[data-label="gancheop"] blockquote{color:var(--stamp);font-family:var(--font-gancheop)}
+
+/* 스파이판: the making-of booklet. */
+[data-label="spy"]{background:var(--night);color:var(--bone);font-family:var(--font-spy)}
+[data-label="spy"] .tag{background:var(--night)}
+[data-label="spy"] h1,[data-label="spy"] h2{font-family:var(--font-spy);color:var(--marquee)}
+[data-label="spy"] h1{font-size:var(--type-poster-head)}
+[data-label="spy"] .field::before{color:var(--marquee)}
+[data-label="spy"] .stem-row path{fill:var(--marquee)}
+[data-label="spy"] .stem-row line{stroke:var(--bone)}
+[data-label="spy"] blockquote{color:var(--marquee)}
+@media (prefers-reduced-motion:reduce){body{transition:none}}

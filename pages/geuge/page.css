@@ -1,0 +1,142 @@
+/* One sheet, two labels. Every element is the same in both; only how it is labelled and dressed changes.
+   The answer 그게 그거야 is label-maker tape, and tape looks the same under either label. */
+*{box-sizing:border-box}
+html,body{margin:0}
+body{min-height:var(--view);transition:background-color var(--flip-time) var(--ease)}
+img{display:block;max-width:100%}
+a,button{font:inherit;color:inherit}
+h2,p,ol,dl{margin:0}
+
+.tag{position:fixed;inset:0 0 auto;z-index:3;display:flex;justify-content:space-between;align-items:center;gap:var(--space-m);
+ padding-block:var(--space-m);padding-left:max(var(--gutter),env(safe-area-inset-left,var(--zero)));padding-right:max(var(--gutter),env(safe-area-inset-right,var(--zero)));
+ font:var(--type-strip)/1 var(--font-tape);letter-spacing:var(--track-strip)}
+.tag button{background:none;border:0;padding:var(--space-xs) 0;cursor:pointer;letter-spacing:inherit;border-bottom:var(--underline) solid currentColor}
+.tag button:focus-visible,.action:focus-visible,.line:focus-visible{outline:var(--underline) solid currentColor;outline-offset:var(--focus-gap)}
+
+/* The sheet turns like a name card around the middle of what you are looking at. */
+.sheet{transition:transform var(--flip-time) var(--ease)}
+.sheet.turning{transform:perspective(var(--depth)) rotateY(90deg)}
+
+/* The same painting twice. The label decides which one the page shows. */
+.photo{margin:0;position:relative;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:var(--focus)}
+.photo .spy{position:absolute;inset:0}
+.hero{--focus:var(--focus-hero)}
+#ch1 .photo{--focus:var(--focus-ch01)}
+#ch2 .photo{--focus:var(--focus-ch02)}
+#ch3 .photo{--focus:var(--focus-ch03)}
+#ch4 .photo{--focus:var(--focus-ch04)}
+#ch5 .photo{--focus:var(--focus-ch05)}
+#ch6 .photo{--focus:var(--focus-ch06)}
+#ch7 .photo{--focus:var(--focus-ch07)}
+#ch8 .photo{--focus:var(--focus-ch08)}
+#ch9 .photo{--focus:var(--focus-ch09)}
+
+[data-label="gancheop"] .photo .spy,[data-label="spy"] .photo .gancheop{visibility:hidden}
+
+.field::before{content:attr(data-gancheop);display:block;font:var(--type-field)/1.4 var(--font-tape);letter-spacing:var(--track-field)}
+[data-label="spy"] .field::before{content:attr(data-spy)}
+.title{margin:0;line-height:var(--line-title);text-wrap:balance;word-break:keep-all}
+.premise{word-break:keep-all;max-width:var(--read-width);font-size:var(--type-body);line-height:var(--line-body)}
+.credits{display:grid;gap:var(--space-xs)}
+.credits div{display:flex;gap:var(--space-s)}
+.credits dt{min-width:var(--credit-label)}
+.credits dd{margin:0}
+.action{display:inline-block;text-decoration:none;border-bottom:var(--underline) solid currentColor;padding-bottom:var(--space-xs)}
+.action span::after{content:attr(data-gancheop)}
+[data-label="spy"] .action span::after{content:attr(data-spy)}
+.word{position:absolute;pointer-events:none}
+
+.entry-head h2{word-break:keep-all;text-wrap:balance}
+.lines{list-style:none;padding:0;display:grid;gap:var(--space-xs)}
+.line{display:grid;grid-template-columns:var(--clock-width) minmax(0,1fr);gap:var(--space-s);align-items:baseline;width:100%;text-align:left;background:none;border:0;padding:var(--space-xs) 0;cursor:pointer}
+.line .at{font:var(--type-field)/1 var(--font-tape);letter-spacing:var(--track-field)}
+.line .say{word-break:keep-all}
+.line:hover .say{text-decoration:underline;text-underline-offset:var(--focus-gap)}
+/* Tape is tape: the same black strip and white letters under both labels. */
+.line.tape .say,.tape-line{justify-self:start;font:var(--type-tape)/1.2 var(--font-tape);background:var(--tape);color:var(--tape-ink);padding:var(--tape-pad);letter-spacing:var(--track-tape)}
+.silent span{font:var(--type-body)/1.6 var(--font-tape)}
+.colophon{display:grid;gap:var(--space-m);padding-block:var(--space-l) calc(var(--space-l)*2);
+ padding-left:max(var(--gutter),env(safe-area-inset-left,var(--zero)));padding-right:max(var(--gutter),env(safe-area-inset-right,var(--zero)))}
+.colophon .note{max-width:var(--read-width);line-height:var(--line-body);word-break:keep-all}
+.colophon .links{display:flex;flex-wrap:wrap;gap:var(--space-m)}
+
+.screen{width:min(var(--screen-width),100%);max-width:100%;padding:var(--space-m);border:0}
+.screen::backdrop{background:var(--night-veil)}
+.screen-head{display:flex;justify-content:space-between;align-items:end;gap:var(--space-m);margin-bottom:var(--space-s)}
+.screen-head button{background:none;border:0;border-bottom:var(--underline) solid currentColor;cursor:pointer;padding:var(--space-xs) 0}
+.screen-frame{aspect-ratio:16/9;max-width:100%;background:var(--night)}
+.screen-frame iframe{width:100%;height:100%;border:0;display:block}
+
+/* 간첩판: a police file. */
+[data-label="gancheop"]{background:var(--paper) repeating-linear-gradient(0deg,var(--paper) 0 var(--ruling),var(--paper-shade) var(--ruling) var(--ruling-step));color:var(--ink)}
+[data-label="gancheop"] .first{min-height:var(--view);position:relative;display:grid;grid-template-columns:var(--file-photo) minmax(0,1fr);gap:var(--space-l);align-items:center;
+ padding-block:calc(var(--space-l)*2) var(--space-l);padding-left:max(var(--gutter),env(safe-area-inset-left,var(--zero)));padding-right:max(var(--gutter),env(safe-area-inset-right,var(--zero)))}
+[data-label="gancheop"] .photo{max-width:100%;transform:rotate(var(--photo-tilt));box-shadow:var(--photo-shadow);border:var(--space-s) solid var(--bone)}
+[data-label="gancheop"] .hero{aspect-ratio:4/5}
+[data-label="gancheop"] .record{display:grid;gap:var(--space-m);font-family:var(--font-tape);min-width:0}
+[data-label="gancheop"] .title{font:var(--type-file-title) var(--font-gancheop);border-bottom:var(--rule-heavy) solid var(--ink);padding-bottom:var(--space-s)}
+[data-label="gancheop"] .field::before{color:var(--ink-soft)}
+[data-label="gancheop"] .word{top:12%;left:max(var(--gutter),env(safe-area-inset-left,var(--zero)));transform:rotate(var(--stamp-tilt));
+ font:var(--type-stamp)/1 var(--font-gancheop);color:var(--stamp);border:var(--stamp-border) solid var(--stamp);padding:var(--stamp-pad);background:var(--paper)}
+[data-label="gancheop"] .word::after{content:attr(data-gancheop)}
+[data-label="gancheop"] .entries{display:grid}
+[data-label="gancheop"] .entry{display:grid;grid-template-columns:var(--entry-photo) minmax(0,1fr);grid-template-areas:"photo head" "photo lines";column-gap:var(--space-l);row-gap:var(--space-m);align-items:start;
+ border-top:var(--rule) dashed var(--ink-soft);padding-block:var(--space-l);padding-left:max(var(--gutter),env(safe-area-inset-left,var(--zero)));padding-right:max(var(--gutter),env(safe-area-inset-right,var(--zero)))}
+[data-label="gancheop"] .entry:nth-child(even) .photo{transform:rotate(calc(var(--photo-tilt)*-1))}
+[data-label="gancheop"] .entry .photo{grid-area:photo;aspect-ratio:4/3}
+[data-label="gancheop"] .entry-head{grid-area:head;display:grid;gap:var(--space-xs)}
+[data-label="gancheop"] .entry-head h2{font:var(--type-file-head) var(--font-gancheop)}
+[data-label="gancheop"] .when span{font:var(--type-strip)/1.5 var(--font-tape)}
+[data-label="gancheop"] .lines,[data-label="gancheop"] .silent{grid-area:lines}
+[data-label="gancheop"] .line .say{font:var(--type-body)/1.5 var(--font-tape)}
+[data-label="gancheop"] .line .at{color:var(--ink-soft)}
+[data-label="gancheop"] .screen{background:var(--paper);color:var(--ink)}
+[data-label="gancheop"] .screen-frame{border:var(--space-s) solid var(--bone);box-shadow:var(--photo-shadow)}
+[data-label="gancheop"] .screen-head .field::before{font:var(--type-stamp-small)/1 var(--font-gancheop);color:var(--stamp);letter-spacing:0}
+
+/* 스파이판: a film poster, then a programme of showings. */
+[data-label="spy"]{background:var(--night);color:var(--bone)}
+[data-label="spy"] .first{min-height:var(--view);position:relative;display:grid;align-content:end}
+[data-label="spy"] .hero{position:absolute;inset:0}
+[data-label="spy"] .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--night) 0,var(--night-veil) 22%,var(--night-clear) 62%)}
+[data-label="spy"] .record{position:relative;display:grid;gap:var(--space-m);min-width:0;
+ padding-block:var(--space-l);padding-left:max(var(--gutter),env(safe-area-inset-left,var(--zero)));padding-right:max(var(--gutter),env(safe-area-inset-right,var(--zero)))}
+[data-label="spy"] .title{position:relative;font:var(--type-poster-title) var(--font-spy);color:var(--marquee);-webkit-text-stroke:var(--title-outline) var(--night);text-shadow:var(--title-drop)}
+/* The gloss is a copy of the letters with only a moving band of light, so the yellow itself never goes see-through. */
+[data-label="spy"] .title::after{content:attr(data-text);position:absolute;inset:0;-webkit-text-stroke:0;text-shadow:none;color:transparent;
+ background:linear-gradient(100deg,var(--gloss-clear) 0,var(--gloss) 50%,var(--gloss-clear) 100%) var(--gloss-from) 0/var(--gloss-band) no-repeat;-webkit-background-clip:text;background-clip:text;animation:gloss var(--gloss-time) var(--ease) var(--gloss-delay) 1 both}
+[data-label="spy"] .premise{font-family:var(--font-spy);font-size:var(--type-body)}
+[data-label="spy"] .credits{grid-auto-flow:column;justify-content:start;gap:var(--space-l);font:var(--type-strip)/1.5 var(--font-tape);letter-spacing:var(--track-field)}
+[data-label="spy"] .credits div{flex-direction:column;gap:var(--space-xs)}
+[data-label="spy"] .field::before{color:var(--marquee)}
+[data-label="spy"] .word{top:22%;right:max(var(--gutter),env(safe-area-inset-right,var(--zero)));font:var(--type-stamp)/1 var(--font-spy);color:var(--marquee);-webkit-text-stroke:var(--title-outline) var(--night);paint-order:stroke fill}
+[data-label="spy"] .word::after{content:attr(data-spy)}
+/* Each chapter is one showing: the still in full, the programme underneath, so no line ever lies across a face. */
+[data-label="spy"] .entry{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,var(--read-width));grid-template-areas:"photo photo" "head lines";column-gap:var(--space-l);row-gap:var(--space-m);
+ padding-bottom:var(--space-l);border-bottom:var(--rule) solid var(--marquee-dim)}
+[data-label="spy"] .entry .photo{grid-area:photo;aspect-ratio:16/9;max-height:var(--panel)}
+[data-label="spy"] .entry-head{grid-area:head;align-self:start;padding-left:max(var(--gutter),env(safe-area-inset-left,var(--zero)))}
+[data-label="spy"] .lines,[data-label="spy"] .silent{grid-area:lines;padding-right:max(var(--gutter),env(safe-area-inset-right,var(--zero)))}
+[data-label="spy"] .entry-head{display:grid;gap:var(--space-xs)}
+[data-label="spy"] .entry-head h2{font:var(--type-poster-head) var(--font-spy);color:var(--marquee);-webkit-text-stroke:var(--title-outline) var(--night);text-shadow:var(--title-drop)}
+[data-label="spy"] .when span{font:var(--type-strip)/1.5 var(--font-tape);letter-spacing:var(--track-field)}
+[data-label="spy"] .lines{max-width:var(--read-width)}
+[data-label="spy"] .line .say{font:var(--type-poster-line)/1.25 var(--font-spy)}
+[data-label="spy"] .line .at{color:var(--marquee)}
+[data-label="spy"] .screen{background:var(--night);color:var(--bone)}
+[data-label="spy"] .screen-head .field::before{font:var(--type-stamp-small)/1 var(--font-spy);color:var(--marquee);letter-spacing:0}
+@keyframes gloss{from{background-position:var(--gloss-from) 0}to{background-position:var(--gloss-to) 0}}
+
+@media (max-width:760px){
+ [data-label="gancheop"] .first{grid-template-columns:minmax(0,1fr);padding-block:calc(var(--space-l)*1.6) var(--space-l)}
+ [data-label="gancheop"] .hero{aspect-ratio:4/3}
+ [data-label="gancheop"] .entry{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "photo" "lines"}
+ [data-label="spy"] .entry{grid-template-columns:minmax(0,1fr);grid-template-areas:"photo" "head" "lines"}
+ [data-label="spy"] .lines,[data-label="spy"] .silent{padding-left:max(var(--gutter),env(safe-area-inset-left,var(--zero)))}
+ [data-label="spy"] .credits{grid-auto-flow:row;gap:var(--space-xs)}
+ [data-label="spy"] .credits div{flex-direction:row;gap:var(--space-s)}
+ [data-label="spy"] .word{top:30%;right:auto;left:max(var(--gutter),env(safe-area-inset-left,var(--zero)))}
+ .screen{padding:var(--space-s)}
+}
+@media (prefers-reduced-motion:reduce){.sheet{transition:none}[data-label="spy"] .title::after{animation:none;visibility:hidden}}

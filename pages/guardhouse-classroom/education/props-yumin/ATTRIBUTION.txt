@@ -1,0 +1,5 @@
+Google Scanned Objects, Copyright 2020 Google LLC
+CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+GLB conversion and LODs: https://huggingface.co/datasets/codepawl/scanned-objects-glb
+Objects: Footed_Bowl_Sand, Cole_Hardware_Deep_Bowl_Good_Earth_1075, Ecoforms_Plant_Container_URN_NAT, Room_Essentials_Mug_White_Yellow, Cole_Hardware_Mug_Classic_Blue, Cole_Hardware_Bowl_Scirocco_YellowBlue
+Modifications: Meshopt geometry decoded offline to avoid runtime WASM; supplied LOD1 geometry combined with a 1024 WebP resized from the original albedo at quality 82.

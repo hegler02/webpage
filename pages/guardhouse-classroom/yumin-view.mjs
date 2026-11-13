@@ -13,7 +13,9 @@ import {keyboardOrbit,lightenOnSlowFrames,createRenderer,holdCanvas,seatCanvas,b
 import {createLampHalos} from './masters-power-view.mjs';
 import {point,deviceMesh,pipe,mergeContext,zones,levelAt,indoorAt,walkableAt} from './yumin-scene-parts.mjs';
 import {concrete,basalt,paving,trowelled,gravel} from './yumin-textures.mjs';
-import {furnish,glow} from './yumin-furniture.mjs';
+import {furnish,frameOf} from './yumin-furniture.mjs';
+import {createGlassWorks} from './yumin-glass.mjs';
+import {createPropShelf,holdsProp} from './yumin-props.mjs';
 import {buildLand} from './yumin-land.mjs';
 
 export const prepareYuminMaterials=()=>SurfaceLibrary.prepare();
@@ -75,9 +77,9 @@ export async function mountYumin(host,select){
  // Two planes keep what lies on the near side of either one, which is how the basement plan leaves the tall galleries standing.
  const cut=m=>{m.clippingPlanes=clip;m.clipIntersection=true;m.clipShadows=true;return m;};
  const wood=cut(new THREE.MeshStandardMaterial({vertexColors:true,roughness:.6}));
- // Lamp shades shine by themselves, and the frosted pavilions glow at night.
- const shade=cut(new THREE.MeshStandardMaterial({vertexColors:true,emissive:0xff9a3a,emissiveIntensity:1,roughness:.35})),shades=new THREE.Group(),lanterns=[],soffits=[];
- cut(water.fall);cut(water.still);building.add(shades);
+ // The glass on the furniture and the scanned cups and bowls; the frosted pavilions glow at night.
+ const works=createGlassWorks(cut,look,qualityTier()),shelf=createPropShelf(cut,{renderer,onReady:()=>{renderer.shadowMap.needsUpdate=true;look?.invalidate();wake();}}),lanterns=[],soffits=[];
+ cut(water.fall);cut(water.still);
  await pause();
  const ballast=cut(new THREE.MeshStandardMaterial({color:0xffffff,...gravel(renderer)}));
  function cover(mesh,m){
@@ -92,7 +94,7 @@ export async function mountYumin(host,select){
   if(name==='frosted'){m.transparent=true;m.opacity=.88;m.roughness=.3;m.emissive.set(0xffe9c4);m.depthWrite=false;mesh.castShadow=false;lanterns.push(m);return;}
   if(d.kind==='window-glass'){m.envMapIntensity=.55;m.depthWrite=false;mesh.castShadow=false;look?.glass(m);m.roughness=.17;return;}
   const box=d.kind==='furniture'&&new THREE.Box3().setFromBufferAttribute(mesh.geometry.attributes.position),made=box&&furnish(d,box);
-  if(made){const lit=glow(d,box);if(lit)shades.add(new THREE.Mesh(lit,shade));mesh.geometry.dispose();m.dispose();mesh.geometry=made;mesh.material=wood;return;}
+  if(made){const f=frameOf(d,box);works.dress(mesh,f,{vase:!holdsProp(d.id)});shelf.place(mesh,f);mesh.geometry.dispose();m.dispose();mesh.geometry=made;mesh.material=wood;return;}
   if(skins[name]){worldUV(mesh.geometry);m.color.set(0xffffff);Object.assign(m,skins[name]);m.needsUpdate=true;if(d.kind==='roof'&&!d.context)cover(mesh,m);
    // The open sky lights a deck from above only; what the court walls throw back up at its underside is added here.
    if(/-slab$/.test(d.id)){const under=cut(m.clone());under.emissive.set(0x8fa0ae);under.emissiveMap=under.map;mesh.material=under;soffits.push(under);}
@@ -125,6 +127,7 @@ export async function mountYumin(host,select){
  // While shaders for a new picture are still being built the old picture stays, and the frame is asked for again when they are ready.
  const draw=force=>{if(look){if(!look.render(force))return false;}else renderer.render(scene,camera);dirty=false;return true;};
  if(look)look.onReady=()=>wake();
+ shelf.load();
  const size=()=>{const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();};
 
  function placeSun(){
@@ -134,7 +137,7 @@ export async function mountYumin(host,select){
  function setNight(on){
   view.night=!!on;const s=view.studio,k=s&&view.power?.36+.64*(view.share??1):1;scene.background.set(s?0x12171c:on?0x141f2c:0xb9ccd4);
   ambient.intensity=(s?.3:on?.14:.75)*k;sun.intensity=(s?1.35:on?.1:3.2)*k;sun.color.set(on&&!s?0xaac9ff:0xfff0d9);
-  for(const m of lanterns)m.emissiveIntensity=s?.05:on?1.1:.08;for(const m of soffits)m.emissiveIntensity=s?.12:on?.02:.48;shade.emissiveIntensity=on&&!s?1.7:1;
+  for(const m of lanterns)m.emissiveIntensity=s?.05:on?1.1:.08;for(const m of soffits)m.emissiveIntensity=s?.12:on?.02:.48;works.night(on&&!s);
   scene.environmentIntensity=(s?.45:on?.1:.55)*k;renderer.toneMappingExposure=on&&!s?1.05:1;host.dataset.night=String(view.night);look?.invalidate();wake();
  }
  // A view that names a box steps back along its own line of sight until every corner sits inside the pane, and centres on what it shows; the others only step back in an upright pane.
@@ -213,7 +216,7 @@ export async function mountYumin(host,select){
   state={...state,view:name,studio,id,show,cut:level};
   if(recut){
    clip.length=0;const c=studio&&(level===null?sliced[name]:[[0,-1,0],cuts[level]]);if(c)clip.push(new THREE.Plane(new THREE.Vector3(...c[0]),c[1]));if(level===0)clip.push(new THREE.Plane(new THREE.Vector3(1,0,0),-EAST));
-   const skeleton=studio&&bones.has(name);for(const mesh of base.children)mesh.visible=skeleton?structural(mesh.userData,name):!(level===0&&capped(mesh.userData));shades.visible=!skeleton;
+   const skeleton=studio&&bones.has(name);for(const mesh of base.children)mesh.visible=skeleton?structural(mesh.userData,name):!(level===0&&capped(mesh.userData));
    host.dataset.storey=level===null?'':String(level+1);renderer.shadowMap.needsUpdate=true;look?.invalidate();
   }
   if(changed){
@@ -263,7 +266,7 @@ export async function mountYumin(host,select){
   image:()=>{draw(true);return canvas.toDataURL('image/png');},
   setActive:on=>loop.setActive(on),
   dispose(){
-   if(disposed)return;disposed=true;loop.dispose();resize.disconnect();controls.dispose();stopKeys?.();stopLighten?.();look?.dispose();env.dispose();
+   if(disposed)return;disposed=true;loop.dispose();resize.disconnect();controls.dispose();stopKeys?.();stopLighten?.();look?.dispose();env.dispose();shelf.dispose();works.dispose();
    for(const skin of Object.values(skins))for(const t of [skin.map,skin.bumpMap])t?.dispose();
    disposeTree(scene);surfaces.dispose();renderer.dispose();canvas.remove();
   }

@@ -1,0 +1,53 @@
+{
+  "title": "유민미술관 소품",
+  "source": "Google Scanned Objects, Copyright 2020 Google LLC",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "conversion": "codepawl/scanned-objects-glb",
+  "sourceRevision": "fdb214f6ea18996f2d45e05df74c5d9696c3f7a2",
+  "modifications": "Meshopt geometry decoded offline to avoid runtime WASM; supplied LOD1 geometry combined with a 1024 WebP resized from the original albedo at quality 82.",
+  "props": [
+    {
+      "slug": "footed-bowl",
+      "label": "모래색 굽 그릇",
+      "id": "Footed_Bowl_Sand",
+      "file": "footed-bowl.glb",
+      "bytes": 94516
+    },
+    {
+      "slug": "deep-bowl",
+      "label": "깊은 도자 그릇",
+      "id": "Cole_Hardware_Deep_Bowl_Good_Earth_1075",
+      "file": "deep-bowl.glb",
+      "bytes": 94404
+    },
+    {
+      "slug": "urn",
+      "label": "항아리 모양 화분",
+      "id": "Ecoforms_Plant_Container_URN_NAT",
+      "file": "urn.glb",
+      "bytes": 95352
+    },
+    {
+      "slug": "mug-yellow",
+      "label": "노란 머그컵",
+      "id": "Room_Essentials_Mug_White_Yellow",
+      "file": "mug-yellow.glb",
+      "bytes": 89328
+    },
+    {
+      "slug": "mug-blue",
+      "label": "파란 머그컵",
+      "id": "Cole_Hardware_Mug_Classic_Blue",
+      "file": "mug-blue.glb",
+      "bytes": 86024
+    },
+    {
+      "slug": "bowl-small",
+      "label": "작은 무늬 그릇",
+      "id": "Cole_Hardware_Bowl_Scirocco_YellowBlue",
+      "file": "bowl-small.glb",
+      "bytes": 116652
+    }
+  ]
+}

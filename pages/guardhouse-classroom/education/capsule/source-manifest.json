@@ -1,0 +1,296 @@
+{
+ "source": "Autodesk AutoCAD Electrical 2027 sample project IecDemo",
+ "renderNote": "DWG에서 추출한 선과 문자를 다시 그린 그림. 제목란은 뺐고 해치·곡선·글꼴은 원본 CAD와 다를 수 있습니다.",
+ "files": [
+  {
+   "sheet": "01",
+   "file": "001.dwg",
+   "title": "MACHINE LAYOUT",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 80560,
+   "sha256": "0af4d1732b7fd1ccc762ed385dccd100cc68a866abed551bf73963f703b82916",
+   "renderHash": "fc7b6ef0e2cc474f1ba9630d70ff4cf0ff0225afd7078c6e92fc1782eabbfdcf"
+  },
+  {
+   "sheet": "02",
+   "file": "002.dwg",
+   "title": "POWER DISCONNECT",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 62350,
+   "sha256": "8f99b6964772cdafa94377c5919320a69c68220f4676d0079a28f19565a5ac7d",
+   "renderHash": "d203dd54e73ccc3a63990dae1aa4b4bb94663b6b72d23a18612e9ed5b7852222"
+  },
+  {
+   "sheet": "03",
+   "file": "003.dwg",
+   "title": "DC POWER SUPPLY",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 48488,
+   "sha256": "70397b50f27d50d8ec3c7215985736bb817184f62f85109e0bac480209f007a6",
+   "renderHash": "4ac5867908b785372040a4bde1340208f7a4556ac1bbb0021a55e1885b874453"
+  },
+  {
+   "sheet": "04",
+   "file": "004.dwg",
+   "title": "MAIN DRIVE",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 90678,
+   "sha256": "9c8ef7ad47c84b452db177875beb89ae34118603a086b9c423d5b0971a91857f",
+   "renderHash": "77dc561988d0ae8b0ddd2f7a888d3099b08d47c6b8ad087ec9254bc9f32f7af3"
+  },
+  {
+   "sheet": "05",
+   "file": "005.dwg",
+   "title": "AUXILIARY DRIVE",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 69490,
+   "sha256": "9662941036001ce8ff47ac38cfae68fe49c180d92f7604b8e8d22ecb3c4b624c",
+   "renderHash": "78ba875120261c8723b3b4a77645f7cc67b1b0a2c3a90c5ad42b8db805e5bec1"
+  },
+  {
+   "sheet": "06",
+   "file": "006.dwg",
+   "title": "VACUUM PUMP",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 63974,
+   "sha256": "8c301d42731640ac17e66353dd1ee1fb9aaf7dc1b4078c98da6d97400a3c3846",
+   "renderHash": "05f01be8b63d5e07d4bbc3b08fcddb89c4b9dc01aaa05519937af06c9ee8a89b"
+  },
+  {
+   "sheet": "07",
+   "file": "007.dwg",
+   "title": "AUXILIARY DRIVE",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 42758,
+   "sha256": "83339fb5b3f0bca0ed5ddc6a3d0d44bba08e4ed023112b48ed64ba8fe83f4283",
+   "renderHash": "2fffa2f76106c1e7439fd28b5736fc7a2efa05986b581e7e68d85e99df406b86"
+  },
+  {
+   "sheet": "08",
+   "file": "008.dwg",
+   "title": "COMMUNICATIONS",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 52858,
+   "sha256": "718b444d10ad429995ff2fd575f9461d626955d0db8c3c722818d0defd37cdac",
+   "renderHash": "11cf6d28788ec0c0f37675d74714d73dd79332716c7401a840f56857506c1b33"
+  },
+  {
+   "sheet": "09",
+   "file": "009.dwg",
+   "title": "PLC I/O RACK ARRANGEMENT",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 56520,
+   "sha256": "6f91fe5b4249274ccf2ad515c346fcdc2754d9f02be07b5bc6ad7b85e065bf4d",
+   "renderHash": "4ac2661a0f19bc0d3089648e2b263c2bb09f0f0474a63fda60d20fd86cfb7a91"
+  },
+  {
+   "sheet": "10",
+   "file": "010.dwg",
+   "title": "RACK 1 / SLOT 1 AB-1746-OW16",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 65800,
+   "sha256": "a4260a93b202d100b9b85497156aac7d0bef64766ae86e4d243324877d89e4d0",
+   "renderHash": "1383bdea3c490de9e4b359c5d6687f8dc6a55a7beb239aad4cd14ef121cadca1"
+  },
+  {
+   "sheet": "11",
+   "file": "011.dwg",
+   "title": "RACK 1 / SLOT 1 AB-1746-OW16",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 49224,
+   "sha256": "0fdf80125b8bea8fd7facf771680ca94914f97fce190e38e0ab8cf3bb13f8f9a",
+   "renderHash": "f805b0eef5fe771a189525124a15f58211dbd29d38e1472d64298a2ae0115a23"
+  },
+  {
+   "sheet": "12",
+   "file": "012.dwg",
+   "title": "RACK 1 / SLOT 2 AB-1746-OW16",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 90290,
+   "sha256": "564cf55512034df8081c496b8f92137e07a0130ef7591d1463b96078af2e0f14",
+   "renderHash": "afa6c8b4ad5d40ec62e4d731d1ef79b3ce5f003161c74d0bf83cd518022ff613"
+  },
+  {
+   "sheet": "13",
+   "file": "013.dwg",
+   "title": "RACK 1 / SLOT 2 AB-1746-OW16",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 64622,
+   "sha256": "494e5598fa8ec4f7aaea7181b8d28352200ab344b54fa315375bf3d64e945bf4",
+   "renderHash": "0718fc6de17a15b05c02c8cb134596525a7065f7eb0f238aed32b3b4864a6bff"
+  },
+  {
+   "sheet": "14",
+   "file": "014.DWG",
+   "title": "RACK 1 / SLOT 3 AB-1746-IB16",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 91514,
+   "sha256": "4d85b4c8503e643cebf99a20fe7eeab2005a37c762366a315038230689ab7466",
+   "renderHash": "a4742bc7a154058be29bf1e0be263f3e8c8167db77efe7f515b8badf36bd520c"
+  },
+  {
+   "sheet": "15",
+   "file": "015.DWG",
+   "title": "RACK 1 / SLOT 3 AB-1746-IB16",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 94900,
+   "sha256": "4dfcdf13b3758f2e26050958099294fa0b56612cc63cc9c3b7a14e32291ae61b",
+   "renderHash": "fd6671cfd622dc0c57405b5e39267cdcf82fd3ed12703359e6deef77d20c9384"
+  },
+  {
+   "sheet": "16",
+   "file": "016.dwg",
+   "title": "RACK 1 / SLOT 4 AB-1746-IB16",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 118642,
+   "sha256": "dab1533b86213ae90abdb219e43325c17658896b9474fce6317780b753e92532",
+   "renderHash": "3b8495ad9b1da6aff58c212819822f1cdabaff35a9cfba1b8c4ca426e88f9e2d"
+  },
+  {
+   "sheet": "17",
+   "file": "017.dwg",
+   "title": "RACK 1 / SLOT 4 AB-1746-IB16",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 116920,
+   "sha256": "f0f3938d94d109398016786404be4299f08352085f15d13f1760c89a226bb6c8",
+   "renderHash": "7041e0aa7f8c445e28c928709a769a83110946010a0b5fe9e001a56537cbff1a"
+  },
+  {
+   "sheet": "18",
+   "file": "018.dwg",
+   "title": "RACK 1 / SLOT 5 AB-1746-NO4I",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 66590,
+   "sha256": "e13ea3069c3e8b33850396fdb871e14fa07b3e2d06823f9cfd48397a479d3721",
+   "renderHash": "9f974ec3dc85bc2a103c0f0121d99a1299df103de86789a735ab64b51cf53048"
+  },
+  {
+   "sheet": "19",
+   "file": "019.dwg",
+   "title": "RACK 1 / SLOT 6 AB-1746-NI4",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 64782,
+   "sha256": "23bf446862749f45b96a8e2c892c00c57bb6471b3baceca95ec8cbe4aed491e0",
+   "renderHash": "2273dd110f7b4259b2fa4b585db5297ab7c071b2df17838a00843c199c0579ce"
+  },
+  {
+   "sheet": "20",
+   "file": "020.dwg",
+   "title": "EMERGENCY STOP CIRCUIT",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 101134,
+   "sha256": "c9e16ef4e8ede0dc4087dbf038815401b0f9aa3956f5e2061d8fb4fd352ebd31",
+   "renderHash": "287402ae85f19bc149abe70b20b1386d9b5411ab68d611050901756e1a7a7cee"
+  },
+  {
+   "sheet": "21",
+   "file": "021.dwg",
+   "title": "SAFETY CIRCUIT",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 80828,
+   "sha256": "1928064d0397a8de94c68c4ba56e0fb5647f1a821a0168c8a1e5c5705f6b59ae",
+   "renderHash": "69ee65159eea536c69a1027a354c783f12a7e37f4eb4b6428391a0144caae1a1"
+  },
+  {
+   "sheet": "22",
+   "file": "022.DWG",
+   "title": "CONTROL WIRING",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 88034,
+   "sha256": "dc931e7d86eebd0b050e5a4c079798bd20102400cf97af9d80a462fb086902c2",
+   "renderHash": "37225000fc70dbcaabbaba7c47a5e82fd8423c0bc6031e0e25e61b01651cfcd4"
+  },
+  {
+   "sheet": "23",
+   "file": "023.DWG",
+   "title": "OPERATOR STATION LAYOUT",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 68360,
+   "sha256": "5d424263f70ad3198e5156a51917f2a5c3bdfd577f694bfe48cbd016fa912a3f",
+   "renderHash": "2fe59e21814131c0bc5ed62baa04fb5daa1248409cd1111ff294435273e5797f"
+  },
+  {
+   "sheet": "24",
+   "file": "024.DWG",
+   "title": "MAIN CABINET LAYOUT",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 84512,
+   "sha256": "75e385d9d8583f342a9eda88cdd7ed03a517bc148601fbdc8b52bee52479a9b8",
+   "renderHash": "7fcb088b4b0ec58f61070747aed538bc2e3abf247dde77cf0b69a03b9109e754"
+  },
+  {
+   "sheet": "25",
+   "file": "025.DWG",
+   "title": "TERMINAL GRAPHICAL LAYOUT",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 303570,
+   "sha256": "9fb8a2da382eb25f0aab9df44f4eb7a4a24d0fe3841ae95de013e67b454ec4a2",
+   "renderHash": "d72cf78b878dc638c75dd47d32ffc919f4ce0f589a8a9a5b2c6d125970e6e1a3"
+  },
+  {
+   "sheet": "26",
+   "file": "T01.dwg",
+   "title": "TERMINAL TABULAR LAYOUT X3",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 104758,
+   "sha256": "bd9bd6ef55558d77092aa8eddec6dd842a61859808850fb43993fb0f608eff8e",
+   "renderHash": "a42eca2d7182502957c04f563bf8caba8c24977fbccb36d7cde27032cb381ebf"
+  },
+  {
+   "sheet": "27",
+   "file": "T02.dwg",
+   "title": "TERMINAL TABULAR LAYOUT X2",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 110852,
+   "sha256": "ec8caf0f6689497be3bf0694c422dd4272f43a6adcd929c5d918a3845ad0a9cc",
+   "renderHash": "1df274081a267dd406487e466bfe138d5676c202397a774241e611beb9c33122"
+  },
+  {
+   "sheet": "28",
+   "file": "T03.dwg",
+   "title": "TERMINAL TABULAR LAYOUT X4",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 77524,
+   "sha256": "734dfc463b9659248849dfda1140c50d5634e2b1f9208ac0441972548d4eaae0",
+   "renderHash": "68c69e4ade728ce7e1e26a3466a5eb5794b870fea1f545e095fe9f3c03f03f36"
+  },
+  {
+   "sheet": "29",
+   "file": "T04.dwg",
+   "title": "TERMINAL TABULAR LAYOUT X1",
+   "width": 3200,
+   "height": 2477,
+   "bytes": 59232,
+   "sha256": "58601de97a2affebdc4394363e92b77a878129553e895337dd20851599b4002c",
+   "renderHash": "6dff143718186378e0c4066e140834a1d3c46423bac49c1b65591cc80de43616"
+  }
+ ]
+}

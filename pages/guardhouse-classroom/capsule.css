@@ -1,0 +1,16 @@
+/* Capsule sorter sample: only what the conveyor sheet does not already give. */
+.cv-controls button[data-danger][aria-pressed=true],#cv-tools button[data-danger][aria-pressed=true]{background:var(--wb-danger-soft);border-color:var(--wb-danger);color:var(--wb-danger)}
+#cv-tools button[aria-pressed=true],.button-row button[data-control][aria-pressed=true]{background:var(--wb-accent-soft);border-color:var(--wb-accent);color:var(--wb-accent)}
+.cv-groups{display:grid;gap:var(--space-3)}
+.cv-groups details{border:1px solid var(--line);border-radius:var(--radius-s);padding:var(--space-3) var(--space-4)}
+.cv-groups summary{cursor:pointer;font-weight:var(--weight-strong)}
+.cv-groups details[open] summary{margin-bottom:var(--space-3)}
+.cv-stations{display:grid;gap:var(--space-3);margin:0;padding-left:var(--space-6)}
+.cv-stations li{padding-left:var(--space-2)}
+.cv-stations li span{display:block;margin-top:var(--space-2)}
+.card h3{margin:var(--space-5) 0 var(--space-3)}
+.card label input[type=number]{margin-left:var(--space-3)}
+body.wb-on .wb-body .card h3{margin-top:var(--wb-gap-section)}
+body.wb-on .wb-body .card .cv-states+.button-row,body.wb-on .wb-body .card .button-row+label{margin-top:var(--wb-gap-action)}
+body.wb-on .wb-body .card .button-row+label{display:block}
+.cv-capture{width:100%}

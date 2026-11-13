@@ -10,7 +10,8 @@ export const samples=Object.freeze([
  {id:5,name:'솔크 연구소',path:'salk.html',view:'salk-view.mjs',atlas:true},
  {id:6,name:'판스워스 주택',path:'farnsworth.html',view:'farnsworth-view.mjs',atlas:true},
  {id:7,name:'낙수장',path:'fallingwater.html',view:'fallingwater-view.mjs',atlas:true},
- {id:8,name:'유민미술관',path:'yumin.html',view:'yumin-view.mjs',atlas:true}
+ {id:8,name:'유민미술관',path:'yumin.html',view:'yumin-view.mjs',atlas:true},
+ {id:9,name:'캡슐 선별기',path:'capsule.html',view:'capsule-scene.mjs'}
 ]);
 // The 3D part of a sample is asked for while the student reads the first screen, so the first 3D press does not begin with a download.
 const AHEAD_DELAY=1500;let ahead=null;

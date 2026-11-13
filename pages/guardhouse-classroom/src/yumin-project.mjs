@@ -53,6 +53,14 @@ export const steps=[
  {id:'energy',title:'땅에 묻힌 건물의 열 보기',text:'서울 날씨에 놓은 미술관에서 벽과 환기가 가져가는 열을 계산합니다.',menu:'energy'}
 ];
 
+// 안전점검 항목: [id, 문장, 메뉴, 미리 고를 대상]. 대상은 전기·소방 자료에 실제로 있는 id다.
+export const safetyChecks=[
+ ['circuits','L1 차단기를 내린 뒤에도 벽천폭포 순환 펌프는 계속 도는지 확인했어요.','electrical','PU1'],
+ ['path','분전반에서 명작의 방 바닥 콘센트까지 바닥 판 속 배선을 따라갔어요.','electrical','FB1'],
+ ['signal','연기감지기, 수신기, 경종·시각경보기의 작동 순서를 확인했어요.','fire','SD3'],
+ ['escape','제1전시실에서 경사로를 한 바퀴 올라 남쪽 돌의 문까지 따라갔어요.','fire','EX1']
+];
+
 export const circuits=[
  {id:'L1',name:'전시실 조명',volts:220,phase:1,pf:.95,color:'#d19129',breaker:16,area:2.5,ampacity:24,rcd:30,limit:3},
  {id:'L2',name:'전실·명작의 방 조명',volts:220,phase:1,pf:.95,color:'#c0762f',breaker:16,area:2.5,ampacity:24,rcd:30,limit:3},
@@ -108,12 +116,13 @@ export const lighting={lux:150,area:TALL,lumens:5000,use:.5,keep:.7};
 export const requiredFittings=()=>Math.ceil(lighting.lux*lighting.area/(lighting.lumens*lighting.use*lighting.keep));
 
 export function freshYumin(raw={}){
- const state={power:raw?.power!==false,breakers:{},switches:{SW1:true,SW2:true,SW3:true,SW4:true},watts:{},completed:[]};
+ const state={power:raw?.power!==false,breakers:{},switches:{SW1:true,SW2:true,SW3:true,SW4:true},watts:{},completed:[],checks:{}};
  const saved=Array.isArray(raw?.completed)?raw.completed:[];
  state.completed=steps.filter(s=>saved.includes(s.id)).map(s=>s.id);
  for(const c of circuits)state.breakers[c.id]=typeof raw?.breakers?.[c.id]==='boolean'?raw.breakers[c.id]:true;
  for(const k of Object.keys(state.switches))if(typeof raw?.switches?.[k]==='boolean')state.switches[k]=raw.switches[k];
  for(const d of equipment){const w=raw?.watts?.[d.id];if(d.watts&&Number.isInteger(w)&&w>=1&&w<=30000)state.watts[d.id]=w;}
+ for(const [id] of safetyChecks)state.checks[id]=raw?.checks?.[id]===true;
  return state;
 }
 export const floorOf=z=>z>=-.2?0:B1;

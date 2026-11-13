@@ -1,5 +1,5 @@
 // Lesson panels for the Salk sample. Each one reads the same project data the drawings and the model use.
-import {rooms,steps,materials,moduleBay,lighting,requiredFittings,blockLoad,fireStages,fireZones,sprinklerPlan,stations,sheets} from './src/salk-project.mjs';
+import {rooms,steps,materials,moduleBay,lighting,requiredFittings,blockLoad,fireStages,fireZones,sprinklerPlan,stations,sheets,safetyChecks} from './src/salk-project.mjs';
 import {lessonSummary} from './src/lesson-catalog.mjs';
 import {powerControls} from './masters-power.mjs';
 
@@ -46,11 +46,15 @@ export function electrical({state,electric,selected}){
   '<article class="bay-card"><h2>분기 회로표</h2><table><thead><tr><th>회로</th><th>이름</th><th>전원</th><th>차단기</th><th>전선</th><th>부하</th><th>전류</th><th>전압강하</th><th>판정</th></tr></thead><tbody>'+body+'</tbody></table></article>';
 }
 
+export function safety({state}){
+ return card('학습 기록 '+safetyChecks.filter(([id])=>state.checks[id]).length+' / '+safetyChecks.length,'<div class="checklist">'+safetyChecks.map(([id,label])=>'<div><label><input type="checkbox" data-check="'+id+'" '+(state.checks[id]?'checked':'')+'>'+label+'</label>'+btn('관련 수업','related',id)+'</div>').join('')+'</div>');
+}
+
 export function fire({stage,fire}){
  const list=fireStages.map((s,i)=>'<li data-on="'+(i<=stage)+'"><strong>'+(i+1)+'. '+s.title+'</strong>'+(i<=stage?'<br>'+s.text:'')+'</li>').join('');
  const counts=k=>fire.devices.filter(d=>d.kind===k).length;
  return card('감지에서 피난까지 한 번 따라가기','<ol class="salk-stages">'+list+'</ol>'+actions(btn(stage<0?'시험 신호 넣기':stage<fireStages.length-1?'다음 단계':'처음부터 다시',stage<fireStages.length-1?'advance':'reset-test','','class="primary"')+(stage>=0&&stage<fireStages.length-1?btn('되돌리기','reset-test'):'')))+
-  card('한 층을 경계구역 셋으로',rows([...fireZones.map(z=>[z.name,num(z.area,1)+' m²']),['연기감지기',counts('smoke')+'개'],['스프링클러 헤드','한 칸 '+sprinklerPlan.perBay+'개 · 한 층 '+sprinklerPlan.floor+'개'],['헤드 간격',sprinklerPlan.spacing+' m']]));
+  card('한 층을 경계구역 셋으로',rows([...fireZones.map(z=>[z.name,num(z.area,1)+' m²']),['연기감지기',counts('smoke')+'개'],['스프링클러 헤드','한 칸 '+sprinklerPlan.perBay+'개 · 한 층 '+sprinklerPlan.floor+'개'],['헤드 간격',num(sprinklerPlan.spacing,2)+' m']]));
 }
 
 // One stroke per circuit, in the colour the model draws its routes.

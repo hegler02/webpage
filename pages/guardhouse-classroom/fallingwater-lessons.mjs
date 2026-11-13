@@ -1,5 +1,5 @@
 // Lesson panels for the Fallingwater sample. Each one reads the same project data the drawings and the model use.
-import {rooms,steps,materials,interior,lighting,requiredFittings,houseLoad,fireStages,fireRule,requiredDetectors,requiredExtinguishers,fireRooms,stations,sheets} from './src/fallingwater-project.mjs';
+import {rooms,steps,materials,interior,lighting,requiredFittings,houseLoad,fireStages,fireRule,requiredDetectors,requiredExtinguishers,fireRooms,stations,sheets,safetyChecks} from './src/fallingwater-project.mjs';
 import {F1,F2,F3,ROOF,PAR,BAY,CANT,JOISTS} from './src/fallingwater-model.mjs';
 import {lessonSummary} from './src/lesson-catalog.mjs';
 import {btn,pressed,card,actions,wireLegend} from './salk-lessons.mjs';
@@ -49,6 +49,11 @@ export function fire({stage,fire}){
  const counts=k=>fire.devices.filter(d=>d.kind===k).length;
  return card('감지에서 피난까지 한 번 따라가기','<ol class="salk-stages">'+list+'</ol>'+actions(btn(stage<0?'시험 연기 넣기':stage<fireStages.length-1?'다음 단계':'처음부터 다시',stage<fireStages.length-1?'advance':'reset-test','','class="primary"')+(stage>=0&&stage<fireStages.length-1?btn('되돌리기','reset-test'):'')))+
   card('주택에는 소화기와 단독경보형 감지기를 둡니다',rows([['법이 요구하는 감지기',requiredDetectors()+'개 · 방 '+fireRooms.length+'곳에 하나씩, 계단 꼭대기에 하나'],['이 설계의 감지기','연기 '+counts('smoke')+'개 · 열 '+counts('heat')+'개'],['소화기',counts('extinguisher')+'개 · 법이 요구하는 '+requiredExtinguishers()+'개는 층마다 하나, 부엌에 하나 더'],['경보음',fireRule.sound+' dB · 감지기 제 몸에서 울림'],['근거',fireRule.law],['감지기 기준',fireRule.detector]]));
+}
+
+// 이 집에는 소방 시험 기록이 없어 학습 점검표만 보인다.
+export function safety({state}){
+ return card('학습 기록 '+safetyChecks.filter(([id])=>state.checks[id]).length+' / '+safetyChecks.length,'<div class="checklist">'+safetyChecks.map(([id,label])=>'<div><label><input type="checkbox" data-check="'+id+'" '+(state.checks[id]?'checked':'')+'>'+label+'</label>'+btn('관련 수업','related',id)+'</div>').join('')+'</div>');
 }
 
 export function experience({walking,wiring,electric}){

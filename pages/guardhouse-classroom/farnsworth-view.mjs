@@ -69,7 +69,7 @@ export async function mountFarnsworth(host,select){
  building.add(base,context);
  const view={scene,renderer,host,camera,active:camera,sun,ambient,ground:null,site:null,base:building,environment:env.texture,project,realistic:true,studio:true,night:false,fpv:false,mode:'orbit',setNight};
  await pause();
- const {land,ground,site}=await buildLand(renderer,qualityTier(),pause);view.ground=ground;view.site=site;scene.add(building,land,ground,site);
+ const {land,ground,site}=await buildLand(renderer,qualityTier(renderer),pause);view.ground=ground;view.site=site;scene.add(building,land,ground,site);
  const look=renderer.noGPU?null:new SceneLook(view),surfaces=new SurfaceLibrary(renderer),clip=[];
  await pause();
  const stone=travertine(renderer);await pause();
@@ -118,12 +118,14 @@ export async function mountFarnsworth(host,select){
   // Every second uplight carries a real light, so the scene stays light on weak graphics.
   if(d.kind==='light'&&Number(d.id.slice(2))%2===0){g.remove(g.userData.glow);g.userData.glow=null;}
   deviceMeshes.set(d.id,g);devices.add(g);}
+ // Lamp lights stand apart from their fittings: hiding a fitting must not change how many lights the scene has, or every lit material is rebuilt for the new count.
+ const glows=new THREE.Group();for(const g of deviceMeshes.values()){const l=g.userData.glow;if(l){g.updateMatrixWorld();l.position.copy(g.localToWorld(l.position.clone()));glows.add(l);}}
  // What the white ceiling gives back to the room, one soft light on each side of the core.
  const bounce=new THREE.Group(),mid=[(CORE.x0+CORE.x1)/2,(CORE.y0+CORE.y1)/2];
  for(const [x,y] of [[CORE.x0-1.6,mid[1]],[CORE.x1+1.5,mid[1]],[mid[0],CORE.y0-1.5],[mid[0]-2.4,CORE.y1+.7]]){const l=new THREE.PointLight(0xffe2bd,0,13,1.6);l.position.copy(point([x,y,CEIL-1.3]));bounce.add(l);}
  const routes=new THREE.Group(),highlight=new THREE.BoxHelper(new THREE.Object3D(),0xe0903a);highlight.material.depthTest=false;highlight.renderOrder=10;highlight.visible=false;
  const marker=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({color:0xe8b572,transparent:true,opacity:.4,depthWrite:false,side:THREE.DoubleSide}));marker.rotation.x=-Math.PI/2;marker.visible=false;
- scene.add(devices,bounce,routes,highlight,marker);
+ scene.add(devices,glows,bounce,routes,highlight,marker);
  const halos=createLampHalos(deviceMeshes);scene.add(halos.group);
 
  const controls=new OrbitControls(camera,canvas);view.controls=controls;controls.enableDamping=true;controls.dampingFactor=.12;controls.minDistance=1.5;controls.maxDistance=160;controls.maxPolarAngle=Math.PI*.495;
@@ -230,7 +232,7 @@ export async function mountFarnsworth(host,select){
    const dot=g.userData.indicator?.material,lamp=g.userData.kind==='light';
    if(dot){dot.emissive.set(lit?(lamp?0xfff0d0:0xff5a3c):0x000000);dot.emissiveIntensity=lit?(lamp?2.6:1.1):0;}
    if(lamp&&lit)lamps++;
-   if(g.userData.glow)g.userData.glow.intensity=lit&&(power||!studio)?(power?2.8:view.night?2.4:1):0;
+   if(g.userData.glow)g.userData.glow.intensity=g.visible&&lit&&(power||!studio)?(power?2.8:view.night?2.4:1):0;
    halos.show(key,g,{lit,power,visible:g.visible});
    if(g.userData.rotor){g.userData.spin=lit;spinning||=lit&&(power||!studio);}
   }

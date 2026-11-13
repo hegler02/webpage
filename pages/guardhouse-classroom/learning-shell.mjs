@@ -1,6 +1,7 @@
 import './nav-feedback.mjs';
 import {mountStudyReturn} from './glossary-study.mjs';
 import {surfaceAtlasURL} from './surface-atlas.mjs';
+import {mountStuckReport} from './stuck-report.mjs';
 export {mountGlossary} from './glossary-study.mjs';
 export const samples=Object.freeze([
  {id:1,name:'경비실',path:'index.html',view:'classroom-view.mjs',atlas:true},
@@ -24,7 +25,7 @@ function fetchAhead(sample){
  }),AHEAD_DELAY);
 }
 export function mountSamples(current,onCurrent,onStudyReturn){
- fetchAhead(samples.find(s=>s.id===current));
+ fetchAhead(samples.find(s=>s.id===current));mountStuckReport(current);
  if(onStudyReturn)mountStudyReturn(current,onStudyReturn);
  const host=document.querySelector('[data-sample-navigation]');if(!host)return;
  host.setAttribute('aria-label','교육용 샘플 선택');

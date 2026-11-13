@@ -14,10 +14,18 @@ export const LOOK={
  fade:[45,76]
 };
 
-// 'light' on phones and small or low-memory devices: sky, sun and glass stay, corner shade is left out.
-export function qualityTier(){
+// 'light' on phones and small or low-memory devices, and on computers that draw 3D on the processor: sky, sun and glass stay, corner shade is left out.
+export function qualityTier(renderer){
  const coarse=matchMedia('(pointer:coarse)').matches,small=Math.min(screen.width,screen.height)<700;
- return coarse||small||(navigator.deviceMemory??8)<4?'light':'full';
+ return coarse||small||(navigator.deviceMemory??8)<4||softwareGraphics(renderer)?'light':'full';
+}
+// No graphics driver, a blocked one or a remote desktop leaves Chrome drawing with SwiftShader on the processor, where one full picture takes seconds.
+// Read from the renderer already made: opening a context only to ask costs as much as the real one.
+const software=new WeakMap();
+export function softwareGraphics(renderer){
+ if(!renderer?.getContext||renderer.noGPU)return false;
+ if(!software.has(renderer)){let name='';try{const g=renderer.getContext(),info=g.getExtension('WEBGL_debug_renderer_info');name=info?g.getParameter(info.UNMASKED_RENDERER_WEBGL):'';}catch{}software.set(renderer,/SwiftShader|llvmpipe|Basic Render|software/i.test(name));}
+ return software.get(renderer);
 }
 
 const swap=(text,from,to)=>{if(!text.includes(from))console.warn('scene-quality: shader text not found:',from);return text.replace(from,to);};
@@ -49,12 +57,14 @@ function nightSky(){
 
 export class SceneLook {
  constructor(view){
-  this.view=view;this.tier=qualityTier();this.epoch=0;this.key='';this.applied='off';this.glasses=new Set();this.shadeOff=this.tier!=='full';this.frames={sum:0,n:0,slow:0,last:0,from:0};
+  this.view=view;this.tier=qualityTier(view.renderer);this.epoch=0;this.key='';this.applied='off';this.glasses=new Set();this.shadeOff=this.tier!=='full';this.frames={sum:0,n:0,slow:0,last:0,from:0};
   this.sky=daySky();this.sky.visible=false;this.dome=nightSky();this.dome.visible=false;view.scene.add(this.sky,this.dome);
   this.glassUniforms={on:{value:0},body:{value:LOOK.glass.body},boost:{value:LOOK.glass.boost},cap:{value:LOOK.glass.cap},direct:{value:1},through:{value:1}};
   this.fade={value:new THREE.Vector4(0,0,LOOK.fade[0],0)};
   const s=view.sun.shadow;this.shadowBox={left:s.camera.left,right:s.camera.right,top:s.camera.top,bottom:s.camera.bottom,near:s.camera.near,far:s.camera.far};
   if(this.tier==='full')s.mapSize.set(4096,4096);
+  // On the processor every pixel and every shadow costs time the page does not have: a smaller picture, scaled up, and no shadows.
+  if(softwareGraphics(view.renderer)){view.renderer.setPixelRatio(Math.min(view.renderer.getPixelRatio(),.6));view.renderer.shadowMap.enabled=false;view.host.dataset.software='true';}
   // The ground fades out toward the horizon so its edge never shows against the sky.
   const g=view.ground.material;view.ground.userData.aoKeep=true;view.ground.renderOrder=-1;
   g.onBeforeCompile=sh=>{sh.uniforms.uFade=this.fade;

@@ -64,7 +64,7 @@ export async function mountFallingwater(host,select){
  building.add(base,context);
  const view={scene,renderer,host,camera,active:camera,sun,ambient,ground:null,site:null,base:building,environment:env.texture,project,realistic:true,studio:true,night:false,fpv:false,mode:'orbit',setNight};
  await pause();
- const {land,ground,site,flow}=await buildLand(renderer,qualityTier(),pause);view.ground=ground;view.site=site;scene.add(building,land,ground,site);
+ const {land,ground,site,flow}=await buildLand(renderer,qualityTier(renderer),pause);view.ground=ground;view.site=site;scene.add(building,land,ground,site);
  const look=renderer.noGPU?null:new SceneLook(view),surfaces=new SurfaceLibrary(renderer),clip=[];
  const skins={};
  for(const [name,make] of [['sandstone',sandstone],['ochre',ochre],['flagstone',r=>flagstone(r,3.2,pause)],['rock',r=>ledge(r,3)]]){await pause();skins[name]=await make(renderer);}
@@ -86,12 +86,14 @@ export async function mountFallingwater(host,select){
   // Every second lamp carries a real light, so the scene stays light on weak graphics.
   if(d.kind==='light'&&Number(d.id.slice(2))%2===0){g.remove(g.userData.glow);g.userData.glow=null;}
   deviceMeshes.set(d.id,g);devices.add(g);}
+ // Lamp lights stand apart from their fittings: hiding a fitting must not change how many lights the scene has, or every lit material is rebuilt for the new count.
+ const glows=new THREE.Group();for(const g of deviceMeshes.values()){const l=g.userData.glow;if(l){g.updateMatrixWorld();l.position.copy(g.localToWorld(l.position.clone()));glows.add(l);}}
  // What the pale ceilings and the waxed floor give back to the rooms.
  const bounce=new THREE.Group();
  for(const [x,y,z] of [[3.4,-.8,C1-1.3],[8.2,.6,C1-1.3],[5.6,3,C2-1.2],[-1.9,4.8,C1-1]]){const l=new THREE.PointLight(0xffdcb0,0,12,1.6);l.position.copy(point([x,y,z]));bounce.add(l);}
  const routes=new THREE.Group(),highlight=new THREE.BoxHelper(new THREE.Object3D(),0xe0903a);highlight.material.depthTest=false;highlight.renderOrder=10;highlight.visible=false;
  const marker=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({color:0xe8b572,transparent:true,opacity:.4,depthWrite:false,side:THREE.DoubleSide}));marker.rotation.x=-Math.PI/2;marker.visible=false;
- scene.add(devices,bounce,routes,highlight,marker);
+ scene.add(devices,glows,bounce,routes,highlight,marker);
  const halos=createLampHalos(deviceMeshes);scene.add(halos.group);
 
  // The house is best known from below the falls, so the camera may drop under the level it looks at.
@@ -205,7 +207,7 @@ export async function mountFallingwater(host,select){
    const dot=g.userData.indicator?.material,lamp=g.userData.kind==='light';
    if(dot){dot.emissive.set(lit?(lamp?0xfff0d0:0xff5a3c):0x000000);dot.emissiveIntensity=lit?(lamp?2.6:1.1):0;}
    if(lamp&&lit)lamps++;
-   if(g.userData.glow)g.userData.glow.intensity=lit&&(power||!studio)?(power?2.6:view.night?2.2:.9):0;
+   if(g.userData.glow)g.userData.glow.intensity=g.visible&&lit&&(power||!studio)?(power?2.6:view.night?2.2:.9):0;
    halos.show(key,g,{lit,power,visible:g.visible});
    if(g.userData.rotor){g.userData.spin=lit;spinning||=lit&&(power||!studio);}
   }

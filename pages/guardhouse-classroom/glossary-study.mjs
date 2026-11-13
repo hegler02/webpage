@@ -1,5 +1,5 @@
 import {withStudyConcepts,studyCategories,questionsFor} from './src/study-content.mjs';
-import {loadStudy,saveStudy,selectDeck,answerQuestion,quizScore,studyKey} from './study-state.mjs';
+import {loadStudy,saveStudy,saveQuizSummary,selectDeck,answerQuestion,quizScore,studyKey} from './study-state.mjs';
 import {escapeStudy as e,dictionaryView,filtersView,cardView,quizView} from './study-view.mjs';
 
 let volatileStates=new Map();
@@ -23,7 +23,7 @@ export function mountGlossary(host,inputTerms,{sample,action,detailsAction,conce
  if(s.returnMode){s.mode=s.returnMode;s.returnMode=null;s.query='';}
  const notify=mode=>window.dispatchEvent(new CustomEvent('classroom-study-return',{detail:{sample,mode}}));
  notify(null);
- const save=()=>{volatileStates.set(sample,s);persistent=saveStudy(storage,sample,s);};
+ const save=()=>{volatileStates.set(sample,s);persistent=saveStudy(storage,sample,s);saveQuizSummary(storage,sample,s,questions);};
  const shell=document.createElement('div');shell.className='study-shell';host.replaceChildren(shell);
  shell.innerHTML='<nav class="study-tabs" aria-label="용어 학습 방식"></nav><p class="study-muted" data-study-storage></p><div data-study-controls></div><div data-study-dictionary><div class="glossary-search"><input id="term-search" type="search" placeholder="예: 배근도, BIM, 외벽 마감" aria-label="용어 검색"><span id="term-count" role="status"></span></div><div id="term-list" class="glossary-grid"></div></div><div class="study-stage" data-study-stage></div><p role="status" data-study-status></p>';
  const $=selector=>shell.querySelector(selector),input=$('#term-search');

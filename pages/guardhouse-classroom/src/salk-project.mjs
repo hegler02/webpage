@@ -50,13 +50,21 @@ export const equipment=[
 export const lighting={lux:500,area:(X1-X0)*(W-.92),lumens:4400,use:.6,keep:.8};
 export const requiredFittings=()=>Math.ceil(lighting.lux*lighting.area/(lighting.lumens*lighting.use*lighting.keep));
 
+// 안전점검 체크 항목: [id, 문장, 메뉴, 선택할 대상].
+export const safetyChecks=[
+ ['circuits','L1 차단기를 내리면 조명 여섯 열만 꺼지고 배기 팬과 공조기 팬은 계속 도는지 확인했어요.','electrical','LR3'],
+ ['path','분전반 LP2에서 설비층 트레이를 지나 공조기 팬 AHU1까지 배선을 따라갔어요.','electrical','AHU1'],
+ ['signal','연기감지기 5에서 수신기, 경종으로 이어지는 작동 순서를 확인했어요.','fire','SD5'],
+ ['escape','실험실 한가운데에서 남쪽 문과 다리를 지나 중정까지 피난 경로를 따라갔어요.','fire','EX3']
+];
 export function freshSalk(raw={}){
- const state={power:raw?.power!==false,breakers:{},switches:{SW1:true},watts:{},completed:[]};
+ const state={power:raw?.power!==false,breakers:{},switches:{SW1:true},watts:{},checks:{},completed:[]};
  const saved=Array.isArray(raw?.completed)?raw.completed:[];
  state.completed=steps.filter(s=>saved.includes(s.id)).map(s=>s.id);
  for(const c of circuits)state.breakers[c.id]=typeof raw?.breakers?.[c.id]==='boolean'?raw.breakers[c.id]:true;
  if(typeof raw?.switches?.SW1==='boolean')state.switches.SW1=raw.switches.SW1;
  for(const d of equipment){const w=raw?.watts?.[d.id];if(d.watts&&Number.isInteger(w)&&w>=1&&w<=20000)state.watts[d.id]=w;}
+ for(const [id] of safetyChecks)state.checks[id]=raw?.checks?.[id]===true;
  return state;
 }
 // 분전반 → 기둥을 타고 천장 → 슬롯으로 설비층 → 트레이 → 다시 슬롯으로 내려와 기구.

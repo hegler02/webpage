@@ -1,5 +1,5 @@
 // Lesson panels for the Yumin museum sample. Each one reads the same project data the drawings and the model use.
-import {rooms,steps,materials,interior,lighting,requiredFittings,museumLoad,fireStages,fireRule,fireZones,sprinklerPlan,counts,stations,sheets} from './src/yumin-project.mjs';
+import {rooms,steps,materials,interior,lighting,requiredFittings,museumLoad,fireStages,safetyChecks,fireRule,fireZones,sprinklerPlan,counts,stations,sheets} from './src/yumin-project.mjs';
 import {B1,TOP,CEIL,LOW,STONE,SCREEN,ROUND,SPAN,BAY,DEPTH,RAIL} from './src/yumin-model.mjs';
 import {lessonSummary} from './src/lesson-catalog.mjs';
 import {btn,pressed,card,actions,wireLegend} from './salk-lessons.mjs';
@@ -49,6 +49,11 @@ export function fire({stage}){
  return card('감지에서 피난까지 한 번 따라가기','<ol class="salk-stages">'+list+'</ol>'+actions(btn(stage<0?'시험 연기 넣기':stage<fireStages.length-1?'다음 단계':'처음부터 다시',stage<fireStages.length-1?'advance':'reset-test','','class="primary"')+(stage>=0&&stage<fireStages.length-1?btn('되돌리기','reset-test'):'')))+
   card('수용인원 '+fireRule.people+'명이 설비를 정합니다','<p class="equation">연면적 '+num(fireRule.area,0)+' m² ÷ '+fireRule.perPerson+' m² = '+fireRule.people+'명</p>'+rows([['용도',fireRule.use],...fireRule.basis,['근거','소방시설 설치 및 관리에 관한 법률 시행령 별표 4 · 수용인원은 별표 7']]))+
   card('이 설계에 놓은 소방 기구',rows([['연기감지기',counts('smoke')+'개 · 높은 전시실은 보 사이 칸마다 하나'],['경계구역',fireZones.length+'곳 · 지하 동쪽, 지하 서쪽, 1층'],['발신기·경종·시각경보기',counts('callpoint')+'조 · 경계구역마다 하나'],['스프링클러 헤드',sprinklerPlan.count+'개 · 수평거리 '+sprinklerPlan.radius+' m, 간격 '+sprinklerPlan.spacing.toFixed(2)+' m 이하'],['헤드를 두지 않는 곳',sprinklerPlan.dry],['옥내소화전',counts('hydrant')+'개'],['유도등',counts('exit')+'개 · 피난구 3, 통로 5'],['비상조명등',counts('emergency')+'개 · 지하층'],['소화기',counts('extinguisher')+'개 · 보행거리 20 m 이내'],['감지기 기준','NFTC 203 · 연기감지기는 부착 높이 4 m 미만 150 m², 4 m 이상 20 m 미만 75 m²마다 1개'],['헤드 기준','NFTC 103 · 내화구조 수평거리 2.3 m']]));
+}
+
+// 직접 확인한 항목만 표시한다. 관련 수업 버튼은 그 항목의 메뉴와 대상을 연다.
+export function safety({state}){
+ return card('학습 기록 '+safetyChecks.filter(([id])=>state.checks[id]).length+' / '+safetyChecks.length,'<div class="checklist">'+safetyChecks.map(([id,label])=>'<div><label><input type="checkbox" data-check="'+id+'" '+(state.checks[id]?'checked':'')+'>'+label+'</label>'+btn('관련 수업','related',id)+'</div>').join('')+'</div>');
 }
 
 export function experience({walking,wiring,electric}){

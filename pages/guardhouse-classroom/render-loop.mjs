@@ -78,7 +78,17 @@ export class FrameLoop {
 
 // Each scene owns one loop, observer and visibility listener; dispose removes all three.
 export function observeScene(host, frame, visibilityRoot = host) {
-  const loop = new FrameLoop(frame);
+  // Where the picture is drawn on the processor (scene-quality marks the host), one frame takes seconds,
+  // so the scene is stepped at most once a second and the page answers clicks in between.
+  let softAt = 0;
+  const loop = new FrameLoop((dt, elapsed) => {
+    if (host.dataset.software === 'true') {
+      const now = performance.now();
+      if (now - softAt < 1000) return;
+      softAt = now;
+    }
+    frame(dt, elapsed);
+  });
   let enabled = true, intersecting = false, disposed = false;
   const sync = () => {
     if (disposed) return;

@@ -1,8 +1,10 @@
 // Pure learning state. A flip is not a learning rating; an answer is counted once.
 export const studyKey=sample=>'space-electric-study-v1:'+sample;
+// The quiz as the student last left it, kept apart so the stuck report can read it without the sample's questions.
+export const quizSummaryKey=sample=>'space-electric-quiz-v1:'+sample;
 // Full reset also removes card, quiz and fire-drill records, so a shared PC starts clean.
 export function clearLearningRecords(sample,projectId=null){
- try{localStorage.removeItem(studyKey(sample));if(projectId)localStorage.removeItem('fire-sim-result-'+projectId);}catch{}
+ try{localStorage.removeItem(studyKey(sample));localStorage.removeItem(quizSummaryKey(sample));if(projectId)localStorage.removeItem('fire-sim-result-'+projectId);}catch{}
 }
 export const questionSignature=q=>JSON.stringify([q.statement,q.answer,q.explanation]);
 export function freshStudy(){return {version:1,mode:'dictionary',category:'bim',query:'',deck:[],index:0,flipped:false,ratings:{},quiz:[],answers:{},quizIndex:0,result:false,returnMode:null,term:null};}
@@ -35,4 +37,5 @@ export function answerQuestion(s,q,value){
 }
 export function quizScore(s,questions){const qm=new Map(questions.map(q=>[q.id,q])),answered=s.quiz.filter(id=>qm.has(id)&&s.answers[id]?.signature===questionSignature(qm.get(id)));const wrong=answered.filter(id=>s.answers[id].value!==qm.get(id).answer);return {total:s.quiz.length,answered:answered.length,correct:answered.length-wrong.length,wrong};}
 export function loadStudy(storage,sample,terms,questions,categories){try{return {state:restoreStudy(JSON.parse(storage.getItem(studyKey(sample))),terms,questions,categories),persistent:true};}catch{return {state:freshStudy(),persistent:false};}}
+export function saveQuizSummary(storage,sample,s,questions){const r=quizScore(s,questions),qm=new Map(questions.map(q=>[q.id,q]));try{storage.setItem(quizSummaryKey(sample),JSON.stringify({total:r.total,answered:r.answered,correct:r.correct,wrong:r.wrong.map(id=>qm.get(id)?.statement).filter(Boolean)}));}catch{}}
 export function saveStudy(storage,sample,state){try{storage.setItem(studyKey(sample),JSON.stringify(state));return true;}catch{return false;}}

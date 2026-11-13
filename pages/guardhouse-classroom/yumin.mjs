@@ -6,7 +6,7 @@ import {mountSamples,mountGlossary} from './learning-shell.mjs';
 import {bindActions} from './action-events.mjs';
 import {createCalculations,yuminMember} from './masters-calculations.mjs';
 import {provenance,SPAN,BAY,DEPTH} from './src/yumin-model.mjs';
-import {rooms,materials,sheets,steps,circuits,panel,equipment,fireDevices,fireStages,fireSource,signalPath,alarmPath,escapePath,stations,floorOf,freshYumin,yuminElectrical,yuminFire} from './src/yumin-project.mjs';
+import {rooms,materials,sheets,steps,circuits,panel,equipment,fireDevices,fireStages,fireSource,signalPath,alarmPath,escapePath,stations,safetyChecks,floorOf,freshYumin,yuminElectrical,yuminFire} from './src/yumin-project.mjs';
 import {yuminTerms,termFor} from './src/yumin-glossary.mjs';
 import {model} from './yumin-plan-parts.mjs';
 import {yuminPlan} from './yumin-plan.mjs';
@@ -27,6 +27,7 @@ const pages={
   structure:['지붕 보를 읽습니다.','기둥 없이 11.6 m를 건너는 보 세 개가 높은 전시실 지붕을 받칩니다.'],
   electrical:['미술관의 전기를 설계합니다.','지하 전기실 분전반에서 전시실 조명·콘센트·공조기·폭포 펌프까지 가는 길을 따라가세요.'],
   fire:['전시장의 소방을 설계합니다.','감지기가 연기를 잡고 관람객이 경사로를 올라 돌의 문으로 나가기까지 순서대로 확인하세요.'],
+  safety:['유민미술관 학습 점검','직접 확인한 항목에 표시하세요. 이 브라우저에 학습 기록을 저장합니다.'],
   energy:['에너지를 계산합니다.','이 미술관을 서울에 지으면 난방과 냉방이 얼마나 드는지 바꿔 보세요.'],
   glossary:['용어사전','도면과 수업에서 만나는 말을 찾아보세요.'],
   experience:['안에 서 봅니다.','돌의 문에서 물의 통로를 지나 경사로를 내려가 전시실에 서 보세요.'],
@@ -68,7 +69,7 @@ function renderInspector(f){
 
 const directions={section:'동쪽을 보고 자른 모습 · 왼쪽이 북',joint:'동쪽을 보고 자른 모습 · 왼쪽이 북',circuit:'분전반에서 나가는 순서',materials:'재료 견본',upper:'위에서 본 모습 · 1층'};
 function paint(){
-  const f=frame(),workspace=!['home','glossary','quantities','calculations'].includes(tab),live=tab==='experience',sunny=tab==='energy',walking=sunny?null:scene?.walking()??null;
+  const f=frame(),workspace=!['home','safety','glossary','quantities','calculations'].includes(tab),live=tab==='experience',sunny=tab==='energy',walking=sunny?null:scene?.walking()??null;
   $('bay-app').dataset.page=tab;$('bay-walk').hidden=!live||!walking;
   if(live)$('bay-walk').innerHTML='<div><p>눈높이 1.6 m</p><p>휠: 시야 확대·축소 · W A S D: 이동</p></div><div class="move-buttons">'+stations.map(s=>btn(s.name,'walk',s.id)).join('')+btn('앞으로','walk','forward')+btn('뒤로','walk','back')+btn('왼쪽 이동','walk','strafe-left')+btn('오른쪽 이동','walk','strafe-right')+btn('왼쪽 보기','walk','left')+btn('오른쪽 보기','walk','right')+'</div>';
   $('bay-title').textContent=pages[tab][0];$('bay-intro').textContent=pages[tab][1];
@@ -88,7 +89,7 @@ function paint(){
   else if(tab==='quantities')quantities.render();
   else if(tab==='energy')showEnergy();
   else if(tab==='calculations')$('bay-lesson').innerHTML=calc.html();
-  else $('bay-lesson').innerHTML=({home:lessons.home,building:lessons.building,materials:lessons.material,structure:lessons.structure,electrical:lessons.electrical,fire:lessons.fire,experience:lessons.experience})[tab](view);
+  else $('bay-lesson').innerHTML=({home:lessons.home,building:lessons.building,materials:lessons.material,structure:lessons.structure,electrical:lessons.electrical,fire:lessons.fire,safety:lessons.safety,experience:lessons.experience})[tab](view);
   for(const b of document.querySelectorAll('#learning-nav button[data-go]'))b.toggleAttribute('aria-current',false),b.dataset.go===tab&&b.setAttribute('aria-current','page');
   quantities.setPage(tab);$('bay-return').hidden=!returnPage||returnPage===tab;
   $('bay-panes').dataset.layout=layoutMode;for(const b of document.querySelectorAll('#bay-view-tools [data-layout]'))b.setAttribute('aria-pressed',String(b.dataset.layout===layoutMode));
@@ -180,6 +181,7 @@ const yuminActions={
   term:b=>moveTerm(b.dataset.term),
   relatedTerm:b=>{const target=yuminTerms.get(b.dataset.relatedTerm)?.target;if($('bay-term').open)$('bay-term').close();destination(target);},
   glossaryTerm:b=>{glossaryTermOnOpen=b.dataset.glossaryTerm;termReturn=tab;$('bay-term').close();go('glossary');},
+  related:b=>{const row=safetyChecks.find(([id])=>id===b.dataset.related);if(row)go(row[2],row[3]);},
   backReading:()=>{const back=returnPage;returnPage='';go(back);},
   retry:()=>{if(reloadRequired)location.reload();else ensureScene();},
   '#reframe':()=>{if(tab==='experience'||tab==='energy')walk('outside');else scene?.home();},
@@ -190,7 +192,7 @@ const yuminActions={
 bindActions([$('site-top'),$('bay-app'),$('bay-term'),$('bay-reset-dialog')],yuminActions,error=>{$('bay-status').textContent='작업을 마치지 못했습니다: '+error.message;});
 document.addEventListener('keydown',e=>{if(e.target.matches?.('[data-device]')&&['Enter',' '].includes(e.key)){e.preventDefault();pick(e.target.dataset.device);}});
 $('bay-app').addEventListener('submit',e=>calc.submit(e));
-$('bay-app').addEventListener('change',e=>{if(calc.change(e))return;const id=e.target.dataset.complete;if(!id)return;state.completed=steps.filter(s=>s.id===id?e.target.checked:state.completed.includes(s.id)).map(s=>s.id);save();paint();});
+$('bay-app').addEventListener('change',e=>{if(calc.change(e))return;const check=e.target.dataset.check;if(check){state.checks[check]=e.target.checked;save();paint();document.querySelector('[data-check="'+check+'"]')?.focus();return;}const id=e.target.dataset.complete;if(!id)return;state.completed=steps.filter(s=>s.id===id?e.target.checked:state.completed.includes(s.id)).map(s=>s.id);save();paint();});
 const quantities=createQuantities({host:$('bay-lesson'),nav:$('learning-nav'),workspace:$('bay-workspace'),go,read:()=>{const f=frame();return {sample:'yumin',model,electric:f.electric,fire:f.fire,panel,rebar:{bars:[]},resolveSheet:e=>e.kind==='beam'?'S-801':e.base>=-.3?'A-802':'A-801'};},locate:async m=>{drawing=m.sheet;returnPage='quantities';focusOnOpen={menu:m.menu,id:m.id};history.replaceState(null,'','#'+m.menu);await openPage();return !reloadRequired;}});
 mountSamples(8,()=>go('home'),()=>go('glossary'));
 window.addEventListener('hashchange',openPage);

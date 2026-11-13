@@ -56,13 +56,21 @@ export const equipment=[
 export const lighting={lux:60,area:interior.area,lumens:3600,use:.45,keep:.7};
 export const requiredFittings=()=>Math.ceil(lighting.lux*lighting.area/(lighting.lumens*lighting.use*lighting.keep));
 
+// 안전점검: [기록 id, 문장, 메뉴, 관련 수업에서 고를 대상].
+export const safetyChecks=[
+ ['circuits','L1 차단기를 끄면 간접등만 꺼지고 바닥 콘센트는 그대로인지 확인했어요.','electrical','LT1'],
+ ['path','분전반에서 바닥 밑 가로보 사이를 지나 거실 바닥 콘센트까지 배선을 따라갔어요.','electrical','FB3'],
+ ['signal','거실 감지기가 연기를 잡아 제 몸에서 경보음을 내고 잠자리까지 들리는 순서를 확인했어요.','fire','SD1'],
+ ['escape','거실에서 현관문, 베란다, 계단을 지나 마당까지 피난 경로를 따라갔어요.','fire','door-1']
+];
 export function freshFarnsworth(raw={}){
- const state={power:raw?.power!==false,breakers:{},switches:{SW1:true},watts:{},completed:[]};
+ const state={power:raw?.power!==false,breakers:{},switches:{SW1:true},watts:{},checks:{},completed:[]};
  const saved=Array.isArray(raw?.completed)?raw.completed:[];
  state.completed=steps.filter(s=>saved.includes(s.id)).map(s=>s.id);
  for(const c of circuits)state.breakers[c.id]=typeof raw?.breakers?.[c.id]==='boolean'?raw.breakers[c.id]:true;
  if(typeof raw?.switches?.SW1==='boolean')state.switches.SW1=raw.switches.SW1;
  for(const d of equipment){const w=raw?.watts?.[d.id];if(d.watts&&Number.isInteger(w)&&w>=1&&w<=20000)state.watts[d.id]=w;}
+ for(const [id] of safetyChecks)state.checks[id]=raw?.checks?.[id]===true;
  return state;
 }
 // 분전반 → 코어 안에서 바닥 밑으로 → 가로보 사이를 지나 → 기구 바로 아래에서 올라온다. 코어 위 조명만 코어 안을 타고 오른다.

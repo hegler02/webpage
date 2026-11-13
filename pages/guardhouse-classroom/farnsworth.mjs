@@ -6,14 +6,14 @@ import {mountSamples,mountGlossary} from './learning-shell.mjs';
 import {bindActions} from './action-events.mjs';
 import {createCalculations,farnsworthMember} from './masters-calculations.mjs';
 import {provenance,FLOOR,TZ,W,CANT,FASCIA} from './src/farnsworth-model.mjs';
-import {rooms,materials,sheets,steps,circuits,panel,equipment,fireDevices,fireStages,fireSource,soundPath,reachPath,escapePath,stations,freshFarnsworth,farnsworthElectrical,farnsworthFire} from './src/farnsworth-project.mjs';
+import {rooms,materials,sheets,steps,circuits,panel,equipment,fireDevices,fireStages,fireSource,soundPath,reachPath,escapePath,stations,safetyChecks,freshFarnsworth,farnsworthElectrical,farnsworthFire} from './src/farnsworth-project.mjs';
 import {farnsworthTerms,termFor} from './src/farnsworth-glossary.mjs';
 import {model} from './farnsworth-plan-parts.mjs';
 import {farnsworthPlan} from './farnsworth-plan.mjs';
 import * as lessons from './farnsworth-lessons.mjs';
 import {powerStatus,routeLive} from './masters-power.mjs';
 
-const {btn,actions}=lessons;
+const {btn,actions,card}=lessons;
 const $=id=>document.getElementById(id);
 const key='space-electricity-farnsworth-06-v1',energyKey=key+':energy';
 mountWorkbench({root:$('bay-app'),workspace:$('bay-workspace'),heading:$('page-heading'),canvases:$('bay-panes'),plan:$('bay-plan'),three:$('bay-canvas'),inspector:$('bay-inspector'),content:'#bay-lesson',status:$('bay-status'),extraMove:['#bay-return'],idleTitle:'하나를 눌러보세요.',zoomIn:document.querySelector('#drawing [data-zoom=in]'),zoomOut:document.querySelector('#drawing [data-zoom=out]'),pages:standardPages('#bay-lesson')});
@@ -27,6 +27,7 @@ const pages={
   structure:['구조와 접합을 읽습니다.','기둥이 판을 뚫지 않고 테두리보 옆에 붙어 바닥과 지붕을 띄웁니다.'],
   electrical:['벽 없는 집의 전기를 설계합니다.','분전반에서 간접등·바닥 콘센트·인덕션·히트펌프까지 가는 길을 따라가세요.'],
   fire:['주택의 소방을 설계합니다.','감지기가 울리고 소화기를 들고 현관문으로 나가기까지 순서대로 확인하세요.'],
+  safety:['판스워스 주택 학습 점검','직접 확인한 항목에 표시하세요. 이 브라우저에 학습 기록을 저장합니다.'],
   energy:['에너지를 계산합니다.','이 유리 집을 서울에 지으면 난방과 냉방이 얼마나 드는지 바꿔 보세요.'],
   glossary:['용어사전','도면과 수업에서 만나는 말을 찾아보세요.'],
   experience:['안에 서 봅니다.','강가 풀밭에서 테라스로, 베란다에서 거실로 걸어 들어가세요.'],
@@ -68,7 +69,7 @@ function renderInspector(f){
 
 const directions={section:'동쪽을 보고 자른 모습 · 왼쪽이 북',joint:'동쪽을 보고 자른 모습 · 왼쪽이 북',circuit:'분전반에서 나가는 순서',materials:'재료 견본'};
 function paint(){
-  const f=frame(),workspace=!['home','glossary','quantities','calculations'].includes(tab),live=tab==='experience',sunny=tab==='energy',walking=sunny?null:scene?.walking()??null;
+  const f=frame(),workspace=!['home','safety','glossary','quantities','calculations'].includes(tab),live=tab==='experience',sunny=tab==='energy',walking=sunny?null:scene?.walking()??null;
   $('bay-app').dataset.page=tab;$('bay-walk').hidden=!live||!walking;
   if(live)$('bay-walk').innerHTML='<div><p>눈높이 1.6 m</p><p>휠: 시야 확대·축소 · W A S D: 이동</p></div><div class="move-buttons">'+stations.map(s=>btn(s.name,'walk',s.id)).join('')+btn('앞으로','walk','forward')+btn('뒤로','walk','back')+btn('왼쪽 이동','walk','strafe-left')+btn('오른쪽 이동','walk','strafe-right')+btn('왼쪽 보기','walk','left')+btn('오른쪽 보기','walk','right')+'</div>';
   $('bay-title').textContent=pages[tab][0];$('bay-intro').textContent=pages[tab][1];
@@ -88,6 +89,7 @@ function paint(){
   else if(tab==='quantities')quantities.render();
   else if(tab==='energy')showEnergy();
   else if(tab==='calculations')$('bay-lesson').innerHTML=calc.html();
+  else if(tab==='safety')$('bay-lesson').innerHTML=card('학습 기록 '+safetyChecks.filter(([id])=>state.checks[id]).length+' / '+safetyChecks.length,'<div class="checklist">'+safetyChecks.map(([id,label])=>'<div><label><input type="checkbox" data-check="'+id+'" '+(state.checks[id]?'checked':'')+'>'+label+'</label>'+btn('관련 수업','related',id)+'</div>').join('')+'</div>');
   else $('bay-lesson').innerHTML=({home:lessons.home,building:lessons.building,materials:lessons.material,structure:lessons.structure,electrical:lessons.electrical,fire:lessons.fire,experience:lessons.experience})[tab](view);
   for(const b of document.querySelectorAll('#learning-nav button[data-go]'))b.toggleAttribute('aria-current',false),b.dataset.go===tab&&b.setAttribute('aria-current','page');
   quantities.setPage(tab);$('bay-return').hidden=!returnPage||returnPage===tab;
@@ -180,6 +182,8 @@ const farnsworthActions={
   switch:b=>{const id=b.dataset.switch;if(!Object.hasOwn(state.switches,id))return;state.switches[id]=!state.switches[id];save();paint();$('bay-status').textContent=powerStatus(farnsworthElectrical(state),state,'switch',id);},
   advance:()=>{if(stage<fireStages.length-1){stage++;selected=fireStages[stage].id;paint();}},
   resetTest:()=>{stage=-1;selected=fireSource;paint();},
+  // 관련 수업: 그 메뉴로 가서 점검할 대상을 미리 고른다.
+  related:b=>{const row=safetyChecks.find(([id])=>id===b.dataset.related);if(row)go(row[2],row[3]);},
   term:b=>moveTerm(b.dataset.term),
   relatedTerm:b=>{const target=farnsworthTerms.get(b.dataset.relatedTerm)?.target;if($('bay-term').open)$('bay-term').close();destination(target);},
   glossaryTerm:b=>{glossaryTermOnOpen=b.dataset.glossaryTerm;termReturn=tab;$('bay-term').close();go('glossary');},
@@ -193,7 +197,7 @@ const farnsworthActions={
 bindActions([$('site-top'),$('bay-app'),$('bay-term'),$('bay-reset-dialog')],farnsworthActions,error=>{$('bay-status').textContent='작업을 마치지 못했습니다: '+error.message;});
 document.addEventListener('keydown',e=>{if(e.target.matches?.('[data-device]')&&['Enter',' '].includes(e.key)){e.preventDefault();pick(e.target.dataset.device);}});
 $('bay-app').addEventListener('submit',e=>calc.submit(e));
-$('bay-app').addEventListener('change',e=>{if(calc.change(e))return;const id=e.target.dataset.complete;if(!id)return;state.completed=steps.filter(s=>s.id===id?e.target.checked:state.completed.includes(s.id)).map(s=>s.id);save();paint();});
+$('bay-app').addEventListener('change',e=>{if(calc.change(e))return;const check=e.target.dataset.check;if(check){state.checks[check]=e.target.checked;save();paint();document.querySelector('[data-check="'+check+'"]')?.focus();return;}const id=e.target.dataset.complete;if(!id)return;state.completed=steps.filter(s=>s.id===id?e.target.checked:state.completed.includes(s.id)).map(s=>s.id);save();paint();});
 const quantities=createQuantities({host:$('bay-lesson'),nav:$('learning-nav'),workspace:$('bay-workspace'),go,read:()=>{const f=frame();return {sample:'farnsworth',model,electric:f.electric,fire:f.fire,panel,rebar:{bars:[]},resolveSheet:e=>['frame','column'].includes(e.kind)?'S-601':'A-601'};},locate:async m=>{drawing=m.sheet;returnPage='quantities';focusOnOpen={menu:m.menu,id:m.id};history.replaceState(null,'','#'+m.menu);await openPage();return !reloadRequired;}});
 mountSamples(6,()=>go('home'),()=>go('glossary'));
 window.addEventListener('hashchange',openPage);

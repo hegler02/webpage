@@ -81,13 +81,21 @@ export const equipment=[
 export const lighting={lux:60,area:interior.living,lumens:3600,use:.45,keep:.7};
 export const requiredFittings=()=>Math.ceil(lighting.lux*lighting.area/(lighting.lumens*lighting.use*lighting.keep));
 
+// 학습 점검: [id, 문장, 메뉴, 미리 고를 대상]. 대상은 모두 위 데이터에 있는 id다.
+export const safetyChecks=[
+ ['circuits','1층 조명(L1) 차단기를 내리면 거실 간접등만 꺼지고 바닥 콘센트는 그대로인지 확인했어요.','electrical','LT1'],
+ ['path','분전반에서 굴뚝 뒤 세로 배관을 타고 3층 서재 콘센트까지 배관을 따라갔어요.','electrical','WS5'],
+ ['signal','거실 감지기가 연기를 잡아 제 몸에서 울리고 소화기를 드는 순서를 확인했어요.','fire','SD1'],
+ ['escape','안방에서 계단과 현관 유리문을 지나 다리 건너편까지 피난 경로를 따라갔어요.','fire','glass-door']
+];
 export function freshFallingwater(raw={}){
- const state={power:raw?.power!==false,breakers:{},switches:{SW1:true,SW2:true},watts:{},completed:[]};
+ const state={power:raw?.power!==false,breakers:{},switches:{SW1:true,SW2:true},watts:{},checks:{},completed:[]};
  const saved=Array.isArray(raw?.completed)?raw.completed:[];
  state.completed=steps.filter(s=>saved.includes(s.id)).map(s=>s.id);
  for(const c of circuits)state.breakers[c.id]=typeof raw?.breakers?.[c.id]==='boolean'?raw.breakers[c.id]:true;
  for(const k of Object.keys(state.switches))if(typeof raw?.switches?.[k]==='boolean')state.switches[k]=raw.switches[k];
  for(const d of equipment){const w=raw?.watts?.[d.id];if(d.watts&&Number.isInteger(w)&&w>=1&&w<=30000)state.watts[d.id]=w;}
+ for(const [id] of safetyChecks)state.checks[id]=raw?.checks?.[id]===true;
  return state;
 }
 // 분전반 → 굴뚝 뒤 세로 배관 → 층마다 천장 속(조명)이나 바닥 속(콘센트)의 줄기 → 기구. 히트펌프만 북쪽 벽을 뚫고 바로 나간다.

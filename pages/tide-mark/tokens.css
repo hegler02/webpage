@@ -1,0 +1,11 @@
+/* Tide Mark page tokens. Every design value lives here (tools/lint-tokens.mjs). */
+:root{
+ --ink:#e9ecee;--ink-dim:#c3ccd2;--salt:#faf8f2;--lamp:#e8b862;--glass:#0d1318;--deep:#060b14;--fog:rgba(196,205,211,.9);
+ --font-italic:"Cormorant Italic",serif;--font-ko:"Gowun Batang",serif;
+ --w-regular:400;
+ --size-title:clamp(64px,13vw,190px);--size-sub:clamp(17px,2.2vw,22px);--size-body:clamp(17px,1.9vw,20px);--size-label:14px;--size-quote:clamp(26px,4vw,40px);
+ --lh-body:1.95;--lh-tight:1.3;--track-label:.08em;--measure:34em;--gutter:clamp(16px,5vw,64px);--gap:clamp(48px,9vh,110px);--section-pad:clamp(80px,18vh,200px);--hero-min:520px;--hero-h:100svh;
+ --line-thin:1px;--hint-gap:10px;--title-glow:18px;--salt-offset:-.5;--z-steam:2;--z-copy:3;
+ --t-ebb:900ms;--t-fade:600ms;--ease-water:cubic-bezier(.2,.7,.2,1);
+ --blur-fogged:7px;--blur-clear:0px;--fog-copy:.18;--salt-line:.7;--film-w:1100px;--scar-h:20px;--line-scar:2px;
+}

@@ -1,0 +1,44 @@
+html{background:var(--deep);color:var(--ink)}
+body{margin:0;font-family:var(--font-ko);font-size:var(--size-body);line-height:var(--lh-body);word-break:keep-all;overflow-wrap:break-word}
+.label{font-family:var(--font-ko);font-size:var(--size-label);letter-spacing:var(--track-label);color:var(--ink-dim);margin:0}
+.hero{position:relative;height:var(--hero-h);min-height:var(--hero-min);overflow:hidden;background:var(--glass)}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 50%}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:var(--z-steam);touch-action:pan-y;cursor:crosshair}
+.hero-copy{position:absolute;inset:0;z-index:var(--z-copy);display:flex;flex-direction:column;justify-content:space-between;padding:var(--gutter);pointer-events:none}
+.title{font-family:var(--font-italic);font-weight:var(--w-regular);font-size:var(--size-title);line-height:1;margin:0;color:transparent;-webkit-text-stroke:var(--line-thin) var(--salt);text-shadow:0 0 var(--title-glow) var(--fog)}
+.sub{font-size:var(--size-sub);margin:var(--hint-gap) 0 0;color:var(--salt)}
+.hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--hint-gap);flex-wrap:wrap}
+.action{pointer-events:auto;background:none;border:0;padding:0;color:var(--salt);font:inherit;font-size:var(--size-label);border-bottom:var(--line-thin) solid var(--salt);cursor:pointer}
+.ebb{max-width:var(--measure);margin:0 auto;padding:var(--section-pad) var(--gutter)}
+.story p{margin:0 0 var(--gap)}
+.unit{filter:blur(var(--blur-fogged));opacity:var(--fog-copy);transition:filter var(--t-ebb) var(--ease-water),opacity var(--t-ebb) var(--ease-water);position:relative}
+.unit.clear{filter:blur(var(--blur-clear));opacity:1}
+.unit>svg{position:absolute;left:0;bottom:calc(var(--gap) * var(--salt-offset));width:100%;overflow:visible}
+.unit>svg path,.scar-line path{fill:none;stroke:var(--salt);stroke-width:var(--line-thin);opacity:0;transition:opacity var(--t-fade) var(--ease-water)}
+.unit.clear>svg path{opacity:var(--salt-line)}
+.film{max-width:var(--film-w);margin:0 auto;padding:0 var(--gutter) var(--section-pad)}
+.screen{position:relative;aspect-ratio:16/9;margin:var(--hint-gap) 0;background:var(--glass)}
+.screen img,.screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
+.screen .play,.screen .soon{position:absolute;left:var(--gutter);bottom:var(--gutter);color:var(--salt)}
+.note{font-size:var(--size-label);color:var(--ink-dim);margin:0}
+.lyrics{padding-top:0}
+.stanza{margin:0 0 var(--gap)}
+.stanza .label{margin-bottom:var(--hint-gap)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--hint-gap) var(--gutter);margin:0}
+.pair [lang=en]{font-family:var(--font-italic);font-size:var(--size-sub);color:var(--salt)}
+.scar{max-width:var(--measure);margin:0 auto;padding:var(--section-pad) var(--gutter);text-align:center}
+.scar-line{width:100%;height:var(--scar-h)}
+.scar-line path{opacity:1;stroke-width:var(--line-scar)}
+.credit{font-size:var(--size-label);color:var(--ink-dim);line-height:var(--lh-body)}
+a.action{text-decoration:none}
+@media (max-width:560px){.pair{grid-template-columns:1fr}.pair+.pair{margin-top:var(--hint-gap)}}
+.quote{font-family:var(--font-italic);font-size:var(--size-quote);line-height:var(--lh-tight);color:var(--salt)}
+@media (prefers-reduced-motion:reduce){.unit{filter:none;opacity:1;transition:none}.hero canvas{display:none}}
+.making{max-width:var(--measure);margin:0 auto;padding:var(--gutter)}
+.making .title{font-size:var(--size-quote);color:var(--salt);-webkit-text-stroke:0;text-shadow:none;margin-top:var(--gap)}
+.making h2{margin:var(--gap) 0 var(--hint-gap)}
+.facts{padding-left:var(--gutter);margin:0}
+.facts li{margin-bottom:var(--hint-gap)}
+.pair-fig{margin:0 0 var(--gap);display:grid;grid-template-columns:1fr 1fr;gap:var(--hint-gap)}
+.pair-fig img{width:100%;height:auto;display:block}
+.pair-fig figcaption{grid-column:1/-1;font-size:var(--size-label);color:var(--ink-dim);line-height:var(--lh-body)}

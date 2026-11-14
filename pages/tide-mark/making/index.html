@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tide Mark 제작 과정 · 미리내맨</title>
+<meta name="description" content="코드로 재생되는 뮤직비디오 「Tide Mark」를 어떻게 만들었는지: 구상, 곡 분석, 고친 것과 숫자, 아직 못 한 것.">
+<link rel="canonical" href="https://mirinaeman.com/pages/tide-mark/making/">
+<meta property="og:url" content="https://mirinaeman.com/pages/tide-mark/making/">
+<meta property="og:title" content="Tide Mark 제작 과정 · 미리내맨">
+<meta property="og:image" content="https://mirinaeman.com/pages/tide-mark/assets/og.jpg">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="making">
+ <p><a class="action" href="../">← Tide Mark</a></p>
+ <h1 class="title" lang="en">Tide Mark</h1>
+ <p class="sub">어떻게 만들었나</p>
+
+ <h2 class="label">구상</h2>
+ <p>이 영상은 코드가 매 순간 그려 내는 영화입니다. 그림은 방과 사물을 맡고, 코드는 그림 위에 깔린 김(안개), 밀물, 소금 선, 가사를 곡의 시간에 맞춰 그립니다. 가사는 김 서린 유리에 손가락으로 쓴 것처럼 닦인 자리로 나타났다가 다시 김에 덮입니다. 후렴마다 밀물이 화면을 덮었다 빠지고, 빠질 때마다 소금 선이 하나씩 남습니다. 브리지 끝에서 악기가 빠지면 그림이 모두 빠지고 영상 내내 쌓인 소금 선만 남습니다.</p>
+ <p>무엇을 그림이 맡고 무엇을 코드가 그릴지, 가사 줄마다 어떻게 움직일지, 컷 28개가 앞 장면에서 무엇을 넘겨받는지를 먼저 표로 써서 승인받은 뒤에 그렸습니다.</p>
+
+ <h2 class="label">곡 분석</h2>
+ <ul class="facts">
+  <li>템포 78 BPM(기계 추정, 첫 박은 청취로 확인하지 않음)</li>
+  <li>도입 0–14초, 1절 14초, 프리코러스 38초, 후렴 52초, 기타 간주 77초, 2절 87초, 후렴 124초, 브리지 151초</li>
+  <li>172.5–191초: 악기가 빠지고 보컬만 남음. 191초 드럼 복귀, 197–228초가 곡에서 가장 큰 구간</li>
+  <li>가사 시각: 처음 받아쓰기가 노래를 한국어로 잘못 인식해 쓸 수 없었습니다. 그래서 사용자가 준 가사 원문을 분리한 보컬에 강제 정렬해 60줄의 시각을 얻었습니다.</li>
+ </ul>
+
+ <h2 class="label">고친 것</h2>
+ <figure class="pair-fig"><img src="assets/steam-before.jpg" alt="고치기 전: 김 속의 가사가 거의 보이지 않는 프레임" width="480" height="270" loading="lazy"><img src="assets/steam-after.jpg" alt="고친 뒤: 닦인 글자와 물방울 테두리가 읽히는 프레임" width="480" height="270" loading="lazy">
+  <figcaption>김에 쓴 가사가 어두운 그림 위에서 읽히지 않았습니다. 김을 더 밝게 깔고, 닦인 글자 가장자리에 물 테두리를 더했습니다.</figcaption></figure>
+ <figure class="pair-fig"><img src="assets/salt-before.jpg" alt="고치기 전: 소금 선이 공책 줄처럼 고르게 그어진 프레임" width="480" height="270" loading="lazy"><img src="assets/salt-after.jpg" alt="고친 뒤: 기울기와 길이가 제각각인 소금 선" width="480" height="270" loading="lazy">
+  <figcaption>소금 선이 처음엔 한 띠로 뭉쳤고, 펼치자 공책 줄처럼 보였습니다. 기울기와 길이를 달리해 물이 빠진 자리처럼 보이게 했습니다.</figcaption></figure>
+ <figure class="pair-fig"><img src="assets/pose-before.jpg" alt="고치기 전: 남자가 등을 굽힌 자세" width="480" height="270" loading="lazy"><img src="assets/pose-after.jpg" alt="고친 뒤: 남자가 허리를 펴고 여자 머리에 뺨을 댄 자세" width="480" height="270" loading="lazy">
+  <figcaption>"머리를 그녀의 어깨에 떨군다"고 그리게 했더니 등이 굽었습니다. 사용자가 짚어 준 그림을, 허리를 편 채 뺨을 머리에 대는 자세로 다시 그렸습니다.</figcaption></figure>
+ <ul class="facts">
+  <li>곡에서 가장 큰 구간이 화면에서도 가장 커야 합니다. 첫 전곡 렌더에서 200–220초의 움직임(1.34)이 140–160초(1.42)보다 작았습니다. 마지막 후렴의 반응을 키우고 몽타주에 두 박마다 충격을 더해 그 구간만 다시 렌더링했고, 1.51이 되었습니다.</li>
+  <li>'let it burn'이 글자 대신 주황색 네모로 그려졌던 것, 'it bends apart'가 앞 줄 위에 놓였던 것, 'and find it there'가 다음 줄과 겹쳤던 것을 고쳤습니다.</li>
+  <li>나방 장면 그림에 나방이 그려지지 않아, 따로 그린 나방을 코드로 램프 주위에 날게 하고 킥마다 날개를 접게 했습니다.</li>
+ </ul>
+
+ <h2 class="label">숫자</h2>
+ <ul class="facts">
+  <li>1920×1080, 30fps, 7,320프레임, 4분 4초. 암전 0</li>
+  <li>그림: 장면 21장, 사람 자세 5장, 나방 1장. 같은 방과 재킷을 기준 그림 하나로 이었습니다.</li>
+  <li>몽타주(197–212초)는 새 그림 없이 앞 장면 10장을 다시 씁니다. 다시 나올 때는 그 위에 소금 선이 그어져 있습니다.</li>
+ </ul>
+
+ <h2 class="label">아직 못 한 것</h2>
+ <ul class="facts">
+  <li>가사 시각과 박자는 기계 추정이며, 귀로 듣고 맞춘 것이 아닙니다.</li>
+  <li>남성 보컬이 들어오는 시점은 측정으로 가려내지 못했습니다.</li>
+  <li>후렴 가사는 구상에서 사람 뒤에 두려 했지만, 사람 그림이 화면 전체를 덮어 앞층에 흐리게 두었습니다.</li>
+  <li>2절 후렴의 두 번째 자세는 다시 그리면서 방의 기울기가 조금 달라져, 자세가 바뀔 때 방이 살짝 움직입니다.</li>
+ </ul>
+
+ <h2 class="label">쓴 도구</h2>
+ <ul class="facts">
+  <li>악기 분리와 음악 지도, 보컬 강제 정렬(torchaudio MMS), 깊이 지도</li>
+  <li>그림: OpenAI gpt-image-2.6(flare로 장면, sunburst로 자세 편집)</li>
+  <li>영상: 브라우저에서 WebGL과 Canvas로 매 프레임을 그려 FFmpeg로 묶음</li>
+  <li>글꼴: Cormorant Garamond, 고운바탕(모두 SIL Open Font License)</li>
+ </ul>
+ <p class="credit">가사: 미리내맨<br>음악: Suno<br>그림: 미리내맨의 지시로 AI가 만듦</p>
+</main>
+</body>
+</html>

@@ -629,6 +629,10 @@
       "destination": "/pages/profile/work/taste-expiration/"
     },
     {
+      "source": "/work/tide-mark/",
+      "destination": "/pages/profile/work/tide-mark/"
+    },
+    {
       "source": "/work/today-i-believe/",
       "destination": "/pages/profile/work/today-i-believe/"
     },

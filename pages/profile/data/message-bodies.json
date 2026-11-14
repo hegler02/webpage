@@ -2457,6 +2457,39 @@
       "latest_deployed_at": "2026-07-30T10:30:22Z"
     },
     {
+      "body_id": "tide-mark",
+      "title": "Tide Mark — 뮤직비디오",
+      "body_type": "SONGBODY",
+      "source_kinds": [
+        "user-provided-audio",
+        "generated-image-cinema",
+        "code-rendered-video",
+        "stem-driven-motion"
+      ],
+      "tags": [
+        "audio",
+        "image-cinema",
+        "motion",
+        "music-video",
+        "youtube",
+        "making-of",
+        "steam-writing",
+        "tide-mark"
+      ],
+      "message_sentence": "썰물이 빠져도 소금 선은 남듯, 떠난 사람도 자국을 남긴다. 가사는 김 서린 유리에 쓰였다 지워지고 후렴마다 소금 선이 하나씩 쌓이는 뮤직비디오와, 손가락으로 김을 닦고 스크롤로 썰물을 빼는 페이지.",
+      "thumbnail": {
+        "path": "assets/thumbnails/tide-mark.webp",
+        "alt": "김 서린 유리 너머 빈 방의 의자와 재킷, 손가락으로 닦은 한 줄 사이로 선명한 방이 보이고 소금 선 글씨로 Tide Mark",
+        "width": 960,
+        "height": 540,
+        "focal_point": "40% 45%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/tide-mark/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-11-14T00:25:25+00:00",
+      "latest_deployed_at": "2026-11-14T00:25:25+00:00"
+    },
+    {
       "body_id": "today-i-believe",
       "title": "오늘은 내가 믿어요 | Single Album",
       "body_type": "SONGBODY",

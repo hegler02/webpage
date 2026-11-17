@@ -247,6 +247,38 @@
       "latest_deployed_at": "2026-09-30T10:34:46+00:00"
     },
     {
+      "body_id": "audit-ai-lecture",
+      "title": "AI를 활용한 감사업무 효율화",
+      "body_type": "SLIDEBODY",
+      "source_kinds": [
+        "education",
+        "lecture",
+        "rehearsed-prompts",
+        "generated-teaching-illustration"
+      ],
+      "tags": [
+        "lecture",
+        "audit",
+        "ai-literacy",
+        "causal-chain",
+        "self-study",
+        "scrollytelling",
+        "password-locked"
+      ],
+      "message_sentence": "실제 자료를 AI에 넣지 않고 단문 인과 체인으로 착안점·점검표·엑셀 수식·보고서 초안을 받는 자체감사 담당자 강의. 판단은 담당자가 한다.",
+      "thumbnail": {
+        "path": "assets/thumbnails/audit-ai-lecture.webp",
+        "alt": "AI를 활용한 감사업무 효율화 강의 표지: 돋보기와 붉은 도장이 놓인 서류 책상",
+        "width": 960,
+        "height": 540,
+        "focal_point": "50% 50%"
+      },
+      "canonical_url": "https://mirinaeman.com/pages/audit-ai-lecture/",
+      "status": "DEPLOYED",
+      "first_deployed_at": "2026-11-17T03:12:32+00:00",
+      "latest_deployed_at": "2026-11-17T03:15:18+00:00"
+    },
+    {
       "body_id": "baekje-renaissance",
       "title": "검이불루, 화이불치 2026 | BAEKJE RENAISSANCE 2026",
       "body_type": "SCREENBODY",
@@ -1092,7 +1124,7 @@
       "canonical_url": "https://mirinaeman.com/pages/geuge/",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-11-12T21:05:55+00:00",
-      "latest_deployed_at": "2026-11-12T21:05:55+00:00"
+      "latest_deployed_at": "2026-11-12T21:13:33+00:00"
     },
     {
       "body_id": "gileodo-geudaero-astra",
@@ -2487,7 +2519,7 @@
       "canonical_url": "https://mirinaeman.com/pages/tide-mark/",
       "status": "DEPLOYED",
       "first_deployed_at": "2026-11-14T00:25:25+00:00",
-      "latest_deployed_at": "2026-11-14T00:25:25+00:00"
+      "latest_deployed_at": "2026-11-14T00:50:00+00:00"
     },
     {
       "body_id": "today-i-believe",

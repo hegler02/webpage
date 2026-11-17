@@ -301,6 +301,10 @@
       "destination": "/pages/profile/work/astra-motion-study/"
     },
     {
+      "source": "/work/audit-ai-lecture/",
+      "destination": "/pages/profile/work/audit-ai-lecture/"
+    },
+    {
       "source": "/work/baekje-renaissance/",
       "destination": "/pages/profile/work/baekje-renaissance/"
     },

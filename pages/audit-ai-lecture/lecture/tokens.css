@@ -1,0 +1,91 @@
+/* 디자인 토큰 — 이 파일만 디자인 값을 가진다. 나머지 CSS·JS는 이 변수만 읽는다. */
+@font-face{font-family:Pretendard;src:url('assets/fonts/PretendardVariable.woff2') format('woff2');font-weight:100 900;font-display:swap}
+:root{
+  /* 색 — 서류·인주·형광펜 */
+  --c-paper:#f5f0e6;        /* 바탕 종이 */
+  --c-paper-deep:#ebe3d2;   /* 접힌 종이, 띠 */
+  --c-sheet:#fffdf8;        /* 서류 한 장 */
+  --c-ink:#1a2233;          /* 본문 먹색 */
+  --c-ink-soft:#3c4558;     /* 보조 본문 */
+  --c-muted:#5a6272;        /* 캡션 (종이 위 4.5:1 이상) */
+  --c-rule:#d3c9b5;         /* 괘선 */
+  --c-rule-strong:#1a2233;
+  --c-seal:#b3261e;         /* 인주 빨강: 금지·확인 필요 */
+  --c-seal-ink:#8f1d17;     /* 인주 글자 (작은 글씨용) */
+  --c-seal-tint:#f7dfdb;
+  --c-marker:#ffd54a;       /* 형광펜 */
+  --c-marker-soft:#fff1b8;
+  --c-ok:#1d6a45;           /* 확인됨 */
+  --c-ok-tint:#dcefe3;
+  --c-navy:#22385e;         /* 링크·포커스 */
+  --c-on-dark:#fffdf8;
+  --c-shadow:rgba(26,34,51,.14);
+  --c-shadow-strong:rgba(26,34,51,.24);
+  --c-scrim:rgba(26,34,51,.6);
+
+  /* 글꼴 */
+  --f-sans:Pretendard,'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+  --f-mono:var(--f-sans);  /* 수식·열 이름도 프리텐다드, 숫자는 고정폭 숫자로 */
+  --w-regular:430;--w-medium:560;--w-bold:720;--w-black:860;
+  --lh-tight:1.14;--lh-title:1.24;--lh-body:1.5;--lh-read:1.72;
+  --tracking-title:-.028em;--tracking-label:.04em;
+
+  /* 무대 글자 크기 (1920×1080 기준) */
+  --t-hero:132px;--t-display:96px;--t-title:72px;--t-sub:52px;--t-lead:40px;--t-body:36px;--t-small:30px;--t-caption:26px;--t-mono:30px;
+
+  /* 읽기 화면 글자 크기 */
+  --r-body:18px;--r-small:15px;--r-h1:30px;--r-h2:23px;--r-h3:18px;--r-width:860px;--r-gutter:16px;
+
+  /* 간격 */
+  --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:40px;--s-8:56px;--s-9:72px;--s-10:96px;--s-11:120px;--s-12:160px;
+
+  /* 무대 */
+  --stage-w:1920px;--stage-h:1080px;--stage-pad-x:120px;--stage-pad-top:88px;--stage-pad-bottom:112px;--stage-foot:56px;
+
+  /* 모양 */
+  --radius-s:6px;--radius:14px;--radius-l:24px;--radius-pill:999px;
+  --rule:1px;--rule-m:2px;--rule-l:4px;--rule-xl:8px;
+  --shadow-sheet:0 2px 0 var(--c-rule),0 18px 40px var(--c-shadow);
+  --shadow-lift:0 24px 60px var(--c-shadow-strong);
+  --seal-size:220px;--seal-size-s:180px;--seal-tilt:-9deg;--icon:56px;--control:44px;--check:44px;--dialog-w:880px;--prompt-h:300px;
+  --marker-skew:-1.5deg;
+
+  /* 움직임 (트랜지션 디렉터가 읽는다) */
+  --m-page:620ms;           /* 장 넘김: 새 장이 종이처럼 덮는 시간 */
+  --m-page-parallax:220px;  /* 덮일 때 이전 장이 뒤로 밀리는 거리 */
+  --m-page-dim:.94;         /* 덮일 때 이전 장 밝기 */
+  --m-ease-page:cubic-bezier(.7,0,.25,1);
+  --shadow-page:-28px 0 56px rgba(26,34,51,.22);
+  --m-veil:220ms;           /* (예비) */
+
+  /* 장 넘김 5종 — 트랜지션 디렉터가 장과 장의 관계로 고른다. 움직임은 읽는 방향(왼→오) */
+  --m-wipe:900ms;           /* 캔버스 와이프: 새 사례가 시작될 때 */
+  --m-lift:760ms;           /* 페이퍼 리프트: 같은 부의 새 주제 */
+  --m-story:820ms;          /* 스토리 오픈: 같은 사례가 이어질 때 */
+  --m-gallery:980ms;        /* 갤러리 디졸브: 그림 장면(표지·휴식·실습·마무리) */
+  --m-impact:1200ms;        /* 임팩트 브리지: 부가 바뀔 때 (띠에 새 부 이름) */
+  --m-ease-turn:cubic-bezier(.68,0,.22,1);
+  --m-ease-enter:cubic-bezier(.18,.78,.18,1);
+  --m-fx-shift:56px;        /* 나가는 장이 밀리는 거리 */
+  --m-fx-scale:1.035;       /* 확대·정착 배율 */
+  --m-fx-blur:6px;          /* 흐림 */
+  --m-fx-tilt:9deg;         /* 종이가 들리는 각도 */
+  --m-fx-depth:2400px;      /* 원근 */
+  --m-fx-skew:8deg;         /* 장막 기울기 */
+  --m-fx-veil-w:30%;        /* 장막 폭 */
+  --m-fx-thread-w:10px;     /* 빛줄기(실선) 폭 */
+  --m-fx-band-h:200px;      /* 임팩트 띠 높이 */
+  --c-fx-veil:linear-gradient(90deg,rgba(245,240,230,0),rgba(245,240,230,.92) 45%,rgba(255,213,74,.55) 60%,rgba(245,240,230,0));
+  --c-fx-thread:#b3261e;
+  --c-fx-gallery:#f5f0e6;
+  --m-structure:460ms;      /* 틀 등장 */
+  --m-message:560ms;        /* 핵심 메시지 등장 */
+  --m-stamp:420ms;          /* 도장 찍힘 */
+  --m-mark:520ms;           /* 형광펜 긋기 */
+  --m-stagger:70ms;         /* 같은 묶음 안의 시차 */
+  --m-shift:36px;           /* 공간 이동 거리 */
+  --m-fallback-pad:240ms;   /* 완료 이벤트 대기 여유 */
+  --m-ease-out:cubic-bezier(.2,.8,.2,1);
+  --m-ease-in:cubic-bezier(.4,0,1,1);
+  --m-ease-stamp:cubic-bezier(.3,1.5,.5,1);
+}

@@ -1,0 +1,15 @@
+/* 강의 입장 화면. 값은 강의 묶음의 tokens.css 변수만 쓴다. */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--c-paper);color:var(--c-ink);font-family:var(--f-sans);font-size:var(--r-body);line-height:var(--lh-read);word-break:keep-all}
+.gate{width:min(100% - 2 * var(--s-5),calc(var(--dialog-w) / 2));padding:var(--s-7) var(--s-6);background:var(--c-sheet);border-left:var(--rule-xl) solid var(--c-seal);border-radius:0 var(--radius) var(--radius) 0;box-shadow:var(--shadow-sheet)}
+.gate-kicker{margin:0;font-size:var(--r-small);font-weight:var(--w-bold);color:var(--c-seal-ink);letter-spacing:var(--tracking-label)}
+.gate h1{font-size:var(--r-h1);line-height:var(--lh-title);margin:var(--s-2) 0 var(--s-3)}
+.gate p{margin:0 0 var(--s-4)}
+form{display:grid;gap:var(--s-2)}
+label{font-weight:var(--w-bold)}
+input{font:inherit;min-height:var(--control);padding:0 var(--s-3);border:var(--rule-m) solid var(--c-rule-strong);border-radius:var(--radius-s);background:var(--c-paper)}
+button{font:inherit;font-weight:var(--w-bold);min-height:var(--control);border:0;border-radius:var(--radius-s);background:var(--c-ink);color:var(--c-on-dark);cursor:pointer}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:var(--rule-l) solid var(--c-navy);outline-offset:var(--s-1)}
+.gate-msg{min-height:1.5em;margin-top:var(--s-3)!important;color:var(--c-seal-ink);font-weight:var(--w-bold)}
+.gate-back{margin:var(--s-5) 0 0!important;font-size:var(--r-small)}
+.gate-back a{color:var(--c-navy)}

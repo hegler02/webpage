@@ -1,0 +1,24 @@
+{
+  "assets": [
+    {
+      "id": "og-cover",
+      "kind": "image",
+      "role": "open-graph",
+      "source": {
+        "kind": "approved-representative-image",
+        "from": [
+          "lecture/assets/img/cover.webp"
+        ]
+      },
+      "alt": "AI를 활용한 감사업무 효율화 강의 표지: 돋보기와 붉은 도장이 놓인 서류 책상",
+      "delivery": {
+        "path": "og.jpg",
+        "mime": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "bytes": 109126,
+        "sha256": "f080dde28f33a9c36ba746f7f70d2e40c04161b6935c19abbd91a5e80cf1a4a0"
+      }
+    }
+  ]
+}

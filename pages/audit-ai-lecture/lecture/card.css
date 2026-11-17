@@ -1,0 +1,35 @@
+/* 프롬프트 카드(휴대폰). 값은 tokens.css 변수만 쓴다. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--c-paper);color:var(--c-ink);font-family:var(--f-sans);font-size:var(--r-body);line-height:var(--lh-read);word-break:keep-all;overflow-wrap:break-word}
+main{max-width:var(--r-width);margin:0 auto;padding:var(--s-5) var(--r-gutter) var(--s-10)}
+h1{font-size:var(--r-h1);line-height:var(--lh-title);font-weight:var(--w-black);letter-spacing:var(--tracking-title);margin:0 0 var(--s-2)}
+h2{font-size:var(--r-h2);line-height:var(--lh-title);font-weight:var(--w-black);margin:0 0 var(--s-3)}
+h3{font-size:var(--r-h3);line-height:var(--lh-title);margin:var(--s-5) 0 var(--s-2)}
+p{margin:0 0 var(--s-3)}
+a{color:var(--c-navy)}
+a:focus-visible,button:focus-visible{outline:var(--rule-l) solid var(--c-navy);outline-offset:var(--s-1)}
+.sub{color:var(--c-ink-soft);font-weight:var(--w-medium)}
+.toc{display:flex;flex-wrap:wrap;gap:var(--s-2);margin:var(--s-4) 0 0;padding:0;list-style:none}
+.toc a{display:inline-flex;align-items:center;min-height:var(--control);padding:0 var(--s-3);background:var(--c-sheet);border:var(--rule) solid var(--c-rule);border-radius:var(--radius-pill);text-decoration:none;color:var(--c-ink);font-size:var(--r-small);font-weight:var(--w-medium)}
+section{background:var(--c-sheet);border-left:var(--rule-xl) solid var(--c-seal);border-radius:0 var(--radius-s) var(--radius-s) 0;box-shadow:var(--shadow-sheet);padding:var(--s-5) var(--s-4);margin-top:var(--s-5)}
+.rules{display:grid;gap:var(--s-3);margin:0;padding:0;list-style:none}
+.rules li{padding:var(--s-3) var(--s-4);border-radius:var(--radius-s);border-left:var(--rule-xl) solid var(--c-rule)}
+.rules strong{display:block}
+.rules .stop{background:var(--c-seal-tint);border-left-color:var(--c-seal)}
+.rules .stop strong{color:var(--c-seal-ink)}
+.rules .caution{background:var(--c-marker-soft);border-left-color:var(--c-marker)}
+.rules .ok{background:var(--c-ok-tint);border-left-color:var(--c-ok)}
+.rules .ok strong{color:var(--c-ok)}
+.prompt{margin:var(--s-3) 0 var(--s-4)}
+.prompt pre{margin:0;white-space:pre-wrap;word-break:keep-all;overflow-wrap:break-word;font-family:var(--f-sans);font-size:var(--r-small);line-height:var(--lh-read);background:var(--c-paper);border:var(--rule) solid var(--c-rule);border-radius:var(--radius-s);padding:var(--s-3) var(--s-4)}
+.prompt-head{display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);margin-bottom:var(--s-2)}
+.copy{min-height:var(--control);min-width:var(--control);padding:0 var(--s-4);border:0;border-radius:var(--radius-s);background:var(--c-ink);color:var(--c-on-dark);font:inherit;font-size:var(--r-small);font-weight:var(--w-bold);cursor:pointer;flex:none}
+.check{margin:0;padding-left:var(--s-5)}
+.check li{margin-bottom:var(--s-2)}
+.note{font-size:var(--r-small);color:var(--c-muted)}
+.motto{font-weight:var(--w-black);background:var(--c-marker-soft);padding:var(--s-2) var(--s-3);border-radius:var(--radius-s)}
+.status{position:fixed;left:var(--r-gutter);right:var(--r-gutter);bottom:var(--s-4);max-width:var(--r-width);margin:0 auto;padding:var(--s-3) var(--s-4);background:var(--c-ink);color:var(--c-on-dark);border-radius:var(--radius-s);text-align:center}
+.status:empty{display:none}
+@media (forced-colors:active){section,.rules li,.copy{border:var(--rule-m) solid CanvasText}}
+@media print{.copy,.toc,.status{display:none!important}section{break-inside:avoid;box-shadow:none}}

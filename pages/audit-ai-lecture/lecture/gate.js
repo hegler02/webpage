@@ -8,6 +8,8 @@
   const STORE = "audit-lecture-key";
 
   async function open(key) {
+    // 문서를 읽는 중에 document.open을 부르면 교체되지 않고 덧붙는다(같은 탭 자동 열기에서 입장 상자가 남던 원인).
+    if (document.readyState !== "complete") await new Promise((r) => addEventListener("load", r, { once: true }));
     const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: bytes(data.iv) }, key, bytes(data.ct));
     const html = new TextDecoder().decode(plain);
     document.open(); document.write(html); document.close();
